@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "soa_additions:block/infernium_ore_block" }
+  }
+}

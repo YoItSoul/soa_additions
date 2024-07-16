@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "soa_additions:block/infernium_ore_block"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "itemGroup.soa_additions_tab": "SOA Additions",
+
+  "item.soa_additions.abyssal_ingot": "Abyssal Ingot",
+  "item.soa_additions.ether_ingot": "Ether Ingot",
+  "item.soa_additions.infernium_ingot": "Infernium Ingot",
+  "item.soa_additions.void_ingot": "Void Ingot",
+
+  "block.soa_additions.abyssal_ore_block": "Abyssal Ore Block",
+  "block.soa_additions.ether_ore_block": "Ether Ore Block",
+  "block.soa_additions.infernium_ore_block": "Infernium Ore Block",
+  "block.soa_additions.void_ore_block": "Void Ore Block",
+
+  "tetra.material.abyssal_ingot": "Abyssal",
+  "tetra.material.abyssal_ingot.prefix": "Abyssal",
+  "tetra.material.ether_ingot": "Ether",
+  "tetra.material.ether_ingot.prefix": "Ether",
+  "tetra.material.infernium_ingot": "Infernium",
+  "tetra.material.infernium_ingot.prefix": "Infernium",
+  "tetra.material.void_ingot": "Void",
+  "tetra.material.void_ingot.prefix": "Void"
+}
