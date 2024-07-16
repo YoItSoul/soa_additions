@@ -1,15 +1,15 @@
 {
-  "key": "infernium_ingot",
+  "key": "void_ingot",
   "category": "metal",
   "primary": "16",
   "secondary": "10",
   "tertiary": "10",
-  "durability": "1000",
+  "durability": "3000",
   "integrityCost": "2",
   "integrityGain": "8",
   "magicCapacity": "235",
   "toolLevel": "soa_additions:void",
-  "toolEfficiency": "11",
+  "toolEfficiency": "13",
   "effects": {
     "stabilizing": [5],
     "armorPenetration": [5],

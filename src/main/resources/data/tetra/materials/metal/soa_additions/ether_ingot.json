@@ -1,22 +1,23 @@
 {
-  "key": "infernium_ingot",
+  "key": "ether_ingot",
   "category": "metal",
-  "primary": "13",
-  "secondary": "8",
-  "tertiary": "8",
-  "durability": "2500",
+  "primary": "22",
+  "secondary": "15",
+  "tertiary": "15",
+  "durability": "4000",
   "integrityCost": "2",
   "integrityGain": "8",
   "magicCapacity": "235",
-  "toolLevel": "soa_additions:infernium",
-  "toolEfficiency": "11",
+  "toolLevel": "soa_additions:ether",
+  "toolEfficiency": "20",
   "effects": {
-    "fierySelf": [5, 0.1],
-    "stun": [4]
+    "stabilizing": [5],
+    "armorPenetration": [5],
+    "counterweight": [1]
   },
   "tints": {
-    "glyph": "DE8316",
-    "texture": "DE8316"
+    "glyph": "2bfafa",
+    "texture": "2bfafa"
   },
   "textures": [
     "metal",
@@ -24,7 +25,7 @@
   ],
   "material": {
     "items": [
-      "soa_additions:infernium_ingot"
+      "soa_additions:ether_ingot"
     ]
   },
   "improvements": {
