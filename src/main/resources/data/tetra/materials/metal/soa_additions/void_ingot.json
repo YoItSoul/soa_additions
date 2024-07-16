@@ -1,0 +1,43 @@
+{
+  "key": "infernium_ingot",
+  "category": "metal",
+  "primary": "16",
+  "secondary": "10",
+  "tertiary": "10",
+  "durability": "1000",
+  "integrityCost": "2",
+  "integrityGain": "8",
+  "magicCapacity": "235",
+  "toolLevel": "soa_additions:void",
+  "toolEfficiency": "11",
+  "effects": {
+    "stabilizing": [5],
+    "armorPenetration": [5],
+    "counterweight": [1]
+  },
+  "tints": {
+    "glyph": "260136",
+    "texture": "260136"
+  },
+  "textures": [
+    "metal",
+    "shiny"
+  ],
+  "material": {
+    "items": [
+      "soa_additions:void_ingot"
+    ]
+  },
+  "improvements": {
+    "workable": 5
+  },
+  "requiredTools": {
+    "hammer_dig": "tetra:maxed_forge_hammer"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "soa_additions"
+    }
+  ]
+}
