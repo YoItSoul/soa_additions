@@ -1,0 +1,217 @@
+name: Auto-Draft Fix from Issue
+
+on:
+  issues:
+    types: [opened, labeled]
+
+# Only one run per issue at a time
+concurrency:
+  group: issue-fix-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  draft-fix:
+    # Only run if the issue has the 'auto-fix' label
+    if: contains(github.event.issue.labels.*.name, 'auto-fix')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+          fetch-depth: 0
+
+      - name: Gather codebase context
+        id: context
+        run: |
+          # Build a map of the project for Claude
+          echo "## Project Structure" > /tmp/codebase_context.md
+          find src -type f -name '*.java' | sort >> /tmp/codebase_context.md
+          echo "" >> /tmp/codebase_context.md
+
+          echo "## Source Files" >> /tmp/codebase_context.md
+          for f in $(find src -type f -name '*.java' | sort); do
+            echo "---" >> /tmp/codebase_context.md
+            echo "### $f" >> /tmp/codebase_context.md
+            cat "$f" >> /tmp/codebase_context.md
+            echo "" >> /tmp/codebase_context.md
+          done
+
+          # Include build config
+          echo "## build.gradle" >> /tmp/codebase_context.md
+          cat build.gradle >> /tmp/codebase_context.md
+
+          echo "## gradle.properties" >> /tmp/codebase_context.md
+          cat gradle.properties >> /tmp/codebase_context.md
+
+      - name: Ask Claude for a fix
+        id: claude
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          CODEBASE=$(cat /tmp/codebase_context.md)
+
+          # Build the prompt
+          cat > /tmp/prompt.json << 'PROMPT_EOF'
+          {
+            "model": "claude-sonnet-4-20250514",
+            "max_tokens": 8096,
+            "messages": [
+              {
+                "role": "user",
+                "content": "PLACEHOLDER"
+              }
+            ]
+          }
+          PROMPT_EOF
+
+          # Construct the actual user message
+          USER_MSG=$(cat <<MSG_EOF
+          You are a Minecraft Forge mod developer. You are given the full source code of a Java mod called "soa_additions" (Souls of Avarice Additions), and a GitHub issue describing a bug or feature request.
+
+          YOUR TASK: Propose a fix or implementation by outputting ONLY a JSON array of file changes. No explanation, no markdown fences, just valid JSON.
+
+          Each element in the array must be an object with these fields:
+          - "path": the file path relative to the repo root (e.g. "src/main/java/com/soul/soa_additions/item/MyItem.java")
+          - "action": one of "modify", "create", or "delete"
+          - "content": the COMPLETE new file content (for "modify" and "create"), or omit for "delete"
+
+          RULES:
+          - Output ONLY the JSON array. No markdown, no explanation, no backticks.
+          - For "modify", include the ENTIRE file with your changes applied, not just a diff.
+          - Keep changes minimal and focused on the issue.
+          - Follow existing code style and conventions.
+          - If the issue is unclear or you cannot determine a fix, output: []
+
+          ISSUE #${ISSUE_NUMBER}: ${ISSUE_TITLE}
+          ${ISSUE_BODY}
+
+          CODEBASE:
+          ${CODEBASE}
+          MSG_EOF
+          )
+
+          # Use jq to safely encode the message into JSON
+          jq -n --arg msg "$USER_MSG" '{
+            model: "claude-sonnet-4-20250514",
+            max_tokens: 8096,
+            messages: [{role: "user", content: $msg}]
+          }' > /tmp/request.json
+
+          # Call Claude API
+          HTTP_CODE=$(curl -s -w "%{http_code}" -o /tmp/response.json \
+            -X POST https://api.anthropic.com/v1/messages \
+            -H "Content-Type: application/json" \
+            -H "x-api-key: ${ANTHROPIC_API_KEY}" \
+            -H "anthropic-version: 2023-06-01" \
+            -d @/tmp/request.json)
+
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "Claude API returned HTTP $HTTP_CODE"
+            cat /tmp/response.json
+            exit 1
+          fi
+
+          # Extract the text response
+          jq -r '.content[0].text' /tmp/response.json > /tmp/changes.json
+
+          echo "Claude proposed changes:"
+          cat /tmp/changes.json
+
+      - name: Apply changes and create draft PR
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+        run: |
+          CHANGES=$(cat /tmp/changes.json)
+
+          # Check if Claude returned empty changes
+          if [ "$CHANGES" = "[]" ] || [ -z "$CHANGES" ]; then
+            echo "Claude could not determine a fix. Skipping PR creation."
+            # Comment on the issue
+            gh issue comment "$ISSUE_NUMBER" \
+              --body "I analyzed this issue but couldn't determine an automated fix. A maintainer will need to look at this manually."
+            exit 0
+          fi
+
+          # Create a branch
+          BRANCH="auto-fix/issue-${ISSUE_NUMBER}"
+          git checkout -b "$BRANCH"
+
+          # Apply each file change
+          echo "$CHANGES" | jq -c '.[]' | while read -r change; do
+            FILE_PATH=$(echo "$change" | jq -r '.path')
+            ACTION=$(echo "$change" | jq -r '.action')
+
+            case "$ACTION" in
+              create|modify)
+                mkdir -p "$(dirname "$FILE_PATH")"
+                echo "$change" | jq -r '.content' > "$FILE_PATH"
+                git add "$FILE_PATH"
+                ;;
+              delete)
+                if [ -f "$FILE_PATH" ]; then
+                  git rm "$FILE_PATH"
+                fi
+                ;;
+            esac
+          done
+
+          # Check if there are actual changes
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            gh issue comment "$ISSUE_NUMBER" \
+              --body "I analyzed this issue but the proposed changes resulted in no diff. A maintainer will need to look at this manually."
+            exit 0
+          fi
+
+          # Commit and push
+          git config user.name "SoA Bot"
+          git config user.email "bot@soulsofavarice.com"
+          git commit -m "Auto-fix for #${ISSUE_NUMBER}: ${ISSUE_TITLE}
+
+          Generated by Claude Sonnet from issue analysis.
+          This is an automated draft — review carefully before merging."
+
+          git push origin "$BRANCH"
+
+          # Create draft PR
+          gh pr create \
+            --base master \
+            --head "$BRANCH" \
+            --title "Draft fix: ${ISSUE_TITLE}" \
+            --body "$(cat <<PR_EOF
+          ## Auto-generated fix for #${ISSUE_NUMBER}
+
+          This draft PR was automatically generated by Claude Sonnet after analyzing the issue.
+
+          **This is a DRAFT and requires manual review before merging.**
+
+          ### What to check:
+          - [ ] Changes are correct and complete
+          - [ ] Code compiles (`./gradlew build`)
+          - [ ] No unintended side effects
+          - [ ] Tested in-game
+
+          Closes #${ISSUE_NUMBER}
+
+          ---
+          *Generated by SoA Auto-Fix Bot*
+          PR_EOF
+          )" \
+            --draft
+
+          # Comment on the issue
+          gh issue comment "$ISSUE_NUMBER" \
+            --body "I've created a draft PR with a proposed fix. Please review it carefully before approving — it's AI-generated and needs human verification."
