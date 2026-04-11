@@ -59,24 +59,8 @@ jobs:
           ISSUE_BODY: ${{ github.event.issue.body }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
-          CODEBASE=$(cat /tmp/codebase_context.md)
-
-          # Build the prompt
-          cat > /tmp/prompt.json << 'PROMPT_EOF'
-          {
-            "model": "claude-sonnet-4-20250514",
-            "max_tokens": 8096,
-            "messages": [
-              {
-                "role": "user",
-                "content": "PLACEHOLDER"
-              }
-            ]
-          }
-          PROMPT_EOF
-
-          # Construct the actual user message
-          USER_MSG=$(cat <<MSG_EOF
+          # Write the prompt to a file to avoid argument length limits
+          cat > /tmp/user_msg.txt <<MSG_EOF
           You are a Minecraft Forge mod developer. You are given the full source code of a Java mod called "soa_additions" (Souls of Avarice Additions), and a GitHub issue describing a bug or feature request.
 
           YOUR TASK: Propose a fix or implementation by outputting ONLY a JSON array of file changes. No explanation, no markdown fences, just valid JSON.
@@ -97,12 +81,11 @@ jobs:
           ${ISSUE_BODY}
 
           CODEBASE:
-          ${CODEBASE}
           MSG_EOF
-          )
+          cat /tmp/codebase_context.md >> /tmp/user_msg.txt
 
-          # Use jq to safely encode the message into JSON
-          jq -n --arg msg "$USER_MSG" '{
+          # Use jq with file input (--rawfile) to avoid argument length limits
+          jq -n --rawfile msg /tmp/user_msg.txt '{
             model: "claude-sonnet-4-20250514",
             max_tokens: 8096,
             messages: [{role: "user", content: $msg}]
