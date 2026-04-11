@@ -17,7 +17,7 @@ permissions:
 jobs:
   draft-fix:
     # Only run if the issue has the 'auto-fix' label
-    if: contains(github.event.issue.labels.*.name, 'auto fix')
+    if: contains(github.event.issue.labels.*.name, 'auto-fix')
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
