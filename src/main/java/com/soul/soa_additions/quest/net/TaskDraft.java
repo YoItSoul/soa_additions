@@ -42,7 +42,7 @@ public record TaskDraft(
 
     public enum Type {
         ITEM, MINE, KILL, CRAFT, PLACE, TAME, BREED, OBSERVE,
-        DIMENSION, ADVANCEMENT, STAT, CHECKMARK;
+        DIMENSION, ADVANCEMENT, STAT, CHECKMARK, TRIGGER;
 
         public Type next() { return values()[(ordinal() + 1) % values().length]; }
         public boolean usesCount() { return this != DIMENSION && this != ADVANCEMENT && this != CHECKMARK; }
@@ -60,6 +60,7 @@ public record TaskDraft(
                 case ADVANCEMENT -> "minecraft:story/mine_diamond";
                 case STAT -> "minecraft:custom";
                 case CHECKMARK -> "Acknowledge";
+                case TRIGGER -> "soa_additions:my_trigger";
             };
         }
         public String defaultAux() {
@@ -117,6 +118,8 @@ public record TaskDraft(
                 case ADVANCEMENT -> new AdvancementTask(new ResourceLocation(value));
                 case STAT -> new StatTask(new ResourceLocation(value), new ResourceLocation(aux), c);
                 case CHECKMARK -> new CheckmarkTask(value);
+                case TRIGGER -> new com.soul.soa_additions.quest.task.CustomTriggerTask(
+                        new ResourceLocation(value), c, "");
             };
         } catch (Exception e) {
             return new CheckmarkTask("(invalid: " + value + ")");
@@ -145,9 +148,11 @@ public record TaskDraft(
         if (t instanceof AdvancementTask at) return new TaskDraft(Type.ADVANCEMENT, at.advancement().toString(), 1, "", false, false);
         if (t instanceof StatTask st) return new TaskDraft(Type.STAT, st.statType().toString(), st.threshold(), st.statValue().toString(), false, false);
         if (t instanceof CheckmarkTask ck) return new TaskDraft(Type.CHECKMARK, ck.text(), 1, "", false, false);
-        // Unknown (e.g. CustomTriggerTask, or ItemTask with an NBT filter the
-        // GUI can't express) — preserve as a checkmark labeled with describe()
-        // so the user notices it isn't editable here.
+        if (t instanceof com.soul.soa_additions.quest.task.CustomTriggerTask ct)
+            return new TaskDraft(Type.TRIGGER, ct.triggerId().toString(), ct.count(), "", false, false);
+        // Unknown (e.g. ItemTask with an NBT filter the GUI can't express) —
+        // preserve as a checkmark labeled with describe() so the user notices
+        // it isn't editable here.
         return new TaskDraft(Type.CHECKMARK, t.describe(), 1, "", false, false);
     }
 }
