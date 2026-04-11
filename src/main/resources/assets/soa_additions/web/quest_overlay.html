@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SOA Quest Book</title>
+<style>
+:root{
+  --bg:#0e1220;
+  --panel:#1a1f33;--panel-sel:#222842;--panel-hover:#1f253e;
+  --border:#3a4264;--sep:#2a3050;
+  --text:#e6e9f5;--text-dim:#8a91ae;--text-muted:#bfc5dc;
+  --accent:#6b8cff;--heading:#6b8cff;
+  --edge:#5a6391;--edge-or:#b59a3a;
+  --node-outline:#0a0d18;--node-outline-hover:#ffffff;
+  --status-locked:#3a3f55;--status-visible:#3e6fb5;--status-ready:#4eb02e;--status-claimed:#c9a227;
+  --detail-bg:rgba(14,18,32,.96);--detail-header:#222842;--detail-border:#3a4264;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font:13px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;display:flex;height:100vh;overflow:hidden;user-select:none}
+
+/* LEFT PANE */
+.sidebar{width:200px;min-width:160px;background:var(--panel);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0}
+.sidebar-head{padding:10px 12px;font-size:12px;color:var(--heading);font-weight:700;letter-spacing:1px;border-bottom:1px solid var(--sep)}
+.ch-list{flex:1;overflow-y:auto;padding:4px 0}
+.ch-row{padding:6px 12px;cursor:pointer;border-left:3px solid transparent;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-muted);display:flex;justify-content:space-between;align-items:center}
+.ch-row:hover{background:var(--panel-hover)}
+.ch-row.active{border-left-color:var(--accent);background:var(--panel-sel);color:var(--text)}
+.ch-row .ch-stats{font-size:10px;color:var(--text-dim);flex-shrink:0;margin-left:6px}
+.ch-row.d0{font-size:14px;font-weight:600;color:var(--text);padding:8px 12px}
+.ch-row.d1{padding-left:22px;font-size:12px}
+.ch-row.d2{padding-left:32px;font-size:11px;color:var(--text-dim)}
+.ch-row.d3{padding-left:42px;font-size:10px;color:var(--text-dim)}
+
+/* MAIN */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.header{height:44px;background:var(--panel);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:12px;flex-shrink:0}
+.header h2{font-size:15px;color:var(--text);font-weight:600;white-space:nowrap}
+.header .sub{font-size:11px;color:var(--text-dim);white-space:nowrap}
+.header .right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.header button{background:var(--panel-sel);border:1px solid var(--border);color:var(--text);padding:3px 10px;border-radius:3px;cursor:pointer;font:inherit;font-size:11px}
+.header button:hover{background:var(--panel-hover)}
+.header .zoom-lbl{font-size:11px;color:var(--text-dim);min-width:40px;text-align:center}
+.header .status{font-size:11px;color:var(--text-dim)}
+.header .status.live{color:var(--status-ready)}
+
+/* GRAPH */
+.graph-wrap{flex:1;position:relative;overflow:hidden;cursor:grab}
+.graph-wrap.dragging{cursor:grabbing}
+.graph-layer{position:absolute;top:0;left:0;transform-origin:0 0}
+svg.edge-layer{pointer-events:none;overflow:visible}
+
+/* NODES */
+.qnode{position:absolute;cursor:pointer;text-align:center}
+.qnode-box{border-radius:6px;border:3px solid var(--node-outline);display:flex;align-items:center;justify-content:center;transition:border-color .12s,filter .12s}
+.qnode:hover .qnode-box{border-color:var(--node-outline-hover);filter:brightness(1.25)}
+.qnode-box.circle{border-radius:50%}
+.qnode-box.rhombus{transform:rotate(45deg)}
+.qnode-box.rhombus .node-icon{transform:rotate(-45deg)}
+.node-icon{font-size:11px;color:var(--text);pointer-events:none;line-height:1.1;overflow:hidden;text-overflow:ellipsis;padding:2px}
+.qnode-label{position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:4px;font-size:11px;color:var(--text-muted);white-space:nowrap;max-width:120px;overflow:hidden;text-overflow:ellipsis;pointer-events:none;text-align:center}
+.qnode .claimed-tick{position:absolute;top:-6px;right:-6px;background:var(--panel);border:1px solid var(--status-claimed);color:#66ff66;font-size:10px;width:16px;height:16px;display:flex;align-items:center;justify-content:center;border-radius:3px;font-weight:700;pointer-events:none}
+
+/* TOOLTIP */
+.tooltip{position:fixed;z-index:500;background:var(--detail-bg);border:1px solid var(--accent);border-radius:6px;padding:10px 14px;max-width:300px;pointer-events:none;font-size:12px;box-shadow:0 4px 24px rgba(0,0,0,.7)}
+.tooltip .tt-title{color:var(--accent);font-weight:600;font-size:14px;margin-bottom:4px}
+.tooltip .tt-status{font-size:11px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.tooltip .tt-desc{color:var(--text-dim);font-size:11px;white-space:pre-wrap;margin-bottom:6px}
+.tooltip .tt-tasks{font-size:11px;color:var(--text-muted)}
+.tooltip .tt-tasks div{padding:2px 0}
+.tooltip .tt-done{color:var(--status-ready)}
+.tooltip .tt-pending{color:var(--text-dim)}
+
+/* DETAIL POPUP */
+.detail-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;display:flex;align-items:center;justify-content:center}
+.detail{background:var(--detail-bg);border:1px solid var(--detail-border);border-radius:8px;width:460px;max-height:80vh;overflow-y:auto;box-shadow:4px 4px 0 rgba(0,0,0,.5)}
+.detail-head{padding:10px 16px;background:var(--detail-header);border-bottom:1px solid var(--detail-border);display:flex;justify-content:space-between;align-items:center;border-radius:8px 8px 0 0}
+.detail-head h3{font-size:15px;color:var(--text)}
+.detail-close{background:none;border:none;color:var(--text-dim);font-size:20px;cursor:pointer;padding:2px 8px}
+.detail-close:hover{color:var(--text)}
+.detail-body{padding:14px 16px}
+.section{margin-bottom:14px}
+.section h4{font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--text-dim);margin-bottom:6px}
+.status-badge{display:inline-block;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:600;text-transform:uppercase}
+.s-LOCKED{background:var(--status-locked);color:var(--text-dim)}
+.s-VISIBLE{background:rgba(62,111,181,.3);color:var(--status-visible)}
+.s-READY{background:rgba(78,176,46,.3);color:var(--status-ready)}
+.s-CLAIMED{background:rgba(201,162,39,.3);color:var(--status-claimed)}
+.desc{color:var(--text-muted);font-size:12px;white-space:pre-wrap}
+.d-list{list-style:none}
+.d-list li{padding:5px 10px;background:var(--panel-sel);border-radius:4px;margin-bottom:4px;font-size:12px;display:flex;justify-content:space-between;align-items:center}
+.d-list .ct{font-weight:600}
+.d-list .ct.ok{color:var(--status-ready)}
+.d-list .ct.no{color:var(--accent)}
+.dep-link{color:var(--accent);cursor:pointer;text-decoration:underline}
+.dep-link:hover{color:var(--text)}
+.meta{font-size:10px;color:var(--text-dim);margin-top:10px}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
+.tag{background:var(--panel-sel);padding:2px 8px;border-radius:3px;font-size:10px;color:var(--text-muted)}
+
+.banner{position:fixed;top:0;left:0;right:0;padding:8px;text-align:center;font-size:12px;z-index:999;display:none}
+.banner.error{background:#c75050;color:white;display:block}
+.banner.reconnecting{background:var(--status-claimed);color:#222;display:block}
+.loading{display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-dim);font-size:14px}
+</style>
+</head>
+<body>
+<div id="banner" class="banner"></div>
+<div class="sidebar">
+  <div class="sidebar-head">CHAPTERS</div>
+  <div class="ch-list" id="ch-list"></div>
+</div>
+<div class="main">
+  <div class="header">
+    <h2 id="hdr-title">No Chapter</h2>
+    <span class="sub" id="hdr-sub"></span>
+    <div class="right">
+      <span class="status" id="status">Connecting...</span>
+      <button onclick="zoomOut()">&minus;</button>
+      <span class="zoom-lbl" id="zoom-lbl">100%</span>
+      <button onclick="zoomIn()">+</button>
+      <button onclick="resetView()">Reset</button>
+    </div>
+  </div>
+  <div class="graph-wrap" id="wrap">
+    <svg class="edge-layer graph-layer" id="svg"></svg>
+    <div class="graph-layer" id="canvas"></div>
+  </div>
+</div>
+<div class="tooltip" id="tt" style="display:none"></div>
+<div id="detailOvr" class="detail-overlay" style="display:none"></div>
+
+<script>
+// ============================================================
+//  LAYOUT — positions come from the server (same algorithm as
+//  the in-game GUI). We just scale them up for browser display.
+// ============================================================
+const PX_SCALE = 2.5;   // multiply server pixel coords for browser
+const NODE_SIZE = 52;    // default node px in browser
+
+const params = new URLSearchParams(location.search);
+const TOKEN = params.get('token');
+if (!TOKEN) document.body.innerHTML='<div class="loading" style="height:100vh">No token provided. Log into the server to get your overlay URL.</div>';
+
+let DATA=null, PROGRESS={}, selCh=null;
+let scale=1, panX=0, panY=0, isDrag=false, dSX, dSY, pSX, pSY;
+const wrap=document.getElementById('wrap');
+const canvas=document.getElementById('canvas');
+const svgEl=document.getElementById('svg');
+const ttEl=document.getElementById('tt');
+
+// ============================================================
+//  LOAD
+// ============================================================
+async function loadData(){
+  try{
+    const r=await fetch('/api/quests?token='+TOKEN);
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    DATA=await r.json(); PROGRESS=DATA.progress||{};
+    if(DATA.chapters.length&&!selCh) selCh=DATA.chapters[0].id;
+    renderAll(); resetView();
+    setStatus('live','Connected'); connectSSE();
+  }catch(e){ setStatus('error','Failed: '+e.message); showBanner('error','Cannot connect to server.'); }
+}
+
+// ============================================================
+//  SSE
+// ============================================================
+let es=null,rt=null;
+function connectSSE(){
+  if(es)es.close();
+  es=new EventSource('/api/events?token='+TOKEN);
+  es.onmessage=e=>{
+    try{
+      PROGRESS=JSON.parse(e.data);
+      renderAll();
+      // If detail popup is open, refresh it with updated progress
+      const ovr=document.getElementById('detailOvr');
+      if(ovr.style.display==='flex'){
+        const h3=ovr.querySelector('h3');
+        if(h3){
+          const ch=DATA.chapters.find(c=>c.id===selCh);
+          if(ch){
+            const q=ch.quests.find(q=>q.title===h3.textContent);
+            if(q) openDetail(q);
+          }
+        }
+      }
+      flashStatus();
+    }catch(x){}
+  };
+  es.onopen=()=>{setStatus('live','Live');hideBanner();};
+  es.onerror=()=>{setStatus('error','Disconnected');showBanner('reconnecting','Connection lost...');es.close();clearTimeout(rt);rt=setTimeout(()=>{loadData();},3000);};
+}
+
+// Layout positions come from the server — no client-side computation needed.
+
+// ============================================================
+//  CHAPTER DEPTH
+// ============================================================
+function chDepth(ch){let d=0,p=ch.parentChapter;const s=new Set([ch.id]);while(p&&d<5){if(s.has(p))break;s.add(p);d++;const f=DATA.chapters.find(c=>c.id===p);if(!f)break;p=f.parentChapter;}return d;}
+
+// ============================================================
+//  RENDER
+// ============================================================
+function renderAll(){ renderChapters(); renderGraph(); }
+
+function renderChapters(){
+  const el=document.getElementById('ch-list'); el.innerHTML='';
+  if(!DATA) return;
+  DATA.chapters.forEach(ch=>{
+    const d=chDepth(ch);
+    let claimed=0; ch.quests.forEach(q=>{if((PROGRESS[q.fullId]||{}).status==='CLAIMED')claimed++;});
+    const row=document.createElement('div');
+    row.className='ch-row d'+Math.min(d,3)+(ch.id===selCh?' active':'');
+    const nameSpan=document.createElement('span');
+    nameSpan.textContent=ch.title;
+    nameSpan.style.overflow='hidden';
+    nameSpan.style.textOverflow='ellipsis';
+    const statSpan=document.createElement('span');
+    statSpan.className='ch-stats';
+    statSpan.textContent=claimed+'/'+ch.quests.length;
+    row.appendChild(nameSpan);
+    row.appendChild(statSpan);
+    row.onclick=()=>{selCh=ch.id;renderAll();resetView();};
+    el.appendChild(row);
+  });
+}
+
+function renderGraph(){
+  canvas.innerHTML=''; svgEl.innerHTML='';
+  if(!DATA||!selCh) return;
+  const ch=DATA.chapters.find(c=>c.id===selCh);
+  if(!ch) return;
+  document.getElementById('hdr-title').textContent=ch.title;
+  document.getElementById('hdr-sub').textContent='Mode: '+DATA.packMode+' \u2022 '+ch.quests.length+' quests';
+
+  // Use server-provided layout positions (scaled up for browser)
+  const positions={};
+  const qById={};
+  ch.quests.forEach(q=>{
+    qById[q.fullId]=q;
+    if(q.layoutX>=0&&q.layoutY>=0){
+      positions[q.fullId]={px:q.layoutX*PX_SCALE, py:q.layoutY*PX_SCALE};
+    }
+  });
+
+  // Edges come from the server too
+  const edges=ch.edges||[];
+
+  // Bounding box
+  let mnX=Infinity,mxX=-Infinity,mnY=Infinity,mxY=-Infinity;
+  Object.values(positions).forEach(p=>{mnX=Math.min(mnX,p.px);mxX=Math.max(mxX,p.px);mnY=Math.min(mnY,p.py);mxY=Math.max(mxY,p.py);});
+  if(!isFinite(mnX)){mnX=0;mxX=0;mnY=0;mxY=0;}
+  const PAD=80;
+  const W=mxX-mnX+NODE_SIZE+PAD*2;
+  const H=mxY-mnY+NODE_SIZE+PAD*2+30;
+  canvas.style.width=W+'px'; canvas.style.height=H+'px';
+  svgEl.setAttribute('width',W); svgEl.setAttribute('height',H);
+  svgEl.style.width=W+'px'; svgEl.style.height=H+'px';
+
+  // Arrow markers
+  const defs=document.createElementNS('http://www.w3.org/2000/svg','defs');
+  [['arr','var(--edge)'],['arr-or','var(--edge-or)'],['arr-hi','var(--accent)']].forEach(([id,fill])=>{
+    const m=document.createElementNS('http://www.w3.org/2000/svg','marker');
+    m.setAttribute('id',id); m.setAttribute('viewBox','0 0 10 10');
+    m.setAttribute('refX','10'); m.setAttribute('refY','5');
+    m.setAttribute('markerWidth','8'); m.setAttribute('markerHeight','8');
+    m.setAttribute('orient','auto-start-reverse');
+    const p=document.createElementNS('http://www.w3.org/2000/svg','path');
+    p.setAttribute('d','M 0 0 L 10 5 L 0 10 z'); p.setAttribute('fill',fill);
+    m.appendChild(p); defs.appendChild(m);
+  });
+  svgEl.appendChild(defs);
+
+  // Draw edges
+  edges.forEach(e=>{
+    const fp=positions[e.from], tp=positions[e.to];
+    if(!fp||!tp) return;
+    const srcQ=qById[e.from], dstQ=qById[e.to];
+    const srcS=nodeSize(srcQ), dstS=nodeSize(dstQ);
+
+    const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+    line.setAttribute('x1',fp.px-mnX+PAD+srcS/2);
+    line.setAttribute('y1',fp.py-mnY+PAD+srcS);   // bottom of source
+    line.setAttribute('x2',tp.px-mnX+PAD+dstS/2);
+    line.setAttribute('y2',tp.py-mnY+PAD);          // top of target
+    line.setAttribute('stroke',e.or?'var(--edge-or)':'var(--edge)');
+    line.setAttribute('stroke-width','3');
+    line.setAttribute('marker-end',e.or?'url(#arr-or)':'url(#arr)');
+    if(e.or) line.setAttribute('stroke-dasharray','8,4');
+    line.dataset.from=e.from; line.dataset.to=e.to;
+    svgEl.appendChild(line);
+  });
+
+  // Draw nodes
+  ch.quests.forEach(q=>{
+    const pos=positions[q.fullId];
+    if(!pos) return;
+    const ns=nodeSize(q);
+    const prog=PROGRESS[q.fullId]||{status:'LOCKED',taskCounts:[]};
+    const sColor=statusColor(prog.status);
+
+    const node=document.createElement('div');
+    node.className='qnode';
+    node.style.left=(pos.px-mnX+PAD)+'px';
+    node.style.top=(pos.py-mnY+PAD)+'px';
+    node.style.width=ns+'px';
+    node.style.height=ns+'px';
+    node.dataset.fid=q.fullId;
+
+    // Shape box
+    const box=document.createElement('div');
+    box.className='qnode-box';
+    const shape=q.shape||'square';
+    if(shape==='circle') box.classList.add('circle');
+    if(shape==='rhombus') box.classList.add('rhombus');
+    box.style.width=ns+'px'; box.style.height=ns+'px';
+    box.style.background=sColor;
+
+    // Icon text inside node
+    const ico=document.createElement('div');
+    ico.className='node-icon';
+    if(shape==='rhombus') ico.style.transform='rotate(-45deg)';
+    const iconName=q.icon?(q.icon.includes(':')?q.icon.split(':')[1]:q.icon):'?';
+    const abbr=iconName.replace(/_/g,' ').split(' ').map(w=>w.charAt(0).toUpperCase()).join('').substring(0,3);
+    ico.textContent=abbr;
+    ico.style.fontSize=(ns>40?'13px':'10px');
+    box.appendChild(ico);
+    node.appendChild(box);
+
+    // Label
+    const lbl=document.createElement('div');
+    lbl.className='qnode-label';
+    lbl.textContent=q.title;
+    node.appendChild(lbl);
+
+    // Claimed tick
+    if(prog.status==='CLAIMED'){
+      const tick=document.createElement('div');
+      tick.className='claimed-tick';
+      tick.textContent='\u2714';
+      node.appendChild(tick);
+    }
+
+    // Events
+    node.addEventListener('mouseenter',e=>{showTT(q,prog,e);hiEdges(q.fullId);});
+    node.addEventListener('mousemove',e=>moveTT(e));
+    node.addEventListener('mouseleave',()=>{hideTT();loEdges();});
+    node.addEventListener('click',()=>openDetail(q));
+    canvas.appendChild(node);
+  });
+
+  applyTransform();
+}
+
+function nodeSize(q){ return (q&&q.size>0)?Math.max(q.size*1.5,40):NODE_SIZE; }
+function statusColor(s){
+  return {LOCKED:'var(--status-locked)',VISIBLE:'var(--status-visible)',READY:'var(--status-ready)',CLAIMED:'var(--status-claimed)'}[s]||'var(--status-locked)';
+}
+
+// ============================================================
+//  EDGE HIGHLIGHTING
+// ============================================================
+function hiEdges(fid){
+  svgEl.querySelectorAll('line').forEach(l=>{
+    if(l.dataset.from===fid||l.dataset.to===fid){
+      l.setAttribute('stroke','var(--accent)');
+      l.setAttribute('stroke-width','5');
+      l.setAttribute('marker-end','url(#arr-hi)');
+    }
+  });
+  canvas.querySelectorAll('.qnode').forEach(n=>{
+    if(n.dataset.fid===fid) n.querySelector('.qnode-box').style.borderColor='var(--node-outline-hover)';
+  });
+}
+function loEdges(){
+  svgEl.querySelectorAll('line').forEach(l=>{
+    const or=l.getAttribute('stroke-dasharray');
+    l.setAttribute('stroke',or?'var(--edge-or)':'var(--edge)');
+    l.setAttribute('stroke-width','3');
+    l.setAttribute('marker-end',or?'url(#arr-or)':'url(#arr)');
+  });
+  canvas.querySelectorAll('.qnode-box').forEach(b=>b.style.borderColor='');
+}
+
+// ============================================================
+//  TOOLTIP
+// ============================================================
+function showTT(q,prog,e){
+  let tasks='';
+  if(q.tasks&&q.tasks.length){
+    tasks='<div class="tt-tasks">';
+    q.tasks.forEach((t,i)=>{
+      const c=(prog.taskCounts&&prog.taskCounts[i])||0;
+      const tgt=parseInt(t.target)||1;
+      const ok=c>=tgt;
+      tasks+=`<div class="${ok?'tt-done':'tt-pending'}">${esc(t.description||t.type)} ${c}/${tgt}${ok?' \u2714':''}</div>`;
+    });
+    tasks+='</div>';
+  }
+  ttEl.innerHTML=`<div class="tt-title">${esc(q.title)}</div>
+    <div class="tt-status" style="color:${statusColor(prog.status)}">${prog.status}${q.optional?' (optional)':''}</div>
+    ${q.description&&q.description.length?'<div class="tt-desc">'+esc(q.description.join('\n'))+'</div>':''}
+    ${tasks}`;
+  ttEl.style.display='block'; moveTT(e);
+}
+function moveTT(e){
+  const p=14;let x=e.clientX+p,y=e.clientY+p;
+  const r=ttEl.getBoundingClientRect();
+  if(x+r.width>innerWidth-p)x=e.clientX-r.width-p;
+  if(y+r.height>innerHeight-p)y=e.clientY-r.height-p;
+  if(x<p)x=p;if(y<p)y=p;
+  ttEl.style.left=x+'px';ttEl.style.top=y+'px';
+}
+function hideTT(){ttEl.style.display='none';}
+
+// ============================================================
+//  DETAIL POPUP
+// ============================================================
+function openDetail(q){
+  const prog=PROGRESS[q.fullId]||{status:'LOCKED',taskCounts:[],teamClaimed:false,localClaimed:false};
+
+  // Deps
+  let dH='';
+  if(q.dependencies&&q.dependencies.length){
+    dH='<ul class="d-list">';
+    q.dependencies.forEach(depId=>{
+      let dq=null,dc=null;
+      DATA.chapters.forEach(c=>{const f=c.quests.find(o=>o.id===depId);if(f){dq=f;dc=c;}});
+      const dp=dq?PROGRESS[dq.fullId]:null;
+      const ok=dp&&dp.status==='CLAIMED';
+      dH+=`<li><span class="dep-link" onclick="navTo('${depId}')">${dq?esc(dq.title)+' ['+esc(dc.title)+']':esc(depId)}</span>${ok?' <span class="ct ok">\u2714</span>':''}</li>`;
+    });
+    dH+='</ul>';
+  } else dH='<div style="color:var(--text-dim);font-size:11px">None (starter quest)</div>';
+
+  // Tasks
+  let tH='<ul class="d-list">';
+  (q.tasks||[]).forEach((t,i)=>{
+    const c=(prog.taskCounts&&prog.taskCounts[i])||0;
+    const tgt=parseInt(t.target)||1; const ok=c>=tgt;
+    tH+=`<li><span>${esc(t.description||t.type)}</span><span class="ct ${ok?'ok':'no'}">${c}/${tgt}${ok?' \u2714':''}</span></li>`;
+  });
+  tH+='</ul>';
+
+  // Rewards
+  let rH='<ul class="d-list">';
+  (q.rewards||[]).forEach(r=>{rH+=`<li>${esc(r.description||r.type)}</li>`;});
+  rH+='</ul>';
+
+  const tags=[];
+  if(q.optional)tags.push('Optional');
+  if(q.repeatable)tags.push('Repeatable');
+  if(q.visibility!=='normal')tags.push(q.visibility);
+  if(!q.depsAll&&q.dependencies&&q.dependencies.length>1)tags.push('OR deps');
+
+  const ol=document.getElementById('detailOvr');
+  ol.innerHTML=`<div class="detail">
+    <div class="detail-head"><h3>${esc(q.title)}</h3><button class="detail-close" onclick="closeDet()">&times;</button></div>
+    <div class="detail-body">
+      <div class="section"><span class="status-badge s-${prog.status}">${prog.status}</span>
+        ${prog.teamClaimed?'<span class="tag" style="margin-left:6px">Team Claimed</span>':''}
+        ${prog.localClaimed?'<span class="tag" style="margin-left:6px">You Claimed</span>':''}
+      </div>
+      ${tags.length?'<div class="section"><div class="tags">'+tags.map(t=>'<span class="tag">'+esc(t)+'</span>').join('')+'</div></div>':''}
+      ${q.description&&q.description.length?'<div class="section"><div class="desc">'+esc(q.description.join('\n'))+'</div></div>':''}
+      <div class="section"><h4>Dependencies (${(q.dependencies||[]).length})${q.depsAll&&(q.dependencies||[]).length>1?' \u2014 ALL required':''}</h4>${dH}</div>
+      <div class="section"><h4>Tasks (${(q.tasks||[]).length})</h4>${tH}</div>
+      <div class="section"><h4>Rewards (${(q.rewards||[]).length})</h4>${rH}</div>
+      <div class="meta">ID: ${esc(q.fullId)} \u2022 Icon: ${esc(q.icon)} \u2022 Shape: ${q.shape}</div>
+    </div>
+  </div>`;
+  ol.style.display='flex';
+  ol.onclick=e=>{if(e.target===ol)closeDet();};
+}
+function closeDet(){document.getElementById('detailOvr').style.display='none';}
+function navTo(qid){
+  for(const ch of DATA.chapters){const q=ch.quests.find(o=>o.id===qid);if(q){selCh=ch.id;renderAll();resetView();openDetail(q);return;}}
+}
+
+// ============================================================
+//  PAN / ZOOM
+// ============================================================
+function applyTransform(){
+  const t=`translate(${panX}px,${panY}px) scale(${scale})`;
+  canvas.style.transform=t; svgEl.style.transform=t;
+  document.getElementById('zoom-lbl').textContent=Math.round(scale*100)+'%';
+}
+function resetView(){
+  const wW=wrap.clientWidth,wH=wrap.clientHeight;
+  const cW=parseInt(canvas.style.width)||1,cH=parseInt(canvas.style.height)||1;
+  scale=Math.min(wW/cW,wH/cH,2)*0.85;
+  panX=(wW-cW*scale)/2; panY=(wH-cH*scale)/2;
+  applyTransform();
+}
+function zoomIn(){scale=Math.min(scale*1.2,5);applyTransform();}
+function zoomOut(){scale=Math.max(scale*0.8,0.1);applyTransform();}
+
+wrap.addEventListener('mousedown',e=>{
+  if(e.target.closest('.qnode'))return;
+  isDrag=true;wrap.classList.add('dragging');dSX=e.clientX;dSY=e.clientY;pSX=panX;pSY=panY;
+});
+window.addEventListener('mousemove',e=>{if(!isDrag)return;panX=pSX+(e.clientX-dSX);panY=pSY+(e.clientY-dSY);applyTransform();});
+window.addEventListener('mouseup',()=>{isDrag=false;wrap.classList.remove('dragging');});
+wrap.addEventListener('wheel',e=>{
+  e.preventDefault();
+  const r=wrap.getBoundingClientRect(),mx=e.clientX-r.left,my=e.clientY-r.top,old=scale;
+  scale=Math.min(Math.max(scale*(e.deltaY>0?.9:1.1),0.1),5);
+  panX=mx-(mx-panX)*(scale/old);panY=my-(my-panY)*(scale/old);
+  applyTransform();
+},{passive:false});
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDet();});
+
+// ============================================================
+//  UTILS
+// ============================================================
+function esc(s){return s==null?'':String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function setStatus(c,t){const e=document.getElementById('status');e.textContent=t;e.className='status '+c;}
+function flashStatus(){const e=document.getElementById('status');e.textContent='Updated!';e.className='status live';setTimeout(()=>{e.textContent='Live';},1500);}
+function showBanner(c,t){const e=document.getElementById('banner');e.textContent=t;e.className='banner '+c;}
+function hideBanner(){document.getElementById('banner').className='banner';}
+
+if(TOKEN)loadData();
+</script>
+</body>
+</html>

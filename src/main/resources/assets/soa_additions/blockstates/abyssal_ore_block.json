@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "soa_additions:block/abyssal_ore_block" }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "soa_additions:cheater_coin"
+    },
+    "title": {
+      "translate": "advancements.soa_additions.cheats_are_fun.title"
+    },
+    "description": {
+      "translate": "advancements.soa_additions.cheats_are_fun.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true,
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+  },
+  "criteria": {
+    "cheater": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "cheater"
+    ]
+  ]
+}
