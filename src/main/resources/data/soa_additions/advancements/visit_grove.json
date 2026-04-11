@@ -1,0 +1,25 @@
+{
+  "display": {
+    "icon": {
+      "item": "soa_additions:grove_chiseled_stone_bricks_block"
+    },
+    "title": {
+      "translate": "advancements.soa_additions.visit_grove.title"
+    },
+    "description": {
+      "translate": "advancements.soa_additions.visit_grove.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "near_boon_block": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [ "near_boon_block" ]
+  ]
+}

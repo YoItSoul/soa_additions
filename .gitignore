@@ -1,0 +1,48 @@
+# --- IDE ---
+# Eclipse
+bin/
+*.launch
+.settings/
+.metadata/
+.classpath
+.project
+
+# IntelliJ IDEA
+out/
+*.ipr
+*.iws
+*.iml
+.idea/
+
+# VS Code
+.vscode/
+
+# --- Build / Gradle ---
+build/
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# --- Minecraft / Forge runtime ---
+run/
+run-data/
+logs/
+eclipse/
+
+# Forge MDK
+forge*changelog.txt
+
+# --- Shader reference packs (not mod source) ---
+ComplementaryUnbound_ref/
+SoA_Radiance/
+
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Secrets / credentials ---
+*.env
+*.env.*
+
+# --- Claude Code ---
+.claude/

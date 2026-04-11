@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "soa_additions:block/ether_ore_block"
+  }
+}
