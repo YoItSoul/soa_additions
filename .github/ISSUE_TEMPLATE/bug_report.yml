@@ -1,36 +1,7 @@
 name: Bug Report
-description: Report a bug or crash with SoA Additions
+description: Report a bug or crash
 labels: ["bug"]
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Thanks for reporting a bug! Please fill out the details below so we can reproduce and fix it.
-
-  - type: input
-    id: mc-version
-    attributes:
-      label: Minecraft Version
-      placeholder: "1.20.1"
-    validations:
-      required: true
-
-  - type: input
-    id: mod-version
-    attributes:
-      label: Mod Version
-      placeholder: "e.g. 1.0.0"
-    validations:
-      required: true
-
-  - type: input
-    id: forge-version
-    attributes:
-      label: Forge Version
-      placeholder: "e.g. 47.2.0"
-    validations:
-      required: false
-
   - type: textarea
     id: description
     attributes:
@@ -65,13 +36,5 @@ body:
       label: Crash log / relevant log output
       description: Paste the crash report or relevant log lines here.
       render: text
-    validations:
-      required: false
-
-  - type: textarea
-    id: other-mods
-    attributes:
-      label: Other mods installed
-      description: List any other mods that might be relevant.
     validations:
       required: false
