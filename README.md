@@ -2,7 +2,7 @@
   <img src="https://img.shields.io/badge/Minecraft-1.20.1-62B47A?style=for-the-badge&logo=curseforge" alt="Minecraft 1.20.1"/>
   <img src="https://img.shields.io/badge/Forge-47+-E04E14?style=for-the-badge&logo=curseforge" alt="Forge 47+"/>
   <img src="https://img.shields.io/badge/Version-3.1.1-blue?style=for-the-badge" alt="Version 3.1.1"/>
-  <img src="https://img.shields.io/github/license/YoItSoul/soa_additions?style=for-the-badge" alt="License"/>
+  <img src="https://img.shields.io/badge/License-All%20Rights%20Reserved-red?style=for-the-badge" alt="All Rights Reserved"/>
 </p>
 
 # Souls of Avarice Additions
