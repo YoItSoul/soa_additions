@@ -28,28 +28,94 @@ jobs:
           token: ${{ secrets.GH_PAT }}
           fetch-depth: 0
 
-      - name: Gather codebase context
-        id: context
+      - name: Build file index
         run: |
-          # Build a map of the project for Claude
+          # Create a compact index: file path + first-line summary
+          echo "## Java Source Files" > /tmp/file_index.txt
+          for f in $(find src -type f -name '*.java' | sort); do
+            FIRST_LINE=$(head -5 "$f" | grep -E "class |interface |enum |package " | head -1 | xargs)
+            echo "$f  -- $FIRST_LINE" >> /tmp/file_index.txt
+          done
+
+          echo "" >> /tmp/file_index.txt
+          echo "## Build Config (build.gradle)" >> /tmp/file_index.txt
+          cat build.gradle >> /tmp/file_index.txt
+
+      - name: Ask Claude which files are relevant
+        id: triage
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          cat > /tmp/triage_prompt.txt <<'MSG_EOF'
+          You are a Minecraft Forge mod developer triaging a GitHub issue.
+
+          Below is a file index for the "soa_additions" mod and the issue description.
+          Return ONLY a JSON array of file paths (strings) that are likely relevant to fixing this issue.
+          Include files that would need to be read for context or modified for the fix.
+          Return at most 30 files. No markdown, no explanation, just the JSON array.
+          If no files seem relevant, return: []
+          MSG_EOF
+
+          echo "" >> /tmp/triage_prompt.txt
+          echo "ISSUE #${ISSUE_NUMBER}: ${ISSUE_TITLE}" >> /tmp/triage_prompt.txt
+          echo "${ISSUE_BODY}" >> /tmp/triage_prompt.txt
+          echo "" >> /tmp/triage_prompt.txt
+          echo "FILE INDEX:" >> /tmp/triage_prompt.txt
+          cat /tmp/file_index.txt >> /tmp/triage_prompt.txt
+
+          jq -n --rawfile msg /tmp/triage_prompt.txt '{
+            model: "claude-sonnet-4-20250514",
+            max_tokens: 2048,
+            messages: [{role: "user", content: $msg}]
+          }' > /tmp/triage_request.json
+
+          HTTP_CODE=$(curl -s -w "%{http_code}" -o /tmp/triage_response.json \
+            -X POST https://api.anthropic.com/v1/messages \
+            -H "Content-Type: application/json" \
+            -H "x-api-key: ${ANTHROPIC_API_KEY}" \
+            -H "anthropic-version: 2023-06-01" \
+            -d @/tmp/triage_request.json)
+
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "Claude triage API returned HTTP $HTTP_CODE"
+            cat /tmp/triage_response.json
+            exit 1
+          fi
+
+          jq -r '.content[0].text' /tmp/triage_response.json > /tmp/relevant_files.json
+          echo "Relevant files selected by Claude:"
+          cat /tmp/relevant_files.json
+
+      - name: Gather relevant source code
+        run: |
           echo "## Project Structure" > /tmp/codebase_context.md
           find src -type f -name '*.java' | sort >> /tmp/codebase_context.md
           echo "" >> /tmp/codebase_context.md
 
-          echo "## Source Files" >> /tmp/codebase_context.md
-          for f in $(find src -type f -name '*.java' | sort); do
-            echo "---" >> /tmp/codebase_context.md
-            echo "### $f" >> /tmp/codebase_context.md
-            cat "$f" >> /tmp/codebase_context.md
-            echo "" >> /tmp/codebase_context.md
+          echo "## Relevant Source Files" >> /tmp/codebase_context.md
+
+          # Read each file Claude identified as relevant
+          for f in $(jq -r '.[]' /tmp/relevant_files.json 2>/dev/null); do
+            if [ -f "$f" ]; then
+              echo "---" >> /tmp/codebase_context.md
+              echo "### $f" >> /tmp/codebase_context.md
+              cat "$f" >> /tmp/codebase_context.md
+              echo "" >> /tmp/codebase_context.md
+            fi
           done
 
-          # Include build config
           echo "## build.gradle" >> /tmp/codebase_context.md
           cat build.gradle >> /tmp/codebase_context.md
 
           echo "## gradle.properties" >> /tmp/codebase_context.md
           cat gradle.properties >> /tmp/codebase_context.md
+
+          # Report size
+          TOKENS_APPROX=$(wc -c < /tmp/codebase_context.md)
+          echo "Context size: ~${TOKENS_APPROX} bytes"
 
       - name: Ask Claude for a fix
         id: claude
@@ -59,9 +125,8 @@ jobs:
           ISSUE_BODY: ${{ github.event.issue.body }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
-          # Write the prompt to a file to avoid argument length limits
           cat > /tmp/user_msg.txt <<MSG_EOF
-          You are a Minecraft Forge mod developer. You are given the full source code of a Java mod called "soa_additions" (Souls of Avarice Additions), and a GitHub issue describing a bug or feature request.
+          You are a Minecraft Forge mod developer. You are given relevant source files from a Java mod called "soa_additions" (Souls of Avarice Additions), and a GitHub issue describing a bug or feature request.
 
           YOUR TASK: Propose a fix or implementation by outputting ONLY a JSON array of file changes. No explanation, no markdown fences, just valid JSON.
 
@@ -84,7 +149,6 @@ jobs:
           MSG_EOF
           cat /tmp/codebase_context.md >> /tmp/user_msg.txt
 
-          # Use jq with file input (--rawfile) to avoid argument length limits
           jq -n --rawfile msg /tmp/user_msg.txt '{
             model: "claude-sonnet-4-20250514",
             max_tokens: 8096,
@@ -122,9 +186,8 @@ jobs:
           # Check if Claude returned empty changes
           if [ "$CHANGES" = "[]" ] || [ -z "$CHANGES" ]; then
             echo "Claude could not determine a fix. Skipping PR creation."
-            # Comment on the issue
             gh issue comment "$ISSUE_NUMBER" \
-              --body "I analyzed this issue but couldn't determine an automated fix. A maintainer will need to look at this manually."
+              --body "🤖 I analyzed this issue but couldn't determine an automated fix. A maintainer will need to look at this manually."
             exit 0
           fi
 
@@ -155,7 +218,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit."
             gh issue comment "$ISSUE_NUMBER" \
-              --body "I analyzed this issue but the proposed changes resulted in no diff. A maintainer will need to look at this manually."
+              --body "🤖 I analyzed this issue but the proposed changes resulted in no diff. A maintainer will need to look at this manually."
             exit 0
           fi
 
@@ -183,7 +246,7 @@ jobs:
 
           ### What to check:
           - [ ] Changes are correct and complete
-          - [ ] Code compiles (`./gradlew build`)
+          - [ ] Code compiles (\`./gradlew build\`)
           - [ ] No unintended side effects
           - [ ] Tested in-game
 
@@ -197,4 +260,4 @@ jobs:
 
           # Comment on the issue
           gh issue comment "$ISSUE_NUMBER" \
-            --body "I've created a draft PR with a proposed fix. Please review it carefully before approving — it's AI-generated and needs human verification."
+            --body "🤖 I've created a draft PR with a proposed fix. Please review it carefully before approving — it's AI-generated and needs human verification."
