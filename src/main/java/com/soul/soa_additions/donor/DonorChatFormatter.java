@@ -49,8 +49,11 @@ public final class DonorChatFormatter {
         decorated.append(Component.literal("|")
                 .withStyle(s -> s.withColor(tier.color).withObfuscated(true)));
 
+        // Colon separator
+        decorated.append(Component.literal(": "));
+
         // Message
-        decorated.append(Component.literal(" " + event.getRawText())
+        decorated.append(Component.literal(event.getRawText())
                 .withStyle(ChatFormatting.WHITE));
 
         event.setMessage(decorated);
