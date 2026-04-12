@@ -12,6 +12,7 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.players.GameProfileCache;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -24,14 +25,21 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.YearMonth;
+import java.time.ZoneOffset;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
  * {@code /soa donor sync} — pulls the latest donor list from the Souls of
  * Avarice telemetry API and merges it into the local donor registry.
  *
- * <p>Endpoint: {@code GET https://telemetry.soulsofavarice.com/api/supporters}
- * Returns a JSON array of supporter objects.</p>
+ * <p>Endpoint: {@code GET https://telemetry.soulsofavarice.com/api/supporters}<br>
+ * Returns a JSON array of supporter objects with fields:
+ * {@code name}, {@code tier}, {@code ign}, {@code message}, {@code date}.
+ * The {@code ign} field is the Minecraft username (may be null).
+ * The {@code tier} field is one of: "draconium", "voidmetal", "netherite".
+ * Entries without an {@code ign} are skipped.</p>
  */
 @Mod.EventBusSubscriber(modid = SoaAdditions.MODID)
 public final class DonorSyncCommand {
@@ -61,7 +69,6 @@ public final class DonorSyncCommand {
                         .withStyle(ChatFormatting.YELLOW),
                 false);
 
-        // Run the HTTP fetch off the server thread
         Thread thread = new Thread(() -> {
             try {
                 HttpClient client = HttpClient.newBuilder()
@@ -87,41 +94,97 @@ public final class DonorSyncCommand {
                     return;
                 }
 
-                int added = 0, updated = 0;
+                GameProfileCache profileCache = server.getProfileCache();
+                int added = 0, updated = 0, skipped = 0;
+
                 for (JsonElement elem : arr) {
                     JsonObject obj = elem.getAsJsonObject();
-                    DonorData donor = parseSupporter(obj);
-                    if (donor == null) continue;
 
-                    DonorData existing = DonorRegistry.get(donor.uuid()).orElse(null);
+                    // ign is the Minecraft username — skip if null/absent
+                    if (!obj.has("ign") || obj.get("ign").isJsonNull()
+                            || obj.get("ign").getAsString().trim().isEmpty()) {
+                        skipped++;
+                        continue;
+                    }
+                    String ign = obj.get("ign").getAsString().trim();
+
+                    // Look up UUID from the server's profile cache (usercache.json)
+                    UUID uuid = null;
+                    if (profileCache != null) {
+                        Optional<com.mojang.authlib.GameProfile> profile =
+                                profileCache.get(ign);
+                        if (profile.isPresent()) {
+                            uuid = profile.get().getId();
+                        }
+                    }
+                    // Fallback: check online players
+                    if (uuid == null) {
+                        var online = server.getPlayerList().getPlayerByName(ign);
+                        if (online != null) uuid = online.getUUID();
+                    }
+                    if (uuid == null) {
+                        LOG.debug("Skipping supporter '{}' — IGN not found in profile cache", ign);
+                        skipped++;
+                        continue;
+                    }
+
+                    // Tier
+                    DonorData.Tier tier = DonorData.Tier.SUPPORTER;
+                    if (obj.has("tier") && !obj.get("tier").isJsonNull()) {
+                        tier = DonorData.Tier.fromName(obj.get("tier").getAsString());
+                    }
+
+                    // Date — format is "YYYY-MM" (e.g. "2024-11")
+                    Instant donated = Instant.now();
+                    if (obj.has("date") && !obj.get("date").isJsonNull()) {
+                        try {
+                            String dateStr = obj.get("date").getAsString().trim();
+                            YearMonth ym = YearMonth.parse(dateStr);
+                            donated = ym.atDay(1).atStartOfDay().toInstant(ZoneOffset.UTC);
+                        } catch (Exception ignored) {}
+                    }
+
+                    // Message
+                    String message = "";
+                    if (obj.has("message") && !obj.get("message").isJsonNull()) {
+                        message = obj.get("message").getAsString();
+                    }
+
+                    // Ko-fi display name (for the wall)
+                    String displayName = ign;
+                    if (obj.has("name") && !obj.get("name").isJsonNull()) {
+                        displayName = obj.get("name").getAsString();
+                    }
+
+                    DonorData existing = DonorRegistry.get(uuid).orElse(null);
                     if (existing == null) {
-                        DonorRegistry.add(donor);
+                        DonorRegistry.add(new DonorData(uuid, displayName, tier, donated, message));
                         added++;
-                    } else if (donor.tier().ordinal() > existing.tier().ordinal()
-                            || !donor.name().equals(existing.name())) {
-                        // Upgrade tier or update name
-                        DonorRegistry.add(new DonorData(
-                                donor.uuid(), donor.name(),
-                                donor.tier().ordinal() > existing.tier().ordinal()
-                                        ? donor.tier() : existing.tier(),
-                                existing.donatedAt(),
-                                existing.message().isEmpty() ? donor.message() : existing.message()));
-                        updated++;
+                    } else {
+                        // Upgrade tier if higher, update name
+                        boolean changed = false;
+                        DonorData.Tier bestTier = tier.ordinal() > existing.tier().ordinal() ? tier : existing.tier();
+                        String bestName = displayName;
+                        String bestMsg = existing.message().isEmpty() ? message : existing.message();
+                        if (bestTier != existing.tier() || !bestName.equals(existing.name())) {
+                            DonorRegistry.add(new DonorData(uuid, bestName, bestTier, existing.donatedAt(), bestMsg));
+                            updated++;
+                        }
                     }
                 }
 
-                int finalAdded = added, finalUpdated = updated;
+                int finalAdded = added, finalUpdated = updated, finalSkipped = skipped;
                 server.execute(() -> {
                     DonorLifecycleHandler.syncToAll();
                     source.sendSuccess(
                             () -> Component.literal("[SOA] Sync complete: " + finalAdded + " added, "
-                                            + finalUpdated + " updated, " + arr.size() + " total from API")
+                                            + finalUpdated + " updated, " + finalSkipped + " skipped (no IGN/UUID)")
                                     .withStyle(ChatFormatting.GREEN),
                             true);
                 });
 
-                LOG.info("Donor sync: {} added, {} updated from {} API entries",
-                        finalAdded, finalUpdated, arr.size());
+                LOG.info("Donor sync: {} added, {} updated, {} skipped from {} API entries",
+                        finalAdded, finalUpdated, finalSkipped, arr.size());
 
             } catch (Exception e) {
                 LOG.error("Donor sync failed", e);
@@ -133,56 +196,5 @@ public final class DonorSyncCommand {
         thread.start();
 
         return Command.SINGLE_SUCCESS;
-    }
-
-    /**
-     * Parse a supporter JSON object. Expected fields vary by API — this
-     * handles common patterns gracefully. At minimum needs a UUID or
-     * player name to be useful.
-     */
-    private static DonorData parseSupporter(JsonObject obj) {
-        try {
-            // Try to get UUID
-            UUID uuid = null;
-            if (obj.has("uuid") && !obj.get("uuid").getAsString().isEmpty()) {
-                uuid = UUID.fromString(obj.get("uuid").getAsString());
-            } else if (obj.has("player_uuid") && !obj.get("player_uuid").getAsString().isEmpty()) {
-                uuid = UUID.fromString(obj.get("player_uuid").getAsString());
-            }
-            if (uuid == null) return null;
-
-            // Name
-            String name = "Unknown";
-            if (obj.has("name")) name = obj.get("name").getAsString();
-            else if (obj.has("player_name")) name = obj.get("player_name").getAsString();
-            else if (obj.has("username")) name = obj.get("username").getAsString();
-
-            // Tier
-            DonorData.Tier tier = DonorData.Tier.SUPPORTER;
-            if (obj.has("tier")) {
-                tier = DonorData.Tier.fromName(obj.get("tier").getAsString());
-            } else if (obj.has("level")) {
-                tier = DonorData.Tier.fromName(obj.get("level").getAsString());
-            }
-
-            // Date
-            Instant donated = Instant.now();
-            if (obj.has("donated_at")) {
-                try { donated = Instant.parse(obj.get("donated_at").getAsString()); }
-                catch (Exception ignored) {}
-            } else if (obj.has("created_at")) {
-                try { donated = Instant.parse(obj.get("created_at").getAsString()); }
-                catch (Exception ignored) {}
-            }
-
-            // Message
-            String message = "";
-            if (obj.has("message")) message = obj.get("message").getAsString();
-
-            return new DonorData(uuid, name, tier, donated, message);
-        } catch (Exception e) {
-            LOG.warn("Failed to parse supporter entry: {}", obj, e);
-            return null;
-        }
     }
 }
