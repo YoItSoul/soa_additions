@@ -24,6 +24,9 @@ public final class ModItems {
 
     public static final RegistryObject<Item> QUEST_BOOK = ITEMS.register("quest_book", QuestBookItem::new);
 
+    public static final RegistryObject<Item> DONOR_TOKEN = ITEMS.register("donor_token",
+            com.soul.soa_additions.donor.DonorTokenItem::new);
+
     private ModItems() {}
 
     public static void register(IEventBus eventBus) {

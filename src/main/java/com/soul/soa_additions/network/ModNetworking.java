@@ -4,6 +4,8 @@ import com.soul.soa_additions.SoaAdditions;
 import com.soul.soa_additions.quest.net.QuestCheckmarkPacket;
 import com.soul.soa_additions.quest.net.QuestClaimPacket;
 import com.soul.soa_additions.quest.net.ChapterEditPacket;
+import com.soul.soa_additions.donor.DonorSyncPacket;
+import com.soul.soa_additions.donor.DonorWallOpenPacket;
 import com.soul.soa_additions.quest.net.QuestDefinitionSyncPacket;
 import com.soul.soa_additions.quest.net.QuestEditPacket;
 import com.soul.soa_additions.quest.net.QuestEditStatePacket;
@@ -90,6 +92,18 @@ public final class ModNetworking {
                 .encoder(QuestDefinitionSyncPacket::encode)
                 .decoder(QuestDefinitionSyncPacket::decode)
                 .consumerMainThread(QuestDefinitionSyncPacket::handle)
+                .add();
+
+        CHANNEL.messageBuilder(DonorSyncPacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(DonorSyncPacket::encode)
+                .decoder(DonorSyncPacket::decode)
+                .consumerMainThread(DonorSyncPacket::handle)
+                .add();
+
+        CHANNEL.messageBuilder(DonorWallOpenPacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(DonorWallOpenPacket::encode)
+                .decoder(DonorWallOpenPacket::decode)
+                .consumerMainThread(DonorWallOpenPacket::handle)
                 .add();
     }
 }
