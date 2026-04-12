@@ -46,9 +46,9 @@ public record ChapterEditPacket(
 
     public enum Op { ADD, DELETE, REORDER, RENAME, EDIT }
 
-    public static ChapterEditPacket add(String id, String title) {
+    public static ChapterEditPacket add(String id, String title, String parentChapter) {
         return new ChapterEditPacket(Op.ADD, id, title, List.of(),
-                List.of(), "", Visibility.NORMAL, List.of(), List.of(), "");
+                List.of(), "", Visibility.NORMAL, List.of(), List.of(), parentChapter == null ? "" : parentChapter);
     }
     public static ChapterEditPacket delete(String id) {
         return new ChapterEditPacket(Op.DELETE, id, "", List.of(),
@@ -130,7 +130,7 @@ public record ChapterEditPacket(
         switch (pkt.op) {
             case ADD -> {
                 if (!QuestRegistry.chapter(pkt.chapterId).isPresent()) {
-                    Chapter fresh = blankChapter(pkt.chapterId, pkt.title);
+                    Chapter fresh = blankChapter(pkt.chapterId, pkt.title, pkt.parentChapter);
                     QuestRegistry.updateChapter(fresh);
                 }
             }
@@ -158,12 +158,13 @@ public record ChapterEditPacket(
         com.soul.soa_additions.quest.client.QuestBookScreen.onChapterMutated(pkt.chapterId);
     }
 
-    private static Chapter blankChapter(String id, String title) {
+    private static Chapter blankChapter(String id, String title, String parentChapter) {
         return new Chapter(
                 id, title, new ArrayList<>(), "minecraft:writable_book",
                 1000, new ArrayList<>(), new ArrayList<>(),
                 Visibility.NORMAL, EnumSet.allOf(PackMode.class),
-                new ArrayList<Quest>(), QuestSource.WORLD_EDITS, "");
+                new ArrayList<Quest>(), QuestSource.WORLD_EDITS,
+                parentChapter == null ? "" : parentChapter);
     }
 
     // ---------- server ----------
@@ -178,7 +179,7 @@ public record ChapterEditPacket(
         switch (pkt.op) {
             case ADD -> {
                 if (QuestRegistry.chapter(pkt.chapterId).isPresent()) return;
-                Chapter fresh = blankChapter(pkt.chapterId, pkt.title);
+                Chapter fresh = blankChapter(pkt.chapterId, pkt.title, pkt.parentChapter);
                 QuestRegistry.updateChapter(fresh);
                 if (storage != null) storage.saveChapter(fresh, EditModeTracker.targetOf(sender.getUUID()));
             }
