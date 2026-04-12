@@ -109,6 +109,8 @@ public final class QuestBookScreen extends Screen {
     }
 
     private List<Chapter> chapters = List.of();
+    /** Set of chapter ids whose children are collapsed in the side list. */
+    private final java.util.Set<String> collapsedChapters = new java.util.HashSet<>();
     private Chapter selected;
     private LayoutResult layout;
     private Quest hoveredQuest;
@@ -228,7 +230,7 @@ public final class QuestBookScreen extends Screen {
     @Override
     protected void init() {
         activeInstance = this;
-        chapters = QuestRegistry.chaptersFor(ClientQuestState.packMode());
+        chapters = treeSort(QuestRegistry.chaptersFor(ClientQuestState.packMode()));
         if (!chapters.isEmpty() && selected == null) {
             selectChapter(chapters.get(0));
         }
@@ -250,7 +252,7 @@ public final class QuestBookScreen extends Screen {
         // show up immediately in the side pane — previously this early-returned
         // unless the mutation targeted the currently-selected chapter, which
         // meant newly-added chapters never appeared until the book reopened.
-        s.chapters = QuestRegistry.chaptersFor(ClientQuestState.packMode());
+        s.chapters = treeSort(QuestRegistry.chaptersFor(ClientQuestState.packMode()));
         // If nothing is selected yet and we now have chapters, pick the first.
         if (s.selected == null) {
             if (!s.chapters.isEmpty()) s.selectChapter(s.chapters.get(0));
@@ -422,6 +424,69 @@ public final class QuestBookScreen extends Screen {
         return depth;
     }
 
+    /** Whether any chapter in the list has this chapter as its parent. */
+    private boolean hasChildren(Chapter chapter) {
+        for (Chapter c : chapters) {
+            if (chapter.id().equals(c.parentChapter())) return true;
+        }
+        return false;
+    }
+
+    /** Whether a chapter is hidden because an ancestor is collapsed. */
+    private boolean isCollapsedByAncestor(Chapter chapter) {
+        java.util.Set<String> seen = new java.util.HashSet<>();
+        seen.add(chapter.id());
+        String parentId = chapter.parentChapter();
+        while (parentId != null && !parentId.isEmpty()) {
+            if (!seen.add(parentId)) break; // cycle guard
+            if (collapsedChapters.contains(parentId)) return true;
+            Chapter parent = null;
+            for (Chapter c : chapters) {
+                if (c.id().equals(parentId)) { parent = c; break; }
+            }
+            if (parent == null) break;
+            parentId = parent.parentChapter();
+        }
+        return false;
+    }
+
+    /** Sort chapters into depth-first tree order: each parent is followed
+     *  immediately by its children (recursively). Preserves the relative
+     *  order of siblings as they appear in the input list. */
+    private static List<Chapter> treeSort(List<Chapter> flat) {
+        // Build children map preserving insertion order.
+        Map<String, List<Chapter>> childrenOf = new java.util.LinkedHashMap<>();
+        List<Chapter> roots = new ArrayList<>();
+        // Index parents for quick lookup
+        java.util.Set<String> ids = new java.util.HashSet<>();
+        for (Chapter c : flat) ids.add(c.id());
+        for (Chapter c : flat) {
+            String pid = c.parentChapter();
+            if (pid == null || pid.isEmpty() || !ids.contains(pid)) {
+                roots.add(c);
+            } else {
+                childrenOf.computeIfAbsent(pid, k -> new ArrayList<>()).add(c);
+            }
+        }
+        List<Chapter> out = new ArrayList<>(flat.size());
+        for (Chapter root : roots) appendSubtree(root, childrenOf, out);
+        // Safety: if any chapters were orphaned by a cycle, append them at the end.
+        if (out.size() < flat.size()) {
+            java.util.Set<String> placed = new java.util.HashSet<>();
+            for (Chapter c : out) placed.add(c.id());
+            for (Chapter c : flat) if (!placed.contains(c.id())) out.add(c);
+        }
+        return out;
+    }
+
+    private static void appendSubtree(Chapter ch, Map<String, List<Chapter>> childrenOf, List<Chapter> out) {
+        out.add(ch);
+        List<Chapter> kids = childrenOf.get(ch.id());
+        if (kids != null) {
+            for (Chapter kid : kids) appendSubtree(kid, childrenOf, out);
+        }
+    }
+
     /** Font scale factor for a chapter at the given nesting depth.
      *  Depth 0 (h1) = 1.3, depth 1 (h2) = 1.0, depth 2+ (h3+) = 0.85. */
     private static float chapterFontScale(int depth) {
@@ -462,10 +527,12 @@ public final class QuestBookScreen extends Screen {
         for (int idx = 0; idx < chapters.size(); idx++) {
             Chapter c = chapters.get(idx);
             if (!isChapterVisible(c)) continue;
+            if (isCollapsedByAncestor(c)) continue;
             int depth = chapterDepth(c);
             int rowH = chapterRowHeight(depth);
             float fontScale = chapterFontScale(depth);
             int indent = 12 + depth * 10; // indent increases with depth
+            boolean isParent = hasChildren(c);
 
             boolean hover = mouseX >= 4 && mouseX < LEFT_PANE_WIDTH - 4 && mouseY >= y && mouseY < y + rowH;
             boolean sel = c == selected;
@@ -480,6 +547,27 @@ public final class QuestBookScreen extends Screen {
             boolean badRef = inEditMode() && chapterHasSelfRef(c);
             int textColor = badRef ? 0xFFFF4444 : (sel ? COL_TEXT() : COL_TEXT_MUTED());
             if (dragGhost) textColor = (textColor & 0x00FFFFFF) | 0x70000000;
+
+            // Collapse/expand indicator for parent chapters
+            if (isParent) {
+                boolean collapsed = collapsedChapters.contains(c.id());
+                int arrowX = indent - 8;
+                int arrowY = y + rowH / 2;
+                int arrowColor = COL_TEXT_DIM();
+                if (collapsed) {
+                    // Right-pointing triangle ▶
+                    for (int row = -3; row <= 3; row++) {
+                        int w = 4 - Math.abs(row);
+                        if (w > 0) g.fill(arrowX, arrowY + row, arrowX + w, arrowY + row + 1, arrowColor);
+                    }
+                } else {
+                    // Down-pointing triangle ▼
+                    for (int row = 0; row <= 3; row++) {
+                        int half = 3 - row;
+                        g.fill(arrowX - half, arrowY - 2 + row, arrowX + half + 1, arrowY - 1 + row, arrowColor);
+                    }
+                }
+            }
 
             // Render text with scale based on depth
             Component title = QuestText.chapterTitle(c);
@@ -512,6 +600,7 @@ public final class QuestBookScreen extends Screen {
         for (int idx = 0; idx < chapters.size(); idx++) {
             Chapter c = chapters.get(idx);
             if (!isChapterVisible(c)) continue;
+            if (isCollapsedByAncestor(c)) continue;
             int rowH = chapterRowHeight(chapterDepth(c));
             if (yPixel >= y && yPixel < y + rowH) return idx;
             y += rowH;
@@ -1331,7 +1420,15 @@ public final class QuestBookScreen extends Screen {
         if ("Add Chapter".equals(label)) {
             String id = "chapter_" + Long.toString(System.currentTimeMillis(), 36);
             ModNetworking.CHANNEL.sendToServer(
-                    com.soul.soa_additions.quest.net.ChapterEditPacket.add(id, "New Chapter"));
+                    com.soul.soa_additions.quest.net.ChapterEditPacket.add(id, "New Chapter", ""));
+        } else if ("Add Sub-Chapter".equals(label)) {
+            if (chapterContextTargetIndex < 0 || chapterContextTargetIndex >= chapters.size()) return;
+            Chapter parent = chapters.get(chapterContextTargetIndex);
+            String id = "chapter_" + Long.toString(System.currentTimeMillis(), 36);
+            ModNetworking.CHANNEL.sendToServer(
+                    com.soul.soa_additions.quest.net.ChapterEditPacket.add(id, "New Sub-Chapter", parent.id()));
+            // Auto-expand the parent so the new child is visible
+            collapsedChapters.remove(parent.id());
         } else if ("Delete Chapter".equals(label)) {
             if (chapterContextTargetIndex < 0 || chapterContextTargetIndex >= chapters.size()) return;
             Chapter c = chapters.get(chapterContextTargetIndex);
@@ -1469,6 +1566,7 @@ public final class QuestBookScreen extends Screen {
             List<String> labels = new ArrayList<>();
             labels.add("Add Chapter");
             if (chapterContextTargetIndex >= 0 && chapterContextTargetIndex < chapters.size()) {
+                labels.add("Add Sub-Chapter");
                 labels.add("Edit Chapter");
                 labels.add("Rename Chapter");
                 labels.add("Delete Chapter");
@@ -1879,15 +1977,29 @@ public final class QuestBookScreen extends Screen {
         // Chapter list click
         if (mouseX < LEFT_PANE_WIDTH) {
             int idx = chapterIndexAt((int) mouseY);
-            // In edit mode, arm a drag for reorder. The actual reorder is
-            // committed in mouseReleased once movement clears DRAG_THRESHOLD;
-            // a click without drag still selects the chapter.
-            if (inEditMode() && idx >= 0) {
-                chapterDragIndex = idx;
-                chapterDragActive = false;
-                chapterDragStartY = mouseY;
+            if (idx >= 0) {
+                Chapter c = chapters.get(idx);
+                int depth = chapterDepth(c);
+                int indent = 12 + depth * 10;
+                // Click on the arrow area (left of the text) toggles collapse
+                if (hasChildren(c) && mouseX < indent) {
+                    if (collapsedChapters.contains(c.id())) {
+                        collapsedChapters.remove(c.id());
+                    } else {
+                        collapsedChapters.add(c.id());
+                    }
+                    return true;
+                }
+                // In edit mode, arm a drag for reorder. The actual reorder is
+                // committed in mouseReleased once movement clears DRAG_THRESHOLD;
+                // a click without drag still selects the chapter.
+                if (inEditMode()) {
+                    chapterDragIndex = idx;
+                    chapterDragActive = false;
+                    chapterDragStartY = mouseY;
+                }
+                selectChapter(c);
             }
-            if (idx >= 0) selectChapter(chapters.get(idx));
             return true;
         }
 
@@ -1955,10 +2067,32 @@ public final class QuestBookScreen extends Screen {
             if (wasDrag && to >= 0 && to != from && to != from + 1) {
                 List<String> ids = new ArrayList<>(chapters.size());
                 for (Chapter c : chapters) ids.add(c.id());
-                String moved = ids.remove(from);
-                int adjusted = to > from ? to - 1 : to;
+                // Collect the dragged chapter and all its descendants
+                String draggedId = ids.get(from);
+                java.util.Set<String> subtreeIds = new java.util.LinkedHashSet<>();
+                subtreeIds.add(draggedId);
+                // Repeatedly scan for children of already-collected ids
+                boolean changed = true;
+                while (changed) {
+                    changed = false;
+                    for (Chapter c : chapters) {
+                        if (!subtreeIds.contains(c.id()) && subtreeIds.contains(c.parentChapter())) {
+                            subtreeIds.add(c.id());
+                            changed = true;
+                        }
+                    }
+                }
+                // Remove the subtree from the list, preserving order
+                List<String> subtreeOrdered = new ArrayList<>();
+                for (String id : ids) {
+                    if (subtreeIds.contains(id)) subtreeOrdered.add(id);
+                }
+                ids.removeAll(subtreeIds);
+                // Compute adjusted insert position
+                int adjusted = to > from ? to - subtreeOrdered.size() : to;
+                if (adjusted < 0) adjusted = 0;
                 if (adjusted > ids.size()) adjusted = ids.size();
-                ids.add(adjusted, moved);
+                ids.addAll(adjusted, subtreeOrdered);
                 ModNetworking.CHANNEL.sendToServer(
                         com.soul.soa_additions.quest.net.ChapterEditPacket.reorder(ids));
             }
@@ -2147,7 +2281,7 @@ public final class QuestBookScreen extends Screen {
 
         int pad = QuestEditForm.PAD;
         int lx = x + pad;
-        int labelOffset = 11;
+        int labelOffset = 13;
 
         // Clear per-row bounds that only apply to specific tabs.
         taskRowRemoveBounds.clear();
@@ -2168,7 +2302,7 @@ public final class QuestBookScreen extends Screen {
                         lx, editForm.titleField.getY() - labelOffset, COL_TEXT_DIM(), false);
                 g.drawString(this.font, "Icon",
                         lx, editForm.iconField.getY() - labelOffset, COL_TEXT_DIM(), false);
-                g.drawString(this.font, "Description (Enter = newline, || = blank line)",
+                g.drawString(this.font, "Description",
                         lx, editForm.descField.getY() - labelOffset, COL_TEXT_DIM(), false);
                 g.drawString(this.font, "X", lx,        editForm.xField.getY() - labelOffset, COL_TEXT_DIM(), false);
                 g.drawString(this.font, "Y", lx + 72,   editForm.yField.getY() - labelOffset, COL_TEXT_DIM(), false);
@@ -2191,9 +2325,9 @@ public final class QuestBookScreen extends Screen {
                 drawFormButton(g, lx, shapeY, 120, "Shape: " + editForm.shape.name(), mouseX, mouseY);
             }
             case DEPS -> {
-                g.drawString(this.font, "Dependencies (comma-separated ids, click nodes to add)",
+                g.drawString(this.font, "Dependencies (click nodes to add)",
                         lx, editForm.depsField.getY() - labelOffset, COL_TEXT_DIM(), false);
-                g.drawString(this.font, "Exclusions (ids \u2014 once any completes, this locks)",
+                g.drawString(this.font, "Exclusions (mutual locks)",
                         lx, editForm.exclField.getY() - labelOffset, COL_TEXT_DIM(), false);
 
                 editForm.renderFields(g, mouseX, mouseY, pt);
@@ -2208,9 +2342,9 @@ public final class QuestBookScreen extends Screen {
                 int flagRow = top;
                 drawFormButton(g, lx,        flagRow, 130, "Vis: " + editForm.visibility.lower(), mouseX, mouseY);
                 drawFormButton(g, lx + 136,  flagRow, 100, "Optional: " + onOff(editForm.optional), mouseX, mouseY);
-                int flagRow2 = flagRow + 20;
+                int flagRow2 = flagRow + 24;
                 drawFormButton(g, lx,        flagRow2, 130, "Auto-claim: " + onOff(editForm.autoClaim), mouseX, mouseY);
-                int flagRow3 = flagRow2 + 20;
+                int flagRow3 = flagRow2 + 24;
                 drawFormButton(g, lx,        flagRow3, 130, "Repeatable: " + onOff(editForm.repeatable), mouseX, mouseY);
                 drawFormButton(g, lx + 136,  flagRow3, 130, "Repeat: " + editForm.repeatScope.lower(), mouseX, mouseY);
             }
@@ -2527,9 +2661,9 @@ public final class QuestBookScreen extends Screen {
                 int flagRow = top;
                 if (hitFormButton(mouseX, mouseY, lx, flagRow, 130))       { editForm.visibility = editForm.visibility.next(); return true; }
                 if (hitFormButton(mouseX, mouseY, lx + 136, flagRow, 100)) { editForm.optional = !editForm.optional; return true; }
-                int flagRow2 = flagRow + 20;
+                int flagRow2 = flagRow + 24;
                 if (hitFormButton(mouseX, mouseY, lx, flagRow2, 130))      { editForm.autoClaim = !editForm.autoClaim; return true; }
-                int flagRow3 = flagRow2 + 20;
+                int flagRow3 = flagRow2 + 24;
                 if (hitFormButton(mouseX, mouseY, lx, flagRow3, 130))      { editForm.repeatable = !editForm.repeatable; return true; }
                 if (hitFormButton(mouseX, mouseY, lx + 136, flagRow3, 130)) {
                     editForm.repeatScope = editForm.repeatScope == com.soul.soa_additions.quest.model.RewardScope.TEAM

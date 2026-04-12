@@ -357,10 +357,10 @@ public final class QuestEditForm {
     // ---------- layout ----------
 
     public static final int PAD = 12;
-    /** Vertical pitch for a single-line field row: label (10) + field (16) +
-     *  gap (6) = 32. Anything tighter and labels visually butt against the
-     *  field above them. */
-    public static final int ROW_H = 32;
+    /** Vertical pitch for a single-line field row: label (10) + gap (2) +
+     *  field (16) + gap (8) = 36. Extra breathing room prevents labels from
+     *  overlapping the field above them. */
+    public static final int ROW_H = 36;
     /** Y offset below the popup top where tab content starts (title bar 24 +
      *  tab strip 18 + gap 4 = 46). */
     public static final int CONTENT_Y_OFFSET = 46;
@@ -400,11 +400,11 @@ public final class QuestEditForm {
     public int tabContentHeight() {
         return switch (activeTab) {
             // title + icon + desc + x/y/size + shape button row
-            case GENERAL -> ROW_H * 3 + DESC_H + 16 + 24;
+            case GENERAL -> ROW_H * 3 + DESC_H + 20 + 28;
             // deps + excl + dep mode/show lines button row
-            case DEPS -> ROW_H * 2 + 24;
+            case DEPS -> ROW_H * 2 + 28;
             // three rows of toggle buttons
-            case FLAGS -> 20 * 3 + 8;
+            case FLAGS -> 24 * 3 + 12;
             case TASKS -> taskSectionHeight();
             case REWARDS -> rewardSectionHeight();
         };
@@ -436,7 +436,7 @@ public final class QuestEditForm {
                 descField.setX(lx); descField.setY(row);
                 descField.setWidth(w - PAD * 2);
                 descField.setHeight(DESC_H);
-                row += DESC_H + 16;
+                row += DESC_H + 20;
                 xField.setPosition(lx, row);
                 yField.setPosition(lx + 72, row);
                 sizeField.setPosition(lx + 144, row);
