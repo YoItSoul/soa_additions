@@ -43,6 +43,7 @@ public final class SoaAdditions {
         ModBlockEntities.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
         ModPOIs.register(modEventBus);
+        com.soul.soa_additions.donor.ModEntities.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(StartupProfiler::onCommonSetup);
