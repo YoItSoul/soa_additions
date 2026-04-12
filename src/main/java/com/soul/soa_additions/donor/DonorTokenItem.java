@@ -15,13 +15,13 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * A cosmetic donor token item intended for the Curios "donor" slot.
+ * The Orb of Avarice — a cosmetic donor item for the Curios "donor" slot.
  * Gives no gameplay advantages — it's a badge of honor with a
- * shimmering enchant glint and custom tooltip.
+ * shimmering enchant glint and custom tooltip. When equipped, it spawns
+ * a glowing orb pet that orbits the player.
  *
  * <p>Only donors can use/equip this item. Non-donors who try to use it
- * get a message explaining it's donor-exclusive. The same restriction
- * pattern can be used for per-player reward items.</p>
+ * get a message explaining it's donor-exclusive.</p>
  */
 public class DonorTokenItem extends Item {
 
@@ -54,9 +54,9 @@ public class DonorTokenItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level,
                                  List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(Component.literal("A token of gratitude for your support.")
+        tooltip.add(Component.literal("A shimmering orb pulsing with gratitude.")
                 .withStyle(ChatFormatting.LIGHT_PURPLE, ChatFormatting.ITALIC));
-        tooltip.add(Component.literal("Place in your Donor slot for cosmetic effects.")
+        tooltip.add(Component.literal("Equip in your Donor slot to summon a glowing companion.")
                 .withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.empty());
         tooltip.add(Component.literal("\u2764 Donor Exclusive")

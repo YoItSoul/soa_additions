@@ -81,10 +81,13 @@ public class DonorOrbEntity extends Entity {
             return;
         }
 
-        // Remove if owner is no longer a donor (server side)
-        if (!this.level().isClientSide && !DonorRegistry.isDonor(owner.getUUID())) {
-            this.discard();
-            return;
+        // Remove if owner lost donor status or unequipped the token (server side)
+        if (!this.level().isClientSide) {
+            if (!DonorRegistry.isDonor(owner.getUUID())
+                    || !DonorCuriosHelper.hasDonorTokenEquipped(owner)) {
+                this.discard();
+                return;
+            }
         }
 
         // Orbit around the owner

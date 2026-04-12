@@ -73,8 +73,8 @@ public final class DonorCommand {
             DonorRegistry.add(donor);
             DonorLifecycleHandler.syncToAll();
 
-            // Spawn the orb for the player
-            DonorOrbManager.spawnOrb(player);
+            // Re-sync orb state (will spawn if token is equipped)
+            DonorOrbManager.syncOrb(player);
 
             ctx.getSource().sendSuccess(
                     () -> Component.literal("[SOA] ")
