@@ -219,7 +219,7 @@ public final class Quests {
             Set<PackMode> effective = modes != null ? EnumSet.copyOf(modes) : EnumSet.copyOf(chapterModes);
             effective.retainAll(chapterModes);
             return new Quest(id, chapterId, title, description, icon, visibility, optional,
-                    dependencies, depsAll, tasks, rewards, effective, QuestSource.PROGRAMMATIC, autoClaim, shape, posX, posY, true, Quest.DEFAULT_SIZE, false, com.soul.soa_additions.quest.model.RewardScope.TEAM, java.util.List.of());
+                    dependencies, depsAll, -1, tasks, rewards, effective, QuestSource.PROGRAMMATIC, autoClaim, shape, posX, posY, true, Quest.DEFAULT_SIZE, false, com.soul.soa_additions.quest.model.RewardScope.TEAM, java.util.List.of());
         }
     }
 }

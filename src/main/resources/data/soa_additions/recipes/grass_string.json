@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "soa_additions:plant_fibre"
+    },
+    {
+      "item": "soa_additions:plant_fibre"
+    },
+    {
+      "item": "soa_additions:plant_fibre"
+    }
+  ],
+  "result": {
+    "item": "soa_additions:grass_string"
+  }
+}

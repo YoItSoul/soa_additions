@@ -65,6 +65,8 @@ public final class QuestWebServer {
     private static final Map<UUID, String> PLAYER_TO_TOKEN = new ConcurrentHashMap<>();
     /** Active SSE connections keyed by player UUID */
     private static final Map<UUID, List<SseClient>> SSE_CLIENTS = new ConcurrentHashMap<>();
+    /** Cached layout results — invalidated on quest definition reload. */
+    private static volatile Map<String, LayoutResult> layoutCache = new ConcurrentHashMap<>();
 
     private static final SecureRandom RANDOM = new SecureRandom();
 
@@ -105,10 +107,14 @@ public final class QuestWebServer {
             for (SseClient c : clients) c.close();
         }
         SSE_CLIENTS.clear();
+        layoutCache.clear();
         mcServer = null;
     }
 
     public static boolean isRunning() { return server != null; }
+
+    /** Clear cached layout results — call after quest definitions change. */
+    public static void invalidateLayoutCache() { layoutCache.clear(); }
 
     // ---------- token management ----------
 
@@ -236,8 +242,9 @@ public final class QuestWebServer {
             for (String line : ch.description()) descArr.add(line);
             chObj.add("description", descArr);
 
-            // Compute layout using the same algorithm the in-game GUI uses
-            LayoutResult layout = QuestLayout.compute(ch);
+            // Compute layout using the same algorithm the in-game GUI uses.
+            // Cached to avoid recomputing on every API request.
+            LayoutResult layout = layoutCache.computeIfAbsent(ch.id(), k -> QuestLayout.compute(ch));
 
             JsonArray questsArr = new JsonArray();
             for (Quest q : ch.quests()) {

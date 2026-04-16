@@ -1,0 +1,21 @@
+{
+  "parent": "block/thin_block",
+  "textures": {
+    "particle": "soa_additions:block/ba_glass_shards",
+    "texture": "soa_additions:block/ba_glass_shards"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [16, 3, 16],
+      "faces": {
+        "down":  { "texture": "#texture", "cullface": "down" },
+        "up":    { "texture": "#texture" },
+        "north": { "texture": "#texture", "uv": [0, 13, 16, 16], "cullface": "north" },
+        "south": { "texture": "#texture", "uv": [0, 13, 16, 16], "cullface": "south" },
+        "west":  { "texture": "#texture", "uv": [0, 13, 16, 16], "cullface": "west" },
+        "east":  { "texture": "#texture", "uv": [0, 13, 16, 16], "cullface": "east" }
+      }
+    }
+  ]
+}

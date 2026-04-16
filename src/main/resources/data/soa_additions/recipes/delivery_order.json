@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "ttt",
+    "tpt",
+    "ttt"
+  ],
+  "key": {
+    "t": {
+      "item": "soa_additions:time_shard"
+    },
+    "p": {
+      "item": "minecraft:paper"
+    }
+  },
+  "result": {
+    "item": "soa_additions:delivery_order"
+  },
+  "show_notification": true
+}

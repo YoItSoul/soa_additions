@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "soa_additions:ancient_tome"
+    }
+  ],
+  "result": {
+    "item": "soa_additions:ancient_tome_page",
+    "count": 9
+  }
+}

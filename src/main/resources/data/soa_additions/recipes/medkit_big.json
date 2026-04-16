@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " c ",
+    "cmc",
+    " c "
+  ],
+  "key": {
+    "c": {
+      "item": "scalinghealth:heart_crystal"
+    },
+    "m": {
+      "item": "soa_additions:medkit_small"
+    }
+  },
+  "result": {
+    "item": "soa_additions:medkit_big"
+  },
+  "show_notification": true
+}

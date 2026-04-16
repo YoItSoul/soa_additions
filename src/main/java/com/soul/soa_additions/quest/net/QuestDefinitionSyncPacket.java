@@ -15,6 +15,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.PacketDistributor;
@@ -55,7 +56,7 @@ public record QuestDefinitionSyncPacket(String chaptersJson) {
 
     public static void handle(QuestDefinitionSyncPacket pkt, Supplier<NetworkEvent.Context> ctx) {
         NetworkEvent.Context c = ctx.get();
-        c.enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> applyOnClient(pkt)));
+        c.enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientHandler.applyOnClient(pkt)));
         c.setPacketHandled(true);
     }
 
@@ -88,25 +89,28 @@ public record QuestDefinitionSyncPacket(String chaptersJson) {
 
     // ---------- client-side apply ----------
 
-    private static void applyOnClient(QuestDefinitionSyncPacket pkt) {
-        try {
-            JsonArray arr = GSON.fromJson(pkt.chaptersJson, JsonArray.class);
-            List<Chapter> chapters = new ArrayList<>();
-            for (var el : arr) {
-                JsonObject root = el.getAsJsonObject();
-                Chapter ch = QuestLoader.parseChapterForWorldEdits(root);
-                if (ch != null) chapters.add(ch);
+    /** Isolated in its own class so client-only references (ClientQuestEditState,
+     *  QuestBookScreen) are never resolved on a dedicated server. */
+    @OnlyIn(Dist.CLIENT)
+    static final class ClientHandler {
+        static void applyOnClient(QuestDefinitionSyncPacket pkt) {
+            try {
+                JsonArray arr = GSON.fromJson(pkt.chaptersJson, JsonArray.class);
+                List<Chapter> chapters = new ArrayList<>();
+                for (var el : arr) {
+                    JsonObject root = el.getAsJsonObject();
+                    Chapter ch = QuestLoader.parseChapterForWorldEdits(root);
+                    if (ch != null) chapters.add(ch);
+                }
+                chapters.sort(Comparator.comparingInt(Chapter::sortOrder).thenComparing(Chapter::id));
+                QuestRegistry.replace(chapters);
+                ClientQuestEditState.clear();
+                LOG.debug("Received quest definitions: {} chapters, {} quests",
+                        chapters.size(), chapters.stream().mapToInt(c -> c.quests().size()).sum());
+                com.soul.soa_additions.quest.client.QuestBookScreen.onChapterMutated(null);
+            } catch (Exception e) {
+                LOG.error("Failed to apply quest definition sync: {}", e.getMessage(), e);
             }
-            // Sort by sort_order for consistent GUI ordering
-            chapters.sort(Comparator.comparingInt(Chapter::sortOrder).thenComparing(Chapter::id));
-            QuestRegistry.replace(chapters);
-            LOG.debug("Received quest definitions: {} chapters, {} quests",
-                    chapters.size(), chapters.stream().mapToInt(c -> c.quests().size()).sum());
-
-            // Refresh the quest book if it's open
-            com.soul.soa_additions.quest.client.QuestBookScreen.onChapterMutated(null);
-        } catch (Exception e) {
-            LOG.error("Failed to apply quest definition sync: {}", e.getMessage(), e);
         }
     }
 
@@ -160,6 +164,7 @@ public record QuestDefinitionSyncPacket(String chaptersJson) {
         }
         if (q.optional()) out.addProperty("optional", true);
         if (!q.depsAll()) out.addProperty("dependency_logic", "any");
+        if (q.minDeps() > 0) out.addProperty("min_deps", q.minDeps());
         if (q.autoClaim()) out.addProperty("auto_claim", true);
         if (!q.showDeps()) out.addProperty("show_deps", false);
         if (q.shape() != com.soul.soa_additions.quest.model.NodeShape.ICON) {

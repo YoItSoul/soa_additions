@@ -111,6 +111,7 @@ public final class ObserveTaskPoller {
         }
 
         boolean changed = false;
+        boolean anyBecameReady = false;
         long tick = player.server.getTickCount();
         for (Pending p : pending) {
             ResourceLocation hitId = p.task.isBlock() ? hitBlockId : hitEntityId;
@@ -123,8 +124,13 @@ public final class ObserveTaskPoller {
                 qp.touch(tick);
                 QuestStatus after = QuestEvaluator.recompute(p.quest, tp);
                 QuestNotifier.onTransition(player, p.quest, p.statusBefore, after);
+                if (after == QuestStatus.READY) anyBecameReady = true;
                 changed = true;
             }
+        }
+
+        if (anyBecameReady) {
+            QuestEvaluator.recomputeAllAndAutoClaim(tp, player);
         }
 
         if (changed) {

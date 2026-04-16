@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "ata",
+    "eme",
+    "aca"
+  ],
+  "key": {
+    "a": {
+      "item": "draconicevolution:awakened_core"
+    },
+    "t": {
+      "item": "soa_additions:ancient_tome_fragment"
+    },
+    "e": {
+      "tag": "forge:ingots/enderium"
+    },
+    "m": {
+      "item": "soa_additions:bounty_hunter_medal"
+    },
+    "c": {
+      "item": "soa_additions:creative_shard"
+    }
+  },
+  "result": {
+    "item": "soa_additions:death_coin"
+  },
+  "show_notification": true
+}

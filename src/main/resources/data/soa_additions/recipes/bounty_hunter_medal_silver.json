@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aaa",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "soa_additions:bounty_hunter_medal_bronze"
+    }
+  },
+  "result": {
+    "item": "soa_additions:bounty_hunter_medal_silver"
+  },
+  "show_notification": true
+}

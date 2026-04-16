@@ -34,9 +34,9 @@ public final class QuestsEditModeCommand {
     public static void onRegisterCommands(RegisterCommandsEvent event) {
         event.getDispatcher().register(
                 Commands.literal("soa")
-                        .requires(src -> src.hasPermission(2))
                         .then(Commands.literal("quests")
                                 .then(Commands.literal("editmode")
+                                        .requires(src -> src.hasPermission(2))
                                         .then(Commands.argument("enabled", BoolArgumentType.bool())
                                                 .executes(QuestsEditModeCommand::runSelf)
                                                 .then(Commands.argument("player", EntityArgument.player())

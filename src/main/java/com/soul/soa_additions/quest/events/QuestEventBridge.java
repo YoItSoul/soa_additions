@@ -6,6 +6,7 @@ import com.soul.soa_additions.quest.task.AdvancementTask;
 import com.soul.soa_additions.quest.task.BreedTask;
 import com.soul.soa_additions.quest.task.CraftTask;
 import com.soul.soa_additions.quest.task.DimensionTask;
+import com.soul.soa_additions.quest.task.IsPackmodeTask;
 import com.soul.soa_additions.quest.task.KillTask;
 import com.soul.soa_additions.quest.task.MineTask;
 import com.soul.soa_additions.quest.task.PlaceTask;
@@ -42,6 +43,7 @@ public final class QuestEventBridge {
     @SubscribeEvent
     public static void onKill(LivingDeathEvent event) {
         if (!(event.getSource().getEntity() instanceof ServerPlayer player)) return;
+        if (!com.soul.soa_additions.quest.QuestRegistry.hasTasksOfType(KillTask.TYPE)) return;
         LivingEntity victim = event.getEntity();
         ResourceLocation entityId = BuiltInRegistries.ENTITY_TYPE.getKey(victim.getType());
 
@@ -61,6 +63,7 @@ public final class QuestEventBridge {
     @SubscribeEvent
     public static void onItemCrafted(PlayerEvent.ItemCraftedEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
+        if (!com.soul.soa_additions.quest.QuestRegistry.hasTasksOfType(CraftTask.TYPE)) return;
         ItemStack stack = event.getCrafting();
         if (stack.isEmpty()) return;
         int count = stack.getCount();
@@ -75,6 +78,7 @@ public final class QuestEventBridge {
     @SubscribeEvent
     public static void onBlockPlace(BlockEvent.EntityPlaceEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
+        if (!com.soul.soa_additions.quest.QuestRegistry.hasTasksOfType(PlaceTask.TYPE)) return;
         ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(event.getPlacedBlock().getBlock());
 
         ProgressService.apply(player, 1, PlaceTask.TYPE, task -> {
@@ -86,6 +90,7 @@ public final class QuestEventBridge {
     @SubscribeEvent
     public static void onTame(net.minecraftforge.event.entity.living.AnimalTameEvent event) {
         if (!(event.getTamer() instanceof ServerPlayer player)) return;
+        if (!com.soul.soa_additions.quest.QuestRegistry.hasTasksOfType(TameTask.TYPE)) return;
         ResourceLocation entityId = BuiltInRegistries.ENTITY_TYPE.getKey(event.getAnimal().getType());
 
         ProgressService.apply(player, 1, TameTask.TYPE, task -> {
@@ -97,6 +102,7 @@ public final class QuestEventBridge {
     @SubscribeEvent
     public static void onBreed(net.minecraftforge.event.entity.living.BabyEntitySpawnEvent event) {
         if (!(event.getCausedByPlayer() instanceof ServerPlayer player)) return;
+        if (!com.soul.soa_additions.quest.QuestRegistry.hasTasksOfType(BreedTask.TYPE)) return;
         // Parent type is authoritative — BabyEntitySpawnEvent's child may be
         // null for some mods, but parentA is always set when the vanilla
         // breeding flow fires this event.
@@ -113,6 +119,7 @@ public final class QuestEventBridge {
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
         if (!(event.getPlayer() instanceof ServerPlayer player)) return;
         if (event.isCanceled()) return;
+        if (!com.soul.soa_additions.quest.QuestRegistry.hasTasksOfType(MineTask.TYPE)) return;
         BlockState state = event.getState();
         ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(state.getBlock());
 
@@ -125,6 +132,7 @@ public final class QuestEventBridge {
     @SubscribeEvent
     public static void onAdvancement(AdvancementEvent.AdvancementEarnEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
+        if (!com.soul.soa_additions.quest.QuestRegistry.hasTasksOfType(AdvancementTask.TYPE)) return;
         ResourceLocation advId = event.getAdvancement().getId();
 
         ProgressService.apply(player, 1, AdvancementTask.TYPE, task -> {
@@ -151,11 +159,21 @@ public final class QuestEventBridge {
         }
 
         if (staggered % 20 == 0) {
-            ResourceLocation dimId = player.level().dimension().location();
-            ProgressService.apply(player, 1, DimensionTask.TYPE, task -> {
-                DimensionTask dt = (DimensionTask) task;
-                return dt.dimension().equals(dimId);
-            });
+            if (com.soul.soa_additions.quest.QuestRegistry.hasTasksOfType(DimensionTask.TYPE)) {
+                ResourceLocation dimId = player.level().dimension().location();
+                ProgressService.apply(player, 1, DimensionTask.TYPE, task -> {
+                    DimensionTask dt = (DimensionTask) task;
+                    return dt.dimension().equals(dimId);
+                });
+            }
+            if (com.soul.soa_additions.quest.QuestRegistry.hasTasksOfType(IsPackmodeTask.TYPE)) {
+                com.soul.soa_additions.quest.PackMode current =
+                        com.soul.soa_additions.quest.PackModeData.get(player.server).mode();
+                ProgressService.apply(player, 1, IsPackmodeTask.TYPE, task -> {
+                    IsPackmodeTask pt = (IsPackmodeTask) task;
+                    return pt.mode() == current;
+                });
+            }
             ObserveTaskPoller.poll(player);
         }
 

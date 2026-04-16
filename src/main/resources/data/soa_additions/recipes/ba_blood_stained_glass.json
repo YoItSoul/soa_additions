@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aba",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "tag": "forge:glass"
+    },
+    "b": {
+      "type": "bloodmagic:bloodorb",
+      "orb_tier": 1
+    }
+  },
+  "result": {
+    "item": "soa_additions:ba_blood_stained_glass",
+    "count": 8
+  },
+  "show_notification": true
+}

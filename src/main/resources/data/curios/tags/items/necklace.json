@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "soa_additions:ba_sacrifice_amulet",
+    "soa_additions:ba_self_sacrifice_amulet",
+    "soa_additions:ba_soul_pendant_petty",
+    "soa_additions:ba_soul_pendant_lesser",
+    "soa_additions:ba_soul_pendant_common",
+    "soa_additions:ba_soul_pendant_greater",
+    "soa_additions:ba_soul_pendant_grand"
+  ]
+}

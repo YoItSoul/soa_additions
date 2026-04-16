@@ -6,6 +6,7 @@ import com.soul.soa_additions.quest.task.BreedTask;
 import com.soul.soa_additions.quest.task.CheckmarkTask;
 import com.soul.soa_additions.quest.task.CraftTask;
 import com.soul.soa_additions.quest.task.DimensionTask;
+import com.soul.soa_additions.quest.task.IsPackmodeTask;
 import com.soul.soa_additions.quest.task.ItemTask;
 import com.soul.soa_additions.quest.task.KillTask;
 import com.soul.soa_additions.quest.task.MineTask;
@@ -42,13 +43,50 @@ public record TaskDraft(
 
     public enum Type {
         ITEM, MINE, KILL, CRAFT, PLACE, TAME, BREED, OBSERVE,
-        DIMENSION, ADVANCEMENT, STAT, CHECKMARK, TRIGGER;
+        DIMENSION, ADVANCEMENT, STAT, CHECKMARK, TRIGGER, IS_PACKMODE;
 
         public Type next() { return values()[(ordinal() + 1) % values().length]; }
-        public boolean usesCount() { return this != DIMENSION && this != ADVANCEMENT && this != CHECKMARK; }
-        public boolean usesAux() { return this == STAT; }
+        public boolean usesCount() { return this != DIMENSION && this != ADVANCEMENT && this != CHECKMARK && this != IS_PACKMODE; }
+        public boolean usesAux() { return this == STAT || this == ITEM || this == CRAFT; }
         public boolean supportsTag() { return this == ITEM || this == CRAFT; }
         public boolean supportsConsume() { return this == ITEM; }
+        public boolean hasPicker() {
+            return this == ITEM || this == CRAFT || this == MINE || this == PLACE
+                    || this == OBSERVE || this == KILL || this == TAME || this == BREED
+                    || this == DIMENSION || this == ADVANCEMENT;
+        }
+        /** True if the value field should render as a clickable stat-type
+         *  button instead of a text EditBox. */
+        public boolean usesStatTypeButton() { return this == STAT; }
+        /** True if the aux field (stat value) also supports a browse picker. */
+        public boolean hasAuxPicker() { return this == STAT; }
+        /** Grouping so that switching within the same category preserves the
+         *  value field, but switching across categories resets it. */
+        public int inputCategory() {
+            return switch (this) {
+                case ITEM, CRAFT -> 0;
+                case MINE, PLACE, OBSERVE -> 1;
+                case KILL, TAME, BREED -> 2;
+                case DIMENSION -> 3;
+                case ADVANCEMENT -> 4;
+                case STAT -> 5;
+                case CHECKMARK -> 6;
+                case TRIGGER -> 7;
+                case IS_PACKMODE -> 8;
+            };
+        }
+        public com.soul.soa_additions.quest.client.RegistryPickerPopup.Mode pickerMode() {
+            return switch (this) {
+                case ITEM, CRAFT -> com.soul.soa_additions.quest.client.RegistryPickerPopup.Mode.ITEM;
+                case MINE, PLACE, OBSERVE -> com.soul.soa_additions.quest.client.RegistryPickerPopup.Mode.BLOCK;
+                case KILL, TAME, BREED -> com.soul.soa_additions.quest.client.RegistryPickerPopup.Mode.ENTITY;
+                case STAT -> com.soul.soa_additions.quest.client.RegistryPickerPopup.Mode.STAT_TYPE;
+                case DIMENSION -> com.soul.soa_additions.quest.client.RegistryPickerPopup.Mode.DIMENSION;
+                case ADVANCEMENT -> com.soul.soa_additions.quest.client.RegistryPickerPopup.Mode.ADVANCEMENT;
+                case IS_PACKMODE -> null; // value is typed as casual/adventure/expert
+                default -> null;
+            };
+        }
 
         public String defaultValue() {
             return switch (this) {
@@ -61,6 +99,7 @@ public record TaskDraft(
                 case STAT -> "minecraft:custom";
                 case CHECKMARK -> "Acknowledge";
                 case TRIGGER -> "soa_additions:my_trigger";
+                case IS_PACKMODE -> "adventure";
             };
         }
         public String defaultAux() {
@@ -102,12 +141,18 @@ public record TaskDraft(
         try {
             int c = Math.max(1, count);
             return switch (type) {
-                case ITEM -> tagMode
-                        ? new ItemTask(null, new ResourceLocation(value), null, c, consume)
-                        : new ItemTask(new ResourceLocation(value), null, null, c, consume);
-                case CRAFT -> tagMode
-                        ? new CraftTask(null, new ResourceLocation(value), null, c)
-                        : new CraftTask(new ResourceLocation(value), null, null, c);
+                case ITEM -> {
+                    net.minecraft.nbt.CompoundTag nbt = parseNbt(aux);
+                    yield tagMode
+                        ? new ItemTask(null, new ResourceLocation(value), nbt, c, consume)
+                        : new ItemTask(new ResourceLocation(value), null, nbt, c, consume);
+                }
+                case CRAFT -> {
+                    net.minecraft.nbt.CompoundTag nbt = parseNbt(aux);
+                    yield tagMode
+                        ? new CraftTask(null, new ResourceLocation(value), nbt, c)
+                        : new CraftTask(new ResourceLocation(value), null, nbt, c);
+                }
                 case MINE -> new MineTask(new ResourceLocation(value), c);
                 case KILL -> new KillTask(new ResourceLocation(value), c);
                 case PLACE -> new PlaceTask(new ResourceLocation(value), c);
@@ -120,6 +165,8 @@ public record TaskDraft(
                 case CHECKMARK -> new CheckmarkTask(value);
                 case TRIGGER -> new com.soul.soa_additions.quest.task.CustomTriggerTask(
                         new ResourceLocation(value), c, "");
+                case IS_PACKMODE -> new IsPackmodeTask(
+                        com.soul.soa_additions.quest.PackMode.fromString(value));
             };
         } catch (Exception e) {
             return new CheckmarkTask("(invalid: " + value + ")");
@@ -131,12 +178,14 @@ public record TaskDraft(
      *  a label so they aren't silently dropped on save. */
     public static TaskDraft fromTask(QuestTask t) {
         if (t instanceof ItemTask it) {
-            if (it.tag() != null) return new TaskDraft(Type.ITEM, it.tag().toString(), it.count(), "", true, it.consume());
-            if (it.item() != null) return new TaskDraft(Type.ITEM, it.item().toString(), it.count(), "", false, it.consume());
+            String nbt = it.nbt() != null ? it.nbt().toString() : "";
+            if (it.tag() != null) return new TaskDraft(Type.ITEM, it.tag().toString(), it.count(), nbt, true, it.consume());
+            if (it.item() != null) return new TaskDraft(Type.ITEM, it.item().toString(), it.count(), nbt, false, it.consume());
         }
         if (t instanceof CraftTask ct) {
-            if (ct.tag() != null) return new TaskDraft(Type.CRAFT, ct.tag().toString(), ct.count(), "", true, false);
-            if (ct.item() != null) return new TaskDraft(Type.CRAFT, ct.item().toString(), ct.count(), "", false, false);
+            String nbt = ct.nbt() != null ? ct.nbt().toString() : "";
+            if (ct.tag() != null) return new TaskDraft(Type.CRAFT, ct.tag().toString(), ct.count(), nbt, true, false);
+            if (ct.item() != null) return new TaskDraft(Type.CRAFT, ct.item().toString(), ct.count(), nbt, false, false);
         }
         if (t instanceof MineTask mt) return new TaskDraft(Type.MINE, mt.block().toString(), mt.count(), "", false, false);
         if (t instanceof KillTask kt) return new TaskDraft(Type.KILL, kt.entity().toString(), kt.count(), "", false, false);
@@ -148,11 +197,19 @@ public record TaskDraft(
         if (t instanceof AdvancementTask at) return new TaskDraft(Type.ADVANCEMENT, at.advancement().toString(), 1, "", false, false);
         if (t instanceof StatTask st) return new TaskDraft(Type.STAT, st.statType().toString(), st.threshold(), st.statValue().toString(), false, false);
         if (t instanceof CheckmarkTask ck) return new TaskDraft(Type.CHECKMARK, ck.text(), 1, "", false, false);
+        if (t instanceof IsPackmodeTask ipt) return new TaskDraft(Type.IS_PACKMODE, ipt.mode().lower(), 1, "", false, false);
         if (t instanceof com.soul.soa_additions.quest.task.CustomTriggerTask ct)
             return new TaskDraft(Type.TRIGGER, ct.triggerId().toString(), ct.count(), "", false, false);
         // Unknown (e.g. ItemTask with an NBT filter the GUI can't express) —
         // preserve as a checkmark labeled with describe() so the user notices
         // it isn't editable here.
         return new TaskDraft(Type.CHECKMARK, t.describe(), 1, "", false, false);
+    }
+
+    /** Parse an SNBT string into a CompoundTag, or null if blank/invalid. */
+    private static net.minecraft.nbt.CompoundTag parseNbt(String snbt) {
+        if (snbt == null || snbt.isBlank()) return null;
+        try { return net.minecraft.nbt.TagParser.parseTag(snbt); }
+        catch (Exception e) { return null; }
     }
 }

@@ -1,0 +1,12 @@
+{
+  "type": "bloodmagic:array",
+  "baseinput": {
+    "item": "bloodmagic:reagentbinding"
+  },
+  "addedinput": {
+    "item": "soa_additions:ba_blood_infused_stick"
+  },
+  "output": {
+    "item": "soa_additions:ba_bound_stick"
+  }
+}

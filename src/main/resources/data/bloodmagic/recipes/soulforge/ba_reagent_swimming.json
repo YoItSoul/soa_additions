@@ -1,0 +1,20 @@
+{
+  "type": "bloodmagic:soulforge",
+  "minimumDrain": 100.0,
+  "drain": 40.0,
+  "output": {
+    "item": "soa_additions:ba_reagent_swimming"
+  },
+  "input0": {
+    "item": "bloodmagic:reagentwater"
+  },
+  "input1": {
+    "item": "minecraft:prismarine_shard"
+  },
+  "input2": {
+    "item": "minecraft:glass_bottle"
+  },
+  "input3": {
+    "item": "minecraft:cod"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " r ",
+    "rcr",
+    " r "
+  ],
+  "key": {
+    "r": {
+      "item": "quark:rainbow_rune"
+    },
+    "c": {
+      "tag": "forge:casts"
+    }
+  },
+  "result": {
+    "item": "soa_additions:plate_of_honor"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "bmb",
+    "mxm",
+    "bmb"
+  ],
+  "key": {
+    "m": {
+      "item": "soa_additions:raw_human_meat"
+    },
+    "b": {
+      "item": "bloodmagic:life_essence_bucket"
+    },
+    "x": {
+      "item": "minecraft:bone"
+    }
+  },
+  "result": {
+    "item": "soa_additions:bloody_sacrifice"
+  },
+  "show_notification": true
+}

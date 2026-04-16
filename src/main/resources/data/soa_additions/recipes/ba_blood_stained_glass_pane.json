@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "soa_additions:ba_blood_stained_glass"
+    }
+  },
+  "result": {
+    "item": "soa_additions:ba_blood_stained_glass_pane",
+    "count": 16
+  },
+  "show_notification": true
+}

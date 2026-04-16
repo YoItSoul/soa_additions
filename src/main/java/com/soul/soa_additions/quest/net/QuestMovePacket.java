@@ -12,6 +12,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
@@ -55,7 +56,7 @@ public record QuestMovePacket(String chapterId, String questId, int x, int y) {
             if (dir == NetworkDirection.PLAY_TO_SERVER) {
                 handleServer(pkt, c.getSender());
             } else {
-                DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientQuestEditState.applyMove(pkt));
+                DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientApply.move(pkt));
             }
         });
         c.setPacketHandled(true);
@@ -111,5 +112,12 @@ public record QuestMovePacket(String chapterId, String questId, int x, int y) {
                 .info("Quest moved: {}/{} -> ({},{}) by {}",
                         pkt.chapterId, pkt.questId, pkt.x, pkt.y,
                         sender.getGameProfile().getName());
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private static final class ClientApply {
+        static void move(QuestMovePacket pkt) {
+            ClientQuestEditState.applyMove(pkt);
+        }
     }
 }

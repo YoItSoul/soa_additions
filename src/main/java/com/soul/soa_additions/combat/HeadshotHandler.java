@@ -1,8 +1,10 @@
 package com.soul.soa_additions.combat;
 
 import com.soul.soa_additions.SoaAdditions;
+import com.soul.soa_additions.config.HeadshotConfig;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -11,12 +13,10 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -35,7 +35,6 @@ public final class HeadshotHandler {
     private static final float BASE_HEADSHOT_MULTIPLIER = 2.0F;
     private static final float CRITICAL_HEADSHOT_MULTIPLIER = 3.0F;
     private static final float VELOCITY_DAMAGE_MULTIPLIER = 0.2F;
-    private static final int BLINDNESS_DURATION = 60;
     private static final int SLOWNESS_DURATION = 40;
     private static final int HELMET_BREAK_NAUSEA_DURATION = 80;
 
@@ -50,10 +49,19 @@ public final class HeadshotHandler {
         Vec3 attackPos = event.getSource().getSourcePosition();
         if (attackPos == null || !isHeadshot(target, attackPos)) return;
 
+        boolean playerHadHelmet = target instanceof Player p
+                && !p.getItemBySlot(EquipmentSlot.HEAD).isEmpty()
+                && p.getItemBySlot(EquipmentSlot.HEAD).getItem() instanceof ArmorItem;
+
+        // event.getAmount() is already post-armor/toughness/protection — vanilla
+        // runs those reductions before LivingHurtEvent fires. processHeadshot
+        // therefore works on already-reduced damage and the helmet profile is a
+        // direct multiplier on that. No further armor math here; re-applying it
+        // was a double-reduction bug.
         float damage = processHeadshot(event, target, attacker);
-        event.setAmount(calculateFinalDamage(event.getSource(), target, damage));
-        applyHeadshotEffects(target);
-        playHeadshotSound(target);
+        event.setAmount(Math.max(0.0F, damage));
+        applyHeadshotEffects(target, playerHadHelmet);
+        playHeadshotSounds(target, attacker, playerHadHelmet);
         spawnHeadshotParticles(target);
     }
 
@@ -82,17 +90,27 @@ public final class HeadshotHandler {
             multiplier += (float) (arrow.getDeltaMovement().length() * VELOCITY_DAMAGE_MULTIPLIER);
         }
 
-        // Player targets absorb the hit through their helmet (the helmet dies instead)
+        float rawHeadshotDamage = baseDamage * multiplier;
+
+        // Player targets route the hit through their configured helmet profile:
+        // the helmet soaks most of the blow (durability loss scaled per-profile)
+        // and only the remainder reaches the player. The result is floored at
+        // baseDamage so a headshot can never hurt *less* than a body shot, no
+        // matter how absorbent the helmet profile is.
         if (target instanceof Player player) {
             ItemStack helmet = player.getItemBySlot(EquipmentSlot.HEAD);
-            if (!helmet.isEmpty() && helmet.getItem() instanceof ArmorItem) {
-                damageHelmet(player, baseDamage);
-                return 0.0F;
+            if (!helmet.isEmpty() && helmet.getItem() instanceof ArmorItem armor) {
+                HeadshotConfig.Profile prof = HeadshotConfig.profileFor(armor);
+                int durabilityLoss = Math.max(1, Math.round(rawHeadshotDamage * prof.durabilityMult()));
+                damageHelmet(player, durabilityLoss);
+                return Math.max(baseDamage, rawHeadshotDamage * prof.damageTakenMult());
             }
+            // No helmet — player eats the full headshot damage.
+            return rawHeadshotDamage;
         }
 
         ItemStack helmet = target.getItemBySlot(EquipmentSlot.HEAD);
-        return helmet.isEmpty() ? baseDamage * multiplier : baseDamage;
+        return helmet.isEmpty() ? rawHeadshotDamage : baseDamage;
     }
 
     private static float calculateHeadshotMultiplier(LivingEntity attacker) {
@@ -101,44 +119,62 @@ public final class HeadshotHandler {
                 : BASE_HEADSHOT_MULTIPLIER;
     }
 
-    private static float calculateFinalDamage(DamageSource source, LivingEntity target, float damage) {
-        if (damage <= 0.0F) return 0.0F;
-
-        float armor = (float) target.getAttributeValue(Attributes.ARMOR);
-        float armorToughness = (float) target.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
-        float enchantmentProtection = EnchantmentHelper.getDamageProtection(target.getArmorSlots(), source);
-
-        float clampedArmor = Math.min(armor, 20.0F);
-        float afterArmor = damage * (1.0F - clampedArmor / 25.0F);
-
-        int toughnessFactor = (int) (armorToughness + armor * 2.0F);
-        float ratio = Math.max(0.0F, damage / 4.0F);
-        afterArmor += Math.max(0.0F, damage - ratio * toughnessFactor * 0.04F);
-
-        afterArmor *= 1.0F - enchantmentProtection / 25.0F;
-        return Math.max(afterArmor, 0.0F);
-    }
-
-    private static void damageHelmet(Player player, float damage) {
+    private static void damageHelmet(Player player, int durabilityLoss) {
         ItemStack helmet = player.getItemBySlot(EquipmentSlot.HEAD);
         if (helmet.isEmpty() || !(helmet.getItem() instanceof ArmorItem)) return;
-        helmet.hurtAndBreak((int) Math.ceil(damage), player, p -> {
+        helmet.hurtAndBreak(durabilityLoss, player, p -> {
             p.broadcastBreakEvent(EquipmentSlot.HEAD);
             p.addEffect(new MobEffectInstance(MobEffects.CONFUSION, HELMET_BREAK_NAUSEA_DURATION));
             playHelmetBreakSound(p);
         });
     }
 
-    private static void applyHeadshotEffects(LivingEntity target) {
+    private static void applyHeadshotEffects(LivingEntity target, boolean playerHadHelmet) {
         if (target.isDeadOrDying()) return;
-        target.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, BLINDNESS_DURATION));
         target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, SLOWNESS_DURATION));
+        // A helmeted player is protected from the visual disorientation — the
+        // helmet is meant to mitigate the hit, not just the raw damage. Mobs
+        // and unhelmeted players still get blinded so the hit has teeth.
+        if (target instanceof Player && playerHadHelmet) return;
+        int seconds = HeadshotConfig.NO_HELMET_BLINDNESS_SECONDS.get();
+        int amplifier = HeadshotConfig.NO_HELMET_BLINDNESS_AMPLIFIER.get();
+        if (seconds > 0) {
+            target.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, seconds * 20, amplifier));
+        }
+    }
+
+    /** Play the three headshot sounds:
+     *  - a quiet "ding" delivered only to the attacker as successful-hit feedback,
+     *  - the long-standing hurt sound broadcast at the target,
+     *  - a low thump broadcast at the target when they're an unhelmeted player. */
+    private static void playHeadshotSounds(LivingEntity target, LivingEntity attacker, boolean playerHadHelmet) {
+        playHeadshotSound(target);
+        if (attacker instanceof ServerPlayer sp) {
+            sp.playNotifySound(
+                    SoundEvents.EXPERIENCE_ORB_PICKUP,
+                    SoundSource.PLAYERS,
+                    HeadshotConfig.HEADSHOT_DING_VOLUME.get().floatValue(),
+                    HeadshotConfig.HEADSHOT_DING_PITCH.get().floatValue()
+            );
+        }
+        if (target instanceof Player && !playerHadHelmet) {
+            playThumpSound(target);
+        }
     }
 
     private static void playHeadshotSound(LivingEntity target) {
         if (target.level() instanceof ServerLevel level) {
             level.playSound(null, target.getX(), target.getY(), target.getZ(),
                     SoundEvents.PLAYER_HURT, SoundSource.PLAYERS, 1.0F, 1.0F);
+        }
+    }
+
+    private static void playThumpSound(LivingEntity target) {
+        if (target.level() instanceof ServerLevel level) {
+            level.playSound(null, target.getX(), target.getY(), target.getZ(),
+                    SoundEvents.NOTE_BLOCK_BASEDRUM.value(), SoundSource.PLAYERS,
+                    HeadshotConfig.THUMP_VOLUME.get().floatValue(),
+                    HeadshotConfig.THUMP_PITCH.get().floatValue());
         }
     }
 

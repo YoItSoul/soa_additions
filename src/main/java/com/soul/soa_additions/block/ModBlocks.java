@@ -22,7 +22,7 @@ public final class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, SoaAdditions.MODID);
 
-    private static final BlockBehaviour.Properties ORE_PROPERTIES = BlockBehaviour.Properties.of()
+    private static final BlockBehaviour.Properties ORE_PROPERTIES = BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE)
             .mapColor(MapColor.STONE)
             .strength(50f, 1200f)
             .requiresCorrectToolForDrops()
@@ -39,7 +39,7 @@ public final class ModBlocks {
             () -> new GroveSpawnBlock(ORE_PROPERTIES));
 
     public static final RegistryObject<Block> GROVE_BOON_BLOCK = registerBlock("grove_boon_block",
-            () -> new GroveBoonBlock(BlockBehaviour.Properties.of()
+            () -> new GroveBoonBlock(BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE)
                     .mapColor(MapColor.STONE)
                     .strength(-1.0f, Float.MAX_VALUE)
                     .requiresCorrectToolForDrops()

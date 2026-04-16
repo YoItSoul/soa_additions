@@ -2,6 +2,7 @@ package com.soul.soa_additions.donor;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent;
 
@@ -46,7 +47,14 @@ public record DonorSyncPacket(List<DonorData> donors) {
     public static void handle(DonorSyncPacket pkt, Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() ->
                 DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () ->
-                        ClientDonorCache.apply(pkt.donors)));
+                        ClientHandler.apply(pkt)));
         ctx.get().setPacketHandled(true);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private static final class ClientHandler {
+        static void apply(DonorSyncPacket pkt) {
+            ClientDonorCache.apply(pkt.donors);
+        }
     }
 }

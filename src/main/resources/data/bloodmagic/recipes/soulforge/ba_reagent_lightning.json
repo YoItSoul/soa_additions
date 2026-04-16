@@ -1,0 +1,20 @@
+{
+  "type": "bloodmagic:soulforge",
+  "minimumDrain": 500.0,
+  "drain": 200.0,
+  "output": {
+    "item": "soa_additions:ba_reagent_lightning"
+  },
+  "input0": {
+    "item": "bloodmagic:reagentair"
+  },
+  "input1": {
+    "item": "minecraft:blaze_rod"
+  },
+  "input2": {
+    "item": "minecraft:lightning_rod"
+  },
+  "input3": {
+    "tag": "forge:dusts/glowstone"
+  }
+}

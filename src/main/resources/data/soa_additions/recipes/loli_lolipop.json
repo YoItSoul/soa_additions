@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " st",
+    " xs",
+    "x  "
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:sugar"
+    },
+    "t": {
+      "item": "soa_additions:time_shard"
+    },
+    "x": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "soa_additions:loli_lolipop"
+  },
+  "show_notification": true
+}

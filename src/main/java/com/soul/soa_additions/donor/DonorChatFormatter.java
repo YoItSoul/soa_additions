@@ -53,6 +53,12 @@ public final class DonorChatFormatter {
         decorated.append(Component.literal(" " + event.getRawText())
                 .withStyle(ChatFormatting.WHITE));
 
-        event.setMessage(decorated);
+        // Cancel the default chat pipeline (which would prepend <PlayerName>
+        // via the chat type decoration, causing the name to appear twice) and
+        // broadcast the fully-formatted message ourselves.
+        event.setCanceled(true);
+        for (ServerPlayer recipient : player.server.getPlayerList().getPlayers()) {
+            recipient.sendSystemMessage(decorated);
+        }
     }
 }

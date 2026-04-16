@@ -1,0 +1,13 @@
+{
+  "type": "bloodmagic:altar",
+  "input": {
+    "item": "soa_additions:ba_blood_diamond_inert"
+  },
+  "output": {
+    "item": "soa_additions:ba_blood_diamond_infused"
+  },
+  "upgradeLevel": 4,
+  "altarSyphon": 100000,
+  "consumptionRate": 25,
+  "drainRate": 25
+}

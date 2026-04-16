@@ -27,8 +27,9 @@ public final class OptimizerCommand {
 
     private static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("soa")
-                .requires(src -> src.hasPermission(2))
-                .then(Commands.literal("optimizer").executes(ctx -> {
+                .then(Commands.literal("optimizer")
+                        .requires(src -> src.hasPermission(2))
+                        .executes(ctx -> {
                     JvmStatsSampler.Snapshot snap = JvmStatsSampler.snapshot();
                     if (snap == null) {
                         ctx.getSource().sendFailure(Component.literal("Profiler is not running."));
@@ -46,7 +47,9 @@ public final class OptimizerCommand {
                     src.sendSuccess(() -> Component.literal("file: " + snap.sessionFile().getFileName()).withStyle(ChatFormatting.DARK_GRAY), false);
                     return 1;
                 }))
-                .then(Commands.literal("compat").executes(ctx -> {
+                .then(Commands.literal("compat")
+                        .requires(src -> src.hasPermission(2))
+                        .executes(ctx -> {
                     var src = ctx.getSource();
                     src.sendSuccess(() -> Component.literal("Running compat scan…").withStyle(ChatFormatting.GRAY), false);
                     new Thread(() -> {

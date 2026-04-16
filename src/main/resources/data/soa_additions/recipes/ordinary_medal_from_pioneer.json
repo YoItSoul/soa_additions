@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "soa_additions:pioneer_medal"
+    }
+  ],
+  "result": {
+    "item": "soa_additions:ordinary_medal",
+    "count": 9
+  }
+}

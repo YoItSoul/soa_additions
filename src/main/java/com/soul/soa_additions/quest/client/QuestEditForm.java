@@ -75,6 +75,7 @@ public final class QuestEditForm {
     public boolean repeatable;
     public RewardScope repeatScope = RewardScope.TEAM;
     public boolean depsAll;
+    public int minDeps;
     public boolean showDeps;
 
     /** Per-task row state. Mutable: add/remove tracked by the screen. */
@@ -129,6 +130,7 @@ public final class QuestEditForm {
             optional = false;
             autoClaim = false;
             depsAll = true;
+            minDeps = -1;
             showDeps = true;
             repeatable = false;
             repeatScope = RewardScope.TEAM;
@@ -146,6 +148,7 @@ public final class QuestEditForm {
             optional = existing.optional();
             autoClaim = existing.autoClaim();
             depsAll = existing.depsAll();
+            minDeps = existing.minDeps();
             showDeps = existing.showDeps();
             repeatable = existing.repeatable();
             repeatScope = existing.repeatScope() == null ? RewardScope.TEAM : existing.repeatScope();
@@ -174,7 +177,9 @@ public final class QuestEditForm {
             case FLAGS -> { /* no text boxes on this tab */ }
             case TASKS -> {
                 for (TaskRow r : taskRows) {
-                    all.add(r.value);
+                    // STAT uses a clickable button for the stat type instead
+                    // of a text field, so skip its value EditBox.
+                    if (!r.type.usesStatTypeButton()) all.add(r.value);
                     if (r.type.usesCount()) all.add(r.count);
                     if (r.type.usesAux()) all.add(r.aux);
                 }
@@ -371,9 +376,14 @@ public final class QuestEditForm {
     /** Pixel height reserved for the multi-line description widget. */
     public static final int DESC_H = 88;
 
-    /** Height of a single row including its optional sub-row. */
+    /** Height of a single row including its optional sub-rows.
+     *  ITEM/CRAFT get two sub-rows: one for tag/consume toggles, one for NBT. */
     public int rowHeight(TaskRow r) {
-        return TASK_ROW_H + (r.hasSubRow() ? TASK_SUB_ROW_H : 0);
+        int h = TASK_ROW_H;
+        if (r.hasSubRow()) h += TASK_SUB_ROW_H;
+        // Second sub-row for aux (NBT) when toggles already occupy the first.
+        if (r.type.supportsTag() && r.type.usesAux()) h += TASK_SUB_ROW_H;
+        return h;
     }
 
     /** Height of the task list section in pixels, including the header + add button. */
@@ -401,8 +411,8 @@ public final class QuestEditForm {
         return switch (activeTab) {
             // title + icon + desc + x/y/size + shape button row
             case GENERAL -> ROW_H * 3 + DESC_H + 20 + 28;
-            // deps + excl + dep mode/show lines button row
-            case DEPS -> ROW_H * 2 + 28;
+            // deps + excl + dep mode/show lines + min_deps button rows
+            case DEPS -> ROW_H * 2 + 28 + 22;
             // three rows of toggle buttons
             case FLAGS -> 24 * 3 + 12;
             case TASKS -> taskSectionHeight();
@@ -453,7 +463,8 @@ public final class QuestEditForm {
                 for (TaskRow r : taskRows) {
                     int valueX = lx + 92;
                     int countReserve = r.type.usesCount() ? 36 : 0;
-                    int valueW = w - PAD * 2 - 92 - countReserve - 18;
+                    int browseReserve = r.type.hasPicker() ? 18 : 0;
+                    int valueW = w - PAD * 2 - 92 - countReserve - browseReserve - 18;
                     r.value.setPosition(valueX, rowY);
                     r.value.setWidth(valueW);
                     if (r.type.usesCount()) {
@@ -461,8 +472,12 @@ public final class QuestEditForm {
                         r.count.setWidth(32);
                     }
                     if (r.type.usesAux()) {
-                        r.aux.setPosition(valueX, rowY + TASK_ROW_H);
-                        r.aux.setWidth(valueW + countReserve);
+                        int auxBrowseReserve = r.type.hasAuxPicker() ? 18 : 0;
+                        // When tag toggles occupy the first sub-row, place aux
+                        // on a second sub-row below them.
+                        int auxSubRowOffset = r.type.supportsTag() ? TASK_SUB_ROW_H * 2 : TASK_SUB_ROW_H;
+                        r.aux.setPosition(valueX, rowY + auxSubRowOffset);
+                        r.aux.setWidth(valueW + countReserve - auxBrowseReserve);
                     }
                     rowY += rowHeight(r);
                 }

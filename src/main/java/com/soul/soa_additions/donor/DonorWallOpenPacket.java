@@ -2,6 +2,7 @@ package com.soul.soa_additions.donor;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent;
 
@@ -23,10 +24,17 @@ public record DonorWallOpenPacket() {
 
     public static void handle(DonorWallOpenPacket pkt, Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() ->
-                DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-                    var mc = net.minecraft.client.Minecraft.getInstance();
-                    mc.setScreen(new DonorWallScreen());
-                }));
+                DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> ClientHandler::open));
         ctx.get().setPacketHandled(true);
+    }
+
+    /** Isolated so the JVM never resolves DonorWallScreen / Screen on the
+     *  server — this inner class is only loaded on Dist.CLIENT. */
+    @OnlyIn(Dist.CLIENT)
+    private static final class ClientHandler {
+        static void open() {
+            var mc = net.minecraft.client.Minecraft.getInstance();
+            mc.setScreen(new DonorWallScreen());
+        }
     }
 }

@@ -3,6 +3,11 @@
     "soa_additions:abyssal_ore_block",
     "soa_additions:ether_ore_block",
     "soa_additions:infernium_ore_block",
-    "soa_additions:void_ore_block"
+    "soa_additions:void_ore_block",
+    "soa_additions:ba_blood_infused_iron_block",
+    "soa_additions:ba_slate",
+    "soa_additions:ba_stasis_plate",
+    "soa_additions:ba_altare_aenigmatica",
+    "soa_additions:ba_blood_capacitor"
   ]
 }

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aba",
+    "aca"
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:string"
+    },
+    "b": {
+      "item": "minecraft:flint_and_steel"
+    },
+    "c": {
+      "type": "bloodmagic:bloodorb",
+      "orb_tier": 1
+    }
+  },
+  "result": {
+    "item": "soa_additions:ba_blood_burned_string",
+    "count": 7
+  },
+  "show_notification": true
+}

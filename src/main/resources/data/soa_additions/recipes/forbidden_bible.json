@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "vdv",
+    "dhd",
+    "vdv"
+  ],
+  "key": {
+    "v": {
+      "item": "soa_additions:void_ingot"
+    },
+    "d": {
+      "tag": "forge:ingots/demonic_metal"
+    },
+    "h": {
+      "item": "minecraft:player_head"
+    }
+  },
+  "result": {
+    "item": "soa_additions:forbidden_bible"
+  },
+  "show_notification": true
+}

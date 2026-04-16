@@ -32,9 +32,9 @@ public final class QuestsEditTargetCommand {
     public static void onRegisterCommands(RegisterCommandsEvent event) {
         event.getDispatcher().register(
                 Commands.literal("soa")
-                        .requires(src -> src.hasPermission(2))
                         .then(Commands.literal("quests")
                                 .then(Commands.literal("edittarget")
+                                        .requires(src -> src.hasPermission(2))
                                         .then(Commands.literal("world")
                                                 .executes(ctx -> apply(ctx, EditTarget.WORLD_OVERRIDE)))
                                         .then(Commands.literal("author")

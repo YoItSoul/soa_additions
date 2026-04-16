@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " m ",
+    "sdn",
+    " k "
+  ],
+  "key": {
+    "m": {
+      "item": "twilightforest:magic_map_focus"
+    },
+    "s": {
+      "item": "twilightforest:steeleaf_ingot"
+    },
+    "d": {
+      "item": "minecraft:diamond"
+    },
+    "n": {
+      "item": "twilightforest:naga_scale"
+    },
+    "k": {
+      "item": "twilightforest:knightmetal_ingot"
+    }
+  },
+  "result": {
+    "item": "soa_additions:twilight_gem"
+  },
+  "show_notification": true
+}

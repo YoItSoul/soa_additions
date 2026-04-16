@@ -1,0 +1,12 @@
+{
+  "type": "bloodmagic:array",
+  "baseinput": {
+    "item": "soa_additions:ba_reagent_lightning"
+  },
+  "addedinput": {
+    "item": "bloodmagic:demonslate"
+  },
+  "output": {
+    "item": "soa_additions:ba_sigil_lightning"
+  }
+}

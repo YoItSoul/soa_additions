@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " a ",
+    " a ",
+    "cbc"
+  ],
+  "key": {
+    "a": {
+      "item": "soa_additions:ba_blood_infused_planks"
+    },
+    "b": {
+      "type": "bloodmagic:bloodorb",
+      "orb_tier": 2
+    },
+    "c": {
+      "item": "soa_additions:ba_blood_infused_stick"
+    }
+  },
+  "result": {
+    "item": "soa_additions:ba_blood_infused_wooden_sword"
+  },
+  "show_notification": true
+}

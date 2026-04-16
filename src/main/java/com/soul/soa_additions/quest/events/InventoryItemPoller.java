@@ -101,12 +101,17 @@ public final class InventoryItemPoller {
                 changed = true;
             }
         }
+        boolean anyBecameReady = false;
         if (dirty != null) {
             for (Quest quest : dirty) {
                 QuestStatus before = seen.get(quest);
                 QuestStatus after = QuestEvaluator.recompute(quest, tp);
                 QuestNotifier.onTransition(player, quest, before, after);
+                if (after == QuestStatus.READY) anyBecameReady = true;
             }
+        }
+        if (anyBecameReady) {
+            QuestEvaluator.recomputeAllAndAutoClaim(tp, player);
         }
 
         if (changed) {

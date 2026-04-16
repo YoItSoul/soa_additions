@@ -2,15 +2,14 @@ package com.soul.soa_additions.anticheat;
 
 import com.soul.soa_additions.SoaAdditions;
 import com.soul.soa_additions.network.ClientModReportPacket;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.GameType;
 import net.minecraftforge.event.CommandEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
@@ -46,15 +45,18 @@ import java.util.concurrent.ConcurrentHashMap;
  *   <li><b>Server-side mod scan.</b> On server start, if a forbidden mod is installed on the
  *       server itself, a loud warning is printed (it cannot grant advancements without a player
  *       context, but alerts the admin).</li>
+ *
+ *   <li><b>Creative / spectator gamemode.</b> Entering creative or spectator flags the player.
+ *       This catches tools like JEI's cheat-mode "inventory" path that inject items via
+ *       {@code ServerboundSetCreativeModeSlotPacket} without ever executing a command, which
+ *       would otherwise slip past the command heuristic. Also fires on login if the player is
+ *       already in one of those modes.</li>
  * </ol>
  */
 @Mod.EventBusSubscriber(modid = SoaAdditions.MODID)
 public final class AntiCheatHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger("SOA_AntiCheat");
-
-    private static final ResourceLocation CHEAT_ADVANCEMENT_ID =
-            new ResourceLocation(SoaAdditions.MODID, "cheats_are_fun");
 
     /** How long a client has to submit its report after login before being flagged. */
     private static final int REPORT_DEADLINE_TICKS = 200; // 10 seconds
@@ -78,10 +80,47 @@ public final class AntiCheatHandler {
             "freecam", "tracers", "esphack", "esp hack"
     );
 
-    /** Commands safe for OPs to run without being flagged. Everything else is treated as a cheat. */
+    /** Commands safe for OPs to run without being flagged. Everything else is
+     *  treated as a cheat — either blocked (default) or run-and-flagged if the
+     *  player has opted into {@link CheaterModeOptIn}. List covers legitimate
+     *  server-management commands that don't grant items, XP, position, or
+     *  otherwise bypass progression. */
     private static final Set<String> SAFE_COMMANDS = Set.of(
+            // chat / info
             "help", "me", "msg", "tell", "w", "trigger",
-            "list", "seed", "teammsg", "tm", "pardon"
+            "list", "seed", "teammsg", "tm", "say",
+            // moderation
+            "kick", "ban", "ban-ip", "banip", "pardon", "pardon-ip", "pardonip",
+            "whitelist", "op", "deop",
+            // server / datapack lifecycle (doesn't alter gameplay state)
+            "reload", "datapack", "save-all", "saveall", "save-on", "saveon",
+            "save-off", "saveoff", "stop", "publish",
+            // diagnostics
+            "debug", "perf"
+    );
+
+    /**
+     * Subpaths of {@code /soa} that are safe by themselves. Matching is
+     * prefix-based on a space boundary so {@code "donor"} also covers
+     * {@code "donor add"}, {@code "donor sync"}, etc. Anything NOT listed here
+     * is treated as cheating — the big ones are {@code quests editmode} (live
+     * quest rewrite), {@code quests claim} / {@code quests trigger} /
+     * {@code quests resetprogress} (bypasses tasks/rewards/progression),
+     * {@code quests import-ftb} / {@code quests edittarget} (quest content
+     * mutation), and {@code packmode set} / {@code packmode force} (mode
+     * switch past lock).
+     */
+    private static final Set<String> SAFE_SOA_SUBPATHS = Set.of(
+            // opt-in bootstrap — must always run or nothing can ever opt in
+            "quests cheatermode",
+            // read-only / progression-neutral
+            "quests overlay",     // sends a link to the web overlay
+            "optimizer",          // profiler snapshot
+            "export",             // dumps registry to files
+            "team",               // team mgmt (typically non-op anyway)
+            "donor", "donors",    // donor wall + sync — no item grants
+            "packmode show",      // read-only
+            "packmode lock"       // tightens progression rather than loosening
     );
 
     /** Players who still owe the server a client report. Maps UUID → server tick deadline. */
@@ -139,9 +178,39 @@ public final class AntiCheatHandler {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
         MinecraftServer server = player.getServer();
         if (server == null) return;
+
+        // Cross-check the three cheater backends first so that a stripped
+        // advancement or edited NBT is re-applied before any gameplay starts.
+        CheaterManager.crossCheckOnLogin(player);
+
         long deadline = server.getTickCount() + REPORT_DEADLINE_TICKS;
         PENDING_REPORTS.put(player.getUUID(), deadline);
         LOGGER.debug("Awaiting client report from {} by tick {}", player.getGameProfile().getName(), deadline);
+
+        // Player may have logged in already in creative/spectator — the gamemode-change
+        // event doesn't fire for the initial mode, so check it explicitly here.
+        GameType mode = player.gameMode.getGameModeForPlayer();
+        if (isCheatyGameMode(mode) && !alreadyFlagged(player)) {
+            flag(player, "gamemode", "logged in in " + mode.getName() + " mode");
+        }
+    }
+
+    @SubscribeEvent
+    public static void onGameModeChange(PlayerEvent.PlayerChangeGameModeEvent event) {
+        if (!(event.getEntity() instanceof ServerPlayer player)) return;
+        if (!isCheatyGameMode(event.getNewGameMode())) return;
+        if (alreadyFlagged(player)) return;
+        flag(player, "gamemode", "switched to " + event.getNewGameMode().getName() + " mode");
+    }
+
+    private static boolean isCheatyGameMode(GameType mode) {
+        return mode == GameType.CREATIVE || mode == GameType.SPECTATOR;
+    }
+
+    @SubscribeEvent
+    public static void onServerStopped(ServerStoppedEvent event) {
+        CheaterManager.clearServer(event.getServer());
+        com.soul.soa_additions.quest.telemetry.QuestTelemetry.clearSessionState();
     }
 
     @SubscribeEvent
@@ -175,11 +244,34 @@ public final class AntiCheatHandler {
     @SubscribeEvent
     public static void onCommandExecuted(CommandEvent event) {
         CommandSourceStack source = event.getParseResults().getContext().getSource();
-        if (!(source.getEntity() instanceof ServerPlayer player)) return;
-        if (!source.hasPermission(2)) return;
 
         String raw = event.getParseResults().getReader().getString().trim();
         if (raw.startsWith("/")) raw = raw.substring(1);
+
+        // Intercept any attempt to revoke the cheat advancement — from players
+        // AND from the console. Cancel it, then log a tamper event naming the
+        // executor so the player responsible (if any) is re-flagged.
+        if (isCheatAdvancementRevoke(raw)) {
+            event.setCanceled(true);
+            String who = source.getEntity() instanceof ServerPlayer p
+                    ? p.getGameProfile().getName() + " (" + p.getUUID() + ")"
+                    : source.getTextName();
+            LOGGER.warn("Blocked attempted revoke of cheats_are_fun by {}: {}", who, raw);
+            if (source.getEntity() instanceof ServerPlayer executor) {
+                flag(executor, "tamper", "attempted /advancement revoke of cheats_are_fun");
+            }
+            return;
+        }
+
+        if (!(source.getEntity() instanceof ServerPlayer player)) return;
+        if (!source.hasPermission(2)) return;
+
+        // Classify /soa subcommands individually — most are cheating (editmode
+        // rewrites quests, claim/trigger bypass tasks, packmode set jumps
+        // difficulty), a few aren't (cheatermode, overlay, optimizer, team,
+        // donor, read-only packmode queries).
+        if (isSafeSoaSubcommand(raw)) return;
+
         String root = raw.split("\\s+", 2)[0];
         int colon = root.indexOf(':');
         if (colon >= 0) root = root.substring(colon + 1);
@@ -187,9 +279,62 @@ public final class AntiCheatHandler {
 
         if (SAFE_COMMANDS.contains(root)) return;
 
-        if (!alreadyFlagged(player)) {
+        // Already flagged players don't get the blocking UX — they're past
+        // the point where protection helps.
+        if (alreadyFlagged(player)) return;
+
+        // If the player has explicitly opted into cheater mode, run the
+        // command AND flag them. Otherwise cancel it and tell them how to
+        // opt in. This prevents drive-by flagging from commands admins run
+        // routinely but would never think of as "cheating" the run.
+        if (CheaterModeOptIn.isEnabled(player)) {
             flag(player, "op command", raw);
+            return;
         }
+
+        event.setCanceled(true);
+        player.sendSystemMessage(net.minecraft.network.chat.Component.literal(
+                        "[SOA] Blocked: '/" + root + "' would flag you as a cheater. "
+                                + "Run '/soa quests cheatermode true' first to accept the flag and run cheat commands.")
+                .withStyle(net.minecraft.ChatFormatting.RED));
+    }
+
+    /**
+     * Match {@code advancement revoke <target> (only|from|through|until) soa_additions:cheats_are_fun}
+     * and the shorthand {@code advancement revoke <target> everything} which
+     * would strip the cheat advancement too. Case-insensitive; tolerant of
+     * extra whitespace.
+     */
+    /** Strip an optional {@code modid:} prefix from the first token so
+     *  {@code /soa_additions:soa ...} normalises to {@code /soa ...}. */
+    private static String stripNamespaceOnFirstToken(String lower) {
+        int firstSpace = lower.indexOf(' ');
+        String first = firstSpace < 0 ? lower : lower.substring(0, firstSpace);
+        int colon = first.indexOf(':');
+        if (colon < 0) return lower;
+        String rest = firstSpace < 0 ? "" : lower.substring(firstSpace);
+        return first.substring(colon + 1) + rest;
+    }
+
+    /** True iff the command is {@code /soa <subpath>} where {@code subpath}
+     *  starts with one of {@link #SAFE_SOA_SUBPATHS} on a word boundary. */
+    private static boolean isSafeSoaSubcommand(String raw) {
+        String lower = stripNamespaceOnFirstToken(
+                raw.toLowerCase(Locale.ROOT).replaceAll("\\s+", " ").trim());
+        if (!lower.startsWith("soa ")) return false;
+        String rest = lower.substring(4);
+        for (String path : SAFE_SOA_SUBPATHS) {
+            if (rest.equals(path) || rest.startsWith(path + " ")) return true;
+        }
+        return false;
+    }
+
+    private static boolean isCheatAdvancementRevoke(String raw) {
+        String lower = raw.toLowerCase(Locale.ROOT).replaceAll("\\s+", " ").trim();
+        if (!lower.startsWith("advancement revoke ")) return false;
+        if (lower.contains(CheaterManager.CHEAT_ADVANCEMENT_ID.toString())) return true;
+        // "everything" wipes all advancements including ours.
+        return lower.endsWith(" everything");
     }
 
     // ────────────────────────────────────────────────────────────────────────────────
@@ -213,7 +358,8 @@ public final class AntiCheatHandler {
     }
 
     private static boolean alreadyFlagged(ServerPlayer player) {
-        return FLAGGED_THIS_SESSION.contains(player.getUUID()) || hasCheatAdvancement(player);
+        if (FLAGGED_THIS_SESSION.contains(player.getUUID())) return true;
+        return CheaterManager.isFlagged(player);
     }
 
     private static void flag(ServerPlayer player, String category, String detail) {
@@ -226,28 +372,6 @@ public final class AntiCheatHandler {
         LOGGER.warn("  category : {}", category);
         LOGGER.warn("  detail   : {}", detail);
         LOGGER.warn("════════════════════════════════════════");
-        grantCheatAdvancement(player);
-    }
-
-    private static boolean hasCheatAdvancement(ServerPlayer player) {
-        MinecraftServer server = player.getServer();
-        if (server == null) return false;
-        Advancement advancement = server.getAdvancements().getAdvancement(CHEAT_ADVANCEMENT_ID);
-        return advancement != null && player.getAdvancements().getOrStartProgress(advancement).isDone();
-    }
-
-    private static void grantCheatAdvancement(ServerPlayer player) {
-        MinecraftServer server = player.getServer();
-        if (server == null) return;
-        Advancement advancement = server.getAdvancements().getAdvancement(CHEAT_ADVANCEMENT_ID);
-        if (advancement == null) {
-            LOGGER.error("Cheat advancement {} is missing!", CHEAT_ADVANCEMENT_ID);
-            return;
-        }
-        AdvancementProgress progress = player.getAdvancements().getOrStartProgress(advancement);
-        if (progress.isDone()) return;
-        for (String criterion : progress.getRemainingCriteria()) {
-            player.getAdvancements().award(advancement, criterion);
-        }
+        CheaterManager.flag(player, category + ":" + detail);
     }
 }

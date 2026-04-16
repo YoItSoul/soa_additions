@@ -51,6 +51,7 @@ public final class QuestRegistry {
         chaptersById = ch;
         questsByFullId = qs;
         rebuildTaskIndex();
+        com.soul.soa_additions.quest.web.QuestWebServer.invalidateLayoutCache();
     }
 
     /**
@@ -69,6 +70,7 @@ public final class QuestRegistry {
         chaptersById = ch;
         questsByFullId = qs;
         rebuildTaskIndex();
+        com.soul.soa_additions.quest.web.QuestWebServer.invalidateLayoutCache();
     }
 
     /** Drop a chapter and every quest inside it. Used by the editor's
@@ -118,6 +120,16 @@ public final class QuestRegistry {
 
     public static Optional<Quest> quest(String fullId) {
         return Optional.ofNullable(questsByFullId.get(fullId));
+    }
+
+    /** Look up a quest by bare id (no chapter prefix) across all chapters.
+     *  Returns the first match. Used as a fallback when a dependency was
+     *  stored without its chapter prefix (cross-chapter bare id). */
+    public static Optional<Quest> questByBareId(String bareId) {
+        for (Quest q : questsByFullId.values()) {
+            if (q.id().equals(bareId)) return Optional.of(q);
+        }
+        return Optional.empty();
     }
 
     public static int questCount() { return questsByFullId.size(); }

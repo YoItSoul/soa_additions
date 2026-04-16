@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "rrr",
+    "rir",
+    "rrr"
+  ],
+  "key": {
+    "r": {
+      "item": "quark:rainbow_rune"
+    },
+    "i": {
+      "item": "mowziesmobs:ice_crystal"
+    }
+  },
+  "result": {
+    "item": "soa_additions:aurora_heart"
+  },
+  "show_notification": true
+}

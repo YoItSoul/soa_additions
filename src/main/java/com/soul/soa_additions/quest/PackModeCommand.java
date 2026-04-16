@@ -27,8 +27,8 @@ public final class PackModeCommand {
     public static void onRegisterCommands(RegisterCommandsEvent event) {
         event.getDispatcher().register(
                 Commands.literal("soa")
-                        .requires(src -> src.hasPermission(2))
                         .then(Commands.literal("packmode")
+                                .requires(src -> src.hasPermission(2))
                                 .then(Commands.literal("show").executes(PackModeCommand::show))
                                 .then(Commands.literal("lock").executes(PackModeCommand::lock))
                                 .then(Commands.literal("set")
@@ -45,10 +45,13 @@ public final class PackModeCommand {
 
     private static int show(CommandContext<CommandSourceStack> ctx) {
         PackModeData data = PackModeData.get(ctx.getSource().getServer());
+        String suffix = data.serverEnforced() ? " (SERVER ENFORCED)"
+                : data.locked() ? " (LOCKED)"
+                : data.isClosedForChange() ? " (window closed)"
+                : " (editable)";
         ctx.getSource().sendSuccess(() -> Component.literal("[SOA] Packmode: ")
                 .append(Component.literal(data.mode().lower()).withStyle(ChatFormatting.AQUA))
-                .append(Component.literal(data.locked() ? " (LOCKED)" : (data.isClosedForChange() ? " (window closed)" : " (editable)"))
-                        .withStyle(ChatFormatting.GRAY)), false);
+                .append(Component.literal(suffix).withStyle(ChatFormatting.GRAY)), false);
         return Command.SINGLE_SUCCESS;
     }
 
@@ -64,6 +67,8 @@ public final class PackModeCommand {
                 + (force ? " (forced)" : "")).withStyle(ChatFormatting.GOLD), true);
         org.slf4j.LoggerFactory.getLogger("soa_additions/packmode")
                 .warn("{} {} → {} by {}", force ? "FORCE" : "set", previous, mode, ctx.getSource().getTextName());
+        // Hot-reload: immediately apply gamerule/difficulty effects for the new mode
+        PackModeEffects.applyGamerules(ctx.getSource().getServer());
         return Command.SINGLE_SUCCESS;
     }
 

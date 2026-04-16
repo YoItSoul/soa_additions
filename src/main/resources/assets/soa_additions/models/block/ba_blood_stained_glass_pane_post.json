@@ -1,0 +1,7 @@
+{
+  "parent": "block/template_glass_pane_post",
+  "textures": {
+    "edge": "soa_additions:block/ba_blood_stained_glass_pane_top",
+    "pane": "soa_additions:block/ba_blood_stained_glass"
+  }
+}

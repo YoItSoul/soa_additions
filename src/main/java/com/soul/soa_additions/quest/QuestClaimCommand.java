@@ -94,7 +94,7 @@ public final class QuestClaimCommand {
         qp.touch(player.server.getTickCount());
         pdata.touch();
 
-        QuestEvaluator.recomputeAll(team_p);
+        QuestEvaluator.recomputeAllAndAutoClaim(team_p, player);
         QuestSyncPacket.sendToTeam(player);
 
         String verb = complete ? "completed" : "cleared";
@@ -107,7 +107,8 @@ public final class QuestClaimCommand {
         ServerPlayer player = ctx.getSource().getPlayerOrException();
         String fullId = StringArgumentType.getString(ctx, "quest");
         ClaimService.ClaimResult result = ClaimService.claim(player, fullId);
-        if (result == ClaimService.ClaimResult.OK) QuestSyncPacket.sendToTeam(player);
+        if (result == ClaimService.ClaimResult.OK || result == ClaimService.ClaimResult.NOTHING_TO_GRANT)
+            QuestSyncPacket.sendToTeam(player);
 
         Component msg = switch (result) {
             case OK -> Component.literal("[SOA] Claimed " + fullId).withStyle(ChatFormatting.GREEN);

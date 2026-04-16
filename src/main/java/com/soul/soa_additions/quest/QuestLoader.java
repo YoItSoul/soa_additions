@@ -88,7 +88,11 @@ public final class QuestLoader extends SimpleJsonResourceReloadListener {
 
         QuestRegistry.replace(sorted);
         int totalQuests = sorted.stream().mapToInt(c -> c.quests().size()).sum();
-        LOG.info("[SOA Quests] Loaded {} chapters, {} quests", sorted.size(), totalQuests);
+        int totalRewards = sorted.stream()
+                .flatMap(c -> c.quests().stream())
+                .mapToInt(q -> q.rewards().size())
+                .sum();
+        LOG.info("[SOA Quests] Loaded {} chapters, {} quests, {} rewards", sorted.size(), totalQuests, totalRewards);
 
         // Broadcast updated quest definitions to all connected clients so a
         // /reload doesn't leave them stale. This is a no-op during initial
@@ -170,6 +174,7 @@ public final class QuestLoader extends SimpleJsonResourceReloadListener {
         boolean optional = root.has("optional") && root.get("optional").getAsBoolean();
         List<String> deps = readStrings(root, "dependencies");
         boolean depsAll = !root.has("dependency_logic") || "all".equalsIgnoreCase(root.get("dependency_logic").getAsString());
+        int minDeps = root.has("min_deps") ? root.get("min_deps").getAsInt() : -1;
         boolean autoClaim = root.has("auto_claim") && root.get("auto_claim").getAsBoolean();
         com.soul.soa_additions.quest.model.NodeShape shape =
                 com.soul.soa_additions.quest.model.NodeShape.fromString(
@@ -184,7 +189,15 @@ public final class QuestLoader extends SimpleJsonResourceReloadListener {
         List<QuestReward> rewards = new ArrayList<>();
         if (root.has("rewards")) {
             for (JsonElement r : root.getAsJsonArray("rewards")) {
-                rewards.add(RewardRegistry.deserialize(r.getAsJsonObject()));
+                // Per-entry try so a single unknown/malformed reward (e.g. a
+                // future registered type on a newer server, a typo in a
+                // datapack) can't take the entire chapter offline. We log and
+                // drop just the offending entry.
+                try {
+                    rewards.add(RewardRegistry.deserialize(r.getAsJsonObject()));
+                } catch (Exception rex) {
+                    LOG.warn("Skipping malformed reward in quest {}: {}", id, rex.getMessage());
+                }
             }
         }
 
@@ -207,8 +220,13 @@ public final class QuestLoader extends SimpleJsonResourceReloadListener {
                     }
                     if (patch.has("rewards")) {
                         rewards = new ArrayList<>();
-                        for (JsonElement r : patch.getAsJsonArray("rewards"))
-                            rewards.add(RewardRegistry.deserialize(r.getAsJsonObject()));
+                        for (JsonElement r : patch.getAsJsonArray("rewards")) {
+                            try {
+                                rewards.add(RewardRegistry.deserialize(r.getAsJsonObject()));
+                            } catch (Exception rex) {
+                                LOG.warn("Skipping malformed mode-override reward in quest {}: {}", id, rex.getMessage());
+                            }
+                        }
                     }
                     break; // TODO: emit per-mode duplicates once PackModeData filters at query time
                 }
@@ -224,7 +242,7 @@ public final class QuestLoader extends SimpleJsonResourceReloadListener {
                 ? com.soul.soa_additions.quest.model.RewardScope.fromString(root.get("repeat_scope").getAsString())
                 : com.soul.soa_additions.quest.model.RewardScope.TEAM;
         List<String> exclusions = readStrings(root, "exclusions");
-        return new Quest(id, chapterId, title, description, icon, visibility, optional, deps, depsAll, tasks, rewards, modes, source, autoClaim, shape, posX, posY, showDeps, size, repeatable, repeatScope, exclusions);
+        return new Quest(id, chapterId, title, description, icon, visibility, optional, deps, depsAll, minDeps, tasks, rewards, modes, source, autoClaim, shape, posX, posY, showDeps, size, repeatable, repeatScope, exclusions);
     }
 
     private static List<String> readStrings(JsonObject o, String key) {

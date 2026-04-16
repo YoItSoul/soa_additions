@@ -63,12 +63,11 @@ public final class QuestNotifier {
             markNotified(player, quest.fullId());
         }
 
-        // Auto-claim rewards if the quest is flagged that way. Done after the
-        // notification so the "Quest completed" line lands before the
-        // "✔ Claimed" line that ClaimService emits.
-        if (quest.autoClaim()) {
-            ClaimService.claim(player, quest.fullId());
-        }
+        // Auto-claim is handled by the callers (ProgressService, pollers,
+        // ClaimService) via QuestEvaluator.recomputeAllAndAutoClaim() — not
+        // here. Triggering ClaimService.claim from inside a notification that
+        // fires mid-recompute caused re-entrant auto-claim chains and was
+        // redundant with the sweep the caller already runs.
     }
 
     /**
@@ -91,8 +90,21 @@ public final class QuestNotifier {
     }
 
     private static void markNotified(ServerPlayer player, String fullId) {
-        Set<String> set = loadNotified(player);
-        if (set.add(fullId)) saveNotified(player, set);
+        // Check the NBT list directly to avoid deserializing the whole set
+        // just to add one entry.
+        CompoundTag root = player.getPersistentData().getCompound(Player.PERSISTED_NBT_TAG);
+        ListTag list;
+        if (root.contains(NOTIFIED_KEY, Tag.TAG_LIST)) {
+            list = root.getList(NOTIFIED_KEY, Tag.TAG_STRING);
+            for (int i = 0; i < list.size(); i++) {
+                if (list.getString(i).equals(fullId)) return; // already notified
+            }
+        } else {
+            list = new ListTag();
+        }
+        list.add(StringTag.valueOf(fullId));
+        root.put(NOTIFIED_KEY, list);
+        player.getPersistentData().put(Player.PERSISTED_NBT_TAG, root);
     }
 
     private static void saveNotified(ServerPlayer player, Set<String> ids) {

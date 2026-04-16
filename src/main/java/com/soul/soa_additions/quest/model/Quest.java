@@ -18,6 +18,7 @@ public record Quest(
         boolean optional,
         List<String> dependencies,
         boolean depsAll,
+        int minDeps,
         List<QuestTask> tasks,
         List<QuestReward> rewards,
         Set<PackMode> modes,
@@ -67,7 +68,7 @@ public record Quest(
 
     public Quest withPosition(int x, int y) {
         return new Quest(id, chapterId, title, description, icon, visibility, optional,
-                dependencies, depsAll, tasks, rewards, modes, source, autoClaim, shape, x, y, showDeps, size, repeatable, repeatScope, exclusions);
+                dependencies, depsAll, minDeps, tasks, rewards, modes, source, autoClaim, shape, x, y, showDeps, size, repeatable, repeatScope, exclusions);
     }
 
     public static EnumSet<PackMode> allModes() { return EnumSet.allOf(PackMode.class); }

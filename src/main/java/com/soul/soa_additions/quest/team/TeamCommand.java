@@ -54,20 +54,35 @@ public final class TeamCommand {
     private static int create(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
         ServerPlayer player = ctx.getSource().getPlayerOrException();
         String name = StringArgumentType.getString(ctx, "name");
-        QuestTeam team = TeamData.get(player.server).createTeam(player, name);
-        ctx.getSource().sendSuccess(() -> Component.literal("[SOA] Created team '" + team.name() + "' (" + team.id() + ")")
-                .withStyle(ChatFormatting.GREEN), false);
-        return Command.SINGLE_SUCCESS;
+        try {
+            QuestTeam team = TeamData.get(player.server).createTeam(player, name);
+            ctx.getSource().sendSuccess(() -> Component.literal("[SOA] Created team '" + team.name() + "' (" + team.id() + ")")
+                    .withStyle(ChatFormatting.GREEN), false);
+            return Command.SINGLE_SUCCESS;
+        } catch (IllegalArgumentException e) {
+            ctx.getSource().sendFailure(Component.literal("[SOA] " + e.getMessage()));
+            return 0;
+        }
     }
 
     private static int invite(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
         ServerPlayer inviter = ctx.getSource().getPlayerOrException();
         ServerPlayer target = EntityArgument.getPlayer(ctx, "player");
-        QuestTeam team = TeamData.get(inviter.server).teamOf(inviter);
+        TeamData teams = TeamData.get(inviter.server);
+        QuestTeam team = teams.teamOf(inviter);
         if (team.solo()) {
             ctx.getSource().sendFailure(Component.literal("You're not on a team — use /soa team create first."));
             return 0;
         }
+        if (target.getUUID().equals(inviter.getUUID())) {
+            ctx.getSource().sendFailure(Component.literal("You can't invite yourself."));
+            return 0;
+        }
+        if (!teams.canInvite(inviter.getUUID(), target.getUUID())) {
+            ctx.getSource().sendFailure(Component.literal("You recently invited this player — wait a minute before retrying."));
+            return 0;
+        }
+        teams.recordInvite(team.id(), inviter.getUUID(), target.getUUID());
         target.sendSystemMessage(Component.literal("[SOA] " + inviter.getGameProfile().getName()
                 + " invited you to team '" + team.name() + "'. Accept: /soa team join " + team.id())
                 .withStyle(ChatFormatting.AQUA));
@@ -83,15 +98,20 @@ public final class TeamCommand {
             ctx.getSource().sendFailure(Component.literal("Invalid team id."));
             return 0;
         }
+        TeamData teams = TeamData.get(player.server);
+        if (!teams.consumeInvite(player.getUUID(), teamId)) {
+            ctx.getSource().sendFailure(Component.literal("No pending invite for that team (or it expired)."));
+            return 0;
+        }
         try {
-            QuestTeam team = TeamData.get(player.server).joinTeam(teamId, player);
+            QuestTeam team = teams.joinTeam(teamId, player);
             ctx.getSource().sendSuccess(() -> Component.literal("[SOA] Joined team '" + team.name() + "'")
                     .withStyle(ChatFormatting.GREEN), false);
             // Catch the joiner up on everything the team has already completed.
             com.soul.soa_additions.quest.progress.QuestProgressData pdata =
                     com.soul.soa_additions.quest.progress.QuestProgressData.get(player.server);
             com.soul.soa_additions.quest.progress.TeamQuestProgress tp = pdata.forTeam(team.id());
-            com.soul.soa_additions.quest.progress.QuestEvaluator.recomputeAll(tp);
+            com.soul.soa_additions.quest.progress.QuestEvaluator.recomputeAllAndAutoClaim(tp, player);
             com.soul.soa_additions.quest.net.QuestSyncPacket.sendTo(player);
             com.soul.soa_additions.quest.progress.QuestNotifier.replayCompleted(player, tp);
             return Command.SINGLE_SUCCESS;

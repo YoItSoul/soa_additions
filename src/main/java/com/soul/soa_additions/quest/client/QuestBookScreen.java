@@ -23,10 +23,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraftforge.api.distmarker.Dist;
@@ -53,8 +50,8 @@ import java.util.Map;
  *
  * <p>Left pane is a chapter list. Clicking a chapter runs the layout and
  * renders nodes as colored boxes. Click a node → detail popup with tasks,
- * rewards, and a claim button when READY. No pan/zoom yet — viewport
- * controls land with the aesthetic pass.</p>
+ * rewards, and a claim button when READY. Scroll wheel zooms, click-drag
+ * pans, Home key resets the viewport.</p>
  */
 @OnlyIn(Dist.CLIENT)
 public final class QuestBookScreen extends Screen {
@@ -68,43 +65,83 @@ public final class QuestBookScreen extends Screen {
     private static final int COL_SPACING = 72;
     private static final int ROW_SPACING = 48;
 
-    // Color palette — backed by QuestBookConfig so every value is a config
-    // knob. Each getter parses the config string with a hard-coded fallback
-    // so a typo in the TOML can't brick the screen.
-    private static int COL_BG()         { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.BACKGROUND,         0x80000000); }
-    private static int COL_BG_GRAD()    { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.BACKGROUND_GRADIENT, 0x80000000); }
-    private static int COL_PANE()       { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.LEFT_PANE,          0xC01A1F33); }
-    private static int COL_PANE_ALT()   { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.LEFT_PANE_SELECTED, 0xFF222842); }
-    private static int COL_PANE_HOVER() { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.LEFT_PANE_HOVER,    0xFF1F253E); }
-    private static int COL_BORDER()     { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.BORDER,             0xFF3A4264); }
-    private static int COL_SEP()        { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.SEPARATOR,          0xFF2A3050); }
-    private static int COL_TEXT()       { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.TEXT,               0xFFE6E9F5); }
-    private static int COL_TEXT_DIM()   { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.TEXT_DIM,           0xFF8A91AE); }
-    private static int COL_TEXT_MUTED() { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.TEXT_MUTED,         0xFFBFC5DC); }
-    private static int COL_ACCENT()     { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.ACCENT,             0xFF6B8CFF); }
-    private static int COL_HEADING()    { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.HEADING,            0xFF6B8CFF); }
-    private static int COL_OUTLINE_IDLE()  { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.NODE_OUTLINE_IDLE,  0xFF0A0D18); }
-    private static int COL_OUTLINE_HOVER() { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.NODE_OUTLINE_HOVER, 0xFFFFFFFF); }
-    private static int COL_EDGE()       { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.EDGE_NORMAL,        0xFF5A6391); }
-    private static int COL_EDGE_OR()    { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.EDGE_OR_GROUP,      0xFFB59A3A); }
-    private static int COL_DETAIL_BG()  { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.DETAIL_BACKGROUND,  0xF00E1220); }
-    private static int COL_DETAIL_HEADER() { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.DETAIL_HEADER,   0xFF222842); }
-    private static int COL_DETAIL_BORDER() { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.DETAIL_BORDER,   0xFF3A4264); }
-    private static int COL_DETAIL_SHADOW() { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.DETAIL_SHADOW,   0x80000000); }
-    private static int COL_TOOLTIP_BG() { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.TOOLTIP_BACKGROUND, 0xF00A0D18); }
-    private static int COL_CLAIMED_TICK_BG() { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.CLAIMED_TICK_BG, 0xFF1A1F33); }
-    private static int COL_CLAIMED_TICK_FG() { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.CLAIMED_TICK_FG, 0xFF66FF66); }
-    private static int COL_CLAIM_BUTTON()   { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.CLAIM_BUTTON,   0xFF4EB02E); }
-    private static int COL_SUBMIT_BUTTON()  { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.SUBMIT_BUTTON,  0xFF3E6FB5); }
-    private static int COL_CHECKMARK_BOX()  { return com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.CHECKMARK_BOX,  0xFF3A4264); }
+    // Color palette — cached on screen init and config reload. Parsing hex
+    // strings per-frame was burning cycles on every render call.
+    private static int cBG, cBG_GRAD, cPANE, cPANE_ALT, cPANE_HOVER, cBORDER, cSEP;
+    private static int cTEXT, cTEXT_DIM, cTEXT_MUTED, cACCENT, cHEADING;
+    private static int cOUTLINE_IDLE, cOUTLINE_HOVER, cEDGE, cEDGE_OR;
+    private static int cDETAIL_BG, cDETAIL_HEADER, cDETAIL_BORDER, cDETAIL_SHADOW;
+    private static int cTOOLTIP_BG, cCLAIMED_TICK_BG, cCLAIMED_TICK_FG;
+    private static int cCLAIM_BUTTON, cSUBMIT_BUTTON, cCHECKMARK_BOX;
+    private static int cSTATUS_LOCKED, cSTATUS_VISIBLE, cSTATUS_READY, cSTATUS_CLAIMED;
+
+    private static void cacheColors() {
+        cBG             = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.BACKGROUND,         0x80000000);
+        cBG_GRAD        = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.BACKGROUND_GRADIENT, 0x80000000);
+        cPANE           = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.LEFT_PANE,          0xC01A1F33);
+        cPANE_ALT       = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.LEFT_PANE_SELECTED, 0xFF222842);
+        cPANE_HOVER     = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.LEFT_PANE_HOVER,    0xFF1F253E);
+        cBORDER         = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.BORDER,             0xFF3A4264);
+        cSEP            = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.SEPARATOR,          0xFF2A3050);
+        cTEXT           = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.TEXT,               0xFFE6E9F5);
+        cTEXT_DIM       = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.TEXT_DIM,           0xFF8A91AE);
+        cTEXT_MUTED     = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.TEXT_MUTED,         0xFFBFC5DC);
+        cACCENT         = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.ACCENT,             0xFF6B8CFF);
+        cHEADING        = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.HEADING,            0xFF6B8CFF);
+        cOUTLINE_IDLE   = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.NODE_OUTLINE_IDLE,  0xFF0A0D18);
+        cOUTLINE_HOVER  = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.NODE_OUTLINE_HOVER, 0xFFFFFFFF);
+        cEDGE           = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.EDGE_NORMAL,        0xFF5A6391);
+        cEDGE_OR        = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.EDGE_OR_GROUP,      0xFFB59A3A);
+        cDETAIL_BG      = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.DETAIL_BACKGROUND,  0xF00E1220);
+        cDETAIL_HEADER  = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.DETAIL_HEADER,      0xFF222842);
+        cDETAIL_BORDER  = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.DETAIL_BORDER,      0xFF3A4264);
+        cDETAIL_SHADOW  = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.DETAIL_SHADOW,      0x80000000);
+        cTOOLTIP_BG     = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.TOOLTIP_BACKGROUND, 0xF00A0D18);
+        cCLAIMED_TICK_BG = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.CLAIMED_TICK_BG,   0xFF1A1F33);
+        cCLAIMED_TICK_FG = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.CLAIMED_TICK_FG,   0xFF66FF66);
+        cCLAIM_BUTTON   = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.CLAIM_BUTTON,       0xFF4EB02E);
+        cSUBMIT_BUTTON  = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.SUBMIT_BUTTON,      0xFF3E6FB5);
+        cCHECKMARK_BOX  = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.CHECKMARK_BOX,      0xFF3A4264);
+        cSTATUS_LOCKED  = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.STATUS_LOCKED,      0xFF3A3F55);
+        cSTATUS_VISIBLE = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.STATUS_VISIBLE,     0xFF3E6FB5);
+        cSTATUS_READY   = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.STATUS_READY,       0xFF4EB02E);
+        cSTATUS_CLAIMED = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.STATUS_CLAIMED,     0xFFC9A227);
+    }
+
+    private static int COL_BG()         { return cBG; }
+    private static int COL_BG_GRAD()    { return cBG_GRAD; }
+    private static int COL_PANE()       { return cPANE; }
+    private static int COL_PANE_ALT()   { return cPANE_ALT; }
+    private static int COL_PANE_HOVER() { return cPANE_HOVER; }
+    private static int COL_BORDER()     { return cBORDER; }
+    private static int COL_SEP()        { return cSEP; }
+    private static int COL_TEXT()       { return cTEXT; }
+    private static int COL_TEXT_DIM()   { return cTEXT_DIM; }
+    private static int COL_TEXT_MUTED() { return cTEXT_MUTED; }
+    private static int COL_ACCENT()     { return cACCENT; }
+    private static int COL_HEADING()    { return cHEADING; }
+    private static int COL_OUTLINE_IDLE()  { return cOUTLINE_IDLE; }
+    private static int COL_OUTLINE_HOVER() { return cOUTLINE_HOVER; }
+    private static int COL_EDGE()       { return cEDGE; }
+    private static int COL_EDGE_OR()    { return cEDGE_OR; }
+    private static int COL_DETAIL_BG()  { return cDETAIL_BG; }
+    private static int COL_DETAIL_HEADER() { return cDETAIL_HEADER; }
+    private static int COL_DETAIL_BORDER() { return cDETAIL_BORDER; }
+    private static int COL_DETAIL_SHADOW() { return cDETAIL_SHADOW; }
+    private static int COL_TOOLTIP_BG() { return cTOOLTIP_BG; }
+    private static int COL_CLAIMED_TICK_BG() { return cCLAIMED_TICK_BG; }
+    private static int COL_CLAIMED_TICK_FG() { return cCLAIMED_TICK_FG; }
+    private static int COL_CLAIM_BUTTON()   { return cCLAIM_BUTTON; }
+    private static int COL_SUBMIT_BUTTON()  { return cSUBMIT_BUTTON; }
+    private static int COL_CHECKMARK_BOX()  { return cCHECKMARK_BOX; }
 
     // Status → background shape color.
     private static int statusColor(QuestStatus s) {
         return switch (s) {
-            case LOCKED  -> com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.STATUS_LOCKED,  0xFF3A3F55);
-            case VISIBLE -> com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.STATUS_VISIBLE, 0xFF3E6FB5);
-            case READY   -> com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.STATUS_READY,   0xFF4EB02E);
-            case CLAIMED -> com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.STATUS_CLAIMED, 0xFFC9A227);
+            case LOCKED  -> cSTATUS_LOCKED;
+            case VISIBLE -> cSTATUS_VISIBLE;
+            case READY   -> cSTATUS_READY;
+            case CLAIMED -> cSTATUS_CLAIMED;
         };
     }
 
@@ -115,7 +152,18 @@ public final class QuestBookScreen extends Screen {
     private LayoutResult layout;
     private Quest hoveredQuest;
     private Quest openDetailQuest;
+    // Detail popup wraps title, description lines, and task rows with
+    // font.split() every frame while the popup is open — that's an expensive
+    // text layout op. We cache the results and only invalidate when the quest
+    // or popup width changes. Keys encode (wrapW, component string) so varying
+    // per-task suffixes (count/target) naturally produce distinct entries.
+    private final Map<String, List<FormattedCharSequence>> detailSplitCache = new HashMap<>();
+    private Quest detailSplitCacheQuest;
+    private int detailSplitCacheWrapW = -1;
     private final Map<String, int[]> nodeBounds = new HashMap<>(); // fullId → [x,y,w,h]
+    // Reused per-frame to avoid allocation in renderGraph.
+    private final Map<String, Quest> graphQuestIndex = new HashMap<>();
+    private final List<int[]> graphHighlightedEdges = new ArrayList<>();
     // Drag state: armed on mouse-down over a node in edit mode, promoted to
     // "active" once the cursor moves past DRAG_THRESHOLD. A release before
     // that threshold is treated as a plain click (opens the detail popup)
@@ -132,6 +180,20 @@ public final class QuestBookScreen extends Screen {
     private static final int SNAP = 16;
     private int graphOriginX;
     private int graphOriginY;
+
+    // Pan/zoom viewport state. panX/Y are in content-space pixels;
+    // zoom is the scale factor (1.0 = default).
+    private float panX, panY;
+    private float zoom = 1.0f;
+    private static final float MIN_ZOOM = 0.25f;
+    private static final float MAX_ZOOM = 2.0f;
+    private static final float ZOOM_STEP = 0.1f;
+
+    // Pan-drag state: armed when left-click lands on empty graph area.
+    private boolean panDragging;
+    private double panDragStartMx, panDragStartMy;
+    private float panDragStartPanX, panDragStartPanY;
+
     private final Map<Integer, int[]> checkmarkBounds = new HashMap<>(); // task index → [x,y,w,h]
     private final Map<Integer, int[]> submitBounds = new HashMap<>(); // task index → [x,y,w,h]
     /** Task index → [x,y,w,h] rect covering the entire rendered task row in
@@ -154,8 +216,12 @@ public final class QuestBookScreen extends Screen {
     private final List<int[]> contextMenuBounds = new ArrayList<>(); // [x,y,w,h] per row
     private final List<String> contextMenuLabels = new ArrayList<>();
     private boolean placementMode;   // next click in graph area creates a new quest
+    private Quest duplicateSource;   // non-null when placement mode is duplicating a quest
     private QuestEditForm editForm;  // non-null while an edit/create form is open
     private IconPickerPopup iconPicker; // non-null while the icon picker is showing
+    private RegistryPickerPopup taskPicker; // non-null while a task value picker is showing
+    private int taskPickerRow = -1; // which task row the picker targets
+    private boolean taskPickerIsAux; // true when the picker targets the aux field (stat value)
     // Title-bar drag state for the edit popup. Armed on press, promoted on motion.
     private boolean popupDragging;
     private double popupDragStartMx, popupDragStartMy;
@@ -166,6 +232,9 @@ public final class QuestBookScreen extends Screen {
     private final List<int[]> taskRowTypeBounds = new ArrayList<>();
     private final List<int[]> taskRowTagBounds = new ArrayList<>();     // may hold null for rows without a tag toggle
     private final List<int[]> taskRowConsumeBounds = new ArrayList<>(); // ditto for consume toggle
+    private final List<int[]> taskRowBrowseBounds = new ArrayList<>(); // may hold null for rows without a picker
+    private final List<int[]> taskRowAuxBrowseBounds = new ArrayList<>(); // may hold null for rows without an aux picker
+    private final List<int[]> taskRowStatTypeBounds = new ArrayList<>(); // may hold null for non-STAT rows
     private int[] taskAddBounds;     // [x,y,w,h]
     private final List<int[]> rewardRowTypeBounds = new ArrayList<>();
     private final List<int[]> rewardRowRemoveBounds = new ArrayList<>();
@@ -181,6 +250,11 @@ public final class QuestBookScreen extends Screen {
     // top-left of the dropdown list (rendered above the form on z 520).
     private int typeDropdownRow = -1;
     private int dropdownX, dropdownY;
+
+    // Chapter list scroll state. Offset is in pixels from the top of the row
+    // area (y=28). Total height is recomputed each render so we can clamp.
+    private int chapterScrollOffset = 0;
+    private int chapterContentHeight = 0;
 
     // Chapter list editor state.
     /** Index of the chapter row currently being dragged in the side list, or
@@ -229,6 +303,7 @@ public final class QuestBookScreen extends Screen {
 
     @Override
     protected void init() {
+        cacheColors();
         activeInstance = this;
         chapters = treeSort(QuestRegistry.chaptersFor(ClientQuestState.packMode()));
         if (!chapters.isEmpty() && selected == null) {
@@ -289,9 +364,32 @@ public final class QuestBookScreen extends Screen {
     }
 
     private void selectChapter(Chapter c) {
+        // Empty parent chapters act as section headers — redirect to the first
+        // descendant with quests so players don't land on a blank graph. Edit
+        // mode skips this so authors can still select empty chapters to add
+        // quests to them.
+        if (!inEditMode() && c.quests().isEmpty() && hasChildren(c)) {
+            Chapter target = firstDescendantWithQuests(c);
+            if (target != null) c = target;
+        }
         this.selected = c;
         this.layout = QuestLayout.compute(c);
         this.openDetailQuest = null;
+        this.panX = 0;
+        this.panY = 0;
+        this.zoom = 1.0f;
+    }
+
+    /** Depth-first search through the tree-ordered chapter list for the first
+     *  descendant of {@code parent} whose own quest list is non-empty. */
+    private Chapter firstDescendantWithQuests(Chapter parent) {
+        for (Chapter c : chapters) {
+            if (!parent.id().equals(c.parentChapter())) continue;
+            if (!c.quests().isEmpty()) return c;
+            Chapter grand = firstDescendantWithQuests(c);
+            if (grand != null) return grand;
+        }
+        return null;
     }
 
     @Override
@@ -337,6 +435,16 @@ public final class QuestBookScreen extends Screen {
             iconPicker.render(g, px, py, mouseX, mouseY, partialTick);
             g.pose().popPose();
         }
+        if (taskPicker != null) {
+            g.pose().pushPose();
+            g.pose().translate(0f, 0f, 480f);
+            int[] r = formRect();
+            int px = r[0] + r[2] + 8;
+            if (px + RegistryPickerPopup.W > this.width - 4) px = r[0] - RegistryPickerPopup.W - 8;
+            int py = r[1];
+            taskPicker.render(g, px, py, mouseX, mouseY, partialTick);
+            g.pose().popPose();
+        }
         if (typeDropdownRow >= 0 && editForm != null) {
             g.pose().pushPose();
             g.pose().translate(0f, 0f, 520f);
@@ -357,14 +465,17 @@ public final class QuestBookScreen extends Screen {
         }
         // Chapter list overlays (right-click menu and delete confirm) sit on
         // top of everything so the modal can absorb every input.
-        if (chapterContextOpen || chapterDeletePendingId != null || chapterRenamePendingId != null) {
+        if (chapterContextOpen || chapterDeletePendingId != null || chapterRenamePendingId != null || chapterEditPendingId != null) {
             g.pose().pushPose();
             g.pose().translate(0f, 0f, 560f);
             renderChapterOverlays(g, mouseX, mouseY);
             g.pose().popPose();
         }
         if (placementMode && editForm == null) {
-            g.drawString(this.font, "Click in the graph to place a new quest (Esc to cancel)",
+            String hint = duplicateSource != null
+                    ? "Click in the graph to place the duplicate (Esc to cancel)"
+                    : "Click in the graph to place a new quest (Esc to cancel)";
+            g.drawString(this.font, hint,
                     LEFT_PANE_WIDTH + 16, HEADER_H + 2, COL_ACCENT(), false);
         }
 
@@ -516,7 +627,16 @@ public final class QuestBookScreen extends Screen {
                 10, 10, COL_HEADING(), false);
         g.fill(10, 22, LEFT_PANE_WIDTH - 10, 23, COL_SEP());
 
-        int y = 28;
+        // Clamp scroll to a legal range before we apply it so rows don't render
+        // off-screen when chapter list shrinks between frames.
+        chapterScrollOffset = Math.max(0, Math.min(chapterScrollOffset, maxChapterScroll()));
+
+        // Clip rows to the pane area below the heading so scrolling content
+        // doesn't paint over the heading or run off the bottom of the screen.
+        g.enableScissor(0, 28, LEFT_PANE_WIDTH, this.height);
+
+        int yStart = 28 - chapterScrollOffset;
+        int y = yStart;
         // Compute the drop-target index when a drag is active so we can paint
         // the insert line at the right gap.
         if (chapterDragActive && chapterDragIndex >= 0) {
@@ -569,6 +689,27 @@ public final class QuestBookScreen extends Screen {
                 }
             }
 
+            // Chapter icon, if set. Rendered between the indent and the title.
+            int textStart = indent;
+            String iconId = c.icon();
+            if (iconId != null && !iconId.isEmpty()) {
+                int iconS = switch (depth) {
+                    case 0 -> 16;
+                    case 1 -> 14;
+                    default -> 12;
+                };
+                int iconY = y + (rowH - iconS) / 2;
+                float iconScale = iconS / 16f;
+                ItemStack iconStack = resolveIcon(iconId);
+                var pose = g.pose();
+                pose.pushPose();
+                pose.translate(indent, iconY, 0f);
+                pose.scale(iconScale, iconScale, 1f);
+                g.renderFakeItem(iconStack, 0, 0);
+                pose.popPose();
+                textStart = indent + iconS + 3;
+            }
+
             // Render text with scale based on depth
             Component title = QuestText.chapterTitle(c);
             int textY = y + (rowH - (int)(this.font.lineHeight * fontScale)) / 2;
@@ -577,11 +718,11 @@ public final class QuestBookScreen extends Screen {
                 pose.pushPose();
                 pose.scale(fontScale, fontScale, 1.0f);
                 g.drawString(this.font, title,
-                        (int)(indent / fontScale), (int)(textY / fontScale),
+                        (int)(textStart / fontScale), (int)(textY / fontScale),
                         textColor, false);
                 pose.popPose();
             } else {
-                g.drawString(this.font, title, indent, textY, textColor, false);
+                g.drawString(this.font, title, textStart, textY, textColor, false);
             }
             y += rowH;
         }
@@ -589,14 +730,35 @@ public final class QuestBookScreen extends Screen {
         if (chapterDragActive && chapterDragInsertIndex == chapters.size()) {
             g.fill(4, y - 1, LEFT_PANE_WIDTH - 4, y + 1, COL_ACCENT());
         }
+
+        chapterContentHeight = y - yStart;
+        g.disableScissor();
+
+        // Slim scrollbar on the inside of the right-edge border when content
+        // overflows the pane.
+        int viewH = this.height - 28;
+        if (chapterContentHeight > viewH) {
+            int trackX1 = LEFT_PANE_WIDTH - 4;
+            int trackX2 = LEFT_PANE_WIDTH - 2;
+            int thumbH = Math.max(12, viewH * viewH / chapterContentHeight);
+            int thumbY = 28 + (int)((long)(viewH - thumbH) * chapterScrollOffset / Math.max(1, maxChapterScroll()));
+            g.fill(trackX1, thumbY, trackX2, thumbY + thumbH, COL_ACCENT());
+        }
+    }
+
+    /** Maximum legal value of {@link #chapterScrollOffset} — zero when content
+     *  fits the viewport. */
+    private int maxChapterScroll() {
+        int viewH = this.height - 28;
+        return Math.max(0, chapterContentHeight - viewH);
     }
 
     /** Map a Y pixel in the side pane to a chapter row index, or -1 if the
      *  pixel is outside the list area. Accounts for variable row heights
      *  based on chapter nesting depth. */
     private int chapterIndexAt(int yPixel) {
-        if (yPixel < 28) return -1;
-        int y = 28;
+        if (yPixel < 28 || yPixel >= this.height) return -1;
+        int y = 28 - chapterScrollOffset;
         for (int idx = 0; idx < chapters.size(); idx++) {
             Chapter c = chapters.get(idx);
             if (!isChapterVisible(c)) continue;
@@ -724,13 +886,31 @@ public final class QuestBookScreen extends Screen {
         if (c.visibility() == com.soul.soa_additions.quest.model.Visibility.INVISIBLE) return false;
         if (c.visibility() == com.soul.soa_additions.quest.model.Visibility.HIDDEN_UNTIL_DEPS) {
             for (String depQ : c.requiresQuests()) {
-                if (!depSatisfiedFullId(depQ)) return false;
+                if (!chapterDepQuestSatisfied(depQ)) return false;
             }
             for (String depCh : c.requiresChapters()) {
                 if (!chapterFullyClaimed(depCh)) return false;
             }
         }
         return true;
+    }
+
+    /** Resolve a chapter-level {@code requires_quests} entry — accepts both
+     *  fully-qualified {@code chapter/quest} ids and bare quest ids (fallback
+     *  via {@link QuestRegistry#questByBareId}), matching the resolution rule
+     *  used by quest-to-quest dependencies. A dep that names a quest which
+     *  no longer exists is treated as satisfied rather than blocking forever —
+     *  the chapter shouldn't brick when a dependency is deleted mid-pack. */
+    private boolean chapterDepQuestSatisfied(String depId) {
+        String fullId = depId;
+        if (!depId.contains("/")) {
+            var found = QuestRegistry.questByBareId(depId);
+            if (found.isEmpty()) return true;
+            fullId = found.get().fullId();
+        } else if (QuestRegistry.quest(depId).isEmpty()) {
+            return true;
+        }
+        return depSatisfiedFullId(fullId);
     }
 
     /** A quest dependency string is normally a bare quest id within the same
@@ -763,8 +943,16 @@ public final class QuestBookScreen extends Screen {
     private boolean chapterFullyClaimed(String chapterId) {
         var c = QuestRegistry.chapter(chapterId).orElse(null);
         if (c == null) return false;
+        var mode = com.soul.soa_additions.quest.net.ClientQuestState.packMode();
         for (Quest q : c.quests()) {
             if (q.optional()) continue;
+            // Skip quests the player can't reach in their current pack mode or
+            // that are authored-hidden (INVISIBLE) — otherwise the dep chapter
+            // could never "fully claim" and the gated chapter stays hidden
+            // forever even though every quest the player can actually interact
+            // with is done.
+            if (!q.availableIn(mode)) continue;
+            if (q.visibility() == com.soul.soa_additions.quest.model.Visibility.INVISIBLE) continue;
             if (!depClaimedFullId(q.fullId())) return false;
         }
         return true;
@@ -784,6 +972,17 @@ public final class QuestBookScreen extends Screen {
         return new int[]{p.pixelX(), p.pixelY()};
     }
 
+    // ---------- pan/zoom coordinate helpers ----------
+
+    /** Screen-space X → content-space X. */
+    private double toContentX(double screenX) { return (screenX - graphOriginX) / zoom + panX; }
+    /** Screen-space Y → content-space Y. */
+    private double toContentY(double screenY) { return (screenY - graphOriginY) / zoom + panY; }
+    /** Content-space X → screen-space X. */
+    private double toScreenX(double contentX) { return (contentX - panX) * zoom + graphOriginX; }
+    /** Content-space Y → screen-space Y. */
+    private double toScreenY(double contentY) { return (contentY - panY) * zoom + graphOriginY; }
+
     // ---------- graph view ----------
 
     private void renderGraph(GuiGraphics g, int mouseX, int mouseY) {
@@ -798,6 +997,13 @@ public final class QuestBookScreen extends Screen {
         this.graphOriginX = originX;
         this.graphOriginY = originY;
 
+        // Convert mouse to content-space for hit-testing inside the
+        // transformed graph. All drawing below uses content-space coords;
+        // the pose-stack transform maps them to screen pixels.
+        double cmx = toContentX(mouseX);
+        double cmy = toContentY(mouseY);
+        boolean mouseInGraph = mouseX >= LEFT_PANE_WIDTH && mouseY >= HEADER_H;
+
         // First pass: determine the hovered quest so the edge pass can know
         // which lines to highlight. Edges need to be drawn before nodes (so
         // nodes paint on top), but the highlight logic needs hover info, so
@@ -806,25 +1012,33 @@ public final class QuestBookScreen extends Screen {
             if (!isQuestVisible(q)) continue;
             int[] px = nodePixel(q.fullId());
             if (px == null) continue;
-            int x = originX + px[0];
-            int y = originY + px[1];
+            int x = px[0];
+            int y = px[1];
             int ns = q.sizeOrDefault();
-            if (mouseX >= x && mouseX < x + ns && mouseY >= y && mouseY < y + ns) {
+            if (mouseInGraph && cmx >= x && cmx < x + ns && cmy >= y && cmy < y + ns) {
                 hoveredQuest = q;
                 break;
             }
         }
         String hoveredFullId = hoveredQuest == null ? null : hoveredQuest.fullId();
 
+        // Scissor so graph content doesn't bleed into the chapter list or header.
+        g.enableScissor(LEFT_PANE_WIDTH, HEADER_H, this.width, this.height);
+
+        // Apply camera transform: translate by origin minus pan, then scale.
+        // All content-space drawing below is automatically mapped to screen.
+        g.pose().pushPose();
+        g.pose().translate(graphOriginX - panX * zoom, graphOriginY - panY * zoom, 0f);
+        g.pose().scale(zoom, zoom, 1f);
+
         // Draw edges from node-center to node-center. Edges connected to the
         // hovered quest are drawn last so they paint over their neighbors and
         // are clearly visible.
         // Pre-index quests by fullId for O(1) lookups during edge rendering.
-        // Avoids stream().filter().findFirst() per edge per frame.
-        java.util.Map<String, Quest> questByFullId = new java.util.HashMap<>(selected.quests().size());
-        for (Quest qi : selected.quests()) questByFullId.put(qi.fullId(), qi);
-
-        java.util.List<int[]> highlightedEdges = new java.util.ArrayList<>();
+        // Reuse collections across frames to avoid per-frame allocation.
+        graphQuestIndex.clear();
+        for (Quest qi : selected.quests()) graphQuestIndex.put(qi.fullId(), qi);
+        graphHighlightedEdges.clear();
         for (LayoutResult.Edge edge : layout.edges()) {
             int[] from = nodePixel(edge.from());
             int[] to = nodePixel(edge.to());
@@ -832,30 +1046,30 @@ public final class QuestBookScreen extends Screen {
             // Honor the per-quest "show dependency lines" toggle on the
             // dependent (downstream) node — that's the quest that owns the
             // dependency, so its toggle controls whether the line is drawn.
-            Quest dest = questByFullId.get(edge.to());
-            Quest src = questByFullId.get(edge.from());
+            Quest dest = graphQuestIndex.get(edge.to());
+            Quest src = graphQuestIndex.get(edge.from());
             if (dest != null && !dest.showDeps()) continue;
             // Skip edges into/out of nodes that are themselves filtered out.
             if (dest != null && !isQuestVisible(dest)) continue;
             if (src != null && !isQuestVisible(src)) continue;
             int srcSize = src != null ? src.sizeOrDefault() : NODE_W;
             int dstSize = dest != null ? dest.sizeOrDefault() : NODE_W;
-            int x1 = originX + from[0] + srcSize / 2;
-            int y1 = originY + from[1] + srcSize / 2;
-            int x2 = originX + to[0]   + dstSize / 2;
-            int y2 = originY + to[1]   + dstSize / 2;
+            int x1 = from[0] + srcSize / 2;
+            int y1 = from[1] + srcSize / 2;
+            int x2 = to[0]   + dstSize / 2;
+            int y2 = to[1]   + dstSize / 2;
             boolean highlight = hoveredFullId != null
                     && (edge.from().equals(hoveredFullId) || edge.to().equals(hoveredFullId));
             boolean cyclic = inEditMode() && cyclicEdgeKeys.contains(edgeKey(edge.from(), edge.to()));
             int edgeColor = cyclic ? 0xFFFF4444 : (edge.orGroup() ? COL_EDGE_OR() : COL_EDGE());
             if (highlight) {
-                highlightedEdges.add(new int[]{x1, y1, x2, y2,
+                graphHighlightedEdges.add(new int[]{x1, y1, x2, y2,
                         cyclic ? 2 : (edge.orGroup() ? 1 : 0)});
             } else {
                 drawThickLine(g, x1, y1, x2, y2, edgeColor, cyclic ? 3 : 2);
             }
         }
-        for (int[] e : highlightedEdges) {
+        for (int[] e : graphHighlightedEdges) {
             int base = switch (e[4]) {
                 case 2 -> 0xFFFF4444;
                 case 1 -> COL_EDGE_OR();
@@ -870,11 +1084,17 @@ public final class QuestBookScreen extends Screen {
             if (!isQuestVisible(q)) continue;
             int[] px = nodePixel(q.fullId());
             if (px == null) continue;
-            int x = originX + px[0];
-            int y = originY + px[1];
+            int x = px[0];
+            int y = px[1];
             int ns = q.sizeOrDefault();
             int iconS = Math.max(8, ns / 2);
-            nodeBounds.put(q.fullId(), new int[]{x, y, ns, ns});
+
+            // Store screen-space bounds for tooltip/hover rendering outside
+            // the graph transform.
+            int screenNodeX = (int) toScreenX(x);
+            int screenNodeY = (int) toScreenY(y);
+            int screenNodeSize = Math.max(1, (int)(ns * zoom));
+            nodeBounds.put(q.fullId(), new int[]{screenNodeX, screenNodeY, screenNodeSize, screenNodeSize});
 
             QuestStatus status = ClientQuestState.statusOf(q.fullId());
             boolean hovered = q == hoveredQuest;
@@ -900,6 +1120,9 @@ public final class QuestBookScreen extends Screen {
                 g.pose().popPose();
             }
         }
+
+        g.pose().popPose();
+        g.disableScissor();
     }
 
     /**
@@ -963,6 +1186,48 @@ public final class QuestBookScreen extends Screen {
         g.fill(x, y + h - 1, x + w, y + h, color);
         g.fill(x, y, x + 1, y + h, color);
         g.fill(x + w - 1, y, x + w, y + h, color);
+    }
+
+    /** Build the ItemStack used for the JEI link on Obtain/Craft/Place task
+     * rows, or {@code null} if this task has no resolvable single item
+     * (tag-only filters, or blocks with no item form). */
+    private static ItemStack resolveLinkStack(com.soul.soa_additions.quest.model.QuestTask task) {
+        if (task instanceof com.soul.soa_additions.quest.task.ItemTask it && it.item() != null) {
+            ItemStack stack = new ItemStack(BuiltInRegistries.ITEM.get(it.item()));
+            if (stack.isEmpty()) return null;
+            if (it.nbt() != null) stack.setTag(it.nbt().copy());
+            return stack;
+        }
+        if (task instanceof com.soul.soa_additions.quest.task.CraftTask ct && ct.item() != null) {
+            ItemStack stack = new ItemStack(BuiltInRegistries.ITEM.get(ct.item()));
+            if (stack.isEmpty()) return null;
+            if (ct.nbt() != null) stack.setTag(ct.nbt().copy());
+            return stack;
+        }
+        if (task instanceof com.soul.soa_additions.quest.task.PlaceTask pt) {
+            ItemStack stack = new ItemStack(BuiltInRegistries.BLOCK.get(pt.block()));
+            return stack.isEmpty() ? null : stack;
+        }
+        return null;
+    }
+
+    private static String linkVerb(com.soul.soa_additions.quest.model.QuestTask task) {
+        if (task instanceof com.soul.soa_additions.quest.task.CraftTask) return "Craft";
+        if (task instanceof com.soul.soa_additions.quest.task.PlaceTask) return "Place";
+        return "Obtain";
+    }
+
+    /** Cached {@link net.minecraft.client.gui.Font#split(net.minecraft.network.chat.FormattedText, int)}
+     *  for the detail popup. Keyed on wrap width + component text — two
+     *  components with the same rendered text wrap identically, and the map
+     *  is cleared whenever the popup's quest or width changes. */
+    private List<FormattedCharSequence> splitCached(Component c, int w) {
+        String key = w + "\0" + c.getString();
+        List<FormattedCharSequence> cached = detailSplitCache.get(key);
+        if (cached != null) return cached;
+        List<FormattedCharSequence> result = this.font.split(c, w);
+        detailSplitCache.put(key, result);
+        return result;
     }
 
     private static void fillCircle(GuiGraphics g, int x, int y, int size, int color) {
@@ -1032,70 +1297,39 @@ public final class QuestBookScreen extends Screen {
     private static final int MASK_SIZE = 32;
 
     /**
-     * Render the item to an offscreen framebuffer (the same way it appears in
-     * the inventory — baked model, GUI lighting, 3D block faces and all) and
-     * sample the alpha channel to get a silhouette mask. Done once per item
-     * and cached, so the framebuffer dance only runs on first sight.
+     * Sample the alpha channel of the item's baked model particle sprite
+     * directly from the texture atlas — no offscreen framebuffer needed.
+     * For flat items (inventory sprites) the particle icon IS the inventory
+     * texture. For 3D items (tools, blocks) it's a representative face —
+     * good enough to give a recognizable silhouette.
      */
     private static boolean[][] buildMask(ItemStack stack) {
-        Minecraft mc = Minecraft.getInstance();
-        int S = MASK_SIZE;
-        com.mojang.blaze3d.pipeline.TextureTarget target = null;
-        NativeImage img = null;
         try {
-            target = new com.mojang.blaze3d.pipeline.TextureTarget(S, S, true, Minecraft.ON_OSX);
-            target.setClearColor(0f, 0f, 0f, 0f);
-            target.clear(Minecraft.ON_OSX);
-            target.bindWrite(true);
+            Minecraft mc = Minecraft.getInstance();
+            BakedModel model = mc.getItemRenderer().getModel(stack, null, null, 0);
+            TextureAtlasSprite sprite = model.getParticleIcon();
+            if (sprite == null) return null;
 
-            // Set up an ortho projection matching a S×S GUI.
-            org.joml.Matrix4f prevProj = RenderSystem.getProjectionMatrix();
-            com.mojang.blaze3d.vertex.VertexSorting prevSort = RenderSystem.getVertexSorting();
-            org.joml.Matrix4f ortho = new org.joml.Matrix4f().setOrtho(0.0f, S, S, 0.0f, 1000.0f, 21000.0f);
-            RenderSystem.setProjectionMatrix(ortho, com.mojang.blaze3d.vertex.VertexSorting.ORTHOGRAPHIC_Z);
+            int sw = sprite.contents().width();
+            int sh = sprite.contents().height();
+            if (sw <= 0 || sh <= 0) return null;
 
-            com.mojang.blaze3d.vertex.PoseStack mv = RenderSystem.getModelViewStack();
-            mv.pushPose();
-            mv.setIdentity();
-            mv.translate(0.0, 0.0, -11000.0);
-            RenderSystem.applyModelViewMatrix();
-
-            GuiGraphics g = new GuiGraphics(mc, mc.renderBuffers().bufferSource());
-            g.pose().pushPose();
-            g.pose().scale(2.0f, 2.0f, 1.0f); // 16×16 item → 32×32 footprint
-            g.renderFakeItem(stack, 0, 0);
-            g.pose().popPose();
-            g.flush();
-
-            mv.popPose();
-            RenderSystem.applyModelViewMatrix();
-            RenderSystem.setProjectionMatrix(prevProj, prevSort);
-
-            // Download the color attachment.
-            img = new NativeImage(S, S, false);
-            com.mojang.blaze3d.platform.GlStateManager._bindTexture(target.getColorTextureId());
-            img.downloadTexture(0, false);
-
-            mc.getMainRenderTarget().bindWrite(true);
-
-            // Framebuffer pixels are bottom-up; flip on read.
+            int S = MASK_SIZE;
             boolean[][] mask = new boolean[S][S];
+            boolean anySet = false;
             for (int py = 0; py < S; py++) {
                 for (int px = 0; px < S; px++) {
-                    int argb = img.getPixelRGBA(px, S - 1 - py);
-                    int alpha = (argb >> 24) & 0xFF;
-                    mask[py][px] = alpha > 32;
+                    int sx = px * sw / S;
+                    int sy = py * sh / S;
+                    if (!sprite.contents().isTransparent(0, sx, sy)) {
+                        mask[py][px] = true;
+                        anySet = true;
+                    }
                 }
             }
-            return mask;
+            return anySet ? mask : null;
         } catch (Throwable t) {
             return null;
-        } finally {
-            if (img != null) img.close();
-            if (target != null) {
-                try { target.destroyBuffers(); } catch (Throwable ignored) {}
-            }
-            try { mc.getMainRenderTarget().bindWrite(true); } catch (Throwable ignored) {}
         }
     }
 
@@ -1134,14 +1368,43 @@ public final class QuestBookScreen extends Screen {
         }
     }
 
+    /** Cache of resolved icon ItemStacks keyed by their raw icon string
+     *  (including optional SNBT suffix). resolveIcon is called once per quest
+     *  node per frame in {@link #renderGraph}, so without this we'd allocate a
+     *  fresh ItemStack and re-hit the item registry for every visible node,
+     *  every frame. Returned stacks are used read-only by the render path. */
+    private static final Map<String, ItemStack> ICON_CACHE = new HashMap<>();
+
+    /** Resolve an icon string to an ItemStack. Supports an optional SNBT
+     *  suffix for NBT-sensitive icons, e.g. {@code "botania:lexicon{botania:elven_unlock:1b}"}. */
     private static ItemStack resolveIcon(String id) {
         if (id == null || id.isEmpty()) return new ItemStack(Items.PAPER);
+        ItemStack cached = ICON_CACHE.get(id);
+        if (cached != null) return cached;
+        ItemStack stack;
         try {
-            Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(id));
-            return item == Items.AIR ? new ItemStack(Items.PAPER) : new ItemStack(item);
+            String itemId = id;
+            String snbt = null;
+            int braceIdx = id.indexOf('{');
+            if (braceIdx >= 0) {
+                itemId = id.substring(0, braceIdx);
+                snbt = id.substring(braceIdx);
+            }
+            Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(itemId));
+            if (item == Items.AIR) {
+                stack = new ItemStack(Items.PAPER);
+            } else {
+                stack = new ItemStack(item);
+                if (snbt != null) {
+                    try { stack.setTag(net.minecraft.nbt.TagParser.parseTag(snbt)); }
+                    catch (Exception ignored) {}
+                }
+            }
         } catch (Exception e) {
-            return new ItemStack(Items.PAPER);
+            stack = new ItemStack(Items.PAPER);
         }
+        ICON_CACHE.put(id, stack);
+        return stack;
     }
 
     /** Bresenham line stamping a {@code thickness}×{@code thickness} square at
@@ -1213,8 +1476,17 @@ public final class QuestBookScreen extends Screen {
 
         Quest q = openDetailQuest;
 
+        // Drop the per-frame cache when the popup's quest or width changes —
+        // task progress edits the cache key implicitly (via the count/target
+        // suffix), so no explicit invalidation is needed for progress ticks.
+        if (detailSplitCacheQuest != q || detailSplitCacheWrapW != wrapW) {
+            detailSplitCache.clear();
+            detailSplitCacheQuest = q;
+            detailSplitCacheWrapW = wrapW;
+        }
+
         // Title (wrapped if absurdly long)
-        List<FormattedCharSequence> titleLines = this.font.split(QuestText.questTitle(q), wrapW);
+        List<FormattedCharSequence> titleLines = splitCached(QuestText.questTitle(q), wrapW);
         int lineY = y + 7;
         for (int i = 0; i < titleLines.size() && i < 1; i++) {
             g.drawString(this.font, titleLines.get(i), contentX, lineY, COL_TEXT(), true);
@@ -1231,7 +1503,7 @@ public final class QuestBookScreen extends Screen {
                 line += 10;
                 continue;
             }
-            List<FormattedCharSequence> wrapped = this.font.split(QuestText.questDescLine(q, i), wrapW);
+            List<FormattedCharSequence> wrapped = splitCached(QuestText.questDescLine(q, i), wrapW);
             for (FormattedCharSequence l : wrapped) {
                 if (line > y + h - 56) break;
                 g.drawString(this.font, l, contentX, line, COL_TEXT_DIM(), false);
@@ -1270,23 +1542,25 @@ public final class QuestBookScreen extends Screen {
                 textX = boxX + 12;
                 // Wrap task description in the remaining width
                 int availW = contentRight - textX;
-                List<FormattedCharSequence> lines = this.font.split(Component.literal(task.describe()), availW);
+                List<FormattedCharSequence> lines = splitCached(Component.literal(task.describe()), availW);
                 for (int k = 0; k < lines.size(); k++) {
                     g.drawString(this.font, lines.get(k), textX, line + k * 10, done ? 0xFF9BDF9B : 0xFFCCCCCC, false);
                 }
                 line += Math.max(10, lines.size() * 10);
                 detailTaskBounds.put(i, new int[]{contentX, taskRowStart - 1, wrapW, line - taskRowStart + 1});
                 continue;
-            } else if (task instanceof com.soul.soa_additions.quest.task.ItemTask itemTask && itemTask.item() != null) {
-                // Special-case: render the item name as a clickable span that
-                // opens JEI for that item. Layout: "marker Obtain Nx <NAME> (c/t)"
+            } else if (resolveLinkStack(task) != null) {
+                // Render the item name as a clickable span that opens JEI.
+                // Layout: "marker <Verb> Nx <NAME> (c/t)". Applies to ItemTask
+                // (Obtain), CraftTask (Craft), and PlaceTask (Place) when a
+                // concrete item can be resolved.
+                net.minecraft.world.item.ItemStack stack = resolveLinkStack(task);
+                String verb = linkVerb(task);
                 if (isConsume && !done) rightReserve = this.font.width("Submit") + 12;
                 int color = done ? 0xFF9BDF9B : 0xFFCCCCCC;
                 int linkColor = done ? 0xFF7FD0FF : 0xFF9CC9FF;
                 String marker = done ? "✔ " : "• ";
-                String prefix = marker + "Obtain " + count + "x ";
-                net.minecraft.world.item.Item item = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(itemTask.item());
-                net.minecraft.world.item.ItemStack stack = new net.minecraft.world.item.ItemStack(item);
+                String prefix = marker + verb + " " + count + "x ";
                 String name = stack.getHoverName().getString();
                 String suffix = " (" + count + "/" + tgt + ")";
                 int prefixW = this.font.width(prefix);
@@ -1327,7 +1601,7 @@ public final class QuestBookScreen extends Screen {
                     detailTaskBounds.put(i, new int[]{contentX, taskRowStart - 1, wrapW, line - taskRowStart + 1});
                     continue;
                 }
-                // Wrapped fallback: draw "marker Obtain Nx" on line 1, then
+                // Wrapped fallback: draw "marker <Verb> Nx" on line 1, then
                 // "<NAME> (c/t)" on line 2 with the link rect on the name.
                 g.drawString(this.font, prefix.stripTrailing(), textX, line, color, false);
                 int line2Y = line + 10;
@@ -1363,7 +1637,7 @@ public final class QuestBookScreen extends Screen {
                 String text = marker + task.describe() + " (" + count + "/" + tgt + ")";
                 // Wrap to the remaining width minus the submit-button reserve
                 int availW = contentRight - textX - rightReserve;
-                List<FormattedCharSequence> lines = this.font.split(Component.literal(text), availW);
+                List<FormattedCharSequence> lines = splitCached(Component.literal(text), availW);
                 for (int k = 0; k < lines.size(); k++) {
                     g.drawString(this.font, lines.get(k), textX, line + k * 10, color, false);
                 }
@@ -1384,6 +1658,29 @@ public final class QuestBookScreen extends Screen {
                 line += consumed;
                 detailTaskBounds.put(i, new int[]{contentX, taskRowStart - 1, wrapW, line - taskRowStart + 1});
                 continue;
+            }
+        }
+
+        // Rewards section — mirrors the TASKS header/layout so players can see
+        // what they're claiming. Each reward renders its describe() text; we
+        // cap the draw loop at the same bottom margin the task loop uses so
+        // the claim button always has room, even for reward-heavy quests.
+        if (!q.rewards().isEmpty() && line < y + h - 30) {
+            line += 4;
+            g.fill(contentX, line, contentRight, line + 1, COL_SEP());
+            line += 4;
+            g.drawString(this.font, "REWARDS", contentX, line, COL_ACCENT(), false);
+            line += 11;
+            int rewardAvailW = contentRight - contentX;
+            for (var reward : q.rewards()) {
+                if (line >= y + h - 30) break;
+                String text = "• " + reward.describe();
+                List<FormattedCharSequence> rLines = splitCached(Component.literal(text), rewardAvailW);
+                for (FormattedCharSequence l : rLines) {
+                    if (line >= y + h - 30) break;
+                    g.drawString(this.font, l, contentX, line, 0xFFCCCCCC, false);
+                    line += 10;
+                }
             }
         }
 
@@ -1840,6 +2137,17 @@ public final class QuestBookScreen extends Screen {
             iconPicker = null;
             return true;
         }
+        // Task value picker — same behaviour as icon picker.
+        if (taskPicker != null) {
+            int[] r = formRect();
+            int px = r[0] + r[2] + 8;
+            if (px + RegistryPickerPopup.W > this.width - 4) px = r[0] - RegistryPickerPopup.W - 8;
+            int py = r[1];
+            if (taskPicker.click(px, py, mouseX, mouseY, button)) return true;
+            taskPicker = null;
+            taskPickerRow = -1;
+            return true;
+        }
         // Edit form eats most input while open. Two exceptions: title-bar
         // drag, and click-through to background quest nodes when the deps
         // field is focused (for picking dependencies visually).
@@ -1864,7 +2172,11 @@ public final class QuestBookScreen extends Screen {
             // a background quest node, append its id to the deps list.
             if (button == 0 && editForm.depsFieldFocused() && hoveredQuest != null
                     && !hoveredQuest.id().equals(editForm.questId)) {
-                editForm.appendDependency(hoveredQuest.id());
+                // Use the full id (chapter/quest) for cross-chapter deps so
+                // the evaluator can resolve them; bare id for same-chapter.
+                String depId = hoveredQuest.chapterId().equals(editForm.chapterId)
+                        ? hoveredQuest.id() : hoveredQuest.fullId();
+                editForm.appendDependency(depId);
                 return true;
             }
             // Any other outside click is swallowed so we don't open the
@@ -1912,12 +2224,16 @@ public final class QuestBookScreen extends Screen {
         // Placement mode: first left-click in graph area spawns a new form.
         if (button == 0 && placementMode && openDetailQuest == null
                 && mouseX >= LEFT_PANE_WIDTH && mouseY >= HEADER_H && selected != null) {
-            int cx = (int) (mouseX - graphOriginX);
-            int cy = (int) (mouseY - graphOriginY);
+            int cx = (int) toContentX(mouseX);
+            int cy = (int) toContentY(mouseY);
             cx = Math.round((float) cx / SNAP) * SNAP;
             cy = Math.round((float) cy / SNAP) * SNAP;
             placementMode = false;
             editForm = new QuestEditForm(selected.id(), null, cx, cy);
+            if (duplicateSource != null) {
+                populateFromQuest(duplicateSource, editForm);
+                duplicateSource = null;
+            }
             return true;
         }
         if (button != 0) return super.mouseClicked(mouseX, mouseY, button);
@@ -2012,14 +2328,25 @@ public final class QuestBookScreen extends Screen {
                 if (px != null) {
                     draggingQuestId = hoveredQuest.fullId();
                     dragActive = false;
-                    dragGrabOffsetX = (int) mouseX - (graphOriginX + px[0]);
-                    dragGrabOffsetY = (int) mouseY - (graphOriginY + px[1]);
+                    // Grab offset in content-space so drag math works with pan/zoom.
+                    dragGrabOffsetX = (int) toContentX(mouseX) - px[0];
+                    dragGrabOffsetY = (int) toContentY(mouseY) - px[1];
                     dragStartX = mouseX;
                     dragStartY = mouseY;
                     return true;
                 }
             }
             openDetailQuest = hoveredQuest;
+            return true;
+        }
+        // Empty-area left-click in graph: arm a pan drag.
+        if (button == 0 && mouseX >= LEFT_PANE_WIDTH && mouseY >= HEADER_H
+                && openDetailQuest == null && !placementMode) {
+            panDragging = true;
+            panDragStartMx = mouseX;
+            panDragStartMy = mouseY;
+            panDragStartPanX = panX;
+            panDragStartPanY = panY;
             return true;
         }
         return super.mouseClicked(mouseX, mouseY, button);
@@ -2038,17 +2365,28 @@ public final class QuestBookScreen extends Screen {
             editForm.dragOffsetY = popupDragStartOffY + (int) (mouseY - popupDragStartMy);
             return true;
         }
+        if (panDragging && button == 0) {
+            panX = panDragStartPanX - (float)(mouseX - panDragStartMx) / zoom;
+            panY = panDragStartPanY - (float)(mouseY - panDragStartMy) / zoom;
+            return true;
+        }
         if (draggingQuestId != null && button == 0) {
             if (!dragActive) {
                 double moved = Math.hypot(mouseX - dragStartX, mouseY - dragStartY);
                 if (moved < DRAG_THRESHOLD) return true;
                 dragActive = true;
             }
-            int nx = (int) mouseX - dragGrabOffsetX - graphOriginX;
-            int ny = (int) mouseY - dragGrabOffsetY - graphOriginY;
+            // Convert mouse to content-space, then subtract grab offset.
+            int nx = (int) toContentX(mouseX) - dragGrabOffsetX;
+            int ny = (int) toContentY(mouseY) - dragGrabOffsetY;
             // Snap to the nearest grid cell.
             nx = Math.round((float) nx / SNAP) * SNAP;
             ny = Math.round((float) ny / SNAP) * SNAP;
+            // Clamp to non-negative — negative positions are treated as "auto
+            // layout" by hasManualPosition() and would be silently dropped
+            // during serialization, causing the quest to snap back on reload.
+            if (nx < 0) nx = 0;
+            if (ny < 0) ny = 0;
             com.soul.soa_additions.quest.net.ClientQuestEditState.setLocal(draggingQuestId, nx, ny);
             return true;
         }
@@ -2057,6 +2395,10 @@ public final class QuestBookScreen extends Screen {
 
     @Override
     public boolean mouseReleased(double mouseX, double mouseY, int button) {
+        if (panDragging && button == 0) {
+            panDragging = false;
+            return true;
+        }
         if (chapterDragIndex >= 0 && button == 0) {
             int from = chapterDragIndex;
             int to = chapterDragInsertIndex;
@@ -2144,6 +2486,7 @@ public final class QuestBookScreen extends Screen {
         contextMenuBounds.clear();
         if (target != null) {
             contextMenuLabels.add("Edit quest");
+            contextMenuLabels.add("Duplicate quest");
             contextMenuLabels.add("Copy ID");
             contextMenuLabels.add("Delete quest");
         }
@@ -2157,6 +2500,32 @@ public final class QuestBookScreen extends Screen {
         contextTaskIndex = -1;
         contextMenuLabels.clear();
         contextMenuBounds.clear();
+    }
+
+    /** Copies all content from a source quest into a freshly-created edit
+     *  form (new ID, new position). Used by the Duplicate quest flow. */
+    private void populateFromQuest(Quest source, QuestEditForm form) {
+        form.titleField.setValue(source.title() + " (copy)");
+        form.iconField.setValue(source.icon());
+        form.descField.setValue(String.join("\n", source.description()));
+        // Position is already set by the form constructor from the click coords.
+        // Don't copy dependencies or exclusions — the duplicate is a standalone quest.
+        form.sizeField.setValue(String.valueOf(source.sizeOrDefault()));
+        form.shape = source.shape();
+        form.visibility = source.visibility();
+        form.optional = source.optional();
+        form.autoClaim = source.autoClaim();
+        form.depsAll = source.depsAll();
+        form.minDeps = source.minDeps();
+        form.showDeps = source.showDeps();
+        form.repeatable = source.repeatable();
+        form.repeatScope = source.repeatScope() == null
+                ? com.soul.soa_additions.quest.model.RewardScope.TEAM
+                : source.repeatScope();
+        for (var t : source.tasks())
+            form.addTaskRow(com.soul.soa_additions.quest.net.TaskDraft.fromTask(t));
+        for (var r : source.rewards())
+            form.addRewardRow(com.soul.soa_additions.quest.net.RewardDraft.fromReward(r));
     }
 
     /** Task-row context menu (right-click inside the detail popup). Offers
@@ -2186,14 +2555,14 @@ public final class QuestBookScreen extends Screen {
             case "Copy unlock command" -> {
                 if (taskFullId != null && taskIdx >= 0) {
                     Minecraft.getInstance().keyboardHandler.setClipboard(
-                            "/soa quests task complete @p " + taskFullId + " " + taskIdx);
+                            "/soa quests task complete @p \"" + taskFullId + "\" " + taskIdx);
                 }
                 return;
             }
             case "Copy reset command" -> {
                 if (taskFullId != null && taskIdx >= 0) {
                     Minecraft.getInstance().keyboardHandler.setClipboard(
-                            "/soa quests task uncomplete @p " + taskFullId + " " + taskIdx);
+                            "/soa quests task uncomplete @p \"" + taskFullId + "\" " + taskIdx);
                 }
                 return;
             }
@@ -2205,6 +2574,12 @@ public final class QuestBookScreen extends Screen {
                     int dx = px != null ? px[0] : 0;
                     int dy = px != null ? px[1] : 0;
                     editForm = new QuestEditForm(selected.id(), q, dx, dy);
+                }
+            }
+            case "Duplicate quest" -> {
+                if (q != null) {
+                    duplicateSource = q;
+                    placementMode = true;
                 }
             }
             case "Copy ID" -> {
@@ -2219,6 +2594,7 @@ public final class QuestBookScreen extends Screen {
                 }
             }
             case "Add quest here" -> {
+                duplicateSource = null;
                 placementMode = true;
             }
         }
@@ -2288,6 +2664,9 @@ public final class QuestBookScreen extends Screen {
         taskRowTypeBounds.clear();
         taskRowTagBounds.clear();
         taskRowConsumeBounds.clear();
+        taskRowBrowseBounds.clear();
+        taskRowAuxBrowseBounds.clear();
+        taskRowStatTypeBounds.clear();
         rewardRowTypeBounds.clear();
         rewardRowRemoveBounds.clear();
         rewardRowLevelsBounds.clear();
@@ -2336,6 +2715,10 @@ public final class QuestBookScreen extends Screen {
                 int btnY = editForm.exclField.getY() + QuestEditForm.ROW_H;
                 drawFormButton(g, lx,       btnY, 100, "Deps: " + (editForm.depsAll ? "ALL" : "ANY"), mouseX, mouseY);
                 drawFormButton(g, lx + 106, btnY, 130, "Show lines: " + onOff(editForm.showDeps), mouseX, mouseY);
+                // Min deps row
+                int btnY2 = btnY + 22;
+                String minLabel = editForm.minDeps <= 0 ? "Min deps: OFF" : "Min deps: " + editForm.minDeps;
+                drawFormButton(g, lx, btnY2, 130, minLabel, mouseX, mouseY);
             }
             case FLAGS -> {
                 int top = editForm.contentTop(y);
@@ -2362,6 +2745,30 @@ public final class QuestBookScreen extends Screen {
                     drawFormButton(g, typeBtnX, rowY, typeBtnW, tr.type.name(), mouseX, mouseY);
                     g.drawString(this.font, "\u25BC",
                             typeBtnX + typeBtnW - 9, rowY + 3, COL_TEXT_DIM(), false);
+                    // STAT: render a clickable stat-type button in place of the
+                    // value EditBox. Other picker types get a small browse "..."
+                    // button beside their text field.
+                    if (tr.type.usesStatTypeButton()) {
+                        int btnX = tr.value.getX();
+                        int btnW = tr.value.getWidth();
+                        String raw = tr.value.getValue();
+                        int colon = raw.indexOf(':');
+                        String display = colon >= 0 ? raw.substring(colon + 1) : raw;
+                        int[] sb = new int[]{btnX, rowY, btnW, 14};
+                        taskRowStatTypeBounds.add(sb);
+                        drawFormButton(g, sb[0], sb[1], sb[2], display + " \u25BC", mouseX, mouseY);
+                        taskRowBrowseBounds.add(null);
+                    } else if (tr.type.hasPicker()) {
+                        int browseX = tr.value.getX() + tr.value.getWidth() + 2;
+                        int[] bb = new int[]{browseX, rowY, 14, 14};
+                        taskRowBrowseBounds.add(bb);
+                        drawFormButton(g, bb[0], bb[1], bb[2], "\u2026", mouseX, mouseY);
+                        taskRowStatTypeBounds.add(null);
+                    } else {
+                        taskRowBrowseBounds.add(null);
+                        taskRowStatTypeBounds.add(null);
+                    }
+
                     int removeX = x + w - pad - 14;
                     taskRowRemoveBounds.add(new int[]{removeX, rowY, 14, 14});
                     drawFormButton(g, removeX, rowY, 14, "x", mouseX, mouseY);
@@ -2379,13 +2786,29 @@ public final class QuestBookScreen extends Screen {
                             drawFormButton(g, conB[0], conB[1], conB[2], "Consume: " + onOff(tr.consume), mouseX, mouseY);
                         }
                         if (tr.type.usesAux()) {
-                            g.drawString(this.font, "stat value:", x + pad, subY + 3, COL_TEXT_DIM(), false);
+                            // Aux label sits at the aux field's Y (may be on a
+                            // second sub-row for ITEM/CRAFT where the first
+                            // sub-row holds tag/consume toggles).
+                            int auxY = tr.aux.getY();
+                            String auxLabel = tr.type.supportsTag() ? "NBT:" : "stat value:";
+                            g.drawString(this.font, auxLabel, x + pad, auxY + 3, COL_TEXT_DIM(), false);
+                            if (tr.type.hasAuxPicker()) {
+                                int auxBrowseX = tr.aux.getX() + tr.aux.getWidth() + 2;
+                                int[] ab = new int[]{auxBrowseX, auxY, 14, 14};
+                                taskRowAuxBrowseBounds.add(ab);
+                                drawFormButton(g, ab[0], ab[1], ab[2], "\u2026", mouseX, mouseY);
+                            } else {
+                                taskRowAuxBrowseBounds.add(null);
+                            }
+                        } else {
+                            taskRowAuxBrowseBounds.add(null);
                         }
                         taskRowTagBounds.add(tagB);
                         taskRowConsumeBounds.add(conB);
                     } else {
                         taskRowTagBounds.add(null);
                         taskRowConsumeBounds.add(null);
+                        taskRowAuxBrowseBounds.add(null);
                     }
 
                     rowY += editForm.rowHeight(tr);
@@ -2588,11 +3011,11 @@ public final class QuestBookScreen extends Screen {
         var prev = row.type;
         var next = types[idx];
         row.type = next;
-        // Reset the value box only when toggling to/from checkmark — cycling
-        // between id-shaped types preserves what the user already typed in.
-        boolean prevText = prev == com.soul.soa_additions.quest.net.TaskDraft.Type.CHECKMARK;
-        boolean nextText = next == com.soul.soa_additions.quest.net.TaskDraft.Type.CHECKMARK;
-        if (prevText != nextText) row.value.setValue(next.defaultValue());
+        // Reset the value box when the input category changes (e.g. item→entity,
+        // checkmark→id) so the user isn't left with a stale id from a different
+        // registry. Switching within the same category (e.g. ITEM→CRAFT, KILL→TAME)
+        // preserves the current value.
+        if (prev.inputCategory() != next.inputCategory()) row.value.setValue(next.defaultValue());
         if (next == com.soul.soa_additions.quest.net.TaskDraft.Type.STAT
                 && (row.aux.getValue() == null || row.aux.getValue().isEmpty())) {
             row.aux.setValue(next.defaultAux());
@@ -2655,6 +3078,15 @@ public final class QuestBookScreen extends Screen {
                 int btnY = editForm.exclField.getY() + QuestEditForm.ROW_H;
                 if (hitFormButton(mouseX, mouseY, lx, btnY, 100))       { editForm.depsAll = !editForm.depsAll; return true; }
                 if (hitFormButton(mouseX, mouseY, lx + 106, btnY, 130)) { editForm.showDeps = !editForm.showDeps; return true; }
+                int btnY2 = btnY + 22;
+                if (hitFormButton(mouseX, mouseY, lx, btnY2, 130)) {
+                    // Cycle: -1 (off) -> 1 -> 2 -> ... -> dep count -> -1
+                    int depCount = editForm.dependencyIds().size();
+                    if (editForm.minDeps <= 0) editForm.minDeps = 1;
+                    else if (editForm.minDeps >= Math.max(depCount, 1)) editForm.minDeps = -1;
+                    else editForm.minDeps++;
+                    return true;
+                }
             }
             case FLAGS -> {
                 int top = editForm.contentTop(y);
@@ -2673,6 +3105,69 @@ public final class QuestBookScreen extends Screen {
                 }
             }
             case TASKS -> {
+                // Browse button — opens the registry picker for this row's value field.
+                for (int i = 0; i < taskRowBrowseBounds.size(); i++) {
+                    int[] b = taskRowBrowseBounds.get(i);
+                    if (b == null) continue;
+                    if (mouseX >= b[0] && mouseX < b[0] + b[2] && mouseY >= b[1] && mouseY < b[1] + b[3]) {
+                        var tr = editForm.taskRows.get(i);
+                        var mode = tr.type.pickerMode();
+                        if (mode != null) {
+                            final int row = i;
+                            taskPickerRow = row;
+                            taskPickerIsAux = false;
+                            taskPicker = new RegistryPickerPopup(mode, picked -> {
+                                if (row < editForm.taskRows.size()) {
+                                    editForm.taskRows.get(row).value.setValue(picked);
+                                }
+                                taskPicker = null;
+                                taskPickerRow = -1;
+                            });
+                        }
+                        return true;
+                    }
+                }
+                // Aux browse button — opens picker for the stat value field.
+                for (int i = 0; i < taskRowAuxBrowseBounds.size(); i++) {
+                    int[] b = taskRowAuxBrowseBounds.get(i);
+                    if (b == null) continue;
+                    if (mouseX >= b[0] && mouseX < b[0] + b[2] && mouseY >= b[1] && mouseY < b[1] + b[3]) {
+                        var tr = editForm.taskRows.get(i);
+                        var auxMode = RegistryPickerPopup.auxModeForStatType(tr.value.getValue());
+                        if (auxMode != null) {
+                            final int row = i;
+                            taskPickerRow = row;
+                            taskPickerIsAux = true;
+                            taskPicker = new RegistryPickerPopup(auxMode, picked -> {
+                                if (row < editForm.taskRows.size()) {
+                                    editForm.taskRows.get(row).aux.setValue(picked);
+                                }
+                                taskPicker = null;
+                                taskPickerRow = -1;
+                            });
+                        }
+                        return true;
+                    }
+                }
+                // Stat type button — opens the STAT_TYPE picker to choose the stat category.
+                for (int i = 0; i < taskRowStatTypeBounds.size(); i++) {
+                    int[] b = taskRowStatTypeBounds.get(i);
+                    if (b == null) continue;
+                    if (mouseX >= b[0] && mouseX < b[0] + b[2] && mouseY >= b[1] && mouseY < b[1] + b[3]) {
+                        final int row = i;
+                        taskPickerRow = row;
+                        taskPickerIsAux = false;
+                        taskPicker = new RegistryPickerPopup(
+                                RegistryPickerPopup.Mode.STAT_TYPE, picked -> {
+                            if (row < editForm.taskRows.size()) {
+                                editForm.taskRows.get(row).value.setValue(picked);
+                            }
+                            taskPicker = null;
+                            taskPickerRow = -1;
+                        });
+                        return true;
+                    }
+                }
                 for (int i = 0; i < taskRowTagBounds.size(); i++) {
                     int[] b = taskRowTagBounds.get(i);
                     if (b == null) continue;
@@ -2758,7 +3253,7 @@ public final class QuestBookScreen extends Screen {
         }
 
         if (hitFormButton(mouseX, mouseY, x + w - 64 - pad, y + h - 22, 60)) { submitForm(); return true; }
-        if (hitFormButton(mouseX, mouseY, x + w - 130 - pad, y + h - 22, 60)) { editForm = null; return true; }
+        if (hitFormButton(mouseX, mouseY, x + w - 130 - pad, y + h - 22, 60)) { editForm = null; taskPicker = null; taskPickerRow = -1; return true; }
         return true;
     }
 
@@ -2776,6 +3271,7 @@ public final class QuestBookScreen extends Screen {
                 editForm.optional,
                 editForm.autoClaim,
                 editForm.depsAll,
+                editForm.minDeps,
                 editForm.dependencyIds(),
                 editForm.posX(),
                 editForm.posY(),
@@ -2789,12 +3285,18 @@ public final class QuestBookScreen extends Screen {
         );
         ModNetworking.CHANNEL.sendToServer(pkt);
         editForm = null;
+        taskPicker = null;
+        taskPickerRow = -1;
     }
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
         if (iconPicker != null) {
             iconPicker.scroll(delta);
+            return true;
+        }
+        if (taskPicker != null) {
+            taskPicker.scroll(delta);
             return true;
         }
         if (editForm != null && editForm.activeTab == QuestEditForm.Tab.GENERAL) {
@@ -2804,6 +3306,29 @@ public final class QuestBookScreen extends Screen {
                     && mouseY >= d.getY() && mouseY < d.getY() + d.getHeight()) {
                 return d.mouseScrolled(mouseX, mouseY, delta);
             }
+        }
+        // Scroll the chapter list when the cursor is over the side pane.
+        if (mouseX < LEFT_PANE_WIDTH && mouseY >= 28 && openDetailQuest == null && editForm == null) {
+            int step = 20;
+            chapterScrollOffset = Math.max(0,
+                    Math.min(chapterScrollOffset - (int)(delta * step), maxChapterScroll()));
+            return true;
+        }
+        // Zoom the graph when scrolling over the graph area.
+        if (mouseX >= LEFT_PANE_WIDTH && mouseY >= HEADER_H
+                && openDetailQuest == null && editForm == null) {
+            float oldZoom = zoom;
+            zoom += (float)(delta * ZOOM_STEP);
+            zoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, zoom));
+            // Anchor zoom on cursor: adjust pan so the content pixel under
+            // the cursor stays at the same screen position.
+            if (zoom != oldZoom) {
+                double contentXUnderCursor = (mouseX - graphOriginX) / oldZoom + panX;
+                double contentYUnderCursor = (mouseY - graphOriginY) / oldZoom + panY;
+                panX = (float)(contentXUnderCursor - (mouseX - graphOriginX) / zoom);
+                panY = (float)(contentYUnderCursor - (mouseY - graphOriginY) / zoom);
+            }
+            return true;
         }
         return super.mouseScrolled(mouseX, mouseY, delta);
     }
@@ -2834,11 +3359,16 @@ public final class QuestBookScreen extends Screen {
             if (iconPicker.keyPressed(keyCode, scanCode, modifiers)) return true;
             return true;
         }
+        if (taskPicker != null) {
+            if (keyCode == 256) { taskPicker = null; taskPickerRow = -1; return true; }
+            if (taskPicker.keyPressed(keyCode, scanCode, modifiers)) return true;
+            return true;
+        }
         if (editForm != null) {
             if (keyCode == 256) {
                 if (typeDropdownRow >= 0) { typeDropdownRow = -1; return true; }
                 if (rewardTypeDropdownRow >= 0) { rewardTypeDropdownRow = -1; return true; }
-                editForm = null;
+                editForm = null; taskPicker = null; taskPickerRow = -1;
                 return true;
             }
             // ENTER inside the multi-line description inserts a newline; only
@@ -2854,7 +3384,12 @@ public final class QuestBookScreen extends Screen {
         if (contextMenuOpen) {
             if (keyCode == 256) { closeContextMenu(); return true; }
         }
-        if (placementMode && keyCode == 256) { placementMode = false; return true; }
+        if (placementMode && keyCode == 256) { placementMode = false; duplicateSource = null; return true; }
+        // HOME key resets graph pan/zoom to default view.
+        if (keyCode == 268 && openDetailQuest == null) {
+            panX = 0; panY = 0; zoom = 1.0f;
+            return true;
+        }
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
@@ -2872,6 +3407,10 @@ public final class QuestBookScreen extends Screen {
         }
         if (iconPicker != null) {
             if (iconPicker.charTyped(c, modifiers)) return true;
+            return true;
+        }
+        if (taskPicker != null) {
+            if (taskPicker.charTyped(c, modifiers)) return true;
             return true;
         }
         if (editForm != null) {

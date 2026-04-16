@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "ele",
+    "lpl",
+    "ele"
+  ],
+  "key": {
+    "e": {
+      "item": "minecraft:ender_eye"
+    },
+    "l": {
+      "tag": "forge:gems/life_essence"
+    },
+    "p": {
+      "item": "soa_additions:pearl_of_knowledge"
+    }
+  },
+  "result": {
+    "item": "soa_additions:experience_transporter"
+  },
+  "show_notification": true
+}

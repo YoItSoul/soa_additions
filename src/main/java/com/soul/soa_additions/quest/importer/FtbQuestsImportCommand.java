@@ -33,9 +33,9 @@ public final class FtbQuestsImportCommand {
     public static void onRegisterCommands(RegisterCommandsEvent event) {
         event.getDispatcher().register(
                 Commands.literal("soa")
-                        .requires(s -> s.hasPermission(2))
                         .then(Commands.literal("quests")
                                 .then(Commands.literal("import-ftb")
+                                        .requires(s -> s.hasPermission(2))
                                         .executes(FtbQuestsImportCommand::runDefault)
                                         .then(Commands.argument("source", StringArgumentType.greedyString())
                                                 .executes(FtbQuestsImportCommand::runPath))))

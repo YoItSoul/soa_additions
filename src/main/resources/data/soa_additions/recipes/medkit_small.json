@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " h ",
+    "hgh",
+    " h "
+  ],
+  "key": {
+    "h": {
+      "item": "scalinghealth:heart_crystal_shard"
+    },
+    "g": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "result": {
+    "item": "soa_additions:medkit_small"
+  },
+  "show_notification": true
+}

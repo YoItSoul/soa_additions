@@ -35,9 +35,34 @@ public final class DonorRegistry {
 
     // ---------- lifecycle ----------
 
+    /** SoulShark04 — server owner, always Ether tier. */
+    private static final UUID SOULSHARK_UUID = UUID.fromString("3686e026-4b14-4f9d-accb-678b61ee478d");
+
     public static void init(MinecraftServer server) {
         savePath = server.getWorldPath(LevelResource.ROOT).resolve("donors.json");
         load();
+        ensureDefault();
+    }
+
+    /** Ensures the server owner is always present as Ether tier. */
+    private static void ensureDefault() {
+        if (!byUuid.containsKey(SOULSHARK_UUID)) {
+            byUuid.put(SOULSHARK_UUID, new DonorData(
+                    SOULSHARK_UUID, "SoulShark04", DonorData.Tier.ETHER,
+                    Instant.EPOCH, ""));
+            rebuildSorted();
+            save();
+        } else {
+            // Always keep at Ether tier even if file had a lower tier
+            DonorData existing = byUuid.get(SOULSHARK_UUID);
+            if (existing.tier() != DonorData.Tier.ETHER) {
+                byUuid.put(SOULSHARK_UUID, new DonorData(
+                        SOULSHARK_UUID, existing.name(), DonorData.Tier.ETHER,
+                        existing.donatedAt(), existing.message()));
+                rebuildSorted();
+                save();
+            }
+        }
     }
 
     public static void shutdown() {

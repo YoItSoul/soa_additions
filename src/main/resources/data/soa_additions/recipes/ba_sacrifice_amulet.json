@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aba",
+    "caa"
+  ],
+  "key": {
+    "a": {
+      "item": "soa_additions:ba_blood_burned_string"
+    },
+    "b": {
+      "type": "bloodmagic:bloodorb",
+      "orb_tier": 2
+    },
+    "c": {
+      "item": "soa_additions:ba_gem_sacrifice"
+    }
+  },
+  "result": {
+    "item": "soa_additions:ba_sacrifice_amulet"
+  },
+  "show_notification": true
+}

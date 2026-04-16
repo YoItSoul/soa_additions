@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aaa",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "soa_additions:ordinary_medal"
+    }
+  },
+  "result": {
+    "item": "soa_additions:pioneer_medal"
+  },
+  "show_notification": true
+}

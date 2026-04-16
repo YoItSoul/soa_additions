@@ -1,0 +1,20 @@
+{
+  "type": "bloodmagic:soulforge",
+  "minimumDrain": 1024.0,
+  "drain": 512.0,
+  "output": {
+    "item": "soa_additions:ba_blood_diamond"
+  },
+  "input0": {
+    "item": "minecraft:diamond"
+  },
+  "input1": {
+    "item": "bloodmagic:life_essence_bucket"
+  },
+  "input2": {
+    "item": "minecraft:dragon_breath"
+  },
+  "input3": {
+    "item": "soa_additions:ba_blood_infused_glowstone"
+  }
+}

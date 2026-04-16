@@ -85,6 +85,16 @@ dependencies {
 
     // Curios API — optional at runtime, slots only register when present.
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.4.7+1.20.1")
+
+    // ItemStages + GameStages — compile-only for GreedyBag stage checks.
+    // Published by Darkhax on Jared's maven (already declared above).
+    compileOnly fg.deobf("net.darkhax.itemstages:ItemStages-Forge-1.20.1:8.0.3")
+    compileOnly fg.deobf("net.darkhax.gamestages:GameStages-Forge-1.20.1:15.0.2")
+
+    // Blood Magic — compile-only for Blood Arsenal content.
+    // Blood Arsenal items/blocks/rituals only register when BM is present at runtime.
+    // Pulled via CurseMaven since BM doesn't publish a public maven for 1.20.1.
+    compileOnly fg.deobf("curse.maven:blood-magic-224791:7253333")
 }
 
 tasks.named('processResources', ProcessResources).configure {

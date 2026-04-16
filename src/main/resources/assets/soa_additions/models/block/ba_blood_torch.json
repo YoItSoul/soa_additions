@@ -1,0 +1,6 @@
+{
+  "parent": "block/template_torch",
+  "textures": {
+    "torch": "soa_additions:block/ba_blood_torch"
+  }
+}

@@ -13,6 +13,7 @@ import com.soul.soa_additions.quest.model.Visibility;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
@@ -118,7 +119,7 @@ public record ChapterEditPacket(
             if (dir == NetworkDirection.PLAY_TO_SERVER) {
                 handleServer(pkt, c.getSender());
             } else {
-                DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> applyToRegistry(pkt));
+                DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientApply.run(pkt));
             }
         });
         c.setPacketHandled(true);
@@ -155,7 +156,14 @@ public record ChapterEditPacket(
                         pkt.parentChapter));
             }
         }
-        com.soul.soa_additions.quest.client.QuestBookScreen.onChapterMutated(pkt.chapterId);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private static final class ClientApply {
+        static void run(ChapterEditPacket pkt) {
+            applyToRegistry(pkt);
+            com.soul.soa_additions.quest.client.QuestBookScreen.onChapterMutated(pkt.chapterId);
+        }
     }
 
     private static Chapter blankChapter(String id, String title, String parentChapter) {

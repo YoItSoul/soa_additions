@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " b ",
+    "bib",
+    " b "
+  ],
+  "key": {
+    "b": {
+      "item": "bloodmagic:life_essence_bucket"
+    },
+    "i": {
+      "item": "minecraft:iron_block"
+    }
+  },
+  "result": {
+    "item": "soa_additions:blood_sigil"
+  },
+  "show_notification": true
+}

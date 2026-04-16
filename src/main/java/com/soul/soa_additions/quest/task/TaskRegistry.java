@@ -65,5 +65,6 @@ public final class TaskRegistry {
         register("tame", TameTask::fromJson);
         register("breed", BreedTask::fromJson);
         register("observe", ObserveTask::fromJson);
+        register("is_packmode", IsPackmodeTask::fromJson);
     }
 }

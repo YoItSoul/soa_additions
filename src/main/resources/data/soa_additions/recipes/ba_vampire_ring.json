@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "baa",
+    "aca",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "bloodmagic:demonslate"
+    },
+    "b": {
+      "item": "soa_additions:ba_blood_diamond"
+    },
+    "c": {
+      "type": "bloodmagic:bloodorb",
+      "orb_tier": 4
+    }
+  },
+  "result": {
+    "item": "soa_additions:ba_vampire_ring"
+  },
+  "show_notification": true
+}

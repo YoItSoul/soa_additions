@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " w ",
+    "sts",
+    " n "
+  ],
+  "key": {
+    "w": {
+      "item": "draconicevolution:wyvern_core"
+    },
+    "s": {
+      "tag": "forge:ingots/solarium"
+    },
+    "t": {
+      "item": "minecraft:totem_of_undying"
+    },
+    "n": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "result": {
+    "item": "soa_additions:sun_totem"
+  },
+  "show_notification": true
+}
