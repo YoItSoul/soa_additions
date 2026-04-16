@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "sds",
+    "dxd",
+    "sds"
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:slime_block"
+    },
+    "d": {
+      "item": "minecraft:diamond_block"
+    },
+    "x": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "soa_additions:stick_of_knockback"
+  },
+  "show_notification": true
+}

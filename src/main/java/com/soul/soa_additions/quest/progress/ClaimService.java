@@ -100,10 +100,24 @@ public final class ClaimService {
         progressData.touch();
 
         // Newly CLAIMED dependencies may unlock downstream quests.
-        QuestEvaluator.recomputeAll(teamProgress);
+        // Use the auto-claim variant so any downstream quest with autoClaim
+        // set fires immediately rather than waiting for a manual button press.
+        QuestEvaluator.recomputeAllAndAutoClaim(teamProgress, claimant);
 
         claimant.sendSystemMessage(Component.literal("✔ Claimed: " + quest.title())
                 .withStyle(ChatFormatting.GREEN));
+
+        // Telemetry hook — fires a throttled quest_claim event and a one-shot
+        // quest_complete when the team reaches 100% of non-optional quests.
+        // Must run for every online team member so each player's own cheated
+        // flag is evaluated individually (per-player clean-run eligibility).
+        if (team.solo()) {
+            com.soul.soa_additions.quest.telemetry.QuestCompletionTracker.onClaim(claimant, fullQuestId);
+        } else {
+            for (ServerPlayer member : teams.onlineMembers(claimant.server, team.id())) {
+                com.soul.soa_additions.quest.telemetry.QuestCompletionTracker.onClaim(member, fullQuestId);
+            }
+        }
 
         return grantedAny ? ClaimResult.OK : ClaimResult.NOTHING_TO_GRANT;
     }

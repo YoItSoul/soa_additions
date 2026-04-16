@@ -19,8 +19,12 @@ public record CommandReward(String command, RewardScope scope) implements QuestR
         String cmd = command
                 .replace("{player}", player.getGameProfile().getName())
                 .replace("{uuid}", player.getUUID().toString());
-        CommandSourceStack src = player.getServer().createCommandSourceStack().withPermission(4);
-        player.getServer().getCommands().performPrefixedCommand(src, cmd);
+        // Defer to the next tick so a reward command that re-enters the quest
+        // pipeline (e.g. /soa quests claim, /soa quests task complete) can't
+        // recurse through the dispatcher inside the current claim frame.
+        var server = player.getServer();
+        CommandSourceStack src = server.createCommandSourceStack().withPermission(4);
+        server.execute(() -> server.getCommands().performPrefixedCommand(src, cmd));
     }
 
     @Override public void writeJson(JsonObject out) {

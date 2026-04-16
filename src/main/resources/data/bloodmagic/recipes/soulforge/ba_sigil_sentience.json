@@ -1,0 +1,20 @@
+{
+  "type": "bloodmagic:soulforge",
+  "minimumDrain": 8192.0,
+  "drain": 4096.0,
+  "output": {
+    "item": "soa_additions:ba_sigil_sentience"
+  },
+  "input0": {
+    "item": "bloodmagic:soulgemgreater"
+  },
+  "input1": {
+    "item": "bloodmagic:bloodlightsigil"
+  },
+  "input2": {
+    "item": "soa_additions:ba_gem_tartaric"
+  },
+  "input3": {
+    "item": "bloodmagic:airsigil"
+  }
+}

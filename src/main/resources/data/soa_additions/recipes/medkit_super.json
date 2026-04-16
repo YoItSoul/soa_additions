@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " h ",
+    "hmh",
+    " h "
+  ],
+  "key": {
+    "h": {
+      "item": "scalinghealth:heart_container"
+    },
+    "m": {
+      "item": "soa_additions:medkit_big"
+    }
+  },
+  "result": {
+    "item": "soa_additions:medkit_super"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,12 @@
+{
+  "type": "bloodmagic:array",
+  "baseinput": {
+    "item": "bloodmagic:reagentbinding"
+  },
+  "addedinput": {
+    "item": "minecraft:shears"
+  },
+  "output": {
+    "item": "soa_additions:ba_bound_shears"
+  }
+}

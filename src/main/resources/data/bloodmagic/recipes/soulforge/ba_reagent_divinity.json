@@ -1,0 +1,20 @@
+{
+  "type": "bloodmagic:soulforge",
+  "minimumDrain": 16384.0,
+  "drain": 16384.0,
+  "output": {
+    "item": "soa_additions:ba_reagent_divinity"
+  },
+  "input0": {
+    "item": "soa_additions:ba_reagent_lightning"
+  },
+  "input1": {
+    "item": "minecraft:nether_star"
+  },
+  "input2": {
+    "item": "minecraft:enchanted_golden_apple"
+  },
+  "input3": {
+    "item": "bloodmagic:bloodstonebrick"
+  }
+}

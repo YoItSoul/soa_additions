@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "cdc",
+    "efe"
+  ],
+  "key": {
+    "a": {
+      "item": "soa_additions:ba_blood_infused_glowstone"
+    },
+    "b": {
+      "item": "bloodmagic:etherealslate"
+    },
+    "c": {
+      "item": "bloodmagic:activationcrystalweak"
+    },
+    "d": {
+      "item": "soa_additions:ba_blood_diamond"
+    },
+    "e": {
+      "item": "soa_additions:ba_blood_infused_iron_block"
+    },
+    "f": {
+      "type": "bloodmagic:bloodorb",
+      "orb_tier": 5
+    }
+  },
+  "result": {
+    "item": "soa_additions:ba_blood_diamond_inert"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aaa",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "soa_additions:experience_nugget"
+    }
+  },
+  "result": {
+    "item": "soa_additions:experience_ingot"
+  },
+  "show_notification": true
+}

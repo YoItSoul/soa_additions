@@ -18,6 +18,7 @@ import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
@@ -37,6 +38,7 @@ public final class SoaAdditions {
 
         ModConfigs.register();
         com.soul.soa_additions.config.QuestBookConfig.register();
+        com.soul.soa_additions.config.HeadshotConfig.register();
 
         ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);
@@ -53,6 +55,13 @@ public final class SoaAdditions {
 
         SoaTiers.bootstrap();
         ConfigScanner.startScanning();
+
+        // Blood Arsenal — soft dependency on Blood Magic.
+        // All BA classes live in the bloodarsenal subpackage and are never
+        // classloaded unless BM is present, so no NoClassDefFoundError.
+        if (ModList.get().isLoaded("bloodmagic")) {
+            com.soul.soa_additions.bloodarsenal.BloodArsenalPlugin.init(modEventBus);
+        }
         // JvmStatsSampler.start() reads config values, so it has to wait
         // until FMLCommonSetupEvent — configs aren't loaded during mod
         // construction and calling .get() here throws in dev (and will

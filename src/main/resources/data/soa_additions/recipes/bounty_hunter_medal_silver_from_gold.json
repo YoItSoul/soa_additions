@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "soa_additions:bounty_hunter_medal"
+    }
+  ],
+  "result": {
+    "item": "soa_additions:bounty_hunter_medal_silver",
+    "count": 9
+  }
+}

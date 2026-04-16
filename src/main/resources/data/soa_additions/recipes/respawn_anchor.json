@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "tet",
+    "aea",
+    "tat"
+  ],
+  "key": {
+    "t": {
+      "item": "soa_additions:time_shard"
+    },
+    "e": {
+      "tag": "forge:ingots/aeroite"
+    },
+    "a": {
+      "tag": "forge:ingots/asgardium"
+    }
+  },
+  "result": {
+    "item": "soa_additions:respawn_anchor"
+  },
+  "show_notification": true
+}

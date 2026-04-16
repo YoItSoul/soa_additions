@@ -26,24 +26,29 @@ import java.util.function.Supplier;
  * <p>Includes the current packmode so the client can filter the chapter
  * list without having to issue a second request at login.</p>
  */
-public record QuestSyncPacket(PackMode packMode, List<QuestSnapshotEntry> entries) {
+public record QuestSyncPacket(PackMode packMode, boolean serverEnforced, List<QuestSnapshotEntry> entries) {
 
     public static void encode(QuestSyncPacket pkt, FriendlyByteBuf buf) {
         buf.writeEnum(pkt.packMode);
+        buf.writeBoolean(pkt.serverEnforced);
         buf.writeVarInt(pkt.entries.size());
         for (QuestSnapshotEntry e : pkt.entries) e.encode(buf);
     }
 
     public static QuestSyncPacket decode(FriendlyByteBuf buf) {
         PackMode mode = buf.readEnum(PackMode.class);
+        boolean enforced = buf.readBoolean();
         int n = buf.readVarInt();
         List<QuestSnapshotEntry> entries = new ArrayList<>(n);
         for (int i = 0; i < n; i++) entries.add(QuestSnapshotEntry.decode(buf));
-        return new QuestSyncPacket(mode, entries);
+        return new QuestSyncPacket(mode, enforced, entries);
     }
 
     public static void handle(QuestSyncPacket pkt, Supplier<NetworkEvent.Context> ctx) {
-        ctx.get().enqueueWork(() -> ClientQuestState.apply(pkt));
+        ctx.get().enqueueWork(() ->
+                net.minecraftforge.fml.DistExecutor.unsafeRunWhenOn(
+                        net.minecraftforge.api.distmarker.Dist.CLIENT,
+                        () -> () -> ClientQuestState.apply(pkt)));
         ctx.get().setPacketHandled(true);
     }
 
@@ -67,7 +72,8 @@ public record QuestSyncPacket(PackMode packMode, List<QuestSnapshotEntry> entrie
                     qp.hasClaimed(player.getUUID())
             ));
         }
-        return new QuestSyncPacket(PackModeData.get(player.server).mode(), out);
+        PackModeData pmData = PackModeData.get(player.server);
+        return new QuestSyncPacket(pmData.mode(), pmData.serverEnforced(), out);
     }
 
     public static void sendTo(ServerPlayer player) {
@@ -79,7 +85,10 @@ public record QuestSyncPacket(PackMode packMode, List<QuestSnapshotEntry> entrie
         com.soul.soa_additions.quest.web.QuestWebServer.pushUpdate(player);
     }
 
-    /** Send the same snapshot to every online team member — used after claims. */
+    /** Send the same snapshot to every online team member — used after claims.
+     *  For multi-member teams the progress is the same, so we build the packet
+     *  once and send it to everyone (each member still gets their own
+     *  localClaimed flag filled in per-player). */
     public static void sendToTeam(ServerPlayer actor) {
         TeamData teams = TeamData.get(actor.server);
         QuestTeam team = teams.teamOf(actor);

@@ -1,0 +1,34 @@
+{
+  "type": "soa_additions:ba_sanguine_infusion",
+  "ingredients": [
+    {
+      "item": "soa_additions:ba_blood_diamond_infused"
+    },
+    {
+      "item": "bloodmagic:demonslate"
+    },
+    {
+      "item": "soa_additions:ba_blood_infused_iron_block"
+    },
+    {
+      "item": "bloodmagic:activationcrystalweak"
+    },
+    {
+      "item": "soa_additions:ba_blood_infused_iron_block"
+    },
+    {
+      "item": "bloodmagic:demonslate"
+    },
+    {
+      "item": "soa_additions:ba_blood_infused_iron_block"
+    },
+    {
+      "item": "bloodmagic:activationcrystalweak"
+    }
+  ],
+  "result": {
+    "item": "soa_additions:ba_blood_diamond_bound",
+    "count": 1
+  },
+  "lp_cost": 75000
+}

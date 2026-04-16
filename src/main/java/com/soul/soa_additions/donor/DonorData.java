@@ -20,16 +20,15 @@ public record DonorData(
         String message
 ) {
 
-    /** Silver color used for Supporter / Netherite / Void Metal chat glow. */
+    /** Silver color used for Void / Infernium chat glow. */
     public static final int COL_SILVER = 0xFFC0C0C0;
-    /** Gold color used for Draconium chat glow. */
+    /** Gold color used for Ether chat glow. */
     public static final int COL_GOLD   = 0xFFFFD700;
 
     public enum Tier {
-        SUPPORTER("Supporter",    COL_SILVER, "\u2764"),    // silver heart
-        NETHERITE("Netherite",    COL_SILVER, "\u2B50"),    // silver star
-        VOID_METAL("Void Metal",  COL_SILVER, "\u2B50"),    // silver star
-        DRACONIUM("Draconium",    COL_GOLD,   "\u2728");    // gold sparkles
+        VOID("Void",           COL_SILVER, "\u2764"),    // silver heart
+        INFERNIUM("Infernium", COL_SILVER, "\u2B50"),    // silver star
+        ETHER("Ether",         COL_GOLD,   "\u2728");    // gold sparkles
 
         public final String display;
         public final int color;
@@ -41,22 +40,21 @@ public record DonorData(
             this.symbol = symbol;
         }
 
-        /** Whether this tier gets the gold glow (Draconium) vs silver. */
-        public boolean isGold() { return this == DRACONIUM; }
+        /** Whether this tier gets the gold glow (Ether) vs silver. */
+        public boolean isGold() { return this == ETHER; }
 
         public Tier next() { return values()[(ordinal() + 1) % values().length]; }
 
         public static Tier fromName(String name) {
-            if (name == null) return SUPPORTER;
+            if (name == null) return VOID;
             for (Tier t : values()) {
                 if (t.name().equalsIgnoreCase(name) || t.display.equalsIgnoreCase(name)) return t;
             }
-            // Handle common variations
             String lower = name.toLowerCase().trim();
-            if (lower.contains("draconium")) return DRACONIUM;
-            if (lower.contains("void")) return VOID_METAL;
-            if (lower.contains("netherite")) return NETHERITE;
-            return SUPPORTER;
+            if (lower.contains("ether")) return ETHER;
+            if (lower.contains("infernium")) return INFERNIUM;
+            if (lower.contains("void")) return VOID;
+            return VOID;
         }
     }
 }

@@ -67,6 +67,9 @@ public record QuestCheckmarkPacket(String fullQuestId, int taskIndex) {
             qp.touch(player.server.getTickCount());
             QuestStatus after = QuestEvaluator.recompute(quest, tp);
             com.soul.soa_additions.quest.progress.QuestNotifier.onTransition(player, quest, status, after);
+            if (after == QuestStatus.READY) {
+                QuestEvaluator.recomputeAllAndAutoClaim(tp, player);
+            }
             data.touch();
 
             QuestSyncPacket.sendToTeam(player);

@@ -23,6 +23,7 @@ public final class PackModeData extends SavedData {
 
     private PackMode mode = PackMode.ADVENTURE;
     private boolean locked = false;
+    private boolean serverEnforced = false;
     private long worldCreatedMillis = 0L;
 
     public PackModeData() {}
@@ -30,6 +31,9 @@ public final class PackModeData extends SavedData {
     public PackMode mode() { return mode; }
 
     public boolean locked() { return locked; }
+
+    /** True when the mode was set by server config rather than player choice. */
+    public boolean serverEnforced() { return serverEnforced; }
 
     public long worldCreatedMillis() { return worldCreatedMillis; }
 
@@ -78,6 +82,7 @@ public final class PackModeData extends SavedData {
     public CompoundTag save(CompoundTag tag) {
         tag.putString("mode", mode.name());
         tag.putBoolean("locked", locked);
+        tag.putBoolean("serverEnforced", serverEnforced);
         tag.putLong("createdAt", worldCreatedMillis);
         return tag;
     }
@@ -87,6 +92,7 @@ public final class PackModeData extends SavedData {
         try { d.mode = PackMode.valueOf(tag.getString("mode")); }
         catch (IllegalArgumentException ignored) { d.mode = PackMode.ADVENTURE; }
         d.locked = tag.getBoolean("locked");
+        d.serverEnforced = tag.getBoolean("serverEnforced");
         d.worldCreatedMillis = tag.getLong("createdAt");
         return d;
     }
@@ -95,10 +101,59 @@ public final class PackModeData extends SavedData {
         ServerLevel overworld = server.overworld();
         PackModeData data = overworld.getDataStorage().computeIfAbsent(
                 PackModeData::load,
-                PackModeData::new,
+                () -> {
+                    // Fresh world: seed the mode from whatever the player
+                    // picked on the create-world screen, falling back to the
+                    // default. Consumed once so subsequent worlds aren't
+                    // infected by a stale choice.
+                    PackModeData d = new PackModeData();
+                    PackMode pending = PendingPackMode.consume();
+                    if (pending != null) d.mode = pending;
+                    return d;
+                },
                 DATA_NAME
         );
         data.ensureStamped();
+        data.applyServerConfig();
         return data;
+    }
+
+    /**
+     * If the server config specifies a pack mode, enforce it. Re-checks every
+     * startup so admins can change the config value and restart to switch modes.
+     * Clears enforcement when the config is removed (empty string).
+     */
+    private boolean configAppliedThisSession = false;
+
+    private void applyServerConfig() {
+        if (configAppliedThisSession) return;
+        configAppliedThisSession = true;
+
+        String cfg = com.soul.soa_additions.config.ModConfigs.SERVER_PACKMODE.get();
+        if (cfg == null || cfg.isBlank()) {
+            // Config cleared — remove server enforcement so players/commands
+            // can change the mode again (if it wasn't also manually locked).
+            if (serverEnforced) {
+                serverEnforced = false;
+                locked = false;
+                setDirty();
+                org.slf4j.LoggerFactory.getLogger("soa_additions/packmode")
+                        .info("Server pack mode config cleared — mode is now editable");
+            }
+            return;
+        }
+        PackMode target = PackMode.fromString(cfg);
+        // fromString returns ADVENTURE for invalid input — only enforce if the
+        // config string actually matches a valid mode name.
+        if (!target.name().equalsIgnoreCase(cfg.trim())) return;
+
+        if (serverEnforced && this.mode == target) return; // already correct
+
+        this.mode = target;
+        this.locked = true;
+        this.serverEnforced = true;
+        setDirty();
+        org.slf4j.LoggerFactory.getLogger("soa_additions/packmode")
+                .info("Pack mode enforced by server config: {}", target.lower());
     }
 }

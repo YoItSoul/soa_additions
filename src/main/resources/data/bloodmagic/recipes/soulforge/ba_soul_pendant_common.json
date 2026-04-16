@@ -1,0 +1,20 @@
+{
+  "type": "bloodmagic:soulforge",
+  "minimumDrain": 240.0,
+  "drain": 100.0,
+  "output": {
+    "item": "soa_additions:ba_soul_pendant_common"
+  },
+  "input0": {
+    "item": "soa_additions:ba_soul_pendant_lesser"
+  },
+  "input1": {
+    "item": "soa_additions:ba_gem_tartaric"
+  },
+  "input2": {
+    "tag": "forge:storage_blocks/gold"
+  },
+  "input3": {
+    "item": "bloodmagic:infusedslate"
+  }
+}

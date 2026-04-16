@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aab",
+    "acb",
+    "bdb"
+  ],
+  "key": {
+    "a": {
+      "item": "soa_additions:ba_blood_infused_iron_ingot"
+    },
+    "b": {
+      "item": "soa_additions:ba_blood_infused_stick"
+    },
+    "c": {
+      "item": "soa_additions:ba_blood_infused_wooden_axe"
+    },
+    "d": {
+      "type": "bloodmagic:bloodorb",
+      "orb_tier": 3
+    }
+  },
+  "result": {
+    "item": "soa_additions:ba_blood_infused_iron_axe"
+  },
+  "show_notification": true
+}

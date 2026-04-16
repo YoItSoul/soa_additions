@@ -1,0 +1,12 @@
+{
+  "type": "bloodmagic:array",
+  "baseinput": {
+    "item": "bloodmagic:reagentbinding"
+  },
+  "addedinput": {
+    "item": "minecraft:flint_and_steel"
+  },
+  "output": {
+    "item": "soa_additions:ba_bound_igniter"
+  }
+}

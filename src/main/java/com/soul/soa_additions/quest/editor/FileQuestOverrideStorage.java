@@ -54,6 +54,8 @@ public final class FileQuestOverrideStorage implements QuestOverrideStorage {
         // Author path exists only in dev environments — the presence of
         // src/main/resources signals this.
         this.authorSourceDir = gameDir.resolve("../src/main/resources/data/soa_additions/quests").normalize();
+        log("worldOverrideDir resolved to: " + worldOverrideDir.toAbsolutePath()
+                + " (exists=" + Files.isDirectory(worldOverrideDir) + ")");
         migrateLegacyOverrides();
     }
 
@@ -100,8 +102,14 @@ public final class FileQuestOverrideStorage implements QuestOverrideStorage {
             Path tmp = file.resolveSibling(chapter.id() + ".json.tmp");
             String json = GSON.toJson(serializeChapter(chapter));
             Files.writeString(tmp, json, StandardCharsets.UTF_8);
-            Files.move(tmp, file, java.nio.file.StandardCopyOption.REPLACE_EXISTING,
-                    java.nio.file.StandardCopyOption.ATOMIC_MOVE);
+            try {
+                Files.move(tmp, file, java.nio.file.StandardCopyOption.REPLACE_EXISTING,
+                        java.nio.file.StandardCopyOption.ATOMIC_MOVE);
+            } catch (java.nio.file.AtomicMoveNotSupportedException amns) {
+                // ATOMIC_MOVE can fail on some Windows configurations; fall
+                // back to a plain replace which is still safe (tmp is complete).
+                Files.move(tmp, file, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+            }
             log("Wrote chapter " + chapter.id() + " → " + target);
         } catch (IOException e) {
             log("Failed to save chapter " + chapter.id() + ": " + e.getMessage());
@@ -208,6 +216,7 @@ public final class FileQuestOverrideStorage implements QuestOverrideStorage {
         }
         if (q.optional()) out.addProperty("optional", true);
         if (!q.depsAll()) out.addProperty("dependency_logic", "any");
+        if (q.minDeps() > 0) out.addProperty("min_deps", q.minDeps());
         if (q.autoClaim()) out.addProperty("auto_claim", true);
         if (!q.showDeps()) out.addProperty("show_deps", false);
         if (q.shape() != com.soul.soa_additions.quest.model.NodeShape.ICON) {

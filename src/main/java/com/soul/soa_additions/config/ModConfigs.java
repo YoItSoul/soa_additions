@@ -21,6 +21,22 @@ public final class ModConfigs {
     public static final ForgeConfigSpec.BooleanValue TELEMETRY_AUTO_SPARK;
     public static final ForgeConfigSpec.IntValue TELEMETRY_HEARTBEAT_MINUTES;
 
+    // --- Pack mode server enforcement ---
+    public static final ForgeConfigSpec.ConfigValue<String> SERVER_PACKMODE;
+
+    // --- Pack mode difficulty ---
+    public static final ForgeConfigSpec.BooleanValue PACKMODE_FORCE_HARD_DIFFICULTY;
+    public static final ForgeConfigSpec.DoubleValue EXPERT_BOSS_HEALTH_MULTIPLIER;
+    public static final ForgeConfigSpec.DoubleValue CASUAL_REGEN_SPEED_MULTIPLIER;
+    public static final ForgeConfigSpec.DoubleValue ADVENTURE_REGEN_SPEED_MULTIPLIER;
+    public static final ForgeConfigSpec.DoubleValue EXPERT_REGEN_SPEED_MULTIPLIER;
+    public static final ForgeConfigSpec.IntValue CASUAL_STARVATION_DAMAGE;
+    public static final ForgeConfigSpec.IntValue ADVENTURE_STARVATION_DAMAGE;
+    public static final ForgeConfigSpec.IntValue EXPERT_STARVATION_DAMAGE;
+    public static final ForgeConfigSpec.DoubleValue CASUAL_EXHAUSTION_MULTIPLIER;
+    public static final ForgeConfigSpec.DoubleValue ADVENTURE_EXHAUSTION_MULTIPLIER;
+    public static final ForgeConfigSpec.DoubleValue EXPERT_EXHAUSTION_MULTIPLIER;
+
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
         builder.push("soa_additions");
@@ -97,6 +113,59 @@ public final class ModConfigs {
                         "treats rows with no heartbeat in 10 minutes as offline. Default: 5."
                 )
                 .defineInRange("heartbeatMinutes", 5, 1, 60);
+        builder.pop();
+
+        SERVER_PACKMODE = builder
+                .comment(
+                        "Server-enforced pack mode. When set to a valid mode (casual, adventure, expert),",
+                        "the server forces and locks this mode on startup. Players will not be able to",
+                        "change it, and any pack-mode selection quest will auto-complete on login.",
+                        "Leave empty (default) to let players choose their own mode.",
+                        "Intended for dedicated/multiplayer servers where the admin picks the mode."
+                )
+                .define("serverPackMode", "");
+
+        builder.push("packmodeDifficulty");
+        builder.comment("Gameplay effects applied per pack mode, inspired by GreedyCraft.");
+        PACKMODE_FORCE_HARD_DIFFICULTY = builder
+                .comment("Force game difficulty to Hard on every player login.")
+                .define("forceHardDifficulty", true);
+        EXPERT_BOSS_HEALTH_MULTIPLIER = builder
+                .comment("Health multiplier for boss mobs in Expert mode. 1.5 = +50% HP.")
+                .defineInRange("expertBossHealthMultiplier", 1.5D, 1.0D, 10.0D);
+        CASUAL_REGEN_SPEED_MULTIPLIER = builder
+                .comment(
+                        "Natural regen speed multiplier for Casual. Lower = faster regen.",
+                        "Applied as a regen-interval scale: 0.8 means 80% of normal interval (faster)."
+                )
+                .defineInRange("casualRegenMultiplier", 0.8D, 0.1D, 10.0D);
+        ADVENTURE_REGEN_SPEED_MULTIPLIER = builder
+                .comment("Natural regen speed multiplier for Adventure.")
+                .defineInRange("adventureRegenMultiplier", 1.2D, 0.1D, 10.0D);
+        EXPERT_REGEN_SPEED_MULTIPLIER = builder
+                .comment("Natural regen speed multiplier for Expert. 2.5 = much slower regen.")
+                .defineInRange("expertRegenMultiplier", 2.5D, 0.1D, 10.0D);
+        CASUAL_STARVATION_DAMAGE = builder
+                .comment("Starvation damage (half-hearts) in Casual mode.")
+                .defineInRange("casualStarvationDamage", 2, 1, 20);
+        ADVENTURE_STARVATION_DAMAGE = builder
+                .comment("Starvation damage (half-hearts) in Adventure mode.")
+                .defineInRange("adventureStarvationDamage", 3, 1, 20);
+        EXPERT_STARVATION_DAMAGE = builder
+                .comment("Starvation damage (half-hearts) in Expert mode.")
+                .defineInRange("expertStarvationDamage", 4, 1, 20);
+        CASUAL_EXHAUSTION_MULTIPLIER = builder
+                .comment(
+                        "Max exhaustion scale for Casual (GreedyCraft style).",
+                        "Higher = slower hunger drain. 2.5 means hunger drains at 40% normal speed."
+                )
+                .defineInRange("casualExhaustionMultiplier", 2.5D, 0.1D, 10.0D);
+        ADVENTURE_EXHAUSTION_MULTIPLIER = builder
+                .comment("Max exhaustion scale for Adventure. 0.75 means slightly faster hunger drain.")
+                .defineInRange("adventureExhaustionMultiplier", 0.75D, 0.1D, 10.0D);
+        EXPERT_EXHAUSTION_MULTIPLIER = builder
+                .comment("Max exhaustion scale for Expert. 0.5 means hunger drains at 2x normal speed.")
+                .defineInRange("expertExhaustionMultiplier", 0.5D, 0.1D, 10.0D);
         builder.pop();
 
         builder.pop();

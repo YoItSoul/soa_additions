@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " c ",
+    "csc",
+    " c "
+  ],
+  "key": {
+    "c": {
+      "item": "soa_additions:creative_shard"
+    },
+    "s": {
+      "item": "minecraft:sponge"
+    }
+  },
+  "result": {
+    "item": "soa_additions:purifying_pill"
+  },
+  "show_notification": true
+}

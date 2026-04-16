@@ -129,7 +129,7 @@ public final class DonorSyncCommand {
                     }
 
                     // Tier
-                    DonorData.Tier tier = DonorData.Tier.SUPPORTER;
+                    DonorData.Tier tier = DonorData.Tier.VOID;
                     if (obj.has("tier") && !obj.get("tier").isJsonNull()) {
                         tier = DonorData.Tier.fromName(obj.get("tier").getAsString());
                     }

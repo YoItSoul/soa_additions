@@ -38,7 +38,7 @@ public final class DonorCommand {
                                 .requires(src -> src.hasPermission(2))
                                 .then(Commands.literal("add")
                                         .then(Commands.argument("player", EntityArgument.player())
-                                                .executes(ctx -> addDonor(ctx, "SUPPORTER", ""))
+                                                .executes(ctx -> addDonor(ctx, "VOID", ""))
                                                 .then(Commands.argument("tier", StringArgumentType.word())
                                                         .executes(ctx -> addDonor(ctx,
                                                                 StringArgumentType.getString(ctx, "tier"), ""))

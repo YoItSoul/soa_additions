@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "sbs",
+    "bcb",
+    "sbs"
+  ],
+  "key": {
+    "s": {
+      "item": "soa_additions:bloody_sacrifice"
+    },
+    "b": {
+      "item": "soa_additions:blood_sigil"
+    },
+    "c": {
+      "item": "soa_additions:creative_shard"
+    }
+  },
+  "result": {
+    "item": "soa_additions:true_blood_sigil"
+  },
+  "show_notification": true
+}

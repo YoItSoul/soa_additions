@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "soa_additions:broken_solarium_star"
+    },
+    {
+      "item": "soa_additions:solar_seed"
+    }
+  ],
+  "result": {
+    "item": "soa_additions:solarium_star"
+  }
+}

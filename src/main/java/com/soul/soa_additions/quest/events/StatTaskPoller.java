@@ -62,12 +62,17 @@ public final class StatTaskPoller {
                 changed = true;
             }
         }
+        boolean anyBecameReady = false;
         if (dirty != null) {
             for (Quest quest : dirty) {
                 QuestStatus before = seen.get(quest);
                 QuestStatus after = QuestEvaluator.recompute(quest, teamProgress);
                 QuestNotifier.onTransition(player, quest, before, after);
+                if (after == QuestStatus.READY) anyBecameReady = true;
             }
+        }
+        if (anyBecameReady) {
+            QuestEvaluator.recomputeAllAndAutoClaim(teamProgress, player);
         }
         if (changed) {
             progressData.touch();

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "asa",
+    "fdf",
+    " f "
+  ],
+  "key": {
+    "a": {
+      "tag": "forge:ingots/aeonsteel"
+    },
+    "s": {
+      "item": "minecraft:snow_block"
+    },
+    "f": {
+      "item": "twilightforest:alpha_yeti_fur"
+    },
+    "d": {
+      "tag": "forge:dusts/draconium"
+    }
+  },
+  "result": {
+    "item": "soa_additions:beast_hand"
+  },
+  "show_notification": true
+}

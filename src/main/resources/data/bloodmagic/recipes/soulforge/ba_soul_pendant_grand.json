@@ -1,0 +1,20 @@
+{
+  "type": "bloodmagic:soulforge",
+  "minimumDrain": 4000.0,
+  "drain": 3000.0,
+  "output": {
+    "item": "soa_additions:ba_soul_pendant_grand"
+  },
+  "input0": {
+    "item": "soa_additions:ba_soul_pendant_greater"
+  },
+  "input1": {
+    "item": "soa_additions:ba_blood_diamond_inert"
+  },
+  "input2": {
+    "item": "bloodmagic:etherealslate"
+  },
+  "input3": {
+    "item": "minecraft:nether_star"
+  }
+}

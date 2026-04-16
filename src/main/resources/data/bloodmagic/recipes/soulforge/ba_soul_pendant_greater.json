@@ -1,0 +1,20 @@
+{
+  "type": "bloodmagic:soulforge",
+  "minimumDrain": 1000.0,
+  "drain": 600.0,
+  "output": {
+    "item": "soa_additions:ba_soul_pendant_greater"
+  },
+  "input0": {
+    "item": "soa_additions:ba_soul_pendant_common"
+  },
+  "input1": {
+    "item": "bloodmagic:weakbloodshard"
+  },
+  "input2": {
+    "item": "bloodmagic:demonslate"
+  },
+  "input3": {
+    "item": "bloodmagic:defaultcrystal"
+  }
+}

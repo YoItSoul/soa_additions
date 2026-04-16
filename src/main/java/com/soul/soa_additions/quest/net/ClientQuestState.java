@@ -22,6 +22,7 @@ import java.util.Map;
 public final class ClientQuestState {
 
     private static volatile PackMode packMode = PackMode.ADVENTURE;
+    private static volatile boolean serverEnforced = false;
     private static volatile Map<String, QuestSnapshotEntry> byId = Collections.emptyMap();
     private static volatile boolean editMode = false;
 
@@ -35,9 +36,13 @@ public final class ClientQuestState {
         for (QuestSnapshotEntry e : pkt.entries()) fresh.put(e.fullId(), e);
         byId = fresh;
         packMode = pkt.packMode();
+        serverEnforced = pkt.serverEnforced();
     }
 
     public static PackMode packMode() { return packMode; }
+
+    /** True when the server admin pre-set the pack mode via config. */
+    public static boolean serverEnforced() { return serverEnforced; }
 
     public static QuestSnapshotEntry get(String fullId) { return byId.get(fullId); }
 

@@ -30,6 +30,12 @@ public final class QuestEvaluator {
 
     private QuestEvaluator() {}
 
+    /** Re-entrancy guard for {@link #recomputeAllAndAutoClaim}. Command
+     *  rewards can dispatch commands that complete tasks and re-enter the
+     *  auto-claim sweep through the command dispatcher — without this flag
+     *  the recursion is unbounded and blows the stack. */
+    private static boolean autoClaimInProgress = false;
+
     /**
      * Recompute the status of a single quest against the team's current
      * progress. Writes back to the progress row if anything changed and
@@ -89,6 +95,44 @@ public final class QuestEvaluator {
         } while (changed);
     }
 
+    /**
+     * {@link #recomputeAll} followed by an auto-claim sweep: any quest that
+     * is now READY and has {@code autoClaim} set will be claimed on behalf of
+     * {@code player}. Claiming can unlock further dependents, so we loop
+     * until no more auto-claims fire (guarded to prevent runaway chains).
+     */
+    public static void recomputeAllAndAutoClaim(TeamQuestProgress team, net.minecraft.server.level.ServerPlayer player) {
+        recomputeAll(team);
+
+        // If we're already inside an auto-claim sweep (e.g. a CommandReward
+        // dispatched a command that completed a task and re-entered here),
+        // skip the sweep — the outermost invocation's loop will pick up any
+        // newly-READY quests on its next iteration.
+        if (autoClaimInProgress) return;
+
+        autoClaimInProgress = true;
+        try {
+            int guard = 0;
+            boolean claimed;
+            do {
+                claimed = false;
+                for (Chapter c : QuestRegistry.allChapters()) {
+                    for (Quest q : c.quests()) {
+                        if (!q.autoClaim()) continue;
+                        QuestProgress qp = team.peek(q.fullId());
+                        if (qp != null && qp.status() == QuestStatus.READY) {
+                            ClaimService.claim(player, q.fullId());
+                            claimed = true;
+                        }
+                    }
+                }
+                if (++guard > 16) break;
+            } while (claimed);
+        } finally {
+            autoClaimInProgress = false;
+        }
+    }
+
     // ---------- helpers ----------
 
     private static boolean isExcluded(Quest quest, TeamQuestProgress team) {
@@ -96,6 +140,10 @@ public final class QuestEvaluator {
         if (ex == null || ex.isEmpty()) return false;
         for (String id : ex) {
             String fullId = id.contains("/") ? id : quest.chapterId() + "/" + id;
+            if (!id.contains("/") && QuestRegistry.quest(fullId).isEmpty()) {
+                Optional<Quest> found = QuestRegistry.questByBareId(id);
+                if (found.isPresent()) fullId = found.get().fullId();
+            }
             QuestProgress p = team.peek(fullId);
             if (p != null && (p.status() == QuestStatus.CLAIMED || p.everClaimed())) {
                 return true;
@@ -114,6 +162,12 @@ public final class QuestEvaluator {
             // "chapter/quest_id" (cross-chapter). Normalize to full ids.
             String fullDep = depId.contains("/") ? depId : quest.chapterId() + "/" + depId;
             Optional<Quest> depQuest = QuestRegistry.quest(fullDep);
+            if (depQuest.isEmpty() && !depId.contains("/")) {
+                // Bare id not found in same chapter — search all chapters.
+                // Handles cross-chapter deps stored without a chapter prefix.
+                depQuest = QuestRegistry.questByBareId(depId);
+                if (depQuest.isPresent()) fullDep = depQuest.get().fullId();
+            }
             if (depQuest.isEmpty()) {
                 // Missing dependency — treat as unsatisfied but don't hard-fail;
                 // the loader has already logged it, and an orphaned dep shouldn't
@@ -127,10 +181,14 @@ public final class QuestEvaluator {
                         || depProg.everClaimed());
             if (done) {
                 satisfied++;
-                if (!quest.depsAll()) return true; // OR: one is enough
+                // Short-circuit for OR mode when min_deps isn't set
+                if (quest.minDeps() <= 0 && !quest.depsAll() && satisfied >= 1) return true;
+                // Short-circuit for min_deps threshold
+                if (quest.minDeps() > 0 && satisfied >= quest.minDeps()) return true;
             }
         }
-        return quest.depsAll() && satisfied == deps.size();
+        if (quest.minDeps() > 0) return satisfied >= quest.minDeps();
+        return quest.depsAll() ? satisfied == deps.size() : satisfied >= 1;
     }
 
     private static boolean tasksComplete(Quest quest, QuestProgress qp) {

@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "ana",
+    "cvc",
+    "ege"
+  ],
+  "key": {
+    "a": {
+      "tag": "forge:ingots/asgardium"
+    },
+    "n": {
+      "item": "minecraft:nether_star"
+    },
+    "c": {
+      "tag": "forge:ingots/coralium"
+    },
+    "v": {
+      "tag": "forge:ingots/valkyrie"
+    },
+    "e": {
+      "tag": "forge:ingots/aeroite"
+    },
+    "g": {
+      "tag": "forge:gems/golden_amber"
+    }
+  },
+  "result": {
+    "item": "soa_additions:bravery_certificate"
+  },
+  "show_notification": true
+}

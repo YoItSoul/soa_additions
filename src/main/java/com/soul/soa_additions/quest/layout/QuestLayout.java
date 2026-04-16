@@ -74,7 +74,7 @@ public final class QuestLayout {
 
         // 1. Layer assignment via longest path from roots
         Map<String, Integer> column = new HashMap<>();
-        List<String> order = topologicalOrder(quests, parentsOf);
+        List<String> order = topologicalOrder(quests, parentsOf, childrenOf);
         for (String id : order) {
             int col = 0;
             for (String p : parentsOf.getOrDefault(id, Collections.emptyList())) {
@@ -143,19 +143,14 @@ public final class QuestLayout {
 
     // ---------- helpers ----------
 
-    private static List<String> topologicalOrder(List<Quest> quests, Map<String, List<String>> parentsOf) {
-        // Kahn's algorithm
+    private static List<String> topologicalOrder(List<Quest> quests, Map<String, List<String>> parentsOf,
+                                                   Map<String, List<String>> childrenOf) {
+        // Kahn's algorithm — reuses the childrenOf map built by compute().
         Map<String, Integer> indeg = new HashMap<>();
         for (Quest q : quests) indeg.put(q.id(), parentsOf.getOrDefault(q.id(), Collections.emptyList()).size());
         List<String> ready = new ArrayList<>();
         for (Map.Entry<String, Integer> e : indeg.entrySet()) if (e.getValue() == 0) ready.add(e.getKey());
         List<String> out = new ArrayList<>();
-        Map<String, List<String>> childrenOf = new HashMap<>();
-        for (Quest q : quests) {
-            for (String p : parentsOf.getOrDefault(q.id(), Collections.emptyList())) {
-                childrenOf.computeIfAbsent(p, k -> new ArrayList<>()).add(q.id());
-            }
-        }
         while (!ready.isEmpty()) {
             String n = ready.remove(0);
             out.add(n);

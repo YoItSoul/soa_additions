@@ -11,12 +11,15 @@ import com.soul.soa_additions.SoaAdditions;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
@@ -42,6 +45,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 /**
  * {@code /soa export <target>} — dumps registry contents to JSON files under
@@ -63,15 +67,15 @@ public final class RegistryExportCommand {
 
     private static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("soa")
-                .requires(src -> src.hasPermission(2))
                 .then(Commands.literal("export")
+                        .requires(src -> src.hasPermission(2))
                         .executes(ctx -> run(ctx.getSource(), "all"))
                         .then(Commands.argument("target", StringArgumentType.word())
                                 .suggests((c, b) -> {
                                     for (String s : new String[]{"all", "items", "blocks", "entities",
                                             "structures", "biomes", "dimensions", "effects",
                                             "enchantments", "fluids", "sounds", "particles",
-                                            "block_entities", "villager_professions"}) {
+                                            "block_entities", "villager_professions", "tags"}) {
                                         b.suggest(s);
                                     }
                                     return b.buildFuture();
@@ -121,6 +125,8 @@ public final class RegistryExportCommand {
                 totals.put("block_entities", write(outDir.resolve("block_entities.json"), dumpIds(BuiltInRegistries.BLOCK_ENTITY_TYPE)));
             if (all || "villager_professions".equalsIgnoreCase(target))
                 totals.put("villager_professions", write(outDir.resolve("villager_professions.json"), dumpIds(BuiltInRegistries.VILLAGER_PROFESSION)));
+            if (all || "tags".equalsIgnoreCase(target))
+                totals.put("tags", write(outDir.resolve("tags.json"), dumpAllTags(server)));
         } catch (IOException e) {
             src.sendFailure(Component.literal("Export failed: " + e.getMessage()));
             return 0;
@@ -329,6 +335,52 @@ public final class RegistryExportCommand {
             arr.add(o);
         }
         return arr;
+    }
+
+    private static JsonArray dumpAllTags(MinecraftServer server) {
+        JsonArray arr = new JsonArray();
+        // Built-in registries
+        dumpTagsFrom(arr, "item", BuiltInRegistries.ITEM);
+        dumpTagsFrom(arr, "block", BuiltInRegistries.BLOCK);
+        dumpTagsFrom(arr, "entity_type", BuiltInRegistries.ENTITY_TYPE);
+        dumpTagsFrom(arr, "fluid", BuiltInRegistries.FLUID);
+        dumpTagsFrom(arr, "enchantment", BuiltInRegistries.ENCHANTMENT);
+        dumpTagsFrom(arr, "mob_effect", BuiltInRegistries.MOB_EFFECT);
+        dumpTagsFrom(arr, "potion", BuiltInRegistries.POTION);
+        dumpTagsFrom(arr, "block_entity_type", BuiltInRegistries.BLOCK_ENTITY_TYPE);
+        dumpTagsFrom(arr, "particle_type", BuiltInRegistries.PARTICLE_TYPE);
+        dumpTagsFrom(arr, "painting_variant", BuiltInRegistries.PAINTING_VARIANT);
+        dumpTagsFrom(arr, "point_of_interest_type", BuiltInRegistries.POINT_OF_INTEREST_TYPE);
+        dumpTagsFrom(arr, "banner_pattern", BuiltInRegistries.BANNER_PATTERN);
+        dumpTagsFrom(arr, "cat_variant", BuiltInRegistries.CAT_VARIANT);
+        dumpTagsFrom(arr, "instrument", BuiltInRegistries.INSTRUMENT);
+        dumpTagsFrom(arr, "game_event", BuiltInRegistries.GAME_EVENT);
+        // Datapack registries
+        try { dumpTagsFrom(arr, "biome", server.registryAccess().registryOrThrow(Registries.BIOME)); } catch (Exception ignored) {}
+        try { dumpTagsFrom(arr, "structure", server.registryAccess().registryOrThrow(Registries.STRUCTURE)); } catch (Exception ignored) {}
+        try { dumpTagsFrom(arr, "damage_type", server.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE)); } catch (Exception ignored) {}
+        return arr;
+    }
+
+    private static <T> void dumpTagsFrom(JsonArray arr, String registryName, Registry<T> registry) {
+        List<TagKey<T>> tagKeys = registry.getTagNames()
+                .sorted(Comparator.comparing(k -> k.location().toString()))
+                .collect(Collectors.toList());
+        for (TagKey<T> tagKey : tagKeys) {
+            var holders = registry.getTag(tagKey);
+            if (holders.isEmpty()) continue;
+            JsonObject o = new JsonObject();
+            o.addProperty("tag", "#" + tagKey.location());
+            o.addProperty("registry", registryName);
+            o.addProperty("mod", tagKey.location().getNamespace());
+            JsonArray entries = new JsonArray();
+            for (Holder<T> holder : holders.get()) {
+                holder.unwrapKey().ifPresent(key -> entries.add(key.location().toString()));
+            }
+            o.addProperty("count", entries.size());
+            o.add("entries", entries);
+            arr.add(o);
+        }
     }
 
     // ---------- helpers ----------

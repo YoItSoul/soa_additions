@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "www",
+    "ppp",
+    "www"
+  ],
+  "key": {
+    "w": {
+      "item": "minecraft:wheat"
+    },
+    "p": {
+      "item": "soa_additions:poop"
+    }
+  },
+  "result": {
+    "item": "soa_additions:poopburger"
+  },
+  "show_notification": true
+}

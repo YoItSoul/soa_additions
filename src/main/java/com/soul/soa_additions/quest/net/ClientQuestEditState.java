@@ -1,6 +1,7 @@
 package com.soul.soa_additions.quest.net;
 
-import net.minecraft.client.Minecraft;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -22,6 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * the local drag release, so it harmlessly overwrites the client estimate
  * with the authoritative value.</p>
  */
+@OnlyIn(Dist.CLIENT)
 public final class ClientQuestEditState {
 
     private ClientQuestEditState() {}
@@ -42,9 +44,5 @@ public final class ClientQuestEditState {
 
     public static void applyMove(QuestMovePacket pkt) {
         POSITIONS.put(pkt.chapterId() + "/" + pkt.questId(), new int[]{pkt.x(), pkt.y()});
-        // Nudge the active screen to repaint. Not strictly required — the
-        // render loop is constantly redrawing — but spelled out here so the
-        // intent is obvious if someone gates repaints later.
-        Minecraft.getInstance();
     }
 }

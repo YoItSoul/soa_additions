@@ -16,6 +16,7 @@ import com.soul.soa_additions.quest.model.QuestTask;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
@@ -55,6 +56,7 @@ public record QuestEditPacket(
         boolean optional,
         boolean autoClaim,
         boolean depsAll,
+        int minDeps,
         List<String> dependencies,
         int posX,
         int posY,
@@ -71,7 +73,7 @@ public record QuestEditPacket(
 
     public static QuestEditPacket delete(String chapterId, String questId) {
         return new QuestEditPacket(Op.DELETE, chapterId, questId,
-                "", List.of(), "", NodeShape.ICON, Visibility.NORMAL, false, false, true, List.of(), -1, -1, List.of(), true, List.of(), Quest.DEFAULT_SIZE, false, com.soul.soa_additions.quest.model.RewardScope.TEAM, List.of());
+                "", List.of(), "", NodeShape.ICON, Visibility.NORMAL, false, false, true, -1, List.of(), -1, -1, List.of(), true, List.of(), Quest.DEFAULT_SIZE, false, com.soul.soa_additions.quest.model.RewardScope.TEAM, List.of());
     }
 
     public static void encode(QuestEditPacket pkt, FriendlyByteBuf buf) {
@@ -88,6 +90,7 @@ public record QuestEditPacket(
             buf.writeBoolean(pkt.optional);
             buf.writeBoolean(pkt.autoClaim);
             buf.writeBoolean(pkt.depsAll);
+            buf.writeVarInt(pkt.minDeps);
             buf.writeVarInt(pkt.dependencies.size());
             for (String d : pkt.dependencies) buf.writeUtf(d);
             buf.writeVarInt(pkt.posX);
@@ -120,6 +123,7 @@ public record QuestEditPacket(
         boolean optional = buf.readBoolean();
         boolean autoClaim = buf.readBoolean();
         boolean depsAll = buf.readBoolean();
+        int minDeps = buf.readVarInt();
         int dn = buf.readVarInt();
         List<String> deps = new ArrayList<>(dn);
         for (int i = 0; i < dn; i++) deps.add(buf.readUtf());
@@ -139,7 +143,7 @@ public record QuestEditPacket(
         List<String> excl = new ArrayList<>(exn);
         for (int i = 0; i < exn; i++) excl.add(buf.readUtf());
         return new QuestEditPacket(op, chapterId, questId, title, desc, icon, shape,
-                visibility, optional, autoClaim, depsAll, deps, px, py, tasks, showDeps, rewards, size, repeatable, repeatScope, excl);
+                visibility, optional, autoClaim, depsAll, minDeps, deps, px, py, tasks, showDeps, rewards, size, repeatable, repeatScope, excl);
     }
 
     public static void handle(QuestEditPacket pkt, Supplier<NetworkEvent.Context> ctx) {
@@ -149,7 +153,7 @@ public record QuestEditPacket(
             if (dir == NetworkDirection.PLAY_TO_SERVER) {
                 handleServer(pkt, c.getSender());
             } else {
-                DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> applyToRegistry(pkt));
+                DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientApply.run(pkt));
             }
         });
         c.setPacketHandled(true);
@@ -220,7 +224,7 @@ public record QuestEditPacket(
                     List<String> deps = new ArrayList<>(q.dependencies());
                     deps.remove(pkt.questId);
                     updated.add(new Quest(q.id(), q.chapterId(), q.title(), q.description(),
-                            q.icon(), q.visibility(), q.optional(), deps, q.depsAll(),
+                            q.icon(), q.visibility(), q.optional(), deps, q.depsAll(), q.minDeps(),
                             q.tasks(), q.rewards(), q.modes(), q.source(), q.autoClaim(),
                             q.shape(), q.posX(), q.posY(), q.showDeps(), q.size(), q.repeatable(), q.repeatScope(), q.exclusions()));
                 } else {
@@ -254,7 +258,7 @@ public record QuestEditPacket(
                             pkt.questId, chapter.id(), pkt.title,
                             new ArrayList<>(pkt.description), pkt.icon,
                             pkt.visibility, pkt.optional,
-                            new ArrayList<>(pkt.dependencies), pkt.depsAll,
+                            new ArrayList<>(pkt.dependencies), pkt.depsAll, pkt.minDeps,
                             taskList, rewardList, q.modes(), q.source(),
                             pkt.autoClaim, pkt.shape, pkt.posX, pkt.posY, pkt.showDeps, pkt.size, pkt.repeatable, pkt.repeatScope, new ArrayList<>(pkt.exclusions)));
                     replaced = true;
@@ -270,7 +274,7 @@ public record QuestEditPacket(
                         pkt.questId, chapter.id(), pkt.title,
                         new ArrayList<>(pkt.description), pkt.icon,
                         pkt.visibility, pkt.optional,
-                        new ArrayList<>(pkt.dependencies), pkt.depsAll,
+                        new ArrayList<>(pkt.dependencies), pkt.depsAll, pkt.minDeps,
                         taskList, rewardList,
                         chapter.modes(), QuestSource.WORLD_EDITS,
                         pkt.autoClaim, pkt.shape, pkt.posX, pkt.posY, pkt.showDeps, pkt.size, pkt.repeatable, pkt.repeatScope, new ArrayList<>(pkt.exclusions)));
@@ -320,6 +324,13 @@ public record QuestEditPacket(
         Chapter updated = applyToChapter(chapter, pkt);
         if (updated != null) {
             QuestRegistry.updateChapter(updated);
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private static final class ClientApply {
+        static void run(QuestEditPacket pkt) {
+            applyToRegistry(pkt);
             com.soul.soa_additions.quest.client.QuestBookScreen.onChapterMutated(pkt.chapterId);
         }
     }

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "a",
+    "b"
+  ],
+  "key": {
+    "a": {
+      "item": "soa_additions:ba_bound_igniter"
+    },
+    "b": {
+      "item": "soa_additions:ba_blood_infused_stick"
+    }
+  },
+  "result": {
+    "item": "soa_additions:ba_blood_torch",
+    "count": 2
+  },
+  "show_notification": true
+}

@@ -1,0 +1,13 @@
+{
+  "type": "bloodmagic:altar",
+  "input": {
+    "item": "minecraft:orange_dye"
+  },
+  "output": {
+    "item": "soa_additions:ba_blood_orange"
+  },
+  "upgradeLevel": 1,
+  "altarSyphon": 500,
+  "consumptionRate": 10,
+  "drainRate": 10
+}

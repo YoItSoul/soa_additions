@@ -1,0 +1,6 @@
+{
+  "parent": "block/fence_inventory",
+  "textures": {
+    "texture": "soa_additions:block/ba_blood_infused_planks"
+  }
+}

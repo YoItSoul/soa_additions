@@ -1,0 +1,20 @@
+{
+  "type": "bloodmagic:soulforge",
+  "minimumDrain": 2000.0,
+  "drain": 1600.0,
+  "output": {
+    "item": "soa_additions:ba_sigil_augmented_holding"
+  },
+  "input0": {
+    "item": "bloodmagic:reagentholding"
+  },
+  "input1": {
+    "item": "bloodmagic:sigilofholding"
+  },
+  "input2": {
+    "item": "minecraft:chest"
+  },
+  "input3": {
+    "tag": "forge:leather"
+  }
+}

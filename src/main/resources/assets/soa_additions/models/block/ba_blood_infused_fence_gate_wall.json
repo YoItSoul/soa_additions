@@ -1,0 +1,6 @@
+{
+  "parent": "block/template_fence_gate_wall",
+  "textures": {
+    "texture": "soa_additions:block/ba_blood_infused_planks"
+  }
+}

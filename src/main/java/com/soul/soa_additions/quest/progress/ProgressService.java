@@ -73,12 +73,21 @@ public final class ProgressService {
             anythingChanged = true;
         }
 
+        boolean anyBecameReady = false;
         if (changedQuests != null) {
             for (Quest quest : changedQuests) {
                 QuestStatus before = statusCache.get(quest.fullId());
                 QuestStatus after = QuestEvaluator.recompute(quest, teamProgress);
                 QuestNotifier.onTransition(player, quest, before, after);
+                if (after == QuestStatus.READY) anyBecameReady = true;
             }
+        }
+
+        // Auto-claim sweep: if any quest just became READY, run the full
+        // recompute-and-auto-claim pass so autoClaim quests fire immediately
+        // rather than waiting for the next login or manual claim.
+        if (anyBecameReady) {
+            QuestEvaluator.recomputeAllAndAutoClaim(teamProgress, player);
         }
 
         if (anythingChanged) {
