@@ -4,9 +4,18 @@ import com.soul.soa_additions.quest.QuestRegistry;
 import com.soul.soa_additions.quest.model.Chapter;
 import com.soul.soa_additions.quest.model.Quest;
 import com.soul.soa_additions.quest.model.QuestTask;
+import com.mojang.logging.LogUtils;
+import org.slf4j.Logger;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Pure function layer over {@link QuestRegistry} and {@link TeamQuestProgress}.
@@ -27,6 +36,9 @@ import java.util.Optional;
  * what LOCKED means" — there is only this one idea.</p>
  */
 public final class QuestEvaluator {
+
+    private static final Logger LOGGER = LogUtils.getLogger();
+    private static boolean cycleWarned = false;
 
     private QuestEvaluator() {}
 
@@ -75,24 +87,91 @@ public final class QuestEvaluator {
     /**
      * Walk every loaded chapter/quest and recompute. Used after bulk state
      * changes (reload, claim fan-out, team roster change) where multiple
-     * dependent quests might transition at once. Cheap enough for book-sized
-     * packs; if we ever hit perf issues we can switch to a reverse-dep index.
+     * dependent quests might transition at once.
+     *
+     * <p>Implementation: topological sort over the dependency DAG so every
+     * quest is evaluated exactly once and unlock propagation depth is no
+     * longer bounded by the old 16-iteration fixed-point guard. Quests caught
+     * in a dependency cycle (malformed pack) are evaluated last with a warning
+     * — they'll still converge, but may take multiple claim-cycles to do so.
      */
     public static void recomputeAll(TeamQuestProgress team) {
-        // Repeat until fixed point — unlocking a quest can unlock its dependents.
-        boolean changed;
-        int guard = 0;
-        do {
-            changed = false;
-            for (Chapter c : QuestRegistry.allChapters()) {
-                for (Quest q : c.quests()) {
-                    QuestStatus before = team.get(q.fullId()).status();
-                    QuestStatus after = recompute(q, team);
-                    if (before != after) changed = true;
+        List<Quest> all = new ArrayList<>();
+        Map<String, Quest> byId = new HashMap<>();
+        for (Chapter c : QuestRegistry.allChapters()) {
+            for (Quest q : c.quests()) {
+                all.add(q);
+                byId.put(q.fullId(), q);
+            }
+        }
+        if (all.isEmpty()) return;
+
+        // Resolve each quest's in-registry dependencies to full ids, and build
+        // a reverse-dep adjacency (depId -> dependents).
+        Map<String, List<String>> reverseDeps = new HashMap<>();
+        Map<String, Integer> inDegree = new HashMap<>();
+        for (Quest q : all) {
+            List<String> resolved = resolveDeps(q, byId);
+            inDegree.put(q.fullId(), resolved.size());
+            for (String dep : resolved) {
+                reverseDeps.computeIfAbsent(dep, k -> new ArrayList<>()).add(q.fullId());
+            }
+        }
+
+        Deque<String> ready = new ArrayDeque<>();
+        for (Map.Entry<String, Integer> e : inDegree.entrySet()) {
+            if (e.getValue() == 0) ready.add(e.getKey());
+        }
+
+        Set<String> processed = new HashSet<>(all.size());
+        while (!ready.isEmpty()) {
+            String id = ready.poll();
+            if (!processed.add(id)) continue;
+            Quest q = byId.get(id);
+            if (q != null) recompute(q, team);
+            List<String> dependents = reverseDeps.get(id);
+            if (dependents == null) continue;
+            for (String dep : dependents) {
+                int remaining = inDegree.merge(dep, -1, Integer::sum);
+                if (remaining == 0) ready.add(dep);
+            }
+        }
+
+        // Any quest not processed lives in a cycle. Recompute them once each
+        // so state doesn't silently rot; cycles in quest deps are a pack-author
+        // bug and the single pass keeps the one-warning policy cheap.
+        if (processed.size() < all.size()) {
+            if (!cycleWarned) {
+                cycleWarned = true;
+                List<String> cyclic = new ArrayList<>();
+                for (Quest q : all) if (!processed.contains(q.fullId())) cyclic.add(q.fullId());
+                LOGGER.warn("Quest dependency cycle detected; affected quests: {}", cyclic);
+            }
+            for (Quest q : all) {
+                if (!processed.contains(q.fullId())) recompute(q, team);
+            }
+        }
+    }
+
+    /** Map a quest's raw dependency ids to full ids that exist in the registry. */
+    private static List<String> resolveDeps(Quest quest, Map<String, Quest> byId) {
+        List<String> raw = quest.dependencies();
+        if (raw == null || raw.isEmpty()) return List.of();
+        List<String> out = new ArrayList<>(raw.size());
+        for (String depId : raw) {
+            String fullDep = depId.contains("/") ? depId : quest.chapterId() + "/" + depId;
+            if (byId.containsKey(fullDep)) { out.add(fullDep); continue; }
+            if (!depId.contains("/")) {
+                Optional<Quest> found = QuestRegistry.questByBareId(depId);
+                if (found.isPresent() && byId.containsKey(found.get().fullId())) {
+                    out.add(found.get().fullId());
                 }
             }
-            if (++guard > 16) break; // deep dep chains shouldn't exceed this in practice
-        } while (changed);
+            // Missing deps are silently dropped — matches the old behavior of
+            // dependenciesSatisfied() which treats unknown deps as unsatisfied
+            // but doesn't brick the dependent quest.
+        }
+        return out;
     }
 
     /**

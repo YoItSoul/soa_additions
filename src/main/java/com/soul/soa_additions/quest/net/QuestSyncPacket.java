@@ -62,15 +62,7 @@ public record QuestSyncPacket(PackMode packMode, boolean serverEnforced, List<Qu
 
         List<QuestSnapshotEntry> out = new ArrayList<>(tp.size());
         for (QuestProgress qp : tp.all()) {
-            List<Integer> counts = new ArrayList<>(qp.tasks().size());
-            for (var t : qp.tasks()) counts.add(t.count());
-            out.add(new QuestSnapshotEntry(
-                    qp.fullId(),
-                    qp.status(),
-                    counts,
-                    qp.teamClaimed(),
-                    qp.hasClaimed(player.getUUID())
-            ));
+            out.add(QuestSnapshotEntry.from(qp, player.getUUID()));
         }
         PackModeData pmData = PackModeData.get(player.server);
         return new QuestSyncPacket(pmData.mode(), pmData.serverEnforced(), out);

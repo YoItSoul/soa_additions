@@ -1,6 +1,0 @@
-{
-  "variants": {
-    "on=false": { "model": "soa_additions:block/grove_boon_block" },
-    "on=true":  { "model": "soa_additions:block/grove_boon_block_on" }
-  }
-}

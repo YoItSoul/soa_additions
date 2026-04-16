@@ -1,10 +1,13 @@
 package com.soul.soa_additions.quest.net;
 
+import com.soul.soa_additions.quest.progress.QuestProgress;
+import com.soul.soa_additions.quest.progress.TaskProgress;
 import com.soul.soa_additions.quest.progress.QuestStatus;
 import net.minecraft.network.FriendlyByteBuf;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Wire-format row for a single quest's progress. Kept minimal — the client
@@ -38,5 +41,19 @@ public record QuestSnapshotEntry(
         boolean teamClaimed = buf.readBoolean();
         boolean localClaimed = buf.readBoolean();
         return new QuestSnapshotEntry(id, st, counts, teamClaimed, localClaimed);
+    }
+
+    /** Build the wire row for a given viewer. Extracted so the full-snapshot
+     *  and delta-diff paths can't drift in what they consider "the same row". */
+    public static QuestSnapshotEntry from(QuestProgress qp, UUID viewer) {
+        List<Integer> counts = new ArrayList<>(qp.tasks().size());
+        for (TaskProgress t : qp.tasks()) counts.add(t.count());
+        return new QuestSnapshotEntry(
+                qp.fullId(),
+                qp.status(),
+                counts,
+                qp.teamClaimed(),
+                qp.hasClaimed(viewer)
+        );
     }
 }

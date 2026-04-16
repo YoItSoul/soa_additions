@@ -35,10 +35,6 @@ public final class ModCreativeTabs {
                         output.accept(ModBlocks.ETHER_ORE_BLOCK.get());
                         output.accept(ModBlocks.INFERNIUM_ORE_BLOCK.get());
                         output.accept(ModBlocks.VOID_ORE_BLOCK.get());
-
-                        // Grove
-                        output.accept(ModBlocks.GROVE_SPAWN_BLOCK.get());
-                        output.accept(ModBlocks.GROVE_BOON_BLOCK.get());
                     })
                     .build());
 

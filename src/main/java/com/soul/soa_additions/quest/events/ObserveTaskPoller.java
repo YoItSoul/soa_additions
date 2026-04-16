@@ -2,7 +2,7 @@ package com.soul.soa_additions.quest.events;
 
 import com.soul.soa_additions.quest.QuestRegistry;
 import com.soul.soa_additions.quest.model.Quest;
-import com.soul.soa_additions.quest.net.QuestSyncPacket;
+import com.soul.soa_additions.quest.net.QuestDeltaPacket;
 import com.soul.soa_additions.quest.progress.QuestEvaluator;
 import com.soul.soa_additions.quest.progress.QuestNotifier;
 import com.soul.soa_additions.quest.progress.QuestProgress;
@@ -38,6 +38,10 @@ import java.util.List;
  */
 public final class ObserveTaskPoller {
 
+    // Cap raycast reach so a single mis-typed ObserveTask with maxReach=256
+    // cannot drag the entity-hit AABB across an entire chunk of sky.
+    private static final double MAX_OBSERVE_REACH = 128.0;
+
     private ObserveTaskPoller() {}
 
     /** Per-poll bookkeeping for one (quest, taskIndex, task) triple. */
@@ -52,6 +56,7 @@ public final class ObserveTaskPoller {
         QuestTeam team = teams.teamOf(player);
         QuestProgressData data = QuestProgressData.get(player.server);
         TeamQuestProgress tp = data.forTeam(team.id());
+        QuestDeltaPacket.Capture delta = QuestDeltaPacket.Capture.of(player);
 
         // Walk only observe-task entries via the index. Cache quest status so
         // quests with multiple observe tasks don't pay recompute per-ref.
@@ -73,6 +78,7 @@ public final class ObserveTaskPoller {
             if (ot.reach() > maxReach) maxReach = ot.reach();
         }
         if (pending == null) return;
+        if (maxReach > MAX_OBSERVE_REACH) maxReach = MAX_OBSERVE_REACH;
 
         // One block raycast and (optionally) one entity raycast, sized to the
         // largest reach any pending task wants.
@@ -135,7 +141,7 @@ public final class ObserveTaskPoller {
 
         if (changed) {
             data.touch();
-            QuestSyncPacket.sendToTeam(player);
+            delta.sendChanges(player);
         }
     }
 }

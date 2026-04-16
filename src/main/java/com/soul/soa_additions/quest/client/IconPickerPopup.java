@@ -49,6 +49,10 @@ public final class IconPickerPopup {
 
     private static List<Entry> CACHED_ALL;
 
+    public static void invalidateCache() {
+        CACHED_ALL = null;
+    }
+
     public IconPickerPopup(Consumer<String> onPick) {
         this.onPick = onPick;
         this.all = loadAll();

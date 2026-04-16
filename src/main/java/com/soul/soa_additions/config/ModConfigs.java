@@ -8,7 +8,6 @@ public final class ModConfigs {
 
     public static final ForgeConfigSpec SPEC;
     public static final ForgeConfigSpec.BooleanValue ENABLE_TOOL_REQUIREMENTS;
-    public static final ForgeConfigSpec.BooleanValue ENABLE_GROVE_BOONS;
     public static final ForgeConfigSpec.DoubleValue TOOL_DAMAGE_MULTIPLIER;
     public static final ForgeConfigSpec.BooleanValue ENABLE_JVM_PROFILER;
     public static final ForgeConfigSpec.IntValue JVM_PROFILER_INTERVAL_SECONDS;
@@ -43,9 +42,6 @@ public final class ModConfigs {
         ENABLE_TOOL_REQUIREMENTS = builder
                 .comment("If true, breaking high-tier ores without the required tool deals heavy damage to the tool.")
                 .define("enableToolRequirements", false);
-        ENABLE_GROVE_BOONS = builder
-                .comment("If true, Grove Boon blocks apply their effects.")
-                .define("enableGroveBoons", true);
         TOOL_DAMAGE_MULTIPLIER = builder
                 .comment("Damage multiplier applied to tools that break blocks they cannot mine.")
                 .defineInRange("toolDamageMultiplier", 10.0D, 1.0D, 100.0D);
