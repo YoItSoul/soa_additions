@@ -39,6 +39,14 @@ public final class ClientQuestState {
         serverEnforced = pkt.serverEnforced();
     }
 
+    /** Merge a delta packet into the existing cache without clearing unchanged
+     *  rows. Pack mode can't change via a delta — that's a full-sync concern. */
+    public static void applyDelta(QuestDeltaPacket pkt) {
+        Map<String, QuestSnapshotEntry> merged = new HashMap<>(byId);
+        for (QuestSnapshotEntry e : pkt.entries()) merged.put(e.fullId(), e);
+        byId = merged;
+    }
+
     public static PackMode packMode() { return packMode; }
 
     /** True when the server admin pre-set the pack mode via config. */

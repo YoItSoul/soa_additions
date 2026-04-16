@@ -1,8 +1,6 @@
 package com.soul.soa_additions.block;
 
 import com.soul.soa_additions.SoaAdditions;
-import com.soul.soa_additions.block.custom.GroveBoonBlock;
-import com.soul.soa_additions.block.custom.GroveSpawnBlock;
 import com.soul.soa_additions.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -33,18 +31,6 @@ public final class ModBlocks {
     public static final RegistryObject<Block> VOID_ORE_BLOCK      = registerBlock("void_ore_block",      () -> new Block(ORE_PROPERTIES));
     public static final RegistryObject<Block> ABYSSAL_ORE_BLOCK   = registerBlock("abyssal_ore_block",   () -> new Block(ORE_PROPERTIES));
     public static final RegistryObject<Block> ETHER_ORE_BLOCK     = registerBlock("ether_ore_block",     () -> new Block(ORE_PROPERTIES));
-
-    // Grove: shrine spawn + active shrine (unbreakable, glows)
-    public static final RegistryObject<Block> GROVE_SPAWN_BLOCK = registerBlock("grove_spawn_block",
-            () -> new GroveSpawnBlock(ORE_PROPERTIES));
-
-    public static final RegistryObject<Block> GROVE_BOON_BLOCK = registerBlock("grove_boon_block",
-            () -> new GroveBoonBlock(BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE)
-                    .mapColor(MapColor.STONE)
-                    .strength(-1.0f, Float.MAX_VALUE)
-                    .requiresCorrectToolForDrops()
-                    .lightLevel(state -> 5)
-                    .sound(SoundType.STONE)));
 
     private ModBlocks() {}
 

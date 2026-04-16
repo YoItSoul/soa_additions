@@ -10,7 +10,8 @@ import java.util.function.Supplier;
 /**
  * Client→server claim request. Server re-validates status via
  * {@link ClaimService#claim} (never trusts the client's view of READY) and
- * responds by broadcasting a fresh {@link QuestSyncPacket} to the whole team.
+ * responds with a {@link QuestDeltaPacket} covering only the quests whose
+ * state changed (claimed + any auto-claimed downstream).
  */
 public record QuestClaimPacket(String fullQuestId) {
 
@@ -27,8 +28,9 @@ public record QuestClaimPacket(String fullQuestId) {
         c.enqueueWork(() -> {
             ServerPlayer player = c.getSender();
             if (player == null) return;
+            QuestDeltaPacket.Capture delta = QuestDeltaPacket.Capture.of(player);
             ClaimService.claim(player, pkt.fullQuestId);
-            QuestSyncPacket.sendToTeam(player);
+            delta.sendChanges(player);
         });
         c.setPacketHandled(true);
     }

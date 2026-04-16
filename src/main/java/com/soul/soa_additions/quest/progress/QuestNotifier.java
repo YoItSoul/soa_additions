@@ -1,5 +1,6 @@
 package com.soul.soa_additions.quest.progress;
 
+import com.soul.soa_additions.SoaAdditions;
 import com.soul.soa_additions.quest.QuestRegistry;
 import com.soul.soa_additions.quest.i18n.QuestText;
 import com.soul.soa_additions.quest.model.Chapter;
@@ -15,10 +16,16 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.server.ServerStoppingEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Broadcasts "Quest completed: <title>!" chat messages when a quest
@@ -29,7 +36,20 @@ import java.util.UUID;
  * players get it for themselves and team members see each other's
  * completions in real time.</p>
  */
+@Mod.EventBusSubscriber(modid = SoaAdditions.MODID)
 public final class QuestNotifier {
+
+    // Key under player persistent data. Using the Forge PERSISTED_NBT_TAG
+    // sub-compound so this survives death + full logout.
+    private static final String NOTIFIED_KEY = "soa_quests_notified";
+
+    // Per-session in-memory cache. The old code round-tripped the full NBT
+    // list on every single markNotified call, which during a multi-quest
+    // auto-claim sweep meant one NBT write per claimed quest. Now we mutate
+    // the in-memory set, track a dirty flag per player, and flush once on
+    // logout or server shutdown.
+    private static final Map<UUID, Set<String>> CACHE = new ConcurrentHashMap<>();
+    private static final Set<UUID> DIRTY = ConcurrentHashMap.newKeySet();
 
     private QuestNotifier() {}
 
@@ -70,19 +90,13 @@ public final class QuestNotifier {
         // redundant with the sweep the caller already runs.
     }
 
-    /**
-     * Replay "Quest completed: <title>!" messages to a single player for
-     * every quest their team has already completed (status READY or
-     * CLAIMED). Used on login and after joining an existing team so a
-     * catching-up player sees everything the team has finished.
-     */
-    // Key under player persistent data. Using the Forge PERSISTED_NBT_TAG
-    // sub-compound so this survives death + full logout.
-    private static final String NOTIFIED_KEY = "soa_quests_notified";
+    private static Set<String> notifiedSet(ServerPlayer player) {
+        return CACHE.computeIfAbsent(player.getUUID(), id -> loadFromNbt(player));
+    }
 
-    private static Set<String> loadNotified(ServerPlayer player) {
+    private static Set<String> loadFromNbt(ServerPlayer player) {
         CompoundTag root = player.getPersistentData().getCompound(Player.PERSISTED_NBT_TAG);
-        Set<String> out = new HashSet<>();
+        Set<String> out = ConcurrentHashMap.newKeySet();
         if (!root.contains(NOTIFIED_KEY, Tag.TAG_LIST)) return out;
         ListTag list = root.getList(NOTIFIED_KEY, Tag.TAG_STRING);
         for (int i = 0; i < list.size(); i++) out.add(list.getString(i));
@@ -90,35 +104,25 @@ public final class QuestNotifier {
     }
 
     private static void markNotified(ServerPlayer player, String fullId) {
-        // Check the NBT list directly to avoid deserializing the whole set
-        // just to add one entry.
-        CompoundTag root = player.getPersistentData().getCompound(Player.PERSISTED_NBT_TAG);
-        ListTag list;
-        if (root.contains(NOTIFIED_KEY, Tag.TAG_LIST)) {
-            list = root.getList(NOTIFIED_KEY, Tag.TAG_STRING);
-            for (int i = 0; i < list.size(); i++) {
-                if (list.getString(i).equals(fullId)) return; // already notified
-            }
-        } else {
-            list = new ListTag();
-        }
-        list.add(StringTag.valueOf(fullId));
-        root.put(NOTIFIED_KEY, list);
-        player.getPersistentData().put(Player.PERSISTED_NBT_TAG, root);
+        Set<String> set = notifiedSet(player);
+        if (set.add(fullId)) DIRTY.add(player.getUUID());
     }
 
-    private static void saveNotified(ServerPlayer player, Set<String> ids) {
+    private static void flush(ServerPlayer player) {
+        UUID id = player.getUUID();
+        if (!DIRTY.remove(id)) return;
+        Set<String> set = CACHE.get(id);
+        if (set == null) return;
         CompoundTag persisted = player.getPersistentData().getCompound(Player.PERSISTED_NBT_TAG);
         ListTag list = new ListTag();
-        for (String id : ids) list.add(StringTag.valueOf(id));
+        for (String qid : set) list.add(StringTag.valueOf(qid));
         persisted.put(NOTIFIED_KEY, list);
         player.getPersistentData().put(Player.PERSISTED_NBT_TAG, persisted);
     }
 
     public static void replayCompleted(ServerPlayer player, TeamQuestProgress team) {
-        Set<String> notified = loadNotified(player);
+        Set<String> notified = notifiedSet(player);
         int count = 0;
-        boolean dirty = false;
         for (Chapter chapter : QuestRegistry.allChapters()) {
             for (Quest quest : chapter.quests()) {
                 QuestProgress qp = team.peek(quest.fullId());
@@ -129,7 +133,7 @@ public final class QuestNotifier {
                 // brand-new completions (e.g. team-mate finished it while this
                 // player was offline) should re-notify.
                 if (!notified.add(quest.fullId())) continue;
-                dirty = true;
+                DIRTY.add(player.getUUID());
 
                 MutableComponent msg = Component.literal("Quest completed: ")
                         .withStyle(ChatFormatting.GREEN)
@@ -139,11 +143,27 @@ public final class QuestNotifier {
                 count++;
             }
         }
-        if (dirty) saveNotified(player, notified);
         if (count > 0) {
             player.sendSystemMessage(Component.literal("(" + count + " quest"
                     + (count == 1 ? "" : "s") + " already completed by your team)")
                     .withStyle(ChatFormatting.DARK_GRAY));
         }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
+        if (event.getEntity() instanceof ServerPlayer sp) {
+            flush(sp);
+            CACHE.remove(sp.getUUID());
+        }
+    }
+
+    @SubscribeEvent
+    public static void onServerStopping(ServerStoppingEvent event) {
+        for (ServerPlayer sp : event.getServer().getPlayerList().getPlayers()) {
+            flush(sp);
+        }
+        CACHE.clear();
+        DIRTY.clear();
     }
 }

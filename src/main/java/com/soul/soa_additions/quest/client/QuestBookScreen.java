@@ -24,8 +24,10 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
+import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -75,7 +77,7 @@ public final class QuestBookScreen extends Screen {
     private static int cCLAIM_BUTTON, cSUBMIT_BUTTON, cCHECKMARK_BOX;
     private static int cSTATUS_LOCKED, cSTATUS_VISIBLE, cSTATUS_READY, cSTATUS_CLAIMED;
 
-    private static void cacheColors() {
+    public static void cacheColors() {
         cBG             = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.BACKGROUND,         0x80000000);
         cBG_GRAD        = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.BACKGROUND_GRADIENT, 0x80000000);
         cPANE           = com.soul.soa_additions.config.QuestBookConfig.argb(com.soul.soa_additions.config.QuestBookConfig.LEFT_PANE,          0xC01A1F33);
@@ -145,6 +147,11 @@ public final class QuestBookScreen extends Screen {
         };
     }
 
+    // Cycle/self-ref detection is O(N² × edges). renderGraph used to run it
+    // every frame in edit mode; now it runs only when a mutation landed since
+    // the last pass. Set true on anything that could change quests or their
+    // dependencies (chapter switch, incoming edit packet, initial open).
+    private boolean validationDirty = true;
     private List<Chapter> chapters = List.of();
     /** Set of chapter ids whose children are collapsed in the side list. */
     private final java.util.Set<String> collapsedChapters = new java.util.HashSet<>();
@@ -323,6 +330,7 @@ public final class QuestBookScreen extends Screen {
     public static void onChapterMutated(String chapterId) {
         QuestBookScreen s = activeInstance;
         if (s == null) return;
+        s.validationDirty = true;
         // Always refresh the chapter list so adds/deletes/renames/reorders
         // show up immediately in the side pane — previously this early-returned
         // unless the mutation targeted the currently-selected chapter, which
@@ -378,6 +386,7 @@ public final class QuestBookScreen extends Screen {
         this.panX = 0;
         this.panY = 0;
         this.zoom = 1.0f;
+        this.validationDirty = true;
     }
 
     /** Depth-first search through the tree-ordered chapter list for the first
@@ -989,8 +998,12 @@ public final class QuestBookScreen extends Screen {
         nodeBounds.clear();
         hoveredQuest = null;
         if (selected == null || layout == null) return;
-        if (inEditMode()) recomputeEditorValidation();
-        else { cyclicEdgeKeys.clear(); selectedChapterSelfRefs = false; }
+        if (inEditMode()) {
+            if (validationDirty) {
+                recomputeEditorValidation();
+                validationDirty = false;
+            }
+        } else { cyclicEdgeKeys.clear(); selectedChapterSelfRefs = false; }
 
         int originX = LEFT_PANE_WIDTH + 28;
         int originY = HEADER_H + 16;
@@ -1148,37 +1161,37 @@ public final class QuestBookScreen extends Screen {
                 if (hovered) strokeRhombus(g, x, y, size, outline);
             }
             case ICON -> {
-                // Flat-color silhouette of the icon at 2× size. We cache a
-                // boolean alpha mask sampled from the item's texture atlas
-                // sprite on first use; subsequent renders are a cheap pixel
-                // loop filling each mask cell with the status color.
-                boolean[][] mask = getSilhouetteMask(iconStack);
-                if (mask == null) {
-                    // Couldn't sample the texture for some reason — fall
-                    // back to a plain square so the node still reads.
+                // Flat-color silhouette of the icon. The mask is sampled once
+                // from the item's texture atlas sprite and baked into a 32×32
+                // white-on-alpha DynamicTexture. Rendering is then a single
+                // tinted blit instead of up-to-1024 g.fill() calls per frame.
+                SilhouetteTex tex = getSilhouetteTex(iconStack);
+                if (tex == null) {
+                    // Couldn't sample the texture — fall back to a plain square
+                    // so the node still reads.
                     g.fill(x, y, x + size, y + size, color);
                     drawBox(g, x, y, size, size, outline);
                 } else {
-                    int mh = mask.length, mw = mask[0].length;
-                    // Scale the mask to fit the node's footprint.
-                    float sx = (float) size / mw;
-                    float sy = (float) size / mh;
-                    for (int py = 0; py < mh; py++) {
-                        for (int px = 0; px < mw; px++) {
-                            if (!mask[py][px]) continue;
-                            int dx0 = x + (int) (px * sx);
-                            int dy0 = y + (int) (py * sy);
-                            int dx1 = x + (int) ((px + 1) * sx);
-                            int dy1 = y + (int) ((py + 1) * sy);
-                            if (dx1 <= dx0) dx1 = dx0 + 1;
-                            if (dy1 <= dy0) dy1 = dy0 + 1;
-                            g.fill(dx0, dy0, dx1, dy1, color);
-                        }
-                    }
-                    if (hovered) strokeSilhouette(g, x, y, size, mask, outline);
+                    blitTinted(g, tex.fillId(), x, y, size, size, color);
+                    if (hovered) blitTinted(g, tex.strokeId(), x, y, size, size, outline);
                 }
             }
         }
+    }
+
+    /** Tint-and-blit a 32×32 silhouette (or stroke) texture into a node-sized
+     *  rect. The source texture is white-on-alpha; the ARGB {@code color} is
+     *  applied as a shader-color tint so the one texture can be reused for
+     *  every status color (locked/visible/ready/claimed) and hover outlines. */
+    private static void blitTinted(GuiGraphics g, ResourceLocation tex, int x, int y, int w, int h, int argb) {
+        float a = ((argb >>> 24) & 0xFF) / 255f;
+        float r = ((argb >>> 16) & 0xFF) / 255f;
+        float gg = ((argb >>> 8) & 0xFF) / 255f;
+        float b = (argb & 0xFF) / 255f;
+        g.setColor(r, gg, b, a);
+        // Scaling overload: stretch the full MASK_SIZE × MASK_SIZE source into the w × h node rect.
+        g.blit(tex, x, y, w, h, 0f, 0f, MASK_SIZE, MASK_SIZE, MASK_SIZE, MASK_SIZE);
+        g.setColor(1f, 1f, 1f, 1f);
     }
 
     private static void drawBox(GuiGraphics g, int x, int y, int w, int h, int color) {
@@ -1278,6 +1291,13 @@ public final class QuestBookScreen extends Screen {
     // Sentinel used when mask sampling fails, so we don't retry every frame.
     private static final boolean[][] SILHOUETTE_MISS = new boolean[0][];
 
+    /** Pre-baked silhouette + edge-stroke textures for ICON-shape nodes.
+     *  Replaces the per-pixel g.fill() loop (up to 1024 draw calls per node
+     *  per frame) with a single tinted blit. */
+    private record SilhouetteTex(ResourceLocation fillId, ResourceLocation strokeId) {}
+    private static final Map<ResourceLocation, SilhouetteTex> SILHOUETTE_TEX = new HashMap<>();
+    private static final SilhouetteTex SILHOUETTE_TEX_MISS = new SilhouetteTex(null, null);
+
     private static boolean[][] getSilhouetteMask(ItemStack stack) {
         ResourceLocation key = BuiltInRegistries.ITEM.getKey(stack.getItem());
         boolean[][] cached = SILHOUETTE_CACHE.get(key);
@@ -1285,6 +1305,63 @@ public final class QuestBookScreen extends Screen {
         boolean[][] mask = buildMask(stack);
         SILHOUETTE_CACHE.put(key, mask == null ? SILHOUETTE_MISS : mask);
         return mask;
+    }
+
+    private static SilhouetteTex getSilhouetteTex(ItemStack stack) {
+        ResourceLocation key = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        SilhouetteTex cached = SILHOUETTE_TEX.get(key);
+        if (cached != null) return cached == SILHOUETTE_TEX_MISS ? null : cached;
+        boolean[][] mask = getSilhouetteMask(stack);
+        if (mask == null) {
+            SILHOUETTE_TEX.put(key, SILHOUETTE_TEX_MISS);
+            return null;
+        }
+        try {
+            SilhouetteTex tex = bakeSilhouetteTex(key, mask);
+            SILHOUETTE_TEX.put(key, tex);
+            return tex;
+        } catch (Throwable t) {
+            SILHOUETTE_TEX.put(key, SILHOUETTE_TEX_MISS);
+            return null;
+        }
+    }
+
+    private static SilhouetteTex bakeSilhouetteTex(ResourceLocation itemKey, boolean[][] mask) {
+        int mh = mask.length, mw = mask[0].length;
+        NativeImage fill = new NativeImage(NativeImage.Format.RGBA, mw, mh, false);
+        NativeImage stroke = new NativeImage(NativeImage.Format.RGBA, mw, mh, false);
+        for (int py = 0; py < mh; py++) {
+            for (int px = 0; px < mw; px++) {
+                fill.setPixelRGBA(px, py, mask[py][px] ? 0xFFFFFFFF : 0);
+                boolean edge = mask[py][px] && (
+                        px == 0 || px == mw - 1 || py == 0 || py == mh - 1
+                        || !mask[py][px - 1] || !mask[py][px + 1]
+                        || !mask[py - 1][px] || !mask[py + 1][px]);
+                stroke.setPixelRGBA(px, py, edge ? 0xFFFFFFFF : 0);
+            }
+        }
+        DynamicTexture fillTex = new DynamicTexture(fill);
+        DynamicTexture strokeTex = new DynamicTexture(stroke);
+        String safe = itemKey.getNamespace() + "_" + itemKey.getPath().replace('/', '_');
+        ResourceLocation fillId = Minecraft.getInstance().getTextureManager()
+                .register("soa_additions_silhouette_fill_" + safe, fillTex);
+        ResourceLocation strokeId = Minecraft.getInstance().getTextureManager()
+                .register("soa_additions_silhouette_stroke_" + safe, strokeTex);
+        return new SilhouetteTex(fillId, strokeId);
+    }
+
+    /** Drop every baked silhouette texture. Call on resource-pack reload so
+     *  regenerated sprites are re-sampled. Must close the GL textures, not
+     *  just clear the cache. */
+    public static void invalidateSilhouetteCache() {
+        Minecraft mc = Minecraft.getInstance();
+        for (SilhouetteTex tex : SILHOUETTE_TEX.values()) {
+            if (tex == SILHOUETTE_TEX_MISS) continue;
+            if (tex.fillId() != null) mc.getTextureManager().release(tex.fillId());
+            if (tex.strokeId() != null) mc.getTextureManager().release(tex.strokeId());
+        }
+        SILHOUETTE_TEX.clear();
+        SILHOUETTE_CACHE.clear();
     }
 
     /**
@@ -1330,30 +1407,6 @@ public final class QuestBookScreen extends Screen {
             return anySet ? mask : null;
         } catch (Throwable t) {
             return null;
-        }
-    }
-
-    /** Draw a 1-pixel outline around the silhouette's edge cells for hover. */
-    private static void strokeSilhouette(GuiGraphics g, int x, int y, int size, boolean[][] mask, int color) {
-        int mh = mask.length, mw = mask[0].length;
-        float sx = (float) size / mw;
-        float sy = (float) size / mh;
-        for (int py = 0; py < mh; py++) {
-            for (int px = 0; px < mw; px++) {
-                if (!mask[py][px]) continue;
-                boolean edge =
-                        px == 0 || px == mw - 1 || py == 0 || py == mh - 1
-                                || !mask[py][px - 1] || !mask[py][px + 1]
-                                || !mask[py - 1][px] || !mask[py + 1][px];
-                if (!edge) continue;
-                int dx0 = x + (int) (px * sx);
-                int dy0 = y + (int) (py * sy);
-                int dx1 = x + (int) ((px + 1) * sx);
-                int dy1 = y + (int) ((py + 1) * sy);
-                if (dx1 <= dx0) dx1 = dx0 + 1;
-                if (dy1 <= dy0) dy1 = dy0 + 1;
-                g.fill(dx0, dy0, dx1, dy1, color);
-            }
         }
     }
 

@@ -9,7 +9,6 @@ import com.soul.soa_additions.item.ModCreativeTabs;
 import com.soul.soa_additions.item.ModItems;
 import com.soul.soa_additions.network.ModNetworking;
 import com.soul.soa_additions.optimizer.JvmStatsSampler;
-import com.soul.soa_additions.poi.ModPOIs;
 import com.soul.soa_additions.registry.SoaTiers;
 import com.soul.soa_additions.telemetry.Telemetry;
 import com.soul.soa_additions.util.ConfigScanner;
@@ -44,7 +43,6 @@ public final class SoaAdditions {
         ModItems.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
-        ModPOIs.register(modEventBus);
         com.soul.soa_additions.donor.ModEntities.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);

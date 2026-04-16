@@ -20,7 +20,6 @@
 | **Quest Book** | Full quest system with visual dependency graph, in-game editor, teams, and browser overlay |
 | **Ore Tiers** | 4 new progression tiers past Netherite (Infernium, Void, Abyssal, Ether) |
 | **Headshots** | Skill-based combat with headshot multipliers for melee and projectiles |
-| **Grove Shrine** | World-spawn landmark with boon effects for new players |
 | **Server Profiler** | Background performance sampling with automatic JFR capture |
 | **Anti-Cheat** | Multi-layer cheat detection with mod scanning and behavior monitoring |
 | **Registry Export** | Dump all items, blocks, entities, etc. to JSON for documentation |
@@ -136,7 +135,7 @@ Four layers: client mod list scanning, silent-client flagging, OP command monito
 ## Configuration
 
 Everything is configurable in `soa_additions.toml`:
-- Toggle tool requirements, grove boons, profiler, web overlay, telemetry
+- Toggle tool requirements, profiler, web overlay, telemetry
 - Set the tool damage multiplier, profiler interval, overlay port
 - 40+ client-side color settings for the quest book UI
 

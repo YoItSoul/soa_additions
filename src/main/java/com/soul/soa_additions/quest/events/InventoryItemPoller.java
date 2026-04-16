@@ -2,7 +2,7 @@ package com.soul.soa_additions.quest.events;
 
 import com.soul.soa_additions.quest.QuestRegistry;
 import com.soul.soa_additions.quest.model.Quest;
-import com.soul.soa_additions.quest.net.QuestSyncPacket;
+import com.soul.soa_additions.quest.net.QuestDeltaPacket;
 import com.soul.soa_additions.quest.progress.QuestEvaluator;
 import com.soul.soa_additions.quest.progress.QuestNotifier;
 import com.soul.soa_additions.quest.progress.QuestProgress;
@@ -59,7 +59,7 @@ public final class InventoryItemPoller {
             if (stack.isEmpty()) continue;
             stacks.add(stack);
             ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
-            owned.merge(id, stack.getCount(), Integer::sum);
+            owned.put(id, owned.getOrDefault(id, 0) + stack.getCount());
         }
 
         TeamData teams = TeamData.get(player.server);
@@ -67,6 +67,7 @@ public final class InventoryItemPoller {
         QuestProgressData data = QuestProgressData.get(player.server);
         TeamQuestProgress tp = data.forTeam(team.id());
 
+        QuestDeltaPacket.Capture delta = QuestDeltaPacket.Capture.of(player);
         boolean changed = false;
         long tick = player.server.getTickCount();
         java.util.Map<Quest, QuestStatus> seen = new java.util.HashMap<>();
@@ -93,7 +94,11 @@ public final class InventoryItemPoller {
             int capped = Math.min(have, it.target());
             QuestProgress qp = tp.get(quest.fullId());
             TaskProgress progress = qp.task(ref.taskIndex());
-            if (progress.count() != capped) {
+            // Ratchet only — never let polling regress count. Once a "collect N"
+            // task has been satisfied to some level, losing the items (death,
+            // crafting, dropping) must not un-complete it. Otherwise a finished
+            // quest reverts to VISIBLE on the next inventory loss.
+            if (capped > progress.count()) {
                 progress.setCount(capped);
                 qp.touch(tick);
                 if (dirty == null) dirty = new java.util.HashSet<>();
@@ -116,8 +121,7 @@ public final class InventoryItemPoller {
 
         if (changed) {
             data.touch();
-            // Push a fresh snapshot so the quest book GUI updates live.
-            QuestSyncPacket.sendToTeam(player);
+            delta.sendChanges(player);
         }
     }
 }

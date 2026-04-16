@@ -11,6 +11,7 @@ import com.soul.soa_additions.quest.net.QuestEditPacket;
 import com.soul.soa_additions.quest.net.QuestEditStatePacket;
 import com.soul.soa_additions.quest.net.QuestMovePacket;
 import com.soul.soa_additions.quest.net.QuestSubmitPacket;
+import com.soul.soa_additions.quest.net.QuestDeltaPacket;
 import com.soul.soa_additions.quest.net.QuestSyncPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkDirection;
@@ -42,6 +43,12 @@ public final class ModNetworking {
                 .encoder(QuestSyncPacket::encode)
                 .decoder(QuestSyncPacket::decode)
                 .consumerMainThread(QuestSyncPacket::handle)
+                .add();
+
+        CHANNEL.messageBuilder(QuestDeltaPacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(QuestDeltaPacket::encode)
+                .decoder(QuestDeltaPacket::decode)
+                .consumerMainThread(QuestDeltaPacket::handle)
                 .add();
 
         CHANNEL.messageBuilder(QuestClaimPacket.class, id++, NetworkDirection.PLAY_TO_SERVER)
