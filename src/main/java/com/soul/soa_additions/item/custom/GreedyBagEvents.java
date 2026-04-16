@@ -7,10 +7,9 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerContainerEvent;
-import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -54,27 +53,20 @@ public final class GreedyBagEvents {
     }
 
     /**
-     * Post-pickup: scan inventory for anything that slipped through
-     * (e.g. items given by commands, loot, etc.).
+     * Per-tick absorber at HIGHEST priority so we run BEFORE ItemStages'
+     * own NORMAL-priority {@code onPlayerTick}, which drops restricted
+     * inventory items on the ground via {@code player.drop()} (40-tick
+     * pickup delay — easy to walk away from or have despawn). By absorbing
+     * here first, ItemStages never sees anything to drop.
+     *
+     * <p>Catches every entry path our event handlers miss: crafting results,
+     * /give, container shift-click, mob drops via auto-pickup, etc.</p>
      */
-    @SubscribeEvent
-    public static void onItemPickupPost(PlayerEvent.ItemPickupEvent event) {
-        handleChange(event.getEntity());
-    }
-
-    @SubscribeEvent
-    public static void onItemToss(ItemTossEvent event) {
-        handleChange(event.getPlayer());
-    }
-
-    @SubscribeEvent
-    public static void onDimensionChange(PlayerEvent.PlayerChangedDimensionEvent event) {
-        handleChange(event.getEntity());
-    }
-
-    @SubscribeEvent
-    public static void onContainerOpen(PlayerContainerEvent.Open event) {
-        handleChange(event.getEntity());
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        if (event.phase != TickEvent.Phase.START) return;
+        if (!(event.player instanceof ServerPlayer sp)) return;
+        handleChange(sp);
     }
 
     @SubscribeEvent

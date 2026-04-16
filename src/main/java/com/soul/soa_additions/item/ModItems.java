@@ -302,13 +302,13 @@ public final class ModItems {
             "\u00a7eSkip a blood moon to the next morning.",
             "\u00a77Consumed on use");
 
-    public static final RegistryObject<Item> AWAKENED_EYE = stageItem("awakened_eye",
-            new Item.Properties().stacksTo(1), false,
+    public static final RegistryObject<Item> AWAKENED_EYE = stageGrantItem("awakened_eye",
+            new Item.Properties().stacksTo(1), false, "abyssal_conquerer",
             "\u00a7eRight click to unlock game stage: \u00a76abyssal_conquerer");
 
     // ========== Skilled Wizard stage ==========
 
-    public static final RegistryObject<Item> ARCANE_CRYSTAL_BALL = stageItem("arcane_crystal_ball", true,
+    public static final RegistryObject<Item> ARCANE_CRYSTAL_BALL = stageGrantItem("arcane_crystal_ball", true, "master_wizard",
             "\u00a75You only made this to prove your magical skills.",
             "\u00a7eRight click to unlock game stage: \u00a76master_wizard");
 
@@ -327,17 +327,17 @@ public final class ModItems {
 
     // ========== Wither Slayer stage ==========
 
-    public static final RegistryObject<Item> BRAVERY_CERTIFICATE = stageItem("bravery_certificate", false,
+    public static final RegistryObject<Item> BRAVERY_CERTIFICATE = stageGrantItem("bravery_certificate", false, "fearless_man",
             "\u00a7e\u00a7oOnly the bravest ones shall have it.",
             "\u00a7eRight click to unlock game stage: \u00a76fearless_man");
 
-    public static final RegistryObject<Item> ENDER_CHARM = stageItem("ender_charm", false,
+    public static final RegistryObject<Item> ENDER_CHARM = stageGrantItem("ender_charm", false, "ender_charm",
             "\u00a73Only those who once fell into the abyss shall enter the End.",
             "\u00a7eRight click to unlock game stage: \u00a76ender_charm");
 
     // ========== Wyvern stage ==========
 
-    public static final RegistryObject<Item> SOLARIUM_STAR = stageItem("solarium_star", true,
+    public static final RegistryObject<Item> SOLARIUM_STAR = stageGrantItem("solarium_star", true, "descendant_of_the_sun",
             "\u00a7eRight click to unlock game stage: \u00a76descendant_of_the_sun",
             "\u00a76A new ore will spawn in the Nether");
 
@@ -624,7 +624,7 @@ public final class ModItems {
     public static final RegistryObject<Item> TWILIGHT_GEM = stageItem("twilight_gem", true,
             "\u00a7bA gem that gives out a mystical glow.",
             "\u00a76Used to activate the Twilight Forest portal.");
-    public static final RegistryObject<Item> TWILIGHT_SHIELD = stageItem("twilight_shield", true,
+    public static final RegistryObject<Item> TWILIGHT_SHIELD = stageGrantItem("twilight_shield", true, "twilight_shield",
             "\u00a76Can resist the heat from hell.",
             "\u00a7eRight click to unlock game stage: \u00a76twilight_shield");
 
@@ -653,6 +653,16 @@ public final class ModItems {
 
     private static RegistryObject<Item> stageItem(String name, Item.Properties props, boolean foil, String... tooltip) {
         return ITEMS.register(name, () -> new StageItem(props, foil, tooltip));
+    }
+
+    /** Stage-granting variant: right-clicking adds {@code stageToGrant} via
+     *  GameStages and consumes one from the stack. */
+    private static RegistryObject<Item> stageGrantItem(String name, boolean foil, String stageToGrant, String... tooltip) {
+        return ITEMS.register(name, () -> new StageItem(new Item.Properties(), foil, stageToGrant, tooltip));
+    }
+
+    private static RegistryObject<Item> stageGrantItem(String name, Item.Properties props, boolean foil, String stageToGrant, String... tooltip) {
+        return ITEMS.register(name, () -> new StageItem(props, foil, stageToGrant, tooltip));
     }
 
     private static RegistryObject<Item> rewardTicket(String name, boolean foil, String lootName, String... tooltip) {
