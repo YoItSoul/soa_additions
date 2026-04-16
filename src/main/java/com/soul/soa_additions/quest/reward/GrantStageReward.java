@@ -22,8 +22,10 @@ public record GrantStageReward(String stage, RewardScope scope) implements Quest
     @Override public void grant(ServerPlayer player) {
         try {
             Class<?> helperCls = Class.forName("net.darkhax.gamestages.GameStageHelper");
-            helperCls.getMethod("addStage", net.minecraft.world.entity.player.Player.class, String.class)
-                    .invoke(null, player, stage);
+            // GameStages 1.20.1: addStage(ServerPlayer, String...) — varargs,
+            // reflected as String[].class.
+            helperCls.getMethod("addStage", ServerPlayer.class, String[].class)
+                    .invoke(null, player, new String[]{stage});
         } catch (ClassNotFoundException ignored) {
             // GameStages not installed: silently skip.
         } catch (ReflectiveOperationException e) {

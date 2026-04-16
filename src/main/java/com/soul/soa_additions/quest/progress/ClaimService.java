@@ -53,6 +53,18 @@ public final class ClaimService {
 
         QuestProgress qp = teamProgress.get(fullQuestId);
 
+        // Snapshot which players still need their PLAYER-scope rewards BEFORE
+        // the reward loop. Marking inside the loop would set hasClaimed after
+        // the first reward, causing rewards 2..N for the same player to skip.
+        java.util.List<ServerPlayer> pendingClaimants = new java.util.ArrayList<>();
+        if (team.solo()) {
+            if (!qp.hasClaimed(claimant.getUUID())) pendingClaimants.add(claimant);
+        } else {
+            for (ServerPlayer member : teams.onlineMembers(claimant.server, team.id())) {
+                if (!qp.hasClaimed(member.getUUID())) pendingClaimants.add(member);
+            }
+        }
+
         boolean grantedAny = false;
         for (QuestReward reward : quest.rewards()) {
             if (reward.scope() == RewardScope.TEAM) {
@@ -61,23 +73,16 @@ public final class ClaimService {
                     grantedAny = true;
                 }
             } else {
-                // PLAYER scope — fan out across every online team member who
-                // hasn't personally claimed yet.
-                for (ServerPlayer member : teams.onlineMembers(claimant.server, team.id())) {
-                    if (!qp.hasClaimed(member.getUUID())) {
-                        reward.grant(member);
-                        qp.markPlayerClaimed(member.getUUID());
-                        grantedAny = true;
-                    }
-                }
-                // Solo-team case: team has no persistent record, so onlineMembers
-                // returns empty. Grant to claimant directly.
-                if (team.solo() && !qp.hasClaimed(claimant.getUUID())) {
-                    reward.grant(claimant);
-                    qp.markPlayerClaimed(claimant.getUUID());
+                // PLAYER scope — grant to every pending member. Marking is
+                // deferred until after all rewards have fired (see below).
+                for (ServerPlayer member : pendingClaimants) {
+                    reward.grant(member);
                     grantedAny = true;
                 }
             }
+        }
+        for (ServerPlayer member : pendingClaimants) {
+            qp.markPlayerClaimed(member.getUUID());
         }
         qp.markTeamClaimed(); // team-level rewards definitively distributed
         qp.markEverClaimed(); // sticky flag — downstream deps stay satisfied

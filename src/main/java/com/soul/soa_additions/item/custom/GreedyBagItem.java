@@ -99,19 +99,22 @@ public class GreedyBagItem extends Item implements ICurio {
 
     /**
      * Scan the player's inventory for restricted items and absorb them
-     * into this bag.
+     * into this bag. Walks main + armor + offhand to match ItemStages'
+     * own tick-scan range — anything we skip would be dropped on the
+     * ground by ItemStages on the next tick.
      */
     public void absorbRestrictedItems(ServerPlayer player, ItemStack bag) {
         Inventory inv = player.getInventory();
-        for (int i = 0; i < inv.items.size(); i++) {
-            ItemStack slot = inv.items.get(i);
+        int total = inv.getContainerSize();
+        for (int i = 0; i < total; i++) {
+            ItemStack slot = inv.getItem(i);
             if (slot.isEmpty() || slot.getItem() instanceof GreedyBagItem) continue;
 
             Restriction restriction = RestrictionManager.INSTANCE
                     .getRestriction(player, slot);
             if (restriction != null && restriction.isRestricted(slot)) {
                 storeItem(bag, slot.copy());
-                slot.setCount(0);
+                inv.setItem(i, ItemStack.EMPTY);
             }
         }
     }
