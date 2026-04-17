@@ -1,6 +1,7 @@
 package com.soul.soa_additions;
 
 import com.soul.soa_additions.anticheat.AntiCheatHandler;
+import com.soul.soa_additions.autoupdate.AutoUpdater;
 import com.soul.soa_additions.block.ModBlocks;
 import com.soul.soa_additions.compat.StartupProfiler;
 import com.soul.soa_additions.block.entity.ModBlockEntities;
@@ -75,6 +76,10 @@ public final class SoaAdditions {
     }
 
     private void onLoadComplete(final FMLLoadCompleteEvent event) {
+        // Start the auto-updater early so clients and servers both begin polling GitHub.
+        // Runs on its own daemon thread, so any network slowness is invisible to the game.
+        AutoUpdater.start();
+
         // Fire one telemetry report per launch, async, daemon thread. No startup cost.
         String mcVersion;
         try {
@@ -112,5 +117,6 @@ public final class SoaAdditions {
         if (event.getServer().isDedicatedServer()) {
             Telemetry.stopHeartbeat();
         }
+        AutoUpdater.stop();
     }
 }

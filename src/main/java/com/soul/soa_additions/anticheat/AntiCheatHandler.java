@@ -3,11 +3,9 @@ package com.soul.soa_additions.anticheat;
 import com.soul.soa_additions.SoaAdditions;
 import com.soul.soa_additions.network.ClientModReportPacket;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.GameType;
 import net.minecraftforge.event.CommandEvent;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -18,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Locale;
-import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -30,13 +27,8 @@ import java.util.concurrent.ConcurrentHashMap;
  *   <li><b>Client report scan.</b> On login the client's {@link ClientModScanner} sends a
  *       {@link ClientModReportPacket} with its full mod list and all available resource packs.
  *       The server scans every entry for forbidden substrings (xray, baritone, known cheat
- *       clients). A match flags the player.</li>
- *
- *   <li><b>Silent-client detection.</b> Every joining player is entered into an expected-report
- *       table with a deadline. If the report does not arrive within
- *       {@link #REPORT_DEADLINE_TICKS} ticks the player is flagged. This catches cheaters who
- *       strip, no-op, or never ship the client scanner — the only legitimate clients that do not
- *       report are ones whose anticheat has been tampered with.</li>
+ *       clients). A match flags the player. Note: a missing report is NOT treated as tampering,
+ *       because laggy or slow clients can legitimately send it late or drop the packet.</li>
  *
  *   <li><b>Command heuristic.</b> Any command executed by a player with OP permissions (level
  *       &ge; 2) is treated as a cheat unless the root command is on a small whitelist of
@@ -57,9 +49,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class AntiCheatHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger("SOA_AntiCheat");
-
-    /** How long a client has to submit its report after login before being flagged. */
-    private static final int REPORT_DEADLINE_TICKS = 200; // 10 seconds
 
     /** Substrings that mark a mod or resource pack as forbidden. Match is case-insensitive. */
     private static final Set<String> FORBIDDEN_KEYWORDS = Set.of(
@@ -123,9 +112,6 @@ public final class AntiCheatHandler {
             "packmode lock"       // tightens progression rather than loosening
     );
 
-    /** Players who still owe the server a client report. Maps UUID → server tick deadline. */
-    private static final Map<UUID, Long> PENDING_REPORTS = new ConcurrentHashMap<>();
-
     /** Players whose session has already been flagged — prevents repeat logging. */
     private static final Set<UUID> FLAGGED_THIS_SESSION = ConcurrentHashMap.newKeySet();
 
@@ -154,8 +140,6 @@ public final class AntiCheatHandler {
     // ────────────────────────────────────────────────────────────────────────────────
 
     public static void handleClientReport(ServerPlayer player, ClientModReportPacket report) {
-        PENDING_REPORTS.remove(player.getUUID());
-
         if (alreadyFlagged(player)) return;
 
         String hit = findForbiddenIn(report.mods());
@@ -176,16 +160,10 @@ public final class AntiCheatHandler {
     @SubscribeEvent
     public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
-        MinecraftServer server = player.getServer();
-        if (server == null) return;
 
         // Cross-check the three cheater backends first so that a stripped
         // advancement or edited NBT is re-applied before any gameplay starts.
         CheaterManager.crossCheckOnLogin(player);
-
-        long deadline = server.getTickCount() + REPORT_DEADLINE_TICKS;
-        PENDING_REPORTS.put(player.getUUID(), deadline);
-        LOGGER.debug("Awaiting client report from {} by tick {}", player.getGameProfile().getName(), deadline);
 
         // Player may have logged in already in creative/spectator — the gamemode-change
         // event doesn't fire for the initial mode, so check it explicitly here.
@@ -216,25 +194,7 @@ public final class AntiCheatHandler {
     @SubscribeEvent
     public static void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
-        PENDING_REPORTS.remove(player.getUUID());
         FLAGGED_THIS_SESSION.remove(player.getUUID());
-    }
-
-    @SubscribeEvent
-    public static void onServerTick(TickEvent.ServerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) return;
-        if (PENDING_REPORTS.isEmpty()) return;
-
-        long now = event.getServer().getTickCount();
-        PENDING_REPORTS.entrySet().removeIf(entry -> {
-            if (now < entry.getValue()) return false;
-            ServerPlayer player = event.getServer().getPlayerList().getPlayer(entry.getKey());
-            if (player != null && !alreadyFlagged(player)) {
-                flag(player, "silent client",
-                        "no anticheat report received within " + REPORT_DEADLINE_TICKS + " ticks — client scanner likely tampered with");
-            }
-            return true;
-        });
     }
 
     // ────────────────────────────────────────────────────────────────────────────────
@@ -265,6 +225,14 @@ public final class AntiCheatHandler {
 
         if (!(source.getEntity() instanceof ServerPlayer player)) return;
         if (!source.hasPermission(2)) return;
+
+        // Bypass when another mod dispatches the command with the player as the
+        // source (e.g. Chance Blocks running /summon on block break). Player-typed
+        // commands always come from the chat packet handler; mod-dispatched ones
+        // don't touch ServerGamePacketListenerImpl. Without this, gameplay
+        // features that use the command system get cancelled as if the player had
+        // typed them.
+        if (!isPlayerTypedCommand()) return;
 
         // Classify /soa subcommands individually — most are cheating (editmode
         // rewrites quests, claim/trigger bypass tasks, packmode set jumps
@@ -327,6 +295,18 @@ public final class AntiCheatHandler {
             if (rest.equals(path) || rest.startsWith(path + " ")) return true;
         }
         return false;
+    }
+
+    /**
+     * True iff the currently-executing command was typed by a player (routed
+     * through {@code ServerGamePacketListenerImpl}), rather than dispatched
+     * programmatically by another mod. Used to skip the OP-command block when
+     * a mod runs a command with the player as the source.
+     */
+    private static boolean isPlayerTypedCommand() {
+        return StackWalker.getInstance().walk(frames ->
+                frames.anyMatch(f -> f.getClassName().equals(
+                        "net.minecraft.server.network.ServerGamePacketListenerImpl")));
     }
 
     private static boolean isCheatAdvancementRevoke(String raw) {

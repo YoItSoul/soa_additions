@@ -1052,6 +1052,14 @@ public final class QuestBookScreen extends Screen {
         graphQuestIndex.clear();
         for (Quest qi : selected.quests()) graphQuestIndex.put(qi.fullId(), qi);
         graphHighlightedEdges.clear();
+        // Viewport bounds (content-space) for culling edges and nodes that
+        // fall entirely outside the visible graph area. Scissor clips pixels
+        // on the GPU, but the CPU-side rasterization loops and item-model
+        // setup still fire without this early-out.
+        double viewX0 = toContentX(LEFT_PANE_WIDTH);
+        double viewY0 = toContentY(HEADER_H);
+        double viewX1 = toContentX(this.width);
+        double viewY1 = toContentY(this.height);
         for (LayoutResult.Edge edge : layout.edges()) {
             int[] from = nodePixel(edge.from());
             int[] to = nodePixel(edge.to());
@@ -1071,6 +1079,11 @@ public final class QuestBookScreen extends Screen {
             int y1 = from[1] + srcSize / 2;
             int x2 = to[0]   + dstSize / 2;
             int y2 = to[1]   + dstSize / 2;
+            // Bounding-box cull: skip edges whose AABB lies entirely outside
+            // the viewport.
+            int ebx0 = Math.min(x1, x2), ebx1 = Math.max(x1, x2);
+            int eby0 = Math.min(y1, y2), eby1 = Math.max(y1, y2);
+            if (ebx1 < viewX0 || ebx0 > viewX1 || eby1 < viewY0 || eby0 > viewY1) continue;
             boolean highlight = hoveredFullId != null
                     && (edge.from().equals(hoveredFullId) || edge.to().equals(hoveredFullId));
             boolean cyclic = inEditMode() && cyclicEdgeKeys.contains(edgeKey(edge.from(), edge.to()));
@@ -1101,6 +1114,13 @@ public final class QuestBookScreen extends Screen {
             int y = px[1];
             int ns = q.sizeOrDefault();
             int iconS = Math.max(8, ns / 2);
+
+            // Viewport cull: renderFakeItem + shape drawing are both
+            // non-trivial, so skip nodes whose content-space AABB is entirely
+            // outside the visible viewport. Hover hit-testing uses content-
+            // space mouse coords earlier, so we don't need nodeBounds for the
+            // culled node either.
+            if (x + ns < viewX0 || x > viewX1 || y + ns < viewY0 || y > viewY1) continue;
 
             // Store screen-space bounds for tooltip/hover rendering outside
             // the graph transform.
@@ -1243,34 +1263,58 @@ public final class QuestBookScreen extends Screen {
         return result;
     }
 
+    /** Fill a circle as one {@link GuiGraphics#fill} span per row. Cuts fill()
+     *  calls from O(size²) (per-pixel) to O(size) — ~32× fewer at size 32. */
     private static void fillCircle(GuiGraphics g, int x, int y, int size, int color) {
         float r = size / 2f;
         float cx = x + r, cy = y + r;
         float r2 = r * r;
+        int xMin = x, xMax = x + size;
         for (int py = 0; py < size; py++) {
-            for (int px = 0; px < size; px++) {
-                float dx = (x + px + 0.5f) - cx;
-                float dy = (y + py + 0.5f) - cy;
-                if (dx * dx + dy * dy <= r2) {
-                    g.fill(x + px, y + py, x + px + 1, y + py + 1, color);
-                }
-            }
+            float dy = (y + py + 0.5f) - cy;
+            float dy2 = dy * dy;
+            if (dy2 > r2) continue;
+            float halfW = (float) Math.sqrt(r2 - dy2);
+            int startX = (int) Math.ceil(cx - halfW - 0.5f);
+            int endX   = (int) Math.floor(cx + halfW - 0.5f) + 1;
+            if (startX < xMin) startX = xMin;
+            if (endX > xMax) endX = xMax;
+            if (endX > startX) g.fill(startX, y + py, endX, y + py + 1, color);
         }
     }
 
+    /** Stroke a 1.2-px ring as at most two axis-aligned spans per row (the
+     *  left and right arcs). Same O(size) budget as {@link #fillCircle}. */
     private static void strokeCircle(GuiGraphics g, int x, int y, int size, int color) {
         float r = size / 2f;
         float cx = x + r, cy = y + r;
-        float outer = r * r;
-        float inner = (r - 1.2f) * (r - 1.2f);
+        float outer2 = r * r;
+        float innerR = r - 1.2f;
+        float inner2 = innerR * innerR;
+        int xMin = x, xMax = x + size;
         for (int py = 0; py < size; py++) {
-            for (int px = 0; px < size; px++) {
-                float dx = (x + px + 0.5f) - cx;
-                float dy = (y + py + 0.5f) - cy;
-                float d2 = dx * dx + dy * dy;
-                if (d2 <= outer && d2 >= inner) {
-                    g.fill(x + px, y + py, x + px + 1, y + py + 1, color);
-                }
+            float dy = (y + py + 0.5f) - cy;
+            float dy2 = dy * dy;
+            if (dy2 > outer2) continue;
+            float outerHalf = (float) Math.sqrt(outer2 - dy2);
+            int outerStart = (int) Math.ceil(cx - outerHalf - 0.5f);
+            int outerEnd   = (int) Math.floor(cx + outerHalf - 0.5f) + 1;
+            if (outerStart < xMin) outerStart = xMin;
+            if (outerEnd > xMax) outerEnd = xMax;
+            if (outerEnd <= outerStart) continue;
+            int yTop = y + py, yBot = yTop + 1;
+            if (dy2 >= inner2) {
+                // Row is entirely inside the band — one span.
+                g.fill(outerStart, yTop, outerEnd, yBot, color);
+            } else {
+                // Row crosses the hole — left arc + right arc.
+                float innerHalf = (float) Math.sqrt(inner2 - dy2);
+                int innerStart = (int) Math.ceil(cx - innerHalf - 0.5f);
+                int innerEnd   = (int) Math.floor(cx + innerHalf - 0.5f) + 1;
+                if (innerStart < outerStart) innerStart = outerStart;
+                if (innerEnd > outerEnd) innerEnd = outerEnd;
+                if (innerStart > outerStart) g.fill(outerStart, yTop, innerStart, yBot, color);
+                if (outerEnd > innerEnd) g.fill(innerEnd, yTop, outerEnd, yBot, color);
             }
         }
     }
@@ -1460,21 +1504,44 @@ public final class QuestBookScreen extends Screen {
         return stack;
     }
 
-    /** Bresenham line stamping a {@code thickness}×{@code thickness} square at
-     *  each step. Cheap enough for the ~50 edges a chapter has, and yields a
-     *  visually solid line at thickness 2-4 without needing a real rasterizer. */
+    /** Rasterize a {@code thickness}-px thick line. Axis-aligned lines collapse
+     *  to one {@link GuiGraphics#fill} call; for diagonals we step along the
+     *  major axis and emit a single {@code 1×thickness} (or {@code thickness×1})
+     *  span per step. This replaces the old per-pixel {@code thickness²} stamp,
+     *  cutting fill() calls by up to {@code thickness²}× on slow GPUs where
+     *  edge rendering was a primary driver of single-digit FPS. */
     private void drawThickLine(GuiGraphics g, int x1, int y1, int x2, int y2, int color, int thickness) {
         int half = thickness / 2;
         int dx = Math.abs(x2 - x1), dy = Math.abs(y2 - y1);
+        if (dx == 0 || dy == 0) {
+            int xa = Math.min(x1, x2) - half;
+            int xb = Math.max(x1, x2) - half + thickness;
+            int ya = Math.min(y1, y2) - half;
+            int yb = Math.max(y1, y2) - half + thickness;
+            g.fill(xa, ya, xb, yb, color);
+            return;
+        }
         int sx = x1 < x2 ? 1 : -1, sy = y1 < y2 ? 1 : -1;
-        int err = dx - dy;
-        int x = x1, y = y1;
-        while (true) {
-            g.fill(x - half, y - half, x - half + thickness, y - half + thickness, color);
-            if (x == x2 && y == y2) break;
-            int e2 = err * 2;
-            if (e2 > -dy) { err -= dy; x += sx; }
-            if (e2 < dx) { err += dx; y += sy; }
+        if (dx >= dy) {
+            // Near-horizontal: one vertical {@code 1×thickness} span per x.
+            int err = dx / 2;
+            int x = x1, y = y1;
+            for (int i = 0; i <= dx; i++) {
+                g.fill(x - half, y - half, x - half + 1, y - half + thickness, color);
+                err -= dy;
+                if (err < 0) { y += sy; err += dx; }
+                x += sx;
+            }
+        } else {
+            // Near-vertical: one horizontal {@code thickness×1} span per y.
+            int err = dy / 2;
+            int x = x1, y = y1;
+            for (int i = 0; i <= dy; i++) {
+                g.fill(x - half, y - half, x - half + thickness, y - half + 1, color);
+                err -= dx;
+                if (err < 0) { x += sx; err += dy; }
+                y += sy;
+            }
         }
     }
 
