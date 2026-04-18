@@ -1,0 +1,13 @@
+{
+  "default": [
+    { "level": 1, "name": "soa_additions:tconevo/bloodbound" }
+  ],
+  "perStat": {
+    "tconstruct:head": [
+      { "level": 1, "name": "soa_additions:tconevo/crystalys" }
+    ],
+    "tconstruct:limb": [
+      { "level": 1, "name": "soa_additions:tconevo/crystalys" }
+    ]
+  }
+}

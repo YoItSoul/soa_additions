@@ -83,8 +83,11 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-1.20.1-common-api:15.3.0.8")
     compileOnly fg.deobf("mezz.jei:jei-1.20.1-forge-api:15.3.0.8")
 
-    // Curios API — optional at runtime, slots only register when present.
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.4.7+1.20.1")
+    // Curios — compile-only. GreedyBagItem implements ICurio and would crash
+    // dev startup if the class linked against a missing ICurio, so it lives in
+    // the curios/ subpackage along with GreedyBagEvents, both gated behind a
+    // ModList.isLoaded("curios") check in SoaAdditions's constructor.
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.14.1+1.20.1")
 
     // ItemStages + GameStages — compile-only for GreedyBag stage checks.
     // Published by Darkhax on Jared's maven (already declared above).
@@ -95,6 +98,40 @@ dependencies {
     // Blood Arsenal items/blocks/rituals only register when BM is present at runtime.
     // Pulled via CurseMaven since BM doesn't publish a public maven for 1.20.1.
     compileOnly fg.deobf("curse.maven:blood-magic-224791:7253333")
+
+    // Botania — mana system drives four TConstructEvo modifiers (AuraSiphon,
+    // FaeVoice, GaiaWrath, ManaInfused). Compile-only; all four bail silently
+    // when Botania is absent at runtime via the INTEG_BOTANIA config gate.
+    compileOnly fg.deobf("curse.maven:botania-225643:5594997")
+
+    // ProjectE — EMC system drives the EternalDensity modifier. Compile-only.
+    compileOnly fg.deobf("curse.maven:projecte-226410:4901949")
+
+    // Avaritia Universal — damage types / infinity-tier hooks for Omnipotence.
+    // The TConstructEvo infinity-trait family falls back to vanilla magic
+    // damage if the Avaritia-specific sources aren't available at runtime.
+    compileOnly fg.deobf("curse.maven:avaritia-universal-891434:7141546")
+
+    // Tinkers' Construct + Mantle — compile-only for the tconstructevo subpackage.
+    // All TConstructEvo content only registers when TConstruct is loaded at
+    // runtime. Jars are vendored under libs/ so the modpack can be built
+    // offline without chasing CurseForge file IDs.
+    //
+    // The ForgeGradle "files() not deobfuscated" warning is cosmetic for 1.20.1
+    // Forge: the target mods publish their production jars with the same
+    // official names we compile against, so no runtime remap is needed.
+    compileOnly fg.deobf(files("libs/TConstruct-1.20.1-3.11.2.166.jar"))
+    compileOnly fg.deobf(files("libs/Mantle-1.20.1-1.11.104.jar"))
+
+    // Draconic Evolution + its hard deps (BrandonsCore, CodeChickenLib).
+    // These stay vendored because the DE author has disabled 3rd-party
+    // sharing on CurseForge, so curse.maven rejects the coordinates with
+    // "Curse Maven does not yet support mods that have disabled 3rd party
+    // sharing". Until that flag flips, libs/ is the only offline-buildable
+    // source for these three.
+    compileOnly fg.deobf(files("libs/Draconic-Evolution-1.20.1-3.1.2.621-universal.jar"))
+    compileOnly fg.deobf(files("libs/BrandonsCore-1.20.1-3.2.1.302-universal.jar"))
+    compileOnly fg.deobf(files("libs/CodeChickenLib-1.20.1-4.4.0.516-universal.jar"))
 }
 
 tasks.named('processResources', ProcessResources).configure {

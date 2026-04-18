@@ -1,0 +1,66 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "draconicevolution"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "type": "soa_additions:draconic_tool_upgrade",
+  "catalyst": {
+    "tag": "tconstruct:modifiable"
+  },
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "minecraft:nether_star"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:nether_star"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "draconicevolution:draconium_core"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "draconicevolution:draconium_core"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:emerald"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:emerald"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "draconicevolution:wyvern_core"
+      },
+      "consume": true
+    }
+  ],
+  "result": {
+    "item": "draconicevolution:wyvern_core"
+  },
+  "tier": "WYVERN",
+  "total_energy": 512000,
+  "modifier": "soa_additions:draconic_attack_damage"
+}

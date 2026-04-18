@@ -1,7 +1,6 @@
 package com.soul.soa_additions.item;
 
 import com.soul.soa_additions.SoaAdditions;
-import com.soul.soa_additions.item.custom.GreedyBagItem;
 import com.soul.soa_additions.quest.item.QuestBookItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -627,11 +626,6 @@ public final class ModItems {
     public static final RegistryObject<Item> TWILIGHT_SHIELD = stageGrantItem("twilight_shield", true, "twilight_shield",
             "\u00a76Can resist the heat from hell.",
             "\u00a7eRight click to unlock game stage: \u00a76twilight_shield");
-
-    // ========== Greedy Bag ==========
-
-    public static final RegistryObject<Item> GREEDY_BAG = ITEMS.register("greedy_bag",
-            () -> new GreedyBagItem(new Item.Properties().rarity(Rarity.EPIC)));
 
     // ========== Private constructor ==========
 

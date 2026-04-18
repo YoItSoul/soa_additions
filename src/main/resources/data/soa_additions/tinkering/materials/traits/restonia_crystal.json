@@ -1,0 +1,13 @@
+{
+  "default": [
+    { "level": 1, "name": "soa_additions:tconevo/crystalline" }
+  ],
+  "perStat": {
+    "tconstruct:head": [
+      { "level": 1, "name": "soa_additions:tconevo/piezoelectric" }
+    ],
+    "tconstruct:limb": [
+      { "level": 1, "name": "soa_additions:tconevo/piezoelectric" }
+    ]
+  }
+}

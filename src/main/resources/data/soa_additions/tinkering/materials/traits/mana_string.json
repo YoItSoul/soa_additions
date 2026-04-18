@@ -1,0 +1,8 @@
+{
+  "default": [],
+  "perStat": {
+    "tconstruct:limb": [
+      { "level": 1, "name": "soa_additions:tconevo/mana_infused" }
+    ]
+  }
+}

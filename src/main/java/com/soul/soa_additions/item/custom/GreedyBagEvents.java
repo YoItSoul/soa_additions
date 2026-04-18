@@ -12,7 +12,6 @@ import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.curios.api.CuriosApi;
 
 /**
@@ -20,8 +19,12 @@ import top.theillusivec4.curios.api.CuriosApi;
  * to absorb any newly-restricted items.  Also intercepts ground
  * pickups so that restricted items go straight into the bag
  * instead of being rejected.
+ *
+ * <p>Registered to the Forge event bus by {@link
+ * com.soul.soa_additions.curios.CuriosIntegration} when Curios is present.
+ * NOT annotated with {@code @Mod.EventBusSubscriber} so Forge's class scanner
+ * doesn't load it (and its ICurio-dependent siblings) when Curios is absent.
  */
-@Mod.EventBusSubscriber(modid = "soa_additions", bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class GreedyBagEvents {
 
     private GreedyBagEvents() {}

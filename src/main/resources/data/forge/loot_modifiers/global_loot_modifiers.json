@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "entries": [
+    "soa_additions:tconevo_artifact_abandoned_mineshaft",
+    "soa_additions:tconevo_artifact_desert_pyramid",
+    "soa_additions:tconevo_artifact_end_city_treasure",
+    "soa_additions:tconevo_artifact_igloo",
+    "soa_additions:tconevo_artifact_jungle_temple",
+    "soa_additions:tconevo_artifact_nether_bridge",
+    "soa_additions:tconevo_artifact_simple_dungeon",
+    "soa_additions:tconevo_artifact_stronghold_corridor",
+    "soa_additions:tconevo_artifact_stronghold_crossing",
+    "soa_additions:tconevo_artifact_stronghold_library",
+    "soa_additions:tconevo_artifact_village_weaponsmith",
+    "soa_additions:tconevo_artifact_woodland_mansion"
+  ]
+}

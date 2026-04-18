@@ -1,0 +1,13 @@
+{
+  "default": [],
+  "perStat": {
+    "tconstruct:head": [
+      { "level": 1, "name": "soa_additions:tconevo/fae_voice" },
+      { "level": 1, "name": "soa_additions:tconevo/mana_infused" }
+    ],
+    "tconstruct:limb": [
+      { "level": 1, "name": "soa_additions:tconevo/fae_voice" },
+      { "level": 1, "name": "soa_additions:tconevo/mana_infused" }
+    ]
+  }
+}

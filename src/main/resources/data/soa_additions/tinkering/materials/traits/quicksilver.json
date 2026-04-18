@@ -1,0 +1,11 @@
+{
+  "default": [],
+  "perStat": {
+    "tconstruct:head": [
+      { "level": 2, "name": "soa_additions:tconevo/modifiable" }
+    ],
+    "tconstruct:limb": [
+      { "level": 2, "name": "soa_additions:tconevo/modifiable" }
+    ]
+  }
+}

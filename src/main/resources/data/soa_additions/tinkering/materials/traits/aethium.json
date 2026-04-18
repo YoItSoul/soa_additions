@@ -1,0 +1,7 @@
+{
+  "default": [
+    { "level": 1, "name": "soa_additions:tconevo/executor" },
+    { "level": 1, "name": "soa_additions:tconevo/corrupting" }
+  ],
+  "perStat": {}
+}

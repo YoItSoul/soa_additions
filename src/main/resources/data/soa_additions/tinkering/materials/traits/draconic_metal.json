@@ -1,0 +1,13 @@
+{
+  "default": [],
+  "perStat": {
+    "tconstruct:head": [
+      { "level": 2, "name": "soa_additions:tconevo/evolved" },
+      { "level": 2, "name": "soa_additions:tconevo/soul_rend" }
+    ],
+    "tconstruct:limb": [
+      { "level": 2, "name": "soa_additions:tconevo/evolved" },
+      { "level": 2, "name": "soa_additions:tconevo/soul_rend" }
+    ]
+  }
+}

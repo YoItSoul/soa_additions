@@ -1,0 +1,7 @@
+{
+  "default": [
+    { "level": 2, "name": "soa_additions:tconevo/energized" },
+    { "level": 1, "name": "soa_additions:tconevo/juggernaut" }
+  ],
+  "perStat": {}
+}

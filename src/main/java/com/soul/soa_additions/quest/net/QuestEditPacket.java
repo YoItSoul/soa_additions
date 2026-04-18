@@ -162,44 +162,63 @@ public record QuestEditPacket(
     // ---------- server ----------
 
     private static void handleServer(QuestEditPacket pkt, ServerPlayer sender) {
-        if (sender == null) return;
-        if (!sender.hasPermissions(2)) return;
-        if (!EditModeTracker.isActive(sender.getUUID())) return;
+        org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger("soa_additions/quest-editor");
+        if (sender == null) {
+            log.warn("QuestEditPacket rejected: sender is null (op={} chapter={} quest={})",
+                    pkt.op, pkt.chapterId, pkt.questId);
+            return;
+        }
+        if (!sender.hasPermissions(2)) {
+            log.warn("QuestEditPacket rejected: {} lacks op level 2 (op={} {}/{})",
+                    sender.getGameProfile().getName(), pkt.op, pkt.chapterId, pkt.questId);
+            return;
+        }
+        if (!EditModeTracker.isActive(sender.getUUID())) {
+            log.warn("QuestEditPacket rejected: {} is NOT in edit mode — run /soa quests editmode true (op={} {}/{})",
+                    sender.getGameProfile().getName(), pkt.op, pkt.chapterId, pkt.questId);
+            return;
+        }
 
         Chapter chapter = QuestRegistry.chapter(pkt.chapterId).orElse(null);
-        if (chapter == null) return;
+        if (chapter == null) {
+            log.warn("QuestEditPacket rejected: chapter '{}' not found in registry (op={} quest={} by {})",
+                    pkt.chapterId, pkt.op, pkt.questId, sender.getGameProfile().getName());
+            return;
+        }
 
         Chapter replacement = applyToChapter(chapter, pkt);
-        if (replacement == null) return;
+        if (replacement == null) {
+            log.warn("QuestEditPacket rejected: applyToChapter returned null — no-op delete? (op={} {}/{} by {})",
+                    pkt.op, pkt.chapterId, pkt.questId, sender.getGameProfile().getName());
+            return;
+        }
 
         // Reject upserts that would introduce a dependency cycle. Cycles
         // would freeze the affected quests in LOCKED forever, so the editor
         // surfaces them in red and the server refuses the save outright.
         if (pkt.op == Op.UPSERT && introducesCycle(replacement, pkt.questId)) {
-            org.slf4j.LoggerFactory.getLogger("soa_additions/quest-editor")
-                    .warn("Refusing UPSERT of {}/{} by {}: dependency cycle",
-                            pkt.chapterId, pkt.questId, sender.getGameProfile().getName());
+            log.warn("Refusing UPSERT of {}/{} by {}: dependency cycle",
+                    pkt.chapterId, pkt.questId, sender.getGameProfile().getName());
             return;
         }
 
         QuestRegistry.updateChapter(replacement);
 
         FileQuestOverrideStorage storage = QuestLifecycleHandler.storage();
-        if (storage != null) {
+        if (storage == null) {
+            log.error("QuestEditPacket: storage is null — in-memory update applied but NOT persisted! " +
+                    "(op={} {}/{} by {})", pkt.op, pkt.chapterId, pkt.questId,
+                    sender.getGameProfile().getName());
+        } else {
             EditTarget target = EditModeTracker.targetOf(sender.getUUID());
-            if (storage.canWrite(replacement, target)) {
-                storage.saveChapter(replacement, target);
-            } else {
-                storage.saveChapter(replacement, EditTarget.WORLD_OVERRIDE);
-            }
+            EditTarget effective = storage.canWrite(replacement, target) ? target : EditTarget.WORLD_OVERRIDE;
+            log.info("QuestEditPacket saving: op={} {}/{} by {} target={} (requested={})",
+                    pkt.op, pkt.chapterId, pkt.questId, sender.getGameProfile().getName(),
+                    effective, target);
+            storage.saveChapter(replacement, effective);
         }
 
         ModNetworking.CHANNEL.send(PacketDistributor.ALL.noArg(), pkt);
-
-        org.slf4j.LoggerFactory.getLogger("soa_additions/quest-editor")
-                .info("Quest {} {}/{} by {}",
-                        pkt.op, pkt.chapterId, pkt.questId,
-                        sender.getGameProfile().getName());
     }
 
     // ---------- shared mutation ----------

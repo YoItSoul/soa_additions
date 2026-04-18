@@ -1,0 +1,15 @@
+{
+  "default": [
+    { "level": 1, "name": "tconstruct:crumbling" }
+  ],
+  "perStat": {
+    "tconstruct:head": [
+      { "level": 1, "name": "soa_additions:tconevo/relentless" },
+      { "level": 1, "name": "soa_additions:tconevo/opportunist" }
+    ],
+    "tconstruct:limb": [
+      { "level": 1, "name": "soa_additions:tconevo/relentless" },
+      { "level": 1, "name": "soa_additions:tconevo/opportunist" }
+    ]
+  }
+}

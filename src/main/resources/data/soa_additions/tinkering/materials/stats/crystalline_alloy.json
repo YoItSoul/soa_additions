@@ -1,0 +1,28 @@
+{
+  "stats": {
+    "tconstruct:head": {
+      "durability": 626,
+      "melee_attack": 8.5,
+      "mining_speed": 7.5,
+      "mining_tier": "minecraft:netherite"
+    },
+    "tconstruct:handle": {
+      "durability": 0.3,
+      "melee_damage": 0.0,
+      "melee_speed": 0.15,
+      "mining_speed": 0.15
+    },
+    "tconstruct:binding": {},
+    "tconstruct:grip": {
+      "accuracy": 0.2,
+      "durability": 0.25,
+      "melee_damage": 8.5
+    },
+    "tconstruct:limb": {
+      "accuracy": 0.2,
+      "draw_speed": -0.1,
+      "durability": 626,
+      "velocity": 1.25
+    }
+  }
+}
