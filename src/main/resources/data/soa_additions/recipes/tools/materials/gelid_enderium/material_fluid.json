@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "thermal"
+    }
+  ],
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "fluid": "soa_additions:molten_gelid_enderium",
+    "amount": 90
+  },
+  "temperature": 3200,
+  "output": "soa_additions:gelid_enderium"
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "pdp",
+    "DnD",
+    "pdp"
+  ],
+  "key": {
+    "p": { "tag": "forge:ender_pearls" },
+    "d": { "tag": "forge:ingots/dura_steel" },
+    "D": { "tag": "forge:ingots/dreadium" },
+    "n": { "item": "minecraft:nether_star" }
+  },
+  "result": { "item": "soa_additions:ender_charm" },
+  "show_notification": true
+}

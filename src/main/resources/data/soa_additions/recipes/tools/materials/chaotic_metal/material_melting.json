@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "draconicevolution"
+    }
+  ],
+  "type": "tconstruct:material_melting",
+  "input": "soa_additions:chaotic_metal",
+  "temperature": 3400,
+  "result": {
+    "fluid": "soa_additions:molten_chaotic_metal",
+    "amount": 90
+  }
+}

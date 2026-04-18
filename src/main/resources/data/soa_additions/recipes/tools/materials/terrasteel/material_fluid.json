@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "botania"
+    }
+  ],
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "fluid": "soa_additions:molten_terrasteel",
+    "amount": 90
+  },
+  "temperature": 1200,
+  "output": "soa_additions:terrasteel"
+}

@@ -1,0 +1,18 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:ingots/uru"
+  },
+  "result": {
+    "fluid": "soa_additions:molten_uru",
+    "amount": 90
+  },
+  "temperature": 1850,
+  "time": 120
+}

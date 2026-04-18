@@ -17,7 +17,7 @@ public record GrantStageReward(String stage, RewardScope scope) implements Quest
     public static final ResourceLocation TYPE = new ResourceLocation(SoaAdditions.MODID, "grant_stage");
 
     @Override public ResourceLocation type() { return TYPE; }
-    @Override public String describe() { return "Unlock stage: " + stage; }
+    @Override public String describe() { return "Unlock stage \"" + stage + "\""; }
 
     @Override public void grant(ServerPlayer player) {
         try {

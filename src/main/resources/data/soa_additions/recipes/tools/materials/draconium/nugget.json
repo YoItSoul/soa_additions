@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "draconicevolution"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:nuggets/draconium"
+  },
+  "material": "soa_additions:draconium",
+  "needed": 9,
+  "value": 1
+}

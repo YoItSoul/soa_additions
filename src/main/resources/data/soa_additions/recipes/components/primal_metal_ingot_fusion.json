@@ -1,0 +1,22 @@
+{
+  "conditions": [
+    { "type": "forge:mod_loaded", "modid": "draconicevolution" }
+  ],
+  "type": "draconicevolution:fusion_crafting",
+  "catalyst": {
+    "item": "minecraft:nether_star"
+  },
+  "ingredients": [
+    { "item": "minecraft:end_crystal" },
+    { "item": "minecraft:end_crystal" },
+    { "item": "minecraft:end_crystal" },
+    { "item": "minecraft:end_crystal" },
+    { "tag": "forge:ingots/gold" },
+    { "tag": "forge:ingots/iron" }
+  ],
+  "result": {
+    "item": "soa_additions:primal_metal_ingot"
+  },
+  "tier": "WYVERN",
+  "total_energy": 500000
+}

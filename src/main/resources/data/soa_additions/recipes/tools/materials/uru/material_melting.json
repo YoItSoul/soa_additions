@@ -1,0 +1,15 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "type": "tconstruct:material_melting",
+  "input": "soa_additions:uru",
+  "temperature": 1850,
+  "result": {
+    "fluid": "soa_additions:molten_uru",
+    "amount": 90
+  }
+}

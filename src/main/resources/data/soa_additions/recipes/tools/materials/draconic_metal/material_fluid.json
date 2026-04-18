@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "draconicevolution"
+    }
+  ],
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "fluid": "soa_additions:molten_draconic_metal",
+    "amount": 90
+  },
+  "temperature": 1700,
+  "output": "soa_additions:draconic_metal"
+}

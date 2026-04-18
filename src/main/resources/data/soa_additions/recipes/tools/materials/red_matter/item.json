@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "projecte"
+    }
+  ],
+  "ingredient": {
+    "item": "projecte:red_matter"
+  },
+  "material": "soa_additions:red_matter",
+  "needed": 1,
+  "value": 1
+}

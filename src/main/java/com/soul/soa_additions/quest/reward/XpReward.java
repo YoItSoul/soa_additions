@@ -14,7 +14,7 @@ public record XpReward(int amount, boolean levels, RewardScope scope) implements
     @Override public ResourceLocation type() { return TYPE; }
 
     @Override public String describe() {
-        return "+" + amount + (levels ? " levels" : " XP") + (scope == RewardScope.TEAM ? " (team)" : "");
+        return "Gain +" + amount + (levels ? " levels" : " XP") + (scope == RewardScope.TEAM ? " (team)" : "");
     }
 
     @Override public void grant(ServerPlayer player) {

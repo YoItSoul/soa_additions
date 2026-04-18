@@ -1,0 +1,15 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:ingots/uru"
+  },
+  "material": "soa_additions:uru",
+  "needed": 1,
+  "value": 1
+}

@@ -12,6 +12,7 @@ import com.soul.soa_additions.optimizer.JvmStatsSampler;
 import com.soul.soa_additions.registry.SoaTiers;
 import com.soul.soa_additions.telemetry.Telemetry;
 import com.soul.soa_additions.util.ConfigScanner;
+import com.soul.soa_additions.worldgen.ModFeatures;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStoppingEvent;
@@ -40,6 +41,7 @@ public final class SoaAdditions {
         com.soul.soa_additions.config.HeadshotConfig.register();
 
         ModBlocks.register(modEventBus);
+        ModFeatures.register(modEventBus);
         // Curios soft-dep: queue GreedyBag onto ModItems.ITEMS before the
         // DeferredRegister fires. CuriosIntegration never gets class-loaded
         // when Curios is absent, so GreedyBagItem (implements ICurio) stays
@@ -50,6 +52,8 @@ public final class SoaAdditions {
         ModItems.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
+        com.soul.soa_additions.loot.LootModifierSerializers.register(modEventBus);
+        com.soul.soa_additions.loot.LootConditions.register(modEventBus);
         com.soul.soa_additions.donor.ModEntities.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);

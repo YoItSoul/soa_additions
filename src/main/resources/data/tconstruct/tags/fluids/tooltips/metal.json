@@ -1,0 +1,29 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:molten_sky_stone",
+    "#forge:molten_fluix_steel",
+    "#forge:molten_crystal_matrix",
+    "#forge:molten_neutronium",
+    "#forge:molten_infinity_metal",
+    "#forge:molten_bound_metal",
+    "#forge:molten_sentient_metal",
+    "#forge:molten_livingrock",
+    "#forge:molten_manasteel",
+    "#forge:molten_terrasteel",
+    "#forge:molten_elementium",
+    "#forge:molten_draconium",
+    "#forge:molten_wyvern_metal",
+    "#forge:molten_draconic_metal",
+    "#forge:molten_chaotic_metal",
+    "#forge:molten_pink_slime",
+    "#forge:molten_pink_metal",
+    "#forge:molten_energetic_metal",
+    "#forge:molten_universal_metal",
+    "#forge:molten_refined_obsidian",
+    "#forge:molten_refined_glowstone",
+    "#forge:molten_gelid_enderium",
+    "#forge:molten_primal_metal",
+    "#forge:molten_uru"
+  ]
+}

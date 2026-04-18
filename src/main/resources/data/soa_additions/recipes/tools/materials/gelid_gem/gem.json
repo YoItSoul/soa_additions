@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "thermal"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:gems/gelid_crystal"
+  },
+  "material": "soa_additions:gelid_gem",
+  "needed": 1,
+  "value": 1
+}

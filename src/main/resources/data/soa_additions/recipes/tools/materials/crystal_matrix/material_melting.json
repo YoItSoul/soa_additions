@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "avaritia"
+    }
+  ],
+  "type": "tconstruct:material_melting",
+  "input": "soa_additions:crystal_matrix",
+  "temperature": 2400,
+  "result": {
+    "fluid": "soa_additions:molten_crystal_matrix",
+    "amount": 90
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "soa_additions:blueprint" },
+    { "tag": "forge:alloys/elite" }
+  ],
+  "result": { "item": "soa_additions:blueprint_shuriken" }
+}

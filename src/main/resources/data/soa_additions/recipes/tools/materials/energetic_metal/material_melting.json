@@ -1,0 +1,15 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "type": "tconstruct:material_melting",
+  "input": "soa_additions:energetic_metal",
+  "temperature": 1600,
+  "result": {
+    "fluid": "soa_additions:molten_energetic_metal",
+    "amount": 90
+  }
+}

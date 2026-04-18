@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "thermal"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:storage_blocks/mica"
+  },
+  "material": "soa_additions:mica",
+  "needed": 1,
+  "value": 4
+}

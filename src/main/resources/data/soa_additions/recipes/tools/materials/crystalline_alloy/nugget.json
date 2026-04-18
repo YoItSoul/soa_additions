@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "enderio"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:nuggets/crystalline_alloy"
+  },
+  "material": "soa_additions:crystalline_alloy",
+  "needed": 9,
+  "value": 1
+}

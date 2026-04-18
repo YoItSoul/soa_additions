@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "enderio"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:ingots/electrical_steel"
+  },
+  "material": "soa_additions:electrical_steel",
+  "needed": 1,
+  "value": 1
+}

@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "bloodmagic"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:ingots/sentient_metal"
+  },
+  "material": "soa_additions:sentient_metal",
+  "needed": 1,
+  "value": 1
+}

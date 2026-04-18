@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "sss"
+  ],
+  "key": {
+    "s": { "item": "thermal:silk" }
+  },
+  "result": { "item": "soa_additions:nylon_string" },
+  "show_notification": true
+}

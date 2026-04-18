@@ -1,0 +1,15 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "ingredient": {
+    "item": "soa_additions:darkwood_planks"
+  },
+  "material": "soa_additions:darkwood",
+  "needed": 1,
+  "value": 1
+}

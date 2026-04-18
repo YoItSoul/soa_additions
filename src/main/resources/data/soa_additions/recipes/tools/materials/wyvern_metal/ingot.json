@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "draconicevolution"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:ingots/wyvern"
+  },
+  "material": "soa_additions:wyvern_metal",
+  "needed": 1,
+  "value": 1
+}

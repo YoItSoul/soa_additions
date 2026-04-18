@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "enderio"
+    }
+  ],
+  "ingredient": {
+    "item": "enderio:pulsating_crystal"
+  },
+  "material": "soa_additions:pulsating_crystal",
+  "needed": 1,
+  "value": 1
+}

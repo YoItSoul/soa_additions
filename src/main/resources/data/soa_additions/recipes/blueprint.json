@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "ddd",
+    "dpd",
+    "ddd"
+  ],
+  "key": {
+    "d": { "tag": "forge:dyes/light_blue" },
+    "p": { "item": "tconstruct:pattern" }
+  },
+  "result": { "item": "soa_additions:blueprint" },
+  "show_notification": true
+}

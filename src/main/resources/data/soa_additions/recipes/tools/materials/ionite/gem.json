@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "environmentaltech"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:gems/ionite"
+  },
+  "material": "soa_additions:ionite",
+  "needed": 1,
+  "value": 1
+}

@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "soa_additions:molten_bound_metal",
+    "soa_additions:molten_bound_metal_flowing"
+  ]
+}

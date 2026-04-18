@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "avaritia"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:ingots/neutronium"
+  },
+  "material": "soa_additions:neutronium",
+  "needed": 1,
+  "value": 1
+}

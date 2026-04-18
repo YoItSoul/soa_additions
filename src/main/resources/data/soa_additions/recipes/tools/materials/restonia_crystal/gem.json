@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "actuallyadditions"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:gems/restonia"
+  },
+  "material": "soa_additions:restonia_crystal",
+  "needed": 1,
+  "value": 1
+}

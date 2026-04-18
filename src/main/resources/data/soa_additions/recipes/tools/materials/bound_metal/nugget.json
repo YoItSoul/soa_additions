@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "bloodmagic"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:nuggets/bound_metal"
+  },
+  "material": "soa_additions:bound_metal",
+  "needed": 9,
+  "value": 1
+}

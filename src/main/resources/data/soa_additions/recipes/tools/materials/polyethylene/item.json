@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "mekanism"
+    }
+  ],
+  "ingredient": {
+    "item": "mekanism:hdpe_sheet"
+  },
+  "material": "soa_additions:polyethylene",
+  "needed": 1,
+  "value": 1
+}

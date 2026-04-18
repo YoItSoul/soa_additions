@@ -1,0 +1,15 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:ingots/starmetal"
+  },
+  "material": "soa_additions:starmetal",
+  "needed": 1,
+  "value": 1
+}

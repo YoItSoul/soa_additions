@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "nnn",
+    "nnn",
+    "nnn"
+  ],
+  "key": {
+    "n": { "item": "soa_additions:titanium_nugget" }
+  },
+  "result": { "item": "soa_additions:titanium_ingot" },
+  "show_notification": true
+}

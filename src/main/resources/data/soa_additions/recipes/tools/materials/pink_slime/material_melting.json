@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "industrialforegoing"
+    }
+  ],
+  "type": "tconstruct:material_melting",
+  "input": "soa_additions:pink_slime",
+  "temperature": 1000,
+  "result": {
+    "fluid": "soa_additions:molten_pink_slime",
+    "amount": 100
+  }
+}

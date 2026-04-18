@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "mekanism"
+    }
+  ],
+  "type": "tconstruct:material_melting",
+  "input": "soa_additions:refined_obsidian",
+  "temperature": 2100,
+  "result": {
+    "fluid": "soa_additions:molten_refined_obsidian",
+    "amount": 90
+  }
+}

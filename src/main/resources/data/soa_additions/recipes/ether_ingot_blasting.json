@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 2.0,
+  "ingredient": { "item": "soa_additions:ether_ore_block" },
+  "result": "soa_additions:ether_ingot"
+}

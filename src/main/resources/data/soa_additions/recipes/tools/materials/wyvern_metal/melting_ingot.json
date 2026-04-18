@@ -1,0 +1,22 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "draconicevolution"
+    }
+  ],
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:ingots/wyvern"
+  },
+  "result": {
+    "fluid": "soa_additions:molten_wyvern_metal",
+    "amount": 90
+  },
+  "temperature": 1200,
+  "time": 120
+}

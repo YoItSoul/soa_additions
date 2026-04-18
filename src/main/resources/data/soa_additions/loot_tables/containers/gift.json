@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:gift",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        { "type": "minecraft:item", "name": "minecraft:coal",                       "weight": 50, "functions": [{ "function": "minecraft:set_count", "count": 1 }] },
+        { "type": "minecraft:item", "name": "minecraft:diamond",                    "weight": 10, "functions": [{ "function": "minecraft:set_count", "count": { "min": 3, "max": 8 } }] },
+        { "type": "minecraft:item", "name": "minecraft:emerald",                    "weight": 5,  "functions": [{ "function": "minecraft:set_count", "count": { "min": 2, "max": 5 } }] },
+        { "type": "minecraft:item", "name": "minecraft:iron_ingot",                 "weight": 20, "functions": [{ "function": "minecraft:set_count", "count": { "min": 8, "max": 16 } }] },
+        { "type": "minecraft:item", "name": "minecraft:gold_ingot",                 "weight": 15, "functions": [{ "function": "minecraft:set_count", "count": { "min": 5, "max": 10 } }] },
+        { "type": "minecraft:item", "name": "soa_additions:reward_ticket_common",   "weight": 20 },
+        { "type": "minecraft:item", "name": "soa_additions:reward_ticket_rare",     "weight": 10 },
+        { "type": "minecraft:item", "name": "soa_additions:reward_ticket_epic",     "weight": 3  },
+        { "type": "minecraft:item", "name": "soa_additions:reward_ticket_legendary","weight": 1  },
+        { "type": "minecraft:item", "name": "soa_additions:sunny_doll",             "weight": 5  },
+        { "type": "minecraft:item", "name": "soa_additions:catalyst_star",          "weight": 2  },
+        { "type": "minecraft:item", "name": "soa_additions:food_bag",               "weight": 12 },
+        { "type": "minecraft:item", "name": "soa_additions:furniture_crate",        "weight": 12 },
+        { "type": "minecraft:item", "name": "soa_additions:respawn_anchor",         "weight": 2  },
+        { "type": "minecraft:item", "name": "soa_additions:delivery_order",         "weight": 20 },
+        { "type": "minecraft:item", "name": "soa_additions:loli_lolipop",           "weight": 3  },
+        { "type": "minecraft:item", "name": "soa_additions:huaji",                  "weight": 5, "functions": [{ "function": "minecraft:set_count", "count": { "min": 1, "max": 3 } }] },
+        { "type": "minecraft:item", "name": "soa_additions:bag_of_dyes",            "weight": 10 },
+        { "type": "minecraft:item", "name": "soa_additions:time_fragment",          "weight": 12, "functions": [{ "function": "minecraft:set_count", "count": { "min": 4, "max": 24 } }] },
+        { "type": "minecraft:item", "name": "soa_additions:plate_of_honor",         "weight": 2  },
+        { "type": "minecraft:item", "name": "soa_additions:experience_transporter", "weight": 1  }
+      ]
+    }
+  ]
+}

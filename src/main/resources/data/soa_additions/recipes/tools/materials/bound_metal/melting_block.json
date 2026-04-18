@@ -1,0 +1,22 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "bloodmagic"
+    }
+  ],
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:storage_blocks/bound_metal"
+  },
+  "result": {
+    "fluid": "soa_additions:molten_bound_metal",
+    "amount": 810
+  },
+  "temperature": 1700,
+  "time": 800
+}

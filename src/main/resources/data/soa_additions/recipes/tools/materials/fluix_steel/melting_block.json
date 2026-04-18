@@ -1,0 +1,22 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "appliedenergistics2"
+    }
+  ],
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:storage_blocks/fluix_steel"
+  },
+  "result": {
+    "fluid": "soa_additions:molten_fluix_steel",
+    "amount": 810
+  },
+  "temperature": 1100,
+  "time": 800
+}

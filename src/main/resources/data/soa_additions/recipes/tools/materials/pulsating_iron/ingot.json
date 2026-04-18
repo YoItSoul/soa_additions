@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "enderio"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:ingots/pulsating_iron"
+  },
+  "material": "soa_additions:pulsating_iron",
+  "needed": 1,
+  "value": 1
+}

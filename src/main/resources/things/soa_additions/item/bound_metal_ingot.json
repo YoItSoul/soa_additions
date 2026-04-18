@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:plain",
+  "max_stack_size": 64,
+  "creative_menu_stacks": [
+    { "tabs": ["soa_additions:tconstructevo"] }
+  ]
+}

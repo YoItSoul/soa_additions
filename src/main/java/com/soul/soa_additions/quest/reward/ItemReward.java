@@ -17,7 +17,8 @@ public record ItemReward(ResourceLocation item, int count, RewardScope scope) im
     @Override public ResourceLocation type() { return TYPE; }
 
     @Override public String describe() {
-        return item.getPath() + " x" + count + (scope == RewardScope.TEAM ? " (team)" : "");
+        return "Receive " + count + "x " + com.soul.soa_additions.quest.task.TaskNames.item(item.toString())
+                + (scope == RewardScope.TEAM ? " (team)" : "");
     }
 
     @Override public void grant(ServerPlayer player) {

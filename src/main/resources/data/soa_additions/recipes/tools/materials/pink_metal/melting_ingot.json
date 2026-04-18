@@ -1,0 +1,22 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "industrialforegoing"
+    }
+  ],
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:ingots/pink_slime"
+  },
+  "result": {
+    "fluid": "soa_additions:molten_pink_metal",
+    "amount": 90
+  },
+  "temperature": 1000,
+  "time": 120
+}

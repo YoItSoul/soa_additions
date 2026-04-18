@@ -1,0 +1,15 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "ingredient": {
+    "item": "soa_additions:fusewood_planks"
+  },
+  "material": "soa_additions:fusewood",
+  "needed": 1,
+  "value": 1
+}

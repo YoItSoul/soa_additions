@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:infernium_ore_block"
+    "soa_additions:infernium_ore_block",
+    "soa_additions:obsidiorite",
+    "soa_additions:uru_ore",
+    "soa_additions:uru_block"
   ]
 }

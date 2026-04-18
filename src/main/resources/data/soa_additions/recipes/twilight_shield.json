@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "iki",
+    "faf",
+    " c "
+  ],
+  "key": {
+    "i": { "item": "twilightforest:ironwood_ingot" },
+    "k": { "item": "twilightforest:knightmetal_ingot" },
+    "f": { "item": "twilightforest:fiery_ingot" },
+    "a": { "item": "twilightforest:alpha_fur" },
+    "c": { "item": "twilightforest:carminite" }
+  },
+  "result": { "item": "soa_additions:twilight_shield" },
+  "show_notification": true
+}
