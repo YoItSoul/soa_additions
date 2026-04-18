@@ -1,0 +1,66 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "draconicevolution"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "type": "soa_additions:draconic_tool_upgrade",
+  "catalyst": {
+    "tag": "tconstruct:modifiable"
+  },
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "draconicevolution:wyvern_core"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "draconicevolution:wyvern_core"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "draconicevolution:awakened_core"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "draconicevolution:awakened_core"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:dragon_egg"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:dragon_egg"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "draconicevolution:chaotic_core"
+      },
+      "consume": true
+    }
+  ],
+  "result": {
+    "item": "draconicevolution:chaotic_core"
+  },
+  "tier": "CHAOTIC",
+  "total_energy": 256000000,
+  "modifier": "soa_additions:draconic_attack_aoe"
+}

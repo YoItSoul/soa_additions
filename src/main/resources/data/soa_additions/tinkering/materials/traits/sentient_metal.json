@@ -1,0 +1,13 @@
+{
+  "default": [
+    { "level": 1, "name": "soa_additions:tconevo/willful" }
+  ],
+  "perStat": {
+    "tconstruct:head": [
+      { "level": 1, "name": "soa_additions:tconevo/sentient" }
+    ],
+    "tconstruct:limb": [
+      { "level": 1, "name": "soa_additions:tconevo/sentient" }
+    ]
+  }
+}

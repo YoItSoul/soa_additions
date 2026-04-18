@@ -1,0 +1,7 @@
+{
+  "default": [
+    { "level": 1, "name": "tconstruct:heavy" },
+    { "level": 1, "name": "tconstruct:magnetic" }
+  ],
+  "perStat": {}
+}

@@ -1,0 +1,7 @@
+{
+  "default": [
+    { "level": 1, "name": "soa_additions:tconevo/photosynthetic" },
+    { "level": 1, "name": "soa_additions:tconevo/luminiferous" }
+  ],
+  "perStat": {}
+}

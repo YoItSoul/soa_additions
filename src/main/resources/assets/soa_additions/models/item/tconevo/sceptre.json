@@ -1,0 +1,16 @@
+{
+  "loader": "tconstruct:tool",
+  "parent": "forge:item/default-tool",
+  "textures": {
+    "head":    "soa_additions:item/tconevo/sceptre/hilt",
+    "handle":  "soa_additions:item/tconevo/sceptre/handle",
+    "binding": "soa_additions:item/tconevo/sceptre/setting",
+    "focus":   "soa_additions:item/tconevo/sceptre/focus"
+  },
+  "parts": [
+    { "name": "head",    "index": 0 },
+    { "name": "handle",  "index": 1 },
+    { "name": "binding", "index": 2 },
+    { "name": "focus",   "index": 3 }
+  ]
+}

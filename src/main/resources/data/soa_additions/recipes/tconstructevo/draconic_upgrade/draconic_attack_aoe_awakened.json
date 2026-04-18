@@ -1,0 +1,66 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "draconicevolution"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "type": "soa_additions:draconic_tool_upgrade",
+  "catalyst": {
+    "tag": "tconstruct:modifiable"
+  },
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "minecraft:nether_star"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:nether_star"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "draconicevolution:wyvern_core"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "draconicevolution:wyvern_core"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:emerald_block"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:emerald_block"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "draconicevolution:awakened_core"
+      },
+      "consume": true
+    }
+  ],
+  "result": {
+    "item": "draconicevolution:awakened_core"
+  },
+  "tier": "DRACONIC",
+  "total_energy": 32000000,
+  "modifier": "soa_additions:draconic_attack_aoe"
+}

@@ -4,9 +4,6 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 
-import java.util.Arrays;
-import java.util.List;
-
 public final class ModConfigs {
 
     public static final ForgeConfigSpec SPEC;
@@ -38,16 +35,6 @@ public final class ModConfigs {
     public static final ForgeConfigSpec.DoubleValue CASUAL_EXHAUSTION_MULTIPLIER;
     public static final ForgeConfigSpec.DoubleValue ADVENTURE_EXHAUSTION_MULTIPLIER;
     public static final ForgeConfigSpec.DoubleValue EXPERT_EXHAUSTION_MULTIPLIER;
-
-    // --- Auto-updater ---
-    public static final ForgeConfigSpec.BooleanValue AUTO_UPDATE_ENABLED;
-    public static final ForgeConfigSpec.ConfigValue<String> AUTO_UPDATE_REPO;
-    public static final ForgeConfigSpec.ConfigValue<String> AUTO_UPDATE_BRANCH;
-    public static final ForgeConfigSpec.IntValue AUTO_UPDATE_INTERVAL_MINUTES;
-    public static final ForgeConfigSpec.ConfigValue<String> AUTO_UPDATE_SOURCE_PATH;
-    public static final ForgeConfigSpec.ConfigValue<String> AUTO_UPDATE_TARGET_PATH;
-    public static final ForgeConfigSpec.ConfigValue<List<? extends String>> AUTO_UPDATE_BLACKLIST;
-    public static final ForgeConfigSpec.BooleanValue AUTO_UPDATE_AUTO_RELOAD;
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -175,60 +162,6 @@ public final class ModConfigs {
         EXPERT_EXHAUSTION_MULTIPLIER = builder
                 .comment("Max exhaustion scale for Expert. 0.5 means hunger drains at 2x normal speed.")
                 .defineInRange("expertExhaustionMultiplier", 0.5D, 0.1D, 10.0D);
-        builder.pop();
-
-        builder.push("autoUpdate");
-        builder.comment(
-                "Pulls a scripts directory from a GitHub repository on startup and on a fixed interval,",
-                "overwriting the matching game directory so CraftTweaker/KubeJS/datapack authors can push",
-                "hotfixes without shipping a new mod/pack build.",
-                "",
-                "Only non-JAR files are synced — the mod's own JAR cannot be hot-swapped and still requires a",
-                "game restart. After a successful sync on a dedicated/integrated server, '/reload' is run so",
-                "datapack and script changes apply live.");
-        AUTO_UPDATE_ENABLED = builder
-                .comment("Master switch for the auto-updater. Default: true.")
-                .define("enabled", true);
-        AUTO_UPDATE_REPO = builder
-                .comment("GitHub repository in 'owner/repo' form.")
-                .define("repo", "YoItSoul/Souls-of-Avarice");
-        AUTO_UPDATE_BRANCH = builder
-                .comment("Branch to track on the repository.")
-                .define("branch", "main");
-        AUTO_UPDATE_INTERVAL_MINUTES = builder
-                .comment("How often (in minutes) to re-check GitHub for new commits. Default: 10.")
-                .defineInRange("intervalMinutes", 10, 1, 1440);
-        AUTO_UPDATE_SOURCE_PATH = builder
-                .comment(
-                        "Subdirectory within the repository to sync. Only files under this path are pulled.",
-                        "Use an empty string to sync from the repo root. Default: 'scripts'.")
-                .define("sourcePath", "scripts");
-        AUTO_UPDATE_TARGET_PATH = builder
-                .comment(
-                        "Game-directory-relative directory to write synced files into.",
-                        "Default: 'scripts' (the standard CraftTweaker scripts directory).")
-                .define("targetPath", "scripts");
-        AUTO_UPDATE_BLACKLIST = builder
-                .comment(
-                        "Repository-relative paths or prefixes to exclude from the sync (case-insensitive).",
-                        "Any entry in the zip whose repo-relative path starts with one of these prefixes is skipped.",
-                        "The '.git' directory is always implicitly excluded (zipball archives do not contain it).")
-                .defineList("blacklist",
-                        Arrays.asList(
-                                ".git",
-                                ".gitignore",
-                                ".gitattributes",
-                                ".github",
-                                "README.md",
-                                "README.txt",
-                                "LICENSE",
-                                "LICENSE.txt"),
-                        o -> o instanceof String);
-        AUTO_UPDATE_AUTO_RELOAD = builder
-                .comment(
-                        "Run '/reload' on the server after a successful sync so datapack/script changes apply",
-                        "immediately without a restart. Default: true.")
-                .define("autoReload", true);
         builder.pop();
 
         builder.pop();

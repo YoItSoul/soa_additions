@@ -1,0 +1,13 @@
+{
+  "default": [],
+  "perStat": {
+    "tconstruct:head": [
+      { "level": 1, "name": "soa_additions:tconevo/purging" },
+      { "level": 1, "name": "soa_additions:tconevo/corrupting" }
+    ],
+    "tconstruct:limb": [
+      { "level": 1, "name": "soa_additions:tconevo/purging" },
+      { "level": 1, "name": "soa_additions:tconevo/corrupting" }
+    ]
+  }
+}

@@ -110,9 +110,9 @@ public final class FileQuestOverrideStorage implements QuestOverrideStorage {
                 // back to a plain replace which is still safe (tmp is complete).
                 Files.move(tmp, file, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
             }
-            log("Wrote chapter " + chapter.id() + " → " + target);
+            log("Wrote chapter " + chapter.id() + " → " + target + " (" + file.toAbsolutePath() + ")");
         } catch (IOException e) {
-            log("Failed to save chapter " + chapter.id() + ": " + e.getMessage());
+            log("Failed to save chapter " + chapter.id() + " to " + dir.toAbsolutePath() + ": " + e.getMessage());
         }
     }
 

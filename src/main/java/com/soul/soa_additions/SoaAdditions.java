@@ -1,7 +1,6 @@
 package com.soul.soa_additions;
 
 import com.soul.soa_additions.anticheat.AntiCheatHandler;
-import com.soul.soa_additions.autoupdate.AutoUpdater;
 import com.soul.soa_additions.block.ModBlocks;
 import com.soul.soa_additions.compat.StartupProfiler;
 import com.soul.soa_additions.block.entity.ModBlockEntities;
@@ -41,6 +40,13 @@ public final class SoaAdditions {
         com.soul.soa_additions.config.HeadshotConfig.register();
 
         ModBlocks.register(modEventBus);
+        // Curios soft-dep: queue GreedyBag onto ModItems.ITEMS before the
+        // DeferredRegister fires. CuriosIntegration never gets class-loaded
+        // when Curios is absent, so GreedyBagItem (implements ICurio) stays
+        // unlinked and Forge doesn't hit NoClassDefFoundError.
+        if (ModList.get().isLoaded("curios")) {
+            com.soul.soa_additions.curios.CuriosIntegration.init(modEventBus);
+        }
         ModItems.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
@@ -61,6 +67,13 @@ public final class SoaAdditions {
         if (ModList.get().isLoaded("bloodmagic")) {
             com.soul.soa_additions.bloodarsenal.BloodArsenalPlugin.init(modEventBus);
         }
+
+        // TConstruct Evolution — soft dependency on Tinkers' Construct.
+        // Mirrors the Blood Arsenal pattern: everything lives in the tconstructevo
+        // subpackage and is never classloaded unless TConstruct is present.
+        if (ModList.get().isLoaded("tconstruct")) {
+            com.soul.soa_additions.tconstructevo.TConstructEvoPlugin.init(modEventBus);
+        }
         // JvmStatsSampler.start() reads config values, so it has to wait
         // until FMLCommonSetupEvent — configs aren't loaded during mod
         // construction and calling .get() here throws in dev (and will
@@ -76,10 +89,6 @@ public final class SoaAdditions {
     }
 
     private void onLoadComplete(final FMLLoadCompleteEvent event) {
-        // Start the auto-updater early so clients and servers both begin polling GitHub.
-        // Runs on its own daemon thread, so any network slowness is invisible to the game.
-        AutoUpdater.start();
-
         // Fire one telemetry report per launch, async, daemon thread. No startup cost.
         String mcVersion;
         try {
@@ -117,6 +126,5 @@ public final class SoaAdditions {
         if (event.getServer().isDedicatedServer()) {
             Telemetry.stopHeartbeat();
         }
-        AutoUpdater.stop();
     }
 }

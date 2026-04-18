@@ -1,0 +1,7 @@
+{
+  "type": "soa_additions:tconevo_artifact",
+  "conditions": [
+    { "condition": "forge:loot_table_id", "loot_table_id": "minecraft:chests/woodland_mansion" }
+  ],
+  "chance": 0.25
+}

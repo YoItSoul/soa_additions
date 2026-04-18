@@ -1,0 +1,66 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "draconicevolution"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "type": "soa_additions:draconic_tool_upgrade",
+  "catalyst": {
+    "tag": "tconstruct:modifiable"
+  },
+  "ingredients": [
+    {
+      "ingredient": {
+        "item": "minecraft:golden_apple"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:golden_apple"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:diamond"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:diamond"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:ghast_tear"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:ghast_tear"
+      },
+      "consume": true
+    },
+    {
+      "ingredient": {
+        "item": "draconicevolution:draconium_core"
+      },
+      "consume": true
+    }
+  ],
+  "result": {
+    "item": "draconicevolution:draconium_core"
+  },
+  "tier": "DRACONIUM",
+  "total_energy": 32000,
+  "modifier": "soa_additions:draconic_dig_speed"
+}

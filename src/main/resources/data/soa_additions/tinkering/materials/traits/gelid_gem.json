@@ -1,0 +1,7 @@
+{
+  "default": [
+    { "level": 2, "name": "soa_additions:tconevo/energized" },
+    { "level": 2, "name": "soa_additions:tconevo/aftershock" }
+  ],
+  "perStat": {}
+}

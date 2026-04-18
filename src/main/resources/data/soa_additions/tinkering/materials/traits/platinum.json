@@ -1,0 +1,11 @@
+{
+  "default": [],
+  "perStat": {
+    "tconstruct:head": [
+      { "level": 1, "name": "soa_additions:tconevo/deadly_precision" }
+    ],
+    "tconstruct:limb": [
+      { "level": 1, "name": "soa_additions:tconevo/deadly_precision" }
+    ]
+  }
+}

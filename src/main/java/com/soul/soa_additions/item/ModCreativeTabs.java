@@ -28,7 +28,9 @@ public final class ModCreativeTabs {
                         // Misc
                         output.accept(ModItems.CHEATER_COIN.get());
                         output.accept(ModItems.QUEST_BOOK.get());
-                        output.accept(ModItems.GREEDY_BAG.get());
+                        if (net.minecraftforge.fml.ModList.get().isLoaded("curios")) {
+                            output.accept(com.soul.soa_additions.curios.CuriosIntegration.GREEDY_BAG.get());
+                        }
 
                         // Ores
                         output.accept(ModBlocks.ABYSSAL_ORE_BLOCK.get());

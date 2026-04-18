@@ -1,0 +1,13 @@
+{
+  "default": [
+    { "level": 1, "name": "tconstruct:stonebound" }
+  ],
+  "perStat": {
+    "tconstruct:head": [
+      { "level": 1, "name": "tconstruct:crumbling" }
+    ],
+    "tconstruct:limb": [
+      { "level": 1, "name": "tconstruct:crumbling" }
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "default": [
+    { "level": 1, "name": "soa_additions:tconevo/deadly_precision" },
+    { "level": 1, "name": "soa_additions:tconevo/chain_lightning" }
+  ],
+  "perStat": {}
+}

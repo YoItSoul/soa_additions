@@ -1,0 +1,14 @@
+{
+  "default": [
+    { "level": 1, "name": "soa_additions:tconevo/juggernaut" },
+    { "level": 1, "name": "soa_additions:tconevo/overwhelm" }
+  ],
+  "perStat": {
+    "tconstruct:head": [
+      { "level": 2, "name": "soa_additions:tconevo/eternal_density" }
+    ],
+    "tconstruct:limb": [
+      { "level": 2, "name": "soa_additions:tconevo/eternal_density" }
+    ]
+  }
+}

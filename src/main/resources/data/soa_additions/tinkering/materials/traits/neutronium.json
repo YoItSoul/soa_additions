@@ -1,0 +1,14 @@
+{
+  "default": [
+    { "level": 1, "name": "tconstruct:dense" },
+    { "level": 1, "name": "tconstruct:heavy" }
+  ],
+  "perStat": {
+    "tconstruct:head": [
+      { "level": 1, "name": "soa_additions:tconevo/condensing" }
+    ],
+    "tconstruct:limb": [
+      { "level": 1, "name": "soa_additions:tconevo/condensing" }
+    ]
+  }
+}
