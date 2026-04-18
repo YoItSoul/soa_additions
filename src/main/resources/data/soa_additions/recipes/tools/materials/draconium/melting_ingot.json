@@ -1,0 +1,22 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "draconicevolution"
+    }
+  ],
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:ingots/draconium"
+  },
+  "result": {
+    "fluid": "soa_additions:molten_draconium",
+    "amount": 90
+  },
+  "temperature": 800,
+  "time": 120
+}

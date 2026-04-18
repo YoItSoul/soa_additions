@@ -1,0 +1,15 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "type": "tconstruct:material_melting",
+  "input": "soa_additions:universal_metal",
+  "temperature": 1400,
+  "result": {
+    "fluid": "soa_additions:molten_universal_metal",
+    "amount": 90
+  }
+}

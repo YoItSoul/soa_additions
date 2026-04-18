@@ -4,6 +4,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -51,9 +53,14 @@ public class RewardTicketItem extends StageItem {
 
         Item lootBag = ForgeRegistries.ITEMS.getValue(LOOT_BAG_ID);
         if (lootBag == null) {
-            player.displayClientMessage(
-                    Component.literal("§cResourceful Lootbags is missing — ticket cannot be redeemed."),
-                    true);
+            // Lootbags isn't a 1.20 mod (yet); fall back to rolling our own
+            // loot table at the player. This keeps the ticket useful on packs
+            // without Lootbags and mirrors the GreedyCraft crate contents.
+            if (level instanceof ServerLevel sl && player instanceof ServerPlayer sp) {
+                RightClickActions.rollLootTableAt(lootTableId).apply(sl, sp, held);
+                held.shrink(1);
+                return InteractionResultHolder.consume(held);
+            }
             return InteractionResultHolder.pass(held);
         }
 

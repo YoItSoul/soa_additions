@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "botania"
+    }
+  ],
+  "type": "tconstruct:material_melting",
+  "input": "soa_additions:manasteel",
+  "temperature": 800,
+  "result": {
+    "fluid": "soa_additions:molten_manasteel",
+    "amount": 90
+  }
+}

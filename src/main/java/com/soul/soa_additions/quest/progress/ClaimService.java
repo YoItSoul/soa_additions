@@ -29,12 +29,29 @@ public final class ClaimService {
 
     private ClaimService() {}
 
+    /** Per-quest re-entry guard. CommandReward now runs synchronously, so a
+     *  reward command like {@code /soa quests claim SAME_QUEST} could recurse
+     *  into this method before the outer frame has marked the quest CLAIMED,
+     *  double-granting rewards. Tracking the set of quests currently being
+     *  claimed breaks that cycle while still allowing commands to claim
+     *  <i>different</i> quests. */
+    private static final java.util.Set<String> CLAIMING = new java.util.HashSet<>();
+
     /**
      * Attempt to claim a quest's rewards on behalf of {@code claimant}. Returns
      * a result describing what happened so the caller (command, GUI, packet)
      * can show appropriate feedback.
      */
     public static ClaimResult claim(ServerPlayer claimant, String fullQuestId) {
+        if (!CLAIMING.add(fullQuestId)) return ClaimResult.ALREADY_CLAIMED;
+        try {
+            return doClaim(claimant, fullQuestId);
+        } finally {
+            CLAIMING.remove(fullQuestId);
+        }
+    }
+
+    private static ClaimResult doClaim(ServerPlayer claimant, String fullQuestId) {
         Optional<Quest> maybeQuest = QuestRegistry.quest(fullQuestId);
         if (maybeQuest.isEmpty()) return ClaimResult.UNKNOWN_QUEST;
         Quest quest = maybeQuest.get();

@@ -1,0 +1,22 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "forestry"
+    }
+  ],
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:gems/apatite"
+  },
+  "result": {
+    "fluid": "soa_additions:molten_apatite",
+    "amount": 100
+  },
+  "temperature": 900,
+  "time": 125
+}

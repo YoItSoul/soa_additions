@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "appliedenergistics2"
+    }
+  ],
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "fluid": "soa_additions:molten_fluix_steel",
+    "amount": 90
+  },
+  "temperature": 1100,
+  "output": "soa_additions:fluix_steel"
+}

@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "environmentaltech"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:gems/kyronite"
+  },
+  "material": "soa_additions:kyronite",
+  "needed": 1,
+  "value": 1
+}

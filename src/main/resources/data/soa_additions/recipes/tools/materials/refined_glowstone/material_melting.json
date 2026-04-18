@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "mekanism"
+    }
+  ],
+  "type": "tconstruct:material_melting",
+  "input": "soa_additions:refined_glowstone",
+  "temperature": 1350,
+  "result": {
+    "fluid": "soa_additions:molten_refined_glowstone",
+    "amount": 90
+  }
+}

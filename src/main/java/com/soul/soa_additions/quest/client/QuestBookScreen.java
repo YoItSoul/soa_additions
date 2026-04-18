@@ -1680,7 +1680,10 @@ public final class QuestBookScreen extends Screen {
                 int color = done ? 0xFF9BDF9B : 0xFFCCCCCC;
                 int linkColor = done ? 0xFF7FD0FF : 0xFF9CC9FF;
                 String marker = done ? "✔ " : "• ";
-                String prefix = marker + verb + " " + count + "x ";
+                // Prefix shows the goal count, not current progress — the
+                // "(c/t)" suffix already carries progress, and "Obtain 0x Dirt"
+                // before any was picked up reads as "obtain zero of this".
+                String prefix = marker + verb + " " + tgt + "x ";
                 String name = stack.getHoverName().getString();
                 String suffix = " (" + count + "/" + tgt + ")";
                 int prefixW = this.font.width(prefix);
@@ -1782,9 +1785,11 @@ public final class QuestBookScreen extends Screen {
         }
 
         // Rewards section — mirrors the TASKS header/layout so players can see
-        // what they're claiming. Each reward renders its describe() text; we
-        // cap the draw loop at the same bottom margin the task loop uses so
-        // the claim button always has room, even for reward-heavy quests.
+        // what they're claiming. Item rewards render with a small inline icon
+        // and a JEI-clickable name, matching the Obtain/Craft task style.
+        // Other reward types fall back to the describe() text. We cap the
+        // draw loop at the same bottom margin the task loop uses so the
+        // claim button always has room, even for reward-heavy quests.
         if (!q.rewards().isEmpty() && line < y + h - 30) {
             line += 4;
             g.fill(contentX, line, contentRight, line + 1, COL_SEP());
@@ -1794,6 +1799,63 @@ public final class QuestBookScreen extends Screen {
             int rewardAvailW = contentRight - contentX;
             for (var reward : q.rewards()) {
                 if (line >= y + h - 30) break;
+                if (reward instanceof com.soul.soa_additions.quest.reward.ItemReward ir) {
+                    ItemStack stack = new ItemStack(BuiltInRegistries.ITEM.get(ir.item()));
+                    if (!stack.isEmpty()) {
+                        // Draw a 10×10 inline icon so the reward is visually
+                        // identifiable at a glance; the name stays as a
+                        // clickable span that opens JEI on the exact stack.
+                        int iconSize = 10;
+                        int iconX = contentX;
+                        int iconY = line - 1;
+                        g.pose().pushPose();
+                        g.pose().translate(iconX, iconY, 0);
+                        g.pose().scale(iconSize / 16f, iconSize / 16f, 1f);
+                        g.renderFakeItem(stack, 0, 0);
+                        g.pose().popPose();
+
+                        int textX = contentX + iconSize + 3;
+                        int color = 0xFFCCCCCC;
+                        int linkColor = 0xFF9CC9FF;
+                        String prefix = ir.count() + "x ";
+                        String name = stack.getHoverName().getString();
+                        String suffix = ir.scope() == com.soul.soa_additions.quest.model.RewardScope.TEAM ? " (team)" : "";
+                        int prefixW = this.font.width(prefix);
+                        int nameW = this.font.width(name);
+                        int suffixW = this.font.width(suffix);
+                        int availW = contentRight - textX;
+                        if (prefixW + nameW + suffixW <= availW) {
+                            g.drawString(this.font, prefix, textX, line, color, false);
+                            int nameX = textX + prefixW;
+                            int[] rect = new int[]{nameX, line - 1, nameW, 10};
+                            boolean linkHover = mouseX >= rect[0] && mouseX < rect[0] + rect[2]
+                                    && mouseY >= rect[1] && mouseY < rect[1] + rect[3];
+                            int drawColor = linkHover ? 0xFFFFFFFF : linkColor;
+                            g.drawString(this.font, name, nameX, line, drawColor, false);
+                            g.fill(nameX, line + 9, nameX + nameW, line + 10, drawColor);
+                            if (!suffix.isEmpty()) g.drawString(this.font, suffix, nameX + nameW, line, color, false);
+                            itemLinkBounds.add(rect);
+                            itemLinkStacks.add(stack);
+                            line += 12;
+                        } else {
+                            // Wrapped: "Nx" on row 1, "<Name>" on row 2 — the
+                            // icon stays aligned to the first text row.
+                            g.drawString(this.font, prefix.stripTrailing(), textX, line, color, false);
+                            int line2Y = line + 10;
+                            int[] rect = new int[]{textX, line2Y - 1, nameW, 10};
+                            boolean linkHover = mouseX >= rect[0] && mouseX < rect[0] + rect[2]
+                                    && mouseY >= rect[1] && mouseY < rect[1] + rect[3];
+                            int drawColor = linkHover ? 0xFFFFFFFF : linkColor;
+                            g.drawString(this.font, name, textX, line2Y, drawColor, false);
+                            g.fill(textX, line2Y + 9, textX + nameW, line2Y + 10, drawColor);
+                            if (!suffix.isEmpty()) g.drawString(this.font, suffix, textX + nameW, line2Y, color, false);
+                            itemLinkBounds.add(rect);
+                            itemLinkStacks.add(stack);
+                            line += 22;
+                        }
+                        continue;
+                    }
+                }
                 String text = "• " + reward.describe();
                 List<FormattedCharSequence> rLines = splitCached(Component.literal(text), rewardAvailW);
                 for (FormattedCharSequence l : rLines) {

@@ -19,12 +19,16 @@ public record CommandReward(String command, RewardScope scope) implements QuestR
         String cmd = command
                 .replace("{player}", player.getGameProfile().getName())
                 .replace("{uuid}", player.getUUID().toString());
-        // Defer to the next tick so a reward command that re-enters the quest
-        // pipeline (e.g. /soa quests claim, /soa quests task complete) can't
-        // recurse through the dispatcher inside the current claim frame.
+        // Run synchronously. The old server.execute() deferral dropped commands
+        // during auto-claim sweeps (multiple quests claimed in one PlayerTick
+        // frame queued tasks that sometimes never drained in-order). Re-entry
+        // through /soa quests claim is already bounded: ClaimService has a
+        // per-quest re-entry guard and QuestEvaluator.autoClaimInProgress
+        // blocks nested sweep recursion. Source is anchored to the player so
+        // @s and relative coords resolve correctly.
         var server = player.getServer();
-        CommandSourceStack src = server.createCommandSourceStack().withPermission(4);
-        server.execute(() -> server.getCommands().performPrefixedCommand(src, cmd));
+        CommandSourceStack src = player.createCommandSourceStack().withPermission(4);
+        server.getCommands().performPrefixedCommand(src, cmd);
     }
 
     @Override public void writeJson(JsonObject out) {

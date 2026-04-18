@@ -1,0 +1,22 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "avaritia"
+    }
+  ],
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:ingots/infinity"
+  },
+  "result": {
+    "fluid": "soa_additions:molten_infinity_metal",
+    "amount": 90
+  },
+  "temperature": 6660,
+  "time": 120
+}

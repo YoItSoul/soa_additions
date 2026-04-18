@@ -1,0 +1,15 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:nuggets/energetic_metal"
+  },
+  "material": "soa_additions:energetic_metal",
+  "needed": 9,
+  "value": 1
+}

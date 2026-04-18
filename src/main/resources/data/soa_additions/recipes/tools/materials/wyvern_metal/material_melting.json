@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "draconicevolution"
+    }
+  ],
+  "type": "tconstruct:material_melting",
+  "input": "soa_additions:wyvern_metal",
+  "temperature": 1200,
+  "result": {
+    "fluid": "soa_additions:molten_wyvern_metal",
+    "amount": 90
+  }
+}

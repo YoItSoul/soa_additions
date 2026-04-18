@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "thaumcraft"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:ingots/void"
+  },
+  "material": "soa_additions:void_metal",
+  "needed": 1,
+  "value": 1
+}

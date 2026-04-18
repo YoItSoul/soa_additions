@@ -12,6 +12,9 @@
     "soa_additions:tconevo_artifact_stronghold_crossing",
     "soa_additions:tconevo_artifact_stronghold_library",
     "soa_additions:tconevo_artifact_village_weaponsmith",
-    "soa_additions:tconevo_artifact_woodland_mansion"
+    "soa_additions:tconevo_artifact_woodland_mansion",
+    "soa_additions:gc_dungeon_injection",
+    "soa_additions:gc_dungeon_injection_hardmode",
+    "soa_additions:gc_slime_crown_drop"
   ]
 }

@@ -20,7 +20,7 @@ public record LockPackmodeReward() implements QuestReward {
     public static final ResourceLocation TYPE = new ResourceLocation(SoaAdditions.MODID, "lock_packmode");
 
     @Override public ResourceLocation type() { return TYPE; }
-    @Override public String describe() { return "§7(difficulty locked in)"; }
+    @Override public String describe() { return "Lock the world's difficulty in"; }
     @Override public RewardScope scope() { return RewardScope.TEAM; }
 
     @Override public void grant(ServerPlayer player) {

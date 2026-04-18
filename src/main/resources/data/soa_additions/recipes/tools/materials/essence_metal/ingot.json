@@ -1,0 +1,15 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:ingots/essence_metal"
+  },
+  "material": "soa_additions:essence_metal",
+  "needed": 1,
+  "value": 1
+}

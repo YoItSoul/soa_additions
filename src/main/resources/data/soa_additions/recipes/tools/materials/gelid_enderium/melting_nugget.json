@@ -1,0 +1,22 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "thermal"
+    }
+  ],
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:nuggets/gelid_enderium"
+  },
+  "result": {
+    "fluid": "soa_additions:molten_gelid_enderium",
+    "amount": 10
+  },
+  "temperature": 3200,
+  "time": 40
+}

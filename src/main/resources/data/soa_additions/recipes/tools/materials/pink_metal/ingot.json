@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "industrialforegoing"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:ingots/pink_slime"
+  },
+  "material": "soa_additions:pink_metal",
+  "needed": 1,
+  "value": 1
+}

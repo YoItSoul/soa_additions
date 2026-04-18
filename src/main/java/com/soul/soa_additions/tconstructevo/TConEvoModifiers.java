@@ -12,6 +12,7 @@ import com.soul.soa_additions.tconstructevo.modifier.core.CorruptingModifier;
 import com.soul.soa_additions.tconstructevo.modifier.core.CrystallineModifier;
 import com.soul.soa_additions.tconstructevo.modifier.core.CullingModifier;
 import com.soul.soa_additions.tconstructevo.modifier.core.DeadlyPrecisionModifier;
+import com.soul.soa_additions.tconstructevo.modifier.core.DiffuseModifier;
 import com.soul.soa_additions.tconstructevo.modifier.core.ElectricModifier;
 import com.soul.soa_additions.tconstructevo.modifier.core.EnergizedModifier;
 import com.soul.soa_additions.tconstructevo.modifier.core.ExecutorModifier;
@@ -39,117 +40,169 @@ import com.soul.soa_additions.tconstructevo.modifier.core.ThundergodWrathModifie
 import com.soul.soa_additions.tconstructevo.modifier.core.TrueStrikeModifier;
 import com.soul.soa_additions.tconstructevo.modifier.core.VampiricModifier;
 import com.soul.soa_additions.tconstructevo.modifier.core.WarpingModifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
 import slimeknights.tconstruct.library.modifiers.Modifier;
+import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.library.modifiers.ModifierManager;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 /**
- * Central DeferredRegister for every TConstructEvo modifier (the 1.20.1
- * successor to 1.12.2's {@code TraitXxx}/{@code ModifierXxx} classes).
+ * Central registry for every TConstructEvo modifier (the 1.20.1 successor to
+ * 1.12.2's {@code TraitXxx}/{@code ModifierXxx} classes).
  *
- * <p>TConstruct 3.x registers modifiers through its own {@code MODIFIERS} key,
- * exposed by {@link ModifierManager}. Sub-systems call {@link #register(String, Supplier)}
- * during plugin init; the DeferredRegister is attached to the mod event bus in
- * {@link #register(IEventBus)} so all modifiers are present by {@code RegisterEvent}.</p>
+ * <p>TConstruct 3.x does <b>not</b> expose its modifier registry as a Forge
+ * {@code ForgeRegistry}, so {@link net.minecraftforge.registries.DeferredRegister}
+ * crashes on mod construction with "Unable to find registry with key
+ * tconstruct:modifiers". Instead, modifiers are added during
+ * {@link ModifierManager.ModifierRegistrationEvent} — a mod-bus event fired from
+ * {@code ModifierManager.fireRegistryEvent()} during {@link net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent}.
+ * Each sub-system calls {@link #register(String, Supplier)} during plugin init
+ * to queue a pending entry; {@link #register(IEventBus)} attaches the listener
+ * that drains the queue by calling {@code event.registerStatic(...)}.</p>
  */
 public final class TConEvoModifiers {
 
-    public static final DeferredRegister<Modifier> MODIFIERS =
-            DeferredRegister.create(ModifierManager.REGISTRY_KEY, SoaAdditions.MODID);
+    /** Queued entries awaiting {@link ModifierManager.ModifierRegistrationEvent}. */
+    private static final List<Holder<?>> PENDING = new ArrayList<>();
 
     // ---------- Core (mod-agnostic) traits ----------
-    public static final RegistryObject<VampiricModifier> VAMPIRIC =
+    public static final Holder<VampiricModifier> VAMPIRIC =
             register("vampiric", VampiricModifier::new);
-    public static final RegistryObject<ExecutorModifier> EXECUTOR =
+    public static final Holder<ExecutorModifier> EXECUTOR =
             register("executor", ExecutorModifier::new);
-    public static final RegistryObject<CullingModifier> CULLING =
+    public static final Holder<CullingModifier> CULLING =
             register("culling", CullingModifier::new);
-    public static final RegistryObject<JuggernautModifier> JUGGERNAUT =
+    public static final Holder<JuggernautModifier> JUGGERNAUT =
             register("juggernaut", JuggernautModifier::new);
-    public static final RegistryObject<OverwhelmModifier> OVERWHELM =
+    public static final Holder<OverwhelmModifier> OVERWHELM =
             register("overwhelm", OverwhelmModifier::new);
-    public static final RegistryObject<OpportunistModifier> OPPORTUNIST =
+    public static final Holder<OpportunistModifier> OPPORTUNIST =
             register("opportunist", OpportunistModifier::new);
-    public static final RegistryObject<ImpactForceModifier> IMPACT_FORCE =
+    public static final Holder<ImpactForceModifier> IMPACT_FORCE =
             register("impact_force", ImpactForceModifier::new);
-    public static final RegistryObject<CrystallineModifier> CRYSTALLINE =
+    public static final Holder<CrystallineModifier> CRYSTALLINE =
             register("crystalline", CrystallineModifier::new);
-    public static final RegistryObject<SunderingModifier> SUNDERING =
+    public static final Holder<SunderingModifier> SUNDERING =
             register("sundering", SunderingModifier::new);
-    public static final RegistryObject<CorruptingModifier> CORRUPTING =
+    public static final Holder<CorruptingModifier> CORRUPTING =
             register("corrupting", CorruptingModifier::new);
-    public static final RegistryObject<BattleFurorModifier> BATTLE_FUROR =
+    public static final Holder<BattleFurorModifier> BATTLE_FUROR =
             register("battle_furor", BattleFurorModifier::new);
-    public static final RegistryObject<LuminiferousModifier> LUMINIFEROUS =
+    public static final Holder<LuminiferousModifier> LUMINIFEROUS =
             register("luminiferous", LuminiferousModifier::new);
-    public static final RegistryObject<FootFleetModifier> FOOT_FLEET =
+    public static final Holder<FootFleetModifier> FOOT_FLEET =
             register("foot_fleet", FootFleetModifier::new);
-    public static final RegistryObject<MortalWoundsModifier> MORTAL_WOUNDS =
+    public static final Holder<MortalWoundsModifier> MORTAL_WOUNDS =
             register("mortal_wounds", MortalWoundsModifier::new);
-    public static final RegistryObject<RejuvenatingModifier> REJUVENATING =
+    public static final Holder<RejuvenatingModifier> REJUVENATING =
             register("rejuvenating", RejuvenatingModifier::new);
-    public static final RegistryObject<TrueStrikeModifier> TRUE_STRIKE =
+    public static final Holder<TrueStrikeModifier> TRUE_STRIKE =
             register("true_strike", TrueStrikeModifier::new);
-    public static final RegistryObject<RuinationModifier> RUINATION =
+    public static final Holder<RuinationModifier> RUINATION =
             register("ruination", RuinationModifier::new);
-    public static final RegistryObject<DeadlyPrecisionModifier> DEADLY_PRECISION =
+    public static final Holder<DeadlyPrecisionModifier> DEADLY_PRECISION =
             register("deadly_precision", DeadlyPrecisionModifier::new);
-    public static final RegistryObject<RelentlessModifier> RELENTLESS =
+    public static final Holder<RelentlessModifier> RELENTLESS =
             register("relentless", RelentlessModifier::new);
-    public static final RegistryObject<ThundergodWrathModifier> THUNDERGOD_WRATH =
+    public static final Holder<ThundergodWrathModifier> THUNDERGOD_WRATH =
             register("thundergod_wrath", ThundergodWrathModifier::new);
-    public static final RegistryObject<PurgingModifier> PURGING =
+    public static final Holder<PurgingModifier> PURGING =
             register("purging", PurgingModifier::new);
-    public static final RegistryObject<StaggeringModifier> STAGGERING =
+    public static final Holder<StaggeringModifier> STAGGERING =
             register("staggering", StaggeringModifier::new);
-    public static final RegistryObject<BlastingModifier> BLASTING =
+    public static final Holder<BlastingModifier> BLASTING =
             register("blasting", BlastingModifier::new);
-    public static final RegistryObject<ChainLightningModifier> CHAIN_LIGHTNING =
+    public static final Holder<ChainLightningModifier> CHAIN_LIGHTNING =
             register("chain_lightning", ChainLightningModifier::new);
-    public static final RegistryObject<AftershockModifier> AFTERSHOCK =
+    public static final Holder<AftershockModifier> AFTERSHOCK =
             register("aftershock", AftershockModifier::new);
-    public static final RegistryObject<PhotosyntheticModifier> PHOTOSYNTHETIC =
+    public static final Holder<PhotosyntheticModifier> PHOTOSYNTHETIC =
             register("photosynthetic", PhotosyntheticModifier::new);
-    public static final RegistryObject<FertilizingModifier> FERTILIZING =
+    public static final Holder<FertilizingModifier> FERTILIZING =
             register("fertilizing", FertilizingModifier::new);
-    public static final RegistryObject<CascadingModifier> CASCADING =
+    public static final Holder<CascadingModifier> CASCADING =
             register("cascading", CascadingModifier::new);
-    public static final RegistryObject<ModifiableModifier> MODIFIABLE =
+    public static final Holder<ModifiableModifier> MODIFIABLE =
             register("modifiable", ModifiableModifier::new);
-    public static final RegistryObject<EnergizedModifier> ENERGIZED =
+    public static final Holder<EnergizedModifier> ENERGIZED =
             register("energized", EnergizedModifier::new);
-    public static final RegistryObject<PiezoelectricModifier> PIEZOELECTRIC =
+    public static final Holder<PiezoelectricModifier> PIEZOELECTRIC =
             register("piezoelectric", PiezoelectricModifier::new);
-    public static final RegistryObject<PhotovoltaicModifier> PHOTOVOLTAIC =
+    public static final Holder<PhotovoltaicModifier> PHOTOVOLTAIC =
             register("photovoltaic", PhotovoltaicModifier::new);
-    public static final RegistryObject<FluxedModifier> FLUXED =
+    public static final Holder<FluxedModifier> FLUXED =
             register("fluxed", FluxedModifier::new);
-    public static final RegistryObject<AccuracyModifier> ACCURACY =
+    public static final Holder<AccuracyModifier> ACCURACY =
             register("accuracy", AccuracyModifier::new);
+    public static final Holder<DiffuseModifier> DIFFUSE =
+            register("diffuse", DiffuseModifier::new);
 
     // Marker traits for materials whose source mods are absent from 1.20.1 but
     // still need their material JSONs to load. Behaviour is a no-op until the
     // respective mod is available and dedicated behaviour is wired in.
-    public static final RegistryObject<AstralModifier> ASTRAL =
+    public static final Holder<AstralModifier> ASTRAL =
             register("astral", AstralModifier::new);
-    public static final RegistryObject<ElectricModifier> ELECTRIC =
+    public static final Holder<ElectricModifier> ELECTRIC =
             register("electric", ElectricModifier::new);
-    public static final RegistryObject<WarpingModifier> WARPING =
+    public static final Holder<WarpingModifier> WARPING =
             register("warping", WarpingModifier::new);
-    public static final RegistryObject<SlimeyPinkModifier> SLIMEY_PINK =
+    public static final Holder<SlimeyPinkModifier> SLIMEY_PINK =
             register("slimey_pink", SlimeyPinkModifier::new);
 
     private TConEvoModifiers() {}
 
-    public static <M extends Modifier> RegistryObject<M> register(String name, Supplier<M> factory) {
-        return MODIFIERS.register("tconevo/" + name, factory);
+    public static <M extends Modifier> Holder<M> register(String name, Supplier<M> factory) {
+        Holder<M> holder = new Holder<>(
+                new ResourceLocation(SoaAdditions.MODID, "tconevo/" + name), factory);
+        PENDING.add(holder);
+        return holder;
     }
 
     public static void register(IEventBus modEventBus) {
-        MODIFIERS.register(modEventBus);
+        modEventBus.addListener(TConEvoModifiers::onModifierRegistration);
+    }
+
+    private static void onModifierRegistration(ModifierManager.ModifierRegistrationEvent event) {
+        for (Holder<?> holder : PENDING) {
+            holder.bindAndRegister(event);
+        }
+    }
+
+    /**
+     * Holds a pending modifier entry and, after
+     * {@link ModifierManager.ModifierRegistrationEvent} fires, caches the
+     * registered instance for {@link #get()}. Mimics the subset of
+     * {@link net.minecraftforge.registries.RegistryObject} that callers
+     * actually need ({@code get}, {@code getId}).
+     */
+    public static final class Holder<M extends Modifier> implements Supplier<M> {
+        private final ResourceLocation id;
+        private final Supplier<M> factory;
+        private M instance;
+
+        private Holder(ResourceLocation id, Supplier<M> factory) {
+            this.id = id;
+            this.factory = factory;
+        }
+
+        public ResourceLocation getId() { return id; }
+
+        @Override public M get() {
+            if (instance == null) {
+                throw new IllegalStateException(
+                        "Modifier " + id + " accessed before ModifierRegistrationEvent fired");
+            }
+            return instance;
+        }
+
+        @SuppressWarnings("unchecked")
+        private void bindAndRegister(ModifierManager.ModifierRegistrationEvent event) {
+            instance = factory.get();
+            event.registerStatic(new ModifierId(id), instance);
+        }
     }
 }

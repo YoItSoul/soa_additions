@@ -1,0 +1,22 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "draconicevolution"
+    }
+  ],
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:nuggets/draconium_awakened"
+  },
+  "result": {
+    "fluid": "soa_additions:molten_draconic_metal",
+    "amount": 10
+  },
+  "temperature": 1700,
+  "time": 40
+}

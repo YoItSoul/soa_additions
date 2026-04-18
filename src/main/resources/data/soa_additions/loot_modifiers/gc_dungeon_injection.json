@@ -1,0 +1,60 @@
+{
+  "type": "soa_additions:add_item",
+  "conditions": [
+    {
+      "condition": "minecraft:any_of",
+      "terms": [
+        { "condition": "forge:loot_table_id", "loot_table_id": "minecraft:chests/simple_dungeon" },
+        { "condition": "forge:loot_table_id", "loot_table_id": "minecraft:chests/abandoned_mineshaft" },
+        { "condition": "forge:loot_table_id", "loot_table_id": "minecraft:chests/end_city_treasure" },
+        { "condition": "forge:loot_table_id", "loot_table_id": "minecraft:chests/igloo_chest" },
+        { "condition": "forge:loot_table_id", "loot_table_id": "minecraft:chests/jungle_temple" },
+        { "condition": "forge:loot_table_id", "loot_table_id": "minecraft:chests/nether_bridge" },
+        { "condition": "forge:loot_table_id", "loot_table_id": "minecraft:chests/stronghold_corridor" },
+        { "condition": "forge:loot_table_id", "loot_table_id": "minecraft:chests/desert_pyramid" },
+        { "condition": "forge:loot_table_id", "loot_table_id": "minecraft:chests/woodland_mansion" },
+        { "condition": "forge:loot_table_id", "loot_table_id": "minecraft:chests/stronghold_library" },
+        { "condition": "forge:loot_table_id", "loot_table_id": "minecraft:chests/stronghold_crossing" },
+        { "condition": "forge:loot_table_id", "loot_table_id": "minecraft:chests/village/village_weaponsmith" },
+        { "condition": "forge:loot_table_id", "loot_table_id": "minecraft:chests/village/village_toolsmith" },
+        { "condition": "forge:loot_table_id", "loot_table_id": "minecraft:chests/village/village_armorer" },
+        { "condition": "forge:loot_table_id", "loot_table_id": "minecraft:gameplay/fishing/treasure" }
+      ]
+    }
+  ],
+  "rolls": 2,
+  "entries": [
+    { "item": "soa_additions:blood_sigil",            "weight": 2,  "min": 1,  "max": 1  },
+    { "item": "soa_additions:time_fragment",          "weight": 18, "min": 1,  "max": 3  },
+    { "item": "soa_additions:time_shard",             "weight": 3,  "min": 1,  "max": 1  },
+    { "item": "soa_additions:one_punch",              "weight": 1,  "min": 1,  "max": 1  },
+    { "item": "soa_additions:reward_ticket_common",   "weight": 25, "min": 1,  "max": 3  },
+    { "item": "soa_additions:reward_ticket_rare",     "weight": 8,  "min": 1,  "max": 2  },
+    { "item": "soa_additions:reward_ticket_epic",     "weight": 2,  "min": 1,  "max": 1  },
+    { "item": "soa_additions:medkit_super",           "weight": 1,  "min": 1,  "max": 1  },
+    { "item": "soa_additions:medkit_big",             "weight": 4,  "min": 1,  "max": 3  },
+    { "item": "soa_additions:medkit_small",           "weight": 16, "min": 1,  "max": 6  },
+    { "item": "soa_additions:experience_ingot",       "weight": 18, "min": 2,  "max": 12 },
+    { "item": "soa_additions:delivery_order",         "weight": 3,  "min": 1,  "max": 1  },
+    { "item": "soa_additions:tower_chest_key",        "weight": 2,  "min": 1,  "max": 1  },
+    { "item": "soa_additions:sunny_doll",             "weight": 4,  "min": 1,  "max": 1  },
+    { "item": "soa_additions:bag_of_dyes",            "weight": 6,  "min": 1,  "max": 3  },
+    { "item": "soa_additions:true_eye_of_ender",      "weight": 1,  "min": 1,  "max": 1  },
+    { "item": "soa_additions:huaji",                  "weight": 3,  "min": 1,  "max": 1  },
+    { "item": "soa_additions:poop",                   "weight": 8,  "min": 1,  "max": 2  },
+    { "item": "soa_additions:experience_transporter", "weight": 1,  "min": 1,  "max": 1  },
+    { "item": "soa_additions:blueprint_laser_gun",    "weight": 1,  "min": 1,  "max": 1  },
+    { "item": "soa_additions:skill_reset_scroll",     "weight": 1,  "min": 1,  "max": 1  },
+    { "item": "soa_additions:plate_of_honor",         "weight": 1,  "min": 1,  "max": 1  },
+    { "item": "soa_additions:purifying_dust",         "weight": 3,  "min": 10, "max": 40 },
+    { "item": "soa_additions:respawn_anchor",         "weight": 1,  "min": 1,  "max": 1  },
+    { "item": "soa_additions:loli_lolipop",           "weight": 3,  "min": 1,  "max": 2  },
+    { "item": "soa_additions:food_bag",               "weight": 4,  "min": 1,  "max": 1  },
+    { "item": "soa_additions:furniture_crate",        "weight": 3,  "min": 1,  "max": 1  },
+    { "item": "soa_additions:strange_matter",         "weight": 1,  "min": 1,  "max": 1  },
+    { "item": "soa_additions:catalyst_star",          "weight": 2,  "min": 1,  "max": 1  },
+    { "item": "soa_additions:slime_crown",            "weight": 2,  "min": 1,  "max": 1  },
+    { "item": "soa_additions:shining_star",           "weight": 2,  "min": 1,  "max": 1  },
+    { "item": "soa_additions:chromium_ingot",         "weight": 5,  "min": 4,  "max": 12 }
+  ]
+}

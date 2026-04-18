@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "botania"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:nuggets/manasteel"
+  },
+  "material": "soa_additions:manasteel",
+  "needed": 9,
+  "value": 1
+}

@@ -1,0 +1,15 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:ingots/primal_metal"
+  },
+  "material": "soa_additions:primal_metal",
+  "needed": 1,
+  "value": 1
+}

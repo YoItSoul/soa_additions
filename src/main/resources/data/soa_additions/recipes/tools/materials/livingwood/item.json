@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "botania"
+    }
+  ],
+  "ingredient": {
+    "item": "botania:livingwood_log"
+  },
+  "material": "soa_additions:livingwood",
+  "needed": 1,
+  "value": 1
+}

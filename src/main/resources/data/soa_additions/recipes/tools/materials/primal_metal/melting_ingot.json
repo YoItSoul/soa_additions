@@ -1,0 +1,18 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:ingots/primal_metal"
+  },
+  "result": {
+    "fluid": "soa_additions:molten_primal_metal",
+    "amount": 90
+  },
+  "temperature": 1760,
+  "time": 120
+}

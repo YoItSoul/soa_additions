@@ -1,0 +1,16 @@
+{
+  "type": "bloodmagic:altar",
+  "conditions": [
+    { "type": "forge:mod_loaded", "modid": "bloodmagic" }
+  ],
+  "altarSyphon": 10000,
+  "consumptionRate": 200,
+  "drainRate": 200,
+  "input": {
+    "tag": "forge:ingots/steel"
+  },
+  "output": {
+    "item": "soa_additions:bound_metal_ingot"
+  },
+  "upgradeLevel": 2
+}

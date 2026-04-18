@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "avaritia"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:nuggets/infinity"
+  },
+  "material": "soa_additions:infinity_metal",
+  "needed": 9,
+  "value": 1
+}

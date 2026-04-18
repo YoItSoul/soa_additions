@@ -1,0 +1,15 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:plates/carbon"
+  },
+  "material": "soa_additions:carbon_fiber",
+  "needed": 1,
+  "value": 1
+}

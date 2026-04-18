@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "twilightforest"
+    }
+  ],
+  "ingredient": {
+    "item": "twilightforest:twilight_oak_planks"
+  },
+  "material": "soa_additions:ghostwood",
+  "needed": 1,
+  "value": 1
+}

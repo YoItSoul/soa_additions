@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "ae2"
+    }
+  ],
+  "type": "tconstruct:material_melting",
+  "input": "soa_additions:sky_stone",
+  "temperature": 1250,
+  "result": {
+    "fluid": "soa_additions:molten_sky_stone",
+    "amount": 100
+  }
+}

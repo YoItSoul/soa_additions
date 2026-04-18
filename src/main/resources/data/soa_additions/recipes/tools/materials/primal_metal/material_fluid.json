@@ -1,0 +1,15 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "fluid": "soa_additions:molten_primal_metal",
+    "amount": 90
+  },
+  "temperature": 1760,
+  "output": "soa_additions:primal_metal"
+}

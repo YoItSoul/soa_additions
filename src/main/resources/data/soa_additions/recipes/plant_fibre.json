@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "tag": "forge:plants/cattail" }
+  ],
+  "result": { "item": "soa_additions:plant_fibre" }
+}

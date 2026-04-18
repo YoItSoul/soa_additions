@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "forestry"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:gems/apatite"
+  },
+  "material": "soa_additions:apatite",
+  "needed": 1,
+  "value": 1
+}

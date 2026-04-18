@@ -233,8 +233,9 @@ public final class ModItems {
             "\u00a74Demonic whispers are written all over it.",
             "\u00a74You might summon an evil presence by using this on a summoning altar.");
 
-    public static final RegistryObject<Item> TRUE_BLOOD_SIGIL = stageItem("true_blood_sigil",
+    public static final RegistryObject<Item> TRUE_BLOOD_SIGIL = useItemPersistent("true_blood_sigil",
             new Item.Properties().stacksTo(1), true,
+            RightClickActions.setTimeToNight(),
             "\u00a7eRight click to summon a blood moon",
             "\u00a7eLeft click to skip a blood moon",
             "\u00a7bDoes not consume when used");
@@ -275,7 +276,8 @@ public final class ModItems {
 
     // ========== Nether stage ==========
 
-    public static final RegistryObject<Item> SHINING_STAR = stageItem("shining_star", false,
+    public static final RegistryObject<Item> SHINING_STAR = useItem("shining_star", false,
+            RightClickActions.summonMeteor(),
             "\u00a7bRight click to summon a meteor on top of you",
             "\u00a7cDo not use this at your base");
 
@@ -292,12 +294,14 @@ public final class ModItems {
                     "\u00a77Gains 40s of Regen III.",
                     "\u00a77Restores 32 health."));
 
-    public static final RegistryObject<Item> BLOOD_SIGIL = stageItem("blood_sigil", false,
+    public static final RegistryObject<Item> BLOOD_SIGIL = useItem("blood_sigil", false,
+            RightClickActions.setTimeToNight(),
             "\u00a7eSummons blood moon when used",
             "\u00a7eBloodmoon will occur at the next possible night",
             "\u00a77Consumed on use");
 
-    public static final RegistryObject<Item> BLOODY_SACRIFICE = stageItem("bloody_sacrifice", false,
+    public static final RegistryObject<Item> BLOODY_SACRIFICE = useItem("bloody_sacrifice", false,
+            RightClickActions.setTimeToDay(),
             "\u00a7eSkip a blood moon to the next morning.",
             "\u00a77Consumed on use");
 
@@ -411,7 +415,8 @@ public final class ModItems {
             "\u00a77A page of an ancient artifact.",
             "\u00a77It's partly repaired, but still not understandable.");
     public static final RegistryObject<Item> AURORA_HEART = stageItem("aurora_heart", true);
-    public static final RegistryObject<Item> BAG_OF_DYES = stageItem("bag_of_dyes", false,
+    public static final RegistryObject<Item> BAG_OF_DYES = useItem("bag_of_dyes", false,
+            rollTable("containers/bag_of_dyes"),
             "\u00a7eLooks like it's filled with dyes... open it and have a look?");
     public static final RegistryObject<Item> BLACK_HOLE_REMNANT = stageItem("black_hole_remnant", false);
     public static final RegistryObject<Item> BLUEPRINT = stageItem("blueprint", false,
@@ -451,7 +456,8 @@ public final class ModItems {
             "\u00a73It is cold enough to freeze the sun.");
     public static final RegistryObject<Item> DEATH_COUNTER = stageItem("death_counter", false,
             "\u00a77\u00a7oRight click to show the death leaderboard.");
-    public static final RegistryObject<Item> DELIVERY_ORDER = stageItem("delivery_order", false,
+    public static final RegistryObject<Item> DELIVERY_ORDER = useItem("delivery_order", false,
+            rollTable("containers/delivery_order"),
             "\u00a7bWarps a load of goods to you with future technology!",
             "\u00a76Right click to use");
     public static final RegistryObject<Item> DIFFICULTY_SYNCER = stageItem("difficulty_syncer",
@@ -460,18 +466,21 @@ public final class ModItems {
             "\u00a7eDoes not consume");
     public static final RegistryObject<Item> ELYSIA_PROJECT_LORE = stageItem("elysia_project_lore",
             new Item.Properties().stacksTo(1), false);
-    public static final RegistryObject<Item> EMERGENCY_BUTTON = stageItem("emergency_button",
+    public static final RegistryObject<Item> EMERGENCY_BUTTON = useItem("emergency_button",
             new Item.Properties().stacksTo(1), false,
+            RightClickActions.clearEntities(),
             "\u00a74EMERGENCY USE ONLY",
             "\u00a7cRight click to clear all entities besides players.",
             "\u00a7cConsumed on use.");
     public static final RegistryObject<Item> EXECUTOR_TERMINAL = stageItem("executor_terminal", false,
             "\u00a74\u00a7oIt's up to you to decide the fate of this world.",
             "\u00a7c\u00a7lTHIS CANNOT BE UNDONE.");
-    public static final RegistryObject<Item> EXPERIENCE_INGOT = stageItem("experience_ingot", false,
+    public static final RegistryObject<Item> EXPERIENCE_INGOT = useItem("experience_ingot", false,
+            RightClickActions.grantXp(9),
             "\u00a77Used to store XP",
             "\u00a7aRight click to consume and gain XP");
-    public static final RegistryObject<Item> EXPERIENCE_NUGGET = stageItem("experience_nugget", false,
+    public static final RegistryObject<Item> EXPERIENCE_NUGGET = useItem("experience_nugget", false,
+            RightClickActions.grantXp(1),
             "\u00a77Used to store XP",
             "\u00a7aRight click to consume and gain XP");
     public static final RegistryObject<Item> EXPERIENCE_TRANSPORTER = stageItem("experience_transporter",
@@ -479,13 +488,16 @@ public final class ModItems {
             "\u00a7eTransports XP between tools via crafting.");
     public static final RegistryObject<Item> EXPERIMENT_NOTE = stageItem("experiment_note", false,
             "\u00a77A broken experiment log, the text on it can't be seen clearly.");
-    public static final RegistryObject<Item> FOOD_BAG = stageItem("food_bag", false,
+    public static final RegistryObject<Item> FOOD_BAG = useItem("food_bag", false,
+            rollTable("containers/food_bag"),
             "\u00a7eFilled with delicious food!",
             "\u00a77Right click to open");
-    public static final RegistryObject<Item> FURNITURE_CRATE = stageItem("furniture_crate", false,
+    public static final RegistryObject<Item> FURNITURE_CRATE = useItem("furniture_crate", false,
+            rollTable("containers/furniture_crate"),
             "\u00a7bFilled with furnitures and decorations!",
             "\u00a77Right click to open");
-    public static final RegistryObject<Item> GIFT = stageItem("gift", false,
+    public static final RegistryObject<Item> GIFT = useItem("gift", false,
+            rollTable("containers/gift"),
             "\u00a7aHo ho ho!",
             "\u00a7eRight click to open");
     public static final RegistryObject<Item> GRASS_STRING = stageItem("grass_string", false,
@@ -504,8 +516,9 @@ public final class ModItems {
     public static final RegistryObject<Item> INFINITY_STONE = stageItem("infinity_stone",
             new Item.Properties().stacksTo(1), true,
             "\u00a75For the worthy...");
-    public static final RegistryObject<Item> ITEM_PURGER = stageItem("item_purger",
+    public static final RegistryObject<Item> ITEM_PURGER = useItemPersistent("item_purger",
             new Item.Properties().stacksTo(1), false,
+            RightClickActions.clearGroundItems(),
             "\u00a7bRight click to clear all ground items.");
     public static final RegistryObject<Item> LOLI_LOLIPOP = ITEMS.register("loli_lolipop",
             () -> new StageFoodItem(new Item.Properties().food(new FoodProperties.Builder()
@@ -535,7 +548,8 @@ public final class ModItems {
     public static final RegistryObject<Item> PASSPORT = stageItem("passport", false,
             "\u00a76Right click to unlock all game stages",
             "\u00a7bCreative mode only");
-    public static final RegistryObject<Item> PEARL_OF_KNOWLEDGE = stageItem("pearl_of_knowledge", true,
+    public static final RegistryObject<Item> PEARL_OF_KNOWLEDGE = useItem("pearl_of_knowledge", true,
+            RightClickActions.grantXp(59049),
             "\u00a7eStores a lot of XP.",
             "\u00a7aRight click to use.");
     public static final RegistryObject<Item> PEBBLE = stageItem("pebble", false,
@@ -573,22 +587,24 @@ public final class ModItems {
                     .effect(() -> new MobEffectInstance(MobEffects.CONFUSION, 160, 0), 0.5f)
                     .build()),
                     false, 32, false));
-    public static final RegistryObject<Item> RED_PACKET = stageItem("red_packet", false,
+    public static final RegistryObject<Item> RED_PACKET = useItem("red_packet", false,
+            rollTable("containers/gift"),
             "\u00a7eHappy lunar new year!",
             "\u00a76Right click to open");
-    public static final RegistryObject<Item> RESPAWN_ANCHOR = stageItem("respawn_anchor", true,
+    public static final RegistryObject<Item> RESPAWN_ANCHOR = useItem("respawn_anchor", true,
+            RightClickActions.setSpawn(),
             "\u00a7eRight click to set current location as spawn point.");
     public static final RegistryObject<Item> REWARD_TICKET_COMMON = rewardTicket("reward_ticket_common", false,
-            "loot_crate_common",
+            "containers/loot_crate_common",
             "\u00a77Right click to get a \u00a7aCOMMON\u00a7r\u00a77 Loot Crate");
     public static final RegistryObject<Item> REWARD_TICKET_EPIC = rewardTicket("reward_ticket_epic", false,
-            "loot_crate_epic",
+            "containers/loot_crate_epic",
             "\u00a77Right click to get an \u00a7dEPIC\u00a7r\u00a77 Loot Crate");
     public static final RegistryObject<Item> REWARD_TICKET_LEGENDARY = rewardTicket("reward_ticket_legendary", true,
-            "loot_crate_legendary",
+            "containers/loot_crate_legendary",
             "\u00a77Right click to get a \u00a76LEGENDARY\u00a7r\u00a77 Loot Crate");
     public static final RegistryObject<Item> REWARD_TICKET_RARE = rewardTicket("reward_ticket_rare", false,
-            "loot_crate_rare",
+            "containers/loot_crate_rare",
             "\u00a77Right click to get a \u00a79RARE\u00a7r\u00a77 Loot Crate");
     public static final RegistryObject<Item> ROYAL_GEL = stageItem("royal_gel", false,
             "\u00a7eBoth tasty and flammable!");
@@ -604,7 +620,8 @@ public final class ModItems {
     public static final RegistryObject<Item> STAINLESS_STEEL_BALL = stageItem("stainless_steel_ball", false);
     public static final RegistryObject<Item> STRANGE_MATTER = stageItem("strange_matter", false,
             "\u00a72The most dangerous substance in the universe.");
-    public static final RegistryObject<Item> SUNNY_DOLL = stageItem("sunny_doll", false,
+    public static final RegistryObject<Item> SUNNY_DOLL = useItem("sunny_doll", false,
+            RightClickActions.clearWeather(),
             "\u00a7bHey, It'll clear up now~",
             "\u00a7eSets the weather to sunny when used.");
     public static final RegistryObject<Item> TIME_FRAGMENT = stageItem("time_fragment",
@@ -662,5 +679,30 @@ public final class ModItems {
     private static RegistryObject<Item> rewardTicket(String name, boolean foil, String lootName, String... tooltip) {
         ResourceLocation lootId = new ResourceLocation(SoaAdditions.MODID, lootName);
         return ITEMS.register(name, () -> new RewardTicketItem(new Item.Properties(), foil, lootId, tooltip));
+    }
+
+    /** Register an item with a right-click action ported from a GreedyCraft
+     *  Additions-mod effect JSON. Consumes one on successful use. */
+    private static RegistryObject<Item> useItem(String name, boolean foil,
+                                                UseActionItem.UseAction action, String... tooltip) {
+        return ITEMS.register(name, () -> new UseActionItem(new Item.Properties(), foil, true, action, tooltip));
+    }
+
+    private static RegistryObject<Item> useItem(String name, Item.Properties props, boolean foil,
+                                                UseActionItem.UseAction action, String... tooltip) {
+        return ITEMS.register(name, () -> new UseActionItem(props, foil, true, action, tooltip));
+    }
+
+    /** Like {@link #useItem} but does not consume the stack — for reusable
+     *  trigger items (true_blood_sigil, item_purger). */
+    private static RegistryObject<Item> useItemPersistent(String name, Item.Properties props, boolean foil,
+                                                          UseActionItem.UseAction action, String... tooltip) {
+        return ITEMS.register(name, () -> new UseActionItem(props, foil, false, action, tooltip));
+    }
+
+    /** Build a loot-table-rolling action from a path under
+     *  {@code data/soa_additions/loot_tables/}. */
+    private static UseActionItem.UseAction rollTable(String path) {
+        return RightClickActions.rollLootTableAt(new ResourceLocation(SoaAdditions.MODID, path));
     }
 }

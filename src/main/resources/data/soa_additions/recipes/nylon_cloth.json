@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "sss",
+    "sss",
+    "sss"
+  ],
+  "key": {
+    "s": { "item": "soa_additions:nylon_string" }
+  },
+  "result": { "item": "soa_additions:nylon_cloth" },
+  "show_notification": true
+}

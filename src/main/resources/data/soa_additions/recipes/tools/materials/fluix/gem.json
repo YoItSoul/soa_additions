@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "ae2"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:gems/fluix"
+  },
+  "material": "soa_additions:fluix",
+  "needed": 1,
+  "value": 1
+}

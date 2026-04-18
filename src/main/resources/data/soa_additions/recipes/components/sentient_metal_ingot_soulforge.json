@@ -1,0 +1,17 @@
+{
+  "type": "bloodmagic:soulforge",
+  "conditions": [
+    { "type": "forge:mod_loaded", "modid": "bloodmagic" }
+  ],
+  "drain": 2.0,
+  "minimumDrain": 2.0,
+  "input0": {
+    "item": "bloodmagic:soulgempetty"
+  },
+  "input1": {
+    "tag": "forge:ingots/steel"
+  },
+  "output": {
+    "item": "soa_additions:sentient_metal_ingot"
+  }
+}

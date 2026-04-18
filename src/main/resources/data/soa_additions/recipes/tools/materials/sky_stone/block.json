@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "ae2"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:storage_blocks/sky_stone"
+  },
+  "material": "soa_additions:sky_stone",
+  "needed": 1,
+  "value": 4
+}

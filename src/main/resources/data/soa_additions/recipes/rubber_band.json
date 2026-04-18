@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "rrr"
+  ],
+  "key": {
+    "r": { "item": "thermal:rubber" }
+  },
+  "result": { "item": "soa_additions:rubber_band" },
+  "show_notification": true
+}

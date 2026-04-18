@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "pvj:pinecones" }
+  ],
+  "result": { "item": "soa_additions:pinecone" }
+}
