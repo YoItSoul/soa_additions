@@ -1,0 +1,18 @@
+{
+  "name": "Defense & Durability",
+  "icon": "tconstruct:reinforcement",
+  "category": "soa_additions:traits",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Durability modifiers",
+      "text": "$(item)Superheavy$() — slower swing, higher per-hit damage and durability.$(br)$(item)Softy$() — opposite: faster swing, lower peak damage, gentler durability drain.$(br)$(item)Hollow$() — starts with reduced durability but gains it back over time during use.$(br)$(item)Fragile$() — shatters faster near low durability.$(br)$(item)Decay$() — very slowly degrades even while not in use."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Protective",
+      "text": "$(item)Revive$() — once per life, refuses to break; restores a chunk of durability instead.$(br)$(item)Curvature$() — angles attacks for glancing hits; reduces incoming damage during melee.$(br)$(item)NatureBound$() — regenerates durability while standing on natural blocks (grass, leaves, podzol)."
+    }
+  ]
+}

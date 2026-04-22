@@ -1,14 +1,14 @@
 {
   "default": [
-    { "level": 1, "name": "soa_additions:tconevo/culling" },
-    { "level": 1, "name": "soa_additions:tconevo/staggering" }
+    { "level": 1, "name": "tconevo:culling" },
+    { "level": 1, "name": "tconevo:staggering" }
   ],
   "perStat": {
     "tconstruct:head": [
-      { "level": 1, "name": "soa_additions:tconevo/eternal_density" }
+      { "level": 1, "name": "tconevo:eternal_density" }
     ],
     "tconstruct:limb": [
-      { "level": 1, "name": "soa_additions:tconevo/eternal_density" }
+      { "level": 1, "name": "tconevo:eternal_density" }
     ]
   }
 }

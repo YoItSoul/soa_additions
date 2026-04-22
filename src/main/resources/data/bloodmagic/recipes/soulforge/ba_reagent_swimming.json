@@ -3,7 +3,7 @@
   "minimumDrain": 100.0,
   "drain": 40.0,
   "output": {
-    "item": "soa_additions:ba_reagent_swimming"
+    "item": "bloodarsenal:reagent_swimming"
   },
   "input0": {
     "item": "bloodmagic:reagentwater"

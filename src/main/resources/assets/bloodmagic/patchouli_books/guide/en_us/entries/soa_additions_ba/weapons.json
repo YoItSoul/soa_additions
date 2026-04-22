@@ -1,0 +1,20 @@
+{
+  "name": "Special Weapons",
+  "icon": "bloodarsenal:warp_blade",
+  "category": "bloodmagic:soa_additions_ba",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:warp_blade",
+      "title": "Warp Blade",
+      "text": "A glass-edged short sword. Hitting a living target has a chance to teleport them a short random distance. The disorientation usually hurts more than the blade does."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:stygian_dagger",
+      "title": "Stygian Dagger",
+      "text": "An Ender-kin weapon. Strikes against the $(l:bloodmagic:demon_will)wilful$() — demons, the Ender and their ilk — land with noticeably greater force."
+    }
+  ]
+}

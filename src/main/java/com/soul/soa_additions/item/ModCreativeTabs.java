@@ -32,6 +32,18 @@ public final class ModCreativeTabs {
                             output.accept(com.soul.soa_additions.curios.CuriosIntegration.GREEDY_BAG.get());
                         }
 
+                        // Patchouli addon books — soft-dep, construct via registry lookup
+                        // to avoid a compile-time Patchouli dependency.
+                        if (net.minecraftforge.fml.ModList.get().isLoaded("patchouli")) {
+                            net.minecraft.world.item.Item guideBook =
+                                    net.minecraftforge.registries.ForgeRegistries.ITEMS.getValue(
+                                            new net.minecraft.resources.ResourceLocation("patchouli", "guide_book"));
+                            if (guideBook != null) {
+                                output.accept(makeBook(guideBook, "soa_additions:nyx_guide"));
+                                output.accept(makeBook(guideBook, "soa_additions:taiga_guide"));
+                            }
+                        }
+
                         // Ores
                         output.accept(ModBlocks.ABYSSAL_ORE_BLOCK.get());
                         output.accept(ModBlocks.ETHER_ORE_BLOCK.get());
@@ -279,6 +291,14 @@ public final class ModCreativeTabs {
                     .build());
 
     private ModCreativeTabs() {}
+
+    private static net.minecraft.world.item.ItemStack makeBook(net.minecraft.world.item.Item bookItem, String bookId) {
+        net.minecraft.world.item.ItemStack stack = new net.minecraft.world.item.ItemStack(bookItem);
+        net.minecraft.nbt.CompoundTag tag = new net.minecraft.nbt.CompoundTag();
+        tag.putString("patchouli:book", bookId);
+        stack.setTag(tag);
+        return stack;
+    }
 
     public static void register(IEventBus eventBus) {
         CREATIVE_MODE_TABS.register(eventBus);

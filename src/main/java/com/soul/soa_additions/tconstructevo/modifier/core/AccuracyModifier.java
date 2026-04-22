@@ -16,7 +16,7 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 /**
  * Accuracy — while the tool is held in either hand, contributes a MULTIPLY_BASE
- * modifier to the holder's {@code soa_additions:tconevo/accuracy} attribute.
+ * modifier to the holder's {@code tconevo:accuracy} attribute.
  * The consumer of that attribute (pierce-through-evasion roll) ships with the
  * Evasion trait in a later milestone; for now the attribute value is still
  * read by the TrueStrike potion's placeholder path and by any downstream mod

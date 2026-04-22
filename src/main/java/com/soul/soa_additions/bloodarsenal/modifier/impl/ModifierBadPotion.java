@@ -35,7 +35,7 @@ public class ModifierBadPotion extends Modifier {
         if (random.nextInt(modLevel + 1) < random.nextInt(getMaxLevel())) return;
 
         if (!stack.hasTag()) return;
-        CompoundTag data = stack.getTag().getCompound("ba_potion_itemstack");
+        CompoundTag data = stack.getTag().getCompound("potion_itemstack");
         if (data.isEmpty()) return;
 
         ItemStack potionStack = ItemStack.of(data);

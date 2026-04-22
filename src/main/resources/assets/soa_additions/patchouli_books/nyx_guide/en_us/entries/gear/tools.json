@@ -1,0 +1,43 @@
+{
+  "name": "Meteor Tools",
+  "icon": "soa_additions:meteor_pickaxe",
+  "category": "soa_additions:gear",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Meteor tier",
+      "text": "The meteor tool tier sits between diamond and netherite — slightly higher mining speed (7.0), slightly higher attack damage (+3), and ~18 enchantability.$(br2)Durability: 2341 uses. Matches netherite's harvest level."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:meteor_pickaxe",
+      "title": "Meteor Pickaxe",
+      "text": "Mines anything netherite can mine. The default choice for deep-stone work."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:meteor_axe",
+      "title": "Meteor Axe",
+      "text": "Standard axe behavior — chopping and sweeping attacks with meteor-tier damage."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:meteor_shovel",
+      "title": "Meteor Shovel",
+      "text": "For fast-clearing softer terrain; paths dirt blocks like any shovel."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:meteor_hoe",
+      "title": "Meteor Hoe",
+      "text": "Best-in-slot for farm prep. Meteor-tier durability keeps it going for a very long time."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:meteor_sword",
+      "title": "Meteor Sword",
+      "text": "The baseline meteor weapon. Pairs exceptionally well with the $(l:gear/enchantments)Lunar Edge$() enchantment."
+    }
+  ]
+}

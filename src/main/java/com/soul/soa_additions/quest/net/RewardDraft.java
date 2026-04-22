@@ -4,7 +4,9 @@ import com.google.gson.JsonObject;
 import com.soul.soa_additions.quest.model.QuestReward;
 import com.soul.soa_additions.quest.model.RewardScope;
 import com.soul.soa_additions.quest.reward.CommandReward;
+import com.soul.soa_additions.quest.reward.GrantStageReward;
 import com.soul.soa_additions.quest.reward.ItemReward;
+import com.soul.soa_additions.quest.reward.LockPackmodeReward;
 import com.soul.soa_additions.quest.reward.RewardRegistry;
 import com.soul.soa_additions.quest.reward.XpReward;
 import net.minecraft.network.FriendlyByteBuf;
@@ -38,18 +40,21 @@ public record RewardDraft(
 ) {
 
     public enum Type {
-        ITEM, XP, COMMAND, OTHER;
+        ITEM, XP, COMMAND, GRANT_STAGE, LOCK_PACKMODE, OTHER;
 
         public Type next() { return values()[(ordinal() + 1) % values().length]; }
         public boolean usesCount() { return this == ITEM || this == XP; }
+        public boolean usesValue() { return this != LOCK_PACKMODE && this != OTHER; }
         public boolean editable()  { return this != OTHER; }
 
         public String defaultValue() {
             return switch (this) {
-                case ITEM    -> "minecraft:diamond";
-                case XP      -> "";
-                case COMMAND -> "say {player} finished a quest";
-                case OTHER   -> "";
+                case ITEM         -> "minecraft:diamond";
+                case XP           -> "";
+                case COMMAND      -> "say {player} finished a quest";
+                case GRANT_STAGE  -> "stage_id";
+                case LOCK_PACKMODE -> "";
+                case OTHER        -> "";
             };
         }
     }
@@ -100,6 +105,8 @@ public record RewardDraft(
                 case ITEM -> new ItemReward(new ResourceLocation(value), Math.max(1, count), scope);
                 case XP -> new XpReward(Math.max(0, count), levels, scope);
                 case COMMAND -> new CommandReward(value == null ? "" : value, scope);
+                case GRANT_STAGE -> new GrantStageReward(value == null ? "" : value, scope);
+                case LOCK_PACKMODE -> new LockPackmodeReward();
                 case OTHER -> {
                     // Rehydrate from the cached JSON body we captured at form open.
                     if (aux == null || aux.isEmpty()) yield null;
@@ -124,6 +131,12 @@ public record RewardDraft(
         if (r instanceof CommandReward cr) {
             return new RewardDraft(Type.COMMAND, cr.command(), 0, false, cr.scope(), "");
         }
+        if (r instanceof GrantStageReward gs) {
+            return new RewardDraft(Type.GRANT_STAGE, gs.stage(), 0, false, gs.scope(), "");
+        }
+        if (r instanceof LockPackmodeReward) {
+            return new RewardDraft(Type.LOCK_PACKMODE, "", 0, false, r.scope(), "");
+        }
         // Preserve unknown types verbatim.
         JsonObject body = new JsonObject();
         try { r.writeJson(body); } catch (Exception ignored) {}
@@ -134,10 +147,12 @@ public record RewardDraft(
     /** Short display label for the form row. */
     public String displayLabel() {
         return switch (type) {
-            case ITEM    -> "Item: " + value + " x" + count;
-            case XP      -> "+" + count + (levels ? " levels" : " XP");
-            case COMMAND -> "Run: " + value;
-            case OTHER   -> "Other: " + value;
+            case ITEM          -> "Item: " + value + " x" + count;
+            case XP            -> "+" + count + (levels ? " levels" : " XP");
+            case COMMAND       -> "Run: " + value;
+            case GRANT_STAGE   -> "Stage: " + value;
+            case LOCK_PACKMODE -> "Lock packmode";
+            case OTHER         -> "Other: " + value;
         };
     }
 }

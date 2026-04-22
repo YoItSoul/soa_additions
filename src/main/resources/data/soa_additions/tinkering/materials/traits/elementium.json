@@ -1,16 +1,16 @@
 {
   "default": [
-    { "level": 1, "name": "soa_additions:tconevo/cascading" },
-    { "level": 1, "name": "soa_additions:tconevo/mana_infused" }
+    { "level": 1, "name": "tconevo:cascading" },
+    { "level": 1, "name": "tconevo:mana_infused" }
   ],
   "perStat": {
     "tconstruct:head": [
-      { "level": 1, "name": "soa_additions:tconevo/fae_voice" },
-      { "level": 1, "name": "soa_additions:tconevo/opportunist" }
+      { "level": 1, "name": "tconevo:fae_voice" },
+      { "level": 1, "name": "tconevo:opportunist" }
     ],
     "tconstruct:limb": [
-      { "level": 1, "name": "soa_additions:tconevo/fae_voice" },
-      { "level": 1, "name": "soa_additions:tconevo/opportunist" }
+      { "level": 1, "name": "tconevo:fae_voice" },
+      { "level": 1, "name": "tconevo:opportunist" }
     ]
   }
 }

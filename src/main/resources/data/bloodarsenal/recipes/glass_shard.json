@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "forge:glass_panes"
+    }
+  ],
+  "result": {
+    "item": "bloodarsenal:glass_shard",
+    "count": 3
+  }
+}

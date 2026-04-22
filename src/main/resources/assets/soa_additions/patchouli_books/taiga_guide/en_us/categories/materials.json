@@ -1,0 +1,6 @@
+{
+  "name": "Materials",
+  "description": "Each material's ingot, nugget, dust, and storage-block forms.",
+  "icon": "taiga:palladium_ingot",
+  "sortnum": 2
+}

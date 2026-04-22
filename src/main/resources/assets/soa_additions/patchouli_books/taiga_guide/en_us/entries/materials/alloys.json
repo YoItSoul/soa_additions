@@ -1,0 +1,23 @@
+{
+  "name": "Alloy Tiers",
+  "icon": "taiga:adamant_ingot",
+  "category": "soa_additions:materials",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Low-tier alloys",
+      "text": "Mixed in the TC3 smeltery from base metals and common vanilla fluids:$(br2)$(item)Terrax$(), $(item)Triberium$(), $(item)Fractum$(), $(item)Violium$(), $(item)Proxii$(), $(item)Tritonite$(), $(item)Ignitz$(), $(item)Imperomite$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Mid-tier alloys",
+      "text": "$(item)Solarium$(), $(item)Adamant$(), $(item)Nihilite$(), $(item)Seismum$(), $(item)Astrium$(), $(item)Niob$(), $(item)Obsidiorite$(), $(item)Lumix$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "High-tier alloys",
+      "text": "$(item)Yrdeen$(), $(item)Iox$(), $(item)Nucleum$(), $(item)Dyonite$(), $(item)Nitronite$().$(br2)These are the endgame TC3 materials — expensive but unique trait combinations. Consult JEI for the exact inputs and ratios."
+    }
+  ]
+}

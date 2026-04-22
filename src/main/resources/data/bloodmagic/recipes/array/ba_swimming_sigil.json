@@ -1,13 +1,13 @@
 {
   "type": "bloodmagic:array",
   "baseinput": {
-    "item": "soa_additions:ba_reagent_swimming"
+    "item": "bloodarsenal:reagent_swimming"
   },
   "addedinput": {
     "item": "bloodmagic:reinforcedslate"
   },
   "output": {
-    "item": "soa_additions:ba_sigil_swimming"
+    "item": "bloodarsenal:sigil_swimming"
   },
   "texture": "bloodmagic:textures/models/alchemyarrays/watersigil.png"
 }

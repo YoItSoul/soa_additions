@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/bound_metal"
+    }
+  ],
+  "result": {
+    "item": "soa_additions:bound_metal_ingot",
+    "count": 9
+  },
+  "category": "misc"
+}

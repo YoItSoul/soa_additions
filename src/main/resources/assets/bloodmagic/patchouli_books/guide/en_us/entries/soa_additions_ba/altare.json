@@ -1,0 +1,24 @@
+{
+  "name": "Altare Aenigmatica",
+  "icon": "bloodarsenal:altare_aenigmatica",
+  "category": "bloodmagic:soa_additions_ba",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "The Altare",
+      "text": "A silent companion to the $(l:bloodmagic:altar)Blood Altar$(). While the altar charges items, the $(item)Altare Aenigmatica$() performs $(0)Sanguine Infusion$() — recipes that fuse multiple catalysts into a single output.$(br2)Right-click with an input item to insert it. The altare accepts a center stack plus up to eight adjacent ingredients hovering above it."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Sanguine Infusion",
+      "text": "Infusion is the altare's own recipe type — distinct from altar crafting, the $(l:bloodmagic:alchemy_table)Alchemy Table$(), or a $(item)Tartaric Forge$(). Recipes specify an LP cost drawn from the nearest $(l:bloodmagic:altar/soul_network)Soul Network$(), the catalyst layout, and the produced stack.$(br2)Canonical uses: upgrading a $(item)Blood Diamond$(), binding $(l:bloodmagic:soa_additions_ba/stasis)stasis weapons$(), and producing the higher $(l:bloodmagic:soa_additions_ba/pendants)soul pendant$() tiers."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:blood_capacitor",
+      "title": "Blood Capacitor",
+      "text": "An auxiliary storage block. Network-connected blocks (capacitor, altare, altar) share LP reserves, so a capacitor at the altare saves a long trip back to the altar to top up."
+    }
+  ]
+}

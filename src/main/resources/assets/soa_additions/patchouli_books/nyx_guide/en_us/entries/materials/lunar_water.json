@@ -1,0 +1,19 @@
+{
+  "name": "Lunar Water",
+  "icon": "soa_additions:lunar_water_bottle",
+  "category": "soa_additions:materials",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Water, by moonlight",
+      "text": "A cauldron left outside during rain on a full moon (or similar lunar phase) gathers $(item)Lunar Water$() instead of ordinary rainwater. Dip a glass bottle to collect."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:lunar_water_bottle",
+      "title": "Lunar Water Bottle",
+      "text": "Drink to clear negative status effects and apply $(6)Regeneration II$() for a short burst. A good panic button during a $(l:events/blood_moon)Blood Moon$() — it's easier to make than a potion and triggers immediately."
+    }
+  ]
+}

@@ -15,7 +15,7 @@ import net.minecraftforge.registries.RegistryObject;
 public final class BACreativeTab {
 
     public static final DeferredRegister<CreativeModeTab> TABS =
-            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, SoaAdditions.MODID);
+            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, "bloodarsenal");
 
     public static final RegistryObject<CreativeModeTab> BA_TAB = TABS.register("blood_arsenal",
             () -> CreativeModeTab.builder()
@@ -101,6 +101,7 @@ public final class BACreativeTab {
                         output.accept(BAItems.BOUND_STICK.get());
                         output.accept(BAItems.BOUND_IGNITER.get());
                         output.accept(BAItems.BOUND_SHEARS.get());
+                        output.accept(BAItems.BOUND_SICKLE.get());
 
                         // Blocks — Wood family
                         output.accept(BABlocks.BLOOD_INFUSED_PLANKS.get());
@@ -122,6 +123,7 @@ public final class BACreativeTab {
                         // Blocks — Decorative
                         output.accept(BABlocks.SLATE.get());
                         output.accept(BABlocks.GLASS_SHARDS.get());
+                        output.accept(BABlocks.BLOOD_BURNED_STRING_BLOCK.get());
 
                         // Blocks — Functional
                         output.accept(BABlocks.STASIS_PLATE.get());

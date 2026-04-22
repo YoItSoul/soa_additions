@@ -1,0 +1,30 @@
+{
+  "name": "Blood-Infused Tools",
+  "icon": "bloodarsenal:blood_infused_iron_pickaxe",
+  "category": "bloodmagic:soa_additions_ba",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Two Tiers",
+      "text": "$(item)Blood-Infused Wooden$() tools are the cheap early set — wood-tier mining level, but with higher enchantability than their vanilla counterparts.$(br2)$(item)Blood-Infused Iron$() tools are the workhorse tier — roughly diamond-equivalent in damage, iron-equivalent in mining level, and they auto-repair from the wearer's $(l:bloodmagic:altar/soul_network)Soul Network$() while in the inventory."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:blood_infused_iron_sickle",
+      "title": "Sickle",
+      "text": "A plant-harvester. Breaking a crop, bush, or flower sweeps a square of matching blocks around it — $(6)3×3$() for wooden, $(6)5×5$() for iron. Use a right-click-drag to sweep a garden in seconds."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:bound_sickle",
+      "title": "Bound Sickle",
+      "text": "The top-tier sickle. Netherite-durable, $(6)7×7$() harvest area, auto-repairing. Crafted by binding a $(item)Blood-Infused Iron Sickle$() via $(l:bloodmagic:soa_additions_ba/altare)Sanguine Infusion$() with a $(item)Bound Blood Diamond$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Other bound tools",
+      "text": "$(item)Bound Stick$(), $(item)Bound Igniter$(), and $(item)Bound Shears$() round out the set. Each is a crafting component — together they build the $(l:bloodmagic:soa_additions_ba/stasis)Stasis tools$()."
+    }
+  ]
+}

@@ -17,7 +17,7 @@ import java.util.Map;
 
 /**
  * Data-pack-driven loader for tconevo artifact specs. JSON files at
- * {@code data/<namespace>/tconevo/artifacts/<id>.json} parse into
+ * {@code data/<namespace>/artifacts/<id>.json} parse into
  * {@link ArtifactSpec} instances and are exposed via {@link #all()} for
  * downstream loot integration. Hot-reloads on {@code /reload}.
  *
@@ -33,7 +33,7 @@ import java.util.Map;
 public final class ArtifactManager extends SimpleJsonResourceReloadListener {
 
     private static final Gson GSON = new Gson();
-    private static final String DIRECTORY = "tconevo/artifacts";
+    private static final String DIRECTORY = "artifacts";
 
     public static final ArtifactManager INSTANCE = new ArtifactManager();
 

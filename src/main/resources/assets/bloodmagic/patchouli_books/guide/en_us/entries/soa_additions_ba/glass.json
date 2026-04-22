@@ -1,0 +1,25 @@
+{
+  "name": "Glass & Sacrificial Daggers",
+  "icon": "bloodarsenal:glass_sacrificial_dagger",
+  "category": "bloodmagic:soa_additions_ba",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Glass Shards",
+      "text": "Breaking $(item)Blood-Stained Glass$() or the $(item)Glass Shards$() block yields fragile $(item)Glass Shards$() — jagged splinters used to craft the sacrificial daggers below. The $(item)Glass Shards$() block, placed, damages any living entity that steps over it."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:glass_sacrificial_dagger",
+      "title": "Glass Sacrificial Dagger",
+      "text": "A self-sacrifice tool. Right-clicking with it in hand draws $(blood)2 HP$() worth of LP to the altar — triple the yield of a standard $(l:bloodmagic:altar)Sacrificial Dagger$(), at the cost of fragility."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:glass_dagger_of_sacrifice",
+      "title": "Glass Dagger of Sacrifice",
+      "text": "Its counterpart: mobs slain near an altar with this blade yield their full life force into the altar reservoir. Durability is shorter than the iron $(l:bloodmagic:altar)Dagger of Sacrifice$(), the multiplier is higher."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "soa_additions:fallen_star"
+    }
+  },
+  "result": {
+    "item": "soa_additions:star_block",
+    "count": 4
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Star Shower",
+  "icon": "soa_additions:fallen_star",
+  "category": "soa_additions:events",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Star Shower",
+      "text": "A rare event layered on top of a normal night. Stars fall onto loaded chunks, leaving $(l:materials/fallen_star)Fallen Star$() items where they land.$(br2)Collect quickly — star shower debris can be swept up by other mobs or decay if left unattended on some terrain types."
+    }
+  ]
+}

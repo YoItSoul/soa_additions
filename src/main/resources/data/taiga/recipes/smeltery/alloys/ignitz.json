@@ -1,0 +1,22 @@
+{
+  "type": "tconstruct:alloy",
+  "inputs": [
+    {
+      "fluid": "tconstruct:molten_amethyst_bronze",
+      "amount": 288
+    },
+    {
+      "fluid": "taiga:molten_terrax",
+      "amount": 288
+    },
+    {
+      "fluid": "taiga:molten_osram",
+      "amount": 144
+    }
+  ],
+  "result": {
+    "fluid": "taiga:molten_ignitz",
+    "amount": 288
+  },
+  "temperature": 850
+}

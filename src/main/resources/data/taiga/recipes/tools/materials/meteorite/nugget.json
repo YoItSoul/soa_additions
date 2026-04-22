@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/meteorite"
+  },
+  "material": "taiga:meteorite",
+  "needed": 9,
+  "value": 1
+}

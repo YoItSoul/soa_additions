@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:ingotEnergium"
+    }
+  ],
+  "result": {
+    "item": "soa_additions:energetic_metal_nugget",
+    "count": 9
+  },
+  "category": "misc"
+}

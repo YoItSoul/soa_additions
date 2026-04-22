@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/dyonite"
+  },
+  "material": "taiga:dyonite",
+  "needed": 9,
+  "value": 1
+}

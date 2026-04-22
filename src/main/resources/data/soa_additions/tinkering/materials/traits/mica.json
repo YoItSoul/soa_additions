@@ -1,6 +1,6 @@
 {
   "default": [
-    { "level": 2, "name": "soa_additions:tconevo/modifiable" }
+    { "level": 2, "name": "tconevo:modifiable" }
   ],
   "perStat": {}
 }

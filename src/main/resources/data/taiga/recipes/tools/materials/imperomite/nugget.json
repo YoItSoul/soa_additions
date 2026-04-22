@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/imperomite"
+  },
+  "material": "taiga:imperomite",
+  "needed": 9,
+  "value": 1
+}

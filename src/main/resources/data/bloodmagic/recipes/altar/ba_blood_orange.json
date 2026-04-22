@@ -4,7 +4,7 @@
     "item": "minecraft:orange_dye"
   },
   "output": {
-    "item": "soa_additions:ba_blood_orange"
+    "item": "bloodarsenal:blood_orange"
   },
   "upgradeLevel": 1,
   "altarSyphon": 500,

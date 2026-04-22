@@ -1,0 +1,6 @@
+{
+  "name": "Smeltery",
+  "description": "Alloy and melting recipes. TAIGA leans heavily on the TC3 smeltery — expect to be piping a lot of molten fluids.",
+  "icon": "tconstruct:seared_bricks",
+  "sortnum": 3
+}

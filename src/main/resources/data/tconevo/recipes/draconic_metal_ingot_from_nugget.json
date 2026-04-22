@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "nnn",
+    "nnn",
+    "nnn"
+  ],
+  "key": {
+    "n": {
+      "tag": "forge:nuggets/draconic_metal"
+    }
+  },
+  "result": {
+    "item": "soa_additions:draconic_metal_ingot",
+    "count": 1
+  },
+  "category": "misc"
+}

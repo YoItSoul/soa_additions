@@ -1,0 +1,6 @@
+{
+  "parent": "block/template_torch",
+  "textures": {
+    "torch": "bloodarsenal:block/blood_torch"
+  }
+}

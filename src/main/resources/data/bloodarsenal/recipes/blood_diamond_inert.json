@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "cdc",
+    "efe"
+  ],
+  "key": {
+    "a": {
+      "item": "bloodarsenal:blood_infused_glowstone"
+    },
+    "b": {
+      "item": "bloodmagic:etherealslate"
+    },
+    "c": {
+      "item": "bloodmagic:activationcrystalweak"
+    },
+    "d": {
+      "item": "bloodarsenal:blood_diamond"
+    },
+    "e": {
+      "item": "bloodarsenal:blood_infused_iron_block"
+    },
+    "f": {
+      "type": "bloodmagic:bloodorb",
+      "orb_tier": 5
+    }
+  },
+  "result": {
+    "item": "bloodarsenal:blood_diamond_inert"
+  },
+  "show_notification": true
+}

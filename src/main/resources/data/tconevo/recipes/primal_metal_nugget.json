@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:ingotPrimordial"
+    }
+  ],
+  "result": {
+    "item": "soa_additions:primal_metal_nugget",
+    "count": 9
+  },
+  "category": "misc"
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "MSM",
+    "LSL"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "M": {
+      "item": "soa_additions:meteor_dust"
+    },
+    "B": {
+      "item": "soa_additions:meteor_block"
+    }
+  },
+  "result": {
+    "item": "soa_additions:meteor_hammer"
+  }
+}

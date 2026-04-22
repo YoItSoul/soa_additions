@@ -1,0 +1,6 @@
+{
+  "name": "Blood Arsenal",
+  "description": "$(item)Blood Arsenal$() is a $(item)Blood Magic$() addon. Its contents expand the practitioner's arsenal with infused tools, stasis weapons, upgradeable modifiers, new rituals, $(item)Glass Shards$() for sacrifice, and the $(item)Altare Aenigmatica$() — a companion to the $(l:bloodmagic:altar)Blood Altar$() where $(0)Sanguine Infusion$() recipes unlock new crafting branches.$(br2)Start with the $(l:bloodmagic:soa_additions_ba/overview)Overview$() entry below.",
+  "icon": "bloodarsenal:altare_aenigmatica",
+  "sortnum": 10
+}

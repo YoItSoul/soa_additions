@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mdm",
+    "dcd",
+    "mdm"
+  ],
+  "key": {
+    "m": {
+      "tag": "forge:storage_blocks/manyullyn"
+    },
+    "d": {
+      "tag": "forge:storage_blocks/diamond"
+    },
+    "c": {
+      "tag": "tconstruct:casts"
+    }
+  },
+  "result": {
+    "item": "soa_additions:artifact_unsealer",
+    "count": 1
+  },
+  "category": "misc"
+}

@@ -1,33 +1,33 @@
 {
-  "type": "soa_additions:ba_sanguine_infusion",
+  "type": "bloodarsenal:sanguine_infusion",
   "ingredients": [
     {
       "item": "bloodmagic:soulaxe"
     },
     {
-      "item": "soa_additions:ba_blood_infused_iron_axe"
+      "item": "bloodarsenal:blood_infused_iron_axe"
     },
     {
-      "item": "soa_additions:ba_stasis_plate"
+      "item": "bloodarsenal:stasis_plate"
     },
     {
-      "item": "soa_additions:ba_blood_diamond"
+      "item": "bloodarsenal:blood_diamond"
     },
     {
-      "item": "soa_additions:ba_stasis_plate"
+      "item": "bloodarsenal:stasis_plate"
     },
     {
       "item": "bloodmagic:demonslate"
     },
     {
-      "item": "soa_additions:ba_stasis_plate"
+      "item": "bloodarsenal:stasis_plate"
     },
     {
-      "item": "soa_additions:ba_blood_diamond"
+      "item": "bloodarsenal:blood_diamond"
     }
   ],
   "result": {
-    "item": "soa_additions:ba_stasis_axe",
+    "item": "bloodarsenal:stasis_axe",
     "count": 1
   },
   "lp_cost": 50000

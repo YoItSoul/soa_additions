@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/nucleum"
+  },
+  "material": "taiga:nucleum",
+  "needed": 9,
+  "value": 1
+}

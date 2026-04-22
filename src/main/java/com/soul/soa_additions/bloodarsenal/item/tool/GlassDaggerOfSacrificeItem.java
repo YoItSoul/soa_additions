@@ -77,7 +77,7 @@ public class GlassDaggerOfSacrificeItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(Component.translatable("tooltip.soa_additions.ba_glass_dagger_of_sacrifice.desc")
+        tooltip.add(Component.translatable("tooltip.bloodarsenal.glass_dagger_of_sacrifice.desc")
                 .withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
     }
 }

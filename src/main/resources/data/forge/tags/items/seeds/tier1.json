@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "mysticalagriculture:deepslate_seeds",
+    "mysticalagriculture:dirt_seeds",
+    "mysticalagriculture:ice_seeds",
+    "mysticalagriculture:inferium_seeds",
+    "mysticalagriculture:stone_seeds",
+    "mysticalagriculture:wood_seeds"
+  ]
+}

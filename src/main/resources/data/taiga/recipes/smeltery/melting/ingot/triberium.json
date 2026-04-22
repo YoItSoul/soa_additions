@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:ingots/triberium"
+  },
+  "result": {
+    "fluid": "taiga:molten_triberium",
+    "amount": 144
+  },
+  "temperature": 400,
+  "time": 100
+}

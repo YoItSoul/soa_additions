@@ -10,6 +10,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.EntityType;
@@ -104,6 +106,19 @@ public final class RightClickActions {
             level.explode(null, null, null,
                     player.getX(), player.getY(), player.getZ(),
                     6.0F, true, Level.ExplosionInteraction.TNT);
+            return true;
+        };
+    }
+
+    // ---------------- Potion self-buffs ----------------
+
+    /** Adrenaline right-click: Speed V + Strength IV for 10 seconds, matching
+     *  GreedyCraft's adrenaline.json (speed a=4 t=200, strength a=3 t=200). */
+    public static UseActionItem.UseAction adrenalineRush() {
+        return (level, player, stack) -> {
+            player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 4));
+            player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 200, 3));
+            spawnAuraParticles(level, player, ParticleTypes.FLAME);
             return true;
         };
     }

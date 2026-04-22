@@ -1,0 +1,37 @@
+{
+  "name": "Meteor Armor",
+  "icon": "soa_additions:meteor_chest",
+  "category": "soa_additions:gear",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "The armor set",
+      "text": "Full-set protection values: boots 4, legs 8, chest 10, head 4. Toughness 3.0 across the board — above diamond, below netherite.$(br2)Two-tone visual: the inner $(6)meteor_layer_1$() plates with an outer $(6)meteor_layer_2$() etched pattern that glows faintly on a full moon."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:meteor_helm",
+      "title": "Meteor Helm",
+      "text": "Head slot. Base defense 4."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:meteor_chest",
+      "title": "Meteor Chestplate",
+      "text": "Chest slot. Base defense 10 — the bulk of the set's protection."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:meteor_pants",
+      "title": "Meteor Leggings",
+      "text": "Legs slot. Base defense 8."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:meteor_boots",
+      "title": "Meteor Boots",
+      "text": "Feet slot. Base defense 4."
+    }
+  ]
+}

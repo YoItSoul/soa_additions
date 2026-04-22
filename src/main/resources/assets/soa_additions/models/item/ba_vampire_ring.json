@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "soa_additions:item/ba_vampire_ring"
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "variants": {
-    "axis=x": { "model": "soa_additions:block/ba_blood_infused_log_horizontal", "x": 90, "y": 90 },
-    "axis=y": { "model": "soa_additions:block/ba_blood_infused_log" },
-    "axis=z": { "model": "soa_additions:block/ba_blood_infused_log_horizontal", "x": 90 }
-  }
-}

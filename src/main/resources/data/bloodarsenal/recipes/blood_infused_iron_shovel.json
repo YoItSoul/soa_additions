@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " a ",
+    "bcb",
+    "bdb"
+  ],
+  "key": {
+    "a": {
+      "item": "bloodarsenal:blood_infused_iron_ingot"
+    },
+    "b": {
+      "item": "bloodarsenal:blood_infused_stick"
+    },
+    "c": {
+      "item": "bloodarsenal:blood_infused_wooden_shovel"
+    },
+    "d": {
+      "type": "bloodmagic:bloodorb",
+      "orb_tier": 3
+    }
+  },
+  "result": {
+    "item": "bloodarsenal:blood_infused_iron_shovel"
+  },
+  "show_notification": true
+}

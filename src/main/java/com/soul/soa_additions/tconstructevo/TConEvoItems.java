@@ -25,7 +25,7 @@ import java.util.List;
 public final class TConEvoItems {
 
     public static final DeferredRegister<Item> ITEMS =
-            DeferredRegister.create(ForgeRegistries.ITEMS, SoaAdditions.MODID);
+            DeferredRegister.create(ForgeRegistries.ITEMS, "tconevo");
 
     // Registered items are tracked here so the creative tab can enumerate them.
     private static final List<RegistryObject<? extends Item>> ALL = new ArrayList<>();
@@ -33,13 +33,13 @@ public final class TConEvoItems {
     private TConEvoItems() {}
 
     public static <I extends Item> RegistryObject<I> register(String path, java.util.function.Supplier<I> factory) {
-        RegistryObject<I> obj = ITEMS.register("tconevo/" + path, factory);
+        RegistryObject<I> obj = ITEMS.register( path, factory);
         ALL.add(obj);
         return obj;
     }
 
     static ResourceLocation id(String path) {
-        return new ResourceLocation(SoaAdditions.MODID, "tconevo/" + path);
+        return new ResourceLocation("tconevo",  path);
     }
 
     static List<RegistryObject<? extends Item>> all() {

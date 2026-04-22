@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iii",
+    "iii",
+    "iii"
+  ],
+  "key": {
+    "i": {
+      "tag": "forge:ingots/wyvern"
+    }
+  },
+  "result": {
+    "item": "soa_additions:wyvern_block",
+    "count": 1
+  },
+  "category": "misc"
+}

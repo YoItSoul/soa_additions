@@ -1,0 +1,14 @@
+{
+  "name": "Meteor Finder",
+  "icon": "soa_additions:meteor_finder",
+  "category": "soa_additions:materials",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:meteor_finder",
+      "title": "Meteor Finder",
+      "text": "A compass-style item. The needle points toward the nearest un-mined $(item)Meteor Rock$() within loaded chunks.$(br2)Keep one in your off-hand while crater-hunting. It won't find buried meteors through chunk unloads — stay near the search area as the world generates."
+    }
+  ]
+}

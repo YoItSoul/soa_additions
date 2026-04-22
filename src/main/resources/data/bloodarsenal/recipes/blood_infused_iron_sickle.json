@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " aa",
+    "bda",
+    "caa"
+  ],
+  "key": {
+    "a": {
+      "item": "bloodarsenal:blood_infused_iron_ingot"
+    },
+    "b": {
+      "item": "bloodarsenal:blood_infused_stick"
+    },
+    "c": {
+      "item": "bloodarsenal:blood_infused_wooden_sickle"
+    },
+    "d": {
+      "type": "bloodmagic:bloodorb",
+      "orb_tier": 3
+    }
+  },
+  "result": {
+    "item": "bloodarsenal:blood_infused_iron_sickle"
+  },
+  "show_notification": true
+}

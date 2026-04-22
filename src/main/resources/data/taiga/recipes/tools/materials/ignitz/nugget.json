@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/ignitz"
+  },
+  "material": "taiga:ignitz",
+  "needed": 9,
+  "value": 1
+}

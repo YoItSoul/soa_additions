@@ -1,0 +1,43 @@
+{
+  "name": "Soul Pendants",
+  "icon": "bloodarsenal:soul_pendant_grand",
+  "category": "bloodmagic:soa_additions_ba",
+  "sortnum": 8,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "A pocket reservoir",
+      "text": "Soul Pendants store raw LP on the wearer. When an action elsewhere would draw from the Soul Network, the pendant pays first — handy for quick-draw sigils, stasis tools, and trips away from the altar.$(br2)Each tier is built from the one below via $(l:bloodmagic:soa_additions_ba/altare)Sanguine Infusion$(), binding a higher-grade $(item)Blood Diamond$() into the pendant."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:soul_pendant_petty",
+      "title": "Petty Soul Pendant",
+      "text": "Tier 0. Modest capacity, quick to make. A starter buffer for the first sigil or two."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:soul_pendant_lesser",
+      "title": "Lesser Soul Pendant",
+      "text": "Tier 1. Roughly 4× the petty pendant's capacity. Reliable for a mid-run with a $(l:bloodmagic:soa_additions_ba/sigils)Sigil of Divinity$() on the hotbar."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:soul_pendant_common",
+      "title": "Common Soul Pendant",
+      "text": "Tier 2. Enough to buffer a full expedition — mine, fight, teleport home on the stored LP alone."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:soul_pendant_greater",
+      "title": "Greater Soul Pendant",
+      "text": "Tier 3. Deep reserves for Stasis-tool users and anyone who likes to stray far from the altar."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:soul_pendant_grand",
+      "title": "Grand Soul Pendant",
+      "text": "Tier 4. Endgame capacity. Built from a $(item)Bound Blood Diamond$() and the prior tier — more than most rituals will ever ask of it."
+    }
+  ]
+}

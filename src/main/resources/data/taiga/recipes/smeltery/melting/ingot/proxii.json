@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:ingots/proxii"
+  },
+  "result": {
+    "fluid": "taiga:molten_proxii",
+    "amount": 144
+  },
+  "temperature": 400,
+  "time": 100
+}

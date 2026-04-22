@@ -1,0 +1,18 @@
+{
+  "name": "Meteors",
+  "icon": "soa_additions:meteor_rock",
+  "category": "soa_additions:events",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Meteors",
+      "text": "Independent of moon phase, meteors occasionally fall from the sky. A falling meteor impacts the ground and leaves a crater of $(l:materials/meteor_rock)Meteor Rock$() — the raw source of all Meteor-tier materials.$(br2)A $(l:materials/meteor_finder)Meteor Finder$() in your hand points toward the nearest unbroken meteor rock."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Gleaning",
+      "text": "$(item)Gleaning Meteor Rock$() is a richer variant of the standard crater stone — drops more $(l:materials/meteor_dust)Meteor Dust$() per block. Look for the brighter streaks when sweeping a crater."
+    }
+  ]
+}

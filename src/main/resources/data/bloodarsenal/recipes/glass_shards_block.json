@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aaa",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "bloodarsenal:glass_shard"
+    }
+  },
+  "result": {
+    "item": "bloodarsenal:glass_shards"
+  },
+  "show_notification": true
+}

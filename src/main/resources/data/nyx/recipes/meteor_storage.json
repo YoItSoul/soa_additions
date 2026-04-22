@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "soa_additions:meteor_ingot"
+    }
+  },
+  "result": {
+    "item": "soa_additions:meteor_block"
+  }
+}

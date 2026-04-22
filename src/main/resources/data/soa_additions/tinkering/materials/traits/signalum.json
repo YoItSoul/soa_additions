@@ -1,7 +1,7 @@
 {
   "default": [
-    { "level": 1, "name": "soa_additions:tconevo/relentless" },
-    { "level": 1, "name": "soa_additions:tconevo/aftershock" }
+    { "level": 1, "name": "tconevo:relentless" },
+    { "level": 1, "name": "tconevo:aftershock" }
   ],
   "perStat": {}
 }

@@ -2,10 +2,10 @@
   "default": [],
   "perStat": {
     "tconstruct:head": [
-      { "level": 1, "name": "soa_additions:tconevo/chain_lightning" }
+      { "level": 1, "name": "tconevo:chain_lightning" }
     ],
     "tconstruct:limb": [
-      { "level": 1, "name": "soa_additions:tconevo/chain_lightning" }
+      { "level": 1, "name": "tconevo:chain_lightning" }
     ]
   }
 }

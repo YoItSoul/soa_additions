@@ -1,6 +1,6 @@
 {
   "default": [
-    { "level": 1, "name": "soa_additions:tconevo/rejuvenating" },
+    { "level": 1, "name": "tconevo:rejuvenating" },
     { "level": 1, "name": "tconstruct:tasty" }
   ],
   "perStat": {}

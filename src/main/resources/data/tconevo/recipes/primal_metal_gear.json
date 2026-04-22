@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " i ",
+    "i i",
+    " i "
+  ],
+  "key": {
+    "i": {
+      "tag": "forge:ingotPrimordial"
+    }
+  },
+  "result": {
+    "item": "soa_additions:primal_metal_gear",
+    "count": 1
+  },
+  "category": "misc"
+}

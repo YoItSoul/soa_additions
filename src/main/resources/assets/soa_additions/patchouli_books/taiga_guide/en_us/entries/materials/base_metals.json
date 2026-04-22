@@ -1,0 +1,18 @@
+{
+  "name": "Base Metals",
+  "icon": "taiga:karmesine_ingot",
+  "category": "soa_additions:materials",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Mined materials",
+      "text": "The 15 raw materials that come directly from ore blocks (before any alloying):$(br2)$(item)Karmesine$(), $(item)Ovium$(), $(item)Jauxum$(), $(item)Duranite$(), $(item)Vibranium$(), $(item)Eezo$(), $(item)Basalt$(), $(item)Dilithium$(), $(item)Tiberium$(), $(item)Prometheum$(), $(item)Valyrium$(), $(item)Osram$(), $(item)Palladium$(), $(item)Aurorium$(), $(item)Abyssum$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Meteorite",
+      "text": "$(item)Meteorite$() is a 16th raw material, obtained only from mining $(l:soa_additions:nyx_guide/materials/meteor_rock)meteor rock$() — the same crater stone the Nyx mod generates. It bridges the two material systems."
+    }
+  ]
+}

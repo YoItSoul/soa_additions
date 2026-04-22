@@ -1,0 +1,22 @@
+{
+  "type": "tconstruct:alloy",
+  "inputs": [
+    {
+      "fluid": "taiga:molten_proxii",
+      "amount": 432
+    },
+    {
+      "fluid": "taiga:molten_abyssum",
+      "amount": 144
+    },
+    {
+      "fluid": "taiga:molten_osram",
+      "amount": 144
+    }
+  ],
+  "result": {
+    "fluid": "taiga:molten_nucleum",
+    "amount": 432
+  },
+  "temperature": 800
+}

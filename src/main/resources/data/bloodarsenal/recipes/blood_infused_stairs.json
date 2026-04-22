@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "a  ",
+    "aa ",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "bloodarsenal:blood_infused_planks"
+    }
+  },
+  "result": {
+    "item": "bloodarsenal:blood_infused_stairs",
+    "count": 4
+  },
+  "show_notification": true
+}

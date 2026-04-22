@@ -1,0 +1,13 @@
+{
+  "name": "Harvest Moon",
+  "icon": "minecraft:wheat",
+  "category": "soa_additions:events",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Harvest Moon",
+      "text": "The gentlest of the four. Crops in loaded chunks advance growth stages faster, and $(l:materials/crystal)Crystal blocks$() recharge during the night.$(br2)Take advantage: plant before dusk. A fully-planted field going into a harvest moon will finish by sunrise."
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "soa_additions:cytosinite_ingot"
+  },
+  "result": {
+    "fluid": "soa_additions:molten_cytosinite",
+    "amount": 90
+  },
+  "temperature": 850,
+  "time": 60
+}

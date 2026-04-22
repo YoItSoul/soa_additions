@@ -1,0 +1,23 @@
+{
+  "name": "Modifiers",
+  "icon": "bloodarsenal:modifier_tome",
+  "category": "bloodmagic:soa_additions_ba",
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "The Modifier Tome",
+      "text": "The $(item)Modifier Tome$() is the Arsenal's upgrade ledger. Right-click it on a stasis tool and a bound modifier crystal to apply the modifier to the tool. Each tool has a finite number of modifier slots broken into four tracks."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "The four tracks",
+      "text": "$(bold)Head$() — affects the striking surface: sharpness, reach, harvest behavior.$(br)$(bold)Core$() — affects the tool's body: durability multipliers, soul-network draw, item-handling quirks.$(br)$(bold)Handle$() — affects the wielder's side: attack speed, knockback, haste.$(br)$(bold)Ability$() — active or triggered effects: AOE sweeps, launches, area breaks."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Porting note",
+      "text": "The 1.12 Arsenal shipped sixteen real modifiers and seven placeholder class stubs that never held logic. Only the sixteen functional modifiers made the jump to this version; the empty stubs were dropped. If you remember a 1.12 guide mentioning $(italic)Area$(), $(italic)BOD$(), $(italic)DOD$(), $(italic)Free Flowing$(), $(italic)Piercing$(), $(italic)Shield$(), or $(italic)Teleportation$() — those were scaffolds the original author never finished, not something lost in port."
+    }
+  ]
+}

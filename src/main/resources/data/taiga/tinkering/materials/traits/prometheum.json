@@ -1,0 +1,10 @@
+{
+  "default": [
+    { "level": 1, "name": "taiga:catcher" }
+  ],
+  "perStat": {
+    "tconstruct:handle": [
+      { "level": 1, "name": "taiga:blind" }
+    ]
+  }
+}

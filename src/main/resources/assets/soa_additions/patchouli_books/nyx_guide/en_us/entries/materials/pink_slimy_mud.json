@@ -1,0 +1,14 @@
+{
+  "name": "Pink Slimy Mud",
+  "icon": "soa_additions:pink_slimy_mud",
+  "category": "soa_additions:materials",
+  "sortnum": 6,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:pink_slimy_mud",
+      "title": "Pink Slimy Mud",
+      "text": "A rare, soft, bouncy terrain block that occasionally forms where lunar events have warped the soil. Absorbs fall damage like slime. Walking across leaves faint tracks.$(br2)Mostly decorative — but a useful cushion beneath a $(l:events/star_shower)star-shower$() farm."
+    }
+  ]
+}

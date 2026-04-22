@@ -2,11 +2,11 @@
   "default": [],
   "perStat": {
     "tconstruct:head": [
-      { "level": 1, "name": "soa_additions:tconevo/impact_force" },
+      { "level": 1, "name": "tconevo:impact_force" },
       { "level": 1, "name": "tconstruct:magnetic" }
     ],
     "tconstruct:limb": [
-      { "level": 1, "name": "soa_additions:tconevo/impact_force" },
+      { "level": 1, "name": "tconevo:impact_force" },
       { "level": 1, "name": "tconstruct:magnetic" }
     ]
   }

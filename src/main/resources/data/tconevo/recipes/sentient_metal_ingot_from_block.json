@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/sentient_metal"
+    }
+  ],
+  "result": {
+    "item": "soa_additions:sentient_metal_ingot",
+    "count": 9
+  },
+  "category": "misc"
+}

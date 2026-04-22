@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:blockUUMatter"
+    }
+  ],
+  "result": {
+    "item": "soa_additions:universal_metal_ingot",
+    "count": 9
+  },
+  "category": "misc"
+}

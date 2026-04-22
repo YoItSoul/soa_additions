@@ -28,11 +28,11 @@ import java.util.List;
 public class AugmentedHoldingSigilItem extends ItemSigilBase {
 
     private static final int MAX_SLOTS = 9;
-    private static final String TAG_INVENTORY = "ba_holding_inventory";
-    private static final String TAG_SELECTED = "ba_holding_selected";
+    private static final String TAG_INVENTORY = "holding_inventory";
+    private static final String TAG_SELECTED = "holding_selected";
 
     public AugmentedHoldingSigilItem() {
-        super("ba_augmented_holding", 0);
+        super("augmented_holding", 0);
     }
 
     @Override

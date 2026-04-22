@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/wyvern"
+    }
+  ],
+  "result": {
+    "item": "soa_additions:wyvern_nugget",
+    "count": 9
+  },
+  "category": "misc"
+}

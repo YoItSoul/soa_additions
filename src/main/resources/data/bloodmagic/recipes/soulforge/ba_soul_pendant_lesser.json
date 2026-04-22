@@ -3,13 +3,13 @@
   "minimumDrain": 60.0,
   "drain": 40.0,
   "output": {
-    "item": "soa_additions:ba_soul_pendant_lesser"
+    "item": "bloodarsenal:soul_pendant_lesser"
   },
   "input0": {
-    "item": "soa_additions:ba_soul_pendant_petty"
+    "item": "bloodarsenal:soul_pendant_petty"
   },
   "input1": {
-    "item": "soa_additions:ba_gem_tartaric"
+    "item": "bloodarsenal:gem_tartaric"
   },
   "input2": {
     "tag": "forge:storage_blocks/redstone"

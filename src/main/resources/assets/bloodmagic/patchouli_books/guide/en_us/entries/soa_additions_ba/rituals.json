@@ -1,0 +1,33 @@
+{
+  "name": "Rituals",
+  "icon": "bloodmagic:ritualstone",
+  "category": "bloodmagic:soa_additions_ba",
+  "sortnum": 11,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Arsenal rituals",
+      "text": "Every Arsenal ritual is scribed on a standard $(l:bloodmagic:rituals)Ritual Stone$() array — no new block required. Bind the master stone with a $(item)Weak Activation Crystal$() or higher after the layout is laid.$(br2)Each ritual below has its own stone layout and LP cost; open the in-game $(l:bloodmagic:rituals)Ritual$() viewer for the exact diagram."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Blood Burner",
+      "text": "Converts stored LP into fuel-tick energy inside an adjacent burning setup — feeds furnaces and compatible machines directly from the altar network. Useful when your mob farm outpaces your coal supply."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Purification",
+      "text": "Cleanses affected items and entities inside the ritual's radius — strips negative modifiers and status effects. A rescue ritual for over-enchanted gear and cursed mobs."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Modifier Removal",
+      "text": "The counter to $(l:bloodmagic:soa_additions_ba/modifiers)the Modifier Tome$(). Place a stasis tool on the master stone and the ritual strips all applied modifiers back into reclaimable crystals. Expensive — intended for rebuilds, not tinkering."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Sanguine Infusion (ritual form)",
+      "text": "A larger-scale version of the $(l:bloodmagic:soa_additions_ba/altare)Altare Aenigmatica$()'s infusion recipes — ritual-gated for outputs the altare alone can't produce. Rarely the shortest path; included for completeness."
+    }
+  ]
+}

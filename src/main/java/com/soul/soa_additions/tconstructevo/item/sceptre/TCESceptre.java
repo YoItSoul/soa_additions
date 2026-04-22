@@ -27,7 +27,7 @@ public final class TCESceptre {
             .rarity(Rarity.RARE);
 
     public static final ToolDefinition SCEPTRE_DEFINITION =
-            ToolDefinition.create(new ResourceLocation(SoaAdditions.MODID, "tconevo/sceptre"));
+            ToolDefinition.create(new ResourceLocation("tconevo", "sceptre"));
 
     public static final RegistryObject<SceptreItem> SCEPTRE =
             TConEvoItems.register("sceptre", () -> new SceptreItem(PROPS, SCEPTRE_DEFINITION));

@@ -1,15 +1,15 @@
 {
   "default": [
-    { "level": 1, "name": "soa_additions:tconevo/impact_force" }
+    { "level": 1, "name": "tconevo:impact_force" }
   ],
   "perStat": {
     "tconstruct:head": [
-      { "level": 1, "name": "soa_additions:tconevo/aftershock" },
-      { "level": 1, "name": "soa_additions:tconevo/vampiric" }
+      { "level": 1, "name": "tconevo:aftershock" },
+      { "level": 1, "name": "tconevo:vampiric" }
     ],
     "tconstruct:limb": [
-      { "level": 1, "name": "soa_additions:tconevo/aftershock" },
-      { "level": 1, "name": "soa_additions:tconevo/vampiric" }
+      { "level": 1, "name": "tconevo:aftershock" },
+      { "level": 1, "name": "tconevo:vampiric" }
     ]
   }
 }

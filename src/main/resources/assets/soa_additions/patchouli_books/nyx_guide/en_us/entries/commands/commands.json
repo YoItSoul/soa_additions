@@ -1,0 +1,23 @@
+{
+  "name": "/nyxforce, /nyxmeteor",
+  "icon": "minecraft:command_block",
+  "category": "soa_additions:commands",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "/nyxforce <event|clear>",
+      "text": "Forces the next night to a specific lunar event.$(br2)Arguments:$(br)$(item)harvest$(), $(item)full$(), $(item)blood$(), $(item)star_shower$() — force that event.$(br)$(item)clear$() — cancel any forced event; let nature resume.$(br2)Requires op permission level 2."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "/nyxmeteor [x z [size [homing]]]",
+      "text": "Calls a meteor impact.$(br2)All arguments optional:$(br)$(item)x z$() — target coordinates (defaults to near the runner).$(br)$(item)size$() — 1–5, impact crater size.$(br)$(item)homing$() — true to track moving players; false for a fixed target.$(br2)Useful for testing crater loot drops or spawning gleaning rock in known locations."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "/locate poi soa_additions:uru_meteor",
+      "text": "Not a Nyx command, but worth knowing: in The End, this vanilla command finds the nearest $(item)Uru$() meteor cube — the source of Uru ore. Use in conjunction with end-exploration runs."
+    }
+  ]
+}

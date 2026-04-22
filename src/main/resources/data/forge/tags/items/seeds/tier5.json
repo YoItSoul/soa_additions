@@ -1,0 +1,26 @@
+{
+  "replace": false,
+  "values": [
+    "mysticalagriculture:cyanite_seeds",
+    "mysticalagriculture:diamond_seeds",
+    "mysticalagriculture:draconium_seeds",
+    "mysticalagriculture:emerald_seeds",
+    "mysticalagriculture:end_steel_seeds",
+    "mysticalagriculture:enderium_seeds",
+    "mysticalagriculture:flux_infused_gem_seeds",
+    "mysticalagriculture:hepatizon_seeds",
+    "mysticalagriculture:iridium_seeds",
+    "mysticalagriculture:manyullyn_seeds",
+    "mysticalagriculture:netherite_seeds",
+    "mysticalagriculture:niotic_crystal_seeds",
+    "mysticalagriculture:platinum_seeds",
+    "mysticalagriculture:queens_slime_seeds",
+    "mysticalagriculture:rock_crystal_seeds",
+    "mysticalagriculture:spirited_crystal_seeds",
+    "mysticalagriculture:terrasteel_seeds",
+    "mysticalagriculture:uraninite_seeds",
+    "mysticalagriculture:vibrant_alloy_seeds",
+    "mysticalagriculture:wither_skeleton_seeds",
+    "mysticalagriculture:yellorium_seeds"
+  ]
+}

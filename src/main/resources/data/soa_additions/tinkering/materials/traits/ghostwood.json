@@ -1,6 +1,6 @@
 {
   "default": [
-    { "level": 1, "name": "soa_additions:tconevo/foot_fleet" },
+    { "level": 1, "name": "tconevo:foot_fleet" },
     { "level": 1, "name": "tconstruct:ecological" }
   ],
   "perStat": {}

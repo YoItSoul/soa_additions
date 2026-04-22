@@ -1,6 +1,0 @@
-{
-  "parent": "item/handheld",
-  "textures": {
-    "layer0": "soa_additions:item/ba_blood_infused_wooden_shovel"
-  }
-}

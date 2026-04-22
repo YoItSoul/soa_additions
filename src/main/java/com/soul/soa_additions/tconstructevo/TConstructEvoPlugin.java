@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
  */
 public final class TConstructEvoPlugin {
 
-    public static final String MODID = SoaAdditions.MODID;
+    public static final String MODID = "tconevo";
     public static final Logger LOG = LoggerFactory.getLogger("soa_additions/tcon-evo");
 
     private TConstructEvoPlugin() {}

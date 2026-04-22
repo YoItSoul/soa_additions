@@ -1,0 +1,18 @@
+{
+  "name": "Offense Traits",
+  "icon": "tconstruct:sharpening_kit",
+  "category": "soa_additions:traits",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Damage & combat",
+      "text": "$(item)Heroic$() — bonus damage to hostile mobs.$(br)$(item)Berserk$() — damage scales inversely with own health (low HP → more damage).$(br)$(item)Slaughtering$() — increased mob drops on kill.$(br)$(item)Souleater$() — heals on kill; stronger against end-tier mobs.$(br)$(item)Cursed$() — inflicts a Withering-style DoT on hit."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Combat quirks",
+      "text": "$(item)Fracture$() — high chance to break enemy armor durability on hit.$(br)$(item)Crushing$() — ignores a fraction of enemy armor value.$(br)$(item)Cascade$() — chain damage through nearby enemies.$(br)$(item)Resonance$() — bounces small damage back to the attacker on block.$(br)$(item)Unstable$() — small chance to explode on hit; rare but spectacular."
+    }
+  ]
+}

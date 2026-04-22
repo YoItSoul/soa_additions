@@ -16,20 +16,20 @@ import net.minecraftforge.registries.RegistryObject;
 public final class BABlockEntities {
 
     public static final DeferredRegister<BlockEntityType<?>> TYPES =
-            DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, SoaAdditions.MODID);
+            DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, "bloodarsenal");
 
     public static final RegistryObject<BlockEntityType<StasisPlateBlockEntity>> STASIS_PLATE =
-            TYPES.register("ba_stasis_plate",
+            TYPES.register("stasis_plate",
                     () -> BlockEntityType.Builder.of(StasisPlateBlockEntity::new, BABlocks.STASIS_PLATE.get())
                             .build(null));
 
     public static final RegistryObject<BlockEntityType<AltareBlockEntity>> ALTARE =
-            TYPES.register("ba_altare",
+            TYPES.register("altare",
                     () -> BlockEntityType.Builder.of(AltareBlockEntity::new, BABlocks.ALTARE.get())
                             .build(null));
 
     public static final RegistryObject<BlockEntityType<BloodCapacitorBlockEntity>> BLOOD_CAPACITOR =
-            TYPES.register("ba_blood_capacitor",
+            TYPES.register("blood_capacitor",
                     () -> BlockEntityType.Builder.of(BloodCapacitorBlockEntity::new, BABlocks.BLOOD_CAPACITOR.get())
                             .build(null));
 

@@ -2,10 +2,10 @@
   "default": [],
   "perStat": {
     "tconstruct:head": [
-      { "level": 2, "name": "soa_additions:tconevo/modifiable" }
+      { "level": 2, "name": "tconevo:modifiable" }
     ],
     "tconstruct:limb": [
-      { "level": 2, "name": "soa_additions:tconevo/modifiable" }
+      { "level": 2, "name": "tconevo:modifiable" }
     ]
   }
 }

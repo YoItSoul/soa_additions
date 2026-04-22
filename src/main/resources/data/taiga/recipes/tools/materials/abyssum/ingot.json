@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:ingots/abyssum"
+  },
+  "material": "taiga:abyssum",
+  "needed": 1,
+  "value": 1
+}

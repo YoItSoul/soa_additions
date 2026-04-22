@@ -1,7 +1,7 @@
 {
   "default": [
-    { "level": 1, "name": "soa_additions:tconevo/modifiable" },
-    { "level": 1, "name": "soa_additions:tconevo/opportunist" }
+    { "level": 1, "name": "tconevo:modifiable" },
+    { "level": 1, "name": "tconevo:opportunist" }
   ],
   "perStat": {}
 }

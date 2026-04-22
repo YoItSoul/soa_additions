@@ -4,7 +4,7 @@
     "tag": "forge:dusts/glowstone"
   },
   "output": {
-    "item": "soa_additions:ba_blood_infused_glowstone_dust"
+    "item": "bloodarsenal:blood_infused_glowstone_dust"
   },
   "upgradeLevel": 2,
   "altarSyphon": 2500,

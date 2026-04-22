@@ -1,6 +1,6 @@
 {
   "default": [
-    { "level": 1, "name": "soa_additions:tconevo/vampiric" },
+    { "level": 1, "name": "tconevo:vampiric" },
     { "level": 1, "name": "tconstruct:ecological" }
   ],
   "perStat": {}

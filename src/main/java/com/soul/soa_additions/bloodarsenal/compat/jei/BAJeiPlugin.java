@@ -26,7 +26,7 @@ import java.util.List;
 public class BAJeiPlugin implements IModPlugin {
 
     private static final ResourceLocation UID =
-            new ResourceLocation(SoaAdditions.MODID, "ba_jei_plugin");
+            new ResourceLocation("bloodarsenal", "jei_plugin");
 
     @Override
     public ResourceLocation getPluginUid() {
@@ -57,7 +57,7 @@ public class BAJeiPlugin implements IModPlugin {
         // Stasis Plate as secondary catalyst
         registration.addRecipeCatalyst(
                 new ItemStack(net.minecraftforge.registries.ForgeRegistries.ITEMS.getValue(
-                        new ResourceLocation(SoaAdditions.MODID, "ba_stasis_plate"))),
+                        new ResourceLocation("bloodarsenal", "stasis_plate"))),
                 SanguineInfusionCategory.RECIPE_TYPE);
     }
 }

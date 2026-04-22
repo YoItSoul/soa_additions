@@ -4,7 +4,7 @@
       "durability": 626,
       "melee_attack": 8.5,
       "mining_speed": 7.5,
-      "mining_tier": "minecraft:netherite"
+      "mining_tier": "soa_additions:duranite"
     },
     "tconstruct:handle": {
       "durability": 0.3,
@@ -23,6 +23,31 @@
       "draw_speed": -0.1,
       "durability": 626,
       "velocity": 1.25
+    },
+    "tconstruct:maille": {},
+    "tconstruct:plating_helmet": {
+      "toughness": 1.2,
+      "armor": 2.8,
+      "durability": 406
+    },
+    "tconstruct:plating_chestplate": {
+      "toughness": 1.2,
+      "armor": 5.7,
+      "durability": 500
+    },
+    "tconstruct:plating_leggings": {
+      "toughness": 1.2,
+      "armor": 4.2,
+      "durability": 469
+    },
+    "tconstruct:plating_boots": {
+      "toughness": 1.2,
+      "armor": 2.8,
+      "durability": 406
+    },
+    "tconstruct:plating_shield": {
+      "durability": 563,
+      "toughness": 1.2
     }
   }
 }

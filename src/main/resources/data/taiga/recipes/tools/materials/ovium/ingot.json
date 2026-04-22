@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:ingots/ovium"
+  },
+  "material": "taiga:ovium",
+  "needed": 1,
+  "value": 1
+}

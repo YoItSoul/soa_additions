@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "bloodarsenal:blood_infused_planks"
+    }
+  },
+  "result": {
+    "item": "bloodarsenal:blood_infused_slab",
+    "count": 6
+  },
+  "show_notification": true
+}

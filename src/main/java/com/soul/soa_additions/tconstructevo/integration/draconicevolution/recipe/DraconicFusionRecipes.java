@@ -16,7 +16,7 @@ import net.minecraftforge.registries.RegistryObject;
 public final class DraconicFusionRecipes {
 
     public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS =
-            DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, SoaAdditions.MODID);
+            DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, "tconevo");
 
     public static final RegistryObject<RecipeSerializer<DraconicUpgradeFusionRecipe>> DRACONIC_TOOL_UPGRADE_SERIALIZER =
             SERIALIZERS.register("draconic_tool_upgrade", DraconicUpgradeFusionRecipe.Serializer::new);

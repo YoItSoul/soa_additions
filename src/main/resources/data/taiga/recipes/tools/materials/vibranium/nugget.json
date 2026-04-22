@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/vibranium"
+  },
+  "material": "taiga:vibranium",
+  "needed": 9,
+  "value": 1
+}

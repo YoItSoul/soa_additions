@@ -1,0 +1,20 @@
+{
+  "name": "Crystals",
+  "icon": "taiga:tiberium_crystal",
+  "category": "soa_additions:materials",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "taiga:tiberium_crystal",
+      "title": "Tiberium Crystal",
+      "text": "Dropped by Tiberium Ore in the Nether. Melts at 72 mb — roughly half an ingot. Crystalline, glassy texture; used in alloys and as a direct Tinkers' material."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "taiga:dilithium_crystal",
+      "title": "Dilithium Crystal",
+      "text": "Dropped by Dilithium Ore in the Overworld. Same 72 mb melt. Blue-white and luminous. Higher rarity tier than tiberium."
+    }
+  ]
+}

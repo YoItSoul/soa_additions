@@ -1,0 +1,18 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "soa_additions:titanium_ingot"
+  },
+  "result": {
+    "fluid": "soa_additions:molten_titanium",
+    "amount": 90
+  },
+  "temperature": 1150,
+  "time": 60
+}

@@ -1,16 +1,16 @@
 {
   "default": [
-    { "level": 1, "name": "soa_additions:tconevo/mortal_wounds" },
-    { "level": 1, "name": "soa_additions:tconevo/mana_infused" }
+    { "level": 1, "name": "tconevo:mortal_wounds" },
+    { "level": 1, "name": "tconevo:mana_infused" }
   ],
   "perStat": {
     "tconstruct:head": [
-      { "level": 1, "name": "soa_additions:tconevo/staggering" },
-      { "level": 1, "name": "soa_additions:tconevo/gaia_wrath" }
+      { "level": 1, "name": "tconevo:staggering" },
+      { "level": 1, "name": "tconevo:gaia_wrath" }
     ],
     "tconstruct:limb": [
-      { "level": 1, "name": "soa_additions:tconevo/staggering" },
-      { "level": 1, "name": "soa_additions:tconevo/gaia_wrath" }
+      { "level": 1, "name": "tconevo:staggering" },
+      { "level": 1, "name": "tconevo:gaia_wrath" }
     ]
   }
 }

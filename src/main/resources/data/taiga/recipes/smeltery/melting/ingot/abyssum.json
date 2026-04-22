@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:ingots/abyssum"
+  },
+  "result": {
+    "fluid": "taiga:molten_abyssum",
+    "amount": 144
+  },
+  "temperature": 400,
+  "time": 100
+}

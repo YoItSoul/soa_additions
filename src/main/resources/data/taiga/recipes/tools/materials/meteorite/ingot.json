@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:ingots/meteorite"
+  },
+  "material": "taiga:meteorite",
+  "needed": 1,
+  "value": 1
+}

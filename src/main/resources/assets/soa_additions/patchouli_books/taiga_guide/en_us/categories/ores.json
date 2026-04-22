@@ -1,0 +1,6 @@
+{
+  "name": "Ores & Worldgen",
+  "description": "Where each of the fifteen ores spawns and at what depth.",
+  "icon": "taiga:tiberium_ore",
+  "sortnum": 1
+}

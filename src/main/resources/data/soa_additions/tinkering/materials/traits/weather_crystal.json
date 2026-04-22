@@ -2,10 +2,10 @@
   "default": [],
   "perStat": {
     "tconstruct:head": [
-      { "level": 1, "name": "soa_additions:tconevo/thundergod_wrath" }
+      { "level": 1, "name": "tconevo:thundergod_wrath" }
     ],
     "tconstruct:limb": [
-      { "level": 1, "name": "soa_additions:tconevo/thundergod_wrath" }
+      { "level": 1, "name": "tconevo:thundergod_wrath" }
     ]
   }
 }

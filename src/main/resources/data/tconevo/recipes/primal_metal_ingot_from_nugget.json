@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "nnn",
+    "nnn",
+    "nnn"
+  ],
+  "key": {
+    "n": {
+      "tag": "forge:nuggetPrimordial"
+    }
+  },
+  "result": {
+    "item": "soa_additions:primal_metal_ingot",
+    "count": 1
+  },
+  "category": "misc"
+}

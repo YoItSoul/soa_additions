@@ -3,7 +3,7 @@
   "minimumDrain": 1600.0,
   "drain": 800.0,
   "output": {
-    "item": "soa_additions:ba_reagent_ender"
+    "item": "bloodarsenal:reagent_ender"
   },
   "input0": {
     "item": "bloodmagic:reagentteleposition"

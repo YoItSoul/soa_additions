@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aba",
+    "aca"
+  ],
+  "key": {
+    "a": {
+      "item": "bloodarsenal:glass_shard"
+    },
+    "b": {
+      "item": "bloodmagic:daggerofsacrifice"
+    },
+    "c": {
+      "type": "bloodmagic:bloodorb",
+      "orb_tier": 2
+    }
+  },
+  "result": {
+    "item": "bloodarsenal:glass_dagger_of_sacrifice"
+  },
+  "show_notification": true
+}

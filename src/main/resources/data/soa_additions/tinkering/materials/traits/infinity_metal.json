@@ -1,13 +1,13 @@
 {
   "default": [
-    { "level": 1, "name": "soa_additions:tconevo/infinitum" }
+    { "level": 1, "name": "tconevo:infinitum" }
   ],
   "perStat": {
     "tconstruct:head": [
-      { "level": 1, "name": "soa_additions:tconevo/omnipotence" }
+      { "level": 1, "name": "tconevo:omnipotence" }
     ],
     "tconstruct:limb": [
-      { "level": 1, "name": "soa_additions:tconevo/omnipotence" }
+      { "level": 1, "name": "tconevo:omnipotence" }
     ]
   }
 }

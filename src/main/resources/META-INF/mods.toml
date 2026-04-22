@@ -9,6 +9,13 @@ displayName="${mod_name}"
 authors="${mod_authors}"
 description='''${mod_description}'''
 
+# NOTE: Ported content from other 1.12 mods (additions, bloodarsenal, nyx,
+# tconevo, thaumadditions, taiga) uses those modids as namespaces for their
+# registry entries (additions:*, taiga:*, etc.) via DeferredRegister.create(
+# registry, "<id>"). Those namespaces are NOT declared as separate [[mods]]
+# here — Forge would require a matching @Mod class per declaration. The
+# namespace string is just a registry-key prefix.
+
 [[dependencies.${mod_id}]]
     modId="forge"
     mandatory=true

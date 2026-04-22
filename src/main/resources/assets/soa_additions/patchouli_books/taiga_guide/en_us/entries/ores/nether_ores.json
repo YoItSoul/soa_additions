@@ -1,0 +1,13 @@
+{
+  "name": "Nether Ores",
+  "icon": "taiga:tiberium_ore",
+  "category": "soa_additions:ores",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Four in the Nether",
+      "text": "$(item)Tiberium$() — bright green crystal ore; drops $(item)Tiberium Crystals$(). Common in Nether rock.$(br)$(item)Prometheum$() — warm orange, firey visual, widespread.$(br)$(item)Valyrium$() — dark red, rare, deep pockets.$(br)$(item)Osram$() — luminous yellow ore; provides $(item)Osram$() fluid when melted — a glowstone-adjacent material."
+    }
+  ]
+}

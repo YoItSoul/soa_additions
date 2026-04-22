@@ -1,12 +1,12 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:ba_sacrifice_amulet",
-    "soa_additions:ba_self_sacrifice_amulet",
-    "soa_additions:ba_soul_pendant_petty",
-    "soa_additions:ba_soul_pendant_lesser",
-    "soa_additions:ba_soul_pendant_common",
-    "soa_additions:ba_soul_pendant_greater",
-    "soa_additions:ba_soul_pendant_grand"
+    "bloodarsenal:sacrifice_amulet",
+    "bloodarsenal:self_sacrifice_amulet",
+    "bloodarsenal:soul_pendant_petty",
+    "bloodarsenal:soul_pendant_lesser",
+    "bloodarsenal:soul_pendant_common",
+    "bloodarsenal:soul_pendant_greater",
+    "bloodarsenal:soul_pendant_grand"
   ]
 }

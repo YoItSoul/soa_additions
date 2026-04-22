@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/karmesine"
+  },
+  "material": "taiga:karmesine",
+  "needed": 9,
+  "value": 1
+}

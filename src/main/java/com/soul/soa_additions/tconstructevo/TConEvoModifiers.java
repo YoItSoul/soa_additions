@@ -157,7 +157,7 @@ public final class TConEvoModifiers {
 
     public static <M extends Modifier> Holder<M> register(String name, Supplier<M> factory) {
         Holder<M> holder = new Holder<>(
-                new ResourceLocation(SoaAdditions.MODID, "tconevo/" + name), factory);
+                new ResourceLocation("tconevo",  name), factory);
         PENDING.add(holder);
         return holder;
     }

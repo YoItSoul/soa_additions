@@ -29,7 +29,7 @@ import java.util.Map;
 public class SentienceSigilItem extends ItemSigilBase {
 
     public SentienceSigilItem() {
-        super("ba_sentience", BAConfig.SIGIL_SENTIENCE_COST.get());
+        super("sentience", BAConfig.SIGIL_SENTIENCE_COST.get());
     }
 
     @Override

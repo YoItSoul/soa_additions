@@ -37,10 +37,10 @@ import java.util.List;
  */
 public class EnderSigilItem extends ItemSigilBase {
 
-    private static final String TAG_DEST_X = "ba_ender_dest_x";
-    private static final String TAG_DEST_Y = "ba_ender_dest_y";
-    private static final String TAG_DEST_Z = "ba_ender_dest_z";
-    private static final String TAG_DELAY = "ba_ender_delay";
+    private static final String TAG_DEST_X = "ender_dest_x";
+    private static final String TAG_DEST_Y = "ender_dest_y";
+    private static final String TAG_DEST_Z = "ender_dest_z";
+    private static final String TAG_DELAY = "ender_delay";
 
     private static final int INITIAL_DELAY = 40;
     private static final int TELEPORT_COOLDOWN = 100;
@@ -49,7 +49,7 @@ public class EnderSigilItem extends ItemSigilBase {
             Component.translatable("container.enderchest");
 
     public EnderSigilItem() {
-        super("ba_ender", BAConfig.SIGIL_ENDER_COST.get());
+        super("ender", BAConfig.SIGIL_ENDER_COST.get());
     }
 
     @Override

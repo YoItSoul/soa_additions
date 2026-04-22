@@ -5,10 +5,10 @@
   ],
   "perStat": {
     "tconstruct:head": [
-      { "level": 1, "name": "soa_additions:tconevo/condensing" }
+      { "level": 1, "name": "tconevo:condensing" }
     ],
     "tconstruct:limb": [
-      { "level": 1, "name": "soa_additions:tconevo/condensing" }
+      { "level": 1, "name": "tconevo:condensing" }
     ]
   }
 }

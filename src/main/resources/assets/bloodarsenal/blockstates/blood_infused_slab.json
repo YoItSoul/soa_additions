@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "type=bottom": { "model": "bloodarsenal:block/blood_infused_slab" },
+    "type=double": { "model": "bloodarsenal:block/blood_infused_planks" },
+    "type=top":    { "model": "bloodarsenal:block/blood_infused_slab_top" }
+  }
+}

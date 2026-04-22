@@ -27,10 +27,10 @@ import net.minecraftforge.registries.RegistryObject;
 public final class TConEvoAttributes {
 
     public static final DeferredRegister<Attribute> ATTRIBUTES =
-            DeferredRegister.create(ForgeRegistries.ATTRIBUTES, SoaAdditions.MODID);
+            DeferredRegister.create(ForgeRegistries.ATTRIBUTES, "tconevo");
 
     public static final RegistryObject<Attribute> ACCURACY = ATTRIBUTES.register(
-            "tconevo/accuracy",
+            "accuracy",
             () -> new RangedAttribute(
                     "attribute.name.soa_additions.tconevo.accuracy",
                     1.0D,

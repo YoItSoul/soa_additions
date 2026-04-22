@@ -1,7 +1,7 @@
 {
   "default": [
     { "level": 1, "name": "tconstruct:dense" },
-    { "level": 1, "name": "soa_additions:tconevo/impact_force" }
+    { "level": 1, "name": "tconevo:impact_force" }
   ],
   "perStat": {}
 }

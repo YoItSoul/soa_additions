@@ -1,0 +1,19 @@
+{
+  "name": "Refined Life Essence",
+  "icon": "bloodarsenal:refined_life_essence_bucket",
+  "category": "bloodmagic:soa_additions_ba",
+  "sortnum": 13,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "A thicker vintage",
+      "text": "$(item)Refined Life Essence$() is the Arsenal's own fluid — a concentrated, ritual-grade form of the $(l:bloodmagic:altar)Life Essence$() your altar produces. Where raw LP lives inside the network as an abstract pool, refined essence is a carriable, placeable fluid."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:refined_life_essence_bucket",
+      "title": "Refined Life Essence Bucket",
+      "text": "Fill from a source block of the refined fluid. Empties into a cauldron or the world as expected. Used as a crafting component in the higher-tier recipes — anywhere a bare LP draw won't do.$(br2)Pouring it into a cauldron fills the cauldron with the fluid; dipping an empty bucket back into the cauldron retrieves a single bucket's worth."
+    }
+  ]
+}

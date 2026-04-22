@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:nuggets/osram"
+  },
+  "result": {
+    "fluid": "taiga:molten_osram",
+    "amount": 16
+  },
+  "temperature": 400,
+  "time": 50
+}

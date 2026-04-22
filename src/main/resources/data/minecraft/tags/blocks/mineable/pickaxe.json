@@ -7,10 +7,10 @@
     "soa_additions:obsidiorite",
     "soa_additions:uru_ore",
     "soa_additions:uru_block",
-    "soa_additions:ba_blood_infused_iron_block",
-    "soa_additions:ba_slate",
-    "soa_additions:ba_stasis_plate",
-    "soa_additions:ba_altare_aenigmatica",
-    "soa_additions:ba_blood_capacitor"
+    "bloodarsenal:blood_infused_iron_block",
+    "bloodarsenal:slate",
+    "bloodarsenal:stasis_plate",
+    "bloodarsenal:altare_aenigmatica",
+    "bloodarsenal:blood_capacitor"
   ]
 }

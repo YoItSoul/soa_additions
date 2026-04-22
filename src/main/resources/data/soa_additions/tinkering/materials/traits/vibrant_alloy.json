@@ -1,15 +1,15 @@
 {
   "default": [
-    { "level": 1, "name": "soa_additions:tconevo/piezoelectric" }
+    { "level": 1, "name": "tconevo:piezoelectric" }
   ],
   "perStat": {
     "tconstruct:head": [
-      { "level": 2, "name": "soa_additions:tconevo/aftershock" },
-      { "level": 1, "name": "soa_additions:tconevo/deadly_precision" }
+      { "level": 2, "name": "tconevo:aftershock" },
+      { "level": 1, "name": "tconevo:deadly_precision" }
     ],
     "tconstruct:limb": [
-      { "level": 2, "name": "soa_additions:tconevo/aftershock" },
-      { "level": 1, "name": "soa_additions:tconevo/deadly_precision" }
+      { "level": 2, "name": "tconevo:aftershock" },
+      { "level": 1, "name": "tconevo:deadly_precision" }
     ]
   }
 }

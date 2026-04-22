@@ -1,0 +1,22 @@
+{
+  "type": "tconstruct:alloy",
+  "inputs": [
+    {
+      "fluid": "soa_additions:molten_uru",
+      "amount": 432
+    },
+    {
+      "fluid": "taiga:molten_valyrium",
+      "amount": 432
+    },
+    {
+      "fluid": "taiga:molten_eezo",
+      "amount": 144
+    }
+  ],
+  "result": {
+    "fluid": "taiga:molten_yrdeen",
+    "amount": 432
+  },
+  "temperature": 1915
+}

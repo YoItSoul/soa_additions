@@ -1,0 +1,19 @@
+{
+  "name": "A Shorter Night",
+  "icon": "soa_additions:fallen_star",
+  "category": "soa_additions:overview",
+  "priority": true,
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Nightwork",
+      "text": "The night is no longer just the dark half of the day. The moon rolls through four distinct faces — $(l:events/harvest_moon)harvest$(), $(l:events/full_moon)full$(), $(l:events/blood_moon)blood$(), and occasional $(l:events/star_shower)star showers$() — each with its own rules, dangers, and payoffs.$(br2)Between them, meteors fall. Mining the rock they leave behind is how you'll assemble the Meteor gear set."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "What's in this book",
+      "text": "$(l:events)Lunar Events$() — what each moon does and how to survive it.$(br)$(l:materials)Materials$() — the raw drops you'll farm.$(br)$(l:gear)Meteor Gear$() — the tool and armor set.$(br)$(l:commands)Commands$() — operator tools for testing and admin use."
+    }
+  ]
+}

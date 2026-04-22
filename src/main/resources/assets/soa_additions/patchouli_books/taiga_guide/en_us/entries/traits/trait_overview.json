@@ -1,0 +1,19 @@
+{
+  "name": "How Traits Work",
+  "icon": "tconstruct:modifier",
+  "category": "soa_additions:traits",
+  "priority": true,
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Trait inheritance",
+      "text": "Each TAIGA material carries one or more $(item)traits$() — passive modifiers that take effect whenever the material is used in a tool part (head, binding, handle, and so on).$(br2)Traits stack across parts: a pickaxe head of $(item)Niob$() and a binding of $(item)Prometheum$() will apply both materials' traits simultaneously."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Where traits come from",
+      "text": "35 custom traits are registered under the $(o)taiga:$() namespace. All vanilla Tinkers' traits (like $(item)Lazy$(), $(item)Shoddy$(), $(item)Stonebound$()) are also fair game — materials mix custom and vanilla traits freely.$(br2)Three traits — $(italic)catcher$(), $(italic)tantrum$(), $(italic)whirl$() — are documented registered-but-no-op stubs. They appear in material lists and tool tooltips but do nothing at runtime; their 1.12 implementations depended on mechanics that didn't port cleanly."
+    }
+  ]
+}

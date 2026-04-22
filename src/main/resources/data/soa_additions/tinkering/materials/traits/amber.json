@@ -2,10 +2,10 @@
   "default": [],
   "perStat": {
     "tconstruct:head": [
-      { "level": 1, "name": "soa_additions:tconevo/opportunist" }
+      { "level": 1, "name": "tconevo:opportunist" }
     ],
     "tconstruct:limb": [
-      { "level": 1, "name": "soa_additions:tconevo/opportunist" }
+      { "level": 1, "name": "tconevo:opportunist" }
     ]
   }
 }
