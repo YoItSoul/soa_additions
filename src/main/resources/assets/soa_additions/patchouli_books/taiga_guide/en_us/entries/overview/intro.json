@@ -1,0 +1,24 @@
+{
+  "name": "What is TAIGA?",
+  "icon": "taiga:dilithium_ingot",
+  "category": "soa_additions:overview",
+  "priority": true,
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "A material pack",
+      "text": "TAIGA adds $(6)36 materials$() — new ores, ingots, alloys, and molten fluids — aimed squarely at $(item)Tinkers' Construct 3$()'s smeltery. Most of its value is in crafting better tools, though the storage blocks and decorative variants are yours to keep."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Material structure",
+      "text": "Each material has up to four forms:$(br)$(item)Ingot$() — 144 mb in fluid form.$(br)$(item)Nugget$() — 16 mb, 9 per ingot.$(br)$(item)Dust$() — crafted or alloyed; melts identically to its ingot.$(br)$(item)Block$() — 1296 mb, 9 ingots.$(br2)Two materials also have a $(item)Crystal$() form: $(l:ores/end_ores)Tiberium$() and $(l:ores/overworld_ores)Dilithium$(), melting at 72 mb each."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Two things to know",
+      "text": "1. $(item)Uru$() is conspicuously absent from most TAIGA lists. SoA ships it natively under the $(o)soa_additions$() namespace — same recipes, different ID.$(br2)2. Alloy recipes $(italic)require$() the TC3 smeltery. A vanilla furnace or blast furnace won't compose them."
+    }
+  ]
+}

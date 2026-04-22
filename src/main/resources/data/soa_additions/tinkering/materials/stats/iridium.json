@@ -4,7 +4,7 @@
       "durability": 1900,
       "melee_attack": 9.0,
       "mining_speed": 8.5,
-      "mining_tier": "minecraft:diamond"
+      "mining_tier": "soa_additions:obsidian"
     },
     "tconstruct:handle": {
       "durability": -0.2,
@@ -23,6 +23,31 @@
       "draw_speed": -0.4,
       "durability": 1900,
       "velocity": 2.0
+    },
+    "tconstruct:maille": {},
+    "tconstruct:plating_helmet": {
+      "toughness": 3.0,
+      "armor": 1.2,
+      "durability": 113
+    },
+    "tconstruct:plating_chestplate": {
+      "toughness": 3.0,
+      "armor": 3.0,
+      "durability": 162
+    },
+    "tconstruct:plating_leggings": {
+      "toughness": 3.0,
+      "armor": 2.0,
+      "durability": 137
+    },
+    "tconstruct:plating_boots": {
+      "toughness": 3.0,
+      "armor": 1.0,
+      "durability": 113
+    },
+    "tconstruct:plating_shield": {
+      "durability": 153,
+      "toughness": 3.0
     }
   }
 }

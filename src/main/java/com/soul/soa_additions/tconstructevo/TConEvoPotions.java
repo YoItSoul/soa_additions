@@ -17,16 +17,16 @@ import java.util.function.Supplier;
 public final class TConEvoPotions {
 
     public static final DeferredRegister<MobEffect> EFFECTS =
-            DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, SoaAdditions.MODID);
+            DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, "tconevo");
 
     public static final RegistryObject<MobEffect> TRUE_STRIKE =
-            register("tconevo/true_strike", com.soul.soa_additions.tconstructevo.potion.TrueStrikeEffect::new);
+            register("true_strike", com.soul.soa_additions.tconstructevo.potion.TrueStrikeEffect::new);
     public static final RegistryObject<MobEffect> DAMAGE_BOOST =
-            register("tconevo/damage_boost", com.soul.soa_additions.tconstructevo.potion.DamageBoostEffect::new);
+            register("damage_boost", com.soul.soa_additions.tconstructevo.potion.DamageBoostEffect::new);
     public static final RegistryObject<MobEffect> DAMAGE_REDUCTION =
-            register("tconevo/damage_reduction", com.soul.soa_additions.tconstructevo.potion.DamageReductionEffect::new);
+            register("damage_reduction", com.soul.soa_additions.tconstructevo.potion.DamageReductionEffect::new);
     public static final RegistryObject<MobEffect> HEAL_REDUCTION =
-            register("tconevo/heal_reduction", com.soul.soa_additions.tconstructevo.potion.HealReductionEffect::new);
+            register("heal_reduction", com.soul.soa_additions.tconstructevo.potion.HealReductionEffect::new);
 
     private TConEvoPotions() {}
 

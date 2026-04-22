@@ -26,8 +26,8 @@ import java.util.List;
  */
 public class SoulPendantItem extends Item implements ICurio {
 
-    private static final String TAG_WILL = "ba_demon_will";
-    private static final String TAG_WILL_TYPE = "ba_will_type";
+    private static final String TAG_WILL = "demon_will";
+    private static final String TAG_WILL_TYPE = "will_type";
 
     private final int maxWill;
     private final int tier;

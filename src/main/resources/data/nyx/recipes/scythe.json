@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " CC",
+    "C I",
+    "  I"
+  ],
+  "key": {
+    "C": {
+      "item": "soa_additions:unrefined_crystal"
+    },
+    "I": {
+      "item": "soa_additions:meteor_ingot"
+    }
+  },
+  "result": {
+    "item": "soa_additions:scythe"
+  }
+}

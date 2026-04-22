@@ -4,7 +4,7 @@
     "tag": "minecraft:logs"
   },
   "output": {
-    "item": "soa_additions:ba_blood_infused_log"
+    "item": "bloodarsenal:blood_infused_log"
   },
   "upgradeLevel": 1,
   "altarSyphon": 2000,

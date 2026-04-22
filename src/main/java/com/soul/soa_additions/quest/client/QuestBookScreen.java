@@ -3019,6 +3019,10 @@ public final class QuestBookScreen extends Screen {
                         int lx2 = typeBtnX + typeBtnW + 4;
                         g.drawString(this.font, "(preserved) " + rr.value.getValue(),
                                 lx2, rRowY + 3, COL_TEXT_DIM(), false);
+                    } else if (rr.type == com.soul.soa_additions.quest.net.RewardDraft.Type.LOCK_PACKMODE) {
+                        int lx2 = typeBtnX + typeBtnW + 4;
+                        g.drawString(this.font, "(locks packmode on claim)",
+                                lx2, rRowY + 3, COL_TEXT_DIM(), false);
                     }
 
                     if (rr.type == com.soul.soa_additions.quest.net.RewardDraft.Type.XP) {
@@ -3109,15 +3113,11 @@ public final class QuestBookScreen extends Screen {
 
     /** Renders the reward-type dropdown opened from a reward row's type button. */
     private void renderRewardTypeDropdown(GuiGraphics g, int mouseX, int mouseY) {
-        // Offer only the directly-editable types; OTHER can't be chosen from UI,
+        // Offer every directly-editable type; OTHER can't be chosen from UI,
         // it only exists as a round-trip preservation slot.
-        var types = new com.soul.soa_additions.quest.net.RewardDraft.Type[]{
-                com.soul.soa_additions.quest.net.RewardDraft.Type.ITEM,
-                com.soul.soa_additions.quest.net.RewardDraft.Type.XP,
-                com.soul.soa_additions.quest.net.RewardDraft.Type.COMMAND,
-        };
+        var types = REWARD_DROPDOWN_TYPES;
         int rowH = 14;
-        int w = 96;
+        int w = 112;
         int h = types.length * rowH + 2;
         int dx = rewardDropdownX;
         int dy = rewardDropdownY;
@@ -3132,16 +3132,20 @@ public final class QuestBookScreen extends Screen {
         }
     }
 
+    private static final com.soul.soa_additions.quest.net.RewardDraft.Type[] REWARD_DROPDOWN_TYPES = {
+            com.soul.soa_additions.quest.net.RewardDraft.Type.ITEM,
+            com.soul.soa_additions.quest.net.RewardDraft.Type.XP,
+            com.soul.soa_additions.quest.net.RewardDraft.Type.COMMAND,
+            com.soul.soa_additions.quest.net.RewardDraft.Type.GRANT_STAGE,
+            com.soul.soa_additions.quest.net.RewardDraft.Type.LOCK_PACKMODE,
+    };
+
     /** Click handler for the reward-type dropdown. */
     private boolean handleRewardTypeDropdownClick(double mouseX, double mouseY) {
         if (rewardTypeDropdownRow < 0 || editForm == null) return false;
-        var types = new com.soul.soa_additions.quest.net.RewardDraft.Type[]{
-                com.soul.soa_additions.quest.net.RewardDraft.Type.ITEM,
-                com.soul.soa_additions.quest.net.RewardDraft.Type.XP,
-                com.soul.soa_additions.quest.net.RewardDraft.Type.COMMAND,
-        };
+        var types = REWARD_DROPDOWN_TYPES;
         int rowH = 14;
-        int w = 96;
+        int w = 112;
         int h = types.length * rowH + 2;
         int dx = rewardDropdownX;
         int dy = rewardDropdownY;
@@ -3159,6 +3163,12 @@ public final class QuestBookScreen extends Screen {
             if (next != com.soul.soa_additions.quest.net.RewardDraft.Type.XP) row.levels = false;
             if (next == com.soul.soa_additions.quest.net.RewardDraft.Type.XP) row.count.setValue("50");
             else if (next == com.soul.soa_additions.quest.net.RewardDraft.Type.ITEM) row.count.setValue("1");
+            // Stage & lock-packmode rewards are TEAM-scoped by design (stage
+            // applies to the whole party; packmode applies to the world).
+            if (next == com.soul.soa_additions.quest.net.RewardDraft.Type.GRANT_STAGE
+                    || next == com.soul.soa_additions.quest.net.RewardDraft.Type.LOCK_PACKMODE) {
+                row.scope = com.soul.soa_additions.quest.model.RewardScope.TEAM;
+            }
         }
         rewardTypeDropdownRow = -1;
         return true;

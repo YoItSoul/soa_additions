@@ -1,0 +1,53 @@
+{
+  "stats": {
+    "tconstruct:head": {
+      "durability": 1550,
+      "melee_attack": 3.2,
+      "mining_speed": 3.2,
+      "mining_tier": "soa_additions:duranite"
+    },
+    "tconstruct:handle": {
+      "durability": 1.16,
+      "melee_damage": 0.0,
+      "melee_speed": 0.0,
+      "mining_speed": 0.0
+    },
+    "tconstruct:grip": {
+      "accuracy": 0.0,
+      "durability": 1.16,
+      "melee_damage": 3.2
+    },
+    "tconstruct:binding": {},
+    "tconstruct:maille": {},
+    "tconstruct:limb": {
+      "accuracy": 0.0,
+      "draw_speed": -0.2,
+      "durability": 1550,
+      "velocity": 0.7
+    },
+    "tconstruct:plating_helmet": {
+      "armor": 5.0,
+      "durability": 516,
+      "toughness": 1.6
+    },
+    "tconstruct:plating_chestplate": {
+      "armor": 8.0,
+      "durability": 576,
+      "toughness": 1.6
+    },
+    "tconstruct:plating_leggings": {
+      "armor": 6.0,
+      "durability": 516,
+      "toughness": 1.6
+    },
+    "tconstruct:plating_boots": {
+      "armor": 5.0,
+      "durability": 516,
+      "toughness": 1.6
+    },
+    "tconstruct:plating_shield": {
+      "durability": 616,
+      "toughness": 1.6
+    }
+  }
+}

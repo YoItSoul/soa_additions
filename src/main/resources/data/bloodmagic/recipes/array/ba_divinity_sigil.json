@@ -1,12 +1,12 @@
 {
   "type": "bloodmagic:array",
   "baseinput": {
-    "item": "soa_additions:ba_reagent_divinity"
+    "item": "bloodarsenal:reagent_divinity"
   },
   "addedinput": {
     "item": "bloodmagic:etherealslate"
   },
   "output": {
-    "item": "soa_additions:ba_sigil_divinity"
+    "item": "bloodarsenal:sigil_divinity"
   }
 }

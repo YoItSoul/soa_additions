@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "aba"
+  ],
+  "key": {
+    "a": {
+      "item": "bloodarsenal:blood_infused_planks"
+    },
+    "b": {
+      "item": "bloodarsenal:blood_infused_stick"
+    }
+  },
+  "result": {
+    "item": "bloodarsenal:blood_infused_fence",
+    "count": 3
+  },
+  "show_notification": true
+}

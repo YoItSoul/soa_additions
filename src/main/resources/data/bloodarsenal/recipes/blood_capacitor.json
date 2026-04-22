@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aea",
+    "bcb",
+    "ada"
+  ],
+  "key": {
+    "a": {
+      "item": "bloodarsenal:blood_infused_iron_block"
+    },
+    "b": {
+      "item": "bloodarsenal:blood_stained_glass"
+    },
+    "c": {
+      "tag": "forge:storage_blocks/redstone"
+    },
+    "d": {
+      "type": "bloodmagic:bloodorb",
+      "orb_tier": 4
+    },
+    "e": {
+      "item": "bloodmagic:activationcrystalweak"
+    }
+  },
+  "result": {
+    "item": "bloodarsenal:blood_capacitor"
+  },
+  "show_notification": true
+}

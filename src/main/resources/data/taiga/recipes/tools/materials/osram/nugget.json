@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/osram"
+  },
+  "material": "taiga:osram",
+  "needed": 9,
+  "value": 1
+}

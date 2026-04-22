@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aba",
+    "caa"
+  ],
+  "key": {
+    "a": {
+      "item": "bloodarsenal:blood_burned_string"
+    },
+    "b": {
+      "type": "bloodmagic:bloodorb",
+      "orb_tier": 2
+    },
+    "c": {
+      "item": "bloodarsenal:gem_sacrifice"
+    }
+  },
+  "result": {
+    "item": "bloodarsenal:sacrifice_amulet"
+  },
+  "show_notification": true
+}

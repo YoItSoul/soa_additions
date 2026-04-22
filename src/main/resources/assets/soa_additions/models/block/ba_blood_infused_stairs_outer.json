@@ -1,8 +1,0 @@
-{
-  "parent": "block/outer_stairs",
-  "textures": {
-    "bottom": "soa_additions:block/ba_blood_infused_planks",
-    "top": "soa_additions:block/ba_blood_infused_planks",
-    "side": "soa_additions:block/ba_blood_infused_planks"
-  }
-}

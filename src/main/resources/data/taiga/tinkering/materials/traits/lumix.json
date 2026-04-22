@@ -1,0 +1,12 @@
+{
+  "default": [
+  ],
+  "perStat": {
+    "tconstruct:handle": [
+      { "level": 1, "name": "taiga:bright" }
+    ],
+    "tconstruct:head": [
+      { "level": 1, "name": "taiga:glimmer" }
+    ]
+  }
+}

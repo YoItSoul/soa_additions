@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:ingots/triberium"
+  },
+  "material": "taiga:triberium",
+  "needed": 1,
+  "value": 1
+}

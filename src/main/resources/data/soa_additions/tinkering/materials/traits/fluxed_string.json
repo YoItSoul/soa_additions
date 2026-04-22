@@ -2,7 +2,7 @@
   "default": [],
   "perStat": {
     "tconstruct:limb": [
-      { "level": 1, "name": "soa_additions:tconevo/aftershock" }
+      { "level": 1, "name": "tconevo:aftershock" }
     ]
   }
 }

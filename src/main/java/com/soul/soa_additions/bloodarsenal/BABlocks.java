@@ -22,7 +22,7 @@ import java.util.function.Supplier;
 public final class BABlocks {
 
     public static final DeferredRegister<Block> BLOCKS =
-            DeferredRegister.create(ForgeRegistries.BLOCKS, SoaAdditions.MODID);
+            DeferredRegister.create(ForgeRegistries.BLOCKS, "bloodarsenal");
 
     // ── Wood family ──────────────────────────────────────────────────────
 
@@ -33,27 +33,27 @@ public final class BABlocks {
             .sound(SoundType.WOOD)
             .ignitedByLava();
 
-    public static final RegistryObject<Block> BLOOD_INFUSED_PLANKS = registerBlock("ba_blood_infused_planks",
+    public static final RegistryObject<Block> BLOOD_INFUSED_PLANKS = registerBlock("blood_infused_planks",
             () -> new Block(WOOD_PROPS));
 
-    public static final RegistryObject<RotatedPillarBlock> BLOOD_INFUSED_LOG = registerBlock("ba_blood_infused_log",
+    public static final RegistryObject<RotatedPillarBlock> BLOOD_INFUSED_LOG = registerBlock("blood_infused_log",
             () -> new RotatedPillarBlock(WOOD_PROPS));
 
-    public static final RegistryObject<StairBlock> BLOOD_INFUSED_STAIRS = registerBlock("ba_blood_infused_stairs",
+    public static final RegistryObject<StairBlock> BLOOD_INFUSED_STAIRS = registerBlock("blood_infused_stairs",
             () -> new StairBlock(() -> BLOOD_INFUSED_PLANKS.get().defaultBlockState(), WOOD_PROPS));
 
-    public static final RegistryObject<SlabBlock> BLOOD_INFUSED_SLAB = registerBlock("ba_blood_infused_slab",
+    public static final RegistryObject<SlabBlock> BLOOD_INFUSED_SLAB = registerBlock("blood_infused_slab",
             () -> new SlabBlock(WOOD_PROPS));
 
-    public static final RegistryObject<FenceBlock> BLOOD_INFUSED_FENCE = registerBlock("ba_blood_infused_fence",
+    public static final RegistryObject<FenceBlock> BLOOD_INFUSED_FENCE = registerBlock("blood_infused_fence",
             () -> new FenceBlock(WOOD_PROPS));
 
-    public static final RegistryObject<FenceGateBlock> BLOOD_INFUSED_FENCE_GATE = registerBlock("ba_blood_infused_fence_gate",
+    public static final RegistryObject<FenceGateBlock> BLOOD_INFUSED_FENCE_GATE = registerBlock("blood_infused_fence_gate",
             () -> new FenceGateBlock(WOOD_PROPS, net.minecraft.world.level.block.state.properties.WoodType.CRIMSON));
 
     // ── Metal / special ──────────────────────────────────────────────────
 
-    public static final RegistryObject<Block> BLOOD_INFUSED_IRON_BLOCK = registerBlock("ba_blood_infused_iron_block",
+    public static final RegistryObject<Block> BLOOD_INFUSED_IRON_BLOCK = registerBlock("blood_infused_iron_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)
                     .mapColor(MapColor.COLOR_RED)
                     .instrument(NoteBlockInstrument.IRON_XYLOPHONE)
@@ -61,14 +61,14 @@ public final class BABlocks {
                     .sound(SoundType.METAL)
                     .requiresCorrectToolForDrops()));
 
-    public static final RegistryObject<Block> BLOOD_INFUSED_GLOWSTONE = registerBlock("ba_blood_infused_glowstone",
+    public static final RegistryObject<Block> BLOOD_INFUSED_GLOWSTONE = registerBlock("blood_infused_glowstone",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)
                     .mapColor(MapColor.COLOR_RED)
                     .strength(0.3f)
                     .sound(SoundType.GLASS)
                     .lightLevel(s -> 15)));
 
-    public static final RegistryObject<TorchBlock> BLOOD_TORCH = registerBlock("ba_blood_torch",
+    public static final RegistryObject<TorchBlock> BLOOD_TORCH = registerBlock("blood_torch",
             () -> new TorchBlock(BlockBehaviour.Properties.copy(Blocks.STONE)
                     .noCollission()
                     .instabreak()
@@ -79,7 +79,7 @@ public final class BABlocks {
 
     // ── Glass family ─────────────────────────────────────────────────────
 
-    public static final RegistryObject<Block> BLOOD_STAINED_GLASS = registerBlock("ba_blood_stained_glass",
+    public static final RegistryObject<Block> BLOOD_STAINED_GLASS = registerBlock("blood_stained_glass",
             () -> new HalfTransparentBlock(BlockBehaviour.Properties.copy(Blocks.STONE)
                     .mapColor(MapColor.COLOR_RED)
                     .strength(0.3f)
@@ -90,7 +90,7 @@ public final class BABlocks {
                     .isSuffocating((s, g, p) -> false)
                     .isViewBlocking((s, g, p) -> false)));
 
-    public static final RegistryObject<IronBarsBlock> BLOOD_STAINED_GLASS_PANE = registerBlock("ba_blood_stained_glass_pane",
+    public static final RegistryObject<IronBarsBlock> BLOOD_STAINED_GLASS_PANE = registerBlock("blood_stained_glass_pane",
             () -> new IronBarsBlock(BlockBehaviour.Properties.copy(Blocks.STONE)
                     .mapColor(MapColor.COLOR_RED)
                     .strength(0.3f)
@@ -99,23 +99,30 @@ public final class BABlocks {
 
     // ── Decorative ───────────────────────────────────────────────────────
 
-    public static final RegistryObject<Block> SLATE = registerBlock("ba_slate",
+    public static final RegistryObject<Block> SLATE = registerBlock("slate",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)
                     .mapColor(MapColor.STONE)
                     .strength(1.5f, 6.0f)
                     .sound(SoundType.STONE)
                     .requiresCorrectToolForDrops()));
 
-    public static final RegistryObject<GlassShardsBlock> GLASS_SHARDS = registerBlock("ba_glass_shards",
+    public static final RegistryObject<GlassShardsBlock> GLASS_SHARDS = registerBlock("glass_shards",
             () -> new GlassShardsBlock(BlockBehaviour.Properties.copy(Blocks.STONE)
                     .mapColor(MapColor.NONE)
                     .strength(0.3f)
                     .sound(SoundType.GLASS)
                     .noOcclusion()));
 
+    public static final RegistryObject<BloodBurnedStringBlock> BLOOD_BURNED_STRING_BLOCK = registerBlock("block_blood_burned_string",
+            () -> new BloodBurnedStringBlock(BlockBehaviour.Properties.copy(Blocks.TRIPWIRE)
+                    .mapColor(MapColor.COLOR_RED)
+                    .noCollission()
+                    .instabreak()
+                    .sound(SoundType.WOOL)));
+
     // ── Functional ───────────────────────────────────────────────────────
 
-    public static final RegistryObject<StasisPlateBlock> STASIS_PLATE = registerBlock("ba_stasis_plate",
+    public static final RegistryObject<StasisPlateBlock> STASIS_PLATE = registerBlock("stasis_plate",
             () -> new StasisPlateBlock(BlockBehaviour.Properties.copy(Blocks.STONE)
                     .mapColor(MapColor.NONE)
                     .strength(2.0f, 5.0f)
@@ -123,14 +130,14 @@ public final class BABlocks {
                     .noOcclusion()
                     .requiresCorrectToolForDrops()));
 
-    public static final RegistryObject<AltareBlock> ALTARE = registerBlock("ba_altare_aenigmatica",
+    public static final RegistryObject<AltareBlock> ALTARE = registerBlock("altare_aenigmatica",
             () -> new AltareBlock(BlockBehaviour.Properties.copy(Blocks.STONE)
                     .mapColor(MapColor.COLOR_RED)
                     .strength(5.0f, 6.0f)
                     .sound(SoundType.STONE)
                     .requiresCorrectToolForDrops()));
 
-    public static final RegistryObject<BloodCapacitorBlock> BLOOD_CAPACITOR = registerBlock("ba_blood_capacitor",
+    public static final RegistryObject<BloodCapacitorBlock> BLOOD_CAPACITOR = registerBlock("blood_capacitor",
             () -> new BloodCapacitorBlock(BlockBehaviour.Properties.copy(Blocks.STONE)
                     .mapColor(MapColor.METAL)
                     .strength(5.0f, 2.0f)
@@ -140,7 +147,7 @@ public final class BABlocks {
     // ── Fluid block (no BlockItem) ─────────────────────────────────────
     // Initialized in register() since it depends on BAFluids being set up
     static {
-        BAFluids.REFINED_LIFE_ESSENCE_BLOCK = BLOCKS.register("ba_refined_life_essence_block",
+        BAFluids.REFINED_LIFE_ESSENCE_BLOCK = BLOCKS.register("refined_life_essence_block",
                 () -> new LiquidBlock(BAFluids.REFINED_LIFE_ESSENCE_SOURCE,
                         BlockBehaviour.Properties.copy(Blocks.WATER)
                                 .mapColor(MapColor.COLOR_RED)

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " aa",
+    " ca",
+    " b "
+  ],
+  "key": {
+    "a": {
+      "item": "bloodarsenal:blood_infused_planks"
+    },
+    "b": {
+      "type": "bloodmagic:bloodorb",
+      "orb_tier": 2
+    },
+    "c": {
+      "item": "bloodarsenal:blood_infused_stick"
+    }
+  },
+  "result": {
+    "item": "bloodarsenal:blood_infused_wooden_axe"
+  },
+  "show_notification": true
+}

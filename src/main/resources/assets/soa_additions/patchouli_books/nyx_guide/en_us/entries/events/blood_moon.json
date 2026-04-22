@@ -1,0 +1,13 @@
+{
+  "name": "Blood Moon",
+  "icon": "minecraft:redstone",
+  "category": "soa_additions:events",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Blood Moon",
+      "text": "The dangerous one. Hostile mobs spawn more aggressively and at higher density; vanilla sleep-to-skip is $(bold)disabled$() — you cannot sleep through a blood moon, regardless of monster proximity.$(br2)Strategy: prepare before nightfall. A blood moon surprises no-one twice."
+    }
+  ]
+}

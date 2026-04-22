@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:ingots/duranite"
+  },
+  "material": "taiga:duranite",
+  "needed": 1,
+  "value": 1
+}

@@ -1,15 +1,15 @@
 {
   "default": [
-    { "level": 1, "name": "soa_additions:tconevo/crystalline" }
+    { "level": 1, "name": "tconevo:crystalline" }
   ],
   "perStat": {
     "tconstruct:head": [
-      { "level": 1, "name": "soa_additions:tconevo/executor" },
-      { "level": 1, "name": "soa_additions:tconevo/true_strike" }
+      { "level": 1, "name": "tconevo:executor" },
+      { "level": 1, "name": "tconevo:true_strike" }
     ],
     "tconstruct:limb": [
-      { "level": 1, "name": "soa_additions:tconevo/executor" },
-      { "level": 1, "name": "soa_additions:tconevo/true_strike" }
+      { "level": 1, "name": "tconevo:executor" },
+      { "level": 1, "name": "tconevo:true_strike" }
     ]
   }
 }

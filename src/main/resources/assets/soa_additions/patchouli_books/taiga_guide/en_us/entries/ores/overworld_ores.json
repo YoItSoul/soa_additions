@@ -1,0 +1,18 @@
+{
+  "name": "Overworld Ores",
+  "icon": "taiga:karmesine_ore",
+  "category": "soa_additions:ores",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Eight in the Overworld",
+      "text": "TAIGA scatters eight ores across every overworld biome, generating in the $(6)underground_ores$() step:$(br2)$(item)Karmesine$() — crimson-red, common, surface-facing.$(br)$(item)Ovium$() — pale cream, mid-depth.$(br)$(item)Jauxum$() — yellow, mid-depth.$(br)$(item)Duranite$() — grey, deep.$(br)$(item)Vibranium$() — violet, rare, deep."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Overworld (cont.)",
+      "text": "$(item)Eezo$() — blue-black, rare.$(br)$(item)Basalt$() — dark, scattered.$(br)$(item)Dilithium$() — rare blue crystal-cluster ore; drops $(item)Dilithium Crystals$() instead of an ingot.$(br2)Use standard mining tools at iron-tier or higher — these ores don't require special picks."
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "name": "Baubles",
+  "icon": "bloodarsenal:vampire_ring",
+  "category": "bloodmagic:soa_additions_ba",
+  "sortnum": 7,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Wearing the work",
+      "text": "All three baubles slot into the $(item)Curios$() ring/necklace slots. They stay passive while worn — no toggle, no activation keystroke — and their LP draw comes from whichever $(l:bloodmagic:altar/soul_network)Soul Network$() the wearer is bound to."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:vampire_ring",
+      "title": "Vampire Ring",
+      "text": "On a melee hit, converts a fraction of dealt damage into healing for the wearer. Modest lifesteal, but it stacks with your existing attack bonuses — durable for sustained combat."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:sacrifice_amulet",
+      "title": "Sacrifice Amulet",
+      "text": "Kills that happen near your altar route extra LP into the reservoir while worn. Pairs well with a $(l:bloodmagic:soa_additions_ba/glass)Glass Dagger of Sacrifice$() and a mob farm."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:self_sacrifice_amulet",
+      "title": "Self-Sacrifice Amulet",
+      "text": "Mirror of the above: self-drawn LP (from sacrificial daggers, sigils, and similar) deposits into the altar at a higher rate while worn."
+    }
+  ]
+}

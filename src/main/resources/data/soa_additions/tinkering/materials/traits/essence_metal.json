@@ -1,7 +1,7 @@
 {
   "default": [
     { "level": 1, "name": "tconstruct:established" },
-    { "level": 1, "name": "soa_additions:tconevo/sundering" }
+    { "level": 1, "name": "tconevo:sundering" }
   ],
   "perStat": {}
 }

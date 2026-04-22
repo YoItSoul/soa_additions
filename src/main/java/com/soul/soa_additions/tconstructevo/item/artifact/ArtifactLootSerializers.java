@@ -16,10 +16,10 @@ import net.minecraftforge.registries.RegistryObject;
 public final class ArtifactLootSerializers {
 
     public static final DeferredRegister<Codec<? extends IGlobalLootModifier>> SERIALIZERS =
-            DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, SoaAdditions.MODID);
+            DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, "tconevo");
 
     public static final RegistryObject<Codec<ArtifactLootModifier>> ARTIFACT =
-            SERIALIZERS.register("tconevo_artifact", () -> ArtifactLootModifier.CODEC);
+            SERIALIZERS.register("artifact", () -> ArtifactLootModifier.CODEC);
 
     private ArtifactLootSerializers() {}
 

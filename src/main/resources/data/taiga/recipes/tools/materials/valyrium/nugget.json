@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/valyrium"
+  },
+  "material": "taiga:valyrium",
+  "needed": 9,
+  "value": 1
+}

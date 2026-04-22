@@ -1,0 +1,33 @@
+{
+  "name": "Imperfect Rituals",
+  "icon": "bloodmagic:imperfectritualstone",
+  "category": "bloodmagic:soa_additions_ba",
+  "sortnum": 12,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "One stone, one block",
+      "text": "Imperfect rituals skip the full-array overhead. Place an $(l:bloodmagic:rituals/imperfect)Imperfect Ritual Stone$() with the right block directly on top of it, then right-click to trigger. The Arsenal ports four from 1.12:"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Enchant Reset",
+      "text": "Topper: $(item)Bookshelf$(). Removes all enchantments from the activator's held item, returning them as experience. A panic-button for misrolled enchanting-table results."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Ice",
+      "text": "Topper: $(item)Ice$() or $(item)Packed Ice$(). Freezes a cone of water in front of the activator into ice. Traversal + terraforming convenience."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Lightning",
+      "text": "Topper: $(item)Lightning Rod$() (previously an iron-on-gold variant in 1.12). Calls a bolt at the activator's feet — same use cases as the $(l:bloodmagic:soa_additions_ba/sigils)Sigil of Lightning$(), without holding an item slot."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Snow",
+      "text": "Topper: $(item)Snow Block$(). Layers snow in a radius around the stone. Quiet, cheap, visually useful."
+    }
+  ]
+}

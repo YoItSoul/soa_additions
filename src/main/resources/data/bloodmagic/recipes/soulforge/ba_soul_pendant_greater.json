@@ -3,10 +3,10 @@
   "minimumDrain": 1000.0,
   "drain": 600.0,
   "output": {
-    "item": "soa_additions:ba_soul_pendant_greater"
+    "item": "bloodarsenal:soul_pendant_greater"
   },
   "input0": {
-    "item": "soa_additions:ba_soul_pendant_common"
+    "item": "bloodarsenal:soul_pendant_common"
   },
   "input1": {
     "item": "bloodmagic:weakbloodshard"

@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:ingots/basalt"
+  },
+  "result": {
+    "fluid": "taiga:molten_basalt",
+    "amount": 144
+  },
+  "temperature": 400,
+  "time": 100
+}

@@ -31,12 +31,12 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 public class SanguineInfusionCategory implements IRecipeCategory<SanguineInfusionRecipe> {
 
-    public static final ResourceLocation UID = new ResourceLocation(SoaAdditions.MODID, "sanguine_infusion");
+    public static final ResourceLocation UID = new ResourceLocation("bloodarsenal", "sanguine_infusion");
     public static final RecipeType<SanguineInfusionRecipe> RECIPE_TYPE =
             new RecipeType<>(UID, SanguineInfusionRecipe.class);
 
     private static final ResourceLocation TEXTURE =
-            new ResourceLocation(SoaAdditions.MODID, "textures/gui/sanguine_infusion.png");
+            new ResourceLocation("bloodarsenal", "textures/gui/sanguine_infusion.png");
 
     private final IDrawable background;
     private final IDrawable icon;
@@ -48,7 +48,7 @@ public class SanguineInfusionCategory implements IRecipeCategory<SanguineInfusio
         this.icon = guiHelper.createDrawableItemStack(
                 new net.minecraft.world.item.ItemStack(
                         net.minecraftforge.registries.ForgeRegistries.ITEMS.getValue(
-                                new ResourceLocation(SoaAdditions.MODID, "ba_stasis_plate"))));
+                                new ResourceLocation("bloodarsenal", "stasis_plate"))));
     }
 
     @Override

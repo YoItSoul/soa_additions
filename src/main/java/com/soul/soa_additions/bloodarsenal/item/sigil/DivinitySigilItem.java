@@ -19,7 +19,7 @@ import wayoftime.bloodmagic.common.item.sigil.ItemSigilToggleableBase;
 public class DivinitySigilItem extends ItemSigilToggleableBase {
 
     public DivinitySigilItem() {
-        super("ba_divinity", BAConfig.SIGIL_DIVINITY_COST.get());
+        super("divinity", BAConfig.SIGIL_DIVINITY_COST.get());
     }
 
     @Override

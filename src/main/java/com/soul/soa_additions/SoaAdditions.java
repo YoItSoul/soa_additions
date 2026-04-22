@@ -41,7 +41,14 @@ public final class SoaAdditions {
         com.soul.soa_additions.config.HeadshotConfig.register();
 
         ModBlocks.register(modEventBus);
+        com.soul.soa_additions.nyx.NyxBlocks.register(modEventBus);
+        com.soul.soa_additions.nyx.NyxItems.bootstrap();
+        com.soul.soa_additions.nyx.NyxEnchantments.register(modEventBus);
+        com.soul.soa_additions.nyx.NyxEntities.register(modEventBus);
+        com.soul.soa_additions.nyx.NyxSounds.register(modEventBus);
+        com.soul.soa_additions.nyx.NyxConfig.register();
         ModFeatures.register(modEventBus);
+        com.soul.soa_additions.worldgen.ModPoi.register(modEventBus);
         // Curios soft-dep: queue GreedyBag onto ModItems.ITEMS before the
         // DeferredRegister fires. CuriosIntegration never gets class-loaded
         // when Curios is absent, so GreedyBagItem (implements ICurio) stays
@@ -63,6 +70,7 @@ public final class SoaAdditions {
         MinecraftForge.EVENT_BUS.register(this);
 
         SoaTiers.bootstrap();
+        com.soul.soa_additions.nyx.NyxMaterials.bootstrap();
         ConfigScanner.startScanning();
 
         // Blood Arsenal — soft dependency on Blood Magic.
@@ -77,6 +85,7 @@ public final class SoaAdditions {
         // subpackage and is never classloaded unless TConstruct is present.
         if (ModList.get().isLoaded("tconstruct")) {
             com.soul.soa_additions.tconstructevo.TConstructEvoPlugin.init(modEventBus);
+            com.soul.soa_additions.taiga.TaigaPlugin.init(modEventBus);
         }
         // JvmStatsSampler.start() reads config values, so it has to wait
         // until FMLCommonSetupEvent — configs aren't loaded during mod
@@ -89,6 +98,7 @@ public final class SoaAdditions {
             ModNetworking.register();
             AntiCheatHandler.scanServerInstalledMods();
             JvmStatsSampler.start();
+            com.soul.soa_additions.registry.HardnessOverrides.apply();
         });
     }
 

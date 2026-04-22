@@ -2,10 +2,10 @@
   "default": [],
   "perStat": {
     "tconstruct:head": [
-      { "level": 1, "name": "soa_additions:tconevo/soul_rend" }
+      { "level": 1, "name": "tconevo:soul_rend" }
     ],
     "tconstruct:limb": [
-      { "level": 1, "name": "soa_additions:tconevo/soul_rend" }
+      { "level": 1, "name": "tconevo:soul_rend" }
     ]
   }
 }

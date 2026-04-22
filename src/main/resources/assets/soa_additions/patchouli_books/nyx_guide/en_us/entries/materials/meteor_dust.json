@@ -1,0 +1,26 @@
+{
+  "name": "Meteor Dust & Shard",
+  "icon": "soa_additions:meteor_shard",
+  "category": "soa_additions:materials",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:meteor_dust",
+      "title": "Meteor Dust",
+      "text": "Raw dust from cracked meteor rock. Smelt to produce $(item)Meteor Shards$()."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:meteor_shard",
+      "title": "Meteor Shard",
+      "text": "The workable ingot-form of meteor metal. Crafts the full $(l:gear)Meteor tool and armor$() set."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:meteor_block",
+      "title": "Meteor Block",
+      "text": "Nine shards compress into a storage block. Mostly decorative — the dense, refined form of the metal."
+    }
+  ]
+}

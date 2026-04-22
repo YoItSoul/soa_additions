@@ -1,0 +1,18 @@
+{
+  "name": "Melting",
+  "icon": "tconstruct:smeltery_controller",
+  "category": "soa_additions:smeltery",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Melt everything",
+      "text": "TAIGA registers melting recipes for every form of every material:$(br)$(item)Ingot$() → 144 mb$(br)$(item)Nugget$() → 16 mb$(br)$(item)Block$() → 1296 mb$(br)$(item)Ore$() → 288 mb (2× ingot, standard bonus)$(br)$(item)Crystal$() → 72 mb (tiberium/dilithium only)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Temperatures",
+      "text": "Each material has its own melt temperature baked into its fluid definition — expect the TC3 smeltery to need progressively more fuel tiers as you climb the material tree.$(br2)Standard Seared Bricks + a single Melter will handle most TAIGA materials; the highest-tier alloys may require Scorched Bricks."
+    }
+  ]
+}

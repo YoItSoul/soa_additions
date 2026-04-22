@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aa",
+    "aa"
+  ],
+  "key": {
+    "a": {
+      "item": "bloodarsenal:blood_infused_glowstone_dust"
+    }
+  },
+  "result": {
+    "item": "bloodarsenal:blood_infused_glowstone"
+  },
+  "show_notification": true
+}

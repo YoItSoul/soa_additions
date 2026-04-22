@@ -1,0 +1,23 @@
+{
+  "name": "Lunar Enchantments",
+  "icon": "minecraft:enchanted_book",
+  "category": "soa_additions:gear",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Lunar Edge",
+      "text": "Sword enchantment. Adds bonus damage that scales with the current moon phase — negligible under a new moon, significant on a $(l:events/full_moon)full moon$() and $(l:events/blood_moon)blood moon$() nights.$(br2)$(italic)Enchanting is disabled during daylight$() — read the next page for why."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Lunar Shield",
+      "text": "Armor enchantment. Reduces incoming damage from hostile mobs during the night. Stacks across armor pieces up to a cap.$(br2)Particularly effective during blood moons — the same phase when you need it most."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Daylight enchanting restriction",
+      "text": "Nyx's enchanting table refuses to produce lunar enchantments under direct sunlight — the glyphs need moonlight to fix. Enchant at night, or underground with a clear line of sight to the sky after sundown.$(br2)Standard enchanting (Sharpness, Protection, etc.) is unaffected."
+    }
+  ]
+}

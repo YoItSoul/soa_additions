@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:prismarine_shard",
+    "soa_additions:prismarine_ingot"
+  ]
+}

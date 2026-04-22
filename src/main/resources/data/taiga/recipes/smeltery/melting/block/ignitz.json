@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:storage_blocks/ignitz"
+  },
+  "result": {
+    "fluid": "taiga:molten_ignitz",
+    "amount": 1296
+  },
+  "temperature": 400,
+  "time": 300
+}

@@ -1,10 +1,10 @@
 {
   "values": [
-    "soa_additions:ba_blood_infused_planks",
-    "soa_additions:ba_blood_infused_log",
-    "soa_additions:ba_blood_infused_stairs",
-    "soa_additions:ba_blood_infused_slab",
-    "soa_additions:ba_blood_infused_fence",
-    "soa_additions:ba_blood_infused_fence_gate"
+    "bloodarsenal:blood_infused_planks",
+    "bloodarsenal:blood_infused_log",
+    "bloodarsenal:blood_infused_stairs",
+    "bloodarsenal:blood_infused_slab",
+    "bloodarsenal:blood_infused_fence",
+    "bloodarsenal:blood_infused_fence_gate"
   ]
 }

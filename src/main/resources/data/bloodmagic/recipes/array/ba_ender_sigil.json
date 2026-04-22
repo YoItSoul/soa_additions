@@ -1,12 +1,12 @@
 {
   "type": "bloodmagic:array",
   "baseinput": {
-    "item": "soa_additions:ba_reagent_ender"
+    "item": "bloodarsenal:reagent_ender"
   },
   "addedinput": {
     "item": "bloodmagic:demonslate"
   },
   "output": {
-    "item": "soa_additions:ba_sigil_ender"
+    "item": "bloodarsenal:sigil_ender"
   }
 }

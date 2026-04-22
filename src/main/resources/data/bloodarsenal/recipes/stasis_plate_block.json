@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aba",
+    "cdc"
+  ],
+  "key": {
+    "a": {
+      "item": "bloodarsenal:stasis_plate"
+    },
+    "b": {
+      "item": "bloodmagic:altar"
+    },
+    "c": {
+      "item": "bloodarsenal:blood_infused_iron_ingot"
+    },
+    "d": {
+      "type": "bloodmagic:bloodorb",
+      "orb_tier": 3
+    }
+  },
+  "result": {
+    "item": "bloodarsenal:stasis_plate"
+  },
+  "show_notification": true
+}

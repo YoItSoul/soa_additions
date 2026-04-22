@@ -1,0 +1,6 @@
+{
+  "name": "Commands",
+  "description": "Operator tools for forcing lunar events and calling meteors.",
+  "icon": "minecraft:command_block",
+  "sortnum": 4
+}

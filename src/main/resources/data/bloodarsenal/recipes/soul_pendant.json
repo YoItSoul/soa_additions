@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aba",
+    "aca"
+  ],
+  "key": {
+    "a": {
+      "item": "bloodarsenal:blood_burned_string"
+    },
+    "b": {
+      "type": "bloodmagic:bloodorb",
+      "orb_tier": 1
+    },
+    "c": {
+      "item": "bloodarsenal:gem_tartaric"
+    }
+  },
+  "result": {
+    "item": "bloodarsenal:soul_pendant_petty"
+  },
+  "show_notification": true
+}

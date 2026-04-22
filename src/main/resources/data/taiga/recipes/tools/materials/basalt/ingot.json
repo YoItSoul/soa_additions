@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:ingots/basalt"
+  },
+  "material": "taiga:basalt",
+  "needed": 1,
+  "value": 1
+}

@@ -67,11 +67,36 @@ public final class ArtifactSpec {
         int weight = GsonHelper.getAsInt(dto, "weight", 1);
         String name = GsonHelper.getAsString(dto, "name");
         List<String> lore = parseLore(dto);
-        String tool = GsonHelper.getAsString(dto, "tool");
+        String tool = parseToolField(dto, type);
         List<String> materials = parseMaterials(dto);
         int freeMods = GsonHelper.getAsInt(dto, "free_mods", 0);
         List<ModEntry> modifiers = parseModifiers(dto);
         return new ArtifactSpec(type, weight, name, lore, tool, materials, freeMods, modifiers);
+    }
+
+    /** Tool-type artifacts use a "tool" field naming a TC3 tool definition.
+     *  Armour-type artifacts use an "armour" field naming a slot
+     *  ({@code boots}/{@code helmet}/{@code chestplate}/{@code leggings}); we
+     *  map that to TC3's plate armor item id. The dual schema mirrors the
+     *  original 1.12.2 tconevo's split between ArtifactTypeTool and
+     *  ArtifactTypeArmour, so existing JSON parses unchanged. */
+    private static String parseToolField(JsonObject dto, String type) {
+        if ("tconevo:armour".equals(type) || "tconevo:armor".equals(type)) {
+            String slot = GsonHelper.getAsString(dto, "armour", null);
+            if (slot == null) slot = GsonHelper.getAsString(dto, "armor", null);
+            if (slot == null) {
+                throw new JsonSyntaxException("armour-type artifact missing \"armour\" field");
+            }
+            return switch (slot) {
+                case "boots"      -> "tconstruct:plate_boots";
+                case "helmet"     -> "tconstruct:plate_helmet";
+                case "chestplate" -> "tconstruct:plate_chestplate";
+                case "leggings"   -> "tconstruct:plate_leggings";
+                default -> throw new JsonSyntaxException(
+                        "unknown armour slot \"" + slot + "\" (expected boots/helmet/chestplate/leggings)");
+            };
+        }
+        return GsonHelper.getAsString(dto, "tool");
     }
 
     private static List<String> parseLore(JsonObject dto) {

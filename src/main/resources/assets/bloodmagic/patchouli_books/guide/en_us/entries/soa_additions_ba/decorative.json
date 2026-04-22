@@ -1,0 +1,55 @@
+{
+  "name": "Decorative & Building",
+  "icon": "bloodarsenal:blood_infused_planks",
+  "category": "bloodmagic:soa_additions_ba",
+  "sortnum": 14,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "The Arsenal's masonry",
+      "text": "Most of the Arsenal's appeal is functional, but a handful of blocks exist purely to dress a blood-mage's workshop. All are mined with any tool and keep their block-item form on drop."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:blood_infused_planks",
+      "title": "Blood-Infused Wood",
+      "text": "A full wood family: $(item)planks$(), $(item)log$(), $(item)stairs$(), $(item)slab$(), $(item)fence$(), $(item)fence gate$(). Crimson-hued and flammable — handle accordingly."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:blood_stained_glass",
+      "title": "Blood-Stained Glass",
+      "text": "Translucent, spawn-proof, non-conductive. Breaking it yields $(item)Glass Shards$() — feed those into the $(l:bloodmagic:soa_additions_ba/glass)glass daggers$() chain."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:blood_stained_glass_pane",
+      "title": "Blood-Stained Glass Pane",
+      "text": "The pane form — connects to neighbors like an iron bar. Cheap to produce from full blocks via vanilla cutting."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:blood_torch",
+      "title": "Blood Torch",
+      "text": "Brighter than vanilla torch by a notch. Light level 14 on wall or floor."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:blood_infused_glowstone",
+      "title": "Blood-Infused Glowstone",
+      "text": "Full-block light source at level 15. Pairs nicely with $(item)Blood-Stained Glass$() for stained-ceiling lighting."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:block_blood_burned_string",
+      "title": "Blood-Burned String",
+      "text": "A tripwire variant. Connects to $(item)Tripwire Hooks$() and all standard redstone-line uses — $(italic)without$() the attrition from lava or falling blocks that burns vanilla string."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:slate",
+      "title": "Slate Block",
+      "text": "Condensed storage: nine of a single $(item)Blood Magic Slate$() (blank, reinforced, imbued, demonic, or ethereal) craft one block, and one block decompresses back. The block itself carries no tier — it's a storage form only, chosen by which slate goes in."
+    }
+  ]
+}

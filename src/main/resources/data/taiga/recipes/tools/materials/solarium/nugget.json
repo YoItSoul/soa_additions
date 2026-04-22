@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/solarium"
+  },
+  "material": "taiga:solarium",
+  "needed": 9,
+  "value": 1
+}

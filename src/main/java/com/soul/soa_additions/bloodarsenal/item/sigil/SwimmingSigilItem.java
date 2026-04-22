@@ -19,7 +19,7 @@ public class SwimmingSigilItem extends ItemSigilToggleableBase {
     private static final double MAX_SPEED = 0.2;
 
     public SwimmingSigilItem() {
-        super("ba_swimming", BAConfig.SIGIL_SWIMMING_COST.get());
+        super("swimming", BAConfig.SIGIL_SWIMMING_COST.get());
     }
 
     @Override

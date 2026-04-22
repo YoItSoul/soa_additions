@@ -1,0 +1,20 @@
+{
+  "name": "Crystal",
+  "icon": "soa_additions:unrefined_crystal",
+  "category": "soa_additions:materials",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:unrefined_crystal",
+      "title": "Unrefined Crystal",
+      "text": "Drops from mined $(item)Crystal$() blocks. Refine via crafting or ritual into the polished crystal used in higher-tier recipes."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:crystal",
+      "title": "Crystal Block",
+      "text": "A placeable block that recharges during a $(l:events/harvest_moon)Harvest Moon$(). Use bone meal on a depleted crystal to regrow it in daylight, or let it regenerate overnight on the correct phase."
+    }
+  ]
+}

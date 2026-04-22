@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "draconicevolution:overworld_draconium_ore",
+    "draconicevolution:deepslate_draconium_ore",
+    "draconicevolution:nether_draconium_ore",
+    "draconicevolution:end_draconium_ore",
+    "draconicevolution:draconium_block",
+    "draconicevolution:awakened_draconium_block"
+  ]
+}

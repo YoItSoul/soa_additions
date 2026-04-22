@@ -1,0 +1,23 @@
+{
+  "name": "Utility Traits",
+  "icon": "tconstruct:pattern",
+  "category": "soa_additions:traits",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Light & vision",
+      "text": "$(item)Bright$() — emits soft light where held; small night-vision aura.$(br)$(item)Dark$() — opposite; absorbs light briefly, blinds close-range hostiles.$(br)$(item)Blind$() — hostiles hit by this tool get brief blindness.$(br)$(item)Glimmer$() — luminescent visual; occasionally reveals ore veins through terrain."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Mining & gathering",
+      "text": "$(item)Melting$() — auto-smelts block drops.$(br)$(item)Pulverizing$() — drops raw ore forms (dust form) instead of blocks.$(br)$(item)Analysing$() — highlights unmined ores in a small radius.$(br)$(item)Mutate$() — rare alt-drops on block break.$(br)$(item)Garishly$() — rainbow particles; no gameplay effect, pure flavor."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Odd & abstract",
+      "text": "$(item)Arcane$() — interacts with potion effects; exact behavior varies.$(br)$(item)Ported$() — ports enchantments across tool rebuilds.$(br)$(item)Diffuse$() — spreads damage across multiple targets.$(br)$(item)Congenial$() — friendly to mobs; they don't retaliate on first hit.$(br)$(item)Dissolving$() — dissolves dropped items briefly into XP.$(br)$(italic)Catcher, Tantrum, Whirl — registered no-op stubs.$()"
+    }
+  ]
+}

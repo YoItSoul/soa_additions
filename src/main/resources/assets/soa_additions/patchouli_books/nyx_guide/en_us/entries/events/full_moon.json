@@ -1,0 +1,13 @@
+{
+  "name": "Full Moon",
+  "icon": "minecraft:bone",
+  "category": "soa_additions:events",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Full Moon",
+      "text": "Wolves turn. Normal tamed wolves may target their owners on this night — keep them indoors or in pens. Wild wolves become more aggressive and will chase at longer range.$(br2)The $(6)Lunar Edge$() enchantment deals bonus damage on this phase — a full-moon night is when that sword earns its weight."
+    }
+  ]
+}

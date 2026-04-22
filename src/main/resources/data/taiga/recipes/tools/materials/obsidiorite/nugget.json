@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/obsidiorite"
+  },
+  "material": "taiga:obsidiorite",
+  "needed": 9,
+  "value": 1
+}

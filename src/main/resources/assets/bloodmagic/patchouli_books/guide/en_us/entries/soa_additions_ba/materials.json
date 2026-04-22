@@ -1,0 +1,30 @@
+{
+  "name": "Base Materials",
+  "icon": "bloodarsenal:blood_infused_iron_ingot",
+  "category": "bloodmagic:soa_additions_ba",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Blood-Infused Iron",
+      "text": "Cast molten iron into a pool of $(l:bloodmagic:soa_additions_ba/life_essence)Refined Life Essence$() to obtain $(item)Inert Blood-Infused Iron Ingots$(). Charging them in a $(l:bloodmagic:altar)Blood Altar$() yields the active $(item)Blood-Infused Iron Ingot$() — the backbone of every blood-tier tool and weapon."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:blood_infused_stick",
+      "title": "Blood-Infused Stick",
+      "text": "Splinters of charred wood soaked in life essence. The handle component for every blood-infused tool."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:blood_diamond",
+      "title": "Blood Diamond",
+      "text": "Diamonds infused in the altar progress through four stages — $(item)Inert$(), $(item)Infused$(), $(item)Bound$(), and fully active $(item)Blood Diamond$(). The bound form is required for all $(l:bloodmagic:soa_additions_ba/stasis)stasis tools$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Reagents",
+      "text": "Reagents of $(item)Swimming$(), $(item)Ender$(), $(item)Lightning$(), and $(item)Divinity$() are the raw ingredients for the matching $(l:bloodmagic:soa_additions_ba/sigils)sigils$(). Each is crafted in the $(l:bloodmagic:alchemy_table)Alchemy Table$() — the Divinity reagent additionally demands its namesake essence."
+    }
+  ]
+}

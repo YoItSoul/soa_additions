@@ -20,10 +20,10 @@ import slimeknights.tconstruct.library.materials.definition.MaterialId;
  */
 public final class DraconicMaterials {
 
-    public static final MaterialId DRACONIUM = new MaterialId(SoaAdditions.MODID, "tconevo/draconium");
-    public static final MaterialId WYVERN = new MaterialId(SoaAdditions.MODID, "tconevo/wyvern");
-    public static final MaterialId AWAKENED_DRACONIUM = new MaterialId(SoaAdditions.MODID, "tconevo/awakened_draconium");
-    public static final MaterialId CHAOTIC = new MaterialId(SoaAdditions.MODID, "tconevo/chaotic");
+    public static final MaterialId DRACONIUM = new MaterialId("tconevo", "draconium");
+    public static final MaterialId WYVERN = new MaterialId("tconevo", "wyvern");
+    public static final MaterialId AWAKENED_DRACONIUM = new MaterialId("tconevo", "awakened_draconium");
+    public static final MaterialId CHAOTIC = new MaterialId("tconevo", "chaotic");
 
     private DraconicMaterials() {}
 

@@ -4,9 +4,9 @@
     "item": "bloodmagic:reagentbinding"
   },
   "addedinput": {
-    "item": "soa_additions:ba_blood_infused_stick"
+    "item": "bloodarsenal:blood_infused_stick"
   },
   "output": {
-    "item": "soa_additions:ba_bound_stick"
+    "item": "bloodarsenal:bound_stick"
   }
 }

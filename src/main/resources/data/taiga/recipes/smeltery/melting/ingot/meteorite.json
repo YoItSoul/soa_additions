@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:ingots/meteorite"
+  },
+  "result": {
+    "fluid": "taiga:molten_meteorite",
+    "amount": 144
+  },
+  "temperature": 400,
+  "time": 100
+}

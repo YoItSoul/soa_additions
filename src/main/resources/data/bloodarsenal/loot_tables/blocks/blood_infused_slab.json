@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [{ "condition": "minecraft:survives_explosion" }],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "bloodarsenal:blood_infused_slab",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "bloodarsenal:blood_infused_slab",
+                  "properties": { "type": "double" }
+                }
+              ],
+              "count": 2.0
+            },
+            { "function": "minecraft:explosion_decay" }
+          ]
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "bloodarsenal:blocks/blood_infused_slab"
+}

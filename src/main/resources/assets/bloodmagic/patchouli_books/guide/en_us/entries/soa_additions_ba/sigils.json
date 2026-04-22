@@ -1,0 +1,49 @@
+{
+  "name": "Sigils",
+  "icon": "bloodarsenal:sigil_divinity",
+  "category": "bloodmagic:soa_additions_ba",
+  "sortnum": 6,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Six New Sigils",
+      "text": "Each sigil is crafted from its matching $(item)Reagent$() in the $(l:bloodmagic:alchemy_table)Alchemy Table$(). All six operate as $(item)toggleable$() sigils — use the bound-hand key to switch their effect on or off."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:sigil_swimming",
+      "title": "Sigil of Swimming",
+      "text": "While active, the wielder breathes underwater and swims at surface speed. $(blood)100 LP/s$() while submerged."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:sigil_ender",
+      "title": "Sigil of the Ender",
+      "text": "Right-click to fling an $(item)ender pearl$()-equivalent projectile; teleports the wielder on contact. No cooldown — only LP."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:sigil_lightning",
+      "title": "Sigil of Lightning",
+      "text": "Right-click to call a bolt onto the targeted block. Useful for creeper-processing, Charged Creeper farms, and intimidating livestock."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:sigil_divinity",
+      "title": "Sigil of Divinity",
+      "text": "Grants Resistance, Regeneration, and Fire Resistance simultaneously while active. A heavy drain — for emergencies only."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:sigil_sentience",
+      "title": "Sigil of Sentience",
+      "text": "Right-click a mob to nudge its AI — pacifies hostile mobs briefly, or redirects a pacified mob's target. Useful for crowd control."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:sigil_augmented_holding",
+      "title": "Sigil of Augmented Holding",
+      "text": "Expands the $(l:bloodmagic:altar)Sigil of Holding$() to carry eight sigils and cycle through them in-hand with the scroll wheel."
+    }
+  ]
+}

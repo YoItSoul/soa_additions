@@ -1,0 +1,47 @@
+{
+  "stats": {
+    "tconstruct:head": {
+      "durability": 1500,
+      "melee_attack": 1.5,
+      "mining_speed": 1.5,
+      "mining_tier": "soa_additions:obsidian"
+    },
+    "tconstruct:handle": {
+      "durability": 0.5,
+      "melee_damage": 0.0,
+      "melee_speed": 0.0,
+      "mining_speed": 0.0
+    },
+    "tconstruct:grip": {
+      "accuracy": 0.0,
+      "durability": 0.5,
+      "melee_damage": 1.5
+    },
+    "tconstruct:binding": {},
+    "tconstruct:maille": {},
+    "tconstruct:plating_helmet": {
+      "armor": 3.0,
+      "durability": 500,
+      "toughness": 0.75
+    },
+    "tconstruct:plating_chestplate": {
+      "armor": 6.0,
+      "durability": 560,
+      "toughness": 0.75
+    },
+    "tconstruct:plating_leggings": {
+      "armor": 4.0,
+      "durability": 500,
+      "toughness": 0.75
+    },
+    "tconstruct:plating_boots": {
+      "armor": 3.0,
+      "durability": 500,
+      "toughness": 0.75
+    },
+    "tconstruct:plating_shield": {
+      "durability": 600,
+      "toughness": 0.75
+    }
+  }
+}

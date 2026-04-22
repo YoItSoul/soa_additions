@@ -1,0 +1,18 @@
+{
+  "name": "End Ores",
+  "icon": "taiga:palladium_ore",
+  "category": "soa_additions:ores",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Three in the End",
+      "text": "$(item)Palladium$() — pale violet, spawns on outer end islands.$(br)$(item)Aurorium$() — golden, the most aesthetically striking End ore.$(br)$(item)Abyssum$() — deep purple-black, rare."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Uru Meteors (SoA-specific)",
+      "text": "The End also hosts $(item)Uru$() meteors — floating obsidiorite cubes with uru_ore cores. Registered under the $(o)soa_additions$() namespace, not $(o)taiga$().$(br2)Use $(0)/locate poi soa_additions:uru_meteor$() in-game to find the nearest one."
+    }
+  ]
+}

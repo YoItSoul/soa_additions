@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aba",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "tag": "forge:stone"
+    },
+    "b": {
+      "item": "bloodarsenal:gem_self_sacrifice"
+    }
+  },
+  "result": {
+    "item": "bloodmagic:selfsacrificerune",
+    "count": 4
+  },
+  "show_notification": true
+}

@@ -33,6 +33,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.io.IOException;
@@ -75,7 +76,8 @@ public final class RegistryExportCommand {
                                     for (String s : new String[]{"all", "items", "blocks", "entities",
                                             "structures", "biomes", "dimensions", "effects",
                                             "enchantments", "fluids", "sounds", "particles",
-                                            "block_entities", "villager_professions", "tags"}) {
+                                            "block_entities", "villager_professions", "tags",
+                                            "tinker_materials"}) {
                                         b.suggest(s);
                                     }
                                     return b.buildFuture();
@@ -127,6 +129,11 @@ public final class RegistryExportCommand {
                 totals.put("villager_professions", write(outDir.resolve("villager_professions.json"), dumpIds(BuiltInRegistries.VILLAGER_PROFESSION)));
             if (all || "tags".equalsIgnoreCase(target))
                 totals.put("tags", write(outDir.resolve("tags.json"), dumpAllTags(server)));
+            if ((all || "tinker_materials".equalsIgnoreCase(target))
+                    && ModList.get().isLoaded("tconstruct")) {
+                totals.put("tinker_materials", write(outDir.resolve("tinker_materials.json"),
+                        com.soul.soa_additions.tconstructevo.export.TinkerMaterialsExport.dump()));
+            }
         } catch (IOException e) {
             src.sendFailure(Component.literal("Export failed: " + e.getMessage()));
             return 0;

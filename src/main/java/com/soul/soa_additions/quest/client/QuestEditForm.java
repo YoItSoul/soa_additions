@@ -187,7 +187,7 @@ public final class QuestEditForm {
             case REWARDS -> {
                 for (RewardRow rr : rewardRows) {
                     if (rr.type.editable()) {
-                        all.add(rr.value);
+                        if (rr.type.usesValue()) all.add(rr.value);
                         if (rr.type.usesCount()) all.add(rr.count);
                     }
                 }

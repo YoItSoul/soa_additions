@@ -1,0 +1,7 @@
+{
+  "parent": "block/template_glass_pane_side_alt",
+  "textures": {
+    "edge": "bloodarsenal:block/blood_stained_glass_pane_top",
+    "pane": "bloodarsenal:block/blood_stained_glass"
+  }
+}

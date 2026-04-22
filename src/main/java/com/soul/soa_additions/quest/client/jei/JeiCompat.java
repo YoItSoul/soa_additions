@@ -22,12 +22,25 @@ public final class JeiCompat {
 
     public static boolean available() { return runtime != null; }
 
-    /** Open the JEI recipes view for the given item stack. */
+    /** Open the JEI recipes view for the given item stack (OUTPUT focus:
+     *  shows how to craft this stack). */
     public static void showItem(ItemStack stack) {
         if (runtime == null || stack == null || stack.isEmpty()) return;
         IFocusFactory ff = runtime.getJeiHelpers().getFocusFactory();
         runtime.getRecipesGui().show(ff.createFocus(
                 RecipeIngredientRole.OUTPUT,
+                mezz.jei.api.constants.VanillaTypes.ITEM_STACK,
+                stack));
+    }
+
+    /** Open the JEI recipes view for the given item stack (INPUT focus:
+     *  shows recipes that consume this stack — useful for "what can I
+     *  do with this"). */
+    public static void showItemUses(ItemStack stack) {
+        if (runtime == null || stack == null || stack.isEmpty()) return;
+        IFocusFactory ff = runtime.getJeiHelpers().getFocusFactory();
+        runtime.getRecipesGui().show(ff.createFocus(
+                RecipeIngredientRole.INPUT,
                 mezz.jei.api.constants.VanillaTypes.ITEM_STACK,
                 stack));
     }

@@ -1,6 +1,6 @@
 {
   "default": [
-    { "level": 1, "name": "soa_additions:tconevo/mana_infused" }
+    { "level": 1, "name": "tconevo:mana_infused" }
   ],
   "perStat": {}
 }

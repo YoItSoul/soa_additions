@@ -36,13 +36,13 @@ import java.util.List;
  */
 public class LightningSigilItem extends ItemSigilBase {
 
-    private static final String TAG_LEVEL = "ba_lightning_level";
+    private static final String TAG_LEVEL = "lightning_level";
 
     // LP cost multipliers per level (from original source)
     private static final int[] COST_MULTIPLIERS = {1, 4, 7, 13, 29, 85};
 
     public LightningSigilItem() {
-        super("ba_lightning", BAConfig.SIGIL_LIGHTNING_COST.get());
+        super("lightning", BAConfig.SIGIL_LIGHTNING_COST.get());
     }
 
     @Override

@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:ingots/aurorium"
+  },
+  "result": {
+    "fluid": "taiga:molten_aurorium",
+    "amount": 144
+  },
+  "temperature": 400,
+  "time": 100
+}

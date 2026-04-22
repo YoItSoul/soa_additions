@@ -4,6 +4,12 @@
     "soa_additions:infernium_ore_block",
     "soa_additions:obsidiorite",
     "soa_additions:uru_ore",
-    "soa_additions:uru_block"
+    "soa_additions:uru_block",
+    "soa_additions:meteor_rock",
+    "soa_additions:gleaning_meteor_rock",
+    "mekanism:osmium_ore",
+    "mekanism:deepslate_osmium_ore",
+    "bno:nether_osmium_ore",
+    "quark:monster_box"
   ]
 }

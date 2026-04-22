@@ -1,13 +1,13 @@
 {
   "default": [
-    { "level": 1, "name": "soa_additions:tconevo/sundering" }
+    { "level": 1, "name": "tconevo:sundering" }
   ],
   "perStat": {
     "tconstruct:head": [
-      { "level": 1, "name": "soa_additions:tconevo/mortal_wounds" }
+      { "level": 1, "name": "tconevo:mortal_wounds" }
     ],
     "tconstruct:limb": [
-      { "level": 1, "name": "soa_additions:tconevo/mortal_wounds" }
+      { "level": 1, "name": "tconevo:mortal_wounds" }
     ]
   }
 }

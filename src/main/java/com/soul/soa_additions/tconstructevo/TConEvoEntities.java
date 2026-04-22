@@ -17,15 +17,15 @@ import net.minecraftforge.registries.RegistryObject;
 public final class TConEvoEntities {
 
     public static final DeferredRegister<EntityType<?>> ENTITIES =
-            DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, SoaAdditions.MODID);
+            DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, "tconevo");
 
     public static final RegistryObject<EntityType<MagicMissileEntity>> MAGIC_MISSILE =
-            ENTITIES.register("tconevo/magic_missile", () -> EntityType.Builder
+            ENTITIES.register("magic_missile", () -> EntityType.Builder
                     .<MagicMissileEntity>of(MagicMissileEntity::new, MobCategory.MISC)
                     .sized(0.35F, 0.35F)
                     .clientTrackingRange(4)
                     .updateInterval(10)
-                    .build(new ResourceLocation(SoaAdditions.MODID, "tconevo/magic_missile").toString()));
+                    .build(new ResourceLocation("tconevo", "magic_missile").toString()));
 
     private TConEvoEntities() {}
 

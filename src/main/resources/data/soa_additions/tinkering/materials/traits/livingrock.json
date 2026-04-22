@@ -4,10 +4,10 @@
   ],
   "perStat": {
     "tconstruct:head": [
-      { "level": 1, "name": "soa_additions:tconevo/sundering" }
+      { "level": 1, "name": "tconevo:sundering" }
     ],
     "tconstruct:limb": [
-      { "level": 1, "name": "soa_additions:tconevo/sundering" }
+      { "level": 1, "name": "tconevo:sundering" }
     ]
   }
 }

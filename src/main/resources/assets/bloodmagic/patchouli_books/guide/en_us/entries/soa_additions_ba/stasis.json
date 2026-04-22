@@ -1,0 +1,43 @@
+{
+  "name": "Stasis Tools",
+  "icon": "bloodarsenal:stasis_sword",
+  "category": "bloodmagic:soa_additions_ba",
+  "sortnum": 9,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Bound, not held",
+      "text": "Stasis tools are the Arsenal's endgame set — diamond-tier, auto-repairing, and bound to their wielder. Each is forged on a $(item)Stasis Plate$() by $(l:bloodmagic:soa_additions_ba/altare)Sanguine Infusion$(), fusing a bound component with the matching diamond implement.$(br2)Once bound, a stasis tool draws LP from the $(l:bloodmagic:altar/soul_network)Soul Network$() when used — the wielder never pays durability."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:stasis_plate",
+      "title": "Stasis Plate",
+      "text": "A placed block. Drop an eligible tool onto it with the right components arrayed around it, and the plate performs the binding. Unlike the altare, the plate is recipe-specific — one plate, one tool family."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:stasis_sword",
+      "title": "Stasis Sword",
+      "text": "Bound from a $(item)Warp Blade$() or $(item)Stygian Dagger$() + diamond sword. Carries the parent weapon's quirks forward into an indestructible frame."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:stasis_pickaxe",
+      "title": "Stasis Pickaxe",
+      "text": "Bound from a $(item)Blood-Infused Iron Pickaxe$() and diamond pickaxe. A daily-driver mining tool with no durability ceiling."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:stasis_axe",
+      "title": "Stasis Axe",
+      "text": "Bound from a $(item)Blood-Infused Iron Axe$() and diamond axe."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bloodarsenal:stasis_shovel",
+      "title": "Stasis Shovel",
+      "text": "Bound from a $(item)Blood-Infused Iron Shovel$() and diamond shovel."
+    }
+  ]
+}

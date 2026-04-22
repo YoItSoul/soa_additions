@@ -27,13 +27,13 @@ import java.util.function.Consumer;
 public final class BAFluids {
 
     public static final DeferredRegister<Fluid> FLUIDS =
-            DeferredRegister.create(ForgeRegistries.FLUIDS, SoaAdditions.MODID);
+            DeferredRegister.create(ForgeRegistries.FLUIDS, "bloodarsenal");
     public static final DeferredRegister<FluidType> FLUID_TYPES =
-            DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, SoaAdditions.MODID);
+            DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, "bloodarsenal");
 
     // Fluid Type
     public static final RegistryObject<FluidType> REFINED_LIFE_ESSENCE_TYPE = FLUID_TYPES.register(
-            "ba_refined_life_essence",
+            "refined_life_essence",
             () -> new FluidType(FluidType.Properties.create()
                     .density(1200)
                     .viscosity(1200)
@@ -42,9 +42,9 @@ public final class BAFluids {
                 public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
                     consumer.accept(new IClientFluidTypeExtensions() {
                         private static final ResourceLocation STILL =
-                                new ResourceLocation(SoaAdditions.MODID, "block/ba_refined_life_essence_still");
+                                new ResourceLocation("bloodarsenal", "block/refined_life_essence_still");
                         private static final ResourceLocation FLOWING =
-                                new ResourceLocation(SoaAdditions.MODID, "block/ba_refined_life_essence_flowing");
+                                new ResourceLocation("bloodarsenal", "block/refined_life_essence_flowing");
 
                         @Override
                         public ResourceLocation getStillTexture() { return STILL; }
@@ -60,11 +60,11 @@ public final class BAFluids {
 
     // Source & Flowing fluids
     public static final RegistryObject<FlowingFluid> REFINED_LIFE_ESSENCE_SOURCE = FLUIDS.register(
-            "ba_refined_life_essence",
+            "refined_life_essence",
             () -> new ForgeFlowingFluid.Source(BAFluids.refinedLifeEssenceProperties()));
 
     public static final RegistryObject<FlowingFluid> REFINED_LIFE_ESSENCE_FLOWING = FLUIDS.register(
-            "ba_refined_life_essence_flowing",
+            "refined_life_essence_flowing",
             () -> new ForgeFlowingFluid.Flowing(BAFluids.refinedLifeEssenceProperties()));
 
     // Fluid Block (registered in BABlocks)

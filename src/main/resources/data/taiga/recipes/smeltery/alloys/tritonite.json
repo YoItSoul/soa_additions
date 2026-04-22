@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:alloy",
+  "inputs": [
+    {
+      "fluid": "tconstruct:molten_cobalt",
+      "amount": 432
+    },
+    {
+      "fluid": "taiga:molten_terrax",
+      "amount": 288
+    }
+  ],
+  "result": {
+    "fluid": "taiga:molten_tritonite",
+    "amount": 288
+  },
+  "temperature": 850
+}

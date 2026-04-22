@@ -1,0 +1,26 @@
+{
+  "name": "Scythe, Hammer, Bow",
+  "icon": "soa_additions:scythe",
+  "category": "soa_additions:gear",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:scythe",
+      "title": "Meteor Scythe",
+      "text": "An AOE harvester. Sweeps a $(6)4×4×4$() cube of $(item)Leaves$() and $(item)IPlantable$()-type blocks (crops, saplings, flowers) around the targeted block.$(br2)Faster than manual clearing; durable enough to landscape a forest in one go."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:meteor_hammer",
+      "title": "Meteor Hammer",
+      "text": "Breaks a $(6)3×3$() plane of blocks in one swing, oriented to the face you're looking at. Mining speed scales with tier — pairs with $(item)Efficiency$() enchantments for quarry work.$(br2)Costs durability per block broken (not per swing), so large hits drain fast."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:meteor_bow",
+      "title": "Meteor Bow",
+      "text": "Higher base damage than vanilla bow; draws a touch faster. Takes standard bow enchantments (Power, Punch, Flame, Infinity)."
+    }
+  ]
+}

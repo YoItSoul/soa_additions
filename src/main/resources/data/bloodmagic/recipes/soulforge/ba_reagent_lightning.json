@@ -3,7 +3,7 @@
   "minimumDrain": 500.0,
   "drain": 200.0,
   "output": {
-    "item": "soa_additions:ba_reagent_lightning"
+    "item": "bloodarsenal:reagent_lightning"
   },
   "input0": {
     "item": "bloodmagic:reagentair"

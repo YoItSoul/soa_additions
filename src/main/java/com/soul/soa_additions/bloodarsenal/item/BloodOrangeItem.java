@@ -35,7 +35,7 @@ public class BloodOrangeItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level,
                                 List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(Component.translatable("tooltip.soa_additions.ba_blood_orange.desc")
+        tooltip.add(Component.translatable("tooltip.bloodarsenal.blood_orange.desc")
                 .withStyle(ChatFormatting.GRAY));
     }
 }

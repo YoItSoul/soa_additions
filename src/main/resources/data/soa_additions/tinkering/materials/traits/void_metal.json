@@ -1,8 +1,8 @@
 {
   "default": [
-    { "level": 1, "name": "soa_additions:tconevo/ruination" },
-    { "level": 1, "name": "soa_additions:tconevo/sundering" },
-    { "level": 1, "name": "soa_additions:tconevo/warping" }
+    { "level": 1, "name": "tconevo:ruination" },
+    { "level": 1, "name": "tconevo:sundering" },
+    { "level": 1, "name": "tconevo:warping" }
   ],
   "perStat": {}
 }

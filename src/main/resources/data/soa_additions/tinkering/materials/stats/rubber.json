@@ -23,6 +23,26 @@
       "draw_speed": 1.0,
       "durability": 180,
       "velocity": 0.5
+    },
+    "tconstruct:maille": {},
+    "tconstruct:plating_helmet": {
+      "armor": 1.7,
+      "durability": 117
+    },
+    "tconstruct:plating_chestplate": {
+      "armor": 4.0,
+      "durability": 144
+    },
+    "tconstruct:plating_leggings": {
+      "armor": 3.0,
+      "durability": 135
+    },
+    "tconstruct:plating_boots": {
+      "armor": 1.7,
+      "durability": 117
+    },
+    "tconstruct:plating_shield": {
+      "durability": 162
     }
   }
 }

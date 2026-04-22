@@ -1,0 +1,20 @@
+{
+  "name": "Meteor Rock",
+  "icon": "soa_additions:meteor_rock",
+  "category": "soa_additions:materials",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:meteor_rock",
+      "title": "Meteor Rock",
+      "text": "The black, cratered stone left behind when a meteor lands. Mine with an iron pick or better — drops Meteor Dust."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:gleaning_meteor_rock",
+      "title": "Gleaning Meteor Rock",
+      "text": "The richer variant. Higher Meteor Dust yield per block. Rarer within a given crater."
+    }
+  ]
+}

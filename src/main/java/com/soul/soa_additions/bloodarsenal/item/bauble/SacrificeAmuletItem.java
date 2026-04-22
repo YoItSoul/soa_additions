@@ -31,7 +31,7 @@ import java.util.List;
  */
 public class SacrificeAmuletItem extends Item implements ICurio {
 
-    private static final String TAG_LP = "ba_stored_lp";
+    private static final String TAG_LP = "stored_lp";
     private static final int MAX_LP = 10000;
 
     public SacrificeAmuletItem() {

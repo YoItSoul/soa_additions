@@ -357,17 +357,17 @@ public class RitualBloodBurner extends Ritual {
     @Override
     public void readFromNBT(CompoundTag tag) {
         super.readFromNBT(tag);
-        active = tag.getBoolean("ba_active");
-        secondsLeft = tag.getInt("ba_secondsLeft");
-        rateRF = tag.getInt("ba_rfPerTick");
+        active = tag.getBoolean("active");
+        secondsLeft = tag.getInt("secondsLeft");
+        rateRF = tag.getInt("rfPerTick");
     }
 
     @Override
     public void writeToNBT(CompoundTag tag) {
         super.writeToNBT(tag);
-        tag.putBoolean("ba_active", active);
-        tag.putInt("ba_secondsLeft", secondsLeft);
-        tag.putInt("ba_rfPerTick", rateRF);
+        tag.putBoolean("active", active);
+        tag.putInt("secondsLeft", secondsLeft);
+        tag.putInt("rfPerTick", rateRF);
     }
 
     @Override

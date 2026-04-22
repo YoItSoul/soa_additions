@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:ore_melting",
+  "ingredient": {
+    "tag": "forge:ores/palladium"
+  },
+  "result": {
+    "fluid": "taiga:molten_palladium",
+    "amount": 288
+  },
+  "temperature": 400,
+  "time": 200
+}

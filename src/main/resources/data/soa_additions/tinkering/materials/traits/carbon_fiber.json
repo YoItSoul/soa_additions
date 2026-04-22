@@ -1,7 +1,7 @@
 {
   "default": [
     { "level": 1, "name": "tconstruct:lightweight" },
-    { "level": 1, "name": "soa_additions:tconevo/relentless" }
+    { "level": 1, "name": "tconevo:relentless" }
   ],
   "perStat": {}
 }

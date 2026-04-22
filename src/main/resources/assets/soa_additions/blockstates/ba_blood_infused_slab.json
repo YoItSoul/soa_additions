@@ -1,7 +1,0 @@
-{
-  "variants": {
-    "type=bottom": { "model": "soa_additions:block/ba_blood_infused_slab" },
-    "type=double": { "model": "soa_additions:block/ba_blood_infused_planks" },
-    "type=top":    { "model": "soa_additions:block/ba_blood_infused_slab_top" }
-  }
-}

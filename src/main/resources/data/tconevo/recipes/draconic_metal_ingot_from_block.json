@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/draconic_metal"
+    }
+  ],
+  "result": {
+    "item": "soa_additions:draconic_metal_ingot",
+    "count": 9
+  },
+  "category": "misc"
+}

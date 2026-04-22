@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/violium"
+  },
+  "material": "taiga:violium",
+  "needed": 9,
+  "value": 1
+}

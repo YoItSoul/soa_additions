@@ -1,0 +1,19 @@
+{
+  "name": "Overview",
+  "icon": "bloodarsenal:modifier_tome",
+  "category": "bloodmagic:soa_additions_ba",
+  "priority": true,
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Blood Arsenal",
+      "text": "Blood Magic answers the question of $(italic)power$(). Blood Arsenal answers the question of $(italic)what to do with it$().$(br2)Its three pillars are $(l:bloodmagic:soa_additions_ba/altare)Sanguine Infusion$(), $(l:bloodmagic:soa_additions_ba/modifiers)Stasis Modifiers$(), and $(l:bloodmagic:soa_additions_ba/rituals)new Rituals$(). Every content entry in this category builds on one of those three."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Prerequisites",
+      "text": "Most content requires an established $(l:bloodmagic:altar)Blood Altar$() and an active $(l:bloodmagic:altar/soul_network)Soul Network$(). A handful of items — notably $(l:bloodmagic:soa_additions_ba/glass)Glass Shards$() and $(item)Blood-Infused Iron$() — bootstrap the progression.$(br2)This book documents the addon's content but does not replicate core Blood Magic mechanics; follow the main chapters of the $(item)Sanguine Scientium$() first."
+    }
+  ]
+}

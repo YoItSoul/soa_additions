@@ -22,10 +22,10 @@ public final class TConEvoCreativeTab {
 
     public static final ResourceKey<CreativeModeTab> TAB_KEY =
             ResourceKey.create(net.minecraft.core.registries.Registries.CREATIVE_MODE_TAB,
-                    new ResourceLocation(SoaAdditions.MODID, "tconstructevo"));
+                    new ResourceLocation("tconevo", "tconstructevo"));
 
     public static final DeferredRegister<CreativeModeTab> TABS =
-            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, SoaAdditions.MODID);
+            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, "tconevo");
 
     public static final RegistryObject<CreativeModeTab> TCONEVO_TAB = TABS.register("tconstructevo",
             () -> CreativeModeTab.builder()

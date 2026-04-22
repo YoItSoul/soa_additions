@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "cdo",
+    "efe"
+  ],
+  "key": {
+    "a": {
+      "item": "bloodmagic:weakbloodshard"
+    },
+    "b": {
+      "tag": "forge:gems/emerald"
+    },
+    "c": {
+      "item": "bloodmagic:inputroutingnode"
+    },
+    "o": {
+      "item": "bloodmagic:outputroutingnode"
+    },
+    "d": {
+      "item": "bloodmagic:componentframeparts"
+    },
+    "e": {
+      "item": "bloodarsenal:blood_infused_iron_block"
+    },
+    "f": {
+      "type": "bloodmagic:bloodorb",
+      "orb_tier": 4
+    }
+  },
+  "result": {
+    "item": "bloodarsenal:altare_aenigmatica"
+  },
+  "show_notification": true
+}

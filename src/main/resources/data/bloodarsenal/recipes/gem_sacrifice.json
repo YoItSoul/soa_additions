@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "cdc",
+    "aea"
+  ],
+  "key": {
+    "a": {
+      "tag": "forge:ingots/gold"
+    },
+    "b": {
+      "item": "bloodmagic:daggerofsacrifice"
+    },
+    "c": {
+      "item": "bloodmagic:reinforcedslate"
+    },
+    "d": {
+      "tag": "forge:gems/diamond"
+    },
+    "e": {
+      "type": "bloodmagic:bloodorb",
+      "orb_tier": 2
+    }
+  },
+  "result": {
+    "item": "bloodarsenal:gem_sacrifice"
+  },
+  "show_notification": true
+}

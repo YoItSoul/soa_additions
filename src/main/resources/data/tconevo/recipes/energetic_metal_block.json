@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iii",
+    "iii",
+    "iii"
+  ],
+  "key": {
+    "i": {
+      "tag": "forge:ingotEnergium"
+    }
+  },
+  "result": {
+    "item": "soa_additions:energetic_metal_block",
+    "count": 1
+  },
+  "category": "misc"
+}

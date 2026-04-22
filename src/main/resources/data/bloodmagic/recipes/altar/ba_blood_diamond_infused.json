@@ -1,10 +1,10 @@
 {
   "type": "bloodmagic:altar",
   "input": {
-    "item": "soa_additions:ba_blood_diamond_inert"
+    "item": "bloodarsenal:blood_diamond_inert"
   },
   "output": {
-    "item": "soa_additions:ba_blood_diamond_infused"
+    "item": "bloodarsenal:blood_diamond_infused"
   },
   "upgradeLevel": 4,
   "altarSyphon": 100000,

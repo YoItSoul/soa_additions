@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:storage_blocks/basalt"
+  },
+  "result": {
+    "fluid": "taiga:molten_basalt",
+    "amount": 1296
+  },
+  "temperature": 400,
+  "time": 300
+}

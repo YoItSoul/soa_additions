@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aaa",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "bloodarsenal:blood_infused_iron_ingot"
+    }
+  },
+  "result": {
+    "item": "bloodarsenal:blood_infused_iron_block"
+  },
+  "show_notification": true
+}

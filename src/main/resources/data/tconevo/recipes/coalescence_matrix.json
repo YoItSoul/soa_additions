@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "tag": "forge:ingots/manyullyn" },
+    { "tag": "forge:dusts/redstone" },
+    { "tag": "forge:dusts/redstone" },
+    { "tag": "forge:dusts/glowstone" },
+    { "tag": "forge:dusts/glowstone" },
+    { "item": "minecraft:clay_ball" },
+    { "tag": "forge:slimeballs" }
+  ],
+  "result": {
+    "item": "tconevo:coalescence_matrix",
+    "count": 1
+  }
+}

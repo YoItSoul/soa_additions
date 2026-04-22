@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:ingots/osram"
+  },
+  "material": "taiga:osram",
+  "needed": 1,
+  "value": 1
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "forge:glass"
+    },
+    {
+      "type": "bloodmagic:bloodorb",
+      "orb_tier": 1
+    }
+  ],
+  "result": {
+    "item": "bloodarsenal:blood_stained_glass"
+  }
+}

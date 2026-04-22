@@ -7,6 +7,6 @@
     "item": "minecraft:flint_and_steel"
   },
   "output": {
-    "item": "soa_additions:ba_bound_igniter"
+    "item": "bloodarsenal:bound_igniter"
   }
 }

@@ -57,15 +57,15 @@ public class RitualSanguineInfusion extends Ritual {
     @Override
     public void readFromNBT(CompoundTag tag) {
         super.readFromNBT(tag);
-        craftingTimer = tag.getInt("ba_craftingTimer");
-        isCrafting = tag.getBoolean("ba_isCrafting");
+        craftingTimer = tag.getInt("craftingTimer");
+        isCrafting = tag.getBoolean("isCrafting");
     }
 
     @Override
     public void writeToNBT(CompoundTag tag) {
         super.writeToNBT(tag);
-        tag.putInt("ba_craftingTimer", craftingTimer);
-        tag.putBoolean("ba_isCrafting", isCrafting);
+        tag.putInt("craftingTimer", craftingTimer);
+        tag.putBoolean("isCrafting", isCrafting);
     }
 
     @Override

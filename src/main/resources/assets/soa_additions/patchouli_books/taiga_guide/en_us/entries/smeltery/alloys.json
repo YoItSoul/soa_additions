@@ -1,0 +1,23 @@
+{
+  "name": "Alloys",
+  "icon": "taiga:adamant_ingot",
+  "category": "soa_additions:smeltery",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "28 Alloys",
+      "text": "TAIGA ships 28 alloy recipes that combine molten fluids in the smeltery. Each produces a higher-tier material from the one below:$(br2)$(item)Terrax$(), $(item)Triberium$() (two variants), $(item)Fractum$(), $(item)Violium$(), $(item)Proxii$(), $(item)Tritonite$(), $(item)Ignitz$(), $(item)Imperomite$(), $(item)Solarium$(), $(item)Adamant$(), $(item)Nihilite$()…"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Higher tiers",
+      "text": "$(item)Seismum$(), $(item)Astrium$(), $(item)Niob$(), $(item)Yrdeen$() (three variants), $(item)Iox$() (two variants), $(item)Lumix$(), $(item)Obsidiorite$(), $(item)Nucleum$() (three variants), $(item)Dyonite$() (two variants), $(item)Nitronite$().$(br2)Consult JEI for exact input ratios — they vary by alloy."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Porting note",
+      "text": "The original 1.12 TAIGA used $(item)Ardite$() in several recipes. The TC3 port substitutes $(item)Amethyst Bronze$() wherever Ardite was called for — TC3 retired Ardite in 1.16+. Cobalt and obsidian references use standard $(o)tconstruct:molten_cobalt$() / $(o)tconstruct:molten_obsidian$() fluids."
+    }
+  ]
+}

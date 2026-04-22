@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "soa_additions:item/ba_bound_igniter"
-  }
-}

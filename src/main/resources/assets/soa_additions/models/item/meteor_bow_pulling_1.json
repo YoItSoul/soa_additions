@@ -1,0 +1,6 @@
+{
+  "parent": "soa_additions:item/meteor_bow",
+  "textures": {
+    "layer0": "soa_additions:item/meteor_bow_pulling_1"
+  }
+}
