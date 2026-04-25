@@ -1,17 +1,8 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "pattern": [
-    "aa",
-    "aa"
+  "ingredients": [
+    { "item": "bloodarsenal:slate_ethereal" }
   ],
-  "key": {
-    "a": {
-      "item": "bloodmagic:etherealslate"
-    }
-  },
-  "result": {
-    "item": "bloodarsenal:slate"
-  },
-  "show_notification": true
+  "result": { "item": "bloodmagic:etherealslate", "count": 9 }
 }

@@ -87,6 +87,9 @@ public final class SoaAdditions {
             com.soul.soa_additions.tconstructevo.TConstructEvoPlugin.init(modEventBus);
             com.soul.soa_additions.taiga.TaigaPlugin.init(modEventBus);
         }
+
+        // Thaumic Remnants — original content, no soft dependency gate.
+        com.soul.soa_additions.tr.ThaumicRemnants.init(modEventBus);
         // JvmStatsSampler.start() reads config values, so it has to wait
         // until FMLCommonSetupEvent — configs aren't loaded during mod
         // construction and calling .get() here throws in dev (and will

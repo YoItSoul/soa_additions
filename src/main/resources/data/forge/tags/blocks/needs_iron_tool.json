@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "soa_additions:experience_ore",
+    "soa_additions:experience_block",
+    "soa_additions:compressed_experience_block",
+    "soa_additions:unknown_block"
+  ]
+}

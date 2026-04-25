@@ -7,12 +7,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "bloodmagic:etherealslate"
-    }
+    "a": { "item": "bloodmagic:etherealslate" }
   },
-  "result": {
-    "item": "bloodarsenal:slate"
-  },
-  "show_notification": true
+  "result": { "item": "bloodarsenal:slate_ethereal" }
 }

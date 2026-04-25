@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "soa_additions:block/terra_alloy_block"
+    }
+  }
+}

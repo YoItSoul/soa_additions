@@ -42,6 +42,12 @@ public final class TConstructEvoPlugin {
         TConEvoCreativeTab.register(modEventBus);
         TConEvoAttributes.register(modEventBus);
 
+        // GreedyCraft tool + armor traits — marker registrations.
+        // Must classload BEFORE TConEvoModifiers.register so the static initializers
+        // in the holder classes queue their entries into the deferred register.
+        com.soul.soa_additions.tconstructevo.integration.greedy.GreedyToolTraits.bootstrap();
+        com.soul.soa_additions.tconstructevo.integration.greedy.GreedyArmorTraits.bootstrap();
+
         // Modifiers are registered through TConstruct's DeferredRegister on the mod bus.
         TConEvoModifiers.register(modEventBus);
 

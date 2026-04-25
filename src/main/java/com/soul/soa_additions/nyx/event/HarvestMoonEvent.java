@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.GrassBlock;
 import net.minecraft.world.level.block.TallGrassBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.ChunkStatus;
 import net.minecraft.world.level.chunk.LevelChunk;
 
 public class HarvestMoonEvent extends LunarEvent {
@@ -51,14 +52,17 @@ public class HarvestMoonEvent extends LunarEvent {
         int interval = NyxConfig.HARVEST_MOON_GROW_INTERVAL.get();
         if (grow <= 0 || level.getGameTime() % interval != 0L) return;
 
-        // Iterate loaded chunks around each player. 1.20.1 has no simple "all loaded chunks"
-        // iterator on ServerLevel, but `chunkSource.chunkMap.getChunks()` is internal; use
-        // the per-player near-range from ForgeChunkManager instead by sampling player chunks.
+        // Iterate loaded chunks around each player. Use the non-loading
+        // accessor: `getChunk(x, z, FULL, false)` returns null for unloaded
+        // chunks instead of synchronously loading (and, with C2ME, parking
+        // the server thread on the async loader). Using load=true here was
+        // a latent stall — every harvest-moon tick could request 17×17×N
+        // chunks per player, blocking the server while they generated.
         for (var p : level.players()) {
             int cx = p.chunkPosition().x, cz = p.chunkPosition().z;
             for (int dx = -8; dx <= 8; dx++) {
                 for (int dz = -8; dz <= 8; dz++) {
-                    ChunkAccess chunk = level.getChunk(cx + dx, cz + dz);
+                    ChunkAccess chunk = level.getChunkSource().getChunk(cx + dx, cz + dz, ChunkStatus.FULL, false);
                     if (!(chunk instanceof LevelChunk)) continue;
                     for (int i = 0; i < grow; i++) {
                         int rx = level.random.nextInt(16);

@@ -7,22 +7,13 @@
     "cdc"
   ],
   "key": {
-    "a": {
-      "item": "bloodarsenal:stasis_plate"
-    },
-    "b": {
-      "item": "bloodmagic:altar"
-    },
-    "c": {
-      "item": "bloodarsenal:blood_infused_iron_ingot"
-    },
+    "a": { "item": "bloodarsenal:stasis_plate_item" },
+    "b": { "item": "bloodmagic:altar" },
+    "c": { "item": "bloodarsenal:blood_infused_iron_ingot" },
     "d": {
       "type": "bloodmagic:bloodorb",
       "orb_tier": 3
     }
   },
-  "result": {
-    "item": "bloodarsenal:stasis_plate"
-  },
-  "show_notification": true
+  "result": { "item": "bloodarsenal:stasis_plate" }
 }

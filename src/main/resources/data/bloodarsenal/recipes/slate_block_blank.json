@@ -7,12 +7,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "bloodmagic:blankslate"
-    }
+    "a": { "item": "bloodmagic:blankslate" }
   },
-  "result": {
-    "item": "bloodarsenal:slate"
-  },
-  "show_notification": true
+  "result": { "item": "bloodarsenal:slate_blank" }
 }

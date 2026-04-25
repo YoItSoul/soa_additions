@@ -119,6 +119,28 @@ public final class ModItems {
     public static final RegistryObject<Item> UNIVERSAL_METAL_NUGGET = registerRareIngot("universal_metal_nugget");
     public static final RegistryObject<Item> WYVERN_NUGGET = registerRareIngot("wyvern_nugget");
 
+    // ========== TConEvo metal dusts (9 metals) ==========
+    public static final RegistryObject<Item> BOUND_METAL_DUST     = registerRareIngot("bound_metal_dust");
+    public static final RegistryObject<Item> CHAOTIC_DUST         = registerRareIngot("chaotic_dust");
+    public static final RegistryObject<Item> DRACONIC_METAL_DUST  = registerRareIngot("draconic_metal_dust");
+    public static final RegistryObject<Item> ENERGETIC_METAL_DUST = registerRareIngot("energetic_metal_dust");
+    public static final RegistryObject<Item> ESSENCE_METAL_DUST   = registerRareIngot("essence_metal_dust");
+    public static final RegistryObject<Item> PRIMAL_METAL_DUST    = registerRareIngot("primal_metal_dust");
+    public static final RegistryObject<Item> SENTIENT_METAL_DUST  = registerRareIngot("sentient_metal_dust");
+    public static final RegistryObject<Item> UNIVERSAL_METAL_DUST = registerRareIngot("universal_metal_dust");
+    public static final RegistryObject<Item> WYVERN_DUST          = registerRareIngot("wyvern_dust");
+
+    // ========== TConEvo metal plates (9 metals) ==========
+    public static final RegistryObject<Item> BOUND_METAL_PLATE     = registerRareIngot("bound_metal_plate");
+    public static final RegistryObject<Item> CHAOTIC_PLATE         = registerRareIngot("chaotic_plate");
+    public static final RegistryObject<Item> DRACONIC_METAL_PLATE  = registerRareIngot("draconic_metal_plate");
+    public static final RegistryObject<Item> ENERGETIC_METAL_PLATE = registerRareIngot("energetic_metal_plate");
+    public static final RegistryObject<Item> ESSENCE_METAL_PLATE   = registerRareIngot("essence_metal_plate");
+    public static final RegistryObject<Item> PRIMAL_METAL_PLATE    = registerRareIngot("primal_metal_plate");
+    public static final RegistryObject<Item> SENTIENT_METAL_PLATE  = registerRareIngot("sentient_metal_plate");
+    public static final RegistryObject<Item> UNIVERSAL_METAL_PLATE = registerRareIngot("universal_metal_plate");
+    public static final RegistryObject<Item> WYVERN_PLATE          = registerRareIngot("wyvern_plate");
+
     // ========== TConEvo metal gears (9 metals) ==========
     public static final RegistryObject<Item> BOUND_METAL_GEAR = registerRareIngot("bound_metal_gear");
     public static final RegistryObject<Item> CHAOTIC_GEAR = registerRareIngot("chaotic_gear");
@@ -172,6 +194,15 @@ public final class ModItems {
 
     public static final RegistryObject<Item> CHEATER_COIN = ITEMS.register("cheater_coin",
             () -> new Item(new Item.Properties().rarity(Rarity.EPIC).stacksTo(1)));
+
+    /** Rainbow Rune — replaces 1.12 quark:rune:16 (Rainbow Rune). Carries the
+     *  Botania Mana Rune texture with a permanent enchanted glint via isFoil.
+     *  Crafted via the Mana Pool at the same mana cost as a Terrasteel Ingot
+     *  (500,000 mana). */
+    public static final RegistryObject<Item> RAINBOW_RUNE = ITEMS.register("rainbow_rune",
+            () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)) {
+                @Override public boolean isFoil(net.minecraft.world.item.ItemStack stack) { return true; }
+            });
 
     public static final RegistryObject<Item> QUEST_BOOK = ITEMS.register("quest_book", QuestBookItem::new);
 

@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_badlands",
+  "features": "soa_additions:taiga_vibranium_ore_placed",
+  "step": "underground_ores"
+}

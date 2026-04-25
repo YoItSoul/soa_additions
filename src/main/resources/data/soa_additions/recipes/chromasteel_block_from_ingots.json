@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "iii",
+    "iii",
+    "iii"
+  ],
+  "key": {
+    "i": {
+      "item": "soa_additions:chromasteel_ingot"
+    }
+  },
+  "result": {
+    "item": "soa_additions:chromasteel_block"
+  }
+}

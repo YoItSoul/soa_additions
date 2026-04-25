@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "soa_additions:cosmilite_block"
+    }
+  ],
+  "result": {
+    "item": "soa_additions:cosmilite_ingot",
+    "count": 9
+  }
+}

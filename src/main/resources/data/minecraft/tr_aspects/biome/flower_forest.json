@@ -1,0 +1,8 @@
+{
+  "aspects": {
+    "tr:herba": 30,
+    "tr:arbor": 20,
+    "tr:victus": 15,
+    "tr:aer": 10
+  }
+}
