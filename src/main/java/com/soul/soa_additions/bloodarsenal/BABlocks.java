@@ -99,12 +99,18 @@ public final class BABlocks {
 
     // ── Decorative ───────────────────────────────────────────────────────
 
-    public static final RegistryObject<Block> SLATE = registerBlock("slate",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)
-                    .mapColor(MapColor.STONE)
-                    .strength(1.5f, 6.0f)
-                    .sound(SoundType.STONE)
-                    .requiresCorrectToolForDrops()));
+    // Five slate storage blocks — match 1.12 bloodarsenal:slate metas 0..4.
+    private static final BlockBehaviour.Properties SLATE_PROPS = BlockBehaviour.Properties.copy(Blocks.STONE)
+            .mapColor(MapColor.STONE)
+            .strength(1.5f, 6.0f)
+            .sound(SoundType.STONE)
+            .requiresCorrectToolForDrops();
+
+    public static final RegistryObject<Block> SLATE_BLANK      = registerBlock("slate_blank",      () -> new Block(SLATE_PROPS));
+    public static final RegistryObject<Block> SLATE_REINFORCED = registerBlock("slate_reinforced", () -> new Block(SLATE_PROPS));
+    public static final RegistryObject<Block> SLATE_IMBUED     = registerBlock("slate_imbued",     () -> new Block(SLATE_PROPS));
+    public static final RegistryObject<Block> SLATE_DEMONIC    = registerBlock("slate_demonic",    () -> new Block(SLATE_PROPS));
+    public static final RegistryObject<Block> SLATE_ETHEREAL   = registerBlock("slate_ethereal",   () -> new Block(SLATE_PROPS));
 
     public static final RegistryObject<GlassShardsBlock> GLASS_SHARDS = registerBlock("glass_shards",
             () -> new GlassShardsBlock(BlockBehaviour.Properties.copy(Blocks.STONE)

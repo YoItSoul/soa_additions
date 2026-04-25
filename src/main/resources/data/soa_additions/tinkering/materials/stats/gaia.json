@@ -1,0 +1,28 @@
+{
+  "stats": {
+    "tconstruct:head": {
+      "durability": 1600,
+      "melee_attack": 10.8,
+      "mining_speed": 8.5,
+      "mining_tier": "soa_additions:duranite"
+    },
+    "tconstruct:handle": {
+      "durability": 359.0,
+      "melee_damage": 0.0,
+      "melee_speed": 0.19999999999999996,
+      "mining_speed": 0.19999999999999996
+    },
+    "tconstruct:binding": {},
+    "tconstruct:limb": {
+      "accuracy": 0.05,
+      "draw_speed": 0.3999999999999999,
+      "durability": 1600,
+      "velocity": 0.0
+    },
+    "tconstruct:grip": {
+      "accuracy": 0.05,
+      "durability": 0.05,
+      "melee_damage": 0.0
+    }
+  }
+}

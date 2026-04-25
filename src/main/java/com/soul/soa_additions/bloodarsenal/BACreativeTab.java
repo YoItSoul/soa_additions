@@ -121,11 +121,16 @@ public final class BACreativeTab {
                         output.accept(BABlocks.BLOOD_STAINED_GLASS_PANE.get());
 
                         // Blocks — Decorative
-                        output.accept(BABlocks.SLATE.get());
+                        output.accept(BABlocks.SLATE_BLANK.get());
+                        output.accept(BABlocks.SLATE_REINFORCED.get());
+                        output.accept(BABlocks.SLATE_IMBUED.get());
+                        output.accept(BABlocks.SLATE_DEMONIC.get());
+                        output.accept(BABlocks.SLATE_ETHEREAL.get());
                         output.accept(BABlocks.GLASS_SHARDS.get());
                         output.accept(BABlocks.BLOOD_BURNED_STRING_BLOCK.get());
 
                         // Blocks — Functional
+                        output.accept(BAItems.STASIS_PLATE_ITEM.get());
                         output.accept(BABlocks.STASIS_PLATE.get());
                         output.accept(BABlocks.ALTARE.get());
                         output.accept(BABlocks.BLOOD_CAPACITOR.get());

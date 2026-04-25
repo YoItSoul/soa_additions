@@ -2,6 +2,7 @@ package com.soul.soa_additions.nyx;
 
 import com.soul.soa_additions.SoaAdditions;
 import com.soul.soa_additions.item.ModItems;
+import com.soul.soa_additions.tr.TrBlocks;
 import com.soul.soa_additions.nyx.entity.CauldronTrackerEntity;
 import com.soul.soa_additions.nyx.entity.FallingMeteorEntity;
 import com.soul.soa_additions.nyx.entity.FallingStarEntity;
@@ -101,6 +102,12 @@ public final class NyxEvents {
                         BlockPos start = player.blockPosition().offset(
                                 (int) (sl.random.nextGaussian() * 20.0), 0,
                                 (int) (sl.random.nextGaussian() * 20.0));
+                        // Skip if the candidate chunk isn't loaded — getHeightmapPos
+                        // would otherwise force-load the chunk synchronously, which
+                        // C2ME re-routes through its async loader and parks the
+                        // server thread (same lockup pattern as betterchunkloading).
+                        // A falling star that has nowhere to fall isn't worth the stall.
+                        if (!sl.hasChunkAt(start)) continue;
                         BlockPos spawnPos = sl.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, start)
                                 .above(Mth.nextInt(sl.random, 32, 64));
                         FallingStarEntity star = NyxEntities.FALLING_STAR.get().create(sl);
@@ -127,7 +134,15 @@ public final class NyxEvents {
                 chance /= Math.pow(2.0, (double) ticks[0] / (double) disallowTime);
             }
             if (chance > 0.0 && sl.random.nextFloat() <= chance) {
+                // Ward check first — covers the target chunk and the 8 around
+                // it. Uses non-loading chunk lookups so the deadlock pattern
+                // we fixed earlier doesn't re-emerge.
+                if (TrBlocks.isAreaWarded(sl, cp)) {
+                    return;
+                }
                 if (!sl.hasChunkAt(spawnPos)) {
+                    // Chunk not loaded — defer; wardedness will be re-checked
+                    // at materialization time in onChunkLoad below.
                     data.cachedMeteorPositions.add(spawnPos);
                     data.setDirty();
                 } else {
@@ -154,14 +169,62 @@ public final class NyxEvents {
             }
         }
         if (!toSpawn.isEmpty()) {
+            // If a ward is anywhere in the 3×3 area covering this chunk, the
+            // cached meteors are absorbed — dropped from the cache, no
+            // entities spawned. (Keeping them in the cache would mean removing
+            // the ward later silently releases a backlog of meteors, which
+            // is surprising.) Neighbour chunks may not be loaded yet, in which
+            // case they don't contribute — same caveat as the live spawn path.
+            if (TrBlocks.isAreaWarded(sl, cp)) {
+                data.cachedMeteorPositions.removeAll(toSpawn);
+                data.setDirty();
+                return;
+            }
+            // Read the heightmap NOW from the chunk we were notified about —
+            // we're holding a ChunkAccess for it at the same callsite, so
+            // there's no chunk-load roundtrip and no risk of blocking. The
+            // deferred lambda then only does entity creation/add, which
+            // doesn't touch chunk loading at all.
+            //
+            // Earlier attempt called FallingMeteorEntity.spawn() from the
+            // deferred lambda, which internally hits getHeightmapPos →
+            // Level.getChunk(FULL, true) → getChunkBlocking. Even with
+            // hasChunkAt() guarding, hasChunkAt returns true for partially
+            // loaded chunks (any status), but getHeightmapPos requires
+            // FULL — so the call still parked the Server thread waiting
+            // for the chunk to upgrade. 40s watchdog stalls. This version
+            // resolves the heightmap at the only moment we know the chunk
+            // is at FULL: right here, in the chunk-load callback.
+            var chunkAccess = event.getChunk();
+            java.util.List<BlockPos> spawnPositions = new ArrayList<>(toSpawn.size());
+            for (BlockPos p : toSpawn) {
+                int height = chunkAccess.getHeight(Heightmap.Types.MOTION_BLOCKING,
+                        p.getX() & 15, p.getZ() & 15);
+                // Position-derived Y jitter (64..96) — deterministic, no
+                // level.random access (which would be wrong-thread risky if
+                // ChunkEvent.Load fires from a C2ME worker).
+                int jitter = 64 + (Math.floorMod(p.getX() * 31 + p.getZ() * 17, 33));
+                spawnPositions.add(new BlockPos(p.getX(), height + jitter, p.getZ()));
+            }
             data.cachedMeteorPositions.removeAll(toSpawn);
             data.setDirty();
-            // Defer spawn off the chunk-load callback — FallingMeteorEntity.spawn
-            // calls getHeightmapPos which can trigger ServerChunkCache.getChunkBlocking
-            // on an adjacent chunk. Doing that while we're inside a ChunkEvent.Load
-            // callback parks the server thread waiting for itself (reentrant load).
             sl.getServer().execute(() -> {
-                for (BlockPos p : toSpawn) FallingMeteorEntity.spawn(sl, p);
+                boolean reCachedAny = false;
+                for (int i = 0; i < spawnPositions.size(); i++) {
+                    BlockPos spawnPos = spawnPositions.get(i);
+                    BlockPos originalCachePos = toSpawn.get(i);
+                    if (sl.hasChunkAt(spawnPos)) {
+                        FallingMeteorEntity m = NyxEntities.FALLING_METEOR.get().create(sl);
+                        if (m != null) {
+                            m.moveTo(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), 0, 0);
+                            sl.addFreshEntity(m);
+                        }
+                    } else {
+                        data.cachedMeteorPositions.add(originalCachePos);
+                        reCachedAny = true;
+                    }
+                }
+                if (reCachedAny) data.setDirty();
             });
         }
     }
@@ -272,7 +335,9 @@ public final class NyxEvents {
         LivingEntity entity = event.getEntity();
         if (!(entity instanceof ElderGuardian)) return;
         if (entity.level().isClientSide) return;
-        if (entity.level().random.nextDouble() > NyxConfig.METEOR_SHARD_GUARDIAN_CHANCE.get()) return;
+        // Use the entity's random rather than level.random — same C2ME safety
+        // reason as onSpecialSpawn: drop events can fire on worker threads.
+        if (entity.getRandom().nextDouble() > NyxConfig.METEOR_SHARD_GUARDIAN_CHANCE.get()) return;
         int count = event.getLootingLevel() / 2 + 1;
         ItemStack stack = new ItemStack(ModItems.METEOR_SHARD.get(), count);
         event.getDrops().add(new ItemEntity(entity.level(), entity.getX(), entity.getY(), entity.getZ(), stack));
@@ -302,14 +367,21 @@ public final class NyxEvents {
         if (!(entity.level() instanceof ServerLevel sl)) return;
         NyxWorldData data = NyxWorldData.get(sl);
         if (data == null) return;
+        // FinalizeSpawn fires on whatever thread is constructing the entity —
+        // for structure-driven spawns during worldgen that's a C2ME worker
+        // thread, and `sl.random` is owned by the Server thread, so touching
+        // it crashes via C2ME's CheckedThreadLocalRandom safety check.
+        // Use the entity's own random, which is initialised at construction
+        // on the calling thread and is always safe here.
+        var rng = entity.getRandom();
         if (entity instanceof Slime slime) {
             int size = slime.getSize();
             if (data.currentEvent instanceof FullMoonEvent) {
-                int i = sl.random.nextInt(5);
+                int i = rng.nextInt(5);
                 if (i <= 1) size += 2;
                 if (i <= 2) size += 2;
             } else if (data.currentEvent instanceof HarvestMoonEvent) {
-                int i = sl.random.nextInt(15);
+                int i = rng.nextInt(15);
                 if (i < 8) size += i * 2;
             }
             if (size != slime.getSize()) {
@@ -319,7 +391,7 @@ public final class NyxEvents {
         if (data.currentEvent instanceof FullMoonEvent) {
             if (NyxConfig.ADD_POTION_EFFECTS.get() && !(entity instanceof Creeper)) {
                 MobEffect effect = null;
-                int i = sl.random.nextInt(20);
+                int i = rng.nextInt(20);
                 if (i <= 2) effect = MobEffects.MOVEMENT_SPEED;
                 else if (i <= 4) effect = MobEffects.DAMAGE_BOOST;
                 else if (i <= 6) effect = MobEffects.REGENERATION;

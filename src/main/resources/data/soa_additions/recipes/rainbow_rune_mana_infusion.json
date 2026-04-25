@@ -1,0 +1,6 @@
+{
+  "type": "botania:mana_infusion",
+  "input": { "item": "botania:rune_mana" },
+  "output": { "item": "soa_additions:rainbow_rune" },
+  "mana": 500000
+}

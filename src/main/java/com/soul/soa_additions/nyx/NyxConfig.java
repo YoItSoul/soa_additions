@@ -129,14 +129,32 @@ public final class NyxConfig {
 
         b.push("meteors");
         METEORS = b.define("meteors", true);
-        METEOR_CHANCE = b.defineInRange("meteorChance", 1.4E-4, 0.0, 1.0);
-        METEOR_CHANCE_NIGHT = b.defineInRange("meteorChanceNight", 0.0024, 0.0, 1.0);
+        // Per-second per-player roll values. At 20-tick (1s) tick rate, the
+        // expected wait time before a meteor spawns near one player is
+        // roughly 1/chance seconds. Defaults intentionally rare:
+        //   day:                ~3 hr expected (basically never)
+        //   night:              ~30 min  (1-2 per Minecraft week of nights)
+        //   after-gate day:     ~1.5 hr
+        //   after-gate night:   ~15 min  (Nether progression makes meteors more frequent)
+        //   star shower event:  ~3 min   (elevated — the event IS the meteor shower)
+        //   End dimension:      ~10 min
+        // Keep these LOW. Meteors are meant to be a "look up" moment, not
+        // an ambient feature; the impart pool gain from a meteor is small
+        // and the visual is impressive only because it's rare.
+        METEOR_CHANCE = b.defineInRange("meteorChance", 9.0E-5, 0.0, 1.0);
+        METEOR_CHANCE_NIGHT = b.defineInRange("meteorChanceNight", 5.5E-4, 0.0, 1.0);
         METEOR_GATE_DIMENSION = b.define("meteorGateDimension", "minecraft:the_nether");
-        METEOR_CHANCE_AFTER_GATE = b.defineInRange("meteorChanceAfterGate", 2.0E-4, 0.0, 1.0);
-        METEOR_CHANCE_AFTER_GATE_NIGHT = b.defineInRange("meteorChanceAfterGateNight", 0.003, 0.0, 1.0);
-        METEOR_CHANCE_STAR_SHOWER = b.defineInRange("meteorChanceStarShower", 0.0075, 0.0, 1.0);
-        METEOR_CHANCE_END = b.defineInRange("meteorChanceEnd", 0.003, 0.0, 1.0);
-        METEOR_SPAWN_RADIUS = b.defineInRange("meteorSpawnRadius", 1000, 1, 10000);
+        METEOR_CHANCE_AFTER_GATE = b.defineInRange("meteorChanceAfterGate", 1.8E-4, 0.0, 1.0);
+        METEOR_CHANCE_AFTER_GATE_NIGHT = b.defineInRange("meteorChanceAfterGateNight", 1.1E-3, 0.0, 1.0);
+        METEOR_CHANCE_STAR_SHOWER = b.defineInRange("meteorChanceStarShower", 5.0E-3, 0.0, 1.0);
+        METEOR_CHANCE_END = b.defineInRange("meteorChanceEnd", 1.6E-3, 0.0, 1.0);
+        // Reduced from 1000 → 256. At 1000 the spawn area was 2000×2000
+        // (4 million blocks); the player typically sees only ~250×250 of
+        // loaded chunks, so 90%+ of meteors went into cachedMeteorPositions
+        // and materialised when the player walked near, giving a constant
+        // trickle of "found a meteor crater" with no live falling animation.
+        // 256 keeps the meteor in viewing range of the spawning player.
+        METEOR_SPAWN_RADIUS = b.defineInRange("meteorSpawnRadius", 256, 1, 10000);
         METEOR_DISALLOW_RADIUS = b.defineInRange("meteorDisallowRadius", 16, 0, 256);
         METEOR_DISALLOW_TIME = b.defineInRange("meteorDisallowTime", 12000, 1, 240000);
         CRYSTAL_DURABILITY = b.defineInRange("crystalDurability", 1000, 1, 1000000);

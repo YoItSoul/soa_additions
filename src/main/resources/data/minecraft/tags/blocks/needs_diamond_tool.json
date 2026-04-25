@@ -1,6 +1,8 @@
 {
   "replace": false,
-  "values": [],
+  "values": [
+    "soa_additions:hardened_stone"
+  ],
   "remove": [
     "minecraft:obsidian",
     "minecraft:crying_obsidian",

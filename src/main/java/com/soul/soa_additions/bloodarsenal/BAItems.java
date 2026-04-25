@@ -46,6 +46,11 @@ public final class BAItems {
     public static final RegistryObject<Item> BLOOD_BURNED_STRING = ITEMS.register("blood_burned_string",
             () -> new Item(new Item.Properties()));
 
+    // Stasis Plate crafting component (1.12: bloodarsenal:base_item meta 5).
+    // Distinct from the STASIS_PLATE trap block registered in BABlocks.
+    public static final RegistryObject<Item> STASIS_PLATE_ITEM = ITEMS.register("stasis_plate_item",
+            () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
+
     // ── Food ─────────────────────────────────────────────────────────────
 
     public static final RegistryObject<Item> BLOOD_ORANGE = ITEMS.register("blood_orange",

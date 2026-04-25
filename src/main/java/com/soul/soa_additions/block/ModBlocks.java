@@ -102,6 +102,50 @@ public final class ModBlocks {
     public static final RegistryObject<Block> STAR_SLAB           = registerBlock("star_slab",           () -> new SlabBlock(STAR_BLOCK_PROPS));
     public static final RegistryObject<Block> STAR_STAIRS         = registerBlock("star_stairs",         () -> new StairBlock(() -> STAR_BLOCK.get().defaultBlockState(), STAR_BLOCK_PROPS));
 
+    // ============================================================
+    // Additions framework blocks — 1:1 port of GC Additions JSON pack.
+    // ============================================================
+
+    public static final RegistryObject<Block> AEROITE_ORE    = registerBlock("aeroite_ore",    () -> new Block(ORE_PROPERTIES));
+    public static final RegistryObject<Block> AQUALITE_ORE   = registerBlock("aqualite_ore",   () -> new Block(ORE_PROPERTIES));
+    public static final RegistryObject<Block> ASGARDIUM_ORE  = registerBlock("asgardium_ore",  () -> new Block(ORE_PROPERTIES));
+    public static final RegistryObject<Block> CHROMIUM_ORE   = registerBlock("chromium_ore",   () -> new Block(ORE_PROPERTIES));
+    public static final RegistryObject<Block> CRYONIUM_ORE   = registerBlock("cryonium_ore",   () -> new Block(ORE_PROPERTIES));
+    public static final RegistryObject<Block> CYTOSINITE_ORE = registerBlock("cytosinite_ore", () -> new Block(ORE_PROPERTIES));
+    public static final RegistryObject<Block> EXPERIENCE_ORE = registerBlock("experience_ore", () -> new Block(ORE_PROPERTIES));
+    // infernium_ore intentionally not registered — duplicates pre-existing INFERNIUM_ORE_BLOCK above.
+    public static final RegistryObject<Block> MANGANESE_ORE  = registerBlock("manganese_ore",  () -> new Block(ORE_PROPERTIES));
+    public static final RegistryObject<Block> SHADOWIUM_ORE  = registerBlock("shadowium_ore",  () -> new Block(ORE_PROPERTIES));
+    public static final RegistryObject<Block> SHADOWNIUM_ORE = registerBlock("shadownium_ore", () -> new Block(ORE_PROPERTIES));
+    public static final RegistryObject<Block> TITANIUM_ORE   = registerBlock("titanium_ore",   () -> new Block(ORE_PROPERTIES));
+
+    public static final RegistryObject<Block> AEONSTEEL_BLOCK             = registerBlock("aeonsteel_block",             () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> AQUALITE_BLOCK              = registerBlock("aqualite_block",              () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> ASTRAL_METAL_BLOCK          = registerBlock("astral_metal_block",          () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> CHROMASTEEL_BLOCK           = registerBlock("chromasteel_block",           () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> COSMILITE_BLOCK             = registerBlock("cosmilite_block",             () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> CRIMSONITE_BLOCK            = registerBlock("crimsonite_block",            () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> CRYONIUM_BLOCK              = registerBlock("cryonium_block",              () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> CYTOSINITE_BLOCK            = registerBlock("cytosinite_block",            () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> DURASTEEL_BLOCK             = registerBlock("durasteel_block",             () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> ELECTRONIUM_BLOCK           = registerBlock("electronium_block",           () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> EXPERIENCE_BLOCK_BLOCK      = registerBlock("experience_block",            () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> FUSION_MATRIX_BLOCK         = registerBlock("fusion_matrix_block",         () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> INFERNIUM_BLOCK             = registerBlock("infernium_block",             () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> MANGANESE_STEEL_BLOCK       = registerBlock("manganese_steel_block",       () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> MATTER_BLOCK                = registerBlock("matter_block",                () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> MODULARIUM_BLOCK            = registerBlock("modularium_block",            () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> PROTONIUM_BLOCK             = registerBlock("protonium_block",             () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> STAINLESS_STEEL_BLOCK       = registerBlock("stainless_steel_block",       () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> TERRA_ALLOY_BLOCK           = registerBlock("terra_alloy_block",           () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> TITANIUM_BLOCK              = registerBlock("titanium_block",              () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> COMPRESSED_EXPERIENCE_BLOCK = registerBlock("compressed_experience_block", () -> new Block(METAL_BLOCK_PROPS));
+
+    public static final RegistryObject<Block> HARDENED_STONE              = registerBlock("hardened_stone",              () -> new Block(ORE_PROPERTIES));
+    public static final RegistryObject<Block> INFINITY_BLOCK_BLOCK        = registerBlock("infinity_block_block",        () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> INFINITY_BLOCK_BLOCK_BLOCK  = registerBlock("infinity_block_block_block",  () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> UNKNOWN_BLOCK               = registerBlock("unknown_block",               () -> new Block(ORE_PROPERTIES));
+
     private ModBlocks() {}
 
     public static void register(IEventBus eventBus) {

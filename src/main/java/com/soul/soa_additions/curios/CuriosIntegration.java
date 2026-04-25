@@ -28,5 +28,9 @@ public final class CuriosIntegration {
 
     public static void init(IEventBus modEventBus) {
         MinecraftForge.EVENT_BUS.register(GreedyBagEvents.class);
+        // Bind the Arcane Monocle into curios slots when curios is present.
+        // The class hard-references the curios API so it can only be touched
+        // from within this curios-gated init path.
+        com.soul.soa_additions.tr.compat.curios.MonocleCuriosCap.register();
     }
 }

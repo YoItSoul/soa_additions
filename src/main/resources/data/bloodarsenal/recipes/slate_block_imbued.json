@@ -7,12 +7,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "bloodmagic:infusedslate"
-    }
+    "a": { "item": "bloodmagic:infusedslate" }
   },
-  "result": {
-    "item": "bloodarsenal:slate"
-  },
-  "show_notification": true
+  "result": { "item": "bloodarsenal:slate_imbued" }
 }

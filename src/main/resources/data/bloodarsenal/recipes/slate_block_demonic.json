@@ -7,12 +7,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "bloodmagic:demonslate"
-    }
+    "a": { "item": "bloodmagic:demonslate" }
   },
-  "result": {
-    "item": "bloodarsenal:slate"
-  },
-  "show_notification": true
+  "result": { "item": "bloodarsenal:slate_demonic" }
 }

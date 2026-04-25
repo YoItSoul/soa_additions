@@ -12,7 +12,13 @@ base {
     archivesName = mod_id
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+// Toolchain bumped to Java 21 so we can compile against Jade 11.13+, which
+// is Java-21-compiled. Source and target bytecode level stay at 17 — Forge
+// 1.20.1 still expects 17-bytecode mods, but the JDK doing the compiling
+// just needs to be ≥ the highest classfile level on the classpath.
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+java.sourceCompatibility = JavaVersion.VERSION_17
+java.targetCompatibility = JavaVersion.VERSION_17
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 
@@ -88,6 +94,12 @@ dependencies {
     // the curios/ subpackage along with GreedyBagEvents, both gated behind a
     // ModList.isLoaded("curios") check in SoaAdditions's constructor.
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.14.1+1.20.1")
+    // Pinned to the exact jar in the SoA modpack (libs/Jade-1.20.1-Forge-11.13.2.jar).
+    // The cursemaven 5444008 was an older 11.13.2 build that still exposed
+    // IComponentProvider; the rebuild Snownee shipped later under the same
+    // display version removed it, so compiling against the older API caused
+    // NoClassDefFoundError at plugin discovery time.
+    compileOnly fg.deobf(files("libs/Jade-1.20.1-Forge-11.13.2.jar"))
 
     // ItemStages + GameStages — compile-only for GreedyBag stage checks.
     // Published by Darkhax on Jared's maven (already declared above).

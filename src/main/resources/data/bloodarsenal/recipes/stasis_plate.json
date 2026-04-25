@@ -7,22 +7,13 @@
     "cdc"
   ],
   "key": {
-    "a": {
-      "item": "bloodarsenal:blood_stained_glass"
-    },
-    "b": {
-      "item": "minecraft:heavy_weighted_pressure_plate"
-    },
-    "c": {
-      "item": "bloodmagic:infusedslate"
-    },
+    "a": { "item": "bloodarsenal:blood_stained_glass" },
+    "b": { "item": "minecraft:heavy_weighted_pressure_plate" },
+    "c": { "item": "bloodmagic:infusedslate" },
     "d": {
       "type": "bloodmagic:bloodorb",
       "orb_tier": 3
     }
   },
-  "result": {
-    "item": "bloodarsenal:stasis_plate"
-  },
-  "show_notification": true
+  "result": { "item": "bloodarsenal:stasis_plate_item" }
 }

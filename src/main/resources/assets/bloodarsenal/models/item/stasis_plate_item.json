@@ -1,0 +1,4 @@
+{
+  "parent": "item/generated",
+  "textures": { "layer0": "bloodarsenal:item/stasis_plate_item" }
+}

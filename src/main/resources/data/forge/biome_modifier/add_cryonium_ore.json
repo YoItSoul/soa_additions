@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_cold",
+  "features": "soa_additions:cryonium_ore_placed",
+  "step": "underground_ores"
+}
