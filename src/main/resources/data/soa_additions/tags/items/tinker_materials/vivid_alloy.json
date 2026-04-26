@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/vivid_alloy",
+    "#forge:nuggets/vivid_alloy",
+    "#forge:storage_blocks/vivid_alloy"
+  ]
+}

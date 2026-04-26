@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/primal_metal",
+    "#forge:nuggets/primal_metal",
+    "#forge:storage_blocks/primal_metal",
+    "soa_additions:molten_primal_metal_bucket"
+  ]
+}

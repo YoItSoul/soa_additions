@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/lumium",
+    "#forge:nuggets/lumium",
+    "#forge:storage_blocks/lumium"
+  ]
+}

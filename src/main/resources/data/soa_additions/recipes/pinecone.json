@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    { "item": "pvj:pinecones" }
+    { "item": "projectvibrantjourneys:pinecones" }
   ],
   "result": { "item": "soa_additions:pinecone" }
 }

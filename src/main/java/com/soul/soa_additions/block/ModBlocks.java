@@ -146,6 +146,16 @@ public final class ModBlocks {
     public static final RegistryObject<Block> INFINITY_BLOCK_BLOCK_BLOCK  = registerBlock("infinity_block_block_block",  () -> new Block(METAL_BLOCK_PROPS));
     public static final RegistryObject<Block> UNKNOWN_BLOCK               = registerBlock("unknown_block",               () -> new Block(ORE_PROPERTIES));
 
+    // External 1.12 mod ports (Thermal Foundation, TConstruct, ExtraUtilities2)
+    public static final RegistryObject<Block> IRIDIUM_BLOCK               = registerBlock("iridium_block",               () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> IRIDIUM_ORE                 = registerBlock("iridium_ore",                 () -> new Block(ORE_PROPERTIES));
+    public static final RegistryObject<Block> PLATINUM_BLOCK              = registerBlock("platinum_block",              () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> PLATINUM_ORE                = registerBlock("platinum_ore",                () -> new Block(ORE_PROPERTIES));
+    public static final RegistryObject<Block> ARDITE_BLOCK                = registerBlock("ardite_block",                () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> ARDITE_ORE                  = registerBlock("ardite_ore",                  () -> new Block(ORE_PROPERTIES));
+    public static final RegistryObject<Block> EVIL_METAL_BLOCK            = registerBlock("evil_metal_block",            () -> new Block(METAL_BLOCK_PROPS));
+    public static final RegistryObject<Block> DEMONIC_METAL_BLOCK         = registerBlock("demonic_metal_block",         () -> new Block(METAL_BLOCK_PROPS));
+
     private ModBlocks() {}
 
     public static void register(IEventBus eventBus) {

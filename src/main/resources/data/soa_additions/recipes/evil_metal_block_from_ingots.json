@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "III",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "item": "soa_additions:evil_metal_ingot"
+    }
+  },
+  "result": {
+    "item": "soa_additions:evil_metal_block"
+  }
+}

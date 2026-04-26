@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/draconium_awakened",
+    "#forge:nuggets/draconium_awakened",
+    "#forge:storage_blocks/draconium_awakened",
+    "soa_additions:molten_draconic_metal_bucket"
+  ]
+}

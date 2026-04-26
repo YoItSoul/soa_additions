@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/lumix",
+    "#forge:nuggets/lumix",
+    "#forge:storage_blocks/lumix"
+  ]
+}

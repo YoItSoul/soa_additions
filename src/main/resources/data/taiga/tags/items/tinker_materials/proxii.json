@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/proxii",
+    "#forge:nuggets/proxii",
+    "#forge:storage_blocks/proxii"
+  ]
+}

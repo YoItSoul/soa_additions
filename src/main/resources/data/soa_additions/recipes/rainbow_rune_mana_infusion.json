@@ -1,6 +1,21 @@
 {
-  "type": "botania:mana_infusion",
-  "input": { "item": "botania:rune_mana" },
-  "output": { "item": "soa_additions:rainbow_rune" },
-  "mana": 500000
+  "type": "mythicbotany:infuser",
+  "fromColor": 5592575,
+  "toColor": 16733695,
+  "group": "infuser",
+  "ingredients": [
+    { "item": "botania:rune_mana" },
+    { "item": "botania:rune_mana" },
+    { "item": "botania:rune_mana" },
+    { "item": "botania:rune_mana" },
+    { "item": "botania:rune_mana" },
+    { "item": "botania:rune_mana" },
+    { "item": "botania:rune_mana" },
+    { "item": "botania:rune_mana" }
+  ],
+  "mana": 500000,
+  "output": {
+    "count": 1,
+    "item": "soa_additions:rainbow_rune"
+  }
 }

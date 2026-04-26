@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/karmesine",
+    "#forge:nuggets/karmesine",
+    "#forge:storage_blocks/karmesine"
+  ]
+}

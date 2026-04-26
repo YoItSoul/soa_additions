@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/draconium",
+    "#forge:nuggets/draconium",
+    "#forge:storage_blocks/draconium",
+    "soa_additions:molten_draconium_bucket"
+  ]
+}

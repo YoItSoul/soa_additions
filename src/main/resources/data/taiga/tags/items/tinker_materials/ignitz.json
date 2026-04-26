@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/ignitz",
+    "#forge:nuggets/ignitz",
+    "#forge:storage_blocks/ignitz"
+  ]
+}

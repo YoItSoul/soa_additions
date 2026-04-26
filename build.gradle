@@ -144,6 +144,17 @@ dependencies {
     compileOnly fg.deobf(files("libs/Draconic-Evolution-1.20.1-3.1.2.621-universal.jar"))
     compileOnly fg.deobf(files("libs/BrandonsCore-1.20.1-3.2.1.302-universal.jar"))
     compileOnly fg.deobf(files("libs/CodeChickenLib-1.20.1-4.4.0.516-universal.jar"))
+
+    // InsaneLib — provides PlayerExhaustionEvent for the GC HungerTweaker
+    // Tip 52 port (low-food drain-skip RNG). Wired through
+    // InsaneLibHungerBridge with a runtime ModList.isLoaded("insanelib")
+    // gate in SoaAdditions main, so the mod stays optional.
+    compileOnly fg.deobf(files("libs/insanelib-1.23.4.4.jar"))
+
+    // Reskillable — provides SkillCapability/SkillModel for the 9 GC custom
+    // traits port (compatskills/traits.zs). All trait handlers gated on
+    // ModList.isLoaded("reskillable") in SoaAdditions main.
+    compileOnly fg.deobf(files("libs/reskillable-4.6.3.0-1.20.1.jar"))
 }
 
 tasks.named('processResources', ProcessResources).configure {

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/palladium",
+    "#forge:nuggets/palladium",
+    "#forge:storage_blocks/palladium"
+  ]
+}

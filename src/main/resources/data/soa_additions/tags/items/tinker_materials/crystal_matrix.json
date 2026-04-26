@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/crystal_matrix",
+    "#forge:nuggets/crystal_matrix",
+    "#forge:storage_blocks/crystal_matrix",
+    "soa_additions:molten_crystal_matrix_bucket"
+  ]
+}

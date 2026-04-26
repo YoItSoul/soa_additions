@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/triberium",
+    "#forge:nuggets/triberium",
+    "#forge:storage_blocks/triberium"
+  ]
+}

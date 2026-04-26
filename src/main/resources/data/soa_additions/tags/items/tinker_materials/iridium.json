@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/iridium",
+    "#forge:nuggets/iridium",
+    "#forge:storage_blocks/iridium"
+  ]
+}

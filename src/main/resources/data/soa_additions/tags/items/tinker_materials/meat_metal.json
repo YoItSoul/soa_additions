@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/meat_metal",
+    "#forge:nuggets/meat_metal",
+    "#forge:storage_blocks/meat_metal"
+  ]
+}

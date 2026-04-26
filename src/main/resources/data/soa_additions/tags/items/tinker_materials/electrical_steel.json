@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/electrical_steel",
+    "#forge:nuggets/electrical_steel",
+    "#forge:storage_blocks/electrical_steel"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/eezo",
+    "#forge:nuggets/eezo",
+    "#forge:storage_blocks/eezo"
+  ]
+}

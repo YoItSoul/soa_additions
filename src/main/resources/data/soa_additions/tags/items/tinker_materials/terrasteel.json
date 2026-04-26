@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/terrasteel",
+    "#forge:nuggets/terrasteel",
+    "#forge:storage_blocks/terrasteel",
+    "soa_additions:molten_terrasteel_bucket"
+  ]
+}

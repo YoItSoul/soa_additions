@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "soa_additions:ardite_ore"
+  },
+  "result": "soa_additions:ardite_ingot",
+  "experience": 0.7,
+  "cookingtime": 100
+}

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/enderium",
+    "#forge:nuggets/enderium",
+    "#forge:storage_blocks/enderium"
+  ]
+}

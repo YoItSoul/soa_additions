@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "botania:gaia_ingot",
+    "soa_additions:gaia_steel_ingot",
+    "soa_additions:gaiasteel_ingot"
+  ]
+}

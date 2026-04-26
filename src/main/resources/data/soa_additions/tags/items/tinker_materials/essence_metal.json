@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/essence_metal",
+    "#forge:nuggets/essence_metal",
+    "#forge:storage_blocks/essence_metal"
+  ]
+}

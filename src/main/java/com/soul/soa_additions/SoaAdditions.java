@@ -59,6 +59,15 @@ public final class SoaAdditions {
         ModItems.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
+
+        // SoA Potions — port of GreedyCraft's PotionCore brews to native MobEffects.
+        // Brewing recipes are registered natively via SoaBrewing.registerBrewing()
+        // from commonSetup below (Forge 1.20.1 lacks RegisterBrewingRecipesEvent
+        // and KubeJS 6 dropped its brewing recipe schema, so the legacy
+        // kubejs/server_scripts/recipes/ported_gc/vanilla_brewing.js is a no-op).
+        com.soul.soa_additions.potion.SoaPotions.register(modEventBus);
+        com.soul.soa_additions.potion.SoaBrewingPotions.register(modEventBus);
+        MinecraftForge.EVENT_BUS.register(com.soul.soa_additions.potion.SoaPotionEvents.class);
         com.soul.soa_additions.loot.LootModifierSerializers.register(modEventBus);
         com.soul.soa_additions.loot.LootConditions.register(modEventBus);
         com.soul.soa_additions.donor.ModEntities.register(modEventBus);
@@ -78,6 +87,27 @@ public final class SoaAdditions {
         // classloaded unless BM is present, so no NoClassDefFoundError.
         if (ModList.get().isLoaded("bloodmagic")) {
             com.soul.soa_additions.bloodarsenal.BloodArsenalPlugin.init(modEventBus);
+        }
+
+        // InsaneLib bridge — port of GC HungerTweaker's onExhausted RNG (Tip
+        // 52: low-food drain skip). Subscribes to InsaneLib's PlayerExhaustion
+        // Event only when the mod is loaded.
+        if (ModList.get().isLoaded("insanelib")) {
+            com.soul.soa_additions.quest.InsaneLibHungerBridge.init();
+        }
+
+        // Reskillable traits — port of GC compatskills/traits.zs (9 custom
+        // traits: bloodlust/fortified/experience_grinder/turbo_miner/
+        // essence_reaper/magic_brew/strip_miner/building_master/
+        // devourer_of_souls). Each gated on per-skill level checks via
+        // SkillCapability. Class never loads when Reskillable is absent.
+        if (ModList.get().isLoaded("reskillable")) {
+            com.soul.soa_additions.reskillable.ReskillableTraits.init();
+            // Auto-classifier for items NOT in skill_locks.json (Tinker
+            // tools + any unlisted modded gear). Algorithmically derives
+            // skill+level from ATTACK_DAMAGE / harvest tier / armor sum,
+            // calibrated against GC's reskillable.cfg data points.
+            com.soul.soa_additions.reskillable.ToolSkillAutoLock.init();
         }
 
         // TConstruct Evolution — soft dependency on Tinkers' Construct.
@@ -102,6 +132,7 @@ public final class SoaAdditions {
             AntiCheatHandler.scanServerInstalledMods();
             JvmStatsSampler.start();
             com.soul.soa_additions.registry.HardnessOverrides.apply();
+            com.soul.soa_additions.potion.SoaBrewing.registerBrewing();
         });
     }
 

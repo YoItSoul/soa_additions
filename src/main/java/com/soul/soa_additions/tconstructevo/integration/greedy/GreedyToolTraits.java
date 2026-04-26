@@ -10,8 +10,10 @@ import slimeknights.tconstruct.library.modifiers.Modifier;
  */
 public final class GreedyToolTraits {
 
-    public static final Holder<Modifier> POOPY =
-            TConEvoModifiers.register("poopy", PoopyModifier::new);
+    // Modifiers also registered by GreedyArmorTraits (apply to both tools and
+    // armor) — alias here to avoid the "duplicate static modifier" registry
+    // crash. Single registration site lives in GreedyArmorTraits.
+    public static final Holder<Modifier> POOPY = GreedyArmorTraits.POOPY;
 
     public static final Holder<Modifier> PINKY =
             TConEvoModifiers.register("pinky", PinkyModifier::new);
@@ -22,8 +24,7 @@ public final class GreedyToolTraits {
     public static final Holder<Modifier> SUPERKNOCKBACK =
             TConEvoModifiers.register("superknockback", SuperknockbackModifier::new);
 
-    public static final Holder<Modifier> GAMBLE =
-            TConEvoModifiers.register("gamble", GambleModifier::new);
+    public static final Holder<Modifier> GAMBLE = GreedyArmorTraits.GAMBLE;
 
     public static final Holder<Modifier> RAGING =
             TConEvoModifiers.register("raging", RagingModifier::new);
@@ -34,11 +35,9 @@ public final class GreedyToolTraits {
     public static final Holder<Modifier> LIGHTNING =
             TConEvoModifiers.register("lightning", LightningModifier::new);
 
-    public static final Holder<Modifier> VISION =
-            TConEvoModifiers.register("vision", VisionModifier::new);
+    public static final Holder<Modifier> VISION = GreedyArmorTraits.VISION;
 
-    public static final Holder<Modifier> FORTIFIED =
-            TConEvoModifiers.register("fortified", FortifiedModifier::new);
+    public static final Holder<Modifier> FORTIFIED = GreedyArmorTraits.FORTIFIED;
 
     public static final Holder<Modifier> RELIABLE =
             TConEvoModifiers.register("reliable", ReliableModifier::new);
@@ -49,26 +48,20 @@ public final class GreedyToolTraits {
     public static final Holder<Modifier> HALLOWEEN =
             TConEvoModifiers.register("halloween", HalloweenModifier::new);
 
-    public static final Holder<Modifier> MILKY =
-            TConEvoModifiers.register("milky", MilkyModifier::new);
+    public static final Holder<Modifier> MILKY = GreedyArmorTraits.MILKY;
 
     public static final Holder<Modifier> GIANTSLAYER =
             TConEvoModifiers.register("giantslayer", GiantslayerModifier::new);
 
-    public static final Holder<Modifier> CRYSTAL_FORCE =
-            TConEvoModifiers.register("crystal_force", CrystalForceModifier::new);
+    public static final Holder<Modifier> CRYSTAL_FORCE = GreedyArmorTraits.CRYSTAL_FORCE;
 
-    public static final Holder<Modifier> SPARTAN =
-            TConEvoModifiers.register("spartan", SpartanModifier::new);
+    public static final Holder<Modifier> SPARTAN = GreedyArmorTraits.SPARTAN;
 
-    public static final Holder<Modifier> KNOWLEDGEFUL =
-            TConEvoModifiers.register("knowledgeful", KnowledgefulModifier::new);
+    public static final Holder<Modifier> KNOWLEDGEFUL = GreedyArmorTraits.KNOWLEDGEFUL;
 
-    public static final Holder<Modifier> HOLD_GROUND =
-            TConEvoModifiers.register("hold_ground", HoldGroundModifier::new);
+    public static final Holder<Modifier> HOLD_GROUND = GreedyArmorTraits.HOLD_GROUND;
 
-    public static final Holder<Modifier> MOTION =
-            TConEvoModifiers.register("motion", MotionModifier::new);
+    public static final Holder<Modifier> MOTION = GreedyArmorTraits.MOTION;
 
     public static final Holder<Modifier> EXECUTIONER =
             TConEvoModifiers.register("executioner", ExecutionerModifier::new);
@@ -76,8 +69,7 @@ public final class GreedyToolTraits {
     public static final Holder<Modifier> PENETRATION =
             TConEvoModifiers.register("penetration", PenetrationModifier::new);
 
-    public static final Holder<Modifier> THRONY =
-            TConEvoModifiers.register("throny", ThronyModifier::new);
+    public static final Holder<Modifier> THRONY = GreedyArmorTraits.THRONY;
 
     public static final Holder<Modifier> BANE_OF_NIGHT =
             TConEvoModifiers.register("bane_of_night", BaneOfNightModifier::new);
@@ -97,11 +89,9 @@ public final class GreedyToolTraits {
     public static final Holder<Modifier> MATTER_CONDENSING2 =
             TConEvoModifiers.register("matter_condensing2", MatterCondensing2Modifier::new);
 
-    public static final Holder<Modifier> PERFECTIONIST =
-            TConEvoModifiers.register("perfectionist", PerfectionistModifier::new);
+    public static final Holder<Modifier> PERFECTIONIST = GreedyArmorTraits.PERFECTIONIST;
 
-    public static final Holder<Modifier> TIDAL_FORCE =
-            TConEvoModifiers.register("tidal_force", TidalForceModifier::new);
+    public static final Holder<Modifier> TIDAL_FORCE = GreedyArmorTraits.TIDAL_FORCE;
 
     private GreedyToolTraits() {}
 

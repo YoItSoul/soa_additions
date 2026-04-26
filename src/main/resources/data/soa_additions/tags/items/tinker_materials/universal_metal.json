@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/universal_metal",
+    "#forge:nuggets/universal_metal",
+    "#forge:storage_blocks/universal_metal",
+    "soa_additions:molten_universal_metal_bucket"
+  ]
+}

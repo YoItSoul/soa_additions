@@ -4,7 +4,7 @@
       "durability": 8400,
       "melee_attack": 38.2,
       "mining_speed": 30.2,
-      "mining_tier": "soa_additions:duranite"
+      "mining_tier": "soa_additions:mythical"
     },
     "tconstruct:handle": {
       "durability": 4399.0,

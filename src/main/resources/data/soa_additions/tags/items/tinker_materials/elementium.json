@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/elementium",
+    "#forge:nuggets/elementium",
+    "#forge:storage_blocks/elementium",
+    "soa_additions:molten_elementium_bucket"
+  ]
+}

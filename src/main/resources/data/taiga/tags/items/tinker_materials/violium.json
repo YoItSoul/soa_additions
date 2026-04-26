@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/violium",
+    "#forge:nuggets/violium",
+    "#forge:storage_blocks/violium"
+  ]
+}

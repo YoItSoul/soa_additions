@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/adamant",
+    "#forge:nuggets/adamant",
+    "#forge:storage_blocks/adamant"
+  ]
+}
