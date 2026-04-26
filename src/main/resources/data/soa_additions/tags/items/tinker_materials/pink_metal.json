@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/pink_slime",
+    "#forge:nuggets/pink_slime",
+    "#forge:storage_blocks/pink_slime",
+    "soa_additions:molten_pink_metal_bucket"
+  ]
+}

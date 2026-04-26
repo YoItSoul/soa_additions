@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/signalum",
+    "#forge:nuggets/signalum",
+    "#forge:storage_blocks/signalum"
+  ]
+}

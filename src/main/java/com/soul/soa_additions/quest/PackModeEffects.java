@@ -26,7 +26,11 @@ import net.minecraftforge.fml.common.Mod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Set;
 import java.util.UUID;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 
 /**
  * Applies gameplay difficulty effects per pack mode, matching GreedyCraft's
@@ -166,7 +170,23 @@ public final class PackModeEffects {
         }
     }
 
+    /**
+     * Entity types whose HP is already scaled per-packmode by the summoning
+     * ritual recipe (frostmaw_ritual_recipe.js, barako_ritual_recipe.js,
+     * the_forbidden_ritual_recipe.js write Health + max_health attributes
+     * directly into the spawn NBT). Applying the +50% expert boss modifier
+     * on top would double-stack the scaling.
+     */
+    private static final Set<ResourceLocation> EXPERT_HP_BLACKLIST = Set.of(
+            new ResourceLocation("mowziesmobs", "barako"),
+            new ResourceLocation("mowziesmobs", "frostmaw")
+    );
+
     private static boolean isBoss(LivingEntity entity) {
+        EntityType<?> type = entity.getType();
+        ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(type);
+        if (EXPERT_HP_BLACKLIST.contains(id)) return false;
+
         if (entity instanceof WitherBoss || entity instanceof EnderDragon) return true;
         if (entity instanceof net.minecraft.world.entity.Mob mob) {
             AttributeInstance hp = mob.getAttribute(Attributes.MAX_HEALTH);

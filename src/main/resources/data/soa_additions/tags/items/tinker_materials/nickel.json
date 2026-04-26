@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/nickel",
+    "#forge:nuggets/nickel",
+    "#forge:storage_blocks/nickel"
+  ]
+}

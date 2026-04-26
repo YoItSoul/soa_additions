@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NNN",
+    "NNN",
+    "NNN"
+  ],
+  "key": {
+    "N": {
+      "item": "soa_additions:ardite_nugget"
+    }
+  },
+  "result": {
+    "item": "soa_additions:ardite_ingot"
+  }
+}

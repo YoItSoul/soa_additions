@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/starmetal",
+    "#forge:nuggets/starmetal",
+    "#forge:storage_blocks/starmetal"
+  ]
+}

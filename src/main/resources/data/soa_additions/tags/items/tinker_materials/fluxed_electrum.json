@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/electrum_flux",
+    "#forge:nuggets/electrum_flux",
+    "#forge:storage_blocks/electrum_flux"
+  ]
+}

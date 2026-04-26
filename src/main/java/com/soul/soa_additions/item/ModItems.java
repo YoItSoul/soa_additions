@@ -82,6 +82,18 @@ public final class ModItems {
     public static final RegistryObject<Item> GAIASTEEL_INGOT       = registerRareIngot("gaiasteel_ingot");
     public static final RegistryObject<Item> FUSION_MATRIX_INGOT   = registerRareIngot("fusion_matrix_ingot");
 
+    // ========== External 1.12 mod ports (Thermal Foundation, TConstruct, ExtraUtilities2) ==========
+    public static final RegistryObject<Item> IRIDIUM_INGOT         = registerRareIngot("iridium_ingot");
+    public static final RegistryObject<Item> IRIDIUM_NUGGET        = registerRareIngot("iridium_nugget");
+    public static final RegistryObject<Item> IRIDIUM_DUST          = registerRareIngot("iridium_dust");
+    public static final RegistryObject<Item> PLATINUM_INGOT        = registerRareIngot("platinum_ingot");
+    public static final RegistryObject<Item> PLATINUM_NUGGET       = registerRareIngot("platinum_nugget");
+    public static final RegistryObject<Item> PLATINUM_DUST         = registerRareIngot("platinum_dust");
+    public static final RegistryObject<Item> ARDITE_INGOT          = registerRareIngot("ardite_ingot");
+    public static final RegistryObject<Item> ARDITE_NUGGET         = registerRareIngot("ardite_nugget");
+    public static final RegistryObject<Item> EVIL_METAL_INGOT      = registerRareIngot("evil_metal_ingot");
+    public static final RegistryObject<Item> DEMONIC_METAL_INGOT   = registerRareIngot("demonic_metal_ingot");
+
     // ========== TCon material items (tconevo/plustic port, mods not in SOA) ==========
 
     public static final RegistryObject<Item> RESTONIA_CRYSTAL = registerRareIngot("restonia_crystal");

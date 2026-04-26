@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/imperomite",
+    "#forge:nuggets/imperomite",
+    "#forge:storage_blocks/imperomite"
+  ]
+}

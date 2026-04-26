@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/niob",
+    "#forge:nuggets/niob",
+    "#forge:storage_blocks/niob"
+  ]
+}

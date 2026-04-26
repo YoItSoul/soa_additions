@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/jauxum",
+    "#forge:nuggets/jauxum",
+    "#forge:storage_blocks/jauxum"
+  ]
+}

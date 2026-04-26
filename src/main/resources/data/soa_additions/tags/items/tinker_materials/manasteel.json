@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/manasteel",
+    "#forge:nuggets/manasteel",
+    "#forge:storage_blocks/manasteel",
+    "soa_additions:molten_manasteel_bucket"
+  ]
+}

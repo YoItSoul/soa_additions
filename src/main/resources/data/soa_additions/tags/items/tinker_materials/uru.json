@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/uru",
+    "#forge:nuggets/uru",
+    "#forge:storage_blocks/uru",
+    "soa_additions:molten_uru_bucket"
+  ]
+}

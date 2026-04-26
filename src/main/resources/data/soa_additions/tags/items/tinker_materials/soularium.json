@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/soularium",
+    "#forge:nuggets/soularium",
+    "#forge:storage_blocks/soularium"
+  ]
+}

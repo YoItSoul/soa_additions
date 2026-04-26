@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/osram",
+    "#forge:nuggets/osram",
+    "#forge:storage_blocks/osram"
+  ]
+}

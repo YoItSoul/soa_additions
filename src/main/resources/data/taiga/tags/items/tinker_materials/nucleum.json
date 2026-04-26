@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/nucleum",
+    "#forge:nuggets/nucleum",
+    "#forge:storage_blocks/nucleum"
+  ]
+}

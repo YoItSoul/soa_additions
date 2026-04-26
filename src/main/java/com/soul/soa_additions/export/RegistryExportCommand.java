@@ -22,7 +22,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.BossEvent;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -45,6 +50,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
@@ -74,7 +80,7 @@ public final class RegistryExportCommand {
                         .then(Commands.argument("target", StringArgumentType.word())
                                 .suggests((c, b) -> {
                                     for (String s : new String[]{"all", "items", "blocks", "entities",
-                                            "structures", "biomes", "dimensions", "effects",
+                                            "bosses", "structures", "biomes", "dimensions", "effects",
                                             "enchantments", "fluids", "sounds", "particles",
                                             "block_entities", "villager_professions", "tags",
                                             "tinker_materials"}) {
@@ -106,6 +112,8 @@ public final class RegistryExportCommand {
                 totals.put("blocks", write(outDir.resolve("blocks.json"), dumpBlocks()));
             if (all || "entities".equalsIgnoreCase(target))
                 totals.put("entities", write(outDir.resolve("entities.json"), dumpEntities()));
+            if (all || "bosses".equalsIgnoreCase(target))
+                totals.put("bosses", write(outDir.resolve("bosses.json"), dumpBosses()));
             if (all || "structures".equalsIgnoreCase(target))
                 totals.put("structures", write(outDir.resolve("structures.json"),
                         dumpDatapack(server, Registries.STRUCTURE)));
@@ -251,6 +259,118 @@ public final class RegistryExportCommand {
             arr.add(o);
         }
         return arr;
+    }
+
+    /**
+     * Dumps every entity type that spawns with a central boss-bar overlay.
+     * Detection is purely structural — no whitelist, no per-mod knowledge:
+     *   1. {@code forge:bosses} entity_type tag (when a mod opts in).
+     *   2. Reflection: any {@link BossEvent} field declared on the entity class
+     *      or its supertypes. The boss bar is rendered from
+     *      {@code ClientboundBossEventPacket}s emitted by a server-side
+     *      {@code ServerBossEvent}, which mods almost universally store as a
+     *      field on the entity class. Catches vanilla Wither and Ender Dragon,
+     *      Mowzie's Mobs, Cataclysm, Bosses of Mass Destruction, Twilight
+     *      Forest, Ice and Fire, Aether, etc., without naming any of them.
+     */
+    private static JsonArray dumpBosses() {
+        JsonArray arr = new JsonArray();
+        TagKey<EntityType<?>> bossTag = TagKey.create(Registries.ENTITY_TYPE,
+                new ResourceLocation("forge", "bosses"));
+
+        List<EntityType<?>> types = new ArrayList<>();
+        BuiltInRegistries.ENTITY_TYPE.forEach(types::add);
+        types.sort(Comparator.comparing(t -> BuiltInRegistries.ENTITY_TYPE.getKey(t).toString()));
+
+        for (EntityType<?> et : types) {
+            ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(et);
+
+            boolean tagged = isTagged(et, bossTag);
+            boolean reflective = hasBossEventField(et.getBaseClass());
+            if (!(tagged || reflective)) continue;
+
+            JsonObject o = new JsonObject();
+            o.addProperty("id", id.toString());
+            o.addProperty("mod", id.getNamespace());
+            o.addProperty("class", et.getBaseClass().getName());
+
+            JsonArray sources = new JsonArray();
+            if (tagged) sources.add("forge:bosses");
+            if (reflective) sources.add("boss_event_field");
+            o.add("detected_via", sources);
+
+            safe(() -> o.addProperty("name", et.getDescription().getString()));
+            safe(() -> o.addProperty("category", et.getCategory().getName()));
+            safe(() -> o.addProperty("width", et.getWidth()));
+            safe(() -> o.addProperty("height", et.getHeight()));
+            safe(() -> o.addProperty("fire_immune", et.fireImmune()));
+            safe(() -> o.addProperty("summonable", et.canSummon()));
+            JsonObject stats = dumpStats(et);
+            if (stats != null) o.add("stats", stats);
+            arr.add(o);
+        }
+        return arr;
+    }
+
+    /**
+     * Reads base attribute values from the entity's {@link AttributeSupplier},
+     * which is the same source the engine consults at spawn-time. Iterates the
+     * full attribute registry so modded attributes (Forge swim speed, gravity,
+     * step height, plus anything a content mod registers) are picked up
+     * automatically alongside vanilla {@code generic.max_health},
+     * {@code generic.attack_damage}, etc.
+     */
+    private static JsonObject dumpStats(EntityType<?> et) {
+        if (!LivingEntity.class.isAssignableFrom(et.getBaseClass())) return null;
+        if (!DefaultAttributes.hasSupplier(et)) return null;
+        @SuppressWarnings("unchecked")
+        EntityType<? extends LivingEntity> living = (EntityType<? extends LivingEntity>) et;
+        AttributeSupplier supplier;
+        try {
+            supplier = DefaultAttributes.getSupplier(living);
+        } catch (Throwable t) {
+            return null;
+        }
+        if (supplier == null) return null;
+        JsonObject stats = new JsonObject();
+        List<Attribute> attrs = new ArrayList<>();
+        BuiltInRegistries.ATTRIBUTE.forEach(attrs::add);
+        attrs.sort(Comparator.comparing(a -> {
+            ResourceLocation k = BuiltInRegistries.ATTRIBUTE.getKey(a);
+            return k == null ? "" : k.toString();
+        }));
+        for (Attribute attr : attrs) {
+            try {
+                if (!supplier.hasAttribute(attr)) continue;
+                ResourceLocation aId = BuiltInRegistries.ATTRIBUTE.getKey(attr);
+                if (aId == null) continue;
+                stats.addProperty(aId.toString(), supplier.getBaseValue(attr));
+            } catch (Throwable ignored) {}
+        }
+        return stats.size() == 0 ? null : stats;
+    }
+
+    private static boolean isTagged(EntityType<?> et, TagKey<EntityType<?>> tag) {
+        Optional<Holder.Reference<EntityType<?>>> holder =
+                BuiltInRegistries.ENTITY_TYPE.getResourceKey(et)
+                        .flatMap(BuiltInRegistries.ENTITY_TYPE::getHolder);
+        return holder.map(h -> h.is(tag)).orElse(false);
+    }
+
+    private static boolean hasBossEventField(Class<?> clazz) {
+        Class<?> c = clazz;
+        while (c != null && c != Object.class) {
+            try {
+                for (java.lang.reflect.Field f : c.getDeclaredFields()) {
+                    if (BossEvent.class.isAssignableFrom(f.getType())) return true;
+                }
+            } catch (Throwable ignored) {
+                // Some classloaders refuse getDeclaredFields on certain modded classes;
+                // fall through to the next supertype.
+            }
+            c = c.getSuperclass();
+        }
+        return false;
     }
 
     private static JsonArray dumpBiomes(MinecraftServer server) {

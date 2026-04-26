@@ -4,7 +4,7 @@
       "durability": 11111,
       "melee_attack": 13.0,
       "mining_speed": 16.0,
-      "mining_tier": "soa_additions:mythical"
+      "mining_tier": "soa_additions:vibranium"
     },
     "tconstruct:handle": {
       "durability": 0.0,

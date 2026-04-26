@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/abyssum",
+    "#forge:nuggets/abyssum",
+    "#forge:storage_blocks/abyssum"
+  ]
+}

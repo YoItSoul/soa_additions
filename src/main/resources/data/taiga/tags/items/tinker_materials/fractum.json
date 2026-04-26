@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/fractum",
+    "#forge:nuggets/fractum",
+    "#forge:storage_blocks/fractum"
+  ]
+}

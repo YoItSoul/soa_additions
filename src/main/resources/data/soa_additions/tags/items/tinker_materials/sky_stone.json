@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:storage_blocks/sky_stone",
+    "soa_additions:molten_sky_stone_bucket"
+  ]
+}

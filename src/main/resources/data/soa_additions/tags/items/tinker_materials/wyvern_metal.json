@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/wyvern",
+    "#forge:nuggets/wyvern",
+    "#forge:storage_blocks/wyvern",
+    "soa_additions:molten_wyvern_metal_bucket"
+  ]
+}

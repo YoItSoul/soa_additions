@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "soa_additions:platinum_dust"
+  },
+  "result": "soa_additions:platinum_ingot",
+  "experience": 0.0,
+  "cookingtime": 100
+}

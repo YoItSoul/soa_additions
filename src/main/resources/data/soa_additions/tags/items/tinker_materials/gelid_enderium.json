@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/gelid_enderium",
+    "#forge:nuggets/gelid_enderium",
+    "#forge:storage_blocks/gelid_enderium",
+    "soa_additions:molten_gelid_enderium_bucket"
+  ]
+}

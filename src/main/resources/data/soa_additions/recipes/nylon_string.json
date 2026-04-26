@@ -5,7 +5,7 @@
     "sss"
   ],
   "key": {
-    "s": { "item": "thermal:silk" }
+    "s": { "item": "thermal:beekeeper_fabric" }
   },
   "result": { "item": "soa_additions:nylon_string" },
   "show_notification": true

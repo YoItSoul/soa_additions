@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/yrdeen",
+    "#forge:nuggets/yrdeen",
+    "#forge:storage_blocks/yrdeen"
+  ]
+}

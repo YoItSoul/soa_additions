@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/redstone_alloy",
+    "#forge:nuggets/redstone_alloy",
+    "#forge:storage_blocks/redstone_alloy"
+  ]
+}

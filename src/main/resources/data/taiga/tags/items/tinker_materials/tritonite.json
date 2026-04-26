@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/tritonite",
+    "#forge:nuggets/tritonite",
+    "#forge:storage_blocks/tritonite"
+  ]
+}

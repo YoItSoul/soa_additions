@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "soa_additions:iridium_ingot"
+    }
+  ],
+  "result": {
+    "item": "soa_additions:iridium_nugget",
+    "count": 9
+  }
+}

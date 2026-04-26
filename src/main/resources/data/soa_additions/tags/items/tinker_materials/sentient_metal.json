@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/sentient_metal",
+    "#forge:nuggets/sentient_metal",
+    "#forge:storage_blocks/sentient_metal",
+    "soa_additions:molten_sentient_metal_bucket"
+  ]
+}

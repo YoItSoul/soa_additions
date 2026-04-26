@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/aurorium",
+    "#forge:nuggets/aurorium",
+    "#forge:storage_blocks/aurorium"
+  ]
+}

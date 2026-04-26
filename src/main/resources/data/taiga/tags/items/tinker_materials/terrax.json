@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/terrax",
+    "#forge:nuggets/terrax",
+    "#forge:storage_blocks/terrax"
+  ]
+}

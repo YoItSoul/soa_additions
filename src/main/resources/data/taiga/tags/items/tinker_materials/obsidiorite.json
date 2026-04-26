@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/obsidiorite",
+    "#forge:nuggets/obsidiorite",
+    "#forge:storage_blocks/obsidiorite"
+  ]
+}

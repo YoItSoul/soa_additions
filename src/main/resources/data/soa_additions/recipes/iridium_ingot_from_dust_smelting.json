@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "soa_additions:iridium_dust"
+  },
+  "result": "soa_additions:iridium_ingot",
+  "experience": 0.0,
+  "cookingtime": 200
+}

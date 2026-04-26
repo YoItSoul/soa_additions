@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/meteorite",
+    "#forge:nuggets/meteorite",
+    "#forge:storage_blocks/meteorite"
+  ]
+}

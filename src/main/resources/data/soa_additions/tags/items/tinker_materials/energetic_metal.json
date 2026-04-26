@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/energetic_metal",
+    "#forge:nuggets/energetic_metal",
+    "#forge:storage_blocks/energetic_metal",
+    "soa_additions:molten_energetic_metal_bucket"
+  ]
+}

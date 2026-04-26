@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/crystalline_alloy",
+    "#forge:nuggets/crystalline_alloy",
+    "#forge:storage_blocks/crystalline_alloy"
+  ]
+}

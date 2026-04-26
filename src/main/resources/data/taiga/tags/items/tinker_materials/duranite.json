@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/duranite",
+    "#forge:nuggets/duranite",
+    "#forge:storage_blocks/duranite"
+  ]
+}
