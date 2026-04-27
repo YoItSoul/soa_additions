@@ -1,9 +1,9 @@
 {
   "stats": {
     "tconstruct:head": {
-      "durability": 170,
-      "melee_attack": 9.0,
-      "mining_speed": 7.0,
+      "durability": 15000,
+      "melee_attack": 28.2,
+      "mining_speed": 12.2,
       "mining_tier": "soa_additions:heavenly"
     },
     "tconstruct:handle": {

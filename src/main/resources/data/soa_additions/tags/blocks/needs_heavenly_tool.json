@@ -6,6 +6,9 @@
     "draconicevolution:nether_draconium_ore",
     "draconicevolution:end_draconium_ore",
     "draconicevolution:draconium_block",
-    "draconicevolution:awakened_draconium_block"
+    "draconicevolution:awakened_draconium_block",
+    "soa_additions:protonium_block",
+    "soa_additions:terra_alloy_block",
+    "soa_additions:infinity_block_block"
   ]
 }

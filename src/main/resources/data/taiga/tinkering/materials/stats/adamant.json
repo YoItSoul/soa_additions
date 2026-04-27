@@ -1,9 +1,9 @@
 {
   "stats": {
     "tconstruct:head": {
-      "durability": 1750,
-      "melee_attack": 6.0,
-      "mining_speed": 6.0,
+      "durability": 1800,
+      "melee_attack": 18.6,
+      "mining_speed": 18.2,
       "mining_tier": "soa_additions:vibranium"
     },
     "tconstruct:handle": {

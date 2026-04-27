@@ -1,4 +1,9 @@
 {
   "replace": false,
-  "values": []
+  "values": [
+    "soa_additions:chromasteel_block",
+    "soa_additions:cryonium_ore",
+    "soa_additions:infernium_block",
+    "soa_additions:infernium_ore_block"
+  ]
 }

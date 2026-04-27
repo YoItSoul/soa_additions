@@ -1,6 +1,10 @@
 {
   "replace": false,
   "values": [
-    "minecraft:bedrock"
+    "minecraft:bedrock",
+    "soa_additions:cosmilite_block",
+    "soa_additions:titanium_block",
+    "soa_additions:titanium_ore",
+    "soa_additions:infinity_block_block_block"
   ]
 }
