@@ -2,8 +2,8 @@
   "stats": {
     "tconstruct:head": {
       "durability": 80,
-      "melee_attack": 2.5,
-      "mining_speed": 3.5,
+      "melee_attack": 3.5,
+      "mining_speed": 1.875,
       "mining_tier": "minecraft:wood"
     },
     "tconstruct:handle": {

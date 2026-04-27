@@ -4,7 +4,7 @@
       "durability": 540,
       "melee_attack": 9.2,
       "mining_speed": 10.5,
-      "mining_tier": "minecraft:netherite"
+      "mining_tier": "minecraft:diamond"
     },
     "tconstruct:handle": {
       "durability": 199.0,

@@ -3,7 +3,7 @@
     "tconstruct:head": {
       "durability": 1111,
       "melee_attack": 4.8,
-      "mining_speed": 5.37,
+      "mining_speed": 4.0275,
       "mining_tier": "soa_additions:valyrium"
     },
     "tconstruct:handle": {

@@ -1,7 +1,13 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:hardened_stone"
+    "soa_additions:asgardium_ore",
+    "soa_additions:chromium_ore",
+    "soa_additions:experience_ore",
+    "soa_additions:hardened_stone",
+    "soa_additions:manganese_ore",
+    "soa_additions:manganese_steel_block",
+    "soa_additions:stainless_steel_block"
   ],
   "remove": [
     "minecraft:obsidian",

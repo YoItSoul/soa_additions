@@ -1,9 +1,9 @@
 {
   "stats": {
     "tconstruct:head": {
-      "durability": 7200,
-      "melee_attack": 20.0,
-      "mining_speed": 23.0,
+      "durability": 2400,
+      "melee_attack": 18.4,
+      "mining_speed": 12.4,
       "mining_tier": "soa_additions:duranite"
     },
     "tconstruct:handle": {

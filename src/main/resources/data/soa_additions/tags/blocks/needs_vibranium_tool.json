@@ -1,6 +1,11 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:ether_ore_block"
+    "soa_additions:ether_ore_block",
+    "soa_additions:aeonsteel_block",
+    "soa_additions:cryonium_block",
+    "soa_additions:cytosinite_block",
+    "soa_additions:electronium_block",
+    "soa_additions:shadowium_ore"
   ]
 }

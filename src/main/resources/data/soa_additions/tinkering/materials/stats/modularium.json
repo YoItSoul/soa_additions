@@ -4,7 +4,7 @@
       "durability": 420,
       "melee_attack": 6.0,
       "mining_speed": 6.1,
-      "mining_tier": "soa_additions:obsidian"
+      "mining_tier": "minecraft:diamond"
     },
     "tconstruct:handle": {
       "durability": 99.0,

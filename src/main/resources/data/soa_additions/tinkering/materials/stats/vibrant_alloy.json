@@ -1,10 +1,10 @@
 {
   "stats": {
     "tconstruct:head": {
-      "durability": 525,
-      "melee_attack": 7.0,
-      "mining_speed": 7.0,
-      "mining_tier": "soa_additions:obsidian"
+      "durability": 220,
+      "melee_attack": 8.7,
+      "mining_speed": 16.2,
+      "mining_tier": "minecraft:diamond"
     },
     "tconstruct:handle": {
       "durability": 0.1,

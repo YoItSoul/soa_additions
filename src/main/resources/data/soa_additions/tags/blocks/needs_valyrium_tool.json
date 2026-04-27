@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:abyssal_ore_block"
+    "soa_additions:abyssal_ore_block",
+    "soa_additions:uru_ore",
+    "soa_additions:cytosinite_ore",
+    "soa_additions:fusion_matrix_block"
   ]
 }
