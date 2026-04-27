@@ -139,17 +139,24 @@ public final class AspectMap {
 
     /** Best-effort current Level lookup. Server thread → integrated/dedicated
      *  server overworld; client thread → ClientLevel. Returns null off-thread
-     *  or before world load. */
+     *  or before world load.
+     *
+     *  <p>The client branch is delegated to {@link ClientAccess} — a nested
+     *  class loaded only on Dist.CLIENT. Any direct reference to
+     *  {@code net.minecraft.client.Minecraft} (whose {@code level} field is
+     *  typed {@code ClientLevel}) from this method's bytecode would put a
+     *  client-only type in {@link AspectMap}'s constant pool, which fails to
+     *  resolve on a dedicated server when this class is loaded — taking down
+     *  every datapack reload listener that touches AspectMap with it. */
     @Nullable
     private static net.minecraft.world.level.Level currentLevel() {
-        try {
-            // Client-side: Minecraft.getInstance().level
-            if (net.minecraftforge.fml.loading.FMLEnvironment.dist
-                    == net.minecraftforge.api.distmarker.Dist.CLIENT) {
-                var mc = net.minecraft.client.Minecraft.getInstance();
-                if (mc != null && mc.level != null) return mc.level;
-            }
-        } catch (Throwable ignored) {}
+        if (net.minecraftforge.fml.loading.FMLEnvironment.dist
+                == net.minecraftforge.api.distmarker.Dist.CLIENT) {
+            try {
+                var lvl = ClientAccess.level();
+                if (lvl != null) return lvl;
+            } catch (Throwable ignored) {}
+        }
         try {
             // Server-side: any loaded server level works — recipes are global.
             var srv = net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer();
@@ -159,6 +166,20 @@ public final class AspectMap {
             }
         } catch (Throwable ignored) {}
         return null;
+    }
+
+    /** Nested holder for client-only level access. Mirrors the pattern in
+     *  {@code ClientIdentity.ClientAccess}. The JVM only loads this nested
+     *  class when {@link #level()} is first invoked, which is gated by a
+     *  {@code Dist.CLIENT} check in {@link #currentLevel()}, so the dedicated
+     *  server never resolves {@code net.minecraft.client.Minecraft} or
+     *  {@code ClientLevel}. */
+    private static final class ClientAccess {
+        @Nullable
+        static net.minecraft.world.level.Level level() {
+            var mc = net.minecraft.client.Minecraft.getInstance();
+            return mc != null ? mc.level : null;
+        }
     }
 
     /** Filter a composition down to the aspects the predicate accepts.
