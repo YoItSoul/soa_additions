@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:ingots/shadowium"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_shadowium"
+  },
+  "temperature": 1200,
+  "time": 60
+}

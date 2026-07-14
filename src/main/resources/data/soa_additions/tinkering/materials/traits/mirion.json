@@ -1,0 +1,12 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "tconstruct:erratic"
+    },
+    {
+      "level": 1,
+      "name": "tconstruct:magnetic"
+    }
+  ]
+}

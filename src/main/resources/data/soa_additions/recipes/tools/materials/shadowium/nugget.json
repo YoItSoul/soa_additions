@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/shadowium"
+  },
+  "material": "soa_additions:shadowium",
+  "needed": 9,
+  "value": 1
+}

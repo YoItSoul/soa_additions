@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:ingots/supremium"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "mysticalagradditions:molten_supremium"
+  },
+  "temperature": 800,
+  "time": 60,
+  "type": "tconstruct:melting"
+}

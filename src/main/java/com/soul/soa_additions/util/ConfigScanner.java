@@ -45,6 +45,9 @@ public final class ConfigScanner {
     private ConfigScanner() {}
 
     public static void startScanning() {
+        // Dev diagnostic only: a WatchService thread + config-dir walk is pure
+        // overhead for players. Opt in with -Dsoa.devProfiling=true.
+        if (!com.soul.soa_additions.compat.DevProfiling.ENABLED) return;
         LOGGER.info("Starting config scan process");
         MinecraftForge.EVENT_BUS.register(ConfigScanner.class);
         collectKnownConfigs();

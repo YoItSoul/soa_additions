@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:nuggets/aluminium"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "soa_additions:molten_aluminium"
+  },
+  "temperature": 1200,
+  "time": 20
+}

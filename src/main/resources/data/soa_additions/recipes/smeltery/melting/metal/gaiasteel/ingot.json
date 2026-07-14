@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:ingots/gaiasteel"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_gaiasteel"
+  },
+  "temperature": 1200,
+  "time": 60
+}

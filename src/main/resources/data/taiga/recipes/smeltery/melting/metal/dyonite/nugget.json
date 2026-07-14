@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:nuggets/dyonite"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "taiga:molten_dyonite"
+  },
+  "temperature": 800,
+  "time": 20,
+  "type": "tconstruct:melting"
+}

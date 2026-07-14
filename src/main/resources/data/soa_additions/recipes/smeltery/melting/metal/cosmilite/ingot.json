@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:ingots/cosmilite"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_cosmilite"
+  },
+  "temperature": 1800,
+  "time": 60
+}

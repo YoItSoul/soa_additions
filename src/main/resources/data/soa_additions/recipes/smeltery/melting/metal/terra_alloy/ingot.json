@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:ingots/terra_alloy"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_terra_alloy"
+  },
+  "temperature": 800,
+  "time": 60,
+  "type": "tconstruct:melting"
+}

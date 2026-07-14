@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "#forge:ingots/void",
-    "#forge:nuggets/void",
-    "#forge:storage_blocks/void"
+    "#forge:ingots/void_metal",
+    "#forge:nuggets/void_metal",
+    "#forge:storage_blocks/void_metal"
   ]
 }

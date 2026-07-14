@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    { "item": "bloodarsenal:slate_demonic" }
-  ],
-  "result": { "item": "bloodmagic:demonslate", "count": 9 }
-}

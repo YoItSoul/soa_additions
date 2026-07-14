@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:storage_blocks/insanium"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "soa_additions:molten_insanium"
+  },
+  "temperature": 1200,
+  "time": 180
+}

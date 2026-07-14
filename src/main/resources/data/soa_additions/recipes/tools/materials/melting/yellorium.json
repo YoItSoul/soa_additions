@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "soa_additions:yellorium",
+  "result": {
+    "amount": 90,
+    "fluid": "bigreactors:yellorium"
+  },
+  "temperature": 800
+}

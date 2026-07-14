@@ -264,6 +264,10 @@ public final class NyxEvents {
     @SubscribeEvent
     public static void onLivingTick(LivingTickEvent event) {
         LivingEntity e = event.getEntity();
+        // Once a second per entity: this handler runs for EVERY living entity
+        // every tick, and getPersistentData() materializes an NBT tag — a mob
+        // lingering up to 1 s at dawn is imperceptible, the per-tick cost isn't.
+        if (e.tickCount % 20 != 0) return;
         if (e.level().isClientSide) return;
         if (!NyxConfig.BLOOD_MOON_VANISH.get()) return;
         if (NyxWorldData.isDaytime(e.level()) && e.getPersistentData().getBoolean("nyx:blood_moon_spawn")) {

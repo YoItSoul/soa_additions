@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "soa_additions:crimsonite",
+  "result": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_crimsonite"
+  },
+  "temperature": 1800
+}

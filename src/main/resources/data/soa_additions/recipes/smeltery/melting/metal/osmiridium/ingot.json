@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:ingots/osmiridium"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_osmiridium"
+  },
+  "temperature": 800,
+  "time": 60,
+  "type": "tconstruct:melting"
+}

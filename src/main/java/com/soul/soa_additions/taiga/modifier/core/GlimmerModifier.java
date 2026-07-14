@@ -29,7 +29,9 @@ public class GlimmerModifier extends Modifier implements InventoryTickModifierHo
     @Override
     public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder,
                                 int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
-        if (world.isClientSide || !isSelected || !(holder instanceof Player)) return;
+        // Once a second — 100t duration outlasts the 20t refresh.
+        if (world.isClientSide || !isSelected || !(holder instanceof Player)
+                || holder.tickCount % 20 != 0) return;
         holder.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 100, 0, true, false));
     }
 

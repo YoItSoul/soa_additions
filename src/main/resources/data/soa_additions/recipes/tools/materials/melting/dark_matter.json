@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "soa_additions:dark_matter",
+  "result": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_dark_matter"
+  },
+  "temperature": 1200
+}

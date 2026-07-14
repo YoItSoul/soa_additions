@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:nuggets/seismum"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "taiga:molten_seismum"
+  },
+  "temperature": 800,
+  "time": 20,
+  "type": "tconstruct:melting"
+}

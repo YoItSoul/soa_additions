@@ -1,5 +1,15 @@
 {
+  "ingredient": {
+    "tag": "forge:storage_blocks/bound_metal"
+  },
+  "leftover": {
+    "count": 1,
+    "tag": "forge:ingots/bound_metal"
+  },
+  "material": "soa_additions:bound_metal",
+  "needed": 1,
   "type": "tconstruct:material",
+  "value": 9,
   "conditions": [
     {
       "type": "forge:mod_loaded",
@@ -9,15 +19,5 @@
       "type": "forge:mod_loaded",
       "modid": "bloodmagic"
     }
-  ],
-  "ingredient": {
-    "tag": "forge:storage_blocks/bound_metal"
-  },
-  "material": "soa_additions:bound_metal",
-  "needed": 1,
-  "value": 9,
-  "leftover": {
-    "count": 1,
-    "tag": "forge:ingots/bound_metal"
-  }
+  ]
 }

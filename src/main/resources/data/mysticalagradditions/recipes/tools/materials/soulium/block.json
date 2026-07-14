@@ -1,0 +1,13 @@
+{
+  "ingredient": {
+    "tag": "forge:storage_blocks/soulium"
+  },
+  "leftover": {
+    "count": 1,
+    "tag": "forge:ingots/soulium"
+  },
+  "material": "mysticalagradditions:soulium",
+  "needed": 1,
+  "type": "tconstruct:material",
+  "value": 9
+}

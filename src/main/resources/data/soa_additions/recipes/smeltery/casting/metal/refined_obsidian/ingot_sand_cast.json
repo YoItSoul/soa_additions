@@ -1,0 +1,15 @@
+{
+  "cast": {
+    "tag": "tconstruct:casts/single_use/ingot"
+  },
+  "cast_consumed": true,
+  "cooling_time": 60,
+  "fluid": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_refined_obsidian"
+  },
+  "result": {
+    "tag": "forge:ingots/refined_obsidian"
+  },
+  "type": "tconstruct:casting_table"
+}

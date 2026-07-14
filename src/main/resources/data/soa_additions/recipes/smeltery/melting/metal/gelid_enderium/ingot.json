@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:ingots/gelid_enderium"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_gelid_enderium"
+  },
+  "temperature": 800,
+  "time": 60,
+  "type": "tconstruct:melting"
+}

@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:ingots/stellar_alloy"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_stellar_alloy"
+  },
+  "temperature": 1800,
+  "time": 60
+}

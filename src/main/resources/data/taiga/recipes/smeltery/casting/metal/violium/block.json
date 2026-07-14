@@ -1,0 +1,11 @@
+{
+  "cooling_time": 180,
+  "fluid": {
+    "amount": 810,
+    "fluid": "taiga:molten_violium"
+  },
+  "result": {
+    "tag": "forge:storage_blocks/violium"
+  },
+  "type": "tconstruct:casting_basin"
+}

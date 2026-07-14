@@ -1,0 +1,14 @@
+{
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/ingot"
+  },
+  "cooling_time": 60,
+  "fluid": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_stainless_steel"
+  },
+  "result": {
+    "tag": "forge:ingots/stainless_steel"
+  },
+  "type": "tconstruct:casting_table"
+}

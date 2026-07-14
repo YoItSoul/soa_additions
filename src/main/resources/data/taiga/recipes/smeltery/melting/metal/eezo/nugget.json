@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:nuggets/eezo"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "taiga:molten_eezo"
+  },
+  "temperature": 800,
+  "time": 20,
+  "type": "tconstruct:melting"
+}

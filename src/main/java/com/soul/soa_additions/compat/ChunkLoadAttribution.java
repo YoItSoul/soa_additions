@@ -47,6 +47,7 @@ public final class ChunkLoadAttribution {
 
     @SubscribeEvent
     public static void onChunkLoad(ChunkEvent.Load event) {
+        if (!DevProfiling.ENABLED) return;
         long n = totalLoads.incrementAndGet();
         if (n < WARMUP_LOADS) return;
         if ((n % SAMPLE_EVERY) != 0) return;

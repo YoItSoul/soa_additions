@@ -112,5 +112,11 @@ public final class ModNetworking {
                 .decoder(DonorWallOpenPacket::decode)
                 .consumerMainThread(DonorWallOpenPacket::handle)
                 .add();
+
+        CHANNEL.messageBuilder(com.soul.soa_additions.oresight.OreSightSyncPacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(com.soul.soa_additions.oresight.OreSightSyncPacket::encode)
+                .decoder(com.soul.soa_additions.oresight.OreSightSyncPacket::decode)
+                .consumerMainThread(com.soul.soa_additions.oresight.OreSightSyncPacket::handle)
+                .add();
     }
 }

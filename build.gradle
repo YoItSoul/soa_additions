@@ -101,6 +101,12 @@ dependencies {
     // NoClassDefFoundError at plugin discovery time.
     compileOnly fg.deobf(files("libs/Jade-1.20.1-Forge-11.13.2.jar"))
 
+    // Just Enough Resources — compile-only for the JerIntegration plugin
+    // (com.soul.soa_additions.compat.jer). Implements IJERPlugin so JER's
+    // ModFileScanData scanner picks it up at startup; class never loads when
+    // JER is absent.
+    compileOnly fg.deobf(files("libs/JustEnoughResources-1.20.1-1.4.0.247.jar"))
+
     // ItemStages + GameStages — compile-only for GreedyBag stage checks.
     // Published by Darkhax on Jared's maven (already declared above).
     compileOnly fg.deobf("net.darkhax.itemstages:ItemStages-Forge-1.20.1:8.0.3")

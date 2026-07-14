@@ -196,7 +196,7 @@ public final class KnownAspects {
         }
 
         int initialSize = known.size();
-        ThaumicRemnants.LOG.info(
+        ThaumicRemnants.LOG.debug(
                 "[monocle/srv] cascadeFromScans entered: {} known, {} scanned blocks, {} scanned items, {} scanned entities",
                 initialSize, scanned.blockSnapshot().size(),
                 scanned.itemSnapshot().size(), scanned.entitySnapshot().size());
@@ -238,12 +238,12 @@ public final class KnownAspects {
                 }
             }
         } while (changed && ++safety < 16);
-        ThaumicRemnants.LOG.info(
+        ThaumicRemnants.LOG.debug(
                 "[monocle/srv] cascadeFromScans done: evaluated {} aspect-instances, added {} aspects, {} loop passes",
                 aspectsEvaluated, aspectsAdded, safety);
 
         if (known.size() > initialSize) {
-            ThaumicRemnants.LOG.info(
+            ThaumicRemnants.LOG.debug(
                     "[monocle/srv] cascadeFromScans: {} grew from {} to {} known aspects",
                     player.getName().getString(), initialSize, known.size());
             syncTo(player);
@@ -299,48 +299,11 @@ public final class KnownAspects {
 
     public static void register(IEventBus modBus) {
         modBus.addListener(KnownAspects::onRegisterCaps);
-        // AttachCapabilitiesEvent is generic — must use addGenericListener
-        // with the type filter, NOT plain addListener. See
-        // ScannedTargets.register() for the full note.
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addGenericListener(
-                net.minecraft.world.entity.Entity.class, KnownAspects::onAttachCap);
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(KnownAspects::onCloneCap);
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(KnownAspects::onLoginCap);
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(KnownAspects::onRespawnCap);
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(KnownAspects::onDimChangeCap);
-    }
-
-    public static void onAttachCap(AttachCapabilitiesEvent<net.minecraft.world.entity.Entity> event) {
-        if (!(event.getObject() instanceof Player)) return;
-        if (event.getCapabilities().containsKey(CAP_ID)) return;
-        event.addCapability(CAP_ID, new Provider());
-        ThaumicRemnants.LOG.info("[monocle/srv] KnownAspects cap attached to {}",
-                event.getObject().getUUID());
-    }
-
-    public static void onCloneCap(Clone event) {
-        if (!event.isWasDeath()) return;
-        Player oldP = event.getOriginal();
-        Player newP = event.getEntity();
-        oldP.reviveCaps();
-        Data old = of(oldP);
-        Data fresh = of(newP);
-        if (old != EMPTY && fresh != EMPTY) {
-            fresh.read(old.write());
-        }
-        oldP.invalidateCaps();
-    }
-
-    public static void onLoginCap(PlayerLoggedInEvent event) {
-        if (event.getEntity() instanceof ServerPlayer sp) syncTo(sp);
-    }
-
-    public static void onRespawnCap(PlayerRespawnEvent event) {
-        if (event.getEntity() instanceof ServerPlayer sp) syncTo(sp);
-    }
-
-    public static void onDimChangeCap(PlayerChangedDimensionEvent event) {
-        if (event.getEntity() instanceof ServerPlayer sp) syncTo(sp);
+        // Forge-bus handlers (attach/clone/login/respawn/dim-change) live ONLY
+        // in the auto-subscribed Events class below. They used to be manually
+        // added here as well, which double-registered every one of them —
+        // two sync packets per login/respawn and a double reviveCaps/
+        // invalidateCaps on death-clone.
     }
 
     private static void onRegisterCaps(RegisterCapabilitiesEvent event) {

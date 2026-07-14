@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:ingots/aeroite"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_aeroite"
+  },
+  "temperature": 800,
+  "time": 60
+}

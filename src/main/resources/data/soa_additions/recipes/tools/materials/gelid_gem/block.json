@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:storage_blocks/gelid_gem"
+  },
+  "material": "soa_additions:gelid_gem",
+  "needed": 1,
+  "value": 9,
+  "leftover": {
+    "count": 1,
+    "tag": "forge:gems/gelid_gem"
+  }
+}

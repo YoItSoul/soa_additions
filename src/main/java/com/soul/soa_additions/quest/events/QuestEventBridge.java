@@ -174,6 +174,15 @@ public final class QuestEventBridge {
                     return pt.mode() == current;
                 });
             }
+            if (com.soul.soa_additions.quest.QuestRegistry.hasTasksOfType(
+                    com.soul.soa_additions.quest.task.GameStageTask.TYPE)) {
+                ProgressService.apply(player, 1,
+                        com.soul.soa_additions.quest.task.GameStageTask.TYPE, task -> {
+                    com.soul.soa_additions.quest.task.GameStageTask gt =
+                            (com.soul.soa_additions.quest.task.GameStageTask) task;
+                    return com.soul.soa_additions.quest.task.GameStageTask.hasStage(player, gt.stage());
+                });
+            }
             ObserveTaskPoller.poll(player);
         }
 

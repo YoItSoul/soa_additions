@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:storage_blocks/fiery"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "soa_additions:molten_fiery"
+  },
+  "temperature": 800,
+  "time": 180
+}

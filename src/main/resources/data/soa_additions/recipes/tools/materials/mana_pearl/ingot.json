@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:gems/mana_pearl"
+  },
+  "material": "soa_additions:mana_pearl",
+  "needed": 1,
+  "value": 1
+}

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:ingots/modularium"
+  },
+  "material": "soa_additions:modularium",
+  "needed": 1,
+  "value": 1
+}

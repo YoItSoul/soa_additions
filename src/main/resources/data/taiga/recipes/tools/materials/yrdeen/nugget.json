@@ -1,9 +1,9 @@
 {
-  "type": "tconstruct:material",
   "ingredient": {
     "tag": "forge:nuggets/yrdeen"
   },
   "material": "taiga:yrdeen",
   "needed": 9,
+  "type": "tconstruct:material",
   "value": 1
 }

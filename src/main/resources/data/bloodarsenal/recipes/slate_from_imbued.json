@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    { "item": "bloodarsenal:slate_imbued" }
-  ],
-  "result": { "item": "bloodmagic:infusedslate", "count": 9 }
-}

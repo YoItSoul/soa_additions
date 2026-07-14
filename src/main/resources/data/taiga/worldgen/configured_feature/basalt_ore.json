@@ -1,7 +1,7 @@
 {
   "type": "minecraft:ore",
   "config": {
-    "size": 4,
+    "size": 1,
     "discard_chance_on_air_exposure": 0.0,
     "targets": [
       {
@@ -10,7 +10,7 @@
           "block": "minecraft:lava"
         },
         "state": {
-          "Name": "taiga:basalt_ore"
+          "Name": "taiga:basalt_block"
         }
       }
     ]

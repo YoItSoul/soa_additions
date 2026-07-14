@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:gems/aquamarine"
+  },
+  "material": "soa_additions:aquamarine",
+  "needed": 1,
+  "value": 1
+}

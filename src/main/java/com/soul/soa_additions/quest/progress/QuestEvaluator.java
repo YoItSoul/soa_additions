@@ -42,6 +42,12 @@ public final class QuestEvaluator {
 
     private QuestEvaluator() {}
 
+    /** Re-arm the one-shot cycle warning. Called on quest reload so a NEW
+     *  malformed cycle introduced by an edited datapack still gets reported. */
+    public static void resetCycleWarning() {
+        cycleWarned = false;
+    }
+
     /** Re-entrancy guard for {@link #recomputeAllAndAutoClaim}. Command
      *  rewards can dispatch commands that complete tasks and re-enter the
      *  auto-claim sweep through the command dispatcher — without this flag
@@ -214,6 +220,19 @@ public final class QuestEvaluator {
 
     // ---------- helpers ----------
 
+    /** True when every quest in the chapter has been completed (claimed or ready). */
+    private static boolean chapterComplete(String chapterId, TeamQuestProgress team) {
+        var chapter = QuestRegistry.chapter(chapterId);
+        if (chapter.isEmpty() || chapter.get().quests().isEmpty()) return false;
+        for (Quest q : chapter.get().quests()) {
+            QuestProgress p = team.peek(q.fullId());
+            boolean done = p != null && (p.status() == QuestStatus.CLAIMED
+                    || p.status() == QuestStatus.READY || p.everClaimed());
+            if (!done) return false;
+        }
+        return true;
+    }
+
     private static boolean isExcluded(Quest quest, TeamQuestProgress team) {
         List<String> ex = quest.exclusions();
         if (ex == null || ex.isEmpty()) return false;
@@ -237,6 +256,15 @@ public final class QuestEvaluator {
 
         int satisfied = 0;
         for (String depId : deps) {
+            // "chapter:<id>" — satisfied when every quest in that chapter is done.
+            if (depId.startsWith("chapter:")) {
+                if (chapterComplete(depId.substring("chapter:".length()), team)) {
+                    satisfied++;
+                    if (quest.minDeps() <= 0 && !quest.depsAll() && satisfied >= 1) return true;
+                    if (quest.minDeps() > 0 && satisfied >= quest.minDeps()) return true;
+                }
+                continue;
+            }
             // Dependency ids in JSON can be bare "quest_id" (same chapter) or
             // "chapter/quest_id" (cross-chapter). Normalize to full ids.
             String fullDep = depId.contains("/") ? depId : quest.chapterId() + "/" + depId;

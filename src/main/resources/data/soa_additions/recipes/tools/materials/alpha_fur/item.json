@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "twilightforest:alpha_fur"
+  },
+  "material": "soa_additions:alpha_fur",
+  "needed": 1,
+  "value": 1
+}

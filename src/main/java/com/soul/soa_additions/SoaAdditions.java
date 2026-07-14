@@ -104,10 +104,10 @@ public final class SoaAdditions {
         if (ModList.get().isLoaded("reskillable")) {
             com.soul.soa_additions.reskillable.ReskillableTraits.init();
             // Auto-classifier for items NOT in skill_locks.json (Tinker
-            // tools + any unlisted modded gear). Algorithmically derives
-            // skill+level from ATTACK_DAMAGE / harvest tier / armor sum,
-            // calibrated against GC's reskillable.cfg data points.
-            com.soul.soa_additions.reskillable.ToolSkillAutoLock.init();
+            // tools + any unlisted modded gear) is disabled for now — the
+            // armor curve mis-classified vanilla iron gear and the broader
+            // gating needs more calibration before re-enabling.
+            // com.soul.soa_additions.reskillable.ToolSkillAutoLock.init();
         }
 
         // TConstruct Evolution — soft dependency on Tinkers' Construct.
@@ -116,6 +116,7 @@ public final class SoaAdditions {
         if (ModList.get().isLoaded("tconstruct")) {
             com.soul.soa_additions.tconstructevo.TConstructEvoPlugin.init(modEventBus);
             com.soul.soa_additions.taiga.TaigaPlugin.init(modEventBus);
+            com.soul.soa_additions.tinkersaether.TinkersAetherPlugin.init(modEventBus);
         }
 
         // Thaumic Remnants — original content, no soft dependency gate.

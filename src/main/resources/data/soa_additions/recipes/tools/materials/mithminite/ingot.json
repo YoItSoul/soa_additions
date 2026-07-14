@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:ingots/mithminite"
+  },
+  "material": "soa_additions:mithminite",
+  "needed": 1,
+  "value": 1
+}

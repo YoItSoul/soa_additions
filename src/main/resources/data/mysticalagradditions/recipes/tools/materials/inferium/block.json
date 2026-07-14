@@ -1,0 +1,13 @@
+{
+  "ingredient": {
+    "tag": "forge:storage_blocks/inferium"
+  },
+  "leftover": {
+    "count": 1,
+    "tag": "forge:ingots/inferium"
+  },
+  "material": "mysticalagradditions:inferium",
+  "needed": 1,
+  "type": "tconstruct:material",
+  "value": 9
+}

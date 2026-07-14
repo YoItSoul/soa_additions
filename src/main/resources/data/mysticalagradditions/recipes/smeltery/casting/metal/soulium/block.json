@@ -1,0 +1,11 @@
+{
+  "cooling_time": 180,
+  "fluid": {
+    "amount": 810,
+    "fluid": "mysticalagradditions:molten_soulium"
+  },
+  "result": {
+    "tag": "forge:storage_blocks/soulium"
+  },
+  "type": "tconstruct:casting_basin"
+}

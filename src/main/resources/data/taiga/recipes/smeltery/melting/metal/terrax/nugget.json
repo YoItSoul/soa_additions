@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:nuggets/terrax"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "taiga:molten_terrax"
+  },
+  "temperature": 800,
+  "time": 20,
+  "type": "tconstruct:melting"
+}

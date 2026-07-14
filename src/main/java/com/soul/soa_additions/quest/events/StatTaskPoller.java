@@ -45,6 +45,9 @@ public final class StatTaskPoller {
         // Group refs by quest so each quest only pays one recompute pre/post.
         java.util.Map<Quest, QuestStatus> seen = new java.util.HashMap<>();
         java.util.Set<Quest> dirty = null;
+        // Delta capture, taken lazily before the first mutation — most polls
+        // find nothing changed and never pay the snapshot.
+        com.soul.soa_additions.quest.net.QuestDeltaPacket.Capture capture = null;
         for (QuestRegistry.TaskRef ref : QuestRegistry.tasksOfType(StatTask.TYPE)) {
             Quest quest = ref.quest();
             QuestStatus status = seen.computeIfAbsent(quest, q -> QuestEvaluator.recompute(q, teamProgress));
@@ -55,6 +58,9 @@ public final class StatTaskPoller {
             QuestProgress qp = teamProgress.get(quest.fullId());
             TaskProgress tp = qp.task(ref.taskIndex());
             if (tp.count() != current) {
+                if (capture == null) {
+                    capture = com.soul.soa_additions.quest.net.QuestDeltaPacket.Capture.of(player);
+                }
                 tp.setCount(current);
                 qp.touch(tick);
                 if (dirty == null) dirty = new java.util.HashSet<>();
@@ -76,7 +82,7 @@ public final class StatTaskPoller {
         }
         if (changed) {
             progressData.touch();
-            com.soul.soa_additions.quest.net.QuestSyncPacket.sendToTeam(player);
+            capture.sendChanges(player);
         }
     }
 

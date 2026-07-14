@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "minecraft:coal"
+  },
+  "material": "soa_additions:coal",
+  "needed": 1,
+  "value": 1
+}

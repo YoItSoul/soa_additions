@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:nuggets/astrium"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "taiga:molten_astrium"
+  },
+  "temperature": 800,
+  "time": 20,
+  "type": "tconstruct:melting"
+}

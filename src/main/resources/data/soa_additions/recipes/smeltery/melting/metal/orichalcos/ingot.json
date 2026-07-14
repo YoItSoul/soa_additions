@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:ingots/orichalcos"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_orichalcos"
+  },
+  "temperature": 1200,
+  "time": 60
+}

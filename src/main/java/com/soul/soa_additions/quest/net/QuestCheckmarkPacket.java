@@ -63,6 +63,7 @@ public record QuestCheckmarkPacket(String fullQuestId, int taskIndex) {
             QuestProgress qp = tp.get(quest.fullId());
             TaskProgress task = qp.task(pkt.taskIndex);
             if (task.count() >= 1) return; // already checked
+            QuestDeltaPacket.Capture capture = QuestDeltaPacket.Capture.of(player);
             task.setCount(1);
             qp.touch(player.server.getTickCount());
             QuestStatus after = QuestEvaluator.recompute(quest, tp);
@@ -72,7 +73,7 @@ public record QuestCheckmarkPacket(String fullQuestId, int taskIndex) {
             }
             data.touch();
 
-            QuestSyncPacket.sendToTeam(player);
+            capture.sendChanges(player);
         });
         c.setPacketHandled(true);
     }

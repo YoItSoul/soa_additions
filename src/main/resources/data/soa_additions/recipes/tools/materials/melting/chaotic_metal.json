@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "soa_additions:chaotic_metal",
+  "result": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_chaotic_metal"
+  },
+  "temperature": 800
+}

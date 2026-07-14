@@ -95,9 +95,10 @@ public class BloodCapacitorBlockEntity extends BlockEntity {
     public void load(CompoundTag tag) {
         super.load(tag);
         if (tag.contains("Energy")) {
-            // EnergyStorage doesn't have a public setter, so we receive energy to restore
-            int stored = tag.getInt("Energy");
-            energy.receiveEnergy(stored, false);
+            // deserializeNBT sets the raw energy field directly. The old
+            // receiveEnergy(stored) restore was clamped to the per-op transfer
+            // rate, silently discarding everything above it on every reload.
+            energy.deserializeNBT(net.minecraft.nbt.IntTag.valueOf(tag.getInt("Energy")));
         }
     }
 }

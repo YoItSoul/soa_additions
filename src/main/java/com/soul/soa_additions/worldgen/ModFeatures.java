@@ -16,6 +16,9 @@ public final class ModFeatures {
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> URU_OBSIDIORITE =
             FEATURES.register("uru_obsidiorite", () -> new UruObsidioriteFeature(NoneFeatureConfiguration.CODEC));
 
+    public static final RegistryObject<Feature<NoneFeatureConfiguration>> DURANITE_METEOR =
+            FEATURES.register("duranite_meteor", () -> new DuraniteMeteorFeature(NoneFeatureConfiguration.CODEC));
+
     private ModFeatures() {}
 
     public static void register(IEventBus eventBus) {

@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:storage_blocks/vibrant_crystal"
+  },
+  "material": "soa_additions:vibrant_crystal",
+  "needed": 1,
+  "value": 9,
+  "leftover": {
+    "count": 1,
+    "tag": "forge:gems/vibrant_crystal"
+  }
+}

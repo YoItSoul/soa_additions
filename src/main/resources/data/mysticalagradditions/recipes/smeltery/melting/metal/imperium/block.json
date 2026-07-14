@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:storage_blocks/imperium"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "mysticalagradditions:molten_imperium"
+  },
+  "temperature": 800,
+  "time": 180,
+  "type": "tconstruct:melting"
+}

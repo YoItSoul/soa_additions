@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:storage_blocks/lumix"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "taiga:molten_lumix"
+  },
+  "temperature": 800,
+  "time": 180,
+  "type": "tconstruct:melting"
+}

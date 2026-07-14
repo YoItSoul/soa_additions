@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_asgardium"
+  },
+  "output": "soa_additions:asgardium",
+  "temperature": 1200
+}

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_astral_metal"
+  },
+  "output": "soa_additions:astral_metal",
+  "temperature": 1800
+}

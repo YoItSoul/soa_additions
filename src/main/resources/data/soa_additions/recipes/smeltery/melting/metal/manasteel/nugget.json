@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:nuggets/manasteel"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "soa_additions:molten_manasteel"
+  },
+  "temperature": 800,
+  "time": 20,
+  "type": "tconstruct:melting"
+}

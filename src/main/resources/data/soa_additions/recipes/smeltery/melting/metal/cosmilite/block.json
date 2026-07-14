@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:storage_blocks/cosmilite"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "soa_additions:molten_cosmilite"
+  },
+  "temperature": 1800,
+  "time": 180
+}

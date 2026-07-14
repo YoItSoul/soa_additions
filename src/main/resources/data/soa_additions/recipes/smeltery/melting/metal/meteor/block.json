@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:storage_blocks/meteor"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "soa_additions:molten_meteor"
+  },
+  "temperature": 1200,
+  "time": 180
+}

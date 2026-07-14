@@ -143,8 +143,10 @@ public class RitualBloodBurner extends Ritual {
                     mrs.getOwnerNetwork().syphon(SoulTicket.block(level, pos, lpCost));
                 }
 
-                // Lightning VFX at firing positions
-                if (level instanceof ServerLevel serverLevel) {
+                // Lightning VFX at firing positions — once a second, not per
+                // tick: 28 bolt entities/tick (~560/s) per active ritual was
+                // pure entity-spawn churn for a purely visual effect.
+                if (level.getGameTime() % 20 == 0 && level instanceof ServerLevel serverLevel) {
                     for (BlockPos firingPos : FIRING_POS) {
                         BlockPos actual = pos.offset(firingPos);
                         LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(serverLevel);

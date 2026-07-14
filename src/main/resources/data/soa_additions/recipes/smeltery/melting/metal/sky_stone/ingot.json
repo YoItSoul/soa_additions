@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:ingots/sky_stone"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_sky_stone"
+  },
+  "temperature": 800,
+  "time": 60,
+  "type": "tconstruct:melting"
+}

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:storage_blocks/stellar_alloy_gc"
+  },
+  "material": "soa_additions:stellar_alloy_gc",
+  "needed": 1,
+  "value": 9
+}

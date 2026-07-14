@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/terra_alloy"
+  },
+  "material": "soa_additions:terra_alloy",
+  "needed": 9,
+  "value": 1
+}

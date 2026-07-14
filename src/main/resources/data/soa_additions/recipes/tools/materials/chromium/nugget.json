@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/chromium"
+  },
+  "material": "soa_additions:chromium",
+  "needed": 9,
+  "value": 1
+}

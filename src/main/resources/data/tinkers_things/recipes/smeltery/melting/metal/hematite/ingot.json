@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:ingots/hematite"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "tinkers_things:molten_hematite"
+  },
+  "temperature": 800,
+  "time": 60,
+  "type": "tconstruct:melting"
+}

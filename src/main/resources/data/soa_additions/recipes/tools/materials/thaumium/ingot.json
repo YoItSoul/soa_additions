@@ -1,5 +1,11 @@
 {
   "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:ingots/thaumium"
+  },
+  "material": "soa_additions:thaumium",
+  "needed": 1,
+  "value": 1,
   "conditions": [
     {
       "type": "forge:mod_loaded",
@@ -9,11 +15,5 @@
       "type": "forge:mod_loaded",
       "modid": "thaumcraft"
     }
-  ],
-  "ingredient": {
-    "tag": "forge:ingots/thaumium"
-  },
-  "material": "soa_additions:thaumium",
-  "needed": 1,
-  "value": 1
+  ]
 }

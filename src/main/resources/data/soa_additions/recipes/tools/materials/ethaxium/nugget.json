@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/ethaxium"
+  },
+  "material": "soa_additions:ethaxium",
+  "needed": 9,
+  "value": 1
+}

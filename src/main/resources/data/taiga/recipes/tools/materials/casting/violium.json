@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "amount": 90,
+    "fluid": "taiga:molten_violium"
+  },
+  "output": "taiga:violium",
+  "temperature": 800
+}

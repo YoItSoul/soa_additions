@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:ingots/cosmilite"
+  },
+  "material": "soa_additions:cosmilite",
+  "needed": 1,
+  "value": 1
+}

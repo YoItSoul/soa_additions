@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:nuggets/dilithium"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "taiga:molten_dilithium"
+  },
+  "temperature": 800,
+  "time": 20,
+  "type": "tconstruct:melting"
+}

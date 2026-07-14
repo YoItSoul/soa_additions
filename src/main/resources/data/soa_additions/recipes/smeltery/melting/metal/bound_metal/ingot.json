@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:ingots/bound_metal"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_bound_metal"
+  },
+  "temperature": 800,
+  "time": 60,
+  "type": "tconstruct:melting"
+}

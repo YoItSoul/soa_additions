@@ -19,6 +19,12 @@ public final class ModBlockEntities {
                     () -> BlockEntityType.Builder.of(CrystalBlockEntity::new, NyxBlocks.CRYSTAL.get())
                             .build(null));
 
+    public static final RegistryObject<BlockEntityType<TaskCollectorBlockEntity>> TASK_COLLECTOR =
+            BLOCK_ENTITY_TYPES.register("task_collector",
+                    () -> BlockEntityType.Builder.of(TaskCollectorBlockEntity::new,
+                                    com.soul.soa_additions.block.ModBlocks.TASK_COLLECTOR.get())
+                            .build(null));
+
     private ModBlockEntities() {}
 
     public static void register(IEventBus eventBus) {

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:storage_blocks/nylon_cloth"
+  },
+  "material": "soa_additions:nylon_cloth",
+  "needed": 1,
+  "value": 9
+}

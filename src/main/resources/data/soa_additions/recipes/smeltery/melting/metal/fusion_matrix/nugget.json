@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:nuggets/fusion_matrix"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "soa_additions:molten_fusion_matrix"
+  },
+  "temperature": 800,
+  "time": 20,
+  "type": "tconstruct:melting"
+}

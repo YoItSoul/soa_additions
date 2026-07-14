@@ -54,10 +54,12 @@ public final class StartupProfiler {
 
     public static long getCommonSetupMs() { return stageCommonSetupMs; }
 
-    /** Called from the SoaAdditions constructor — earliest hook we have. */
+    /** Called from the SoaAdditions constructor — earliest hook we have.
+     *  Stage timestamps are always recorded (they're free and feed telemetry's
+     *  load-time fields); the 5 Hz all-thread sampler is dev-only. */
     public static void onConstruct() {
         constructStart = System.nanoTime();
-        startSampler();
+        if (DevProfiling.ENABLED) startSampler();
     }
 
     public static void onCommonSetup(FMLCommonSetupEvent event) {
@@ -70,6 +72,7 @@ public final class StartupProfiler {
         long now = System.nanoTime();
         stageCommonSetupMs = (now - commonSetupStart) / 1_000_000L;
         loadCompleteAt = now;
+        if (!DevProfiling.ENABLED) return;
         stopSampler();
         try {
             writeReport();

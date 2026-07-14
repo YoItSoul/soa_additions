@@ -19,6 +19,7 @@ public final class ClientTelemetryHooks {
 
     private static boolean gpuCaptured = false;
     private static boolean heartbeatStarted = false;
+    private static int retryCounter = 0;
 
     @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event) {
@@ -27,11 +28,18 @@ public final class ClientTelemetryHooks {
             ClientIdentity.captureGpuOnRenderThread();
             gpuCaptured = true;
         }
-        if (!heartbeatStarted) {
-            // Retries each tick until initial send has populated cachedEndpoint.
-            Telemetry.startHeartbeat();
-            heartbeatStarted = Telemetry.isHeartbeatRunning();
+        if (heartbeatStarted) return;
+        // Retry once a second (not every tick) until the initial send has
+        // populated cachedEndpoint; give up permanently when telemetry can
+        // never start this session (disabled in config / dev environment)
+        // instead of re-reading the config 20x/s for the whole session.
+        if (++retryCounter % 20 != 0) return;
+        if (!Telemetry.heartbeatPossible()) {
+            heartbeatStarted = true;
+            return;
         }
+        Telemetry.startHeartbeat();
+        heartbeatStarted = Telemetry.isHeartbeatRunning();
     }
 
     @SubscribeEvent

@@ -1,0 +1,13 @@
+{
+  "ingredient": {
+    "tag": "forge:storage_blocks/alumite"
+  },
+  "leftover": {
+    "count": 1,
+    "tag": "forge:ingots/alumite"
+  },
+  "material": "soa_additions:alumite",
+  "needed": 1,
+  "type": "tconstruct:material",
+  "value": 9
+}

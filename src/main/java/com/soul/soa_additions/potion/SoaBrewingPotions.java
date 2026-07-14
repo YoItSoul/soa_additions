@@ -104,6 +104,21 @@ public final class SoaBrewingPotions {
     public static final RegistryObject<Potion> LONG_TELEPORT       = lng("long_teleport", SoaPotions.TELEPORT);
     public static final RegistryObject<Potion> STRONG_TELEPORT     = strong("strong_teleport", SoaPotions.TELEPORT);
 
+    // Ore-sight system: a no-effect "mutagenic" intermediate (water + thaumon:mutagen)
+    // and the ore-sight base/long potions. The actual targeted ore is encoded on the
+    // Potion ItemStack's NBT under the "OreSight" tag (set by the brewing recipe);
+    // the Potion registry entry is the same regardless of which ore is being tracked.
+    public static final RegistryObject<Potion> MUTAGENIC           = POTIONS.register("mutagenic",
+            () -> new Potion("mutagenic"));
+    public static final RegistryObject<Potion> ORE_SIGHT           = base("ore_sight", SoaPotions.ORE_SIGHT);
+    public static final RegistryObject<Potion> LONG_ORE_SIGHT      = lng("long_ore_sight", SoaPotions.ORE_SIGHT);
+
+    /** Master ore-sight — highlights ALL ores in range. White bottle tint
+     *  via {@link SoaPotions#MASTER_ORE_SIGHT}. Registered without a brewing
+     *  recipe (creative-only / loot-table reward / command grant). */
+    public static final RegistryObject<Potion> MASTER_ORE_SIGHT      = base("master_ore_sight", SoaPotions.MASTER_ORE_SIGHT);
+    public static final RegistryObject<Potion> LONG_MASTER_ORE_SIGHT = lng("long_master_ore_sight", SoaPotions.MASTER_ORE_SIGHT);
+
     private SoaBrewingPotions() {}
 
     private static RegistryObject<Potion> base(String name, net.minecraftforge.registries.RegistryObject<? extends net.minecraft.world.effect.MobEffect> effect) {

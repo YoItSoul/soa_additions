@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/nylon_cloth"
+  },
+  "material": "soa_additions:nylon_cloth",
+  "needed": 9,
+  "value": 1
+}

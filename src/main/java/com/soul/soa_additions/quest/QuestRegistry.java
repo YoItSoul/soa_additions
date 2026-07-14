@@ -52,6 +52,7 @@ public final class QuestRegistry {
         questsByFullId = qs;
         rebuildTaskIndex();
         com.soul.soa_additions.quest.web.QuestWebServer.invalidateLayoutCache();
+        com.soul.soa_additions.quest.progress.QuestEvaluator.resetCycleWarning();
     }
 
     /**

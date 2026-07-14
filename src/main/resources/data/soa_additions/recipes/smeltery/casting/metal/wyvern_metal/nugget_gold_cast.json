@@ -1,0 +1,14 @@
+{
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/nugget"
+  },
+  "cooling_time": 20,
+  "fluid": {
+    "amount": 10,
+    "fluid": "soa_additions:molten_wyvern_metal"
+  },
+  "result": {
+    "tag": "forge:nuggets/wyvern_metal"
+  },
+  "type": "tconstruct:casting_table"
+}

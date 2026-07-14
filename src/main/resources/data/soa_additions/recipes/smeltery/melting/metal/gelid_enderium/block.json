@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:storage_blocks/gelid_enderium"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "soa_additions:molten_gelid_enderium"
+  },
+  "temperature": 800,
+  "time": 180,
+  "type": "tconstruct:melting"
+}

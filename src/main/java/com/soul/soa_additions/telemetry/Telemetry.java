@@ -234,6 +234,21 @@ public final class Telemetry {
         return heartbeatTask != null && !heartbeatTask.isDone();
     }
 
+    /**
+     * False when the heartbeat can never start this session (telemetry disabled
+     * in config, or a non-production environment) — lets the client tick hook
+     * stop retrying instead of polling forever. Returns true while the config
+     * hasn't loaded yet so the caller keeps retrying until it has.
+     */
+    public static boolean heartbeatPossible() {
+        if (!FMLEnvironment.production) return false;
+        try {
+            return ModConfigs.ENABLE_TELEMETRY.get();
+        } catch (Throwable t) {
+            return true; // config not loaded yet — keep retrying
+        }
+    }
+
     /** Fires one immediate heartbeat off the main thread. Safe to call anytime. */
     public static void sendImmediateHeartbeat() {
         if (cachedEndpoint == null) return;
@@ -262,6 +277,12 @@ public final class Telemetry {
             if (heartbeatTask != null) {
                 heartbeatTask.cancel(false);
                 heartbeatTask = null;
+            }
+            // Release the scheduler thread too — startHeartbeat lazily recreates
+            // it, so integrated-server open/close cycles don't leak idle threads.
+            if (heartbeatExec != null) {
+                heartbeatExec.shutdown();
+                heartbeatExec = null;
             }
         }
         if (cachedEndpoint == null) return;

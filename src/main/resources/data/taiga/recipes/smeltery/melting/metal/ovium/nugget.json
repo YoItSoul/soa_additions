@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:nuggets/ovium"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "taiga:molten_ovium"
+  },
+  "temperature": 800,
+  "time": 20,
+  "type": "tconstruct:melting"
+}

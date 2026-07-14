@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:nuggets/adamant"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "taiga:molten_adamant"
+  },
+  "temperature": 800,
+  "time": 20,
+  "type": "tconstruct:melting"
+}

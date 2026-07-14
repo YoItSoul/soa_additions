@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:nuggets/stainless_steel"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "soa_additions:molten_stainless_steel"
+  },
+  "temperature": 800,
+  "time": 20,
+  "type": "tconstruct:melting"
+}

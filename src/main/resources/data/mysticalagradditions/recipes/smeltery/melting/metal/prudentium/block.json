@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:storage_blocks/prudentium"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "mysticalagradditions:molten_prudentium"
+  },
+  "temperature": 800,
+  "time": 180,
+  "type": "tconstruct:melting"
+}

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "soa_additions:cryonium",
+  "result": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_cryonium"
+  },
+  "temperature": 800
+}

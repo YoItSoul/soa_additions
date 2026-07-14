@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:nuggets/iridium"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "soa_additions:molten_iridium"
+  },
+  "temperature": 800,
+  "time": 20,
+  "type": "tconstruct:melting"
+}

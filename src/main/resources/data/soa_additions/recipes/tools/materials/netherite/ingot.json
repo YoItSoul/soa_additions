@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:ingots/netherite"
+  },
+  "material": "soa_additions:netherite",
+  "needed": 1,
+  "value": 1
+}

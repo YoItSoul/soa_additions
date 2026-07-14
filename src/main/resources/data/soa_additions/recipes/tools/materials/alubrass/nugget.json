@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/alubrass"
+  },
+  "material": "soa_additions:alubrass",
+  "needed": 9,
+  "value": 1
+}

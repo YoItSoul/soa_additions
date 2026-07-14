@@ -3,7 +3,6 @@ package com.soul.soa_additions.quest.progress;
 import com.soul.soa_additions.quest.QuestRegistry;
 import com.soul.soa_additions.quest.model.Quest;
 import com.soul.soa_additions.quest.model.QuestTask;
-import com.soul.soa_additions.quest.net.QuestSyncPacket;
 import com.soul.soa_additions.quest.team.QuestTeam;
 import com.soul.soa_additions.quest.team.TeamData;
 import net.minecraft.resources.ResourceLocation;
@@ -20,11 +19,10 @@ import java.util.function.Predicate;
  * logic (entity type, item id, stat threshold, etc.) in the subscriber and
  * out of this hot path.
  *
- * <p>Efficiency note: this does an O(chapters × quests × tasks) scan per
- * event. For pack-sized quest trees (low thousands of tasks) that's still
- * sub-millisecond; if profiling ever shows it as hot we can build an index
- * of {@code task_type → [quest refs]} on reload. Not worth the complexity
- * until measured.</p>
+ * <p>Efficiency: matching uses the {@link QuestRegistry} task-type index
+ * (rebuilt on reload), so each event only touches tasks of its own type;
+ * events with no matching tasks exit in microseconds. Sync uses the delta
+ * protocol — only rows that actually changed go over the wire.</p>
  */
 public final class ProgressService {
 
@@ -55,6 +53,9 @@ public final class ProgressService {
         // matching tasks doesn't pay the recompute cost N times.
         java.util.Map<String, QuestStatus> statusCache = new java.util.HashMap<>();
         java.util.Set<Quest> changedQuests = null;
+        // Delta capture, taken lazily right before the first mutation so the
+        // (common) no-match path never pays the snapshot cost.
+        com.soul.soa_additions.quest.net.QuestDeltaPacket.Capture capture = null;
 
         for (QuestRegistry.TaskRef ref : refs) {
             Quest quest = ref.quest();
@@ -66,6 +67,9 @@ public final class ProgressService {
             QuestProgress qp = teamProgress.get(quest.fullId());
             TaskProgress tp = qp.task(ref.taskIndex());
             if (tp.count() >= ref.task().target()) continue;
+            if (capture == null) {
+                capture = com.soul.soa_additions.quest.net.QuestDeltaPacket.Capture.of(player);
+            }
             tp.add(delta);
             qp.touch(tick);
             if (changedQuests == null) changedQuests = new java.util.HashSet<>();
@@ -92,7 +96,10 @@ public final class ProgressService {
 
         if (anythingChanged) {
             progressData.touch();
-            QuestSyncPacket.sendToTeam(player);
+            // Delta, not full-book resend: on grind-heavy packs (one event per
+            // zombie kill / block break) the full QuestSyncPacket per event was
+            // the dominant network cost. Login/reset still use QuestSyncPacket.
+            capture.sendChanges(player);
         }
     }
 }

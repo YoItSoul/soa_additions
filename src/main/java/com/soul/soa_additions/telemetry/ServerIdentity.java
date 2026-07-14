@@ -35,6 +35,20 @@ public final class ServerIdentity {
             return null;
         }
 
+        // We're called from a telemetry daemon thread, but tickTimes, the player
+        // list, level maps and entity lists are all server-thread-only structures.
+        // Marshal the whole snapshot onto the server thread and wait briefly;
+        // if the server is too busy (or stopping) we just skip server metrics
+        // this round rather than risk a torn read / CME.
+        try {
+            return server.submit(() -> captureOnServerThread(server))
+                    .get(5, java.util.concurrent.TimeUnit.SECONDS);
+        } catch (Throwable t) {
+            return null;
+        }
+    }
+
+    private static Telemetry.ServerInfo captureOnServerThread(MinecraftServer server) {
         Telemetry.ServerInfo s = new Telemetry.ServerInfo();
         try {
             // Tick timing: MinecraftServer.tickTimes is a rolling ring of the last

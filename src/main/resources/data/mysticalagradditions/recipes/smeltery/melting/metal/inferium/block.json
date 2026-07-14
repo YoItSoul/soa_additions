@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:storage_blocks/inferium"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "mysticalagradditions:molten_inferium"
+  },
+  "temperature": 800,
+  "time": 180,
+  "type": "tconstruct:melting"
+}

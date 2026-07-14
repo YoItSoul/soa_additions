@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:nuggets/basalt"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "taiga:molten_basalt"
+  },
+  "temperature": 800,
+  "time": 20,
+  "type": "tconstruct:melting"
+}

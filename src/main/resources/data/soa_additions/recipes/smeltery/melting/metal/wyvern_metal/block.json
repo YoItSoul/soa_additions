@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:storage_blocks/wyvern_metal"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "soa_additions:molten_wyvern_metal"
+  },
+  "temperature": 800,
+  "time": 180,
+  "type": "tconstruct:melting"
+}

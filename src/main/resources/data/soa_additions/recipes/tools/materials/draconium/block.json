@@ -1,15 +1,5 @@
 {
   "type": "tconstruct:material",
-  "conditions": [
-    {
-      "type": "forge:mod_loaded",
-      "modid": "tconstruct"
-    },
-    {
-      "type": "forge:mod_loaded",
-      "modid": "draconicevolution"
-    }
-  ],
   "ingredient": {
     "tag": "forge:storage_blocks/draconium"
   },
@@ -19,5 +9,15 @@
   "leftover": {
     "count": 1,
     "tag": "forge:ingots/draconium"
-  }
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "draconicevolution"
+    }
+  ]
 }

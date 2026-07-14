@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/astral_metal"
+  },
+  "material": "soa_additions:astral_metal",
+  "needed": 9,
+  "value": 1
+}

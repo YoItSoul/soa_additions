@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:ingots/mithril"
+  },
+  "material": "soa_additions:mithril",
+  "needed": 1,
+  "value": 1
+}

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:storage_blocks/lonsdaleite"
+  },
+  "material": "soa_additions:lonsdaleite",
+  "needed": 1,
+  "value": 9
+}

@@ -237,6 +237,11 @@ public final class ReskillableTraits {
      *  pattern. 1.20 doesn't have hardened_stone; the analog is the deepslate
      *  family (deepslate, cobbled_deepslate, polished_deepslate, *_bricks).
      *  Net intent: faster mining of high-tier rock variants players hit deep underground. */
+    /** Mod hardened-stone equivalents (Quark gamma_stone, etc.) — matched by tag.
+     *  Hoisted static: onBreakSpeed fires every tick while mining. */
+    private static final TagKey<Block> DEEPSLATE_TAG =
+            BlockTags.create(new ResourceLocation("forge", "stone/deepslate"));
+
     private static boolean isHardenedStone(BlockState state) {
         Block block = state.getBlock();
         if (block == Blocks.DEEPSLATE) return true;
@@ -244,9 +249,7 @@ public final class ReskillableTraits {
         if (block == Blocks.POLISHED_DEEPSLATE) return true;
         if (block == Blocks.DEEPSLATE_BRICKS) return true;
         if (block == Blocks.DEEPSLATE_TILES) return true;
-        // Mod hardened-stone equivalents (Quark gamma_stone, etc.) — match by tag if available
-        TagKey<Block> deepslateTag = BlockTags.create(new ResourceLocation("forge", "stone/deepslate"));
-        return state.is(deepslateTag);
+        return state.is(DEEPSLATE_TAG);
     }
 
     // ============================================================
@@ -294,14 +297,25 @@ public final class ReskillableTraits {
         return isBuildingGadget(mh) || isBuildingGadget(oh);
     }
 
+    /** Gadget items resolved once from the frozen registry (poll path runs every 5t
+     *  for every player — avoid a registry key lookup + string compare per poll). */
+    private static java.util.Set<Item> buildingGadgets;
+
     /** Matches BuildingGadgets2 (1.20.1 fork of the 1.12 buildinggadgets mod).
      *  IDs: buildinggadgets2:gadget_building / gadget_exchanging / gadget_copy_paste / gadget_destruction. */
     private static boolean isBuildingGadget(ItemStack stack) {
         if (stack.isEmpty()) return false;
-        ResourceLocation id = ForgeRegistries.ITEMS.getKey(stack.getItem());
-        if (id == null) return false;
-        return "buildinggadgets2".equals(id.getNamespace())
-                && id.getPath().startsWith("gadget_");
+        if (buildingGadgets == null) {
+            java.util.Set<Item> found = new java.util.HashSet<>();
+            for (var entry : ForgeRegistries.ITEMS.getEntries()) {
+                ResourceLocation id = entry.getKey().location();
+                if ("buildinggadgets2".equals(id.getNamespace()) && id.getPath().startsWith("gadget_")) {
+                    found.add(entry.getValue());
+                }
+            }
+            buildingGadgets = found;
+        }
+        return buildingGadgets.contains(stack.getItem());
     }
 
     /** Resolves a BlockPos for the entity. Used by drops handler to position

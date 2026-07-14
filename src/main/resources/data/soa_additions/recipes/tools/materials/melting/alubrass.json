@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "soa_additions:alubrass",
+  "result": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_alubrass"
+  },
+  "temperature": 800
+}

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "soa_additions:gaiasteel",
+  "result": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_gaiasteel"
+  },
+  "temperature": 1200
+}

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_titanium"
+  },
+  "output": "soa_additions:titanium",
+  "temperature": 800
+}

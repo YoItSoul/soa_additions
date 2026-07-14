@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:gems/weather_crystal"
+  },
+  "material": "soa_additions:weather_crystal",
+  "needed": 1,
+  "value": 1
+}

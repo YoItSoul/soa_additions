@@ -118,6 +118,7 @@ public final class ModItems {
     public static final RegistryObject<Item> CHAOTIC_INGOT = registerRareIngot("chaotic_ingot");
     public static final RegistryObject<Item> DRACONIC_METAL_INGOT = registerRareIngot("draconic_metal_ingot");
     public static final RegistryObject<Item> SENTIENT_METAL_INGOT = registerRareIngot("sentient_metal_ingot");
+    public static final RegistryObject<Item> URU_INGOT = registerRareIngot("uru_ingot");
     public static final RegistryObject<Item> WYVERN_INGOT = registerRareIngot("wyvern_ingot");
 
     // ========== TConEvo metal nuggets (9 metals) ==========
@@ -174,6 +175,11 @@ public final class ModItems {
     public static final RegistryObject<Item> OSGLOGLAS_INGOT = registerRareIngot("osgloglas_ingot");
     public static final RegistryObject<Item> OSMIRIDIUM_INGOT = registerRareIngot("osmiridium_ingot");
 
+    // Tinkers' Aether port (1.12 tinkersaether → 1.20.1)
+    public static final RegistryObject<Item> VALKYRIE_INGOT  = registerRareIngot("valkyrie_ingot");
+    public static final RegistryObject<Item> VALKYRIE_NUGGET = registerRareIngot("valkyrie_nugget");
+    public static final RegistryObject<Item> SWET_CRYSTAL    = registerRareIngot("swet_crystal");
+
     // TCon bowstring/fletching materials (GC additions + RandomThings spectre + Natura)
     public static final RegistryObject<Item> NYLON_STRING = registerRareIngot("nylon_string");
     public static final RegistryObject<Item> RUBBER_BAND = registerRareIngot("rubber_band");
@@ -190,6 +196,28 @@ public final class ModItems {
     public static final RegistryObject<Item> TANZANITE = registerRareIngot("tanzanite");
     public static final RegistryObject<Item> AMETHYST_GEM = registerRareIngot("amethyst");
     public static final RegistryObject<Item> AMBER = registerRareIngot("amber");
+
+    // ========== Ghost-material items added for Tinker compat (porting GC originals) ==========
+    // These materials were registered in soa_additions Tinker materials but had no
+    // obtainable item, leaving JEI showing nothing. Sourced from:
+    //   thaumium / void_metal ........ Thaumcraft 1.12 (ingot/nugget/block)
+    //   pink_metal ................... TConEvo metal (ingot only; texture from EnderIO crystalline pink slime)
+    //   fluix_steel .................. lazy-ae2 / threng (ingot only)
+    //   ender_biotite ................ Quark biotite item (representative for tconevo material)
+    //   perfect ...................... Additions GC addon "perfectly_generic_item"
+    //   crystal_leaf / skyroot_leaf .. Aether 1.12 leaves (textures from aether_legacy)
+    public static final RegistryObject<Item> THAUMIUM_INGOT      = registerRareIngot("thaumium_ingot");
+    public static final RegistryObject<Item> THAUMIUM_NUGGET     = registerRareIngot("thaumium_nugget");
+    public static final RegistryObject<Item> THAUMIUM_BLOCK      = registerRareIngot("thaumium_block");
+    public static final RegistryObject<Item> VOID_METAL_INGOT    = registerRareIngot("void_metal_ingot");
+    public static final RegistryObject<Item> VOID_METAL_NUGGET   = registerRareIngot("void_metal_nugget");
+    public static final RegistryObject<Item> VOID_METAL_BLOCK    = registerRareIngot("void_metal_block");
+    public static final RegistryObject<Item> PINK_METAL_INGOT    = registerRareIngot("pink_metal_ingot");
+    public static final RegistryObject<Item> FLUIX_STEEL_INGOT   = registerRareIngot("fluix_steel_ingot");
+    public static final RegistryObject<Item> ENDER_BIOTITE       = registerRareIngot("ender_biotite");
+    public static final RegistryObject<Item> PERFECT             = registerRareIngot("perfect");
+    public static final RegistryObject<Item> CRYSTAL_LEAF        = registerRareIngot("crystal_leaf");
+    public static final RegistryObject<Item> SKYROOT_LEAF        = registerRareIngot("skyroot_leaf");
 
     // ========== GC forge-catalyst materials from mods not in SOA 1.20 ==========
     // Sourced from: abyssalcraft (dreadium), botanicadditions (gaiasteel), forestry (honey_drop),
@@ -797,6 +825,24 @@ public final class ModItems {
             () -> new com.soul.soa_additions.nyx.MeteorArmorItem(
                     com.soul.soa_additions.nyx.NyxMaterials.METEOR_ARMOR,
                     net.minecraft.world.item.ArmorItem.Type.BOOTS, new Item.Properties()));
+
+    // ========== Ore Sight potions (custom items for dynamic per-block names) ==========
+    // Three bottle forms; the same item handles base + long durations (the
+    // Potion registry entry on the stack controls effect timing). Brewing
+    // recipes set the OreSightBlock NBT key so getName() composes a
+    // translation like "Gold Ore Sight Potion".
+
+    public static final RegistryObject<Item> ORE_SIGHT_POTION = ITEMS.register("ore_sight_potion",
+            () -> new com.soul.soa_additions.oresight.OreSightPotionItem(
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> ORE_SIGHT_SPLASH_POTION = ITEMS.register("ore_sight_splash_potion",
+            () -> new com.soul.soa_additions.oresight.OreSightPotionItem.Splash(
+                    new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> ORE_SIGHT_LINGERING_POTION = ITEMS.register("ore_sight_lingering_potion",
+            () -> new com.soul.soa_additions.oresight.OreSightPotionItem.Lingering(
+                    new Item.Properties().stacksTo(1)));
 
     // ========== Private constructor ==========
 

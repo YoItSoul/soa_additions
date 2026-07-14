@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:storage_blocks/terra_alloy"
+  },
+  "material": "soa_additions:terra_alloy",
+  "needed": 1,
+  "value": 9,
+  "leftover": {
+    "count": 1,
+    "tag": "forge:ingots/terra_alloy"
+  }
+}

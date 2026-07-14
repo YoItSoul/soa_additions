@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:storage_blocks/essence_metal"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "soa_additions:molten_essence_metal"
+  },
+  "temperature": 1200,
+  "time": 180
+}

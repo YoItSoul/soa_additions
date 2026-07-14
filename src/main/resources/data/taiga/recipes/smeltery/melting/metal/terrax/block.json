@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:storage_blocks/terrax"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "taiga:molten_terrax"
+  },
+  "temperature": 800,
+  "time": 180,
+  "type": "tconstruct:melting"
+}

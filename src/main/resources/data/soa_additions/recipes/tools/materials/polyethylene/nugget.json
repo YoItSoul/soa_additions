@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/polyethylene"
+  },
+  "material": "soa_additions:polyethylene",
+  "needed": 9,
+  "value": 1
+}

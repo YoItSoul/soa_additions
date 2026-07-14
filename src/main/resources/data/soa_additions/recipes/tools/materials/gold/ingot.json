@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:ingots/gold"
+  },
+  "material": "soa_additions:gold",
+  "needed": 1,
+  "value": 1
+}

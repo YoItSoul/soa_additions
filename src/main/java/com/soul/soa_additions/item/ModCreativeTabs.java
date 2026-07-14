@@ -28,6 +28,7 @@ public final class ModCreativeTabs {
                         // Misc
                         output.accept(ModItems.CHEATER_COIN.get());
                         output.accept(ModItems.QUEST_BOOK.get());
+                        output.accept(com.soul.soa_additions.block.ModBlocks.TASK_COLLECTOR.get());
                         if (net.minecraftforge.fml.ModList.get().isLoaded("curios")) {
                             output.accept(com.soul.soa_additions.curios.CuriosIntegration.GREEDY_BAG.get());
                         }
@@ -121,6 +122,12 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.ENERGETIC_METAL_INGOT.get());
                         output.accept(ModItems.PRIMAL_METAL_INGOT.get());
                         output.accept(ModItems.UNIVERSAL_METAL_INGOT.get());
+                        output.accept(ModItems.BOUND_METAL_INGOT.get());
+                        output.accept(ModItems.CHAOTIC_INGOT.get());
+                        output.accept(ModItems.DRACONIC_METAL_INGOT.get());
+                        output.accept(ModItems.SENTIENT_METAL_INGOT.get());
+                        output.accept(ModItems.URU_INGOT.get());
+                        output.accept(ModItems.WYVERN_INGOT.get());
                         output.accept(ModItems.MEAT_METAL_INGOT.get());
                         output.accept(ModItems.PINK_SLIME_CRYSTAL.get());
                         output.accept(ModItems.MIRION_INGOT.get());

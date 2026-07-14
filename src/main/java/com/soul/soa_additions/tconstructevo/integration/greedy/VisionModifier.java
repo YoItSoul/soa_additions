@@ -24,7 +24,8 @@ public class VisionModifier extends Modifier implements InventoryTickModifierHoo
     @Override
     public void onInventoryTick(IToolStackView tool, ModifierEntry mod, Level level, LivingEntity holder,
                                 int slot, boolean selected, boolean isCorrectSlot, ItemStack stack) {
-        if (level.isClientSide()) return;
+        // Once a second — 330t duration comfortably outlasts the 20t refresh.
+        if (level.isClientSide() || holder.tickCount % 20 != 0) return;
         boolean isArmor = slot >= 36 && slot <= 39;
         if (selected) {
             holder.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 330, 0, false, false));

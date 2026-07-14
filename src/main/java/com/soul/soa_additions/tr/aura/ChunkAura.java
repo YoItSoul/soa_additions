@@ -40,9 +40,10 @@ import java.util.Map;
  * their biome. Compounds are added when blocks/mobs with compound aspects
  * are destroyed in the chunk.
  *
- * <p>Caps: per-aspect 1000, total 5000. Past those, increments no-op (no
- * overflow, no error). This matches the design's "prevent unbounded farming"
- * note — a chunk can accumulate 5 fully-saturated aspects but no more.
+ * <p>Caps: per-aspect {@link #PER_ASPECT_CAP} (500), total {@link #TOTAL_CAP}
+ * (1000). Past those, increments no-op (no overflow, no error). This matches
+ * the design's "prevent unbounded farming" note — a chunk can accumulate two
+ * fully-saturated aspects' worth of aura but no more.
  */
 public final class ChunkAura {
 

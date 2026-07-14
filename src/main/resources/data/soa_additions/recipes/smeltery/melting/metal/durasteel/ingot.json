@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:ingots/durasteel"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_durasteel"
+  },
+  "temperature": 1200,
+  "time": 60
+}

@@ -1,11 +1,5 @@
 {
   "type": "tconstruct:material",
-  "conditions": [
-    {
-      "type": "forge:mod_loaded",
-      "modid": "tconstruct"
-    }
-  ],
   "ingredient": {
     "tag": "forge:storage_blocks/nickel"
   },
@@ -15,5 +9,11 @@
   "leftover": {
     "count": 1,
     "tag": "forge:ingots/nickel"
-  }
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ]
 }

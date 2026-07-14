@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    { "item": "bloodarsenal:slate_blank" }
-  ],
-  "result": { "item": "bloodmagic:blankslate", "count": 9 }
-}

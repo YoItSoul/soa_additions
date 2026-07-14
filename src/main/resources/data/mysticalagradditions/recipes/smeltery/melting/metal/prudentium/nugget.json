@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:nuggets/prudentium"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "mysticalagradditions:molten_prudentium"
+  },
+  "temperature": 800,
+  "time": 20,
+  "type": "tconstruct:melting"
+}

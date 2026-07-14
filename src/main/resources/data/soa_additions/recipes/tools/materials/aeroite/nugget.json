@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/aeroite"
+  },
+  "material": "soa_additions:aeroite",
+  "needed": 9,
+  "value": 1
+}

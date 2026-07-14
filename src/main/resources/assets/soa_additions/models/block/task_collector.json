@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "soa_additions:block/task_collector_front",
+    "side": "soa_additions:block/task_collector_side",
+    "top": "soa_additions:block/task_collector_side"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/crimsonite"
+  },
+  "material": "soa_additions:crimsonite",
+  "needed": 9,
+  "value": 1
+}

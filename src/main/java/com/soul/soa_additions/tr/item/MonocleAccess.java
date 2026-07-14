@@ -54,6 +54,18 @@ public final class MonocleAccess {
         if (player != null) CACHE.remove(player.getUUID());
     }
 
+    /** Server-side cache eviction — without this the UUID-keyed map grows by
+     *  one entry per player ever seen for the whole server uptime. */
+    @net.minecraftforge.fml.common.Mod.EventBusSubscriber(modid = com.soul.soa_additions.SoaAdditions.MODID)
+    public static final class Events {
+        private Events() {}
+
+        @net.minecraftforge.eventbus.api.SubscribeEvent
+        public static void onLogout(net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent event) {
+            invalidate(event.getEntity());
+        }
+    }
+
     private static boolean computeHasMonocle(Player player, Item monocleItem) {
         boolean curiosLoaded = ModList.get().isLoaded("curios");
         boolean curiosHit = false;

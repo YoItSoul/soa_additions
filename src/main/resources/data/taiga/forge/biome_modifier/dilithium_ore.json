@@ -1,6 +1,14 @@
 {
   "type": "forge:add_features",
-  "biomes": "#minecraft:is_overworld",
+  "biomes": [
+    "minecraft:desert",
+    "minecraft:forest",
+    "minecraft:badlands",
+    "minecraft:ocean",
+    "minecraft:deep_ocean",
+    "minecraft:frozen_ocean",
+    "minecraft:mushroom_fields"
+  ],
   "features": "taiga:dilithium_ore",
   "step": "underground_ores"
 }

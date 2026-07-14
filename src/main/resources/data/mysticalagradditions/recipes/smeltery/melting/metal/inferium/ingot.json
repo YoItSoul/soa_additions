@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:ingots/inferium"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "mysticalagradditions:molten_inferium"
+  },
+  "temperature": 800,
+  "time": 60,
+  "type": "tconstruct:melting"
+}

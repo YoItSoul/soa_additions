@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "tconstruct:scorched_brick"
+  },
+  "material": "soa_additions:scorched",
+  "needed": 1,
+  "value": 1
+}

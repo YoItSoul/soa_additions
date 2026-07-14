@@ -56,6 +56,10 @@ public final class TaigaTraitEvents {
     private static ToolStack toolOf(Player p) {
         ItemStack stack = p.getMainHandItem();
         if (stack.isEmpty()) return null;
+        // Cheap instanceof gate before ToolStack.from — these handlers fire on
+        // every kill/XP-drop/block-break, and parsing NBT for a non-Tinkers
+        // held item on each one is wasted work for the common case.
+        if (!(stack.getItem() instanceof slimeknights.tconstruct.library.tools.item.IModifiable)) return null;
         try { return ToolStack.from(stack); } catch (RuntimeException e) { return null; }
     }
 
@@ -149,10 +153,8 @@ public final class TaigaTraitEvents {
     public static void onLivingDeath(LivingDeathEvent event) {
         if (event.getEntity().level().isClientSide()) return;
         if (!(event.getSource().getEntity() instanceof Player player)) return;
-        ItemStack stack = player.getMainHandItem();
-        if (stack.isEmpty()) return;
-        ToolStack tool;
-        try { tool = ToolStack.from(stack); } catch (RuntimeException e) { return; }
+        ToolStack tool = toolOf(player);
+        if (tool == null) return;
 
         LivingEntity victim = event.getEntity();
         Level level = victim.level();

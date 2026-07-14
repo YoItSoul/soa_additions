@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_ethaxium"
+  },
+  "output": "soa_additions:ethaxium",
+  "temperature": 1800
+}

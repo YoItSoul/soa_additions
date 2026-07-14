@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_shadowium"
+  },
+  "output": "soa_additions:shadowium",
+  "temperature": 1200
+}

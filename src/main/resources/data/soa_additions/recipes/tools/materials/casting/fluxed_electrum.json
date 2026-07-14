@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_fluxed_electrum"
+  },
+  "output": "soa_additions:fluxed_electrum",
+  "temperature": 800
+}

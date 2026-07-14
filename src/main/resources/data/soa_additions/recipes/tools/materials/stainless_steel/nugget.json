@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/stainless_steel"
+  },
+  "material": "soa_additions:stainless_steel",
+  "needed": 9,
+  "value": 1
+}

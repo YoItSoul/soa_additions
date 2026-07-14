@@ -1,0 +1,14 @@
+{
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/ingot"
+  },
+  "cooling_time": 60,
+  "fluid": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_apatite"
+  },
+  "result": {
+    "tag": "forge:ingots/apatite"
+  },
+  "type": "tconstruct:casting_table"
+}

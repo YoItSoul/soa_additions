@@ -1,0 +1,15 @@
+{
+  "cast": {
+    "tag": "tconstruct:casts/single_use/ingot"
+  },
+  "cast_consumed": true,
+  "cooling_time": 60,
+  "fluid": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_cryonium"
+  },
+  "result": {
+    "tag": "forge:ingots/cryonium"
+  },
+  "type": "tconstruct:casting_table"
+}

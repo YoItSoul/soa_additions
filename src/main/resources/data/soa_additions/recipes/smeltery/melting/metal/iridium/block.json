@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:storage_blocks/iridium"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "soa_additions:molten_iridium"
+  },
+  "temperature": 800,
+  "time": 180,
+  "type": "tconstruct:melting"
+}

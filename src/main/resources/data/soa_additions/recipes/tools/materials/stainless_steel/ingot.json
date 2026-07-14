@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:ingots/stainless_steel"
+  },
+  "material": "soa_additions:stainless_steel",
+  "needed": 1,
+  "value": 1
+}

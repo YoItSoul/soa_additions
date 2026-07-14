@@ -65,13 +65,16 @@ public final class CompatScanner {
 
     @SubscribeEvent
     public static void onServerStarted(ServerStartedEvent event) {
-        new Thread(() -> {
+        if (!DevProfiling.ENABLED) return;
+        Thread t = new Thread(() -> {
             try {
                 runScan();
-            } catch (Throwable t) {
-                LOGGER.error("Compat scan failed", t);
+            } catch (Throwable th) {
+                LOGGER.error("Compat scan failed", th);
             }
-        }, "SOA-CompatScanner").start();
+        }, "SOA-CompatScanner");
+        t.setDaemon(true);
+        t.start();
     }
 
     public static Path lastReport() {

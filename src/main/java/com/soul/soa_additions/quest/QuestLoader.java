@@ -172,7 +172,10 @@ public final class QuestLoader extends SimpleJsonResourceReloadListener {
                                 ? com.soul.soa_additions.quest.model.Visibility.HIDDEN_UNTIL_DEPS
                                 : com.soul.soa_additions.quest.model.Visibility.NORMAL);
         boolean optional = root.has("optional") && root.get("optional").getAsBoolean();
+        // "requires" is an accepted alias for "dependencies" — shipped quest
+        // files use it, and silently ignoring it left dependency chains unwired.
         List<String> deps = readStrings(root, "dependencies");
+        if (deps.isEmpty()) deps = readStrings(root, "requires");
         boolean depsAll = !root.has("dependency_logic") || "all".equalsIgnoreCase(root.get("dependency_logic").getAsString());
         int minDeps = root.has("min_deps") ? root.get("min_deps").getAsInt() : -1;
         boolean autoClaim = root.has("auto_claim") && root.get("auto_claim").getAsBoolean();

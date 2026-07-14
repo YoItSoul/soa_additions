@@ -27,7 +27,8 @@ public class TidalForceModifier extends Modifier implements InventoryTickModifie
     @Override
     public void onInventoryTick(IToolStackView tool, ModifierEntry mod, Level level, LivingEntity holder,
                                 int slot, boolean selected, boolean isCorrectSlot, ItemStack stack) {
-        if (level.isClientSide()) return;
+        // Once a second — both durations (50t/25t) outlast the 20t refresh.
+        if (level.isClientSide() || holder.tickCount % 20 != 0) return;
         boolean isArmor = slot >= 36 && slot <= 39;
         if (selected) {
             holder.addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, 50, 0, false, false));

@@ -67,7 +67,10 @@ public final class InventoryItemPoller {
         QuestProgressData data = QuestProgressData.get(player.server);
         TeamQuestProgress tp = data.forTeam(team.id());
 
-        QuestDeltaPacket.Capture delta = QuestDeltaPacket.Capture.of(player);
+        // Delta capture, taken lazily right before the first mutation — the
+        // common no-change poll otherwise clones the full progress table per
+        // online player every 10 ticks for nothing.
+        QuestDeltaPacket.Capture delta = null;
         boolean changed = false;
         long tick = player.server.getTickCount();
         java.util.Map<Quest, QuestStatus> seen = new java.util.HashMap<>();
@@ -99,6 +102,7 @@ public final class InventoryItemPoller {
             // crafting, dropping) must not un-complete it. Otherwise a finished
             // quest reverts to VISIBLE on the next inventory loss.
             if (capped > progress.count()) {
+                if (delta == null) delta = QuestDeltaPacket.Capture.of(player);
                 progress.setCount(capped);
                 qp.touch(tick);
                 if (dirty == null) dirty = new java.util.HashSet<>();

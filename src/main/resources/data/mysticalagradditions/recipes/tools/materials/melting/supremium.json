@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "mysticalagradditions:supremium",
+  "result": {
+    "amount": 90,
+    "fluid": "mysticalagradditions:molten_supremium"
+  },
+  "temperature": 800
+}

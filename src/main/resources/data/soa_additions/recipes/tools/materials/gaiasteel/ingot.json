@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:ingots/gaiasteel"
+  },
+  "material": "soa_additions:gaiasteel",
+  "needed": 1,
+  "value": 1
+}

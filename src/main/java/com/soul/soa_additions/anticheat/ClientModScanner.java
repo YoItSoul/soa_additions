@@ -31,15 +31,22 @@ public final class ClientModScanner {
 
     private ClientModScanner() {}
 
+    /** Mod list is immutable for the JVM lifetime — build the report rows once
+     *  instead of re-streaming ~300 mod descriptors on every reconnect.
+     *  Resource packs CAN change between logins, so those are re-collected. */
+    private static List<String> cachedMods;
+
     @SubscribeEvent
     public static void onClientLogin(ClientPlayerNetworkEvent.LoggingIn event) {
-        List<String> mods = ModList.get().getMods().stream()
-                .map(m -> m.getModId() + "|" + m.getDisplayName() + "|" + m.getDescription())
-                .toList();
+        if (cachedMods == null) {
+            cachedMods = ModList.get().getMods().stream()
+                    .map(m -> m.getModId() + "|" + m.getDisplayName() + "|" + m.getDescription())
+                    .toList();
+        }
 
         List<String> packs = collectAllPacks();
 
-        ModNetworking.CHANNEL.sendToServer(new ClientModReportPacket(mods, packs));
+        ModNetworking.CHANNEL.sendToServer(new ClientModReportPacket(cachedMods, packs));
     }
 
     private static List<String> collectAllPacks() {

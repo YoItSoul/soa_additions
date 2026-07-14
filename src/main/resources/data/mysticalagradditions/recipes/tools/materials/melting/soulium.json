@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "mysticalagradditions:soulium",
+  "result": {
+    "amount": 90,
+    "fluid": "mysticalagradditions:molten_soulium"
+  },
+  "temperature": 800
+}

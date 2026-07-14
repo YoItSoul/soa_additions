@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:ingots/refined_glowstone"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_refined_glowstone"
+  },
+  "temperature": 800,
+  "time": 60,
+  "type": "tconstruct:melting"
+}

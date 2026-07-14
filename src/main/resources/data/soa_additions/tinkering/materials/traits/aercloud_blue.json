@@ -1,0 +1,20 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "soa_additions:cushy"
+    }
+  ],
+  "perStat": {
+    "tconstruct:head": [
+      {
+        "level": 1,
+        "name": "soa_additions:cushy"
+      },
+      {
+        "level": 1,
+        "name": "soa_additions:launching"
+      }
+    ]
+  }
+}

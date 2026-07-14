@@ -2,5 +2,5 @@
   "type": "forge:add_features",
   "biomes": "#minecraft:is_overworld",
   "features": "taiga:duranite_ore",
-  "step": "underground_ores"
+  "step": "vegetal_decoration"
 }

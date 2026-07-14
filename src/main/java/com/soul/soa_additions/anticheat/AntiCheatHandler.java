@@ -109,7 +109,8 @@ public final class AntiCheatHandler {
             "team",               // team mgmt (typically non-op anyway)
             "donor", "donors",    // donor wall + sync — no item grants
             "packmode show",      // read-only
-            "packmode lock"       // tightens progression rather than loosening
+            "packmode lock",      // tightens progression rather than loosening
+            "worldgen"            // read-only scan of generated chunks
     );
 
     /** Players whose session has already been flagged — prevents repeat logging. */
@@ -298,15 +299,41 @@ public final class AntiCheatHandler {
     }
 
     /**
-     * True iff the currently-executing command was typed by a player (routed
-     * through {@code ServerGamePacketListenerImpl}), rather than dispatched
-     * programmatically by another mod. Used to skip the OP-command block when
-     * a mod runs a command with the player as the source.
+     * True iff the currently-executing command was typed by a player into the
+     * chat box, rather than dispatched programmatically by another mod.
+     *
+     * <p>The naive heuristic "is {@code ServerGamePacketListenerImpl} anywhere
+     * in the call stack" is wrong — mods that run commands synchronously from
+     * a player-triggered event (e.g. Chance Cubes scheduling a command on
+     * cube-break with delay 0) inherit the packet handler in their call stack,
+     * and would be flagged as cheating. The correct check is whether the
+     * immediate caller of {@link Commands#performPrefixedCommand} is
+     * {@code ServerGamePacketListenerImpl.performChatCommand} — that's the one
+     * and only path for chat-typed commands.</p>
+     *
+     * <p>Walks down past our own handler, the Forge eventbus internals, and
+     * the {@code Commands.performCommand} frame; the next non-{@code Commands}
+     * frame is the dispatcher. If it's the chat handler, the player typed it.</p>
      */
     private static boolean isPlayerTypedCommand() {
-        return StackWalker.getInstance().walk(frames ->
-                frames.anyMatch(f -> f.getClassName().equals(
-                        "net.minecraft.server.network.ServerGamePacketListenerImpl")));
+        return StackWalker.getInstance().walk(frames -> {
+            boolean pastCommandsFrames = false;
+            for (java.util.Iterator<StackWalker.StackFrame> it = frames.iterator(); it.hasNext(); ) {
+                String cn = it.next().getClassName();
+                if (cn.equals("net.minecraft.commands.Commands")) {
+                    pastCommandsFrames = true;
+                    continue;
+                }
+                if (pastCommandsFrames) {
+                    // First frame above the Commands.* frames is the dispatcher.
+                    // Player-typed: ServerGamePacketListenerImpl.performChatCommand.
+                    // Mod-dispatched: anything else (chanceCubes.util.RewardsUtil,
+                    // a custom server tick task, a scheduled job, etc.).
+                    return cn.equals("net.minecraft.server.network.ServerGamePacketListenerImpl");
+                }
+            }
+            return false;
+        });
     }
 
     private static boolean isCheatAdvancementRevoke(String raw) {

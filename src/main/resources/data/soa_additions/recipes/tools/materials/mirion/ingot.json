@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:ingots/mirion"
+  },
+  "material": "soa_additions:mirion",
+  "needed": 1,
+  "value": 1
+}

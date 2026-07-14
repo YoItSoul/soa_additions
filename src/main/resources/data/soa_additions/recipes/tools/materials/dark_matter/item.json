@@ -1,5 +1,11 @@
 {
   "type": "tconstruct:material",
+  "ingredient": {
+    "item": "projecte:dark_matter"
+  },
+  "material": "soa_additions:dark_matter",
+  "needed": 1,
+  "value": 1,
   "conditions": [
     {
       "type": "forge:mod_loaded",
@@ -9,11 +15,5 @@
       "type": "forge:mod_loaded",
       "modid": "projecte"
     }
-  ],
-  "ingredient": {
-    "item": "projecte:dark_matter"
-  },
-  "material": "soa_additions:dark_matter",
-  "needed": 1,
-  "value": 1
+  ]
 }

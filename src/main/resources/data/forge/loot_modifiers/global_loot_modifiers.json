@@ -15,6 +15,8 @@
     "tconevo:artifact_woodland_mansion",
     "soa_additions:gc_dungeon_injection",
     "soa_additions:gc_dungeon_injection_hardmode",
-    "soa_additions:gc_slime_crown_drop"
+    "soa_additions:gc_slime_crown_drop",
+    "soa_additions:aether_silver_dungeon_chest",
+    "soa_additions:aether_silver_dungeon_reward"
   ]
 }

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:ingots/fusion_matrix"
+  },
+  "material": "soa_additions:fusion_matrix",
+  "needed": 1,
+  "value": 1
+}

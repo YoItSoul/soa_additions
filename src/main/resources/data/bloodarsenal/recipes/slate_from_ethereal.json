@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    { "item": "bloodarsenal:slate_ethereal" }
-  ],
-  "result": { "item": "bloodmagic:etherealslate", "count": 9 }
-}

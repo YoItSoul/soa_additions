@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "aether:enchanted_gravitite"
+  },
+  "material": "soa_additions:gravitite",
+  "needed": 1,
+  "value": 1
+}

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:storage_blocks/apatite"
+  },
+  "material": "soa_additions:apatite",
+  "needed": 1,
+  "value": 9
+}

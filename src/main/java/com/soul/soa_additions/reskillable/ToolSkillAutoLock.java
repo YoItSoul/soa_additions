@@ -1,6 +1,7 @@
 package com.soul.soa_additions.reskillable;
 
 import com.google.common.collect.Multimap;
+import net.bandit.reskillable.Configuration;
 import net.bandit.reskillable.common.commands.skills.Skill;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -175,9 +176,21 @@ public final class ToolSkillAutoLock {
         Requirement cached = ID_CACHE.get(id);
         if (cached != null) return cached;
 
+        // If skill_locks.json already covers this item, defer to Reskillable's
+        // own static-lock gate. Without this guard the auto-classifier
+        // double-gates: e.g. iron_chestplate is defense:5 in the static config
+        // but armor=6 puts it in our defense:6 bucket, blocking equip at level 5.
+        if (hasStaticLock(id)) return NO_GATE;
+
         Requirement r = classifyUncached(stack);
         ID_CACHE.put(id, r);
         return r;
+    }
+
+    private static boolean hasStaticLock(ResourceLocation id) {
+        net.bandit.reskillable.common.commands.skills.Requirement[] reqs =
+                Configuration.getRequirements(id);
+        return reqs != null && reqs.length > 0;
     }
 
     private static Requirement classifyUncached(ItemStack stack) {
@@ -272,12 +285,20 @@ public final class ToolSkillAutoLock {
      *
      * <p>Cleared lazily — entries are valid as long as the player keeps the
      * same item in the same slot. Equipment swap fires {@link LivingEquipment
-     * ChangeEvent} which overwrites the entry. Logout doesn't clear (entries
-     * are small + bounded by online player count x 6 slots).
+     * ChangeEvent} which overwrites the entry; logout evicts all of the
+     * player's entries so the map stays bounded by online player count.
      */
     private static final Map<EquipKey, Requirement> EQUIP_CACHE = new ConcurrentHashMap<>();
 
     private record EquipKey(java.util.UUID player, EquipmentSlot slot) {}
+
+    @SubscribeEvent
+    public static void onPlayerLogout(net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent event) {
+        // Evict all slot entries for the departing player — otherwise the
+        // UUID-keyed cache grows by up to 6 entries per player ever seen.
+        java.util.UUID id = event.getEntity().getUUID();
+        EQUIP_CACHE.keySet().removeIf(k -> k.player().equals(id));
+    }
 
     @SubscribeEvent
     public static void onEquipChange(LivingEquipmentChangeEvent event) {
@@ -296,6 +317,13 @@ public final class ToolSkillAutoLock {
         if (req.skill() != null
                 && !SkillHelper.hasLevel(player, req.skill(), req.level())
                 && !player.isCreative() && !player.isSpectator()) {
+            // Capture the item's translation key BEFORE the deferred runnable
+            // mutates the stack. Inventory.add() shrinks the stack's count to 0
+            // on success, after which ItemStack.getItem() returns Items.AIR and
+            // getDescriptionId() resolves to "block.minecraft.air" — i.e. the
+            // message would read "Air requires defense level N" instead of the
+            // actual item name.
+            final String itemDescId = now.getDescriptionId();
             // Defer to next tick so we don't fight the equip-change event itself
             player.getServer().execute(() -> {
                 ItemStack stillThere = player.getItemBySlot(event.getSlot());
@@ -306,7 +334,7 @@ public final class ToolSkillAutoLock {
                     }
                     player.displayClientMessage(
                             Component.translatable("soa_additions.reskillable.equip_blocked",
-                                    Component.translatable(now.getDescriptionId()),
+                                    Component.translatable(itemDescId),
                                     Component.literal(req.skill().name().toLowerCase()),
                                     Component.literal(String.valueOf(req.level())))
                                     .withStyle(ChatFormatting.RED),

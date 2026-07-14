@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:storage_blocks/apatite"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "soa_additions:molten_apatite"
+  },
+  "temperature": 800,
+  "time": 180,
+  "type": "tconstruct:melting"
+}

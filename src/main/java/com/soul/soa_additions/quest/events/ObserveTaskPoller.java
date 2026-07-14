@@ -56,7 +56,9 @@ public final class ObserveTaskPoller {
         QuestTeam team = teams.teamOf(player);
         QuestProgressData data = QuestProgressData.get(player.server);
         TeamQuestProgress tp = data.forTeam(team.id());
-        QuestDeltaPacket.Capture delta = QuestDeltaPacket.Capture.of(player);
+        // Delta capture, taken lazily right before the first mutation — the
+        // common no-change poll shouldn't clone the full progress table.
+        QuestDeltaPacket.Capture delta = null;
 
         // Walk only observe-task entries via the index. Cache quest status so
         // quests with multiple observe tasks don't pay recompute per-ref.
@@ -126,6 +128,7 @@ public final class ObserveTaskPoller {
             TaskProgress prog = qp.task(p.taskIndex);
             int next = Math.min(p.task.target(), prog.count() + 1);
             if (next != prog.count()) {
+                if (delta == null) delta = QuestDeltaPacket.Capture.of(player);
                 prog.setCount(next);
                 qp.touch(tick);
                 QuestStatus after = QuestEvaluator.recompute(p.quest, tp);

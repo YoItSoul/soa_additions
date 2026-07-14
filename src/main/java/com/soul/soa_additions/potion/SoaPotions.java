@@ -68,6 +68,18 @@ public final class SoaPotions {
     public static final RegistryObject<MobEffect> REVIVAL       = reg("revival",       RevivalEffect::new);
     public static final RegistryObject<MobEffect> TELEPORT      = reg("teleport",      TeleportEffect::new);
 
+    /** Single ore-sight indicator. Per-ore tracking lives on the player capability,
+     *  so this effect just exists as a HUD icon while at least one ore-sight is
+     *  active. */
+    public static final RegistryObject<MobEffect> ORE_SIGHT     = reg("ore_sight",
+            com.soul.soa_additions.oresight.OreSightEffect::new);
+
+    /** Master ore-sight: highlights every ore in range (no per-block selection).
+     *  Same MobEffect class as regular ore-sight, but instantiated with a white
+     *  bottle tint to distinguish it visually. */
+    public static final RegistryObject<MobEffect> MASTER_ORE_SIGHT = reg("master_ore_sight",
+            () -> new com.soul.soa_additions.oresight.OreSightEffect(0xFFFFFF));
+
     private SoaPotions() {}
 
     private static <E extends MobEffect> RegistryObject<E> reg(String name, Supplier<E> factory) {

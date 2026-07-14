@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:ingots/astral_metal"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_astral_metal"
+  },
+  "temperature": 1800,
+  "time": 60
+}

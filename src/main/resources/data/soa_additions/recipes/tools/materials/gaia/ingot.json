@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:ingots/gaia_spirit"
+  },
+  "material": "soa_additions:gaia",
+  "needed": 1,
+  "value": 1
+}

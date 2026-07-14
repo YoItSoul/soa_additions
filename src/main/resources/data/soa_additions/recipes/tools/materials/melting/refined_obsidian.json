@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "soa_additions:refined_obsidian",
+  "result": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_refined_obsidian"
+  },
+  "temperature": 800
+}

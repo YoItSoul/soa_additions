@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/aqualite"
+  },
+  "material": "soa_additions:aqualite",
+  "needed": 9,
+  "value": 1
+}

@@ -1,9 +1,9 @@
 {
-  "type": "tconstruct:material",
   "ingredient": {
     "tag": "forge:nuggets/prometheum"
   },
   "material": "taiga:prometheum",
   "needed": 9,
+  "type": "tconstruct:material",
   "value": 1
 }

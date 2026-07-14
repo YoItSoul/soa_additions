@@ -47,6 +47,7 @@ public final class TickAttribution {
 
     @SubscribeEvent
     public static void onServerStarted(ServerStartedEvent event) {
+        if (!DevProfiling.ENABLED) return;
         ModPackageIndex.buildIfNeeded();
         serverThread = findServerThread();
         if (serverThread == null) {

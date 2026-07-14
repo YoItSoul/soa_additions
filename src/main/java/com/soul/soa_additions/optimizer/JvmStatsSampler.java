@@ -476,6 +476,27 @@ public final class JvmStatsSampler {
         } catch (IOException e) {
             LOGGER.debug("Could not prune old sessions", e);
         }
+        pruneSpikeFiles(keep);
+    }
+
+    /** Spike thread-dumps and JFR recordings (up to 64 MB each) accumulate
+     *  one-per-spike forever if left unpruned — keep only the newest {@code keep}. */
+    private static void pruneSpikeFiles(int keep) {
+        try (Stream<Path> files = Files.list(sessionDir)) {
+            List<Path> spikes = files
+                    .filter(p -> {
+                        String n = p.getFileName().toString();
+                        return n.startsWith("spike_") && (n.endsWith(".txt") || n.endsWith(".jfr"));
+                    })
+                    .sorted(Comparator.comparing(p -> p.getFileName().toString()))
+                    .toList();
+            int excess = spikes.size() - keep;
+            for (int i = 0; i < excess; i++) {
+                Files.deleteIfExists(spikes.get(i));
+            }
+        } catch (IOException e) {
+            LOGGER.debug("Could not prune spike files", e);
+        }
     }
 
     // ────────────────────────────────────────────────────────────────────────────────
@@ -531,19 +552,25 @@ public final class JvmStatsSampler {
             try {
                 var server = ServerLifecycleHooks.getCurrentServer();
                 if (server == null) return EMPTY;
-                long sum = 0L;
-                long[] ticks = server.tickTimes;
-                if (ticks == null || ticks.length == 0) return EMPTY;
-                for (long t : ticks) sum += t;
-                double meanMs = sum / (double) ticks.length / 1_000_000.0;
-                double tps = meanMs <= 50.0 ? 20.0 : (1000.0 / meanMs);
-                int chunks = 0, entities = 0;
-                for (var lvl : server.getAllLevels()) {
-                    chunks += lvl.getChunkSource().getLoadedChunksCount();
-                    for (var ignored : lvl.getAllEntities()) entities++;
-                }
-                int players = server.getPlayerList().getPlayerCount();
-                return new ServerSnapshot(meanMs, tps, chunks, entities, players);
+                // Level maps, chunk sources and entity lists are server-thread-only:
+                // reading them from the sampler daemon races the tick loop (CME /
+                // torn HashMap reads). Hop onto the server thread and wait briefly;
+                // if the server can't service us this interval, skip world stats.
+                return server.submit(() -> {
+                    long sum = 0L;
+                    long[] ticks = server.tickTimes;
+                    if (ticks == null || ticks.length == 0) return EMPTY;
+                    for (long t : ticks) sum += t;
+                    double meanMs = sum / (double) ticks.length / 1_000_000.0;
+                    double tps = meanMs <= 50.0 ? 20.0 : (1000.0 / meanMs);
+                    int chunks = 0, entities = 0;
+                    for (var lvl : server.getAllLevels()) {
+                        chunks += lvl.getChunkSource().getLoadedChunksCount();
+                        for (var ignored : lvl.getAllEntities()) entities++;
+                    }
+                    int players = server.getPlayerList().getPlayerCount();
+                    return new ServerSnapshot(meanMs, tps, chunks, entities, players);
+                }).get(5, java.util.concurrent.TimeUnit.SECONDS);
             } catch (Throwable t) {
                 return EMPTY;
             }

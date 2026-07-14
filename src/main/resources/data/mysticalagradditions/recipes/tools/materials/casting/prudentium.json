@@ -1,0 +1,9 @@
+{
+  "fluid": {
+    "amount": 90,
+    "fluid": "mysticalagradditions:molten_prudentium"
+  },
+  "output": "mysticalagradditions:prudentium",
+  "temperature": 800,
+  "type": "tconstruct:material_fluid"
+}

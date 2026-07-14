@@ -1,6 +1,12 @@
 {
   "type": "forge:add_features",
-  "biomes": "#minecraft:is_overworld",
+  "biomes": [
+    "minecraft:forest",
+    "minecraft:plains",
+    "minecraft:taiga",
+    "minecraft:snowy_plains",
+    "minecraft:desert"
+  ],
   "features": "taiga:vibranium_ore",
   "step": "underground_ores"
 }

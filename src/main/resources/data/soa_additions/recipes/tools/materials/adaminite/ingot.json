@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:ingots/adaminite"
+  },
+  "material": "soa_additions:adaminite",
+  "needed": 1,
+  "value": 1
+}

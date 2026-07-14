@@ -15,6 +15,7 @@ public final class ModConfigs {
     public static final ForgeConfigSpec.BooleanValue JVM_PROFILER_AUTO_JFR;
     public static final ForgeConfigSpec.BooleanValue ENABLE_QUEST_WEB_OVERLAY;
     public static final ForgeConfigSpec.IntValue QUEST_WEB_OVERLAY_PORT;
+    public static final ForgeConfigSpec.ConfigValue<String> QUEST_WEB_OVERLAY_BIND;
     public static final ForgeConfigSpec.BooleanValue ENABLE_TELEMETRY;
     public static final ForgeConfigSpec.ConfigValue<String> TELEMETRY_ENDPOINT;
     public static final ForgeConfigSpec.BooleanValue TELEMETRY_AUTO_SPARK;
@@ -48,8 +49,12 @@ public final class ModConfigs {
 
         builder.push("jvmProfiler");
         ENABLE_JVM_PROFILER = builder
-                .comment("Background JVM/server telemetry sampler. Writes CSV + summary to logs/soa_jvm_stats/.")
-                .define("enabled", true);
+                .comment(
+                        "Background JVM/server stats sampler. Writes CSV + summary to logs/soa_jvm_stats/.",
+                        "Diagnostic tool for pack tuning — leave off for normal play; every sample costs",
+                        "a disk write and a world snapshot. Default: false."
+                )
+                .define("enabled", false);
         JVM_PROFILER_INTERVAL_SECONDS = builder
                 .comment("Sample interval in seconds. Lower = more detail, higher = less overhead. Default 10.")
                 .defineInRange("intervalSeconds", 10, 1, 3600);
@@ -73,6 +78,13 @@ public final class ModConfigs {
         QUEST_WEB_OVERLAY_PORT = builder
                 .comment("HTTP port for the quest overlay server. Default: 25580.")
                 .defineInRange("port", 25580, 1024, 65535);
+        QUEST_WEB_OVERLAY_BIND = builder
+                .comment(
+                        "Network interface the overlay server binds to.",
+                        "\"0.0.0.0\" (default) exposes it on the LAN so phones/tablets can reach it.",
+                        "Set to \"127.0.0.1\" to restrict the overlay to this machine only."
+                )
+                .define("bindAddress", "0.0.0.0");
         builder.pop();
 
         builder.push("telemetry");

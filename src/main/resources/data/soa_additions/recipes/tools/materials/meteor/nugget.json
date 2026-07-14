@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/meteor"
+  },
+  "material": "soa_additions:meteor",
+  "needed": 9,
+  "value": 1
+}

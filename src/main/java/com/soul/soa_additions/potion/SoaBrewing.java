@@ -113,6 +113,11 @@ public final class SoaBrewing {
         addPotion(SoaBrewingPotions.REVIVAL,       Items.GLOWSTONE_DUST, SoaBrewingPotions.STRONG_REVIVAL);
         addPotion(SoaBrewingPotions.TELEPORT,      Items.GLOWSTONE_DUST, SoaBrewingPotions.STRONG_TELEPORT);
 
+        // Ore-sight system: water + thaumon:mutagen → mutagenic; mutagenic + ore →
+        // ore_sight (NBT-tagged); ore_sight + redstone → long_ore_sight. Ore matching
+        // is dynamic so any modded ore (forge:ores tag or *_ore in id) just works.
+        com.soul.soa_additions.oresight.OreSightBrewing.register();
+
         LOGGER.info("[SoaBrewing] registered {} brewing recipes ({} bottle types × rules), {} rules skipped",
                 registered, BOTTLES.length, skipped);
     }

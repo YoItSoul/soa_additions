@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:gems/quicksilver"
+  },
+  "material": "soa_additions:quicksilver",
+  "needed": 1,
+  "value": 1
+}

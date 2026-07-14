@@ -1,0 +1,9 @@
+{
+  "ingredient": {
+    "tag": "forge:ingots/soulium"
+  },
+  "material": "mysticalagradditions:soulium",
+  "needed": 1,
+  "type": "tconstruct:material",
+  "value": 1
+}

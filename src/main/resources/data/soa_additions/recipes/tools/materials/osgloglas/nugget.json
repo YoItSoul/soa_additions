@@ -1,0 +1,9 @@
+{
+  "ingredient": {
+    "tag": "forge:nuggets/osgloglas"
+  },
+  "material": "soa_additions:osgloglas",
+  "needed": 9,
+  "type": "tconstruct:material",
+  "value": 1
+}

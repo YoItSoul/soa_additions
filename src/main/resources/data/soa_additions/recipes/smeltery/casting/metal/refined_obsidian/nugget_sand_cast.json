@@ -1,0 +1,15 @@
+{
+  "cast": {
+    "tag": "tconstruct:casts/single_use/nugget"
+  },
+  "cast_consumed": true,
+  "cooling_time": 20,
+  "fluid": {
+    "amount": 10,
+    "fluid": "soa_additions:molten_refined_obsidian"
+  },
+  "result": {
+    "tag": "forge:nuggets/refined_obsidian"
+  },
+  "type": "tconstruct:casting_table"
+}

@@ -1,0 +1,14 @@
+{
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/nugget"
+  },
+  "cooling_time": 20,
+  "fluid": {
+    "amount": 10,
+    "fluid": "taiga:molten_dilithium"
+  },
+  "result": {
+    "tag": "forge:nuggets/dilithium"
+  },
+  "type": "tconstruct:casting_table"
+}

@@ -21,7 +21,9 @@ public class LuckyModifier extends Modifier implements InventoryTickModifierHook
     @Override
     public void onInventoryTick(IToolStackView tool, ModifierEntry mod, Level level, LivingEntity holder,
                                 int slot, boolean selected, boolean isCorrectSlot, ItemStack stack) {
-        if (level.isClientSide()) return;
+        // Once a second — the 25t duration outlasts the 20t refresh, so the
+        // effect stays continuous without re-adding it every single tick.
+        if (level.isClientSide() || holder.tickCount % 20 != 0) return;
         holder.addEffect(new MobEffectInstance(MobEffects.LUCK, 25, 0, false, false));
     }
 }

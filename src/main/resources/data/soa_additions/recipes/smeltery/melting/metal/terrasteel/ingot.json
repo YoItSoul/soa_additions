@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:ingots/terrasteel"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_terrasteel"
+  },
+  "temperature": 800,
+  "time": 60,
+  "type": "tconstruct:melting"
+}

@@ -1,0 +1,5 @@
+{
+  "loader": "forge:fluid_container",
+  "parent": "forge:item/bucket_drip",
+  "fluid": "soa_additions:molten_apatite"
+}

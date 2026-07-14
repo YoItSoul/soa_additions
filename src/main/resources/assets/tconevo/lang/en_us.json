@@ -1,5 +1,5 @@
 {
-  "item.tconevo.coalescence_matrix": "Â§dCoalescence Matrix",
+  "item.tconevo.coalescence_matrix": "§dCoalescence Matrix",
   "item.tconevo.sceptre": "Sceptre",
   "attribute.name.tconevo.accuracy": "Accuracy",
   "effect.tconevo.true_strike": "True Strike",
@@ -39,7 +39,7 @@
   "modifier.tconevo.corrupting.flavor": "A glimpse of the void...",
   "modifier.tconevo.corrupting.description": "This weapon inflicts increasing wither on fully-charged hits.",
   "modifier.tconevo.battle_furor": "Battle Furor",
-  "modifier.tconevo.battle_furor.flavor": "HwÃ¦t!",
+  "modifier.tconevo.battle_furor.flavor": "Hwæt!",
   "modifier.tconevo.battle_furor.description": "This weapon grants its wielder increasing attack damage on fully-charged hits.",
   "modifier.tconevo.luminiferous": "Luminiferous",
   "modifier.tconevo.luminiferous.flavor": "Relativistic!",

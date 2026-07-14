@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/cytosinite"
+  },
+  "material": "soa_additions:cytosinite",
+  "needed": 9,
+  "value": 1
+}

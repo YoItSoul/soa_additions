@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:storage_blocks/manganese"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "soa_additions:molten_manganese"
+  },
+  "temperature": 800,
+  "time": 180,
+  "type": "tconstruct:melting"
+}

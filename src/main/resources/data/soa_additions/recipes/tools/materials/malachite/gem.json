@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "soa_additions:malachite"
+  },
+  "material": "soa_additions:malachite",
+  "needed": 1,
+  "value": 1
+}

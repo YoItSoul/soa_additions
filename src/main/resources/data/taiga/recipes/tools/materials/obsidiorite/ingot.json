@@ -1,9 +1,9 @@
 {
-  "type": "tconstruct:material",
   "ingredient": {
     "tag": "forge:ingots/obsidiorite"
   },
   "material": "taiga:obsidiorite",
   "needed": 1,
+  "type": "tconstruct:material",
   "value": 1
 }

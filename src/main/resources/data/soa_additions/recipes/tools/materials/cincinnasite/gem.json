@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:gems/cincinnasite"
+  },
+  "material": "soa_additions:cincinnasite",
+  "needed": 1,
+  "value": 1
+}

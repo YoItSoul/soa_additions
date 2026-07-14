@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "soa_additions:block/task_collector"
+    },
+    "facing=south": {
+      "model": "soa_additions:block/task_collector",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "soa_additions:block/task_collector",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "soa_additions:block/task_collector",
+      "y": 90
+    }
+  }
+}

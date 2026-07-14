@@ -168,26 +168,25 @@ public final class QuestTelemetry {
         final String endpoint = questEventEndpoint(baseEndpoint);
 
         final String json = GSON.toJson(body);
-        Thread t = new Thread(() -> {
-            try {
-                HttpRequest req = HttpRequest.newBuilder()
-                        .uri(URI.create(endpoint))
-                        .timeout(Duration.ofSeconds(10))
-                        .header("Content-Type", "application/json; charset=utf-8")
-                        .header("User-Agent", "SoaQuestTelemetry/1")
-                        .POST(HttpRequest.BodyPublishers.ofString(json, StandardCharsets.UTF_8))
-                        .build();
-                HttpResponse<String> res = HTTP.send(req, HttpResponse.BodyHandlers.ofString());
-                int sc = res.statusCode();
-                if (sc < 200 || sc >= 300) {
-                    LOG.debug("Quest telemetry returned HTTP {}: {}", sc, res.body());
-                }
-            } catch (Throwable ex) {
-                LOG.debug("Quest telemetry send failed (ignored): {}", ex.toString());
-            }
-        }, "SOA-QuestTelemetry");
-        t.setDaemon(true);
-        t.setPriority(Thread.MIN_PRIORITY);
-        t.start();
+        try {
+            HttpRequest req = HttpRequest.newBuilder()
+                    .uri(URI.create(endpoint))
+                    .timeout(Duration.ofSeconds(10))
+                    .header("Content-Type", "application/json; charset=utf-8")
+                    .header("User-Agent", "SoaQuestTelemetry/1")
+                    .POST(HttpRequest.BodyPublishers.ofString(json, StandardCharsets.UTF_8))
+                    .build();
+            // Async on the shared client's pool — no thread-per-event churn.
+            HTTP.sendAsync(req, HttpResponse.BodyHandlers.ofString())
+                    .whenComplete((res, ex) -> {
+                        if (ex != null) {
+                            LOG.debug("Quest telemetry send failed (ignored): {}", ex.toString());
+                        } else if (res.statusCode() < 200 || res.statusCode() >= 300) {
+                            LOG.debug("Quest telemetry returned HTTP {}: {}", res.statusCode(), res.body());
+                        }
+                    });
+        } catch (Throwable ex) {
+            LOG.debug("Quest telemetry send failed (ignored): {}", ex.toString());
+        }
     }
 }

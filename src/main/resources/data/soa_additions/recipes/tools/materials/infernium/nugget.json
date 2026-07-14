@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/infernium"
+  },
+  "material": "soa_additions:infernium",
+  "needed": 9,
+  "value": 1
+}

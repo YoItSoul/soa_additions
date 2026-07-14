@@ -14,6 +14,10 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * Listens for inventory-changing events and tells the GreedyBag
  * to absorb any newly-restricted items.  Also intercepts ground
@@ -28,6 +32,13 @@ import top.theillusivec4.curios.api.CuriosApi;
 public final class GreedyBagEvents {
 
     private GreedyBagEvents() {}
+
+    /**
+     * Last-seen {@link Inventory#getTimesChanged()} per player, so the
+     * per-tick absorber only does the full inventory + Curios scan when the
+     * inventory actually changed. Idle ticks cost one map lookup + int compare.
+     */
+    private static final Map<UUID, Integer> LAST_INV_CHANGE = new ConcurrentHashMap<>();
 
     /**
      * HIGH priority so we run before ItemStages can reject the pickup.
@@ -69,12 +80,26 @@ public final class GreedyBagEvents {
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase != TickEvent.Phase.START) return;
         if (!(event.player instanceof ServerPlayer sp)) return;
+
+        // Only scan when the inventory actually changed since our last scan;
+        // getTimesChanged() bumps on every setChanged() (pickup, craft, /give,
+        // shift-click, ...), so this still beats ItemStages to any new item.
+        int changes = sp.getInventory().getTimesChanged();
+        Integer last = LAST_INV_CHANGE.get(sp.getUUID());
+        if (last != null && last == changes) return;
+        LAST_INV_CHANGE.put(sp.getUUID(), changes);
+
         handleChange(sp);
     }
 
     @SubscribeEvent
     public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         handleChange(event.getEntity());
+    }
+
+    @SubscribeEvent
+    public static void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
+        LAST_INV_CHANGE.remove(event.getEntity().getUUID());
     }
 
     private static void handleChange(Player player) {

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "soa_additions:valkyrie_block",
+    "soa_additions:valkyrie_ingot",
+    "soa_additions:valkyrie_nugget"
+  ]
+}

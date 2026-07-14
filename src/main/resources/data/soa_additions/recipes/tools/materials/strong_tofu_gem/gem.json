@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:gems/strong_tofu"
+  },
+  "material": "soa_additions:strong_tofu_gem",
+  "needed": 1,
+  "value": 1
+}

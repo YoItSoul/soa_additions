@@ -1,9 +1,9 @@
 {
-  "type": "tconstruct:material",
   "ingredient": {
     "tag": "forge:nuggets/tiberium"
   },
   "material": "taiga:tiberium",
   "needed": 9,
+  "type": "tconstruct:material",
   "value": 1
 }

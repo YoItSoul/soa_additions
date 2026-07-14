@@ -1,0 +1,15 @@
+{
+  "cast": {
+    "tag": "tconstruct:casts/single_use/nugget"
+  },
+  "cast_consumed": true,
+  "cooling_time": 20,
+  "fluid": {
+    "amount": 10,
+    "fluid": "soa_additions:molten_cytosinite"
+  },
+  "result": {
+    "tag": "forge:nuggets/cytosinite"
+  },
+  "type": "tconstruct:casting_table"
+}

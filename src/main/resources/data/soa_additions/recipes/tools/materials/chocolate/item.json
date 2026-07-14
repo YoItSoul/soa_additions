@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "minecraft:cocoa_beans"
+  },
+  "material": "soa_additions:chocolate",
+  "needed": 1,
+  "value": 1
+}

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "draconicevolution:wyvern_core"
+  },
+  "material": "soa_additions:wyvern_metal",
+  "needed": 1,
+  "value": 1
+}

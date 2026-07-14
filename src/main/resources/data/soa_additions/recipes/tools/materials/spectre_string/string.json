@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:strings/spectre_string"
+  },
+  "material": "soa_additions:spectre_string",
+  "needed": 1,
+  "value": 1
+}

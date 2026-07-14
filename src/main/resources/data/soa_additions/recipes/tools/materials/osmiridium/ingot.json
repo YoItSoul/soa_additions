@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:ingots/osmiridium"
+  },
+  "material": "soa_additions:osmiridium",
+  "needed": 1,
+  "value": 1
+}

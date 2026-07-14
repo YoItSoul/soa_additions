@@ -29,6 +29,11 @@ public record ItemTask(ResourceLocation item, ResourceLocation tag, CompoundTag 
 
     public static final ResourceLocation TYPE = new ResourceLocation(SoaAdditions.MODID, "item");
 
+    /** TagKey memo — matches() runs per inventory stack per poll for tag-based
+     *  tasks, and TagKey.create allocates before hitting its intern pool. */
+    private static final java.util.Map<ResourceLocation, TagKey<Item>> TAG_KEYS =
+            new java.util.concurrent.ConcurrentHashMap<>();
+
     @Override public ResourceLocation type() { return TYPE; }
     @Override public int target() { return count; }
 
@@ -48,7 +53,8 @@ public record ItemTask(ResourceLocation item, ResourceLocation tag, CompoundTag 
     public boolean matches(ItemStack stack) {
         if (stack.isEmpty()) return false;
         if (tag != null) {
-            if (!stack.is(TagKey.create(Registries.ITEM, tag))) return false;
+            TagKey<Item> key = TAG_KEYS.computeIfAbsent(tag, t -> TagKey.create(Registries.ITEM, t));
+            if (!stack.is(key)) return false;
         } else {
             if (!net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem()).equals(item)) return false;
         }

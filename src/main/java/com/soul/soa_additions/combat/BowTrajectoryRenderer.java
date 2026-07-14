@@ -49,6 +49,16 @@ public final class BowTrajectoryRenderer {
 
     private BowTrajectoryRenderer() {}
 
+    // Memoized simulation: the arc is a pure function of origin, aim, power and
+    // shooter motion. While the player holds a steady aim (the common case at
+    // full draw) every input is bit-identical frame to frame, so we reuse the
+    // last result instead of re-running up to 120 level.clip raycasts per frame.
+    private static List<Vec3> cachedPoints;
+    private static Vec3 cachedOrigin;
+    private static Vec3 cachedMotion;
+    private static float cachedXRot, cachedYRot, cachedPower;
+    private static int cachedTick = -1;   // expire once per client tick so world edits show up
+
     @SubscribeEvent
     public static void onRenderLevel(RenderLevelStageEvent event) {
         if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_PARTICLES) return;
@@ -89,6 +99,12 @@ public final class BowTrajectoryRenderer {
 
         float xRot = player.getXRot();
         float yRot = player.getYRot();
+        Vec3 motion = player.getDeltaMovement();
+        if (cachedPoints != null && player.tickCount == cachedTick
+                && xRot == cachedXRot && yRot == cachedYRot && power == cachedPower
+                && pos.equals(cachedOrigin) && motion.equals(cachedMotion)) {
+            return cachedPoints;
+        }
         // shootFromRotation: direction from look angles, normalized by shoot().
         float dx = -sinDeg(yRot) * cosDeg(xRot);
         float dy = -sinDeg(xRot);
@@ -98,9 +114,9 @@ public final class BowTrajectoryRenderer {
         Vec3 vel = dir.scale(speed);
         // Arrow inherits shooter's horizontal motion (and vertical too, if
         // airborne). Matches AbstractArrow.shootFromRotation tail.
-        Vec3 shooterMotion = player.getDeltaMovement();
-        vel = vel.add(shooterMotion.x, player.onGround() ? 0.0 : shooterMotion.y, shooterMotion.z);
+        vel = vel.add(motion.x, player.onGround() ? 0.0 : motion.y, motion.z);
 
+        Vec3 origin = pos;
         out.add(pos);
         for (int i = 0; i < MAX_TICKS; i++) {
             Vec3 next = pos.add(vel);
@@ -111,7 +127,7 @@ public final class BowTrajectoryRenderer {
                     player));
             if (hit.getType() != HitResult.Type.MISS) {
                 out.add(hit.getLocation());
-                return out;
+                break;
             }
             // Drag then gravity, matching AbstractArrow.tick() ordering.
             vel = vel.scale(AIR_DRAG);
@@ -119,6 +135,14 @@ public final class BowTrajectoryRenderer {
             pos = next;
             out.add(pos);
         }
+
+        cachedPoints = out;
+        cachedOrigin = origin;
+        cachedMotion = motion;
+        cachedXRot = xRot;
+        cachedYRot = yRot;
+        cachedPower = power;
+        cachedTick = player.tickCount;
         return out;
     }
 

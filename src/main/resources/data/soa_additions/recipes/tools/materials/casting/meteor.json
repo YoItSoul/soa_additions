@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_meteor"
+  },
+  "output": "soa_additions:meteor",
+  "temperature": 1200
+}

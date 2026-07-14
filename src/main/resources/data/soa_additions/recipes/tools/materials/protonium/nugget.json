@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/protonium"
+  },
+  "material": "soa_additions:protonium",
+  "needed": 9,
+  "value": 1
+}

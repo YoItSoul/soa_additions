@@ -49,14 +49,9 @@ public class AltareBlockEntity extends BlockEntity {
     // ── Tick ─────────────────────────────────────────────────────────────
 
     public void serverTick() {
-        if (level == null || altarPos == null) return;
-
-        BlockEntity altarBE = level.getBlockEntity(altarPos);
-        if (!(altarBE instanceof IBloodAltar altar)) return;
-
-        // Auto-insert the first non-empty input slot item into the altar
-        // Full altar interaction logic will be expanded in Phase 11
-        // For now, this validates the link is functional
+        // Phase-11 placeholder: altar auto-insert logic isn't implemented yet,
+        // so don't pay a per-tick getBlockEntity lookup for a no-op. When the
+        // real logic lands, do the IBloodAltar lookup here (ideally throttled).
     }
 
     // ── Public API ───────────────────────────────────────────────────────

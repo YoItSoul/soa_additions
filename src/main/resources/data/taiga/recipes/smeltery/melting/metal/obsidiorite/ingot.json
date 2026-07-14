@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:ingots/obsidiorite"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "taiga:molten_obsidiorite"
+  },
+  "temperature": 800,
+  "time": 60,
+  "type": "tconstruct:melting"
+}

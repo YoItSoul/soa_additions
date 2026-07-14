@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "bloodmagic:soulsword"
+  },
+  "material": "soa_additions:sentient_metal",
+  "needed": 1,
+  "value": 1
+}

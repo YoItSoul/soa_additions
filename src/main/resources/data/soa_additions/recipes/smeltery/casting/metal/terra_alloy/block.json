@@ -1,0 +1,11 @@
+{
+  "cooling_time": 180,
+  "fluid": {
+    "amount": 810,
+    "fluid": "soa_additions:molten_terra_alloy"
+  },
+  "result": {
+    "tag": "forge:storage_blocks/terra_alloy"
+  },
+  "type": "tconstruct:casting_basin"
+}

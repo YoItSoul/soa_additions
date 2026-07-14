@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "tag": "forge:nuggets/palladium"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "taiga:molten_palladium"
+  },
+  "temperature": 800,
+  "time": 20,
+  "type": "tconstruct:melting"
+}

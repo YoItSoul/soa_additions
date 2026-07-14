@@ -77,8 +77,14 @@ public final class QuestWebServer {
     public static void start(MinecraftServer mc, int port) {
         if (server != null) return;
         mcServer = mc;
+        String bind;
         try {
-            server = HttpServer.create(new InetSocketAddress("0.0.0.0", port), 0);
+            bind = com.soul.soa_additions.config.ModConfigs.QUEST_WEB_OVERLAY_BIND.get();
+        } catch (Throwable t) {
+            bind = "0.0.0.0";
+        }
+        try {
+            server = HttpServer.create(new InetSocketAddress(bind, port), 0);
             server.setExecutor(Executors.newFixedThreadPool(4, r -> {
                 Thread t = new Thread(r, "soa-quest-web");
                 t.setDaemon(true);
@@ -218,6 +224,28 @@ public final class QuestWebServer {
             return;
         }
 
+        // Pack mode, team, progress and player-list data are server-thread-only
+        // (SavedData lookups even mutate maps via computeIfAbsent). Build the
+        // response on the server thread — like the SSE snapshot path — and only
+        // do the HTTP write out here on the pool thread.
+        MinecraftServer srv = mcServer;
+        if (srv == null) {
+            sendJson(ex, 503, "{\"error\":\"Server not available\"}");
+            return;
+        }
+        JsonObject response;
+        try {
+            response = srv.submit(() -> buildQuestsResponse(uuid))
+                    .get(10, java.util.concurrent.TimeUnit.SECONDS);
+        } catch (Exception e) {
+            sendJson(ex, 503, "{\"error\":\"Server busy\"}");
+            return;
+        }
+        sendJson(ex, 200, GSON.toJson(response));
+    }
+
+    /** Must run on the server thread — reads pack mode, registry, layout and progress. */
+    private static JsonObject buildQuestsResponse(UUID uuid) {
         JsonObject response = new JsonObject();
 
         // Pack mode
@@ -319,7 +347,7 @@ public final class QuestWebServer {
         // Progress
         response.add("progress", buildProgressJson(uuid));
 
-        sendJson(ex, 200, GSON.toJson(response));
+        return response;
     }
 
     private static void handleSse(HttpExchange ex) throws IOException {

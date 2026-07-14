@@ -317,53 +317,11 @@ public final class ScannedTargets {
 
     public static void register(IEventBus modBus) {
         modBus.addListener(ScannedTargets::onRegisterCaps);
-        // AttachCapabilitiesEvent<Entity> is a GENERIC event — plain
-        // addListener silently registers but never fires for it; only
-        // addGenericListener with the matching type filter actually binds.
-        // (This is the bug that took us many iterations to find — the
-        // annotation @Mod.EventBusSubscriber inspects the method signature
-        // and routes to addGenericListener under the hood, which is why
-        // SOMETIMES the annotation path worked.)
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addGenericListener(
-                net.minecraft.world.entity.Entity.class, ScannedTargets::onAttachCap);
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(ScannedTargets::onCloneCap);
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(ScannedTargets::onLoginCap);
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(ScannedTargets::onRespawnCap);
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(ScannedTargets::onDimChangeCap);
-    }
-
-    /** Direct subscriber — see register(). */
-    public static void onAttachCap(AttachCapabilitiesEvent<net.minecraft.world.entity.Entity> event) {
-        if (!(event.getObject() instanceof Player)) return;
-        if (event.getCapabilities().containsKey(CAP_ID)) return;
-        event.addCapability(CAP_ID, new Provider());
-        ThaumicRemnants.LOG.info("[monocle/srv] ScannedTargets cap attached to {}",
-                event.getObject().getUUID());
-    }
-
-    public static void onCloneCap(PlayerEvent.Clone event) {
-        if (!event.isWasDeath()) return;
-        Player oldP = event.getOriginal();
-        Player newP = event.getEntity();
-        oldP.reviveCaps();
-        Data old = of(oldP);
-        Data fresh = of(newP);
-        if (old != EMPTY && fresh != EMPTY) {
-            fresh.read(old.write());
-        }
-        oldP.invalidateCaps();
-    }
-
-    public static void onLoginCap(PlayerEvent.PlayerLoggedInEvent event) {
-        if (event.getEntity() instanceof ServerPlayer sp) syncTo(sp);
-    }
-
-    public static void onRespawnCap(PlayerEvent.PlayerRespawnEvent event) {
-        if (event.getEntity() instanceof ServerPlayer sp) syncTo(sp);
-    }
-
-    public static void onDimChangeCap(PlayerEvent.PlayerChangedDimensionEvent event) {
-        if (event.getEntity() instanceof ServerPlayer sp) syncTo(sp);
+        // Forge-bus handlers (attach/clone/login/respawn/dim-change) live ONLY
+        // in the auto-subscribed Events class below — @Mod.EventBusSubscriber
+        // routes generic events through addGenericListener correctly. They
+        // used to ALSO be manually added here, double-registering every one:
+        // two sync packets per login/respawn, double reviveCaps on clone.
     }
 
     private static void onRegisterCaps(RegisterCapabilitiesEvent event) {

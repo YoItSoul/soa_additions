@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/stellar_alloy_gc"
+  },
+  "material": "soa_additions:stellar_alloy_gc",
+  "needed": 9,
+  "value": 1
+}

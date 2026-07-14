@@ -156,6 +156,14 @@ public final class ModBlocks {
     public static final RegistryObject<Block> EVIL_METAL_BLOCK            = registerBlock("evil_metal_block",            () -> new Block(METAL_BLOCK_PROPS));
     public static final RegistryObject<Block> DEMONIC_METAL_BLOCK         = registerBlock("demonic_metal_block",         () -> new Block(METAL_BLOCK_PROPS));
 
+    // Tinkers' Aether port (1.12 tinkersaether → 1.20.1)
+    public static final RegistryObject<Block> VALKYRIE_BLOCK              = registerBlock("valkyrie_block",              () -> new Block(METAL_BLOCK_PROPS));
+
+    // Quest resource sink + task screen (FE / XP / Mana / EMC / item consume-tasks).
+    // Place an NxN wall of them (same facing) to form one large screen.
+    public static final RegistryObject<TaskCollectorBlock> TASK_COLLECTOR =
+            registerBlock("task_collector", () -> new TaskCollectorBlock(METAL_BLOCK_PROPS));
+
     private ModBlocks() {}
 
     public static void register(IEventBus eventBus) {

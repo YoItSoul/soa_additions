@@ -47,7 +47,8 @@
     "soa_additions:hardened_stone",
     "soa_additions:infinity_block_block",
     "soa_additions:infinity_block_block_block",
-    "soa_additions:unknown_block"
+    "soa_additions:unknown_block",
+    "soa_additions:valkyrie_block"
   ],
   "replace": false
 }

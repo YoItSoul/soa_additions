@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "amount": 90,
+    "fluid": "soa_additions:molten_chromasteel"
+  },
+  "output": "soa_additions:chromasteel",
+  "temperature": 1800
+}

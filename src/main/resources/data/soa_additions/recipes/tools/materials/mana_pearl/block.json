@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:storage_blocks/mana_pearl"
+  },
+  "material": "soa_additions:mana_pearl",
+  "needed": 1,
+  "value": 9,
+  "leftover": {
+    "count": 1,
+    "tag": "forge:gems/mana_pearl"
+  }
+}
