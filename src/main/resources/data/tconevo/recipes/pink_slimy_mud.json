@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:gems/pink_slime_crystal"
+    },
+    {
+      "tag": "forge:gems/pink_slime_crystal"
+    },
+    {
+      "tag": "forge:gems/pink_slime_crystal"
+    },
+    {
+      "tag": "forge:gems/pink_slime_crystal"
+    },
+    {
+      "tag": "forge:sand"
+    },
+    {
+      "item": "minecraft:dirt"
+    }
+  ],
+  "result": {
+    "item": "tconevo:pink_slimy_mud",
+    "count": 1
+  }
+}

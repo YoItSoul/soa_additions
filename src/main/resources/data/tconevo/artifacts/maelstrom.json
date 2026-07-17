@@ -1,13 +1,13 @@
 {
   "weight": 1000,
   "type": "tconevo:tool",
-  "name": "Maelstrom",
+  "name": "Maelstorm",
   "lore": "An instrument capable of harnessing the power of electricity.",
   "tool": "hatchet",
   "materials": [
-    "carbon_fiber",
     "invar",
-    "ionite"
+    "fluxed_electrum",
+    "constantan"
   ],
   "free_mods": 2,
   "mods": [

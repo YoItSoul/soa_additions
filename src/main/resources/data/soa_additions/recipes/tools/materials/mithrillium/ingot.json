@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:ingots/mithrillium"
-  },
-  "material": "soa_additions:mithrillium",
-  "needed": 1,
-  "value": 1
-}

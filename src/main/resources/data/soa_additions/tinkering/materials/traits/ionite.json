@@ -1,7 +1,0 @@
-{
-  "default": [
-    { "level": 1, "name": "tconevo:deadly_precision" },
-    { "level": 1, "name": "tconevo:chain_lightning" }
-  ],
-  "perStat": {}
-}

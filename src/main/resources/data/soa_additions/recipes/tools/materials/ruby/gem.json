@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "item": "soa_additions:ruby"
-  },
-  "material": "soa_additions:ruby",
-  "needed": 1,
-  "value": 1
-}

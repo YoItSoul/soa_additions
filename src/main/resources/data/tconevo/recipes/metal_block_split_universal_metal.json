@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/universal_metal"
+    }
+  ],
+  "result": {
+    "item": "tconevo:universal_metal_ingot",
+    "count": 9
+  }
+}

@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:nuggets/ravaging"
-  },
-  "material": "soa_additions:ravaging",
-  "needed": 9,
-  "value": 1
-}

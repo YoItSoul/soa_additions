@@ -1,9 +1,0 @@
-{
-  "fluid": {
-    "amount": 90,
-    "fluid": "mysticalagradditions:molten_imperium"
-  },
-  "output": "mysticalagradditions:imperium",
-  "temperature": 800,
-  "type": "tconstruct:material_fluid"
-}

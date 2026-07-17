@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_fluid",
-  "fluid": {
-    "amount": 90,
-    "fluid": "soa_additions:molten_refined_glowstone"
-  },
-  "output": "soa_additions:refined_glowstone",
-  "temperature": 800
-}

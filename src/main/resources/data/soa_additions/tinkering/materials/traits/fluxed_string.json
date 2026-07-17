@@ -1,8 +1,0 @@
-{
-  "default": [],
-  "perStat": {
-    "tconstruct:limb": [
-      { "level": 1, "name": "tconevo:aftershock" }
-    ]
-  }
-}

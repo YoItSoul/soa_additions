@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "item": "rftoolsbase:dimensionalshard"
-  },
-  "material": "soa_additions:dimensional_shard",
-  "needed": 1,
-  "value": 1
-}

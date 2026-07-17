@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_fluid",
-  "fluid": {
-    "amount": 90,
-    "fluid": "bigreactors:yellorium"
-  },
-  "output": "soa_additions:yellorium",
-  "temperature": 800
-}

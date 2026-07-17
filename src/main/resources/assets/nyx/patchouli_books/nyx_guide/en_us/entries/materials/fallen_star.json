@@ -1,0 +1,26 @@
+{
+  "name": "Fallen Stars",
+  "icon": "nyx:fallen_star",
+  "category": "nyx:materials",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "nyx:fallen_star",
+      "title": "Fallen Star",
+      "text": "Dropped by $(l:events/star_shower)Star Showers$(). The upgrade path for meteor gear and the raw material for $(l:materials/crystal)Star Blocks$()."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "nyx:star_block",
+      "title": "Star Block",
+      "text": "A decorative block with a soft glow. Nine fallen stars form one. Also available as $(item)Chiseled$(), $(item)Slab$(), and $(item)Stairs$() variants."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "nyx:cracked_star_block",
+      "title": "Cracked Star Block",
+      "text": "A damaged variant used in rituals and specific recipes. Crafted by exposing a star block to direct sunlight at a full-moon dawn, or via a crafting shortcut."
+    }
+  ]
+}

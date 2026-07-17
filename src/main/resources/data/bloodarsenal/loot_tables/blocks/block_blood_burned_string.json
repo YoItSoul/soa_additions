@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [{ "condition": "minecraft:survives_explosion" }],
+      "entries": [{ "type": "minecraft:item", "name": "bloodarsenal:blood_burned_string" }],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "bloodarsenal:blocks/block_blood_burned_string"
+}

@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_melting",
-  "input": "soa_additions:draconic_metal",
-  "result": {
-    "amount": 90,
-    "fluid": "soa_additions:molten_draconic_metal"
-  },
-  "temperature": 800
-}

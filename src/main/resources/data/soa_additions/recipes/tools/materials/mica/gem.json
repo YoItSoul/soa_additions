@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:gems/mica"
-  },
-  "material": "soa_additions:mica",
-  "needed": 1,
-  "value": 1
-}

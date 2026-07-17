@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "item": "soa_additions:peridot"
-  },
-  "material": "soa_additions:peridot",
-  "needed": 1,
-  "value": 1
-}

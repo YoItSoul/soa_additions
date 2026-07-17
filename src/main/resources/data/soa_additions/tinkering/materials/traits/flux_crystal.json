@@ -1,7 +1,0 @@
-{
-  "default": [
-    { "level": 1, "name": "tconevo:energized" },
-    { "level": 1, "name": "tconevo:aftershock" }
-  ],
-  "perStat": {}
-}

@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "nyx:meteor_shard" }
+  ],
+  "result": { "item": "nyx:meteor_dust" }
+}

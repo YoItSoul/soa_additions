@@ -67,7 +67,7 @@ public final class SoaBrewing {
         addItem("minecraft:awkward", Items.CLOCK,                         SoaBrewingPotions.EXTENSION);
         addItem("minecraft:awkward", "botania:pure_daisy",                SoaBrewingPotions.PURITY);
         addItem("minecraft:awkward", Items.DIRT,                          SoaBrewingPotions.STEP_UP);
-        addItem("minecraft:awkward", "tconstruct:manyullyn_ingot",        SoaBrewingPotions.MAGIC_SHIELD);
+        addTag( "minecraft:awkward", "forge:ingots/manyullyn",            SoaBrewingPotions.MAGIC_SHIELD);
         addItem("minecraft:awkward", Items.LEATHER,                       SoaBrewingPotions.ARCHERY);
         addTag( "minecraft:awkward", "forge:ingots/lead",                 SoaBrewingPotions.SOLID_CORE);
         addTag( "minecraft:awkward", "forge:storage_blocks/lead",         SoaBrewingPotions.WEIGHT);

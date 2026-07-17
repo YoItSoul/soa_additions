@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:nuggets/invar"
-  },
-  "material": "soa_additions:invar",
-  "needed": 9,
-  "value": 1
-}

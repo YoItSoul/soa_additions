@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "taiga:palladium_ingot"
+    }
+  },
+  "result": {
+    "item": "taiga:palladium_block"
+  }
+}

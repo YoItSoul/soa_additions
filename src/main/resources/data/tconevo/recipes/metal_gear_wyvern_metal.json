@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " i ",
+    "i i",
+    " i "
+  ],
+  "key": {
+    "i": {
+      "tag": "forge:ingots/wyvern_metal"
+    }
+  },
+  "result": {
+    "item": "tconevo:wyvern_gear",
+    "count": 1
+  }
+}

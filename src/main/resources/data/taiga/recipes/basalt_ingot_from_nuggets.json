@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "taiga:basalt_nugget"
+    }
+  },
+  "result": {
+    "item": "taiga:basalt_ingot"
+  }
+}

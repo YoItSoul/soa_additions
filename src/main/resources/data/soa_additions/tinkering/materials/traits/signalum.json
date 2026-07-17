@@ -1,7 +1,0 @@
-{
-  "default": [
-    { "level": 1, "name": "tconevo:relentless" },
-    { "level": 1, "name": "tconevo:aftershock" }
-  ],
-  "perStat": {}
-}

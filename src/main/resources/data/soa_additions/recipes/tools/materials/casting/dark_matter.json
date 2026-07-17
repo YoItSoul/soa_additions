@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_fluid",
-  "fluid": {
-    "amount": 90,
-    "fluid": "soa_additions:molten_dark_matter"
-  },
-  "output": "soa_additions:dark_matter",
-  "temperature": 1200
-}

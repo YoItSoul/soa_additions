@@ -81,5 +81,8 @@
   "block.bloodarsenal.blood_capacitor": "Blood Capacitor",
   "tooltip.bloodarsenal.blood_orange.desc": "An unnaturally red orange, pulsing with life energy.",
   "tooltip.bloodarsenal.glass_sacrificial_dagger.desc": "A dagger made of glass shards. Cuts deeper than steel.",
-  "tooltip.bloodarsenal.glass_dagger_of_sacrifice.desc": "A sacrificial dagger of glass. Mobs slain near an altar yield their life force."
+  "tooltip.bloodarsenal.glass_dagger_of_sacrifice.desc": "A sacrificial dagger of glass. Mobs slain near an altar yield their life force.",
+  "chat.bloodarsenal.crit": "Critical Hit!",
+  "bloodarsenal.subtitle.crit": "Critical hit!",
+  "effect.bloodarsenal.bleeding": "Bleeding"
 }

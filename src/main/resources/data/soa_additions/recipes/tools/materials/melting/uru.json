@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_melting",
-  "input": "soa_additions:uru",
-  "result": {
-    "amount": 90,
-    "fluid": "soa_additions:molten_uru"
-  },
-  "temperature": 800
-}

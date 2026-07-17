@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:strings/mana_string"
-  },
-  "material": "soa_additions:mana_string",
-  "needed": 1,
-  "value": 1
-}

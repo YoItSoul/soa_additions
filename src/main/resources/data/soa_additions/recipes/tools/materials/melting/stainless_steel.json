@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_melting",
-  "input": "soa_additions:stainless_steel",
-  "result": {
-    "amount": 90,
-    "fluid": "soa_additions:molten_stainless_steel"
-  },
-  "temperature": 800
-}

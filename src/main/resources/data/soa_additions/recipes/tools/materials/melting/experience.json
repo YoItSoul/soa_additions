@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_melting",
-  "input": "soa_additions:experience",
-  "result": {
-    "amount": 90,
-    "fluid": "cofh_core:experience"
-  },
-  "temperature": 800
-}

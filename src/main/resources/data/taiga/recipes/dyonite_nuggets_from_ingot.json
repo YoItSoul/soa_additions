@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "taiga:dyonite_ingot"
+    }
+  ],
+  "result": {
+    "item": "taiga:dyonite_nugget",
+    "count": 9
+  }
+}

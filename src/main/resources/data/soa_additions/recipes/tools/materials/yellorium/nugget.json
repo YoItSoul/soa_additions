@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:nuggets/yellorium"
-  },
-  "material": "soa_additions:yellorium",
-  "needed": 9,
-  "value": 1
-}

@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_melting",
-  "input": "soa_additions:alumite",
-  "result": {
-    "amount": 90,
-    "fluid": "soa_additions:molten_alumite"
-  },
-  "temperature": 800
-}

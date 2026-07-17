@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "taiga:violium_ingot"
+    }
+  },
+  "result": {
+    "item": "taiga:violium_block"
+  }
+}

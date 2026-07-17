@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:nuggets/insanium"
-  },
-  "material": "soa_additions:insanium",
-  "needed": 9,
-  "value": 1
-}

@@ -69,9 +69,10 @@ public class GlassSacrificialDaggerItem extends Item {
             float healthDrain = (float) (BAConfig.GLASS_DAGGER_DAMAGE.get().doubleValue() + level.random.nextInt(3));
             player.setHealth(Math.max(player.getHealth() - healthDrain, 0.0001F));
 
-            // 50% chance to apply Bleeding effect (use Wither as Bleeding substitute)
-            if (!player.hasEffect(net.minecraft.world.effect.MobEffects.WITHER) && level.random.nextBoolean()) {
-                player.addEffect(new MobEffectInstance(net.minecraft.world.effect.MobEffects.WITHER,
+            // 50% chance to apply Bleeding (1.12 PotionBleeding, ported in BAEffects)
+            var bleeding = com.soul.soa_additions.bloodarsenal.BAEffects.BLEEDING.get();
+            if (!player.hasEffect(bleeding) && level.random.nextBoolean()) {
+                player.addEffect(new MobEffectInstance(bleeding,
                         40 + (level.random.nextInt(4) * 20), level.random.nextInt(2)));
             }
 

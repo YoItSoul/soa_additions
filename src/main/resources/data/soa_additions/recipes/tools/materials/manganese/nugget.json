@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:nuggets/manganese"
-  },
-  "material": "soa_additions:manganese",
-  "needed": 9,
-  "value": 1
-}

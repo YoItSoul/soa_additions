@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/universal_metal"
+    }
+  ],
+  "result": {
+    "item": "tconevo:universal_metal_nugget",
+    "count": 9
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/wyvern_metal"
+    }
+  ],
+  "result": {
+    "item": "tconevo:wyvern_ingot",
+    "count": 9
+  }
+}

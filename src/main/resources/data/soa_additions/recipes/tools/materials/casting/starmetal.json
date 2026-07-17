@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_fluid",
-  "fluid": {
-    "amount": 90,
-    "fluid": "soa_additions:molten_starmetal"
-  },
-  "output": "soa_additions:starmetal",
-  "temperature": 1200
-}

@@ -1,12 +1,12 @@
 {
-  "weight": 75,
+  "weight": 100,
   "type": "tconevo:tool",
-  "name": "Ancient Arrow",
-  "lore": "An arrow that has been fitted with powerful ancient technology.",
-  "tool": "arrow",
+  "name": "Slimey Sword",
+  "lore": "It's said to be once wielded by the Slime Knight Leader in Slime Kingdom.",
+  "tool": "broadsword",
   "materials": [
-    "polyethylene",
-    "gelid_enderium",
-    "feather"
+    "magmaslime",
+    "knightslime",
+    "blueslime"
   ]
 }

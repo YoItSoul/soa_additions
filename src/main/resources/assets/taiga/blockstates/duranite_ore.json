@@ -1,7 +1,5 @@
-{
+﻿{
   "variants": {
-    "": {
-      "model": "taiga:block/duranite_ore"
-    }
+    "": {"model": "taiga:block/duranite_ore"}
   }
 }

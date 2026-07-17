@@ -1,7 +1,5 @@
-{
+﻿{
   "variants": {
-    "": {
-      "model": "taiga:block/dilithium_ore"
-    }
+    "": {"model": "taiga:block/dilithium_ore"}
   }
 }

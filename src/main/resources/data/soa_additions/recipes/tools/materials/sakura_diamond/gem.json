@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:gems/sakura_diamond"
-  },
-  "material": "soa_additions:sakura_diamond",
-  "needed": 1,
-  "value": 1
-}

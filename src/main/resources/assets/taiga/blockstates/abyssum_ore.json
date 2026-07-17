@@ -1,7 +1,5 @@
-{
+﻿{
   "variants": {
-    "": {
-      "model": "taiga:block/abyssum_ore"
-    }
+    "": {"model": "taiga:block/abyssum_ore"}
   }
 }

@@ -118,5 +118,11 @@ public final class ModNetworking {
                 .decoder(com.soul.soa_additions.oresight.OreSightSyncPacket::decode)
                 .consumerMainThread(com.soul.soa_additions.oresight.OreSightSyncPacket::handle)
                 .add();
+
+        CHANNEL.messageBuilder(com.soul.soa_additions.nyx.net.NyxSyncPacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(com.soul.soa_additions.nyx.net.NyxSyncPacket::encode)
+                .decoder(com.soul.soa_additions.nyx.net.NyxSyncPacket::decode)
+                .consumerMainThread(com.soul.soa_additions.nyx.net.NyxSyncPacket::handle)
+                .add();
     }
 }

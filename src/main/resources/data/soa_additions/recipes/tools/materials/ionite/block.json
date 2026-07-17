@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:storage_blocks/ionite"
-  },
-  "material": "soa_additions:ionite",
-  "needed": 1,
-  "value": 9
-}

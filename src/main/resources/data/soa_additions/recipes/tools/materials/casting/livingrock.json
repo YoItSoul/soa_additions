@@ -1,9 +1,0 @@
-{
-  "fluid": {
-    "amount": 90,
-    "fluid": "soa_additions:molten_livingrock"
-  },
-  "output": "soa_additions:livingrock",
-  "temperature": 800,
-  "type": "tconstruct:material_fluid"
-}

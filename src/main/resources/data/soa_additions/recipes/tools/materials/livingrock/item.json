@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "item": "botania:livingrock"
-  },
-  "material": "soa_additions:livingrock",
-  "needed": 1,
-  "value": 1
-}

@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_melting",
-  "input": "soa_additions:fusion_matrix",
-  "result": {
-    "amount": 90,
-    "fluid": "soa_additions:molten_fusion_matrix"
-  },
-  "temperature": 800
-}

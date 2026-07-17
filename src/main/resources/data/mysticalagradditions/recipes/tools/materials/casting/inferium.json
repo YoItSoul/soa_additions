@@ -1,9 +1,0 @@
-{
-  "fluid": {
-    "amount": 90,
-    "fluid": "mysticalagradditions:molten_inferium"
-  },
-  "output": "mysticalagradditions:inferium",
-  "temperature": 800,
-  "type": "tconstruct:material_fluid"
-}

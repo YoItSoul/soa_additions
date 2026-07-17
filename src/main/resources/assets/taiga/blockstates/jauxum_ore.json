@@ -1,7 +1,5 @@
-{
+﻿{
   "variants": {
-    "": {
-      "model": "taiga:block/jauxum_ore"
-    }
+    "": {"model": "taiga:block/jauxum_ore"}
   }
 }

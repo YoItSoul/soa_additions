@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "taiga:obsidiorite_nugget"
+    }
+  },
+  "result": {
+    "item": "taiga:obsidiorite_ingot"
+  }
+}

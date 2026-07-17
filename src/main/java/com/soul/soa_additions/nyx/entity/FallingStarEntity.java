@@ -1,6 +1,6 @@
 package com.soul.soa_additions.nyx.entity;
 
-import com.soul.soa_additions.item.ModItems;
+import com.soul.soa_additions.nyx.NyxItems;
 import com.soul.soa_additions.nyx.NyxSounds;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -45,7 +45,7 @@ public class FallingStarEntity extends Entity {
             if (this.horizontalCollision || this.verticalCollision) {
                 level().playSound(null, getX(), getY(), getZ(),
                         NyxSounds.FALLING_STAR_IMPACT.get(), SoundSource.AMBIENT, 10.0f, 1.0f);
-                ItemStack stack = new ItemStack(ModItems.FALLEN_STAR.get());
+                ItemStack stack = new ItemStack(NyxItems.FALLEN_STAR.get());
                 ItemEntity ie = new ItemEntity(level(), getX(), getY(), getZ(), stack);
                 ie.getPersistentData().putBoolean("nyx:fallen_star", true);
                 level().addFreshEntity(ie);

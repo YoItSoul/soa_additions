@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/wyvern_metal"
+    }
+  ],
+  "result": {
+    "item": "tconevo:wyvern_nugget",
+    "count": 9
+  }
+}

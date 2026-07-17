@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:nuggets/advanced_alloy"
-  },
-  "material": "soa_additions:advanced_alloy",
-  "needed": 9,
-  "value": 1
-}

@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "item": "minecraft:bedrock"
-  },
-  "material": "soa_additions:bedrock",
-  "needed": 1,
-  "value": 1
-}

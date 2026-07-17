@@ -3,8 +3,8 @@
   "values": [
     "soa_additions:obsidiorite",
     "soa_additions:uru_block",
-    "soa_additions:meteor_rock",
-    "soa_additions:gleaning_meteor_rock",
+    "nyx:meteor_rock",
+    "nyx:gleaning_meteor_rock",
     "mekanism:osmium_ore",
     "mekanism:deepslate_osmium_ore",
     "bno:nether_osmium_ore",

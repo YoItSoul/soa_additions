@@ -1,7 +1,5 @@
-{
+﻿{
   "variants": {
-    "": {
-      "model": "taiga:block/tiberium_ore"
-    }
+    "": {"model": "taiga:block/tiberium_ore"}
   }
 }

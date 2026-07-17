@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:ingots/chromasteel"
-  },
-  "material": "soa_additions:chromasteel",
-  "needed": 1,
-  "value": 1
-}

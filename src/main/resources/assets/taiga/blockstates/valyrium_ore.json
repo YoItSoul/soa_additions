@@ -1,7 +1,5 @@
-{
+﻿{
   "variants": {
-    "": {
-      "model": "taiga:block/valyrium_ore"
-    }
+    "": {"model": "taiga:block/valyrium_ore"}
   }
 }

@@ -1,7 +1,5 @@
-{
+﻿{
   "variants": {
-    "": {
-      "model": "taiga:block/osram_ore"
-    }
+    "": {"model": "taiga:block/osram_ore"}
   }
 }

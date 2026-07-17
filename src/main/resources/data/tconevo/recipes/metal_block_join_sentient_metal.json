@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iii",
+    "iii",
+    "iii"
+  ],
+  "key": {
+    "i": {
+      "tag": "forge:ingots/sentient_metal"
+    }
+  },
+  "result": {
+    "item": "tconevo:sentient_metal_block",
+    "count": 1
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "taiga:lumix_nugget"
+    }
+  },
+  "result": {
+    "item": "taiga:lumix_ingot"
+  }
+}

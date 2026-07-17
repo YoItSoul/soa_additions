@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "item": "soa_additions:poop"
-  },
-  "material": "soa_additions:poop",
-  "needed": 1,
-  "value": 1
-}

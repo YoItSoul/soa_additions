@@ -1,7 +1,0 @@
-{
-  "default": [
-    { "level": 1, "name": "tconevo:aura_siphon" },
-    { "level": 1, "name": "tconstruct:overgrowth" }
-  ],
-  "perStat": {}
-}

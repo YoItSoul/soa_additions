@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_fluid",
-  "fluid": {
-    "amount": 90,
-    "fluid": "cofh_core:experience"
-  },
-  "output": "soa_additions:experience",
-  "temperature": 800
-}

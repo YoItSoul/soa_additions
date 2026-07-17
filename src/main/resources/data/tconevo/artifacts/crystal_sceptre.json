@@ -2,7 +2,7 @@
   "weight": 750,
   "type": "tconevo:tool",
   "name": "Crystal Sceptre",
-  "lore": "Infused with the chilling power of an ice magus.",
+  "lore": "Infused with freezing power!",
   "tool": "tconevo.sceptre",
   "materials": [
     "constantan",

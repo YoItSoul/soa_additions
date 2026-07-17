@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:gems/pulsating_crystal"
-  },
-  "material": "soa_additions:pulsating_crystal",
-  "needed": 1,
-  "value": 1
-}

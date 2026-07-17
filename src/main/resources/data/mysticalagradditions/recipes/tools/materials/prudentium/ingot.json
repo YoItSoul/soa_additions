@@ -1,9 +1,0 @@
-{
-  "ingredient": {
-    "tag": "forge:ingots/prudentium"
-  },
-  "material": "mysticalagradditions:prudentium",
-  "needed": 1,
-  "type": "tconstruct:material",
-  "value": 1
-}

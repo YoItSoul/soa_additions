@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "item": "minecraft:milk_bucket"
-  },
-  "material": "soa_additions:cheese",
-  "needed": 1,
-  "value": 1
-}

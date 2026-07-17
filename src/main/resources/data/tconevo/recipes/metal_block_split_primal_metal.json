@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/primal_metal"
+    }
+  ],
+  "result": {
+    "item": "tconevo:primal_metal_ingot",
+    "count": 9
+  }
+}

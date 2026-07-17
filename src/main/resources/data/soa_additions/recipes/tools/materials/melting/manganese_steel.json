@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_melting",
-  "input": "soa_additions:manganese_steel",
-  "result": {
-    "amount": 90,
-    "fluid": "soa_additions:molten_manganese_steel"
-  },
-  "temperature": 800
-}

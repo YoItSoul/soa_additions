@@ -1,12 +1,14 @@
 {
   "type": "minecraft:block",
+  "random_sequence": "taiga:blocks/tiberium_ore",
   "pools": [
     {
-      "rolls": 1,
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "taiga:tiberium_ore"
+          "name": "taiga:tiberium_crystal"
         }
       ],
       "conditions": [

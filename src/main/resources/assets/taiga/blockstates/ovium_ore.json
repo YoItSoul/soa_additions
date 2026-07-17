@@ -1,7 +1,5 @@
-{
+﻿{
   "variants": {
-    "": {
-      "model": "taiga:block/ovium_ore"
-    }
+    "": {"model": "taiga:block/ovium_ore"}
   }
 }

@@ -1,7 +1,5 @@
-{
+﻿{
   "variants": {
-    "": {
-      "model": "taiga:block/basalt_block"
-    }
+    "": {"model": "taiga:block/basalt_block"}
   }
 }

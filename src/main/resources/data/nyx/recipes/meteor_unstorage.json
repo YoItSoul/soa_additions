@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "nyx:meteor_block" }
+  ],
+  "result": { "item": "nyx:meteor_ingot", "count": 9 }
+}

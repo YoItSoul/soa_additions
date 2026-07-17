@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_melting",
-  "input": "soa_additions:void_metal",
-  "result": {
-    "amount": 90,
-    "fluid": "soa_additions:molten_void_metal"
-  },
-  "temperature": 800
-}

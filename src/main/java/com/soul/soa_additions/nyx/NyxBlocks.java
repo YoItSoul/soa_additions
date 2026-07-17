@@ -1,7 +1,5 @@
 package com.soul.soa_additions.nyx;
 
-import com.soul.soa_additions.SoaAdditions;
-import com.soul.soa_additions.item.ModItems;
 import com.soul.soa_additions.nyx.block.CrystalBlock;
 import com.soul.soa_additions.nyx.block.LunarWaterCauldronBlock;
 import com.soul.soa_additions.nyx.block.MeteorRockBlock;
@@ -11,7 +9,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -21,17 +21,32 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 
-/** Secondary block registry for the Nyx port. Reuses the shared ITEMS registry
- *  so block-items go through the same tab plumbing as ModBlocks. */
 public final class NyxBlocks {
 
     public static final DeferredRegister<Block> BLOCKS =
-            DeferredRegister.create(ForgeRegistries.BLOCKS, SoaAdditions.MODID);
+            DeferredRegister.create(ForgeRegistries.BLOCKS, NyxItems.NYX_ID);
+
+    // --- Block properties ---
+
+    private static final BlockBehaviour.Properties METEOR_BLOCK_PROPS =
+            BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
+                    .mapColor(MapColor.COLOR_PURPLE)
+                    .strength(5.0f, 1000.0f)
+                    .sound(SoundType.METAL)
+                    .requiresCorrectToolForDrops();
+
+    private static final BlockBehaviour.Properties STAR_BLOCK_PROPS =
+            BlockBehaviour.Properties.copy(Blocks.STONE)
+                    .mapColor(MapColor.COLOR_LIGHT_BLUE)
+                    .strength(3.0f, 6.0f)
+                    .sound(SoundType.STONE)
+                    .lightLevel(s -> 7)
+                    .requiresCorrectToolForDrops();
 
     private static final BlockBehaviour.Properties METEOR_ROCK_PROPS =
             BlockBehaviour.Properties.copy(Blocks.STONE)
                     .mapColor(MapColor.COLOR_PURPLE)
-                    .strength(32.0f, 3000.0f)
+                    .strength(40.0f, 3000.0f)
                     .sound(SoundType.STONE)
                     .requiresCorrectToolForDrops();
 
@@ -67,6 +82,21 @@ public final class NyxBlocks {
                     .lightLevel(s -> 15)
                     .noLootTable();
 
+    // --- Blocks (moved from ModBlocks) ---
+
+    public static final RegistryObject<Block> METEOR_BLOCK =
+            registerBlock("meteor_block", () -> new Block(METEOR_BLOCK_PROPS));
+    public static final RegistryObject<Block> STAR_BLOCK =
+            registerBlock("star_block", () -> new Block(STAR_BLOCK_PROPS));
+    public static final RegistryObject<Block> CHISELED_STAR_BLOCK =
+            registerBlock("chiseled_star_block", () -> new Block(STAR_BLOCK_PROPS));
+    public static final RegistryObject<Block> STAR_SLAB =
+            registerBlock("star_slab", () -> new SlabBlock(STAR_BLOCK_PROPS));
+    public static final RegistryObject<Block> STAR_STAIRS =
+            registerBlock("star_stairs", () -> new StairBlock(() -> STAR_BLOCK.get().defaultBlockState(), STAR_BLOCK_PROPS));
+
+    // --- Blocks (originally in NyxBlocks) ---
+
     public static final RegistryObject<Block> METEOR_ROCK =
             registerBlock("meteor_rock", () -> new MeteorRockBlock(METEOR_ROCK_PROPS));
     public static final RegistryObject<Block> GLEANING_METEOR_ROCK =
@@ -88,7 +118,7 @@ public final class NyxBlocks {
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> out = BLOCKS.register(name, block);
-        ModItems.ITEMS.register(name,
+        NyxItems.ITEMS.register(name,
                 () -> new BlockItem(out.get(), new Item.Properties().rarity(Rarity.RARE)));
         return out;
     }

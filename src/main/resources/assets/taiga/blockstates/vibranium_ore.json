@@ -1,7 +1,5 @@
-{
+﻿{
   "variants": {
-    "": {
-      "model": "taiga:block/vibranium_ore"
-    }
+    "": {"model": "taiga:block/vibranium_ore"}
   }
 }

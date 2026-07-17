@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iii",
+    "iii",
+    "iii"
+  ],
+  "key": {
+    "i": {
+      "tag": "forge:ingots/bound_metal"
+    }
+  },
+  "result": {
+    "item": "tconevo:bound_metal_block",
+    "count": 1
+  }
+}

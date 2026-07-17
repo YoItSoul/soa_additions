@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:nuggets/valkyrie"
-  },
-  "material": "soa_additions:valkyrie",
-  "needed": 9,
-  "value": 1
-}

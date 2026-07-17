@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "taiga:yrdeen_ingot"
+    }
+  ],
+  "result": {
+    "item": "taiga:yrdeen_nugget",
+    "count": 9
+  }
+}

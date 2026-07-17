@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_melting",
-  "input": "soa_additions:terra_alloy",
-  "result": {
-    "amount": 90,
-    "fluid": "soa_additions:molten_terra_alloy"
-  },
-  "temperature": 800
-}

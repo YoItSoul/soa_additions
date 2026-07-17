@@ -1,7 +1,5 @@
-{
+﻿{
   "variants": {
-    "": {
-      "model": "taiga:block/palladium_ore"
-    }
+    "": {"model": "taiga:block/palladium_ore"}
   }
 }

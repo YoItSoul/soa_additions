@@ -1,6 +1,5 @@
 package com.soul.soa_additions.nyx;
 
-import com.soul.soa_additions.SoaAdditions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -21,14 +20,14 @@ import java.util.Map;
 
 public final class NyxMaterials {
 
-    public static final TagKey<Block> NEEDS_METEOR_TOOL = BlockTags.create(new ResourceLocation(SoaAdditions.MODID, "needs_meteor_tool"));
+    public static final TagKey<Block> NEEDS_METEOR_TOOL = BlockTags.create(new ResourceLocation(NyxItems.NYX_ID, "needs_meteor_tool"));
 
     // 1.12 Nyx: harvestLevel=3, uses=2341, efficiency=7.0, damage=7.0, enchantability=18.
-    // ForgeTier damage = bonus over base (SwordItem adds 4 + tier damage for its final hit damage);
-    // 3.0 here keeps sword total ~7.0, matching original.
+    // The +7.0 bonus is deliberate (1.12 attack-damage attributes: sword 10, pick 8,
+    // shovel 8.5, axe 12, hammer 8) — per-item modifiers in NyxItems complete the totals.
     public static final Tier METEOR_TIER = TierSortingRegistry.registerTier(
-            new ForgeTier(3, 2341, 7.0f, 3.0f, 18, NEEDS_METEOR_TOOL, () -> Ingredient.EMPTY),
-            new ResourceLocation(SoaAdditions.MODID, "meteor"),
+            new ForgeTier(3, 2341, 7.0f, 7.0f, 18, NEEDS_METEOR_TOOL, () -> Ingredient.EMPTY),
+            new ResourceLocation(NyxItems.NYX_ID, "meteor"),
             List.of(Tiers.DIAMOND),
             List.of(Tiers.NETHERITE));
 
@@ -68,7 +67,7 @@ public final class NyxMaterials {
         public Ingredient getRepairIngredient() { return Ingredient.EMPTY; }
 
         @Override
-        public String getName() { return SoaAdditions.MODID + ":meteor"; }
+        public String getName() { return NyxItems.NYX_ID + ":meteor"; }
 
         @Override
         public float getToughness() { return 3.0f; }

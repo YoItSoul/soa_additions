@@ -1,7 +1,5 @@
-{
+﻿{
   "variants": {
-    "": {
-      "model": "taiga:block/karmesine_ore"
-    }
+    "": {"model": "taiga:block/karmesine_ore"}
   }
 }

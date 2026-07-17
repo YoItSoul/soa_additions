@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:strings/rubber_band"
-  },
-  "material": "soa_additions:rubber_band",
-  "needed": 1,
-  "value": 1
-}

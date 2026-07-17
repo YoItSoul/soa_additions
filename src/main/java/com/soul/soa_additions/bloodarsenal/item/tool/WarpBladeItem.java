@@ -13,12 +13,16 @@ import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.Level;
 
 /**
- * Warp Blade — unbreakable iron sword. Right-click throws a projectile.
- * 20-tick cooldown between throws.
+ * Warp Blade — unbreakable iron sword. Right-click throws a projectile that
+ * teleports the wielder to its impact point (handled in BAEventHandler via
+ * ProjectileImpactEvent on the tagged arrow). 20-tick cooldown between throws.
  *
  * <p>Ported from: arcaratus.bloodarsenal.item.tool.ItemWarpBlade</p>
  */
 public class WarpBladeItem extends SwordItem {
+
+    /** Persistent-data marker BAEventHandler uses to spot warp blade projectiles. */
+    public static final String WARP_TAG = "bloodarsenal:warp_blade";
 
     public WarpBladeItem(Properties props) {
         super(Tiers.IRON, 3, -2.4f, props.defaultDurability(0));
@@ -38,6 +42,7 @@ public class WarpBladeItem extends SwordItem {
             projectile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, 2.5f, 1.0f);
             projectile.pickup = Arrow.Pickup.CREATIVE_ONLY;
             projectile.setBaseDamage(6.0);
+            projectile.getPersistentData().putBoolean(WARP_TAG, true);
             level.addFreshEntity(projectile);
             level.playSound(null, player.getX(), player.getY(), player.getZ(),
                     SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 1.0f, 1.0f);

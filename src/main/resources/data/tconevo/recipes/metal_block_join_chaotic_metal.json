@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iii",
+    "iii",
+    "iii"
+  ],
+  "key": {
+    "i": {
+      "tag": "forge:ingots/chaotic_metal"
+    }
+  },
+  "result": {
+    "item": "tconevo:chaotic_block",
+    "count": 1
+  }
+}

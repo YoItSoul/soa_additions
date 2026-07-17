@@ -1,6 +1,14 @@
 {
-  "parent": "item/handheld",
+  "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "bloodarsenal:item/stasis_sword"
-  }
+    "layer0": "bloodarsenal:item/stasis_sword_deactivated"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "bloodarsenal:activated": 1.0
+      },
+      "model": "bloodarsenal:item/stasis_sword_activated"
+    }
+  ]
 }

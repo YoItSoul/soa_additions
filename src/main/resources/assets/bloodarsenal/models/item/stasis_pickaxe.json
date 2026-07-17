@@ -1,6 +1,14 @@
 {
-  "parent": "item/handheld",
+  "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "bloodarsenal:item/stasis_pickaxe"
-  }
+    "layer0": "bloodarsenal:item/stasis_pickaxe_deactivated"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "bloodarsenal:activated": 1.0
+      },
+      "model": "bloodarsenal:item/stasis_pickaxe_activated"
+    }
+  ]
 }

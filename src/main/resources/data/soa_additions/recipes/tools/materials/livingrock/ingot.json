@@ -1,9 +1,0 @@
-{
-  "ingredient": {
-    "tag": "forge:ingots/livingrock"
-  },
-  "material": "soa_additions:livingrock",
-  "needed": 1,
-  "type": "tconstruct:material",
-  "value": 1
-}

@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:ingots/manganese_steel"
-  },
-  "material": "soa_additions:manganese_steel",
-  "needed": 1,
-  "value": 1
-}

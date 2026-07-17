@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/bound_metal"
+    }
+  ],
+  "result": {
+    "item": "tconevo:bound_metal_ingot",
+    "count": 9
+  }
+}

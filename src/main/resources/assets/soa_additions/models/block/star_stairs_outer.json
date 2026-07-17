@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "soa_additions:block/star_block",
-    "top": "soa_additions:block/star_block",
-    "side": "soa_additions:block/star_block"
-  }
-}

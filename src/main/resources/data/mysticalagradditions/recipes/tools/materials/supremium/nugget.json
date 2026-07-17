@@ -1,9 +1,0 @@
-{
-  "ingredient": {
-    "tag": "forge:nuggets/supremium"
-  },
-  "material": "mysticalagradditions:supremium",
-  "needed": 9,
-  "type": "tconstruct:material",
-  "value": 1
-}

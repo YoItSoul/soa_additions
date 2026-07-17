@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:ingots/spectre"
-  },
-  "material": "soa_additions:spectre",
-  "needed": 1,
-  "value": 1
-}

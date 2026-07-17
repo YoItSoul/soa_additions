@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_fluid",
-  "fluid": {
-    "amount": 90,
-    "fluid": "soa_additions:molten_stellar_alloy"
-  },
-  "output": "soa_additions:stellar_alloy",
-  "temperature": 1800
-}

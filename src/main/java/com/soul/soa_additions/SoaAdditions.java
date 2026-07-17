@@ -39,10 +39,13 @@ public final class SoaAdditions {
         ModConfigs.register();
         com.soul.soa_additions.config.QuestBookConfig.register();
         com.soul.soa_additions.config.HeadshotConfig.register();
+        com.soul.soa_additions.config.LiteModeConfig.register();
 
         ModBlocks.register(modEventBus);
+        com.soul.soa_additions.taiga.TaigaBlocks.register(modEventBus);
+        com.soul.soa_additions.taiga.TaigaItems.register(modEventBus);
+        com.soul.soa_additions.nyx.NyxItems.register(modEventBus);
         com.soul.soa_additions.nyx.NyxBlocks.register(modEventBus);
-        com.soul.soa_additions.nyx.NyxItems.bootstrap();
         com.soul.soa_additions.nyx.NyxEnchantments.register(modEventBus);
         com.soul.soa_additions.nyx.NyxEntities.register(modEventBus);
         com.soul.soa_additions.nyx.NyxSounds.register(modEventBus);
@@ -56,6 +59,8 @@ public final class SoaAdditions {
         if (ModList.get().isLoaded("curios")) {
             com.soul.soa_additions.curios.CuriosIntegration.init(modEventBus);
         }
+        com.soul.soa_additions.item.TConEvoBlocks.register(modEventBus);
+        com.soul.soa_additions.item.TConEvoItems.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModCreativeTabs.register(modEventBus);
@@ -67,8 +72,10 @@ public final class SoaAdditions {
         // kubejs/server_scripts/recipes/ported_gc/vanilla_brewing.js is a no-op).
         com.soul.soa_additions.potion.SoaPotions.register(modEventBus);
         com.soul.soa_additions.potion.SoaBrewingPotions.register(modEventBus);
+        com.soul.soa_additions.potion.TconEvoEffects.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(com.soul.soa_additions.potion.SoaPotionEvents.class);
         com.soul.soa_additions.loot.LootModifierSerializers.register(modEventBus);
+        com.soul.soa_additions.loot.artifact.TconevoArtifacts.register(modEventBus);
         com.soul.soa_additions.loot.LootConditions.register(modEventBus);
         com.soul.soa_additions.donor.ModEntities.register(modEventBus);
 
@@ -110,17 +117,11 @@ public final class SoaAdditions {
             // com.soul.soa_additions.reskillable.ToolSkillAutoLock.init();
         }
 
-        // TConstruct Evolution — soft dependency on Tinkers' Construct.
-        // Mirrors the Blood Arsenal pattern: everything lives in the tconstructevo
-        // subpackage and is never classloaded unless TConstruct is present.
-        if (ModList.get().isLoaded("tconstruct")) {
-            com.soul.soa_additions.tconstructevo.TConstructEvoPlugin.init(modEventBus);
-            com.soul.soa_additions.taiga.TaigaPlugin.init(modEventBus);
-            com.soul.soa_additions.tinkersaether.TinkersAetherPlugin.init(modEventBus);
+        if (ModList.get().isLoaded("smithery")) {
+            com.soul.soa_additions.smithery.SmitheryIntegration.init(modEventBus);
         }
 
-        // Thaumic Remnants — original content, no soft dependency gate.
-        com.soul.soa_additions.tr.ThaumicRemnants.init(modEventBus);
+        // Thaumic Remnants — removed (dead feature).
         // JvmStatsSampler.start() reads config values, so it has to wait
         // until FMLCommonSetupEvent — configs aren't loaded during mod
         // construction and calling .get() here throws in dev (and will

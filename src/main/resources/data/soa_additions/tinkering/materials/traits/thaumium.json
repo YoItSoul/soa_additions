@@ -1,7 +1,0 @@
-{
-  "default": [
-    { "level": 1, "name": "tconevo:modifiable" },
-    { "level": 1, "name": "tconevo:opportunist" }
-  ],
-  "perStat": {}
-}

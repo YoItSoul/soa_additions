@@ -137,11 +137,6 @@ public final class RegistryExportCommand {
                 totals.put("villager_professions", write(outDir.resolve("villager_professions.json"), dumpIds(BuiltInRegistries.VILLAGER_PROFESSION)));
             if (all || "tags".equalsIgnoreCase(target))
                 totals.put("tags", write(outDir.resolve("tags.json"), dumpAllTags(server)));
-            if ((all || "tinker_materials".equalsIgnoreCase(target))
-                    && ModList.get().isLoaded("tconstruct")) {
-                totals.put("tinker_materials", write(outDir.resolve("tinker_materials.json"),
-                        com.soul.soa_additions.tconstructevo.export.TinkerMaterialsExport.dump(server)));
-            }
         } catch (IOException e) {
             src.sendFailure(Component.literal("Export failed: " + e.getMessage()));
             return 0;

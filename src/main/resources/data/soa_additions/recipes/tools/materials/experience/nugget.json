@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:nuggets/experience"
-  },
-  "material": "soa_additions:experience",
-  "needed": 9,
-  "value": 1
-}

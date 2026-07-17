@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "taiga:nucleum_ingot"
+    }
+  },
+  "result": {
+    "item": "taiga:nucleum_block"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "taiga:karmesine_block"
+    }
+  ],
+  "result": {
+    "item": "taiga:karmesine_ingot",
+    "count": 9
+  }
+}

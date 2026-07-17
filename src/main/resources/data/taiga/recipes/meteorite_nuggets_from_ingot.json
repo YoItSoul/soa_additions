@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "taiga:meteorite_ingot"
+    }
+  ],
+  "result": {
+    "item": "taiga:meteorite_nugget",
+    "count": 9
+  }
+}

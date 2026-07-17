@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_melting",
-  "input": "soa_additions:sky_stone",
-  "result": {
-    "amount": 90,
-    "fluid": "soa_additions:molten_sky_stone"
-  },
-  "temperature": 800
-}

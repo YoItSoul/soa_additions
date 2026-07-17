@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "item": "bloodmagic:boundsword"
-  },
-  "material": "soa_additions:bound_metal",
-  "needed": 1,
-  "value": 1
-}

@@ -1,7 +1,0 @@
-{
-  "default": [
-    { "level": 1, "name": "tconevo:crystalline" },
-    { "level": 3, "name": "tconevo:aftershock" }
-  ],
-  "perStat": {}
-}

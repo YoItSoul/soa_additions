@@ -1,10 +1,10 @@
 {
   "type": "forge:add_features",
   "biomes": [
-    "minecraft:forest",
-    "minecraft:plains",
-    "minecraft:taiga",
-    "minecraft:snowy_plains",
+    "#minecraft:is_ocean",
+    "minecraft:beach",
+    "minecraft:snowy_beach",
+    "minecraft:stony_shore",
     "minecraft:desert"
   ],
   "features": "taiga:vibranium_ore",

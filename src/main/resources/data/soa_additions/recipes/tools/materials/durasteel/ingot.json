@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:ingots/durasteel"
-  },
-  "material": "soa_additions:durasteel",
-  "needed": 1,
-  "value": 1
-}

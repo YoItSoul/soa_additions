@@ -4,12 +4,12 @@
   "name": "Ms. Erudita",
   "lore": [
     "Easy. Just in case someone's jealous of my research.",
-    "- Special thanks to ChromaPIE -"
+    "- Special Thanks to ChromaPIE -"
   ],
   "tool": "rapier",
   "materials": [
     "refined_obsidian",
-    "fluix_steel",
+    "durasteel",
     "polyethylene"
   ],
   "free_mods": 2,

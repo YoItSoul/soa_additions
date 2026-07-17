@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_melting",
-  "input": "soa_additions:fiery",
-  "result": {
-    "amount": 90,
-    "fluid": "soa_additions:molten_fiery"
-  },
-  "temperature": 800
-}

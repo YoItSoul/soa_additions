@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:ingots/aeonsteel"
-  },
-  "material": "soa_additions:aeonsteel",
-  "needed": 1,
-  "value": 1
-}

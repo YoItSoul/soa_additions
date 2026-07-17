@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "item": "soa_additions:sapphire"
-  },
-  "material": "soa_additions:sapphire",
-  "needed": 1,
-  "value": 1
-}

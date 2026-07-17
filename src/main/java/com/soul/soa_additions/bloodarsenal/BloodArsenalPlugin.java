@@ -64,6 +64,14 @@ public final class BloodArsenalPlugin {
         BACreativeTab.register(modEventBus);
         BAFluids.register(modEventBus);
         BARecipeTypes.register(modEventBus);
+        BASounds.register(modEventBus);
+        BAEffects.register(modEventBus);
+
+        // Stasis tools swap textures with activation state (client only)
+        if (net.minecraftforge.fml.loading.FMLEnvironment.dist.isClient()) {
+            modEventBus.addListener((net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent e) ->
+                    e.enqueueWork(BloodArsenalPlugin::registerItemProperties));
+        }
 
         // Register modifiers
         registerModifiers();
@@ -72,5 +80,21 @@ public final class BloodArsenalPlugin {
         MinecraftForge.EVENT_BUS.register(com.soul.soa_additions.bloodarsenal.event.BAEventHandler.class);
 
         LOG.info("Blood Arsenal content registered");
+    }
+
+    /** Client: "activated" model predicate for the four stasis tools (1.12 texture pairs). */
+    private static void registerItemProperties() {
+        net.minecraft.resources.ResourceLocation prop =
+                net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("bloodarsenal", "activated");
+        net.minecraft.world.item.Item[] tools = {
+                BAItems.STASIS_SWORD.get(), BAItems.STASIS_PICKAXE.get(),
+                BAItems.STASIS_AXE.get(), BAItems.STASIS_SHOVEL.get()
+        };
+        for (net.minecraft.world.item.Item tool : tools) {
+            net.minecraft.client.renderer.item.ItemProperties.register(tool, prop,
+                    (stack, level, entity, seed) ->
+                            stack.getItem() instanceof wayoftime.bloodmagic.common.item.IActivatable act
+                                    && act.getActivated(stack) ? 1.0f : 0.0f);
+        }
     }
 }

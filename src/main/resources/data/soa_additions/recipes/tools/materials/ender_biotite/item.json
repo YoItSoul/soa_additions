@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "item": "quark:biotite"
-  },
-  "material": "soa_additions:ender_biotite",
-  "needed": 1,
-  "value": 1
-}

@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:gems/fluix"
-  },
-  "material": "soa_additions:fluix",
-  "needed": 1,
-  "value": 1
-}

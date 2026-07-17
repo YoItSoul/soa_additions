@@ -1,7 +1,5 @@
-{
+﻿{
   "variants": {
-    "": {
-      "model": "taiga:block/eezo_ore"
-    }
+    "": {"model": "taiga:block/eezo_ore"}
   }
 }

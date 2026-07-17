@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "taiga:dyonite_nugget"
+    }
+  },
+  "result": {
+    "item": "taiga:dyonite_ingot"
+  }
+}

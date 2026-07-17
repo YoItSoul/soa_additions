@@ -48,15 +48,15 @@ public final class NyxCommands {
                             if (data == null) return 0;
                             if ("clear".equals(name)) {
                                 data.forcedEvent = null;
-                                ctx.getSource().sendSuccess(() -> Component.translatable("command.soa_additions.nyx.force.clear"), true);
+                                ctx.getSource().sendSuccess(() -> Component.translatable("command.nyx.force.clear"), true);
                             } else {
                                 LunarEvent e = data.findEventByName(name);
                                 if (e == null) {
-                                    ctx.getSource().sendFailure(Component.translatable("command.soa_additions.nyx.force.invalid", name));
+                                    ctx.getSource().sendFailure(Component.translatable("command.nyx.force.invalid", name));
                                     return 0;
                                 }
                                 data.forcedEvent = e;
-                                ctx.getSource().sendSuccess(() -> Component.translatable("command.soa_additions.nyx.force.success", name), true);
+                                ctx.getSource().sendSuccess(() -> Component.translatable("command.nyx.force.success", name), true);
                             }
                             data.setDirty();
                             return 1;
@@ -91,7 +91,7 @@ public final class NyxCommands {
         if (size != null) m.setSize(size);
         m.homing = homing;
         BlockPos spawnPos = m.blockPosition();
-        src.sendSuccess(() -> Component.translatable("command.soa_additions.nyx.meteor.success",
+        src.sendSuccess(() -> Component.translatable("command.nyx.meteor.success",
                 spawnPos.getX(), spawnPos.getY(), spawnPos.getZ()), true);
         return 1;
     }

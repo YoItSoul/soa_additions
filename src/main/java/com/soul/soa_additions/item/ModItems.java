@@ -35,6 +35,17 @@ public final class ModItems {
     public static final RegistryObject<Item> INFERNIUM_INGOT = registerRareIngot("infernium_ingot");
     public static final RegistryObject<Item> VOID_INGOT      = registerRareIngot("void_ingot");
 
+    // ========== TConstruct classic alloys (items for the ported alloy fluids) ==========
+
+    public static final RegistryObject<Item> MANYULLYN_INGOT   = registerRareIngot("manyullyn_ingot");
+    public static final RegistryObject<Item> MANYULLYN_NUGGET  = registerRareIngot("manyullyn_nugget");
+    public static final RegistryObject<Item> PIGIRON_INGOT     = registerRareIngot("pigiron_ingot");
+    public static final RegistryObject<Item> PIGIRON_NUGGET    = registerRareIngot("pigiron_nugget");
+    public static final RegistryObject<Item> KNIGHTSLIME_INGOT = registerRareIngot("knightslime_ingot");
+    public static final RegistryObject<Item> KNIGHTSLIME_NUGGET = registerRareIngot("knightslime_nugget");
+    public static final RegistryObject<Item> ALUBRASS_INGOT    = registerRareIngot("alubrass_ingot");
+    public static final RegistryObject<Item> ALUBRASS_NUGGET   = registerRareIngot("alubrass_nugget");
+
     // ========== GreedyCraft custom metals ==========
 
     public static final RegistryObject<Item> AEONSTEEL_INGOT      = registerRareIngot("aeonsteel_ingot");
@@ -75,7 +86,7 @@ public final class ModItems {
     public static final RegistryObject<Item> STRONG_TOFU_GEM       = registerRareIngot("strong_tofu_gem");
     public static final RegistryObject<Item> SAKURA_DIAMOND        = registerRareIngot("sakura_diamond");
     public static final RegistryObject<Item> CHOCOLATE_BAR         = registerRareIngot("chocolate_bar");
-    public static final RegistryObject<Item> METEOR_INGOT          = registerRareIngot("meteor_ingot");
+    // meteor_ingot moved to NyxItems (nyx: namespace)
     public static final RegistryObject<Item> MODULARIUM_INGOT      = registerRareIngot("modularium_ingot");
     public static final RegistryObject<Item> SPECTRE_INGOT         = registerRareIngot("spectre_ingot");
     public static final RegistryObject<Item> ORICHALCOS_INGOT      = registerRareIngot("orichalcos_ingot");
@@ -110,63 +121,7 @@ public final class ModItems {
     public static final RegistryObject<Item> FLUX_CRYSTAL = registerRareIngot("flux_crystal");
     public static final RegistryObject<Item> AQUAMARINE = registerRareIngot("aquamarine");
     public static final RegistryObject<Item> STARMETAL_INGOT = registerRareIngot("starmetal_ingot");
-    public static final RegistryObject<Item> ESSENCE_METAL_INGOT = registerRareIngot("essence_metal_ingot");
-    public static final RegistryObject<Item> ENERGETIC_METAL_INGOT = registerRareIngot("energetic_metal_ingot");
-    public static final RegistryObject<Item> PRIMAL_METAL_INGOT = registerRareIngot("primal_metal_ingot");
-    public static final RegistryObject<Item> UNIVERSAL_METAL_INGOT = registerRareIngot("universal_metal_ingot");
-    public static final RegistryObject<Item> BOUND_METAL_INGOT = registerRareIngot("bound_metal_ingot");
-    public static final RegistryObject<Item> CHAOTIC_INGOT = registerRareIngot("chaotic_ingot");
-    public static final RegistryObject<Item> DRACONIC_METAL_INGOT = registerRareIngot("draconic_metal_ingot");
-    public static final RegistryObject<Item> SENTIENT_METAL_INGOT = registerRareIngot("sentient_metal_ingot");
     public static final RegistryObject<Item> URU_INGOT = registerRareIngot("uru_ingot");
-    public static final RegistryObject<Item> WYVERN_INGOT = registerRareIngot("wyvern_ingot");
-
-    // ========== TConEvo metal nuggets (9 metals) ==========
-    public static final RegistryObject<Item> BOUND_METAL_NUGGET = registerRareIngot("bound_metal_nugget");
-    public static final RegistryObject<Item> CHAOTIC_NUGGET = registerRareIngot("chaotic_nugget");
-    public static final RegistryObject<Item> DRACONIC_METAL_NUGGET = registerRareIngot("draconic_metal_nugget");
-    public static final RegistryObject<Item> ENERGETIC_METAL_NUGGET = registerRareIngot("energetic_metal_nugget");
-    public static final RegistryObject<Item> ESSENCE_METAL_NUGGET = registerRareIngot("essence_metal_nugget");
-    public static final RegistryObject<Item> PRIMAL_METAL_NUGGET = registerRareIngot("primal_metal_nugget");
-    public static final RegistryObject<Item> SENTIENT_METAL_NUGGET = registerRareIngot("sentient_metal_nugget");
-    public static final RegistryObject<Item> UNIVERSAL_METAL_NUGGET = registerRareIngot("universal_metal_nugget");
-    public static final RegistryObject<Item> WYVERN_NUGGET = registerRareIngot("wyvern_nugget");
-
-    // ========== TConEvo metal dusts (9 metals) ==========
-    public static final RegistryObject<Item> BOUND_METAL_DUST     = registerRareIngot("bound_metal_dust");
-    public static final RegistryObject<Item> CHAOTIC_DUST         = registerRareIngot("chaotic_dust");
-    public static final RegistryObject<Item> DRACONIC_METAL_DUST  = registerRareIngot("draconic_metal_dust");
-    public static final RegistryObject<Item> ENERGETIC_METAL_DUST = registerRareIngot("energetic_metal_dust");
-    public static final RegistryObject<Item> ESSENCE_METAL_DUST   = registerRareIngot("essence_metal_dust");
-    public static final RegistryObject<Item> PRIMAL_METAL_DUST    = registerRareIngot("primal_metal_dust");
-    public static final RegistryObject<Item> SENTIENT_METAL_DUST  = registerRareIngot("sentient_metal_dust");
-    public static final RegistryObject<Item> UNIVERSAL_METAL_DUST = registerRareIngot("universal_metal_dust");
-    public static final RegistryObject<Item> WYVERN_DUST          = registerRareIngot("wyvern_dust");
-
-    // ========== TConEvo metal plates (9 metals) ==========
-    public static final RegistryObject<Item> BOUND_METAL_PLATE     = registerRareIngot("bound_metal_plate");
-    public static final RegistryObject<Item> CHAOTIC_PLATE         = registerRareIngot("chaotic_plate");
-    public static final RegistryObject<Item> DRACONIC_METAL_PLATE  = registerRareIngot("draconic_metal_plate");
-    public static final RegistryObject<Item> ENERGETIC_METAL_PLATE = registerRareIngot("energetic_metal_plate");
-    public static final RegistryObject<Item> ESSENCE_METAL_PLATE   = registerRareIngot("essence_metal_plate");
-    public static final RegistryObject<Item> PRIMAL_METAL_PLATE    = registerRareIngot("primal_metal_plate");
-    public static final RegistryObject<Item> SENTIENT_METAL_PLATE  = registerRareIngot("sentient_metal_plate");
-    public static final RegistryObject<Item> UNIVERSAL_METAL_PLATE = registerRareIngot("universal_metal_plate");
-    public static final RegistryObject<Item> WYVERN_PLATE          = registerRareIngot("wyvern_plate");
-
-    // ========== TConEvo metal gears (9 metals) ==========
-    public static final RegistryObject<Item> BOUND_METAL_GEAR = registerRareIngot("bound_metal_gear");
-    public static final RegistryObject<Item> CHAOTIC_GEAR = registerRareIngot("chaotic_gear");
-    public static final RegistryObject<Item> DRACONIC_METAL_GEAR = registerRareIngot("draconic_metal_gear");
-    public static final RegistryObject<Item> ENERGETIC_METAL_GEAR = registerRareIngot("energetic_metal_gear");
-    public static final RegistryObject<Item> ESSENCE_METAL_GEAR = registerRareIngot("essence_metal_gear");
-    public static final RegistryObject<Item> PRIMAL_METAL_GEAR = registerRareIngot("primal_metal_gear");
-    public static final RegistryObject<Item> SENTIENT_METAL_GEAR = registerRareIngot("sentient_metal_gear");
-    public static final RegistryObject<Item> UNIVERSAL_METAL_GEAR = registerRareIngot("universal_metal_gear");
-    public static final RegistryObject<Item> WYVERN_GEAR = registerRareIngot("wyvern_gear");
-
-    // TConEvo artifact unsealer
-    public static final RegistryObject<Item> ARTIFACT_UNSEALER = registerRareIngot("artifact_unsealer");
 
     public static final RegistryObject<Item> MEAT_METAL_INGOT = registerRareIngot("meat_metal_ingot");
     public static final RegistryObject<Item> PINK_SLIME_CRYSTAL = registerRareIngot("pink_slime_crystal");
@@ -212,7 +167,6 @@ public final class ModItems {
     public static final RegistryObject<Item> VOID_METAL_INGOT    = registerRareIngot("void_metal_ingot");
     public static final RegistryObject<Item> VOID_METAL_NUGGET   = registerRareIngot("void_metal_nugget");
     public static final RegistryObject<Item> VOID_METAL_BLOCK    = registerRareIngot("void_metal_block");
-    public static final RegistryObject<Item> PINK_METAL_INGOT    = registerRareIngot("pink_metal_ingot");
     public static final RegistryObject<Item> FLUIX_STEEL_INGOT   = registerRareIngot("fluix_steel_ingot");
     public static final RegistryObject<Item> ENDER_BIOTITE       = registerRareIngot("ender_biotite");
     public static final RegistryObject<Item> PERFECT             = registerRareIngot("perfect");
@@ -764,67 +718,7 @@ public final class ModItems {
             "\u00a76Can resist the heat from hell.",
             "\u00a7eRight click to unlock game stage: \u00a76twilight_shield");
 
-    // ========== Nyx port (items; blocks in ModBlocks) ==========
-
-    public static final RegistryObject<Item> METEOR_DUST = ITEMS.register("meteor_dust",
-            () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> METEOR_SHARD = ITEMS.register("meteor_shard",
-            () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> FALLEN_STAR = ITEMS.register("fallen_star",
-            () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
-    public static final RegistryObject<Item> UNREFINED_CRYSTAL = ITEMS.register("unrefined_crystal",
-            () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> METEOR_FINDER = ITEMS.register("meteor_finder",
-            () -> new Item(new Item.Properties().stacksTo(1)));
-
-    public static final RegistryObject<Item> SCYTHE = ITEMS.register("scythe",
-            () -> new com.soul.soa_additions.nyx.ScytheItem(
-                    com.soul.soa_additions.nyx.NyxMaterials.METEOR_TIER,
-                    0, -3.0f, new Item.Properties().durability(3450)));
-
-    public static final RegistryObject<Item> METEOR_PICKAXE = ITEMS.register("meteor_pickaxe",
-            () -> new net.minecraft.world.item.PickaxeItem(
-                    com.soul.soa_additions.nyx.NyxMaterials.METEOR_TIER,
-                    1, -2.8f, new Item.Properties()));
-    public static final RegistryObject<Item> METEOR_AXE = ITEMS.register("meteor_axe",
-            () -> new net.minecraft.world.item.AxeItem(
-                    com.soul.soa_additions.nyx.NyxMaterials.METEOR_TIER,
-                    12.0f, -3.2f, new Item.Properties()));
-    public static final RegistryObject<Item> METEOR_SHOVEL = ITEMS.register("meteor_shovel",
-            () -> new net.minecraft.world.item.ShovelItem(
-                    com.soul.soa_additions.nyx.NyxMaterials.METEOR_TIER,
-                    1.5f, -3.0f, new Item.Properties()));
-    public static final RegistryObject<Item> METEOR_HOE = ITEMS.register("meteor_hoe",
-            () -> new net.minecraft.world.item.HoeItem(
-                    com.soul.soa_additions.nyx.NyxMaterials.METEOR_TIER,
-                    -1, 0.0f, new Item.Properties()));
-    public static final RegistryObject<Item> METEOR_SWORD = ITEMS.register("meteor_sword",
-            () -> new SwordItem(
-                    com.soul.soa_additions.nyx.NyxMaterials.METEOR_TIER,
-                    3, -2.4f, new Item.Properties()));
-    public static final RegistryObject<Item> METEOR_HAMMER = ITEMS.register("meteor_hammer",
-            () -> new com.soul.soa_additions.nyx.HammerItem(
-                    com.soul.soa_additions.nyx.NyxMaterials.METEOR_TIER,
-                    1, -3.2f, new Item.Properties()));
-    public static final RegistryObject<Item> METEOR_BOW = ITEMS.register("meteor_bow",
-            () -> new net.minecraft.world.item.BowItem(new Item.Properties().durability(2341)));
-
-    public static final RegistryObject<Item> METEOR_HELM = ITEMS.register("meteor_helm",
-            () -> new com.soul.soa_additions.nyx.MeteorArmorItem(
-                    com.soul.soa_additions.nyx.NyxMaterials.METEOR_ARMOR,
-                    net.minecraft.world.item.ArmorItem.Type.HELMET, new Item.Properties()));
-    public static final RegistryObject<Item> METEOR_CHEST = ITEMS.register("meteor_chest",
-            () -> new com.soul.soa_additions.nyx.MeteorArmorItem(
-                    com.soul.soa_additions.nyx.NyxMaterials.METEOR_ARMOR,
-                    net.minecraft.world.item.ArmorItem.Type.CHESTPLATE, new Item.Properties()));
-    public static final RegistryObject<Item> METEOR_PANTS = ITEMS.register("meteor_pants",
-            () -> new com.soul.soa_additions.nyx.MeteorArmorItem(
-                    com.soul.soa_additions.nyx.NyxMaterials.METEOR_ARMOR,
-                    net.minecraft.world.item.ArmorItem.Type.LEGGINGS, new Item.Properties()));
-    public static final RegistryObject<Item> METEOR_BOOTS = ITEMS.register("meteor_boots",
-            () -> new com.soul.soa_additions.nyx.MeteorArmorItem(
-                    com.soul.soa_additions.nyx.NyxMaterials.METEOR_ARMOR,
-                    net.minecraft.world.item.ArmorItem.Type.BOOTS, new Item.Properties()));
+    // ========== Nyx items moved to NyxItems.java (nyx: namespace) ==========
 
     // ========== Ore Sight potions (custom items for dynamic per-block names) ==========
     // Three bottle forms; the same item handles base + long durations (the

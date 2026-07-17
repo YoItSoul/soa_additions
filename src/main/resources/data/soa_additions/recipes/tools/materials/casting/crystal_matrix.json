@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_fluid",
-  "fluid": {
-    "amount": 90,
-    "fluid": "soa_additions:molten_crystal_matrix"
-  },
-  "output": "soa_additions:crystal_matrix",
-  "temperature": 800
-}

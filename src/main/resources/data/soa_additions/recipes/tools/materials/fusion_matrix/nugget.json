@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:nuggets/fusion_matrix"
-  },
-  "material": "soa_additions:fusion_matrix",
-  "needed": 9,
-  "value": 1
-}

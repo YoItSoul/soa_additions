@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:ingots/alumite"
-  },
-  "material": "soa_additions:alumite",
-  "needed": 1,
-  "value": 1
-}

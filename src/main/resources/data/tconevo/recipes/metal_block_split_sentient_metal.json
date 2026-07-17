@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/sentient_metal"
+    }
+  ],
+  "result": {
+    "item": "tconevo:sentient_metal_ingot",
+    "count": 9
+  }
+}

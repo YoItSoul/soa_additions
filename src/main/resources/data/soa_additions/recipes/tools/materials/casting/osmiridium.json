@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_fluid",
-  "fluid": {
-    "amount": 90,
-    "fluid": "soa_additions:molten_osmiridium"
-  },
-  "output": "soa_additions:osmiridium",
-  "temperature": 800
-}

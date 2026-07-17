@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:storage_blocks/litherite"
-  },
-  "material": "soa_additions:litherite",
-  "needed": 1,
-  "value": 9
-}

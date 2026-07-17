@@ -1,6 +1,5 @@
 package com.soul.soa_additions.nyx;
 
-import com.soul.soa_additions.SoaAdditions;
 import com.soul.soa_additions.nyx.entity.CauldronTrackerEntity;
 import com.soul.soa_additions.nyx.entity.FallingMeteorEntity;
 import com.soul.soa_additions.nyx.entity.FallingStarEntity;
@@ -14,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 public final class NyxEntities {
 
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
-            DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, SoaAdditions.MODID);
+            DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, NyxItems.NYX_ID);
 
     public static final RegistryObject<EntityType<FallingStarEntity>> FALLING_STAR = ENTITY_TYPES.register(
             "falling_star",

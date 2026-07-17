@@ -1,6 +1,5 @@
 package com.soul.soa_additions.nyx;
 
-import com.soul.soa_additions.SoaAdditions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -10,10 +9,10 @@ import net.minecraftforge.registries.RegistryObject;
 
 public final class NyxSounds {
     public static final DeferredRegister<SoundEvent> SOUNDS =
-            DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, SoaAdditions.MODID);
+            DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, NyxItems.NYX_ID);
 
     private static RegistryObject<SoundEvent> reg(String name) {
-        return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(SoaAdditions.MODID, name)));
+        return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(NyxItems.NYX_ID, name)));
     }
 
     public static final RegistryObject<SoundEvent> LUNAR_WATER           = reg("lunar_water");

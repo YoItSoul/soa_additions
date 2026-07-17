@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_fluid",
-  "fluid": {
-    "amount": 90,
-    "fluid": "soa_additions:molten_insanium"
-  },
-  "output": "soa_additions:insanium",
-  "temperature": 1200
-}

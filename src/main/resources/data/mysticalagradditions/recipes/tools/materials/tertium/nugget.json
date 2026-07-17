@@ -1,9 +1,0 @@
-{
-  "ingredient": {
-    "tag": "forge:nuggets/tertium"
-  },
-  "material": "mysticalagradditions:tertium",
-  "needed": 9,
-  "type": "tconstruct:material",
-  "value": 1
-}

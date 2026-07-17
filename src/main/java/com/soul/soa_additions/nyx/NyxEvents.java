@@ -1,8 +1,7 @@
 package com.soul.soa_additions.nyx;
 
 import com.soul.soa_additions.SoaAdditions;
-import com.soul.soa_additions.item.ModItems;
-import com.soul.soa_additions.tr.TrBlocks;
+import com.soul.soa_additions.nyx.NyxItems;
 import com.soul.soa_additions.nyx.entity.CauldronTrackerEntity;
 import com.soul.soa_additions.nyx.entity.FallingMeteorEntity;
 import com.soul.soa_additions.nyx.entity.FallingStarEntity;
@@ -134,12 +133,6 @@ public final class NyxEvents {
                 chance /= Math.pow(2.0, (double) ticks[0] / (double) disallowTime);
             }
             if (chance > 0.0 && sl.random.nextFloat() <= chance) {
-                // Ward check first — covers the target chunk and the 8 around
-                // it. Uses non-loading chunk lookups so the deadlock pattern
-                // we fixed earlier doesn't re-emerge.
-                if (TrBlocks.isAreaWarded(sl, cp)) {
-                    return;
-                }
                 if (!sl.hasChunkAt(spawnPos)) {
                     // Chunk not loaded — defer; wardedness will be re-checked
                     // at materialization time in onChunkLoad below.
@@ -169,17 +162,6 @@ public final class NyxEvents {
             }
         }
         if (!toSpawn.isEmpty()) {
-            // If a ward is anywhere in the 3×3 area covering this chunk, the
-            // cached meteors are absorbed — dropped from the cache, no
-            // entities spawned. (Keeping them in the cache would mean removing
-            // the ward later silently releases a backlog of meteors, which
-            // is surprising.) Neighbour chunks may not be loaded yet, in which
-            // case they don't contribute — same caveat as the live spawn path.
-            if (TrBlocks.isAreaWarded(sl, cp)) {
-                data.cachedMeteorPositions.removeAll(toSpawn);
-                data.setDirty();
-                return;
-            }
             // Read the heightmap NOW from the chunk we were notified about —
             // we're holding a ChunkAccess for it at the same callsite, so
             // there's no chunk-load roundtrip and no risk of blocking. The
@@ -305,7 +287,7 @@ public final class NyxEvents {
                     && !NyxConfig.ENCHANTING_WHITELIST_DIMENSIONS.get()
                             .contains(world.dimension().location().toString())) {
                 event.setUseBlock(Event.Result.DENY);
-                player.displayClientMessage(Component.translatable("info.soa_additions.nyx.day_enchanting"), true);
+                player.displayClientMessage(Component.translatable("info.nyx.day_enchanting"), true);
             }
         }
         if (!(world instanceof ServerLevel sl)) return;
@@ -313,7 +295,7 @@ public final class NyxEvents {
         if (data != null && data.currentEvent instanceof BloodMoonEvent
                 && !NyxConfig.BLOOD_MOON_SLEEPING.get()
                 && state.getBlock() instanceof net.minecraft.world.level.block.BedBlock) {
-            player.displayClientMessage(Component.translatable("info.soa_additions.nyx.blood_moon_sleeping"), true);
+            player.displayClientMessage(Component.translatable("info.nyx.blood_moon_sleeping"), true);
         }
     }
 
@@ -343,7 +325,7 @@ public final class NyxEvents {
         // reason as onSpecialSpawn: drop events can fire on worker threads.
         if (entity.getRandom().nextDouble() > NyxConfig.METEOR_SHARD_GUARDIAN_CHANCE.get()) return;
         int count = event.getLootingLevel() / 2 + 1;
-        ItemStack stack = new ItemStack(ModItems.METEOR_SHARD.get(), count);
+        ItemStack stack = new ItemStack(NyxItems.METEOR_SHARD.get(), count);
         event.getDrops().add(new ItemEntity(entity.level(), entity.getX(), entity.getY(), entity.getZ(), stack));
     }
 
@@ -402,6 +384,128 @@ public final class NyxEvents {
                 else if (i <= 7) effect = MobEffects.INVISIBILITY;
                 if (effect != null) entity.addEffect(new MobEffectInstance(effect, Integer.MAX_VALUE));
             }
+            tryFullMoonDuplication(sl, entity, rng);
+        }
+    }
+
+    // ---------- Full moon mob duplication (1.12 Events.doExtraSpawn) ----------
+    // 1/additionalMobsChance chance per hostile spawn to clone itself into a free
+    // spot in a 5×5×5 cube; both mobs tagged nyx:full_moon_spawn to stop chains.
+    // Spawn work is queued to the server thread — FinalizeSpawn can fire on
+    // worker threads (see onSpecialSpawn threading note).
+
+    private static void tryFullMoonDuplication(ServerLevel sl, LivingEntity entity,
+                                               net.minecraft.util.RandomSource rng) {
+        if (entity.getPersistentData().getBoolean("nyx:full_moon_spawn")) return;
+        if (!(entity instanceof net.minecraft.world.entity.Mob)) return;
+        int chance = Math.max(1, NyxConfig.ADDITIONAL_MOBS_CHANCE.get());
+        if (rng.nextInt(chance) != 0) return;
+        if (!duplicationAllowed(entity)) return;
+
+        entity.getPersistentData().putBoolean("nyx:full_moon_spawn", true);
+        var type = entity.getType();
+        var origin = entity.blockPosition();
+        sl.getServer().execute(() -> {
+            NyxWorldData data = NyxWorldData.get(sl);
+            if (data == null || !(data.currentEvent instanceof FullMoonEvent)) return;
+            for (int tries = 0; tries < 10; tries++) {
+                var p = origin.offset(sl.random.nextInt(5) - 2, sl.random.nextInt(5) - 2, sl.random.nextInt(5) - 2);
+                if (!sl.isLoaded(p)) continue;
+                var created = type.create(sl);
+                if (!(created instanceof net.minecraft.world.entity.Mob dup)) {
+                    if (created != null) created.discard();
+                    return;
+                }
+                dup.moveTo(p.getX() + 0.5, p.getY(), p.getZ() + 0.5, sl.random.nextFloat() * 360.0f, 0.0f);
+                if (!sl.noCollision(dup) || !dup.checkSpawnObstruction(sl)) {
+                    dup.discard();
+                    continue;
+                }
+                dup.getPersistentData().putBoolean("nyx:full_moon_spawn", true);
+                dup.finalizeSpawn(sl, sl.getCurrentDifficultyAt(p),
+                        net.minecraft.world.entity.MobSpawnType.EVENT, null, null);
+                sl.addFreshEntityWithPassengers(dup);
+                return;
+            }
+        });
+    }
+
+    private static boolean duplicationAllowed(LivingEntity entity) {
+        var key = net.minecraftforge.registries.ForgeRegistries.ENTITY_TYPES.getKey(entity.getType());
+        if (key == null) return false;
+        boolean listed = NyxConfig.MOB_DUPLICATION_BLACKLIST.get().contains(key.toString());
+        return NyxConfig.IS_MOB_DUPLICATION_WHITELIST.get() == listed;
+    }
+
+    // ---------- Blood moon extra spawning (1.12 BloodMoon.findChunksForSpawning) ----------
+    // Each second, per player, run (multiplier - 1) extra vanilla-equivalent spawn
+    // attempts allowed as close as bloodMoonSpawnRadius; mobs tagged
+    // nyx:blood_moon_spawn so the dawn-vanish in onLivingTick reclaims them.
+
+    @SubscribeEvent
+    public static void onBloodMoonSpawnTick(net.minecraftforge.event.TickEvent.LevelTickEvent event) {
+        if (event.phase != net.minecraftforge.event.TickEvent.Phase.END) return;
+        if (!(event.level instanceof ServerLevel sl)) return;
+        if (sl.getGameTime() % 20 != 0) return;
+        NyxWorldData data = NyxWorldData.get(sl);
+        if (data == null) return;
+
+        // Client sync: active event + meteor landing sites (moon texture, tint, finder)
+        if (sl.getGameTime() % 100 == 0 && !sl.players().isEmpty()) {
+            String name = data.currentEvent != null ? data.currentEvent.name : "";
+            var sites = new java.util.ArrayList<>(data.meteorLandingSites);
+            if (sites.size() > 64) sites = new java.util.ArrayList<>(sites.subList(0, 64));
+            var pkt = new com.soul.soa_additions.nyx.net.NyxSyncPacket(name, sites);
+            com.soul.soa_additions.network.ModNetworking.CHANNEL.send(
+                    net.minecraftforge.network.PacketDistributor.DIMENSION.with(sl::dimension), pkt);
+        }
+
+        if (!(data.currentEvent instanceof BloodMoonEvent)) return;
+
+        int extra = Math.max(0, NyxConfig.BLOOD_MOON_SPAWN_MULTIPLIER.get() - 1);
+        if (extra == 0) return;
+        int radius = NyxConfig.BLOOD_MOON_SPAWN_RADIUS.get();
+
+        for (var player : sl.players()) {
+            if (player.isSpectator() || !player.isAlive()) continue;
+            // vanilla-ish per-player cap so the multiplier can't flood the world
+            var cap = sl.getEntitiesOfClass(net.minecraft.world.entity.monster.Monster.class,
+                    player.getBoundingBox().inflate(64.0)).size();
+            if (cap >= 70) continue;
+            for (int attempt = 0; attempt < extra; attempt++) {
+                double angle = sl.random.nextDouble() * Math.PI * 2.0;
+                int dist = radius + sl.random.nextInt(25);
+                int x = player.getBlockX() + (int) (Math.cos(angle) * dist);
+                int z = player.getBlockZ() + (int) (Math.sin(angle) * dist);
+                var column = new net.minecraft.core.BlockPos(x, 0, z);
+                if (!sl.isLoaded(column)) continue;
+                var ground = sl.getHeightmapPos(
+                        net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, column);
+                var picked = sl.getBiome(ground).value().getMobSettings()
+                        .getMobs(net.minecraft.world.entity.MobCategory.MONSTER)
+                        .getRandom(sl.random);
+                if (picked.isEmpty()) continue;
+                var type = picked.get().type;
+                if (!net.minecraft.world.entity.SpawnPlacements.checkSpawnRules(
+                        type, sl, net.minecraft.world.entity.MobSpawnType.NATURAL, ground, sl.random)) {
+                    continue;
+                }
+                var created = type.create(sl);
+                if (!(created instanceof net.minecraft.world.entity.Mob mob)) {
+                    if (created != null) created.discard();
+                    continue;
+                }
+                mob.moveTo(ground.getX() + 0.5, ground.getY(), ground.getZ() + 0.5,
+                        sl.random.nextFloat() * 360.0f, 0.0f);
+                if (!sl.noCollision(mob)) {
+                    mob.discard();
+                    continue;
+                }
+                mob.getPersistentData().putBoolean("nyx:blood_moon_spawn", true);
+                mob.finalizeSpawn(sl, sl.getCurrentDifficultyAt(ground),
+                        net.minecraft.world.entity.MobSpawnType.NATURAL, null, null);
+                sl.addFreshEntityWithPassengers(mob);
+            }
         }
     }
 
@@ -412,7 +516,7 @@ public final class NyxEvents {
         if (!event.isVanillaCritical() && event.getDamageModifier() <= 1.0f) return;
         if (!NyxConfig.METEORS.get()) return;
         ItemStack held = event.getEntity().getMainHandItem();
-        if (held.getItem() != ModItems.METEOR_SWORD.get()) return;
+        if (held.getItem() != NyxItems.METEOR_SWORD.get()) return;
         Entity target = event.getTarget();
         if (target instanceof LivingEntity le) {
             le.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30, 10, true, false));
@@ -426,7 +530,7 @@ public final class NyxEvents {
         if (!NyxConfig.METEORS.get()) return;
         Entity attacker = event.getSource().getEntity();
         if (!(attacker instanceof LivingEntity atk)) return;
-        if (atk.getMainHandItem().getItem() != ModItems.METEOR_AXE.get()) return;
+        if (atk.getMainHandItem().getItem() != NyxItems.METEOR_AXE.get()) return;
         LivingEntity target = event.getEntity();
         if (!(target instanceof Player p)) return;
         if (!p.isUsingItem()) return;

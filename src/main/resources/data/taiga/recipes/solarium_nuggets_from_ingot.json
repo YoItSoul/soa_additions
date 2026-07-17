@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "taiga:solarium_ingot"
+    }
+  ],
+  "result": {
+    "item": "taiga:solarium_nugget",
+    "count": 9
+  }
+}

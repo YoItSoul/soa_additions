@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/primal_metal"
+    }
+  ],
+  "result": {
+    "item": "tconevo:primal_metal_nugget",
+    "count": 9
+  }
+}

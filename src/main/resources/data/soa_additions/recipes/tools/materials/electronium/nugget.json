@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:nuggets/electronium"
-  },
-  "material": "soa_additions:electronium",
-  "needed": 9,
-  "value": 1
-}

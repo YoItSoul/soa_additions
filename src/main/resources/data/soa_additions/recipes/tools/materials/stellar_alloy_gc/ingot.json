@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:ingots/stellar_alloy_gc"
-  },
-  "material": "soa_additions:stellar_alloy_gc",
-  "needed": 1,
-  "value": 1
-}

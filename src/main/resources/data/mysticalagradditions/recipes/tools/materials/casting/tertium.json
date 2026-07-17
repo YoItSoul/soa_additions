@@ -1,9 +1,0 @@
-{
-  "fluid": {
-    "amount": 90,
-    "fluid": "mysticalagradditions:molten_tertium"
-  },
-  "output": "mysticalagradditions:tertium",
-  "temperature": 800,
-  "type": "tconstruct:material_fluid"
-}

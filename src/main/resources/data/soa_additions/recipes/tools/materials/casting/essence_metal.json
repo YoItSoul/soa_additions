@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_fluid",
-  "fluid": {
-    "amount": 90,
-    "fluid": "soa_additions:molten_essence_metal"
-  },
-  "output": "soa_additions:essence_metal",
-  "temperature": 1200
-}

@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "item": "draconicevolution:chaotic_core"
-  },
-  "material": "soa_additions:chaotic_metal",
-  "needed": 1,
-  "value": 1
-}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "ingredient": {
+    "item": "tconevo:raw_meat_ingot"
+  },
+  "result": "tconevo:cooked_meat_ingot",
+  "experience": 0.35,
+  "cookingtime": 600
+}

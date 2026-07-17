@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:ingots/polyethylene"
-  },
-  "material": "soa_additions:polyethylene",
-  "needed": 1,
-  "value": 1
-}

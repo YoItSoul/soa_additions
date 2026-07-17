@@ -1,7 +1,0 @@
-{
-  "default": [
-    { "level": 1, "name": "tconevo:ruination" },
-    { "level": 1, "name": "tconstruct:crumbling" }
-  ],
-  "perStat": {}
-}

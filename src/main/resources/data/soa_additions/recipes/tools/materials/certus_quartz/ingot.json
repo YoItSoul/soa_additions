@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:gems/certus_quartz"
-  },
-  "material": "soa_additions:certus_quartz",
-  "needed": 1,
-  "value": 1
-}

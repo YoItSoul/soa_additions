@@ -1,7 +1,5 @@
-{
+﻿{
   "variants": {
-    "": {
-      "model": "taiga:block/meteorite_block"
-    }
+    "": {"model": "taiga:block/meteorite_block"}
   }
 }

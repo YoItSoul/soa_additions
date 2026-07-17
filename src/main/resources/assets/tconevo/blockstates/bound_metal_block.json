@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "tconevo:block/bound_metal_block" }
+  }
+}

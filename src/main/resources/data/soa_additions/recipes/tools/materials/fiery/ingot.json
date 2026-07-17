@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:ingots/fiery"
-  },
-  "material": "soa_additions:fiery",
-  "needed": 1,
-  "value": 1
-}

@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_melting",
-  "input": "soa_additions:titanium",
-  "result": {
-    "amount": 90,
-    "fluid": "soa_additions:molten_titanium"
-  },
-  "temperature": 800
-}

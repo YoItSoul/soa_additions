@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "nnn",
+    "nnn",
+    "nnn"
+  ],
+  "key": {
+    "n": {
+      "tag": "forge:nuggets/universal_metal"
+    }
+  },
+  "result": {
+    "item": "tconevo:universal_metal_ingot",
+    "count": 1
+  }
+}

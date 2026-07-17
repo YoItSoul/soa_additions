@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "nnn",
+    "nnn",
+    "nnn"
+  ],
+  "key": {
+    "n": {
+      "tag": "forge:nuggets/sentient_metal"
+    }
+  },
+  "result": {
+    "item": "tconevo:sentient_metal_ingot",
+    "count": 1
+  }
+}

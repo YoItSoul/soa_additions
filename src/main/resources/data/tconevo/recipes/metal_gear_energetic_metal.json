@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " i ",
+    "i i",
+    " i "
+  ],
+  "key": {
+    "i": {
+      "tag": "forge:ingots/energetic_metal"
+    }
+  },
+  "result": {
+    "item": "tconevo:energetic_metal_gear",
+    "count": 1
+  }
+}

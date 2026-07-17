@@ -1,28 +1,34 @@
 package com.soul.soa_additions.bloodarsenal.event;
 
-import com.soul.soa_additions.SoaAdditions;
 import com.soul.soa_additions.bloodarsenal.BAConfig;
 import com.soul.soa_additions.bloodarsenal.BAItems;
 import com.soul.soa_additions.bloodarsenal.item.bauble.*;
+import com.soul.soa_additions.bloodarsenal.item.tool.WarpBladeItem;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import wayoftime.bloodmagic.api.compat.IDemonWill;
 import wayoftime.bloodmagic.common.item.IActivatable;
 
 /**
  * Game-event handler for Blood Arsenal runtime behaviour.
  * Handles: Vampire Ring healing, Sacrifice/Self-Sacrifice amulet LP,
- * Divinity Sigil damage cancellation, Soul Pendant will pickup.
+ * Divinity Sigil damage cancellation, Soul Pendant will pickup,
+ * Warp Blade teleport-to-impact.
  */
-@Mod.EventBusSubscriber(modid = SoaAdditions.MODID)
 public final class BAEventHandler {
 
     private BAEventHandler() {}
@@ -138,6 +144,44 @@ public final class BAEventHandler {
                     return;
                 }
             }
+        }
+    }
+
+    // ── Warp Blade — teleport wielder to projectile impact ──────────────
+    // 1.12 EntityWarpBlade.onImpact: living hit → revenge-target + melee
+    // attack + attemptTeleport to the target's center; block hit →
+    // attemptTeleport to pos y+2; projectile dies. The arrow's 6.0 base
+    // damage supplies the hit + aggro here, so only the warp is added.
+
+    @SubscribeEvent
+    public static void onWarpBladeImpact(ProjectileImpactEvent event) {
+        if (!(event.getProjectile() instanceof Arrow arrow) || arrow.level().isClientSide()) {
+            return;
+        }
+        if (!arrow.getPersistentData().getBoolean(WarpBladeItem.WARP_TAG)) {
+            return;
+        }
+        if (!(arrow.getOwner() instanceof Player player) || !player.isAlive()) {
+            return;
+        }
+
+        HitResult hit = event.getRayTraceResult();
+        if (hit instanceof EntityHitResult entityHit) {
+            if (entityHit.getEntity() != player && entityHit.getEntity() instanceof LivingEntity target) {
+                warpTo(player, target.getX(), target.getY() + target.getBbHeight() / 2.0, target.getZ());
+            }
+        } else if (hit instanceof BlockHitResult blockHit) {
+            var pos = blockHit.getBlockPos();
+            warpTo(player, pos.getX() + 0.5, pos.getY() + 2.0, pos.getZ() + 0.5);
+            arrow.discard();
+        }
+    }
+
+    private static void warpTo(Player player, double x, double y, double z) {
+        // randomTeleport = 1.20 analog of 1.12 attemptTeleport (safe-spot search).
+        if (player.randomTeleport(x, y, z, true)) {
+            player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
+                    SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1.0f, 1.0f);
         }
     }
 

@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "tag": "forge:ingots/protonium"
-  },
-  "material": "soa_additions:protonium",
-  "needed": 1,
-  "value": 1
-}

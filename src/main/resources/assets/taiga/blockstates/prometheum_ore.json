@@ -1,7 +1,5 @@
-{
+﻿{
   "variants": {
-    "": {
-      "model": "taiga:block/prometheum_ore"
-    }
+    "": {"model": "taiga:block/prometheum_ore"}
   }
 }

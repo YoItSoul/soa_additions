@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material",
-  "ingredient": {
-    "item": "soa_additions:crystal_leaf"
-  },
-  "material": "soa_additions:crystal_leaf",
-  "needed": 1,
-  "value": 1
-}
