@@ -10,6 +10,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 /**
@@ -21,9 +23,17 @@ import java.util.stream.Stream;
  * pack keeps it OFF because Better Foliage's baked models crash under it;
  * lite mode disables Better Foliage, which is what makes it safe to enable.
  *
- * Mod jars are file-locked while the game runs, so the actual renames are done
- * by a tiny helper process that waits for this JVM to exit. The game then
- * closes via {@link LiteCountdownScreen}; the player relaunches manually.
+ * <p><b>How the renames are applied</b> (deliberately transparent for users
+ * and for platform malware scanners): toggling registers a JVM shutdown hook
+ * that renames the jars with plain {@link Files#move} when the game closes.
+ * On Linux/macOS that always succeeds. On Windows, jars the mod loader still
+ * holds open can't be renamed by the running JVM — only those leftovers are
+ * handed to a small, human-readable {@code soa_lite_helper.bat} in the game
+ * folder, launched visibly (minimized), which waits for this process to exit,
+ * performs the renames, and logs everything it does to
+ * {@code soa_lite_helper.log}. The helper never deletes itself or anything
+ * else; stale helper files are cleaned up on the next game launch. Everything
+ * touched lives inside the pack's own game folder.
  *
  * State is derived purely from the filesystem: lite mode is active iff any
  * {@code *.jar.litedisabled} file exists in the mods folder.
@@ -32,6 +42,17 @@ public final class LiteMode {
 
     private static final Logger LOG = LoggerFactory.getLogger("soa_additions");
     static final String DISABLED_SUFFIX = ".litedisabled";
+
+    /** Helper artifacts (game-dir file names) cleaned up on the next launch.
+     *  Includes the legacy .ps1/.sh names from older versions of this mod. */
+    private static final String[] HELPER_ARTIFACTS = {
+        "soa_lite_helper.bat", "soa_lite_helper.log",
+        "soa_lite_helper.ps1", "soa_lite_helper.sh",
+    };
+
+    /** Only rename files whose names are unambiguously safe to embed in a
+     *  batch/shell line — no quotes, expansions, or control characters. */
+    private static final Pattern SAFE_NAME = Pattern.compile("[\\w .()\\[\\]+,@~#-]+");
 
     /**
      * Jar-name markers (lowercase substring match) that are SAFE to remove:
@@ -66,6 +87,10 @@ public final class LiteMode {
         "legendarytooltips",          // tooltip borders
     };
 
+    private static final AtomicBoolean CLEANED = new AtomicBoolean(false);
+    private static final AtomicBoolean HOOK_REGISTERED = new AtomicBoolean(false);
+    private static volatile List<Path[]> renamesAtExit = List.of();
+
     private LiteMode() {}
 
     private static Path modsDir() {
@@ -73,6 +98,7 @@ public final class LiteMode {
     }
 
     public static boolean isActive() {
+        cleanupHelperArtifacts();
         try (Stream<Path> files = Files.list(modsDir())) {
             return files.anyMatch(p -> p.getFileName().toString().endsWith(DISABLED_SUFFIX));
         } catch (IOException e) {
@@ -87,6 +113,13 @@ public final class LiteMode {
             boolean restoring = isActive();
             for (Path p : files.toList()) {
                 String name = p.getFileName().toString();
+                if (!SAFE_NAME.matcher(name).matches()) {
+                    if (name.toLowerCase(Locale.ROOT).endsWith(".jar")
+                            || name.endsWith(DISABLED_SUFFIX)) {
+                        LOG.warn("Lite mode: skipping '{}' — unusual characters in file name", name);
+                    }
+                    continue;
+                }
                 if (restoring) {
                     if (name.endsWith(DISABLED_SUFFIX)) {
                         renames.add(new Path[]{p, p.resolveSibling(
@@ -113,8 +146,9 @@ public final class LiteMode {
     }
 
     /**
-     * Applies the toggle: ensures dynamic resources when enabling, then spawns
-     * the rename helper. Caller shows the countdown screen and closes the game.
+     * Applies the toggle: ensures dynamic resources when enabling, then arms
+     * the shutdown-hook renamer. Caller shows the countdown screen and closes
+     * the game, which is what triggers the renames.
      *
      * @return number of jars scheduled for rename, or -1 on failure
      */
@@ -128,13 +162,12 @@ public final class LiteMode {
         if (renames.isEmpty()) {
             return 0;
         }
-        try {
-            spawnRenameHelper(renames);
-        } catch (IOException e) {
-            LOG.error("Lite mode: could not spawn rename helper", e);
-            return -1;
+        renamesAtExit = renames;
+        if (HOOK_REGISTERED.compareAndSet(false, true)) {
+            Runtime.getRuntime().addShutdownHook(
+                    new Thread(LiteMode::renameOnExit, "SOA-LiteMode-Renamer"));
         }
-        LOG.info("Lite mode {}: {} jar(s) scheduled for rename after exit",
+        LOG.info("Lite mode {}: {} jar(s) will be renamed when the game closes",
                 enabling ? "ENABLING" : "DISABLING", renames.size());
         return renames.size();
     }
@@ -163,41 +196,115 @@ public final class LiteMode {
         }
     }
 
+    // ------------------------------------------------------------------
+    // Shutdown-hook renamer + transparent fallback helper
+    // ------------------------------------------------------------------
+
+    /** Runs as a JVM shutdown hook: renames directly where the OS allows it,
+     *  and hands only the still-locked files to the fallback helper. */
+    private static void renameOnExit() {
+        List<Path[]> stillLocked = new ArrayList<>();
+        for (Path[] r : renamesAtExit) {
+            try {
+                Files.move(r[0], r[1]);
+            } catch (IOException e) {
+                // Windows keeps loaded jars locked until the process dies.
+                stillLocked.add(r);
+            }
+        }
+        if (stillLocked.isEmpty()) {
+            return;
+        }
+        try {
+            spawnFallbackHelper(stillLocked);
+        } catch (IOException e) {
+            // Logging frameworks may already be gone during shutdown.
+            System.err.println("[soa_additions] Lite mode: could not start rename helper: " + e);
+        }
+    }
+
     /**
-     * Writes and launches a detached helper that waits for this JVM to exit,
-     * performs the renames (jars are unlocked by then), and deletes itself.
+     * Writes and launches a plain, commented batch/shell script that waits for
+     * this process to exit and renames the listed jars. Runs minimized (not
+     * hidden), logs every action to {@code soa_lite_helper.log}, touches only
+     * the mods folder, and is removed by {@link #cleanupHelperArtifacts()} on
+     * the next launch rather than deleting itself.
      */
-    private static void spawnRenameHelper(List<Path[]> renames) throws IOException {
+    private static void spawnFallbackHelper(List<Path[]> renames) throws IOException {
         long pid = ProcessHandle.current().pid();
         boolean windows = System.getProperty("os.name", "").toLowerCase(Locale.ROOT).contains("win");
-        Path script = FMLPaths.GAMEDIR.get().resolve(windows ? "soa_lite_helper.ps1" : "soa_lite_helper.sh");
+        Path gameDir = FMLPaths.GAMEDIR.get();
+        Path log = gameDir.resolve("soa_lite_helper.log");
 
         StringBuilder sb = new StringBuilder();
         if (windows) {
-            sb.append("try { Wait-Process -Id ").append(pid).append(" -ErrorAction Stop } catch {}\n");
+            Path script = gameDir.resolve("soa_lite_helper.bat");
+            sb.append("@echo off\r\n")
+              .append("REM Souls of Avarice \"Lite Mode\" helper, written by the soa_additions mod\r\n")
+              .append("REM when you toggled Lite Mode in-game. It waits for Minecraft (PID ").append(pid).append(")\r\n")
+              .append("REM to close, then renames the mod jars listed below inside this pack's mods\r\n")
+              .append("REM folder to enable/disable them. Actions are logged to soa_lite_helper.log;\r\n")
+              .append("REM both files are cleaned up automatically on the next game launch.\r\n")
+              .append(":wait\r\n")
+              .append("tasklist /FI \"PID eq ").append(pid).append("\" 2>nul | find \"").append(pid).append("\" >nul\r\n")
+              .append("if not errorlevel 1 (\r\n")
+              .append("  timeout /t 1 /nobreak >nul\r\n")
+              .append("  goto wait\r\n")
+              .append(")\r\n");
             for (Path[] r : renames) {
-                sb.append("Rename-Item -LiteralPath '").append(r[0].toAbsolutePath())
-                  .append("' -NewName '").append(r[1].getFileName())
-                  .append("' -ErrorAction SilentlyContinue\n");
+                sb.append("echo renaming \"").append(r[0].getFileName())
+                  .append("\" to \"").append(r[1].getFileName())
+                  .append("\" >> \"").append(log).append("\"\r\n");
+                sb.append("ren \"").append(r[0].toAbsolutePath())
+                  .append("\" \"").append(r[1].getFileName())
+                  .append("\" >> \"").append(log).append("\" 2>&1\r\n");
             }
-            sb.append("Remove-Item -LiteralPath $MyInvocation.MyCommand.Path -ErrorAction SilentlyContinue\n");
-        } else {
-            sb.append("#!/bin/sh\n");
-            sb.append("while kill -0 ").append(pid).append(" 2>/dev/null; do sleep 1; done\n");
-            for (Path[] r : renames) {
-                sb.append("mv \"").append(r[0].toAbsolutePath())
-                  .append("\" \"").append(r[1].toAbsolutePath()).append("\"\n");
-            }
-            sb.append("rm -- \"$0\"\n");
-        }
-        Files.writeString(script, sb.toString());
+            sb.append("echo done >> \"").append(log).append("\"\r\n");
+            Files.writeString(script, sb.toString());
 
-        ProcessBuilder pb = windows
-                ? new ProcessBuilder("powershell", "-WindowStyle", "Hidden",
-                        "-ExecutionPolicy", "Bypass", "-File", script.toAbsolutePath().toString())
-                : new ProcessBuilder("sh", script.toAbsolutePath().toString());
-        pb.redirectOutput(ProcessBuilder.Redirect.DISCARD);
-        pb.redirectError(ProcessBuilder.Redirect.DISCARD);
-        pb.start();
+            // start /min: visible in the taskbar (nothing hidden) but unobtrusive.
+            new ProcessBuilder("cmd", "/c", "start", "SoA Lite Mode helper", "/min",
+                    "cmd", "/c", script.toAbsolutePath().toString())
+                    .redirectOutput(ProcessBuilder.Redirect.DISCARD)
+                    .redirectError(ProcessBuilder.Redirect.DISCARD)
+                    .start();
+        } else {
+            Path script = gameDir.resolve("soa_lite_helper.sh");
+            sb.append("#!/bin/sh\n")
+              .append("# Souls of Avarice \"Lite Mode\" helper, written by the soa_additions mod when\n")
+              .append("# you toggled Lite Mode in-game. Waits for the game (pid ").append(pid).append(") to exit,\n")
+              .append("# then renames the mod jars listed below. Log: soa_lite_helper.log.\n")
+              .append("# Cleaned up automatically on the next game launch.\n")
+              .append("while kill -0 ").append(pid).append(" 2>/dev/null; do sleep 1; done\n");
+            for (Path[] r : renames) {
+                sb.append("echo \"renaming ").append(r[0].getFileName()).append("\" >> \"").append(log).append("\"\n");
+                sb.append("mv \"").append(r[0].toAbsolutePath())
+                  .append("\" \"").append(r[1].toAbsolutePath())
+                  .append("\" >> \"").append(log).append("\" 2>&1\n");
+            }
+            sb.append("echo done >> \"").append(log).append("\"\n");
+            Files.writeString(script, sb.toString());
+            new ProcessBuilder("sh", script.toAbsolutePath().toString())
+                    .redirectOutput(ProcessBuilder.Redirect.DISCARD)
+                    .redirectError(ProcessBuilder.Redirect.DISCARD)
+                    .start();
+        }
+    }
+
+    /** Remove helper script/log left behind by a previous toggle (they never
+     *  self-delete — doing the cleanup here keeps the helper trivially simple
+     *  and auditable). Runs once per session. */
+    private static void cleanupHelperArtifacts() {
+        if (!CLEANED.compareAndSet(false, true)) return;
+        Path gameDir = FMLPaths.GAMEDIR.get();
+        for (String name : HELPER_ARTIFACTS) {
+            try {
+                if (Files.deleteIfExists(gameDir.resolve(name))) {
+                    LOG.debug("Lite mode: removed stale helper file {}", name);
+                }
+            } catch (IOException ignored) {
+                // Still running helper on a very slow shutdown race — next launch gets it.
+            }
+        }
     }
 }

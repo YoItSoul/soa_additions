@@ -117,6 +117,16 @@ public final class QuestTelemetry {
         body.addProperty("player_uuid", player.getUUID().toString());
         body.addProperty("player_name", player.getGameProfile().getName());
         body.addProperty("world_name", worldName(server));
+        // Seed disambiguates same-named worlds ("New World"...). Sent as a
+        // string: 64-bit seeds overflow JS number precision on the receiver.
+        String seed = worldSeed(server);
+        if (seed != null) body.addProperty("world_seed", seed);
+        // Vanilla per-world playtime stat — gives the quest views hours-per-world.
+        try {
+            int ticks = player.getStats().getValue(
+                    net.minecraft.stats.Stats.CUSTOM.get(net.minecraft.stats.Stats.PLAY_TIME));
+            body.addProperty("play_time_minutes", ticks / (20 * 60));
+        } catch (Throwable ignored) {}
         body.addProperty("is_dedicated", server.isDedicatedServer());
         // Authoritative cheated flag — pulled from the canonical SavedData,
         // never trusted from the client.
@@ -150,6 +160,14 @@ public final class QuestTelemetry {
         }
     }
 
+    private static String worldSeed(MinecraftServer server) {
+        try {
+            return Long.toString(server.overworld().getSeed());
+        } catch (Throwable t) {
+            return null;
+        }
+    }
+
     private static void send(JsonObject body) {
         final boolean enabled;
         final String baseEndpoint;
@@ -160,6 +178,8 @@ public final class QuestTelemetry {
             return; // config not loaded yet
         }
         if (!enabled) return;
+        // Same strict opt-in gate as the main reporter: no recorded consent, no send.
+        if (!com.soul.soa_additions.telemetry.TelemetryConsent.isAccepted()) return;
         if (baseEndpoint == null || baseEndpoint.isBlank()) return;
         if (!FMLEnvironment.production) {
             LOG.debug("Skipping quest telemetry in dev: {}", body);

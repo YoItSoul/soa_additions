@@ -81,21 +81,29 @@ public final class ModConfigs {
         QUEST_WEB_OVERLAY_BIND = builder
                 .comment(
                         "Network interface the overlay server binds to.",
-                        "\"0.0.0.0\" (default) exposes it on the LAN so phones/tablets can reach it.",
-                        "Set to \"127.0.0.1\" to restrict the overlay to this machine only."
+                        "\"127.0.0.1\" (default) keeps the overlay private to this machine.",
+                        "To view it from a phone/tablet, deliberately expose it on your network by",
+                        "setting this to your LAN IP (or \"0.0.0.0\" for all interfaces)."
                 )
-                .define("bindAddress", "0.0.0.0");
+                .define("bindAddress", "127.0.0.1");
         builder.pop();
 
         builder.push("telemetry");
         ENABLE_TELEMETRY = builder
                 .comment(
-                        "Sends one JSON report per launch to the modpack author's telemetry endpoint.",
-                        "Contents: Minecraft username + UUID, OS/CPU/RAM, JVM version + args (secrets stripped),",
-                        "heap size, load time, mod count, GPU. NO file paths, NO env vars, NO world data.",
-                        "Used to diagnose crashes and improve pack performance. Set to false to disable entirely.",
+                        "DEVELOPMENT-PHASE telemetry, used only to troubleshoot and optimize the pack per",
+                        "player while it is in development. It will be disabled for the stable public release.",
+                        "STRICTLY OPT-IN: nothing is ever sent unless the player explicitly accepts the",
+                        "first-launch consent screen. The choice is stored in",
+                        "config/soa_additions/telemetry_consent.txt (dedicated servers opt in by writing",
+                        "'accepted' to that file; delete it to be asked again).",
+                        "If opted in, each launch sends: Minecraft username + UUID, OS/CPU/RAM/GPU specs,",
+                        "JVM version + args (secrets stripped), heap size, load time, mod count, in-world",
+                        "playtime, quest progress (world name + seed), and periodic 'is playing' heartbeats.",
+                        "NO file paths, NO env vars, NO world contents.",
+                        "This setting is a master switch: false disables telemetry regardless of consent.",
                         "An anonymous install UUID is stored at config/soa_additions/install_id.txt — delete",
-                        "that file to rotate your identity. Default: true."
+                        "that file to rotate your identity. Default: true (still requires opt-in consent)."
                 )
                 .define("enabled", true);
         TELEMETRY_ENDPOINT = builder
@@ -108,11 +116,12 @@ public final class ModConfigs {
                 .comment(
                         "If true and spark is installed, automatically run a 120-second spark profile",
                         "shortly after the server starts and attach the resulting spark.lucko.me URL",
-                        "to the telemetry report. Extremely helpful for debugging player performance",
-                        "issues because we can see their flame graph without asking them for one.",
-                        "Minimal overhead — spark's sampler runs at a low frequency. Default: true."
+                        "to the telemetry report. Helpful for debugging performance issues, but the",
+                        "profile is uploaded to spark's public sharing service, so this is OFF by",
+                        "default — enable it only if you're happy with that (still requires telemetry",
+                        "consent). Default: false."
                 )
-                .define("autoSparkProfile", true);
+                .define("autoSparkProfile", false);
         TELEMETRY_HEARTBEAT_MINUTES = builder
                 .comment(
                         "How often (in minutes) to send an 'is playing' heartbeat while in a world.",

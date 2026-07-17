@@ -79,6 +79,9 @@ public final class ServerIdentity {
             s.player_max = server.getMaxPlayers();
         } catch (Throwable ignored) {}
 
+        // Online player names: only ever collected on a DEDICATED server whose
+        // owner explicitly opted in (consent file) — the dashboard uses them to
+        // group player reports under their server. Never sent from clients.
         try {
             List<String> names = new ArrayList<>();
             for (var p : server.getPlayerList().getPlayers()) {

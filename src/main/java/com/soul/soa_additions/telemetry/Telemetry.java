@@ -44,15 +44,18 @@ import java.util.regex.Pattern;
  * configured endpoint on the first load-complete after launch, on a daemon thread,
  * with a short connect timeout, so there is no measurable impact on startup time.
  *
- * <p><b>Privacy:</b> opt-out via {@link ModConfigs#ENABLE_TELEMETRY}. Disabled for
- * dev environment by default. Never sends file paths, environment variables, or
- * any JVM arg matching common secret patterns. An anonymous install UUID is
- * persisted to {@code config/soa_additions/install_id.txt} so the same player
- * can be correlated across sessions without fingerprinting their hardware.
+ * <p><b>Privacy — strictly opt-in:</b> nothing is ever sent unless the user has
+ * explicitly consented via {@link TelemetryConsentScreen} (clients) or the consent
+ * file (dedicated servers) — see {@link TelemetryConsent}. {@link ModConfigs#ENABLE_TELEMETRY}
+ * is an additional master switch, and telemetry is disabled entirely in dev
+ * environments. This telemetry exists only to troubleshoot and optimize the pack
+ * during development and will be disabled for the stable public release.
  *
- * <p>The player's Minecraft username IS included because the modpack author needs
- * it to correlate reports with support tickets. This is documented in the config
- * file and in the modpack README.
+ * <p>Never sends file paths, environment variables, or any JVM arg matching
+ * common secret patterns. An anonymous install UUID is persisted to
+ * {@code config/soa_additions/install_id.txt}. The player's Minecraft username
+ * IS included (disclosed on the consent screen) because the modpack author needs
+ * it to correlate reports with support tickets.
  */
 public final class Telemetry {
 
@@ -84,7 +87,9 @@ public final class Telemetry {
 
     /** Call from FMLLoadCompleteEvent (or equivalent). Safe to call from any thread. */
     public static void sendAsync(String minecraftVersion, String forgeVersion) {
-        if (!SENT.compareAndSet(false, true)) return;
+        // Cache before any gate so a later consent grant can replay the send.
+        cachedMcVersion = minecraftVersion;
+        cachedForgeVersion = forgeVersion;
 
         // Config may not be loaded in some edge cases; bail safely.
         final boolean enabled;
@@ -109,8 +114,23 @@ public final class Telemetry {
             return;
         }
 
-        cachedMcVersion = minecraftVersion;
-        cachedForgeVersion = forgeVersion;
+        // Strict opt-in: without recorded consent, nothing leaves the machine.
+        TelemetryConsent.State consent = TelemetryConsent.get();
+        if (consent == TelemetryConsent.State.DECLINED) {
+            LOGGER.info("Telemetry declined by user; nothing will be sent.");
+            return;
+        }
+        if (consent == TelemetryConsent.State.UNDECIDED) {
+            if (FMLEnvironment.dist != Dist.CLIENT) {
+                LOGGER.info("Telemetry awaiting consent. To opt in on a dedicated server, write "
+                        + "'accepted' to config/soa_additions/telemetry_consent.txt.");
+            }
+            // Clients: the first-launch consent screen calls onConsentGranted()
+            // if the player opts in, which re-enters this method.
+            return;
+        }
+
+        if (!SENT.compareAndSet(false, true)) return;
         cachedEndpoint = endpoint;
 
         Thread t = new Thread(() -> {
@@ -125,6 +145,12 @@ public final class Telemetry {
         t.setDaemon(true);
         t.setPriority(Thread.MIN_PRIORITY);
         t.start();
+    }
+
+    /** Called by the consent screen when the player opts in — replays the initial send. */
+    public static void onConsentGranted() {
+        sendAsync(cachedMcVersion != null ? cachedMcVersion : "unknown",
+                cachedForgeVersion != null ? cachedForgeVersion : "unknown");
     }
 
     /**
@@ -148,6 +174,7 @@ public final class Telemetry {
             return;
         }
         if (!enabled || !autoSpark) return;
+        if (!TelemetryConsent.isAccepted()) return;
         if (cachedEndpoint == null) return;
         if (!FMLEnvironment.production) return;
         if (!SparkIntegration.isSparkInstalled()) {
@@ -200,6 +227,7 @@ public final class Telemetry {
             return;
         }
         if (!enabled) return;
+        if (!TelemetryConsent.isAccepted()) return;
         if (cachedEndpoint == null) return; // initial send hasn't happened yet
         if (!FMLEnvironment.production) return;
 
@@ -242,6 +270,9 @@ public final class Telemetry {
      */
     public static boolean heartbeatPossible() {
         if (!FMLEnvironment.production) return false;
+        if (TelemetryConsent.get() == TelemetryConsent.State.DECLINED) return false;
+        // UNDECIDED keeps returning true: the consent screen resolves it early
+        // in the session, after which the heartbeat can start (or stop retrying).
         try {
             return ModConfigs.ENABLE_TELEMETRY.get();
         } catch (Throwable t) {
@@ -249,8 +280,32 @@ public final class Telemetry {
         }
     }
 
+    /**
+     * Sends a beat that explicitly reports not-playing. Used on client logout,
+     * where the level may not be torn down yet when the event fires — recomputing
+     * the dimension there would report is_playing=true for up to a full heartbeat
+     * interval after the player already quit to the menu.
+     */
+    public static void sendImmediateOfflineBeat() {
+        if (!TelemetryConsent.isAccepted()) return;
+        if (cachedEndpoint == null) return;
+        if (!FMLEnvironment.production) return;
+        Thread t = new Thread(() -> {
+            try {
+                String json = buildPayload(cachedMcVersion, cachedForgeVersion, lastSparkUrl, false, null);
+                postJson(cachedEndpoint, json);
+            } catch (Throwable ex) {
+                LOGGER.debug("Telemetry offline beat failed (ignored): {}", ex.toString());
+            }
+        }, "SOA-Telemetry-Beat");
+        t.setDaemon(true);
+        t.setPriority(Thread.MIN_PRIORITY);
+        t.start();
+    }
+
     /** Fires one immediate heartbeat off the main thread. Safe to call anytime. */
     public static void sendImmediateHeartbeat() {
+        if (!TelemetryConsent.isAccepted()) return;
         if (cachedEndpoint == null) return;
         if (!FMLEnvironment.production) return;
         Thread t = new Thread(() -> {
@@ -285,6 +340,7 @@ public final class Telemetry {
                 heartbeatExec = null;
             }
         }
+        if (!TelemetryConsent.isAccepted()) return;
         if (cachedEndpoint == null) return;
         if (!FMLEnvironment.production) return;
 
@@ -371,6 +427,13 @@ public final class Telemetry {
             try {
                 p.gpu = ClientIdentity.getGpuInfoOrNull();
             } catch (Throwable ignored) {}
+            // In-world playtime; flush piggybacks on sends so the lifetime
+            // counter survives crashes without its own write cadence.
+            try {
+                p.play_session_minutes = PlaytimeTracker.sessionMinutes();
+                p.play_total_minutes = PlaytimeTracker.totalMinutes();
+                PlaytimeTracker.flush();
+            } catch (Throwable ignored) {}
         }
 
         // Detailed hardware via OSHI (cached after first probe)
@@ -450,6 +513,14 @@ public final class Telemetry {
         return out;
     }
 
+    /**
+     * install_id that leaked into the modpack export's overrides/config folder
+     * (Souls of Avarice.zip, Apr 2026). Every player who installed that pack
+     * inherited this exact id, collapsing all their reports into one DB row.
+     * Treat it as poisoned: regenerate a fresh id when we see it.
+     */
+    private static final String LEAKED_INSTALL_ID = "db26574e-c088-4c89-9044-2e63f2e7bb1a";
+
     private static String getOrCreateInstallId() {
         try {
             Path dir = Path.of("config", "soa_additions");
@@ -457,7 +528,7 @@ public final class Telemetry {
             Path file = dir.resolve("install_id.txt");
             if (Files.exists(file)) {
                 String id = Files.readString(file).trim();
-                if (!id.isEmpty()) return id;
+                if (!id.isEmpty() && !id.equalsIgnoreCase(LEAKED_INSTALL_ID)) return id;
             }
             String id = UUID.randomUUID().toString();
             Files.writeString(file, id, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
@@ -505,6 +576,8 @@ public final class Telemetry {
         String spark_profile_url;
         boolean is_playing;
         String current_dimension;
+        Integer play_session_minutes;
+        Integer play_total_minutes;
         ServerInfo server;
     }
 

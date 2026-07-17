@@ -1,12 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": [
-    "#minecraft:is_ocean",
-    "minecraft:beach",
-    "minecraft:snowy_beach",
-    "minecraft:stony_shore",
-    "minecraft:desert"
-  ],
+  "biomes": "#taiga:has_vibranium_ore",
   "features": "taiga:vibranium_ore",
   "step": "underground_ores"
 }

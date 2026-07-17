@@ -7,9 +7,10 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
 /**
- * Full-screen countdown shown after Lite Mode is toggled. The rename helper
- * is already waiting on our PID, so closing the game is what applies the
- * change — this screen is deliberately not dismissible.
+ * Full-screen countdown shown after Lite Mode is toggled. The renames are
+ * applied by a JVM shutdown hook (plus a small logged helper for jars Windows
+ * keeps locked), so closing the game is what applies the change — this screen
+ * is deliberately not dismissible.
  */
 public final class LiteCountdownScreen extends Screen {
 

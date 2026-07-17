@@ -81,7 +81,7 @@ public final class QuestWebServer {
         try {
             bind = com.soul.soa_additions.config.ModConfigs.QUEST_WEB_OVERLAY_BIND.get();
         } catch (Throwable t) {
-            bind = "0.0.0.0";
+            bind = "127.0.0.1"; // fail private, never open
         }
         try {
             server = HttpServer.create(new InetSocketAddress(bind, port), 0);
@@ -94,10 +94,22 @@ public final class QuestWebServer {
             server.createContext("/api/quests", QuestWebServer::handleQuestsApi);
             server.createContext("/api/events", QuestWebServer::handleSse);
             server.start();
-            LOG.info("[SOA Quest Web] Overlay server started on port {}", port);
+            LOG.info("[SOA Quest Web] Overlay server started on {}:{}", bind, port);
+            if (!isLoopback(bind)) {
+                LOG.warn("[SOA Quest Web] Overlay is bound to {} and reachable from your network. "
+                        + "Set questWebOverlay.bindAddress=127.0.0.1 to keep it private to this machine.", bind);
+            }
         } catch (IOException e) {
             LOG.error("[SOA Quest Web] Failed to start on port {}: {}", port, e.getMessage());
             server = null;
+        }
+    }
+
+    private static boolean isLoopback(String bind) {
+        try {
+            return java.net.InetAddress.getByName(bind).isLoopbackAddress();
+        } catch (Throwable t) {
+            return false;
         }
     }
 
