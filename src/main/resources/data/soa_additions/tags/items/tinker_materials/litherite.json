@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "#forge:gems/litherite"
+    {
+      "id": "#forge:gems/litherite",
+      "required": false
+    }
   ]
 }

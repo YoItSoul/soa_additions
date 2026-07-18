@@ -4,6 +4,6 @@
     "#forge:ingots/bound_metal",
     "#forge:nuggets/bound_metal",
     "#forge:storage_blocks/bound_metal",
-    "soa_additions:molten_bound_metal_bucket"
+    "smithery:molten_bound_metal_bucket"
   ]
 }

@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:bloodwood_planks"
+    {
+      "id": "soa_additions:bloodwood_planks",
+      "required": false
+    }
   ]
 }

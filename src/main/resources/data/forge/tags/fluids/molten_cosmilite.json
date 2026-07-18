@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_cosmilite",
-    "soa_additions:molten_cosmilite_flowing"
+    "smithery:molten_cosmilite",
+    "smithery:molten_cosmilite_flowing"
   ]
 }

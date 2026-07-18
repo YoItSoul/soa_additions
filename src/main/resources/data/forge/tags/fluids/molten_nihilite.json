@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "taiga:molten_nihilite",
-    "taiga:molten_nihilite_flowing"
+    "smithery:molten_nihilite",
+    "smithery:molten_nihilite_flowing"
   ]
 }

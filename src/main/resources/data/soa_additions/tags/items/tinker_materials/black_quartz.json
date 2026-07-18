@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "#forge:gems/quartz_black"
+    {
+      "id": "#forge:gems/quartz_black",
+      "required": false
+    }
   ]
 }

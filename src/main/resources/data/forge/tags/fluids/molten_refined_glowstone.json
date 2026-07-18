@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_refined_glowstone",
-    "soa_additions:molten_refined_glowstone_flowing"
+    "smithery:molten_refined_glowstone",
+    "smithery:molten_refined_glowstone_flowing"
   ]
 }

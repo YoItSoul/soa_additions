@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "#forge:ingots/pulsating_iron",
-    "#forge:nuggets/pulsating_iron",
-    "#forge:storage_blocks/pulsating_iron"
+    "#forge:ingots/pulsating_alloy",
+    "#forge:nuggets/pulsating_alloy",
+    "#forge:storage_blocks/pulsating_alloy"
   ]
 }

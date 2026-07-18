@@ -1,7 +1,13 @@
 {
   "replace": false,
   "values": [
-    "tinkers_things:molten_hematite",
-    "tinkers_things:molten_hematite_flowing"
+    {
+      "id": "tinkers_things:molten_hematite",
+      "required": false
+    },
+    {
+      "id": "tinkers_things:molten_hematite_flowing",
+      "required": false
+    }
   ]
 }

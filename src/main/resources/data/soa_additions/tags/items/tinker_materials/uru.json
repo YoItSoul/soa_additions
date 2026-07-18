@@ -4,6 +4,6 @@
     "#forge:ingots/uru",
     "#forge:nuggets/uru",
     "#forge:storage_blocks/uru",
-    "soa_additions:molten_uru_bucket"
+    "smithery:molten_uru_bucket"
   ]
 }

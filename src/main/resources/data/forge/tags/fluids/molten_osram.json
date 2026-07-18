@@ -1,7 +1,13 @@
 {
   "replace": false,
   "values": [
-    "taiga:molten_osram",
-    "taiga:molten_osram_flowing"
+    {
+      "id": "taiga:molten_osram",
+      "required": false
+    },
+    {
+      "id": "taiga:molten_osram_flowing",
+      "required": false
+    }
   ]
 }

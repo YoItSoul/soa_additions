@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:fusewood_planks"
+    {
+      "id": "soa_additions:fusewood_planks",
+      "required": false
+    }
   ]
 }

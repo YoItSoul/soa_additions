@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_aluminium",
-    "soa_additions:molten_aluminium_flowing"
+    "smithery:molten_aluminium",
+    "smithery:molten_aluminium_flowing"
   ]
 }

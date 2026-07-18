@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_stainless_steel",
-    "soa_additions:molten_stainless_steel_flowing"
+    "smithery:molten_stainless_steel",
+    "smithery:molten_stainless_steel_flowing"
   ]
 }

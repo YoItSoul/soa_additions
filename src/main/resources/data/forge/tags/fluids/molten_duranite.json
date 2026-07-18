@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "taiga:molten_duranite",
-    "taiga:molten_duranite_flowing"
+    "smithery:molten_duranite",
+    "smithery:molten_duranite_flowing"
   ]
 }

@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_mirion",
-    "soa_additions:molten_mirion_flowing"
+    "smithery:molten_mirion",
+    "smithery:molten_mirion_flowing"
   ]
 }

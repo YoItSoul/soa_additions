@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "#forge:plates/advanced_alloy"
+    {
+      "id": "#forge:plates/advanced_alloy",
+      "required": false
+    }
   ]
 }

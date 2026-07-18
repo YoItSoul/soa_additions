@@ -34,10 +34,19 @@ public class RewardTicketItem extends StageItem {
     private static final ResourceLocation LOOT_BAG_ID = new ResourceLocation("lootbags", "loot_bag");
 
     private final ResourceLocation lootTableId;
+    // The lootbags:loot RECIPE id differs from the fallback loot-table id:
+    // tables live at "containers/loot_crate_<tier>" but the recipes are
+    // registered as "loot_crate_<tier>" (kubejs/data/soa_additions/recipes/).
+    // Stamping the table id onto the bag leaves it blank and inert, so the
+    // bag gets the last path segment as its recipe id instead.
+    private final ResourceLocation bagRecipeId;
 
     public RewardTicketItem(Properties props, boolean foil, ResourceLocation lootTableId, String... tooltip) {
         super(props, foil, tooltip);
         this.lootTableId = lootTableId;
+        String path = lootTableId.getPath();
+        this.bagRecipeId = new ResourceLocation(lootTableId.getNamespace(),
+                path.substring(path.lastIndexOf('/') + 1));
     }
 
     @Override
@@ -66,11 +75,11 @@ public class RewardTicketItem extends StageItem {
 
         ItemStack bag = new ItemStack(lootBag);
         CompoundTag tag = bag.getOrCreateTag();
-        tag.putString("Loot", lootTableId.toString());
+        tag.putString("Loot", bagRecipeId.toString());
         // Lootbags checks both the root "Loot" tag and a nested tag key; set
         // both so the bag resolves on either code path the mod takes.
         CompoundTag lootbagsSub = tag.getCompound("lootbags");
-        lootbagsSub.putString("Loot", lootTableId.toString());
+        lootbagsSub.putString("Loot", bagRecipeId.toString());
         tag.put("lootbags", lootbagsSub);
 
         // Copy the ticket's display name onto the bag so the player sees

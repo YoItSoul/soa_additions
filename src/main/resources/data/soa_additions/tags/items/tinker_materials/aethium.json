@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "#forge:gems/aethium"
+    {
+      "id": "#forge:gems/aethium",
+      "required": false
+    }
   ]
 }

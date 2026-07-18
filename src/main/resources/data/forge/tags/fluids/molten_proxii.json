@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "taiga:molten_proxii",
-    "taiga:molten_proxii_flowing"
+    "smithery:molten_proxii",
+    "smithery:molten_proxii_flowing"
   ]
 }

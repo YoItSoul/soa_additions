@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_apatite",
-    "soa_additions:molten_apatite_flowing"
+    "smithery:molten_apatite",
+    "smithery:molten_apatite_flowing"
   ]
 }

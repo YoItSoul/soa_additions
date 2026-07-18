@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "#forge:gems/crystal_flux"
+    {
+      "id": "#forge:gems/crystal_flux",
+      "required": false
+    }
   ]
 }

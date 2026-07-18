@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "#forge:storage_blocks/mica"
+    {
+      "id": "#forge:storage_blocks/mica",
+      "required": false
+    }
   ]
 }

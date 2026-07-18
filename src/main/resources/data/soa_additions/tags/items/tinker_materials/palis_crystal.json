@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "#forge:gems/palis"
+    {
+      "id": "#forge:gems/palis",
+      "required": false
+    }
   ]
 }

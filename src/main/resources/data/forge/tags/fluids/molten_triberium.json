@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "taiga:molten_triberium",
-    "taiga:molten_triberium_flowing"
+    "smithery:molten_triberium",
+    "smithery:molten_triberium_flowing"
   ]
 }

@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "#forge:gems/amber"
+    {
+      "id": "#forge:gems/amber",
+      "required": false
+    }
   ]
 }

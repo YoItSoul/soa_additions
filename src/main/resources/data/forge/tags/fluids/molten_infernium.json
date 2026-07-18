@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_infernium",
-    "soa_additions:molten_infernium_flowing"
+    "smithery:molten_infernium",
+    "smithery:molten_infernium_flowing"
   ]
 }

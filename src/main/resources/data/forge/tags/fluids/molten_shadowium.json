@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_shadowium",
-    "soa_additions:molten_shadowium_flowing"
+    "smithery:molten_shadowium",
+    "smithery:molten_shadowium_flowing"
   ]
 }

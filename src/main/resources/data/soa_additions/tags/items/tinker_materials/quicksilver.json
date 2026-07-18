@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "#forge:dusts/quicksilver"
+    {
+      "id": "#forge:dusts/quicksilver",
+      "required": false
+    }
   ]
 }

@@ -2,6 +2,6 @@
   "replace": false,
   "values": [
     "#forge:ingots/fluix_steel",
-    "soa_additions:molten_fluix_steel_bucket"
+    "smithery:molten_fluix_steel_bucket"
   ]
 }

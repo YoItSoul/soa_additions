@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "#forge:gems/sunnarium"
+    {
+      "id": "#forge:gems/sunnarium",
+      "required": false
+    }
   ]
 }

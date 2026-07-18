@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_neutronium",
-    "soa_additions:molten_neutronium_flowing"
+    "smithery:molten_neutronium",
+    "smithery:molten_neutronium_flowing"
   ]
 }

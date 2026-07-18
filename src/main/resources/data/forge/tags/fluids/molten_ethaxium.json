@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_ethaxium",
-    "soa_additions:molten_ethaxium_flowing"
+    "smithery:molten_ethaxium",
+    "smithery:molten_ethaxium_flowing"
   ]
 }

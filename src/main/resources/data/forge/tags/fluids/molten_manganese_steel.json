@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_manganese_steel",
-    "soa_additions:molten_manganese_steel_flowing"
+    "smithery:molten_manganese_steel",
+    "smithery:molten_manganese_steel_flowing"
   ]
 }

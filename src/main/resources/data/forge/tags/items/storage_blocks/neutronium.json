@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "jaopca:storage_blocks.neutronium"
+    {
+      "id": "jaopca:storage_blocks.neutronium",
+      "required": false
+    }
   ]
 }

@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:darkwood_planks"
+    {
+      "id": "soa_additions:darkwood_planks",
+      "required": false
+    }
   ]
 }

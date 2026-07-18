@@ -1,7 +1,13 @@
 {
   "replace": false,
   "values": [
-    "industrialforegoing:pink_slime_ingot",
-    "soa_additions:molten_pink_slime_bucket"
+    {
+      "id": "industrialforegoing:pink_slime_ingot",
+      "required": false
+    },
+    {
+      "id": "soa_additions:molten_pink_slime_bucket",
+      "required": false
+    }
   ]
 }

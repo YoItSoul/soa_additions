@@ -4,6 +4,6 @@
     "#forge:ingots/chaotic",
     "#forge:nuggets/chaotic",
     "#forge:storage_blocks/chaotic",
-    "soa_additions:molten_chaotic_metal_bucket"
+    "smithery:molten_chaotic_metal_bucket"
   ]
 }

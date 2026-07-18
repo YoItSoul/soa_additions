@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_wyvern_metal",
-    "soa_additions:molten_wyvern_metal_flowing"
+    "smithery:molten_wyvern_metal",
+    "smithery:molten_wyvern_metal_flowing"
   ]
 }

@@ -4,6 +4,6 @@
     "#forge:ingots/neutronium",
     "#forge:nuggets/neutronium",
     "#forge:storage_blocks/neutronium",
-    "soa_additions:molten_neutronium_bucket"
+    "smithery:molten_neutronium_bucket"
   ]
 }

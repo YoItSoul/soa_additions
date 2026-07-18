@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "taiga:molten_yrdeen",
-    "taiga:molten_yrdeen_flowing"
+    "smithery:molten_yrdeen",
+    "smithery:molten_yrdeen_flowing"
   ]
 }

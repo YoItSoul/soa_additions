@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_refined_obsidian",
-    "soa_additions:molten_refined_obsidian_flowing"
+    "smithery:molten_refined_obsidian",
+    "smithery:molten_refined_obsidian_flowing"
   ]
 }

@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "#forge:gems/diamantine"
+    {
+      "id": "#forge:gems/diamantine",
+      "required": false
+    }
   ]
 }

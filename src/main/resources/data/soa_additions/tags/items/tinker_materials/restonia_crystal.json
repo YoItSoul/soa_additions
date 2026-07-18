@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "#forge:gems/restonia"
+    {
+      "id": "#forge:gems/restonia",
+      "required": false
+    }
   ]
 }

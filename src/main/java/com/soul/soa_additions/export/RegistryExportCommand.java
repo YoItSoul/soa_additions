@@ -1,5 +1,6 @@
 package com.soul.soa_additions.export;
 
+import com.google.common.collect.Multimap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -24,17 +25,40 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.BowItem;
+import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.item.DiggerItem;
+import net.minecraft.world.item.ElytraItem;
+import net.minecraft.world.item.FishingRodItem;
+import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.HorseArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.ProjectileWeaponItem;
+import net.minecraft.world.item.ShearsItem;
+import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.TridentItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraftforge.common.TierSortingRegistry;
+import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -47,6 +71,7 @@ import java.nio.file.Path;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +83,8 @@ import java.util.stream.Collectors;
  * {@code /soa export <target>} — dumps registry contents to JSON files under
  * {@code <gamedir>/soa_exports/}. Useful for building wikis, checklists, or
  * feeding other tooling. Targets: {@code items}, {@code blocks}, {@code entities},
- * {@code structures}, {@code biomes}, {@code dimensions}, {@code all}.
+ * {@code structures}, {@code biomes}, {@code dimensions}, {@code equipment},
+ * {@code books}, {@code all}.
  */
 @Mod.EventBusSubscriber(modid = SoaAdditions.MODID)
 public final class RegistryExportCommand {
@@ -83,7 +109,7 @@ public final class RegistryExportCommand {
                                             "bosses", "structures", "biomes", "dimensions", "effects",
                                             "enchantments", "fluids", "sounds", "particles",
                                             "block_entities", "villager_professions", "tags",
-                                            "tinker_materials"}) {
+                                            "tinker_materials", "equipment", "books"}) {
                                         b.suggest(s);
                                     }
                                     return b.buildFuture();
@@ -137,6 +163,10 @@ public final class RegistryExportCommand {
                 totals.put("villager_professions", write(outDir.resolve("villager_professions.json"), dumpIds(BuiltInRegistries.VILLAGER_PROFESSION)));
             if (all || "tags".equalsIgnoreCase(target))
                 totals.put("tags", write(outDir.resolve("tags.json"), dumpAllTags(server)));
+            if (all || "equipment".equalsIgnoreCase(target))
+                totals.put("equipment", write(outDir.resolve("equipment.json"), dumpEquipment()));
+            if (all || "books".equalsIgnoreCase(target))
+                totals.put("books", write(outDir.resolve("books.json"), dumpBooks()));
         } catch (IOException e) {
             src.sendFailure(Component.literal("Export failed: " + e.getMessage()));
             return 0;
@@ -503,6 +533,229 @@ public final class RegistryExportCommand {
             o.add("entries", entries);
             arr.add(o);
         }
+    }
+
+    /**
+     * Dumps every armor piece, weapon, and tool with combat/durability stats.
+     * Detection is structural — no per-mod knowledge:
+     *   1. Vanilla item classes ({@link SwordItem}, {@link DiggerItem} family,
+     *      {@link ArmorItem}, {@link BowItem}, {@link ShieldItem}, etc.).
+     *   2. Forge {@code ToolActions} — modded gear that doesn't extend vanilla
+     *      classes but declares what it can do (dig, sweep, block, ...).
+     *   3. Attribute modifiers on the default stack — anything granting
+     *      attack damage in the main hand or armor/toughness in an armor slot.
+     */
+    private static JsonArray dumpEquipment() {
+        JsonArray arr = new JsonArray();
+        List<Item> items = new ArrayList<>();
+        BuiltInRegistries.ITEM.forEach(items::add);
+        items.sort(Comparator.comparing(i -> BuiltInRegistries.ITEM.getKey(i).toString()));
+        for (Item item : items) {
+            try {
+                ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
+                ItemStack stack = item.getDefaultInstance();
+
+                Map<EquipmentSlot, Multimap<Attribute, AttributeModifier>> mods = new EnumMap<>(EquipmentSlot.class);
+                for (EquipmentSlot slot : EquipmentSlot.values()) {
+                    try {
+                        Multimap<Attribute, AttributeModifier> m = stack.getAttributeModifiers(slot);
+                        if (m != null && !m.isEmpty()) mods.put(slot, m);
+                    } catch (Throwable ignored) {}
+                }
+
+                String[] cat = classifyEquipment(item, stack, mods);
+                if (cat == null) continue;
+
+                JsonObject o = new JsonObject();
+                o.addProperty("id", id.toString());
+                o.addProperty("mod", id.getNamespace());
+                o.addProperty("class", item.getClass().getName());
+                o.addProperty("category", cat[0]);
+                o.addProperty("type", cat[1]);
+                safe(() -> o.addProperty("name", stack.getHoverName().getString()));
+                safe(() -> o.addProperty("max_damage", item.getMaxDamage()));
+                safe(() -> o.addProperty("enchantability", item.getEnchantmentValue()));
+                safe(() -> o.addProperty("rarity", stack.getRarity().name()));
+                safe(() -> o.addProperty("fire_resistant", item.isFireResistant()));
+
+                // Player-visible combat numbers: 1.0 base attack damage / 4.0 base
+                // attack speed plus flat main-hand ADDITION modifiers.
+                Multimap<Attribute, AttributeModifier> main = mods.get(EquipmentSlot.MAINHAND);
+                if (main != null && main.containsKey(Attributes.ATTACK_DAMAGE)) {
+                    double dmg = 1.0, spd = 4.0;
+                    for (AttributeModifier m : main.get(Attributes.ATTACK_DAMAGE))
+                        if (m.getOperation() == AttributeModifier.Operation.ADDITION) dmg += m.getAmount();
+                    for (AttributeModifier m : main.get(Attributes.ATTACK_SPEED))
+                        if (m.getOperation() == AttributeModifier.Operation.ADDITION) spd += m.getAmount();
+                    o.addProperty("attack_damage", dmg);
+                    o.addProperty("attack_speed", spd);
+                }
+
+                if (item instanceof TieredItem tiered) {
+                    Tier tier = tiered.getTier();
+                    JsonObject t = new JsonObject();
+                    ResourceLocation tierName = TierSortingRegistry.getName(tier);
+                    if (tierName != null) t.addProperty("name", tierName.toString());
+                    safe(() -> t.addProperty("level", tier.getLevel()));
+                    safe(() -> t.addProperty("uses", tier.getUses()));
+                    safe(() -> t.addProperty("mining_speed", tier.getSpeed()));
+                    safe(() -> t.addProperty("attack_damage_bonus", tier.getAttackDamageBonus()));
+                    safe(() -> t.addProperty("enchantability", tier.getEnchantmentValue()));
+                    safe(() -> {
+                        JsonArray repair = new JsonArray();
+                        for (ItemStack rs : tier.getRepairIngredient().getItems())
+                            repair.add(BuiltInRegistries.ITEM.getKey(rs.getItem()).toString());
+                        if (repair.size() > 0) t.add("repair_items", repair);
+                    });
+                    o.add("tier", t);
+                }
+
+                if (item instanceof ArmorItem armor) {
+                    JsonObject a = new JsonObject();
+                    safe(() -> a.addProperty("slot", armor.getType().getSlot().getName()));
+                    safe(() -> a.addProperty("material", armor.getMaterial().getName()));
+                    safe(() -> a.addProperty("defense", armor.getDefense()));
+                    safe(() -> a.addProperty("toughness", armor.getToughness()));
+                    safe(() -> a.addProperty("knockback_resistance", armor.getMaterial().getKnockbackResistance()));
+                    safe(() -> a.addProperty("armor_enchantability", armor.getMaterial().getEnchantmentValue()));
+                    o.add("armor", a);
+                }
+
+                if (!mods.isEmpty()) {
+                    JsonArray modifiers = new JsonArray();
+                    for (EquipmentSlot slot : EquipmentSlot.values()) {
+                        Multimap<Attribute, AttributeModifier> m = mods.get(slot);
+                        if (m == null) continue;
+                        List<Attribute> attrs = new ArrayList<>(m.keySet());
+                        attrs.sort(Comparator.comparing(a2 -> {
+                            ResourceLocation k = BuiltInRegistries.ATTRIBUTE.getKey(a2);
+                            return k == null ? "" : k.toString();
+                        }));
+                        for (Attribute attr : attrs) {
+                            ResourceLocation aId = BuiltInRegistries.ATTRIBUTE.getKey(attr);
+                            for (AttributeModifier mod : m.get(attr)) {
+                                JsonObject mo = new JsonObject();
+                                mo.addProperty("slot", slot.getName());
+                                mo.addProperty("attribute", aId == null ? attr.getDescriptionId() : aId.toString());
+                                mo.addProperty("amount", mod.getAmount());
+                                mo.addProperty("operation", mod.getOperation().name());
+                                modifiers.add(mo);
+                            }
+                        }
+                    }
+                    o.add("attribute_modifiers", modifiers);
+                }
+
+                arr.add(o);
+            } catch (Throwable ignored) {
+                // A single broken modded item must not kill the whole export.
+            }
+        }
+        return arr;
+    }
+
+    /** Returns {category, type} or null if the item isn't equipment. */
+    private static String[] classifyEquipment(Item item, ItemStack stack,
+            Map<EquipmentSlot, Multimap<Attribute, AttributeModifier>> mods) {
+        // 1. Vanilla class hierarchy. Order matters: the specific DiggerItem
+        //    subclasses and Bow/Crossbow before their parents.
+        if (item instanceof SwordItem) return new String[]{"weapon", "sword"};
+        if (item instanceof PickaxeItem) return new String[]{"tool", "pickaxe"};
+        if (item instanceof AxeItem) return new String[]{"tool", "axe"};
+        if (item instanceof ShovelItem) return new String[]{"tool", "shovel"};
+        if (item instanceof HoeItem) return new String[]{"tool", "hoe"};
+        if (item instanceof DiggerItem) return new String[]{"tool", "digger"};
+        if (item instanceof ShearsItem) return new String[]{"tool", "shears"};
+        if (item instanceof FishingRodItem) return new String[]{"tool", "fishing_rod"};
+        if (item instanceof BowItem) return new String[]{"weapon", "bow"};
+        if (item instanceof CrossbowItem) return new String[]{"weapon", "crossbow"};
+        if (item instanceof TridentItem) return new String[]{"weapon", "trident"};
+        if (item instanceof ProjectileWeaponItem) return new String[]{"weapon", "projectile_weapon"};
+        if (item instanceof ShieldItem) return new String[]{"armor", "shield"};
+        if (item instanceof ElytraItem) return new String[]{"armor", "elytra"};
+        if (item instanceof ArmorItem armor) return new String[]{"armor", armor.getType().getName()};
+        if (item instanceof HorseArmorItem) return new String[]{"armor", "horse_armor"};
+
+        // 2. Forge ToolActions — modded gear declaring capabilities.
+        try {
+            if (stack.canPerformAction(ToolActions.SWORD_SWEEP)) return new String[]{"weapon", "sword"};
+            if (stack.canPerformAction(ToolActions.PICKAXE_DIG)) return new String[]{"tool", "pickaxe"};
+            if (stack.canPerformAction(ToolActions.AXE_DIG)) return new String[]{"tool", "axe"};
+            if (stack.canPerformAction(ToolActions.SHOVEL_DIG)) return new String[]{"tool", "shovel"};
+            if (stack.canPerformAction(ToolActions.HOE_DIG)) return new String[]{"tool", "hoe"};
+            if (stack.canPerformAction(ToolActions.SHEARS_DIG)) return new String[]{"tool", "shears"};
+            if (stack.canPerformAction(ToolActions.FISHING_ROD_CAST)) return new String[]{"tool", "fishing_rod"};
+            if (stack.canPerformAction(ToolActions.SHIELD_BLOCK)) return new String[]{"armor", "shield"};
+        } catch (Throwable ignored) {}
+
+        // 3. Attribute fallback — anything granting armor in an armor slot or
+        //    attack damage in the main hand.
+        for (EquipmentSlot slot : new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST,
+                EquipmentSlot.LEGS, EquipmentSlot.FEET}) {
+            Multimap<Attribute, AttributeModifier> m = mods.get(slot);
+            if (m != null && (m.containsKey(Attributes.ARMOR) || m.containsKey(Attributes.ARMOR_TOUGHNESS)))
+                return new String[]{"armor", slot.getName()};
+        }
+        Multimap<Attribute, AttributeModifier> main = mods.get(EquipmentSlot.MAINHAND);
+        if (main != null && main.containsKey(Attributes.ATTACK_DAMAGE))
+            return new String[]{"weapon", "weapon"};
+        return null;
+    }
+
+    /**
+     * Dumps every "book-like" item — mod guide books (Valoria codex, Ars
+     * Nouveau worn notebook, Patchouli-driven guides), lexica, tomes, journals.
+     * Detection is heuristic since guide books share no common superclass:
+     * keyword match on the registry path and the display name, plus the
+     * vanilla book classes.
+     */
+    private static JsonArray dumpBooks() {
+        String[] keywords = {"book", "codex", "guide", "journal", "tome", "manual",
+                "notebook", "lexicon", "encyclopedia", "grimoire", "compendium",
+                "nomicon", "chronicle", "primer", "dictionary", "almanac", "diary",
+                "opus", "thesaurus", "atlas"};
+        JsonArray arr = new JsonArray();
+        List<Item> items = new ArrayList<>();
+        BuiltInRegistries.ITEM.forEach(items::add);
+        items.sort(Comparator.comparing(i -> BuiltInRegistries.ITEM.getKey(i).toString()));
+        for (Item item : items) {
+            try {
+                ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
+                ItemStack stack = item.getDefaultInstance();
+                String path = id.getPath();
+                String name = "";
+                try { name = stack.getHoverName().getString().toLowerCase(java.util.Locale.ROOT); } catch (Throwable ignored) {}
+                String cls = item.getClass().getName().toLowerCase(java.util.Locale.ROOT);
+
+                List<String> via = new ArrayList<>();
+                for (String kw : keywords) {
+                    if (path.contains(kw)) { via.add("id:" + kw); break; }
+                }
+                if (via.isEmpty()) {
+                    for (String kw : keywords) {
+                        if (name.contains(kw)) { via.add("name:" + kw); break; }
+                    }
+                }
+                if (via.isEmpty() && (cls.contains("book") || cls.contains("codex")
+                        || cls.contains("tome") || cls.contains("lexicon"))) {
+                    via.add("class");
+                }
+                if (via.isEmpty()) continue;
+
+                JsonObject o = new JsonObject();
+                o.addProperty("id", id.toString());
+                o.addProperty("mod", id.getNamespace());
+                o.addProperty("class", item.getClass().getName());
+                safe(() -> o.addProperty("name", stack.getHoverName().getString()));
+                safe(() -> o.addProperty("rarity", stack.getRarity().name()));
+                safe(() -> o.addProperty("max_stack", item.getMaxStackSize()));
+                JsonArray viaArr = new JsonArray();
+                via.forEach(viaArr::add);
+                o.add("matched_via", viaArr);
+                arr.add(o);
+            } catch (Throwable ignored) {}
+        }
+        return arr;
     }
 
     // ---------- helpers ----------

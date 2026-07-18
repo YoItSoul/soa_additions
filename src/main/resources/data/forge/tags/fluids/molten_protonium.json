@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_protonium",
-    "soa_additions:molten_protonium_flowing"
+    "smithery:molten_protonium",
+    "smithery:molten_protonium_flowing"
   ]
 }

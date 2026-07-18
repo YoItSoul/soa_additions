@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_thaumium",
-    "soa_additions:molten_thaumium_flowing"
+    "smithery:molten_thaumium",
+    "smithery:molten_thaumium_flowing"
   ]
 }

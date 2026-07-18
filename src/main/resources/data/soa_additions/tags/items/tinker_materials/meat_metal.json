@@ -2,7 +2,10 @@
   "replace": false,
   "values": [
     "#forge:ingots/meat_metal",
-    "#forge:nuggets/meat_metal",
+    {
+      "id": "#forge:nuggets/meat_metal",
+      "required": false
+    },
     "#forge:storage_blocks/meat_metal"
   ]
 }

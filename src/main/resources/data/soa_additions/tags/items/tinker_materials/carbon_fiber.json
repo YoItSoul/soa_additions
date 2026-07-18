@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "#forge:plates/carbon"
+    {
+      "id": "#forge:plates/carbon",
+      "required": false
+    }
   ]
 }

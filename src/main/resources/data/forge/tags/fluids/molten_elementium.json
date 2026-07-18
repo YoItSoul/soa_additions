@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_elementium",
-    "soa_additions:molten_elementium_flowing"
+    "smithery:molten_elementium",
+    "smithery:molten_elementium_flowing"
   ]
 }

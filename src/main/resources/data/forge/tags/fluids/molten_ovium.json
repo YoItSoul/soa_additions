@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "taiga:molten_ovium",
-    "taiga:molten_ovium_flowing"
+    "smithery:molten_ovium",
+    "smithery:molten_ovium_flowing"
   ]
 }

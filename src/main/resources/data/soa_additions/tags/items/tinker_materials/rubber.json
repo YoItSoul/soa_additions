@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "#forge:ingots/rubber"
+    {
+      "id": "#forge:ingots/rubber",
+      "required": false
+    }
   ]
 }

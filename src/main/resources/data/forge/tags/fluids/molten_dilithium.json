@@ -1,7 +1,13 @@
 {
   "replace": false,
   "values": [
-    "taiga:molten_dilithium",
-    "taiga:molten_dilithium_flowing"
+    {
+      "id": "taiga:molten_dilithium",
+      "required": false
+    },
+    {
+      "id": "taiga:molten_dilithium_flowing",
+      "required": false
+    }
   ]
 }

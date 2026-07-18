@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_dark_matter",
-    "soa_additions:molten_dark_matter_flowing"
+    "smithery:molten_dark_matter",
+    "smithery:molten_dark_matter_flowing"
   ]
 }

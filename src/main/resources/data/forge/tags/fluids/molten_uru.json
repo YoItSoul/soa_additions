@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_uru",
-    "soa_additions:molten_uru_flowing"
+    "smithery:molten_uru",
+    "smithery:molten_uru_flowing"
   ]
 }

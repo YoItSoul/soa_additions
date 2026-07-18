@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "taiga:molten_ignitz",
-    "taiga:molten_ignitz_flowing"
+    "smithery:molten_ignitz",
+    "smithery:molten_ignitz_flowing"
   ]
 }

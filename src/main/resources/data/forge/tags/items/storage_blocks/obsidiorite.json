@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "taiga:obsidiorite_block"
+    {
+      "id": "taiga:obsidiorite_block",
+      "required": false
+    }
   ]
 }

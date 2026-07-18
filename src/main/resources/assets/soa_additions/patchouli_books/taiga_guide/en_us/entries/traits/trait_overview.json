@@ -1,6 +1,6 @@
 {
   "name": "How Traits Work",
-  "icon": "tconstruct:modifier",
+  "icon": "minecraft:enchanted_book",
   "category": "soa_additions:traits",
   "priority": true,
   "sortnum": 0,

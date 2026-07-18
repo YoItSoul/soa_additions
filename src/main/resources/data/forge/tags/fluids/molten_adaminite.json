@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_adaminite",
-    "soa_additions:molten_adaminite_flowing"
+    "smithery:molten_adaminite",
+    "smithery:molten_adaminite_flowing"
   ]
 }

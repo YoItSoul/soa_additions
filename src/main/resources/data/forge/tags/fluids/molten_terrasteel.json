@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_terrasteel",
-    "soa_additions:molten_terrasteel_flowing"
+    "smithery:molten_terrasteel",
+    "smithery:molten_terrasteel_flowing"
   ]
 }

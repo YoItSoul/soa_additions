@@ -4,6 +4,6 @@
     "#forge:ingots/refined_glowstone",
     "#forge:nuggets/refined_glowstone",
     "#forge:storage_blocks/refined_glowstone",
-    "soa_additions:molten_refined_glowstone_bucket"
+    "smithery:molten_refined_glowstone_bucket"
   ]
 }

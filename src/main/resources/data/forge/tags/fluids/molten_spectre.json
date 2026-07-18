@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_spectre",
-    "soa_additions:molten_spectre_flowing"
+    "smithery:molten_spectre",
+    "smithery:molten_spectre_flowing"
   ]
 }

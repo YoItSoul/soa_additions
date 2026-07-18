@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "taiga:molten_abyssum",
-    "taiga:molten_abyssum_flowing"
+    "smithery:molten_abyssum",
+    "smithery:molten_abyssum_flowing"
   ]
 }

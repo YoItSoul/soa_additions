@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_crystal_matrix",
-    "soa_additions:molten_crystal_matrix_flowing"
+    "smithery:molten_crystal_matrix",
+    "smithery:molten_crystal_matrix_flowing"
   ]
 }

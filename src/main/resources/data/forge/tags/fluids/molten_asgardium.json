@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_asgardium",
-    "soa_additions:molten_asgardium_flowing"
+    "smithery:molten_asgardium",
+    "smithery:molten_asgardium_flowing"
   ]
 }

@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_mithrillium",
-    "soa_additions:molten_mithrillium_flowing"
+    "smithery:molten_mithrillium",
+    "smithery:molten_mithrillium_flowing"
   ]
 }

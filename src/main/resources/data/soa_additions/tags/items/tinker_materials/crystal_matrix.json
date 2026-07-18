@@ -2,8 +2,11 @@
   "replace": false,
   "values": [
     "#forge:ingots/crystal_matrix",
-    "#forge:nuggets/crystal_matrix",
+    {
+      "id": "#forge:nuggets/crystal_matrix",
+      "required": false
+    },
     "#forge:storage_blocks/crystal_matrix",
-    "soa_additions:molten_crystal_matrix_bucket"
+    "smithery:molten_crystal_matrix_bucket"
   ]
 }

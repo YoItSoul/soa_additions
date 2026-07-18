@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_void_metal",
-    "soa_additions:molten_void_metal_flowing"
+    "smithery:molten_void_metal",
+    "smithery:molten_void_metal_flowing"
   ]
 }

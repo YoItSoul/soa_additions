@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "taiga:molten_meteorite",
-    "taiga:molten_meteorite_flowing"
+    "smithery:molten_meteorite",
+    "smithery:molten_meteorite_flowing"
   ]
 }

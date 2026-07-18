@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_osgloglas",
-    "soa_additions:molten_osgloglas_flowing"
+    "smithery:molten_osgloglas",
+    "smithery:molten_osgloglas_flowing"
   ]
 }

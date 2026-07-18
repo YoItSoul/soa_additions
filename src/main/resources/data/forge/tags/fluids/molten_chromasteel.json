@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_chromasteel",
-    "soa_additions:molten_chromasteel_flowing"
+    "smithery:molten_chromasteel",
+    "smithery:molten_chromasteel_flowing"
   ]
 }

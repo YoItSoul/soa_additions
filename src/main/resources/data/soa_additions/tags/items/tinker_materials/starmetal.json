@@ -2,7 +2,10 @@
   "replace": false,
   "values": [
     "#forge:ingots/starmetal",
-    "#forge:nuggets/starmetal",
+    {
+      "id": "#forge:nuggets/starmetal",
+      "required": false
+    },
     "#forge:storage_blocks/starmetal"
   ]
 }

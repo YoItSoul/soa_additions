@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_starmetal",
-    "soa_additions:molten_starmetal_flowing"
+    "smithery:molten_starmetal",
+    "smithery:molten_starmetal_flowing"
   ]
 }

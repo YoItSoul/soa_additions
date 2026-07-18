@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "#forge:gems/pladium"
+    {
+      "id": "#forge:gems/pladium",
+      "required": false
+    }
   ]
 }

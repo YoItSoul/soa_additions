@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_astral_metal",
-    "soa_additions:molten_astral_metal_flowing"
+    "smithery:molten_astral_metal",
+    "smithery:molten_astral_metal_flowing"
   ]
 }

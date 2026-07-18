@@ -1,8 +1,17 @@
 {
   "replace": false,
   "values": [
-    "#forge:ingots/melodic_alloy",
-    "#forge:nuggets/melodic_alloy",
-    "#forge:storage_blocks/melodic_alloy"
+    {
+      "id": "#forge:ingots/melodic_alloy",
+      "required": false
+    },
+    {
+      "id": "#forge:nuggets/melodic_alloy",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/melodic_alloy",
+      "required": false
+    }
   ]
 }

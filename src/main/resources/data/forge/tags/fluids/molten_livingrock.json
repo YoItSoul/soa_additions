@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_livingrock",
-    "soa_additions:molten_livingrock_flowing"
+    "smithery:molten_livingrock",
+    "smithery:molten_livingrock_flowing"
   ]
 }

@@ -1,4 +1,4 @@
-﻿{
+{
   "type": "minecraft:block",
   "pools": [
     {
@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "soa_additions:vibranium_ingot",
+          "name": "taiga:vibranium_ingot",
           "functions": [
             {
               "function": "minecraft:apply_bonus",

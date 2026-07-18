@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "#forge:ingots/conductive_iron",
-    "#forge:nuggets/conductive_iron",
-    "#forge:storage_blocks/conductive_iron"
+    "#forge:ingots/conductive_alloy",
+    "#forge:nuggets/conductive_alloy",
+    "#forge:storage_blocks/conductive_alloy"
   ]
 }

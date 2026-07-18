@@ -2,6 +2,6 @@
   "replace": false,
   "values": [
     "#forge:gems/apatite",
-    "soa_additions:molten_apatite_bucket"
+    "smithery:molten_apatite_bucket"
   ]
 }

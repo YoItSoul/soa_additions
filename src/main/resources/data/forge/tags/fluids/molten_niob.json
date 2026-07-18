@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "taiga:molten_niob",
-    "taiga:molten_niob_flowing"
+    "smithery:molten_niob",
+    "smithery:molten_niob_flowing"
   ]
 }

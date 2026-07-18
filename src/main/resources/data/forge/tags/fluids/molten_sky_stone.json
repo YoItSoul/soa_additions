@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_sky_stone",
-    "soa_additions:molten_sky_stone_flowing"
+    "smithery:molten_sky_stone",
+    "smithery:molten_sky_stone_flowing"
   ]
 }

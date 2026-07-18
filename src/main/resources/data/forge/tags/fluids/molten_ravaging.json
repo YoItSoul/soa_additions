@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_ravaging",
-    "soa_additions:molten_ravaging_flowing"
+    "smithery:molten_ravaging",
+    "smithery:molten_ravaging_flowing"
   ]
 }

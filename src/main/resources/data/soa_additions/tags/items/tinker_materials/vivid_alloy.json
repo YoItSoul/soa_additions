@@ -1,8 +1,17 @@
 {
   "replace": false,
   "values": [
-    "#forge:ingots/vivid_alloy",
-    "#forge:nuggets/vivid_alloy",
-    "#forge:storage_blocks/vivid_alloy"
+    {
+      "id": "#forge:ingots/vivid_alloy",
+      "required": false
+    },
+    {
+      "id": "#forge:nuggets/vivid_alloy",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/vivid_alloy",
+      "required": false
+    }
   ]
 }

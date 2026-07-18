@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_osmiridium",
-    "soa_additions:molten_osmiridium_flowing"
+    "smithery:molten_osmiridium",
+    "smithery:molten_osmiridium_flowing"
   ]
 }

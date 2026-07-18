@@ -1,7 +1,13 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_stellar_alloy",
-    "soa_additions:molten_stellar_alloy_flowing"
+    {
+      "id": "soa_additions:molten_stellar_alloy",
+      "required": false
+    },
+    {
+      "id": "soa_additions:molten_stellar_alloy_flowing",
+      "required": false
+    }
   ]
 }

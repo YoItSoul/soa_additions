@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_energetic_metal",
-    "soa_additions:molten_energetic_metal_flowing"
+    "smithery:molten_energetic_metal",
+    "smithery:molten_energetic_metal_flowing"
   ]
 }

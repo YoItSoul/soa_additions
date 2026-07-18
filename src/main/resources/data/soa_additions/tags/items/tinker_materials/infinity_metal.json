@@ -1,9 +1,18 @@
 {
   "replace": false,
   "values": [
-    "#forge:ingots/infinity",
-    "#forge:nuggets/infinity",
-    "#forge:storage_blocks/infinity",
-    "soa_additions:molten_infinity_metal_bucket"
+    {
+      "id": "#forge:ingots/infinity",
+      "required": false
+    },
+    {
+      "id": "#forge:nuggets/infinity",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/infinity",
+      "required": false
+    },
+    "smithery:molten_infinity_metal_bucket"
   ]
 }

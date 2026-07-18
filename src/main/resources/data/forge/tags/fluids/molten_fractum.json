@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "taiga:molten_fractum",
-    "taiga:molten_fractum_flowing"
+    "smithery:molten_fractum",
+    "smithery:molten_fractum_flowing"
   ]
 }

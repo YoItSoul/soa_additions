@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "taiga:molten_imperomite",
-    "taiga:molten_imperomite_flowing"
+    "smithery:molten_imperomite",
+    "smithery:molten_imperomite_flowing"
   ]
 }

@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "taiga:molten_terrax",
-    "taiga:molten_terrax_flowing"
+    "smithery:molten_terrax",
+    "smithery:molten_terrax_flowing"
   ]
 }

@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "tinkers_things:hematite"
+    {
+      "id": "tinkers_things:hematite",
+      "required": false
+    }
   ]
 }

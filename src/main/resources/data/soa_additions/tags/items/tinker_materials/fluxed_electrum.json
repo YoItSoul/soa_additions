@@ -1,8 +1,17 @@
 {
   "replace": false,
   "values": [
-    "#forge:ingots/electrum_flux",
-    "#forge:nuggets/electrum_flux",
-    "#forge:storage_blocks/electrum_flux"
+    {
+      "id": "#forge:ingots/electrum_flux",
+      "required": false
+    },
+    {
+      "id": "#forge:nuggets/electrum_flux",
+      "required": false
+    },
+    {
+      "id": "#forge:storage_blocks/electrum_flux",
+      "required": false
+    }
   ]
 }

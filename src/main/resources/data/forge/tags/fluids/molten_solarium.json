@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "taiga:molten_solarium",
-    "taiga:molten_solarium_flowing"
+    "smithery:molten_solarium",
+    "smithery:molten_solarium_flowing"
   ]
 }

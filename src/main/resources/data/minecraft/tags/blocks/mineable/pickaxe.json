@@ -8,7 +8,10 @@
     "soa_additions:uru_ore",
     "soa_additions:uru_block",
     "bloodarsenal:blood_infused_iron_block",
-    "bloodarsenal:slate",
+    {
+      "id": "bloodarsenal:slate",
+      "required": false
+    },
     "bloodarsenal:stasis_plate",
     "bloodarsenal:altare_aenigmatica",
     "bloodarsenal:blood_capacitor",

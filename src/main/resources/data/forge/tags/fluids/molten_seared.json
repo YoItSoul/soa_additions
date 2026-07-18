@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:molten_seared",
-    "soa_additions:molten_seared_flowing"
+    "smithery:molten_seared",
+    "smithery:molten_seared_flowing"
   ]
 }
