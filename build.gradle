@@ -78,6 +78,29 @@ repositories {
         name = "Illusive Soulworks"
         url = "https://maven.theillusivec4.top/"
     }
+    maven {
+        // Most third-party compile deps. Every coordinate below was verified
+        // byte-identical (sha1) to the jar the pack actually ships.
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+        }
+    }
+    ivy {
+        // Smithery — our own mod, resolved straight from its GitHub release
+        // assets (https://github.com/YoItSoul/smithery/releases). New versions
+        // need a release tagged v<version> with the forge jar attached.
+        name = "Smithery GitHub releases"
+        url = "https://github.com/YoItSoul/smithery/releases/download"
+        patternLayout {
+            artifact "v[revision]/[artifact]-forge-1.20.1-[revision].[ext]"
+        }
+        metadataSources { artifact() }
+        content {
+            includeModule "com.soul", "smithery"
+        }
+    }
 }
 
 dependencies {
@@ -94,24 +117,26 @@ dependencies {
     // the curios/ subpackage along with GreedyBagEvents, both gated behind a
     // ModList.isLoaded("curios") check in SoaAdditions's constructor.
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.14.1+1.20.1")
-    // Pinned to the exact jar in the SoA modpack (libs/Jade-1.20.1-Forge-11.13.2.jar).
-    // The cursemaven 5444008 was an older 11.13.2 build that still exposed
-    // IComponentProvider; the rebuild Snownee shipped later under the same
-    // display version removed it, so compiling against the older API caused
-    // NoClassDefFoundError at plugin discovery time.
-    compileOnly fg.deobf(files("libs/Jade-1.20.1-Forge-11.13.2.jar"))
+    // Pinned to the exact 11.13.2 rebuild the pack shipped (sha1-verified on
+    // Modrinth). The cursemaven 5444008 was an older 11.13.2 build that still
+    // exposed IComponentProvider; the rebuild Snownee shipped later under the
+    // same display version removed it, so compiling against the older API
+    // caused NoClassDefFoundError at plugin discovery time.
+    compileOnly fg.deobf("maven.modrinth:jade:11.13.2+forge")
 
     // Just Enough Resources — compile-only for the JerIntegration plugin
     // (com.soul.soa_additions.compat.jer). Implements IJERPlugin so JER's
     // ModFileScanData scanner picks it up at startup; class never loads when
     // JER is absent.
-    compileOnly fg.deobf(files("libs/JustEnoughResources-1.20.1-1.4.0.247.jar"))
+    compileOnly fg.deobf("curse.maven:jer-240630:5057220") // 1.20.1-1.4.0.247
 
     // Resourceful Lootbags + ResourcefulLib — compile-only for the JEI
     // "Loot Crate Contents" category (reads lootbags:loot recipes' typed
     // Loot/LootEntry records). Classes only load when lootbags is present.
-    compileOnly fg.deobf(files("libs/lootbags-2.0.2.jar"))
-    compileOnly fg.deobf(files("libs/resourcefullib-forge-1.20.1-2.1.29.jar"))
+    // Lootbags pinned by Modrinth version ID (yJ5BKMXq = 2.0.2 forge) because
+    // the fabric build shares the "2.0.2" version number.
+    compileOnly fg.deobf("maven.modrinth:resourceful-lootbags:yJ5BKMXq")
+    compileOnly fg.deobf("maven.modrinth:resourceful-lib:2.1.29")
 
     // ItemStages + GameStages — compile-only for GreedyBag stage checks.
     // Published by Darkhax on Jared's maven (already declared above).
@@ -136,43 +161,43 @@ dependencies {
     compileOnly fg.deobf("curse.maven:blood-magic-224791:7253333")
 
     // Draconic Evolution + its hard deps (BrandonsCore, CodeChickenLib).
-    // These stay vendored because the DE author has disabled 3rd-party
-    // sharing on CurseForge, so curse.maven rejects the coordinates with
-    // "Curse Maven does not yet support mods that have disabled 3rd party
-    // sharing". Until that flag flips, libs/ is the only offline-buildable
-    // source for these three.
-    compileOnly fg.deobf(files("libs/Draconic-Evolution-1.20.1-3.1.2.621-universal.jar"))
-    compileOnly fg.deobf(files("libs/BrandonsCore-1.20.1-3.2.1.302-universal.jar"))
-    compileOnly fg.deobf(files("libs/CodeChickenLib-1.20.1-4.4.0.516-universal.jar"))
+    // curse.maven rejects these (author disabled 3rd-party sharing), but the
+    // author publishes them on Modrinth himself.
+    compileOnly fg.deobf("maven.modrinth:draconic-evolution:3.1.2.621")
+    compileOnly fg.deobf("maven.modrinth:brandons-core:3.2.1.302")
+    compileOnly fg.deobf("maven.modrinth:codechicken-lib:4.4.0.516")
 
     // Malum — soul-harvest trait calls SpiritHarvestHandler; Lodestone is Malum's lib.
-    // Valoria — smithery material integration for its metals. Local jars = the pack's.
-    compileOnly fg.deobf(files("libs/malum-1.20.1-1.6.7.jar"))
-    compileOnly fg.deobf(files("libs/lodestone-1.20.1-1.6.4.1.jar"))
-    compileOnly fg.deobf(files("libs/Valoria-1.20.1-1.0.3.2.jar"))
+    // Valoria — smithery material integration for its metals. Versions = the pack's.
+    // Lodestone pinned by Modrinth version ID (dRIycWqx = 1.20.1-1.6.4.1 forge)
+    // because the fabric build shares the version number.
+    compileOnly fg.deobf("maven.modrinth:malum:1.20.1-1.6.7")
+    compileOnly fg.deobf("maven.modrinth:lodestonelib:dRIycWqx")
+    compileOnly fg.deobf("curse.maven:valoria-698244:8139302") // 1.20.1-1.0.3.2
 
     // InsaneLib — provides PlayerExhaustionEvent for the GC HungerTweaker
     // Tip 52 port (low-food drain-skip RNG). Wired through
     // InsaneLibHungerBridge with a runtime ModList.isLoaded("insanelib")
     // gate in SoaAdditions main, so the mod stays optional.
-    compileOnly fg.deobf(files("libs/insanelib-1.23.4.4.jar"))
+    compileOnly fg.deobf("maven.modrinth:insanelib:1.23.4.4")
 
     // Reskillable — provides SkillCapability/SkillModel for the 9 GC custom
     // traits port (compatskills/traits.zs). All trait handlers gated on
     // ModList.isLoaded("reskillable") in SoaAdditions main.
-    compileOnly fg.deobf(files("libs/reskillable-4.6.3.0-1.20.1.jar"))
+    compileOnly fg.deobf("curse.maven:reskillable-1170464:7958820") // 4.6.3.0-1.20.1
 
-    compileOnly fg.deobf(files("libs/smithery-forge-1.20.1-1.5.3.jar"))
+    // Smithery — resolved from the GitHub release assets (ivy repo above)
+    compileOnly fg.deobf("com.soul:smithery:1.5.3")
 
     // MysticalAgriculture crop plugin API (SoaMysticalCropsPlugin) + its Cucumber library
-    compileOnly fg.deobf(files("libs/MysticalAgriculture-1.20.1-7.0.24.jar"))
-    compileOnly fg.deobf(files("libs/Cucumber-1.20.1-7.0.16.jar"))
+    compileOnly fg.deobf("maven.modrinth:mystical-agriculture:7.0.24")
+    compileOnly fg.deobf("maven.modrinth:cucumber:7.0.16")
 
     // Patchouli — BookOpenItem opens the ported GC lore books (always in pack)
-    compileOnly fg.deobf(files("libs/Patchouli-1.20.1-85-FORGE.jar"))
+    compileOnly fg.deobf("maven.modrinth:patchouli:1.20.1-85-forge")
 
     // Thin Air — target of the AirQualityCacheMixin perf patch
-    compileOnly fg.deobf(files("libs/ThinAir-v8.1.7-1.20.1-Forge.jar"))
+    compileOnly fg.deobf("maven.modrinth:thin-air:v8.1.7-1.20.1-Forge")
 }
 
 // Bundle the SoA Radiance shaderpack (repo-root SoA_Radiance/, the canonical
