@@ -31,9 +31,17 @@ eclipse/
 # Forge MDK
 forge*changelog.txt
 
-# --- Shader reference packs (not mod source) ---
+# --- Shader packs (Complementary-licensed, must stay out of the public repo) ---
+# SoA_Radiance/ is bundled into the jar by build.gradle when present locally;
+# clean checkouts (e.g. CI) build a jar without SoA_Radiance.zip.
 ComplementaryUnbound_ref/
 SoA_Radiance/
+
+# --- Python tooling byproducts ---
+__pycache__/
+*.pyc
+tools/full_run.log
+tools/dupe_report.txt
 
 # --- OS junk ---
 .DS_Store
