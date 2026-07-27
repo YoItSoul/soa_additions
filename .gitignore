@@ -52,8 +52,9 @@ desktop.ini
 *.env
 *.env.*
 
-# --- Claude Code ---
-.claude/
-
 # Third-party dev jars — resolved from mavens now (see build.gradle); never commit
 libs/
+
+# Dev tooling and working notes - local only
+tools/
+audits/
