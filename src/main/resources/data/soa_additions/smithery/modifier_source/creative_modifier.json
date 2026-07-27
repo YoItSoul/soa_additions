@@ -1,0 +1,6 @@
+{
+  "source_item": "soa_additions:creative_modifier",
+  "modifier": "soa_additions:creative",
+  "params": { "bonus_slots_per_level": 1 },
+  "unit_value": 1
+}

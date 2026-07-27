@@ -33,6 +33,14 @@ public class RewardTicketItem extends StageItem {
 
     private static final ResourceLocation LOOT_BAG_ID = new ResourceLocation("lootbags", "loot_bag");
 
+    /** Tier → bag name color, matching the quest-give NBT convention
+     *  (see soa_additions/quests: Common/Rare/Epic/Legendary Loot Crate). */
+    private static final java.util.Map<String, Integer> TIER_COLORS = java.util.Map.of(
+            "common", 0x55FF55,
+            "rare", 0x5555FF,
+            "epic", 0xFF55FF,
+            "legendary", 0xFFAA00);
+
     private final ResourceLocation lootTableId;
     // The lootbags:loot RECIPE id differs from the fallback loot-table id:
     // tables live at "containers/loot_crate_<tier>" but the recipes are
@@ -81,6 +89,18 @@ public class RewardTicketItem extends StageItem {
         CompoundTag lootbagsSub = tag.getCompound("lootbags");
         lootbagsSub.putString("Loot", bagRecipeId.toString());
         tag.put("lootbags", lootbagsSub);
+
+        // Display NBT: Lootbags renders getName() as translatable(Name) styled
+        // with Color; without these the bag shows up nameless. Mirror the
+        // quest-give convention exactly ("Rare Loot Crate", tier color).
+        String recipePath = bagRecipeId.getPath();                 // loot_crate_<tier>
+        String tier = recipePath.startsWith("loot_crate_")
+                ? recipePath.substring("loot_crate_".length()) : "";
+        if (!tier.isEmpty()) {
+            tag.putString("Type", tier.toUpperCase(java.util.Locale.ROOT));
+            tag.putString("Name", Character.toUpperCase(tier.charAt(0)) + tier.substring(1) + " Loot Crate");
+            tag.putInt("Color", TIER_COLORS.getOrDefault(tier, 0xFFFFFF));
+        }
 
         // Copy the ticket's display name onto the bag so the player sees
         // "Common Loot Crate" in the popup rather than a generic lootbag name.

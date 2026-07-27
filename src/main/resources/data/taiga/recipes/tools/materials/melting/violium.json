@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_melting",
-  "input": "taiga:violium",
-  "result": {
-    "amount": 90,
-    "fluid": "taiga:molten_violium"
-  },
-  "temperature": 800
-}

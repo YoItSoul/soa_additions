@@ -5,6 +5,11 @@
     "minecraft:end_portal_frame",
     "soa_additions:aqualite_block",
     "soa_additions:aqualite_ore",
-    "soa_additions:astral_metal_block"
+    "soa_additions:astral_metal_block",
+    "minecraft:ancient_debris",
+    "minecraft:netherite_block",
+    "taiga:duranite_ore",
+    "taiga:palladium_ore",
+    "taiga:prometheum_ore"
   ]
 }

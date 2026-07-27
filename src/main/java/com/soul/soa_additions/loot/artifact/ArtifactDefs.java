@@ -62,7 +62,7 @@ public final class ArtifactDefs extends SimpleJsonResourceReloadListener {
                 Def def = new Def(e.getKey(),
                         o.has("weight") ? o.get("weight").getAsInt() : 1000,
                         o.has("name") ? o.get("name").getAsString() : e.getKey().getPath(),
-                        o.has("lore") ? o.get("lore").getAsString() : "",
+                        o.has("lore") ? readLore(o.get("lore")) : "",
                         o.has("tool") ? o.get("tool").getAsString() : null,
                         o.has("armour") ? o.get("armour").getAsString() : null,
                         mats,
@@ -81,6 +81,17 @@ public final class ArtifactDefs extends SimpleJsonResourceReloadListener {
         DEFS = Map.copyOf(out);
         TOTAL_WEIGHT = total;
         LOGGER.info("Loaded {} tconevo artifact definitions", out.size());
+    }
+
+    /** Lore may be a single string or an array of lines (1:1 with GC's multi-line lore). */
+    private static String readLore(JsonElement el) {
+        if (!el.isJsonArray()) return el.getAsString();
+        StringBuilder sb = new StringBuilder();
+        el.getAsJsonArray().forEach(line -> {
+            if (sb.length() > 0) sb.append('\n');
+            sb.append(line.getAsString());
+        });
+        return sb.toString();
     }
 
     /** Weighted random pick across all loaded definitions; null when none are loaded. */

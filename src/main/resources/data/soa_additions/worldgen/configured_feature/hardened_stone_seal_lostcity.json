@@ -1,0 +1,8 @@
+{
+  "type": "soa_additions:hardened_stone_seal",
+  "config": {
+    "max_y": 50,
+    "dimension": "lostcities:lostcity",
+    "untouchable": []
+  }
+}

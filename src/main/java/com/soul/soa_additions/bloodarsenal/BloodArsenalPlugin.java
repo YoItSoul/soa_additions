@@ -79,6 +79,10 @@ public final class BloodArsenalPlugin {
         // Forge (game) event bus listeners for runtime behaviour
         MinecraftForge.EVENT_BUS.register(com.soul.soa_additions.bloodarsenal.event.BAEventHandler.class);
 
+        // Imperfect rituals activate on BM's blank Ritual Stone (BM 1.20 has
+        // no dedicated imperfect stone block — see ImperfectRitualStoneHandler).
+        MinecraftForge.EVENT_BUS.register(com.soul.soa_additions.bloodarsenal.ritual.ImperfectRitualStoneHandler.class);
+
         LOG.info("Blood Arsenal content registered");
     }
 

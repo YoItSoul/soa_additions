@@ -1,0 +1,15 @@
+{
+  "name": "§9Lost City",
+  "icon": "soa_additions:city_defender_medal",
+  "category": "soa_additions:misc_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(2)Lost City$() is a dimension made of deserted cities and the fastest way to obtain a $(6)City Defender Medal$(). Here's how you can go into it.$(br2)$(c)If you created a world with one of the Lost City presets, you can't go there because you are already in it.$()$(br2)$(5)Please make sure you take enough items to build another portal because a return portal will not be generated.$()"
+    },
+    {
+      "type": "text",
+      "text": "$(o)The structure once shown here used blocks from a 1.12 mod that has no 1.20 equivalent.$()"
+    }
+  ]
+}

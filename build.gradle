@@ -107,6 +107,12 @@ dependencies {
     // JER is absent.
     compileOnly fg.deobf(files("libs/JustEnoughResources-1.20.1-1.4.0.247.jar"))
 
+    // Resourceful Lootbags + ResourcefulLib — compile-only for the JEI
+    // "Loot Crate Contents" category (reads lootbags:loot recipes' typed
+    // Loot/LootEntry records). Classes only load when lootbags is present.
+    compileOnly fg.deobf(files("libs/lootbags-2.0.2.jar"))
+    compileOnly fg.deobf(files("libs/resourcefullib-forge-1.20.1-2.1.29.jar"))
+
     // ItemStages + GameStages — compile-only for GreedyBag stage checks.
     // Published by Darkhax on Jared's maven (already declared above).
     compileOnly fg.deobf("net.darkhax.itemstages:ItemStages-Forge-1.20.1:8.0.3")
@@ -156,10 +162,35 @@ dependencies {
     // ModList.isLoaded("reskillable") in SoaAdditions main.
     compileOnly fg.deobf(files("libs/reskillable-4.6.3.0-1.20.1.jar"))
 
-    compileOnly fg.deobf(files("libs/smithery-forge-1.20.1-1.0.0.jar"))
+    compileOnly fg.deobf(files("libs/smithery-forge-1.20.1-1.5.3.jar"))
+
+    // MysticalAgriculture crop plugin API (SoaMysticalCropsPlugin) + its Cucumber library
+    compileOnly fg.deobf(files("libs/MysticalAgriculture-1.20.1-7.0.24.jar"))
+    compileOnly fg.deobf(files("libs/Cucumber-1.20.1-7.0.16.jar"))
+
+    // Patchouli — BookOpenItem opens the ported GC lore books (always in pack)
+    compileOnly fg.deobf(files("libs/Patchouli-1.20.1-85-FORGE.jar"))
+
+    // Thin Air — target of the AirQualityCacheMixin perf patch
+    compileOnly fg.deobf(files("libs/ThinAir-v8.1.7-1.20.1-Forge.jar"))
 }
 
+// Bundle the SoA Radiance shaderpack (repo-root SoA_Radiance/, the canonical
+// source) into the jar as a single zip; ShaderpackInstaller extracts it into
+// the instance's shaderpacks dir at startup. A zip beats 375 loose resource
+// entries and keeps the installer's file list from drifting out of date.
+tasks.register('zipShaderpack', Zip) {
+    from('SoA_Radiance') {
+        exclude '.gitignore', '.soa_version', 'HOW TO INSTALL.txt'
+    }
+    archiveFileName = 'SoA_Radiance.zip'
+    destinationDirectory = file(layout.buildDirectory.dir('generated/shaderpack/assets/soa_additions/shaderpacks'))
+}
+
+sourceSets.main.resources.srcDir(layout.buildDirectory.dir('generated/shaderpack'))
+
 tasks.named('processResources', ProcessResources).configure {
+    dependsOn 'zipShaderpack'
     var replaceProperties = [
             minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
             forge_version: forge_version, forge_version_range: forge_version_range,
@@ -174,7 +205,56 @@ tasks.named('processResources', ProcessResources).configure {
     }
 }
 
+// The Lite Mode bootstrap MUST ship as its own jar.
+//
+// Forge's ModDirTransformerDiscoverer scans mods/*.jar for
+// META-INF/services/cpw.mods.modlauncher.api.ITransformationService, hands any
+// jar that declares one to ModLauncher's boot layer, and then EXCLUDES that jar
+// from the normal mod scan. Shipping the service descriptor inside the mod jar
+// therefore stopped soa_additions from being loaded as a mod at all — the game
+// booted with the jar present but the modid absent, which surfaced downstream as
+// "Unknown item soa_additions:..." datapack failures and a world-load crash.
+//
+// LiteModeBootstrap is self-contained (JDK + ModLauncher API only, by design),
+// so it needs no reobfuscation and can live in a plain jar alongside the mod.
+// Classes that touch the mods folder. These live in the boot-layer jar, NOT in
+// the mod jar — both because a jar declaring an ITransformationService is
+// excluded from the mod scan, and so the CurseForge-uploaded soa_additions jar
+// contains no mods-folder file manipulation for the scanner to flag.
+// The game-layer UI (DeckModeClientEvents, LiteCountdownScreen) stays in the mod
+// jar and calls into these; the game layer resolves plugin-layer classes through
+// its parent layer, the same way mods reference Mixin.
+// They live in their own package (…liteboot, not …deckmode) on purpose: the
+// package would otherwise exist in both the boot layer and the game layer, and
+// a split package across module layers risks LayerInstantiationException at
+// startup. The UI half stays in …deckmode.
+def liteModeBootClasses = ['com/soul/soa_additions/liteboot/**']
+
+tasks.register('liteModeJar', Jar) {
+    // Constant filename, deliberately unversioned: each deploy overwrites the
+    // previous copy. Two differently-versioned copies in mods/ would both
+    // register the 'soa_additions_litemode' transformer service and ModLauncher
+    // rejects duplicate service names — bricking the launch. Version is
+    // recorded in the manifest instead.
+    archiveFileName = 'soa_litemode.jar'
+    manifest {
+        attributes(['Implementation-Version': project.mod_version])
+    }
+    from(sourceSets.main.output) {
+        liteModeBootClasses.each { include it }
+    }
+    from(sourceSets.main.resources) {
+        include 'META-INF/services/cpw.mods.modlauncher.api.ITransformationService'
+    }
+}
+tasks.named('assemble').configure { dependsOn 'liteModeJar' }
+
 tasks.named('jar', Jar).configure {
+    // see liteModeJar above — the descriptor and every mods-folder-touching
+    // class ship in soa_litemode.jar instead, keeping this jar clean for
+    // CurseForge's upload scanner.
+    exclude 'META-INF/services/cpw.mods.modlauncher.api.ITransformationService'
+    liteModeBootClasses.each { exclude it }
     manifest {
         attributes([
                 'Specification-Title'     : mod_id,
@@ -183,7 +263,10 @@ tasks.named('jar', Jar).configure {
                 'Implementation-Title'    : project.name,
                 'Implementation-Version'  : project.jar.archiveVersion,
                 'Implementation-Vendor'   : mod_authors,
-                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                // Mixins target only OTHER MODS' (deobf) classes, so no refmap
+                // or MixinGradle is needed — the manifest entry alone loads it.
+                'MixinConfigs'            : 'soa_additions.mixins.json'
         ])
     }
     finalizedBy 'reobfJar'

@@ -1,9 +1,0 @@
-{
-  "ingredient": {
-    "tag": "forge:ingots/proxii"
-  },
-  "material": "taiga:proxii",
-  "needed": 1,
-  "type": "tconstruct:material",
-  "value": 1
-}

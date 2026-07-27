@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_melting",
-  "input": "taiga:tritonite",
-  "result": {
-    "amount": 90,
-    "fluid": "taiga:molten_tritonite"
-  },
-  "temperature": 800
-}

@@ -107,7 +107,15 @@ public final class ModBlocks {
     public static final RegistryObject<Block> TITANIUM_BLOCK              = registerBlock("titanium_block",              () -> new Block(METAL_BLOCK_PROPS));
     public static final RegistryObject<Block> COMPRESSED_EXPERIENCE_BLOCK = registerBlock("compressed_experience_block", () -> new Block(METAL_BLOCK_PROPS));
 
-    public static final RegistryObject<Block> HARDENED_STONE              = registerBlock("hardened_stone",              () -> new Block(ORE_PROPERTIES));
+    // GC greedycraft-hardened_stone: hardness 125, resistance 1000, diamond
+    // harvest level (needs_diamond_tool tag). YUNG's Law seal block — see
+    // worldgen/HardenedStoneSealFeature.
+    public static final RegistryObject<Block> HARDENED_STONE              = registerBlock("hardened_stone",              () -> new Block(
+            BlockBehaviour.Properties.copy(net.minecraft.world.level.block.Blocks.STONE)
+                    .mapColor(MapColor.STONE)
+                    .strength(125f, 1000f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.STONE)));
     public static final RegistryObject<Block> INFINITY_BLOCK_BLOCK        = registerBlock("infinity_block_block",        () -> new Block(METAL_BLOCK_PROPS));
     public static final RegistryObject<Block> INFINITY_BLOCK_BLOCK_BLOCK  = registerBlock("infinity_block_block_block",  () -> new Block(METAL_BLOCK_PROPS));
     public static final RegistryObject<Block> UNKNOWN_BLOCK               = registerBlock("unknown_block",               () -> new Block(ORE_PROPERTIES));
@@ -129,6 +137,13 @@ public final class ModBlocks {
     // Place an NxN wall of them (same facing) to form one large screen.
     public static final RegistryObject<TaskCollectorBlock> TASK_COLLECTOR =
             registerBlock("task_collector", () -> new TaskCollectorBlock(METAL_BLOCK_PROPS));
+
+
+    // GC "Tofu Machine Case" (1.12 tofucraft:tf_machine_case — TofuCraft Reload 1.20
+    // dropped the casing intermediate; minted exactly, 1.12 texture). GC recipe:
+    // ring of 8 Metal Tofu Blocks -> 8 (kubejs soa_reported_fixes.js).
+    public static final RegistryObject<Block> TF_MACHINE_CASE =
+            registerBlock("tf_machine_case", () -> new Block(METAL_BLOCK_PROPS));
 
     private ModBlocks() {}
 

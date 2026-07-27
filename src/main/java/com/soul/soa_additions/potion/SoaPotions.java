@@ -68,6 +68,14 @@ public final class SoaPotions {
     public static final RegistryObject<MobEffect> REVIVAL       = reg("revival",       RevivalEffect::new);
     public static final RegistryObject<MobEffect> TELEPORT      = reg("teleport",      TeleportEffect::new);
 
+    // GreedyCraft PotionCore families ported 2026-07-23 (blindness/levitation use vanilla effects).
+    public static final RegistryObject<MobEffect> LOVE          = reg("love",          LoveEffect::new);
+    public static final RegistryObject<MobEffect> MAGIC_FOCUS   = reg("magic_focus",   MagicFocusEffect::new);
+    public static final RegistryObject<MobEffect> DROWN         = reg("drown",         DrownEffect::new);
+    public static final RegistryObject<MobEffect> CLIMB         = reg("climb",         ClimbEffect::new);
+    public static final RegistryObject<MobEffect> VULNERABLE    = reg("vulnerable",    VulnerableEffect::new);
+    public static final RegistryObject<MobEffect> BURST         = reg("burst",         BurstEffect::new);
+
     /** Single ore-sight indicator. Per-ore tracking lives on the player capability,
      *  so this effect just exists as a HUD icon while at least one ore-sight is
      *  active. */

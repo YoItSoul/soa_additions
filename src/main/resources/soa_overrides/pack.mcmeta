@@ -1,0 +1,6 @@
+{
+  "pack": {
+    "pack_format": 15,
+    "description": "SoA GC-parity overrides (forced, top priority): ScalingHealth sh_mechanics, ProgressiveBosses stats, Terralith toast suppression"
+  }
+}

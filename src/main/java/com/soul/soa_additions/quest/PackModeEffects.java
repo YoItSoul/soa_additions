@@ -178,8 +178,15 @@ public final class PackModeEffects {
      * on top would double-stack the scaling.
      */
     private static final Set<ResourceLocation> EXPERT_HP_BLACKLIST = Set.of(
-            new ResourceLocation("mowziesmobs", "barako"),
-            new ResourceLocation("mowziesmobs", "frostmaw")
+            // barako was renamed umvuthi in Mowzie's 1.20 — the old id was dead
+            new ResourceLocation("mowziesmobs", "umvuthi"),
+            new ResourceLocation("mowziesmobs", "frostmaw"),
+            // Not isBoss in GC 1.12 (isNonBoss()==true), so GC's expert
+            // boss_health.zs never buffed them; soa_boss_health.js raises
+            // their base above the 100-HP heuristic, so exclude explicitly.
+            new ResourceLocation("mowziesmobs", "ferrous_wroughtnaut"),
+            new ResourceLocation("twilightforest", "giant_miner"),
+            new ResourceLocation("twilightforest", "armored_giant")
     );
 
     private static boolean isBoss(LivingEntity entity) {

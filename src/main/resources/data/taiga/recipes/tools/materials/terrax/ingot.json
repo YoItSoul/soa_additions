@@ -1,9 +1,0 @@
-{
-  "ingredient": {
-    "tag": "forge:ingots/terrax"
-  },
-  "material": "taiga:terrax",
-  "needed": 1,
-  "type": "tconstruct:material",
-  "value": 1
-}

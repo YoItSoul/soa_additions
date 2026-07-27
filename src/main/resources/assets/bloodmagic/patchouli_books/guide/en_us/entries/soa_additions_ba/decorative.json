@@ -47,9 +47,9 @@
     },
     {
       "type": "patchouli:spotlight",
-      "item": "bloodarsenal:slate",
-      "title": "Slate Block",
-      "text": "Condensed storage: nine of a single $(item)Blood Magic Slate$() (blank, reinforced, imbued, demonic, or ethereal) craft one block, and one block decompresses back. The block itself carries no tier — it's a storage form only, chosen by which slate goes in."
+      "item": "bloodarsenal:slate_blank",
+      "title": "Slate Blocks",
+      "text": "Condensed storage: nine of a single $(item)Blood Magic Slate$() craft one block, and one block decompresses back. Each slate tier (blank, reinforced, imbued, demonic, ethereal) has its own storage block."
     }
   ]
 }

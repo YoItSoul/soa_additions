@@ -1,0 +1,88 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:single",
+      "resource": "mysticalagriculture:block/flower/abyssalnite_flower"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mysticalagriculture:block/flower/aluminum_brass_flower"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mysticalagriculture:block/flower/alumite_flower"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mysticalagriculture:block/flower/amber_flower"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mysticalagriculture:block/flower/ardite_flower"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mysticalagriculture:block/flower/black_quartz_flower"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mysticalagriculture:block/flower/dreadium_flower"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mysticalagriculture:block/flower/ender_amethyst_flower"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mysticalagriculture:block/flower/ender_biotite_flower"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mysticalagriculture:block/flower/guardian_flower"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mysticalagriculture:block/flower/knightslime_flower"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mysticalagriculture:block/flower/malachite_flower"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mysticalagriculture:block/flower/tanzanite_flower"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mysticalagriculture:block/flower/thaumium_flower"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mysticalagriculture:block/flower/void_metal_flower"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mysticalagriculture:block/flower/topaz_flower"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mysticalagriculture:block/flower/cake_flower"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mysticalagriculture:block/flower/chromium_flower"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mysticalagriculture:block/flower/stainless_steel_flower"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mysticalagriculture:block/flower/fusion_matrix_flower"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "mysticalagriculture:block/flower/meteor_flower"
+    }
+  ]
+}

@@ -1,9 +1,0 @@
-{
-  "ingredient": {
-    "tag": "forge:ingots/tritonite"
-  },
-  "material": "taiga:tritonite",
-  "needed": 1,
-  "type": "tconstruct:material",
-  "value": 1
-}

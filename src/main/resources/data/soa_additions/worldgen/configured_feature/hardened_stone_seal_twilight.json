@@ -1,0 +1,19 @@
+{
+  "type": "soa_additions:hardened_stone_seal",
+  "config": {
+    "max_y": 32,
+    "dimension": "twilightforest:twilight_forest",
+    "untouchable": [
+      "twilightforest:mazestone",
+      "twilightforest:mazestone_brick",
+      "twilightforest:cracked_mazestone",
+      "twilightforest:mossy_mazestone",
+      "twilightforest:cut_mazestone",
+      "twilightforest:decorative_mazestone",
+      "twilightforest:mazestone_border",
+      "twilightforest:mazestone_mosaic",
+      "twilightforest:underbrick",
+      "twilightforest:underbrick_floor"
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "music_disc.stencil": {
+    "category": "record",
+    "sounds": [
+      {
+        "name": "soa_additions:records/stencil",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.sunrise": {
+    "category": "record",
+    "sounds": [
+      {
+        "name": "soa_additions:records/sunrise",
+        "stream": true
+      }
+    ]
+  }
+}

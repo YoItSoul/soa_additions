@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:scarlite"
+    "soa_additions:scarlite",
+    "defiledlands:scarlite"
   ]
 }

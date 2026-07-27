@@ -98,8 +98,10 @@ public final class ArtifactBuilder {
         tag.putString(NAME_TAG, def.name());
         if (!def.lore().isEmpty()) {
             ListTag loreList = new ListTag();
-            loreList.add(StringTag.valueOf(Component.Serializer.toJson(
-                    Component.literal(def.lore()).withStyle(ChatFormatting.DARK_PURPLE, ChatFormatting.ITALIC))));
+            for (String line : def.lore().split("\n")) {
+                loreList.add(StringTag.valueOf(Component.Serializer.toJson(
+                        Component.literal(line).withStyle(ChatFormatting.DARK_PURPLE, ChatFormatting.ITALIC))));
+            }
             stack.getOrCreateTagElement("display").put("Lore", loreList);
         }
         stack.setHoverName(Component.literal("Sealed Artifact")

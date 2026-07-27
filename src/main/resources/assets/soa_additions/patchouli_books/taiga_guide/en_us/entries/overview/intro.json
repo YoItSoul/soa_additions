@@ -18,7 +18,7 @@
     {
       "type": "patchouli:text",
       "title": "Two things to know",
-      "text": "1. $(item)Uru$() is conspicuously absent from most TAIGA lists. SoA ships it natively under the $(o)soa_additions$() namespace — same recipes, different ID.$(br2)2. Alloy recipes $(italic)require$() the TC3 smeltery. A vanilla furnace or blast furnace won't compose them."
+      "text": "1. $(item)Uru$() is conspicuously absent from most TAIGA lists. SoA ships it natively under the $(o)soa_additions$() namespace — same recipes, different ID.$(br2)2. Alloy recipes $(italic)require$() the Smithery smeltery. A vanilla furnace or blast furnace won't compose them."
     }
   ]
 }

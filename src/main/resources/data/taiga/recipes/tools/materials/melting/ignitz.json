@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_melting",
-  "input": "taiga:ignitz",
-  "result": {
-    "amount": 90,
-    "fluid": "taiga:molten_ignitz"
-  },
-  "temperature": 800
-}

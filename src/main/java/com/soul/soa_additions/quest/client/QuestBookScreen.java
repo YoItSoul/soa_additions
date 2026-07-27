@@ -1504,15 +1504,16 @@ public final class QuestBookScreen extends Screen {
         return stack;
     }
 
-    /** Rasterize a {@code thickness}-px thick line. Axis-aligned lines collapse
-     *  to one {@link GuiGraphics#fill} call; for diagonals we step along the
-     *  major axis and emit a single {@code 1×thickness} (or {@code thickness×1})
-     *  span per step. This replaces the old per-pixel {@code thickness²} stamp,
-     *  cutting fill() calls by up to {@code thickness²}× on slow GPUs where
-     *  edge rendering was a primary driver of single-digit FPS. */
+    /** Draw a {@code thickness}-px thick line as a single quad. Axis-aligned
+     *  lines are one plain {@link GuiGraphics#fill}; diagonals rotate the pose
+     *  so +X runs along the line and fill one {@code length×thickness} rect.
+     *  O(1) fill calls per edge regardless of length — the previous
+     *  span-per-pixel rasterizer issued one fill per content-space pixel of
+     *  line length, which made dependency-dense chapters (hundreds of edges ×
+     *  hundreds of px each) burn tens of thousands of fill calls per frame. */
     private void drawThickLine(GuiGraphics g, int x1, int y1, int x2, int y2, int color, int thickness) {
         int half = thickness / 2;
-        int dx = Math.abs(x2 - x1), dy = Math.abs(y2 - y1);
+        int dx = x2 - x1, dy = y2 - y1;
         if (dx == 0 || dy == 0) {
             int xa = Math.min(x1, x2) - half;
             int xb = Math.max(x1, x2) - half + thickness;
@@ -1521,44 +1522,13 @@ public final class QuestBookScreen extends Screen {
             g.fill(xa, ya, xb, yb, color);
             return;
         }
-        int sx = x1 < x2 ? 1 : -1, sy = y1 < y2 ? 1 : -1;
-        if (dx >= dy) {
-            // Near-horizontal: one vertical {@code 1×thickness} span per x.
-            int err = dx / 2;
-            int x = x1, y = y1;
-            for (int i = 0; i <= dx; i++) {
-                g.fill(x - half, y - half, x - half + 1, y - half + thickness, color);
-                err -= dy;
-                if (err < 0) { y += sy; err += dx; }
-                x += sx;
-            }
-        } else {
-            // Near-vertical: one horizontal {@code thickness×1} span per y.
-            int err = dy / 2;
-            int x = x1, y = y1;
-            for (int i = 0; i <= dy; i++) {
-                g.fill(x - half, y - half, x - half + thickness, y - half + 1, color);
-                err -= dx;
-                if (err < 0) { x += sx; err += dy; }
-                y += sy;
-            }
-        }
-    }
-
-    private void drawLine(GuiGraphics g, int x1, int y1, int x2, int y2, int color) {
-        // Cheap Bresenham. Two matrices of fill() calls would be pricier
-        // than doing it in one pass; this is plenty for ~50 edges.
-        int dx = Math.abs(x2 - x1), dy = Math.abs(y2 - y1);
-        int sx = x1 < x2 ? 1 : -1, sy = y1 < y2 ? 1 : -1;
-        int err = dx - dy;
-        int x = x1, y = y1;
-        while (true) {
-            g.fill(x, y, x + 1, y + 1, color);
-            if (x == x2 && y == y2) break;
-            int e2 = err * 2;
-            if (e2 > -dy) { err -= dy; x += sx; }
-            if (e2 < dx) { err += dx; y += sy; }
-        }
+        float len = (float) Math.sqrt((double) dx * dx + (double) dy * dy);
+        float ang = (float) Math.atan2(dy, dx);
+        g.pose().pushPose();
+        g.pose().translate(x1, y1, 0f);
+        g.pose().mulPose(com.mojang.math.Axis.ZP.rotation(ang));
+        g.fill(0, -half, Math.round(len), thickness - half, color);
+        g.pose().popPose();
     }
 
     // ---------- header ----------

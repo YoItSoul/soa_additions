@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_melting",
-  "input": "taiga:tiberium",
-  "result": {
-    "amount": 90,
-    "fluid": "taiga:molten_tiberium"
-  },
-  "temperature": 800
-}

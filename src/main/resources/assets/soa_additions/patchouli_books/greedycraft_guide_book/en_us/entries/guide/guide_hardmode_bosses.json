@@ -1,0 +1,78 @@
+{
+  "name": "§cHardmode Bosses",
+  "icon": "soa_additions:sun_totem",
+  "category": "soa_additions:guide_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(c)To make progress in hardmode, defeating some bosses are necessary.$(2) Here's the bosses you will encounter in hardmode.$(br2)$(4)Note: all bosses restore to full health when a player dies and some bosses just disappear instead.$(br)$(c)Note 2: Due to the season system, not all snowing places are actually \"Cold\".$()"
+    },
+    {
+      "type": "text",
+      "title": "The Ritual Site",
+      "text": "Each of these beings is called through a $(5)Summoning Altar$(). The altar must stand upon the foundation its spirit demands: $(b)Packed Ice$() for the frost, $(6)Smooth Sandstone$() for the sun. Keep a $(2)15 x 15$() area around it clear and flat — the guests are large, and they do not knock.$(br2)$(o)How the ritual is set into motion is not written here. Those who have earned the catalyst will know what to do with it.$()"
+    },
+    {
+      "type": "entity",
+      "entity": "mowziesmobs:frostmaw",
+      "scale": 0.6,
+      "offset": 1,
+      "text": "$(5)The giant beast rests in the snow that waits for its prey to come by.$()"
+    },
+    {
+      "type": "text",
+      "text": "$(9)Frostmaw$() answers only the $(9)Beast Hand$() (crafting recipe on the next page). Set your $(5)Summoning Altar$() upon $(b)Packed Ice$(), and wait for a $(3)raging storm$() — the beast will not stir under calm skies. $(c)Remember the clear, flat 15 x 15 ground.$() Frostmaw is the only way to get your first piece of $(d)Cryonic Ingot$() in expert and adventure modes."
+    },
+    {
+      "type": "text",
+      "text": " Defeating it above $(5)600 difficulty$() will get you a random amount of Cryonic Ingots. Then you can mine cryonic ore generated in cold biomes with a wyvern metal tool.$(br) Note: If the packmode is not casual mode, Frostmaw will disappear if any of the players in the server die. Please be prepared."
+    },
+    {
+      "type": "crafting",
+      "recipe": "soa_additions:beast_hand",
+      "text": "The Beast Hand — carried, not thrown."
+    },
+    {
+      "type": "entity",
+      "entity": "mowziesmobs:umvuthi",
+      "scale": 0.8,
+      "text": "$(6)The servant of the sun.$()"
+    },
+    {
+      "type": "text",
+      "text": "$(5)Umvuthi, the Sun Chief$() $(8)(known in older records as Barako)$() is called with a $(9)Sun Totem$() (recipe on a later page). His altar must rest upon $(6)Smooth Sandstone$(), beneath a $(e)cloudless midday sun$() — he will not answer rain, nor darkness. In adventure and expert modes, the Sun Chief must be defeated before you can obtain $(6)Infernium Ingot$() to make Draconic Ingot."
+    },
+    {
+      "type": "text",
+      "text": "Defeating a summoned Sun Chief (not the naturally spawned ones) above $(2)700 difficulty$() will get you a $(6)Broken Solarium Star$() and a $(6)Seed of the Sun$(), use them to make a $(5)Solarium Star$() to unlock $(c)Infernium Ingot$(). $(br)Note: he will also disappear when a player dies."
+    },
+    {
+      "type": "crafting",
+      "recipe": "soa_additions:sun_totem",
+      "recipe2": "soa_ported:shpl_solarium_star"
+    },
+    {
+      "type": "entity",
+      "entity": "draconicevolution:draconic_guardian",
+      "scale": 1.5,
+      "offset": -6,
+      "text": "$(5)The dominator of entropy and chaos.$()"
+    },
+    {
+      "type": "text",
+      "text": "$(5)Chaos Guardian$() is the last boss you'll need to fight. It spawns in the center of chaos islands, which are located where the coords can be divided by 5000. $(8)(For instance, Chaos Guardian will spawn at (-5000,5000), (5000,0), (0,5000), (5000,-10000), but not (0,0) because that's the main End island.)$()"
+    },
+    {
+      "type": "text",
+      "text": "$() Although you can fight it at any times, you only stand a chance to win after having full sets of draconic armor (or better ones) because Chaos Guardian can easily insta-kill anyone who has no protection against Chaotic Damage. Also chaotic shards can't be used before obtaining the awakened core. Also you need something that enables creative flight (like draconic metal armor plate)."
+    },
+    {
+      "type": "text",
+      "text": "To survive in the rains of bullets during this battle, $(6)Chaos Resistance Modifier$() is a must-have. Put this modifier on your smithery armor to give yourself chaotic damage protection, when you max up this modifier to level 5 on all armors you can challenge the Chaos Guardian. You need to destroy all $(c)Chaotic Crystals$() before dealing damage to the dragon. $(5) Chaos Crystals will not respawn normally, but will respawn if it's chunk is unloaded, so please increase your render distance (to around 12) to prevent crystals from respawning."
+    },
+    {
+      "type": "text",
+      "text": "After defeating the Chaos Guardian, the difficulty will increase and you can dig down from the center of the chaos island to get $(5)Chaotic Shards$(), a important ingredient for Chaotic Cores. Next, you will prepare for the Infinity Catalyst amd continue to expand your base."
+    }
+  ]
+}

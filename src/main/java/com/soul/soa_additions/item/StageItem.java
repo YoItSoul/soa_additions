@@ -91,7 +91,7 @@ public class StageItem extends Item {
         }
     }
 
-    private static boolean addStage(Player player, String stage) {
+    static boolean addStage(Player player, String stage) {  // package-visible: TabletOfEnlightenmentItem reuses it
         if (!(player instanceof ServerPlayer sp)) return false;
         try {
             Class<?> helperCls = Class.forName("net.darkhax.gamestages.GameStageHelper");

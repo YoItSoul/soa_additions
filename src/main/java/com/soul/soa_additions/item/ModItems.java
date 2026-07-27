@@ -177,7 +177,35 @@ public final class ModItems {
     // Sourced from: abyssalcraft (dreadium), botanicadditions (gaiasteel), forestry (honey_drop),
     // biomesoplenty (terrestrial_artifact), avaritia 1.12 (unstable_matrix = neutron_pile),
     // tconevo (reinforced = metal:20, supremium = metal:30→prismarine alias).
+    // NOTE 2026-07-23: unstable_matrix / rainbow_petal / prismarine_ingot are retired —
+    // the forge JSONs now use the exact GC items (tconevo:coalescence_matrix,
+    // soa_additions:orichalcos_ingot, tconevo:sentient_metal_ingot). See PARITY_REPORT.
     public static final RegistryObject<Item> DREADIUM_INGOT       = registerRareIngot("dreadium_ingot");
+    // EnderIO Endergy alloys (absent from EIO 1.20): exact GC items, produced in the
+    // EIO alloy smelter via ported enderio:alloy_smelting recipes (gc_machines).
+    public static final RegistryObject<Item> MELODIC_ALLOY_INGOT  = registerRareIngot("melodic_alloy_ingot");
+    public static final RegistryObject<Item> STELLAR_ALLOY_INGOT  = registerRareIngot("stellar_alloy_ingot");
+    // Construct's Armory "Resistance" (conarm:resist_mat): Guardian II quest reward;
+    // grants smithery:resistant via data/soa_additions/smithery/modifier_source.
+    public static final RegistryObject<Item> RESISTANCE_MAT       = registerRareIngot("resistance_mat");
+    // Draconic Additions "Chaotic Energy Core" (draconicadditions:chaotic_energy_core):
+    // DA 1.20 dropped the item. Exact GC item + DA fusion recipe (soa_reported_fixes.js);
+    // used by the Cosmic Solar Panel fusion.
+    public static final RegistryObject<Item> CHAOTIC_ENERGY_CORE  = registerRareIngot("chaotic_energy_core");
+    // TConstruct "Coagulated Blood" (tconstruct:edible:3, oredict slimeballBlood):
+    // blood slimeball used by the Elven Trade scarlite recipe. Exact TCon texture;
+    // tagged forge:slimeballs + forge:slimeballs/blood. Smithery-native source:
+    // molten mob-blood + ingot cast -> coagulated (SmitheryIntegration), melts back
+    // losslessly (SoaSmitheryMelting).
+    public static final RegistryObject<Item> COAGULATED_BLOOD     = registerRareIngot("coagulated_blood");
+
+    // GC "Tablet of Enlightenment" (contenttweaker): stage-backup item — NBT
+    // {stage} grants that GameStages stage on use; owner-bound; self-duplicating
+    // in a crafting grid (TabletDupeRecipe + crafting-remainder copy).
+    public static final RegistryObject<Item> TABLET_OF_ENLIGHTENMENT = ITEMS.register(
+            "tablet_of_enlightenment",
+            () -> new TabletOfEnlightenmentItem(new Item.Properties()
+                    .rarity(Rarity.RARE).stacksTo(1)));
     public static final RegistryObject<Item> GAIA_STEEL_INGOT     = registerRareIngot("gaia_steel_ingot");
     public static final RegistryObject<Item> HONEY_DROP           = registerRareIngot("honey_drop");
     public static final RegistryObject<Item> PRISMARINE_INGOT     = registerRareIngot("prismarine_ingot");
@@ -290,6 +318,15 @@ public final class ModItems {
             new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), false,
             "\u00a7bRight click for creative mode, left click to switch back.",
             "\u00a76You are unstoppable now.");
+
+    // GreedyCraft 'Creative Modifier' (was tconstruct:materials:50). Modifier part;
+    // combine with a tool/armor at the tool/armor forge to apply a free (creative)
+    // modifier slot. NOTE: the Smithery modifier behavior still needs wiring in
+    // SoaSmitheryModifiers.java \u2014 this registers the item + texture only.
+    public static final RegistryObject<Item> CREATIVE_MODIFIER = stageItem("creative_modifier",
+            new Item.Properties().rarity(Rarity.EPIC), true,
+            "\u00a7dCombine with tools or armors with tool forge / armor forge",
+            "\u00a7dto apply a creative modifier (a free modifier slot).");
 
     public static final RegistryObject<Item> OCD_CERTIFICATE = stageItem("ocd_certificate", false,
             "\u00a7bYou are a qualified OCD patient now.",
@@ -538,17 +575,19 @@ public final class ModItems {
             new Item.Properties().stacksTo(1), true,
             "\u00a7dSyncs your difficulty to your current game stage.",
             "\u00a7eDoes not consume");
-    public static final RegistryObject<Item> ELYSIA_PROJECT_LORE = stageItem("elysia_project_lore",
-            new Item.Properties().stacksTo(1), false);
+    public static final RegistryObject<Item> ELYSIA_PROJECT_LORE = ITEMS.register("elysia_project_lore",
+            () -> new BookOpenItem(new Item.Properties().stacksTo(1), false, "the_elysia_project"));
     public static final RegistryObject<Item> EMERGENCY_BUTTON = useItem("emergency_button",
             new Item.Properties().stacksTo(1), false,
             RightClickActions.clearEntities(),
             "\u00a74EMERGENCY USE ONLY",
             "\u00a7cRight click to clear all entities besides players.",
             "\u00a7cConsumed on use.");
-    public static final RegistryObject<Item> EXECUTOR_TERMINAL = stageItem("executor_terminal", false,
-            "\u00a74\u00a7oIt's up to you to decide the fate of this world.",
-            "\u00a7c\u00a7lTHIS CANNOT BE UNDONE.");
+    public static final RegistryObject<Item> EXECUTOR_TERMINAL = ITEMS.register("executor_terminal",
+            () -> new ExecutorTerminalItem(new Item.Properties().stacksTo(1), false,
+                    "\u00a74\u00a7oIt's up to you to decide the fate of this world.",
+                    "\u00a7c\u00a7oRight click to terminate the Elysian Project and the current simulation.",
+                    "\u00a7c\u00a7lTHIS CANNOT BE UNDONE."));
     public static final RegistryObject<Item> EXPERIENCE_INGOT = useItem("experience_ingot", false,
             RightClickActions.grantXp(9),
             "\u00a77Used to store XP",
@@ -576,10 +615,10 @@ public final class ModItems {
             "\u00a7eRight click to open");
     public static final RegistryObject<Item> GRASS_STRING = stageItem("grass_string", false,
             "\u00a7a100% Natural, just too easy to break.");
-    public static final RegistryObject<Item> GUIDE_BOOK = stageItem("guide_book",
-            new Item.Properties().stacksTo(1), false,
-            "\u00a76There's only one line of text on it:",
-            "\u00a7b\"Give up, before you become bald.\"");
+    public static final RegistryObject<Item> GUIDE_BOOK = ITEMS.register("guide_book",
+            () -> new BookOpenItem(new Item.Properties().stacksTo(1), false, "greedycraft_guide_book",
+                    "\u00a76There's only one line of text on it:",
+                    "\u00a7b\"Give up, before you become bald.\""));
     public static final RegistryObject<Item> HUAJI = ITEMS.register("huaji",
             () -> new StageFoodItem(new Item.Properties().food(new FoodProperties.Builder()
                     .nutrition(10).saturationMod(20f).alwaysEat()
@@ -668,6 +707,16 @@ public final class ModItems {
     public static final RegistryObject<Item> RESPAWN_ANCHOR = useItem("respawn_anchor", true,
             RightClickActions.setSpawn(),
             "\u00a7eRight click to set current location as spawn point.");
+    // Jukebox discs — music by Mangonade. Craftable from any music disc +
+    // a marker item (stick/dirt), see data/soa_additions/recipes/music_disc_*.json.
+    public static final RegistryObject<Item> MUSIC_DISC_STENCIL = ITEMS.register("music_disc_stencil",
+            () -> new net.minecraft.world.item.RecordItem(14,
+                    com.soul.soa_additions.sound.ModSounds.MUSIC_DISC_STENCIL,
+                    new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.RARE), 129));
+    public static final RegistryObject<Item> MUSIC_DISC_SUNRISE = ITEMS.register("music_disc_sunrise",
+            () -> new net.minecraft.world.item.RecordItem(15,
+                    com.soul.soa_additions.sound.ModSounds.MUSIC_DISC_SUNRISE,
+                    new Item.Properties().stacksTo(1).rarity(net.minecraft.world.item.Rarity.RARE), 192));
     public static final RegistryObject<Item> REWARD_TICKET_COMMON = rewardTicket("reward_ticket_common", false,
             "containers/loot_crate_common",
             "\u00a77Right click to get a \u00a7aCOMMON\u00a7r\u00a77 Loot Crate");
@@ -717,6 +766,14 @@ public final class ModItems {
     public static final RegistryObject<Item> TWILIGHT_SHIELD = stageGrantItem("twilight_shield", true, "twilight_shield",
             "\u00a76Can resist the heat from hell.",
             "\u00a7eRight click to unlock game stage: \u00a76twilight_shield");
+
+    // GreedyCraft 'Wither Bone' (was netherex:wither_bone; tconstruct:materials:17
+    // was the 'Necrotic Bone' equivalent). Drops from wither skeletons (see
+    // data/soa_additions/loot_modifiers/wither_bone_drop.json) and is intended as
+    // a Smithery modifier part (behavior TBD in SoaSmitheryModifiers.java).
+    public static final RegistryObject<Item> WITHER_BONE = stageItem("wither_bone", false,
+            "\u00a78A bone steeped in wither energy.",
+            "\u00a77Drops from Wither Skeletons.");
 
     // ========== Nyx items moved to NyxItems.java (nyx: namespace) ==========
 

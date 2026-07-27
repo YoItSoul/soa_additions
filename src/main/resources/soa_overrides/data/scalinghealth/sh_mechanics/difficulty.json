@@ -1,0 +1,43 @@
+{
+  "startingValue": 0,
+  "minValue": 0,
+  "maxValue": 2400,
+  "changePerSecond": 0.0,
+  "mode": {
+    "type": "distance_and_time",
+    "distance": {
+      "distanceFactor": 0.0
+    },
+    "average": {
+      "radius": 256
+    }
+  },
+  "groupBonus": "1",
+  "groupBonusRadius": 128,
+  "idleMultiplier": 1.0,
+  "afkMessage": false,
+  "timeBeforeAfk": 120,
+  "sleepWarningMessage": false,
+  "multipliers": {
+    "lunarMultipliers": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+    "locationMultipliers": [
+      {
+        "scale": 1.05,
+        "dimensions": ["minecraft:the_nether"]
+      },
+      {
+        "scale": 1.1,
+        "dimensions": ["minecraft:the_end"]
+      }
+    ]
+  },
+  "mutators": {
+    "onBlightKilled": "difficulty",
+    "onHostileKilled": "difficulty",
+    "onPeacefulKilled": "difficulty",
+    "onPlayerKilled": "difficulty",
+    "onPlayerDeath": "difficulty",
+    "onPlayerSleep": "difficulty",
+    "byEntity": []
+  }
+}

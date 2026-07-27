@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_melting",
-  "input": "taiga:duranite",
-  "result": {
-    "amount": 90,
-    "fluid": "taiga:molten_duranite"
-  },
-  "temperature": 800
-}

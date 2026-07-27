@@ -233,6 +233,10 @@ public final class SoaSmitheryModifiers {
     public static ResourceLocation SOUL_STAINED;
     public static ResourceLocation ALIEN;
     public static ResourceLocation NECROTIC;
+    // GreedyCraft Creative Modifier: +1 free modifier slot per application, stacking
+    // (Tinkers ModCreative set FreeModifiers = level). Slot count comes from the
+    // bonus_slots_per_level param x level, read by SmitheryToolItem.bonusModifierSlots.
+    public static ResourceLocation CREATIVE;
     public static ResourceLocation BLOODYMARY;
     public static ResourceLocation WELL_USED;
     public static ResourceLocation MENDING_ARMOR;
@@ -725,7 +729,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        ASSASSINTRAIT = id("assassinTrait");
+        ASSASSINTRAIT = id("assassin_trait");
         SmitheryAPI.registerModifier(Modifier.builder(ASSASSINTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onDealDamage((effect, ctx) -> {
@@ -968,7 +972,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        BLOODLUSTTRAIT = id("bloodlustTrait");
+        BLOODLUSTTRAIT = id("bloodlust_trait");
         SmitheryAPI.registerModifier(Modifier.builder(BLOODLUSTTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onDealDamage((effect, ctx) -> {
@@ -1253,7 +1257,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        COTLIFESTEALTRAIT = id("cotlifestealTrait");
+        COTLIFESTEALTRAIT = id("cotlifesteal_trait");
         SmitheryAPI.registerModifier(Modifier.builder(COTLIFESTEALTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
@@ -1297,7 +1301,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        CRYONICTRAIT = id("cryonicTrait");
+        CRYONICTRAIT = id("cryonic_trait");
         SmitheryAPI.registerModifier(Modifier.builder(CRYONICTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onDamaged((effect, ctx) -> {
@@ -1310,7 +1314,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        CRYONICTRAIT_ARMOR = id("cryonicTrait_armor");
+        CRYONICTRAIT_ARMOR = id("cryonic_trait_armor");
         SmitheryAPI.registerModifier(Modifier.builder(CRYONICTRAIT_ARMOR)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onDamaged((effect, ctx) -> {
@@ -1323,7 +1327,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        CRYSTALTRAIT = id("crystalTrait");
+        CRYSTALTRAIT = id("crystal_trait");
         SmitheryAPI.registerModifier(Modifier.builder(CRYSTALTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onDealDamage((effect, ctx) -> {
@@ -1350,7 +1354,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        CRYSTALTRAIT_ARMOR = id("crystalTrait_armor");
+        CRYSTALTRAIT_ARMOR = id("crystal_trait_armor");
         SmitheryAPI.registerModifier(Modifier.builder(CRYSTALTRAIT_ARMOR)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onDealDamage((effect, ctx) -> {
@@ -1719,7 +1723,7 @@ public final class SoaSmitheryModifiers {
                 .passive((effect, stats) -> stats.bonusMiningSpeed += effect.paramFloat("speed", 3.0f))
                 .build());
 
-        ENDURANCETRAIT = id("enduranceTrait");
+        ENDURANCETRAIT = id("endurance_trait");
         SmitheryAPI.registerModifier(Modifier.builder(ENDURANCETRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onHurt((effect, ctx) -> {
@@ -1772,7 +1776,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        EXECUTIONERTRAIT = id("executionerTrait");
+        EXECUTIONERTRAIT = id("executioner_trait");
         SmitheryAPI.registerModifier(Modifier.builder(EXECUTIONERTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
@@ -1853,7 +1857,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        FIRSTGUARDTRAIT = id("firstGuardTrait");
+        FIRSTGUARDTRAIT = id("first_guard_trait");
         SmitheryAPI.registerModifier(Modifier.builder(FIRSTGUARDTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onHurt((effect, ctx) -> {
@@ -1862,7 +1866,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        FIRSTGUARDTRAIT_ARMOR = id("firstGuardTrait_armor");
+        FIRSTGUARDTRAIT_ARMOR = id("first_guard_trait_armor");
         SmitheryAPI.registerModifier(Modifier.builder(FIRSTGUARDTRAIT_ARMOR)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onHurt((effect, ctx) -> {
@@ -1879,7 +1883,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        FORTIFIEDTRAIT = id("fortifiedTrait");
+        FORTIFIEDTRAIT = id("fortified_trait");
         SmitheryAPI.registerModifier(Modifier.builder(FORTIFIEDTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
@@ -1897,7 +1901,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        FORTIFIEDTRAIT_ARMOR = id("fortifiedTrait_armor");
+        FORTIFIEDTRAIT_ARMOR = id("fortified_trait_armor");
         SmitheryAPI.registerModifier(Modifier.builder(FORTIFIEDTRAIT_ARMOR)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
@@ -2046,7 +2050,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        GAMBLETRAIT = id("gambleTrait");
+        GAMBLETRAIT = id("gamble_trait");
         SmitheryAPI.registerModifier(Modifier.builder(GAMBLETRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onDealDamage((effect, ctx) -> {
@@ -2158,7 +2162,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        GIANTSLAYERTRAIT = id("giantslayerTrait");
+        GIANTSLAYERTRAIT = id("giantslayer_trait");
         SmitheryAPI.registerModifier(Modifier.builder(GIANTSLAYERTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onDealDamage((effect, ctx) -> {
@@ -2255,7 +2259,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        HALLOWEENTRAIT = id("halloweenTrait");
+        HALLOWEENTRAIT = id("halloween_trait");
         SmitheryAPI.registerModifier(Modifier.builder(HALLOWEENTRAIT)
                                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
@@ -2375,7 +2379,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        HOLDGROUNDTRAIT = id("holdGroundTrait");
+        HOLDGROUNDTRAIT = id("hold_ground_trait");
         SmitheryAPI.registerModifier(Modifier.builder(HOLDGROUNDTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onDealDamage((effect, ctx) -> {
@@ -2527,7 +2531,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        INFERNOTRAIT = id("infernoTrait");
+        INFERNOTRAIT = id("inferno_trait");
         SmitheryAPI.registerModifier(Modifier.builder(INFERNOTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onDamaged((effect, ctx) -> {
@@ -2539,7 +2543,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        INFERNOTRAIT_ARMOR = id("infernoTrait_armor");
+        INFERNOTRAIT_ARMOR = id("inferno_trait_armor");
         SmitheryAPI.registerModifier(Modifier.builder(INFERNOTRAIT_ARMOR)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onDamaged((effect, ctx) -> {
@@ -2659,7 +2663,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        KNOWLEDGEFULTRAIT = id("knowledgefulTrait");
+        KNOWLEDGEFULTRAIT = id("knowledgeful_trait");
         SmitheryAPI.registerModifier(Modifier.builder(KNOWLEDGEFULTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onDealDamage((effect, ctx) -> {
@@ -2711,7 +2715,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        KUNGFUTRAIT = id("kungfuTrait");
+        KUNGFUTRAIT = id("kungfu_trait");
         SmitheryAPI.registerModifier(Modifier.builder(KUNGFUTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onHurt((effect, ctx) -> {
@@ -2757,7 +2761,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        LEVELINGDAMAGETRAIT = id("levelingdamageTrait");
+        LEVELINGDAMAGETRAIT = id("levelingdamage_trait");
         SmitheryAPI.registerModifier(Modifier.builder(LEVELINGDAMAGETRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onDealDamage((effect, ctx) -> {
@@ -2769,7 +2773,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        LEVELINGDEFENSETRAIT = id("levelingdefenseTrait");
+        LEVELINGDEFENSETRAIT = id("levelingdefense_trait");
         SmitheryAPI.registerModifier(Modifier.builder(LEVELINGDEFENSETRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onHurt((effect, ctx) -> {
@@ -2854,7 +2858,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        LUCKYTRAIT = id("luckyTrait");
+        LUCKYTRAIT = id("lucky_trait");
         SmitheryAPI.registerModifier(Modifier.builder(LUCKYTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onArmorTick((effect, ctx) -> {
@@ -2866,7 +2870,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        LUCKYTRAIT_ARMOR = id("luckyTrait_armor");
+        LUCKYTRAIT_ARMOR = id("lucky_trait_armor");
         SmitheryAPI.registerModifier(Modifier.builder(LUCKYTRAIT_ARMOR)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onArmorTick((effect, ctx) -> {
@@ -2878,7 +2882,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        MADNESSTRAIT = id("madnessTrait");
+        MADNESSTRAIT = id("madness_trait");
         SmitheryAPI.registerModifier(Modifier.builder(MADNESSTRAIT)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.bonusAttackDamage += effect.paramFloat("damage", 2.0f))
@@ -2982,7 +2986,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        MATTERTRAIT1 = id("matterTrait1");
+        MATTERTRAIT1 = id("matter_trait1");
         SmitheryAPI.registerModifier(Modifier.builder(MATTERTRAIT1)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
@@ -3000,7 +3004,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        MATTERTRAIT11 = id("matterTrait11");
+        MATTERTRAIT11 = id("matter_trait11");
         SmitheryAPI.registerModifier(Modifier.builder(MATTERTRAIT11)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
@@ -3018,7 +3022,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        MATTERTRAIT12 = id("matterTrait12");
+        MATTERTRAIT12 = id("matter_trait12");
         SmitheryAPI.registerModifier(Modifier.builder(MATTERTRAIT12)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
@@ -3036,7 +3040,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        MATTERTRAIT2 = id("matterTrait2");
+        MATTERTRAIT2 = id("matter_trait2");
         SmitheryAPI.registerModifier(Modifier.builder(MATTERTRAIT2)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
@@ -3159,7 +3163,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        MILKYTRAIT = id("milkyTrait");
+        MILKYTRAIT = id("milky_trait");
         SmitheryAPI.registerModifier(Modifier.builder(MILKYTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onArmorTick((effect, ctx) -> {
@@ -3176,7 +3180,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        MILKYTRAIT_ARMOR = id("milkyTrait_armor");
+        MILKYTRAIT_ARMOR = id("milky_trait_armor");
         SmitheryAPI.registerModifier(Modifier.builder(MILKYTRAIT_ARMOR)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onArmorTick((effect, ctx) -> {
@@ -3225,7 +3229,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        MOTIONTRAIT = id("motionTrait");
+        MOTIONTRAIT = id("motion_trait");
         SmitheryAPI.registerModifier(Modifier.builder(MOTIONTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onDealDamage((effect, ctx) -> {
@@ -3247,7 +3251,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        MOTIONTRAIT_ARMOR = id("motionTrait_armor");
+        MOTIONTRAIT_ARMOR = id("motion_trait_armor");
         SmitheryAPI.registerModifier(Modifier.builder(MOTIONTRAIT_ARMOR)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onDealDamage((effect, ctx) -> {
@@ -3411,7 +3415,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        NIGHTBANETRAIT = id("nightBaneTrait");
+        NIGHTBANETRAIT = id("night_bane_trait");
         SmitheryAPI.registerModifier(Modifier.builder(NIGHTBANETRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onDealDamage((effect, ctx) -> {
@@ -3470,7 +3474,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        PENETRATIONTRAIT = id("penetrationTrait");
+        PENETRATIONTRAIT = id("penetration_trait");
         SmitheryAPI.registerModifier(Modifier.builder(PENETRATIONTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onDealDamage((effect, ctx) -> {
@@ -3502,7 +3506,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        PERFECTIONISTTRAIT = id("perfectionistTrait");
+        PERFECTIONISTTRAIT = id("perfectionist_trait");
         SmitheryAPI.registerModifier(Modifier.builder(PERFECTIONISTTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onDealDamage((effect, ctx) -> {
@@ -3519,7 +3523,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        PERFECTIONISTTRAIT_ARMOR = id("perfectionistTrait_armor");
+        PERFECTIONISTTRAIT_ARMOR = id("perfectionist_trait_armor");
         SmitheryAPI.registerModifier(Modifier.builder(PERFECTIONISTTRAIT_ARMOR)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onDealDamage((effect, ctx) -> {
@@ -3557,7 +3561,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        PINKYTRAIT = id("pinkyTrait");
+        PINKYTRAIT = id("pinky_trait");
         SmitheryAPI.registerModifier(Modifier.builder(PINKYTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onBlockBreak((effect, ctx) -> {
@@ -3596,7 +3600,7 @@ public final class SoaSmitheryModifiers {
                 .onCompose(composeArmorAttribute("polished_armor", () -> Attributes.ARMOR_TOUGHNESS, "amount", 2.0f, AttributeModifier.Operation.ADDITION))
                 .build());
 
-        POOPTRAIT = id("poopTrait");
+        POOPTRAIT = id("poop_trait");
         SmitheryAPI.registerModifier(Modifier.builder(POOPTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
@@ -3811,7 +3815,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        PURIFYINGTRAIT = id("purifyingTrait");
+        PURIFYINGTRAIT = id("purifying_trait");
         SmitheryAPI.registerModifier(Modifier.builder(PURIFYINGTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onArmorTick((effect, ctx) -> {
@@ -3823,7 +3827,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        PURIFYINGTRAIT_ARMOR = id("purifyingTrait_armor");
+        PURIFYINGTRAIT_ARMOR = id("purifying_trait_armor");
         SmitheryAPI.registerModifier(Modifier.builder(PURIFYINGTRAIT_ARMOR)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onArmorTick((effect, ctx) -> {
@@ -3851,7 +3855,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        RAGINGTRAIT = id("ragingTrait");
+        RAGINGTRAIT = id("raging_trait");
         SmitheryAPI.registerModifier(Modifier.builder(RAGINGTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onDealDamage((effect, ctx) -> {
@@ -3906,7 +3910,7 @@ public final class SoaSmitheryModifiers {
                 .passive((effect, stats) -> stats.durabilityMultiplier *= 1.0f + effect.paramFloat("bonus", 0.2f))
                 .build());
 
-        RELIABLETRAIT = id("reliableTrait");
+        RELIABLETRAIT = id("reliable_trait");
         SmitheryAPI.registerModifier(Modifier.builder(RELIABLETRAIT)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.durabilityMultiplier *= 1.0f + effect.paramFloat("bonus", 0.2f))
@@ -3960,7 +3964,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        SACRIFICIALTRAIT = id("sacrificialTrait");
+        SACRIFICIALTRAIT = id("sacrificial_trait");
         SmitheryAPI.registerModifier(Modifier.builder(SACRIFICIALTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onDealDamage((effect, ctx) -> {
@@ -3982,7 +3986,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        SECONDLIFETRAIT = id("secondLifeTrait");
+        SECONDLIFETRAIT = id("second_life_trait");
         SmitheryAPI.registerModifier(Modifier.builder(SECONDLIFETRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onHurt((effect, ctx) -> {
@@ -4005,7 +4009,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        SECONDLIFETRAIT_ARMOR = id("secondLifeTrait_armor");
+        SECONDLIFETRAIT_ARMOR = id("second_life_trait_armor");
         SmitheryAPI.registerModifier(Modifier.builder(SECONDLIFETRAIT_ARMOR)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onHurt((effect, ctx) -> {
@@ -4330,7 +4334,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        SPARTANTRAIT = id("spartanTrait");
+        SPARTANTRAIT = id("spartan_trait");
         SmitheryAPI.registerModifier(Modifier.builder(SPARTANTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onDealDamage((effect, ctx) -> {
@@ -4517,7 +4521,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        STRONGVACCINETRAIT = id("strongVaccineTrait");
+        STRONGVACCINETRAIT = id("strong_vaccine_trait");
         SmitheryAPI.registerModifier(Modifier.builder(STRONGVACCINETRAIT)
                                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
@@ -4531,7 +4535,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        STRONGVACCINETRAIT_ARMOR = id("strongVaccineTrait_armor");
+        STRONGVACCINETRAIT_ARMOR = id("strong_vaccine_trait_armor");
         SmitheryAPI.registerModifier(Modifier.builder(STRONGVACCINETRAIT_ARMOR)
                                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onArmorTick((effect, ctx) -> {
@@ -4630,7 +4634,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        SUPERKNOCKPACKTRAIT = id("superknockpackTrait");
+        SUPERKNOCKPACKTRAIT = id("superknockpack_trait");
         SmitheryAPI.registerModifier(Modifier.builder(SUPERKNOCKPACKTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
@@ -6372,7 +6376,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        THRONYTRAIT = id("thronyTrait");
+        THRONYTRAIT = id("throny_trait");
         SmitheryAPI.registerModifier(Modifier.builder(THRONYTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
@@ -6433,7 +6437,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        THUNDERINGTRAIT = id("thunderingTrait");
+        THUNDERINGTRAIT = id("thundering_trait");
         SmitheryAPI.registerModifier(Modifier.builder(THUNDERINGTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
@@ -6451,7 +6455,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        TIDALFORCETRAIT = id("tidalForceTrait");
+        TIDALFORCETRAIT = id("tidal_force_trait");
         SmitheryAPI.registerModifier(Modifier.builder(TIDALFORCETRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onArmorTick((effect, ctx) -> {
@@ -6473,7 +6477,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        TIDALFORCETRAIT_ARMOR = id("tidalForceTrait_armor");
+        TIDALFORCETRAIT_ARMOR = id("tidal_force_trait_armor");
         SmitheryAPI.registerModifier(Modifier.builder(TIDALFORCETRAIT_ARMOR)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onArmorTick((effect, ctx) -> {
@@ -6585,7 +6589,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        TRUEDEFENSETRAIT = id("trueDefenseTrait");
+        TRUEDEFENSETRAIT = id("true_defense_trait");
         SmitheryAPI.registerModifier(Modifier.builder(TRUEDEFENSETRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onHurt((effect, ctx) -> {
@@ -6597,7 +6601,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        TRUEDEFENSETRAIT_ARMOR = id("trueDefenseTrait_armor");
+        TRUEDEFENSETRAIT_ARMOR = id("true_defense_trait_armor");
         SmitheryAPI.registerModifier(Modifier.builder(TRUEDEFENSETRAIT_ARMOR)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onHurt((effect, ctx) -> {
@@ -6678,7 +6682,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        VACCINETRAIT = id("vaccineTrait");
+        VACCINETRAIT = id("vaccine_trait");
         SmitheryAPI.registerModifier(Modifier.builder(VACCINETRAIT)
                                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
@@ -6694,7 +6698,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        VACCINETRAIT_ARMOR = id("vaccineTrait_armor");
+        VACCINETRAIT_ARMOR = id("vaccine_trait_armor");
         SmitheryAPI.registerModifier(Modifier.builder(VACCINETRAIT_ARMOR)
                                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onArmorTick((effect, ctx) -> {
@@ -6739,7 +6743,7 @@ public final class SoaSmitheryModifiers {
                 .passive((effect, stats) -> stats.bonusAttackDamage += effect.paramFloat("damage", 2.0f))
                 .build());
 
-        VISIONTRAIT = id("visionTrait");
+        VISIONTRAIT = id("vision_trait");
         SmitheryAPI.registerModifier(Modifier.builder(VISIONTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onArmorTick((effect, ctx) -> {
@@ -6753,7 +6757,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        VISIONTRAIT_ARMOR = id("visionTrait_armor");
+        VISIONTRAIT_ARMOR = id("vision_trait_armor");
         SmitheryAPI.registerModifier(Modifier.builder(VISIONTRAIT_ARMOR)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onArmorTick((effect, ctx) -> {
@@ -6783,7 +6787,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        WARMTRAIT = id("warmTrait");
+        WARMTRAIT = id("warm_trait");
         SmitheryAPI.registerModifier(Modifier.builder(WARMTRAIT)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onHurt((effect, ctx) -> {
@@ -6802,7 +6806,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        WARMTRAIT_ARMOR = id("warmTrait_armor");
+        WARMTRAIT_ARMOR = id("warm_trait_armor");
         SmitheryAPI.registerModifier(Modifier.builder(WARMTRAIT_ARMOR)
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onHurt((effect, ctx) -> {
@@ -6821,7 +6825,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        WARPDRAINTRAIT = id("warpDrainTrait");
+        WARPDRAINTRAIT = id("warp_drain_trait");
         SmitheryAPI.registerModifier(Modifier.builder(WARPDRAINTRAIT)
                                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onKill((effect, ctx) -> {
@@ -6841,7 +6845,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
-        WARPDRAINTRAIT_ARMOR = id("warpDrainTrait_armor");
+        WARPDRAINTRAIT_ARMOR = id("warp_drain_trait_armor");
         SmitheryAPI.registerModifier(Modifier.builder(WARPDRAINTRAIT_ARMOR)
                                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onArmorTick((effect, ctx) -> {
@@ -6885,6 +6889,15 @@ public final class SoaSmitheryModifiers {
                         }
                     }
                 })
+                .build());
+
+        // GreedyCraft Creative Modifier — high maxLevel so each applied
+        // soa_additions:creative_modifier stacks another free slot (see
+        // data/soa_additions/smithery/modifier_source/creative_modifier.json).
+        CREATIVE = id("creative");
+        SmitheryAPI.registerModifier(Modifier.builder(CREATIVE)
+                                .category(Modifier.ModifierCategory.PASSIVE)
+                                .maxLevel(999)
                 .build());
 
         WRITABLE = id("writable");

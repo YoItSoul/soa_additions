@@ -17,6 +17,7 @@
     "soa_additions:gc_dungeon_injection_hardmode",
     "soa_additions:gc_slime_crown_drop",
     "soa_additions:aether_silver_dungeon_chest",
-    "soa_additions:aether_silver_dungeon_reward"
+    "soa_additions:aether_silver_dungeon_reward",
+    "soa_additions:wither_bone_drop"
   ]
 }

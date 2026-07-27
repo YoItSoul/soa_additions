@@ -1,6 +1,6 @@
 {
   "name": "Smeltery",
-  "description": "Alloy and melting recipes. TAIGA leans heavily on the TC3 smeltery — expect to be piping a lot of molten fluids.",
-  "icon": "tconstruct:seared_bricks",
+  "description": "Alloy and melting recipes. TAIGA's materials are melted and alloyed in the Smithery forge — expect to be piping a lot of molten fluids.",
+  "icon": "smithery:furnace_bricks",
   "sortnum": 3
 }

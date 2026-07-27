@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": "soa_additions:hardened_stone_seal_lostcity_placed",
+  "step": "top_layer_modification"
+}

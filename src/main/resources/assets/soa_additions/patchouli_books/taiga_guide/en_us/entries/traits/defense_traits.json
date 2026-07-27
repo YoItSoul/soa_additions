@@ -1,6 +1,6 @@
 {
   "name": "Defense & Durability",
-  "icon": "tconstruct:reinforcement",
+  "icon": "minecraft:shield",
   "category": "soa_additions:traits",
   "sortnum": 2,
   "pages": [

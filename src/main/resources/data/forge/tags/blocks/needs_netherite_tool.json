@@ -5,9 +5,6 @@
     "soa_additions:uru_block",
     "nyx:meteor_rock",
     "nyx:gleaning_meteor_rock",
-    "mekanism:osmium_ore",
-    "mekanism:deepslate_osmium_ore",
-    "bno:nether_osmium_ore",
     "quark:monster_box",
     "soa_additions:ardite_ore",
     "soa_additions:iridium_ore",
@@ -16,6 +13,13 @@
     "soa_additions:aeroite_ore",
     "soa_additions:crimsonite_block",
     "soa_additions:durasteel_block",
-    "soa_additions:matter_block"
+    "soa_additions:matter_block",
+    "taiga:abyssum_ore",
+    "taiga:aurorium_ore",
+    "taiga:eezo_ore",
+    "taiga:jauxum_ore",
+    "taiga:karmesine_ore",
+    "taiga:osram_ore",
+    "taiga:ovium_ore"
   ]
 }

@@ -6,6 +6,10 @@
     "soa_additions:cryonium_block",
     "soa_additions:cytosinite_block",
     "soa_additions:electronium_block",
-    "soa_additions:shadowium_ore"
+    "soa_additions:shadowium_ore",
+    "taiga:adamant_block",
+    "taiga:solarium_block",
+    "taiga:vibranium_block",
+    "taiga:vibranium_ore"
   ]
 }

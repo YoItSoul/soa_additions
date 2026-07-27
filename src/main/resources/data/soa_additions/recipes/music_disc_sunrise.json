@@ -1,0 +1,17 @@
+{
+  "_comment": "Mangonade disc: any music disc + dirt re-presses it.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "minecraft:music_discs"
+    },
+    {
+      "item": "minecraft:dirt"
+    }
+  ],
+  "result": {
+    "item": "soa_additions:music_disc_sunrise"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,15 @@
+{
+  "name": "§9失落的城市",
+  "icon": "soa_additions:city_defender_medal",
+  "category": "soa_additions:misc_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(2)失落的城市$()是一个由废弃城市组成的维度，也是获得$(6)城市保卫者勋章$()的最快方法。下面是前往失落的城市维度的方法。$(br2)$(c)如果你创建世界时是选择的是“失落的城市”或其他带有城市的预设则无法前往！$()$(br2)$(5)请在前往该维度之前准备好搭建返回传送门的材料，返回传送门也是右图但是不会自动生成！$()"
+    },
+    {
+      "type": "text",
+      "text": "$(o)The structure once shown here used blocks from a 1.12 mod that has no 1.20 equivalent.$()"
+    }
+  ]
+}

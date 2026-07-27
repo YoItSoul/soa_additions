@@ -54,6 +54,10 @@ public final class SoaSmitheryMaterials {
     public static ResourceLocation AURORIUM;
     public static ResourceLocation AWAKENED_PLUSTIC;
     public static ResourceLocation BARONYTE;
+    // GC TCon entity-melting fluids (cow->milk, enderman->ender, snowman->water)
+    public static ResourceLocation MILK;
+    public static ResourceLocation ENDER;
+    public static ResourceLocation WATER;
     public static ResourceLocation BASALT;
     public static ResourceLocation MA_BASE_ESSENCE;
     public static ResourceLocation BEDROCK;
@@ -640,15 +644,8 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(1.0f)
                 .build());
 
-        SmitheryAPI.registerMaterial(id("ender"), MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(500.0f)
-                        .partColor(0xFF105E51)
-                        .binderMultiplier(1.0f)
-                .build());
+        // "ender" is NOT registered here — it already exists as an entity-melting
+        // fluid material (see ENDER above, with moltenColor + castOnly).
 
         SmitheryAPI.registerMaterial(id("lava"), MaterialStats.builder()
                         .harvestLevel(0)
@@ -813,6 +810,40 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.ARCANE), allToolTypes())
                 .build());
 
+        // GC TCon entity melting fluids — fluid-only materials (pattern: smithery BLOOD).
+        // Water-base fluids render as the bare name ("Milk", not "Molten Milk").
+        MILK = id("milk");
+        SmitheryAPI.registerMaterial(MILK, MaterialStats.builder()
+                        .harvestLevel(0).miningSpeed(0f).attackDamage(0f).durabilityPerIngot(0)
+                        .meltingTemp(50f)
+                        .moltenColor(0xFFF3F3F0)
+                        .partColor(0xFFF3F3F0)
+                        .binderMultiplier(1.0f)
+                        .castOnly(true)
+                        .fluidBase(MaterialStats.FluidBase.WATER)
+                .build());
+
+        ENDER = id("ender");
+        SmitheryAPI.registerMaterial(ENDER, MaterialStats.builder()
+                        .harvestLevel(0).miningSpeed(0f).attackDamage(0f).durabilityPerIngot(0)
+                        .meltingTemp(500f)
+                        .moltenColor(0xFF105E51)
+                        .partColor(0xFF105E51)
+                        .binderMultiplier(1.0f)
+                        .castOnly(true)
+                .build());
+
+        WATER = id("water");
+        SmitheryAPI.registerMaterial(WATER, MaterialStats.builder()
+                        .harvestLevel(0).miningSpeed(0f).attackDamage(0f).durabilityPerIngot(0)
+                        .meltingTemp(20f)
+                        .moltenColor(0xFF3F76E4)
+                        .partColor(0xFF3F76E4)
+                        .binderMultiplier(1.0f)
+                        .castOnly(true)
+                        .fluidBase(MaterialStats.FluidBase.WATER)
+                .build());
+
         BARONYTE = id("baronyte");
         SmitheryAPI.registerMaterial(BARONYTE, MaterialStats.builder()
                         .harvestLevel(0)
@@ -828,7 +859,7 @@ public final class SoaSmitheryMaterials {
 
         BASALT = id("basalt");
         SmitheryAPI.registerMaterial(BASALT, binderSlots(MaterialStats.builder()
-                        .harvestLevel(2)
+                        .harvestLevel(0)
                         .miningSpeed(4.5f)
                         .attackDamage(3.5f)
                         .durabilityPerIngot(180)
@@ -931,7 +962,7 @@ public final class SoaSmitheryMaterials {
 
         DURANITE = id("duranite");
         SmitheryAPI.registerMaterial(DURANITE, binderSlots(MaterialStats.builder()
-                        .harvestLevel(4)
+                        .harvestLevel(5)
                         .miningSpeed(6.5f)
                         .attackDamage(6.0f)
                         .durabilityPerIngot(1000)
@@ -1174,7 +1205,7 @@ public final class SoaSmitheryMaterials {
 
         METEORITE = id("meteorite");
         SmitheryAPI.registerMaterial(METEORITE, binderSlots(MaterialStats.builder()
-                        .harvestLevel(2)
+                        .harvestLevel(3)
                         .miningSpeed(5.0f)
                         .attackDamage(3.0f)
                         .durabilityPerIngot(250)
@@ -1260,7 +1291,7 @@ public final class SoaSmitheryMaterials {
 
         OBSIDIORITE = id("obsidiorite");
         SmitheryAPI.registerMaterial(OBSIDIORITE, binderSlots(MaterialStats.builder()
-                        .harvestLevel(3)
+                        .harvestLevel(4)
                         .miningSpeed(6.0f)
                         .attackDamage(4.0f)
                         .durabilityPerIngot(350)
@@ -1299,7 +1330,7 @@ public final class SoaSmitheryMaterials {
 
         PALLADIUM = id("palladium");
         SmitheryAPI.registerMaterial(PALLADIUM, binderSlots(MaterialStats.builder()
-                        .harvestLevel(4)
+                        .harvestLevel(5)
                         .miningSpeed(7.0f)
                         .attackDamage(5.0f)
                         .durabilityPerIngot(900)
@@ -1327,7 +1358,7 @@ public final class SoaSmitheryMaterials {
 
         PROMETHEUM = id("prometheum");
         SmitheryAPI.registerMaterial(PROMETHEUM, binderSlots(MaterialStats.builder()
-                        .harvestLevel(3)
+                        .harvestLevel(5)
                         .miningSpeed(6.0f)
                         .attackDamage(3.5f)
                         .durabilityPerIngot(800)
@@ -1505,7 +1536,7 @@ public final class SoaSmitheryMaterials {
 
         TIBERIUM = id("tiberium");
         SmitheryAPI.registerMaterial(TIBERIUM, binderSlots(MaterialStats.builder()
-                        .harvestLevel(4)
+                        .harvestLevel(2)
                         .miningSpeed(8.0f)
                         .attackDamage(5.0f)
                         .durabilityPerIngot(600)
@@ -1568,7 +1599,7 @@ public final class SoaSmitheryMaterials {
 
         URU = id("uru");
         SmitheryAPI.registerMaterial(URU, binderSlots(MaterialStats.builder()
-                        .harvestLevel(4)
+                        .harvestLevel(6)
                         .miningSpeed(6.5f)
                         .attackDamage(5.5f)
                         .durabilityPerIngot(800)
@@ -1595,7 +1626,7 @@ public final class SoaSmitheryMaterials {
 
         VALYRIUM = id("valyrium");
         SmitheryAPI.registerMaterial(VALYRIUM, binderSlots(MaterialStats.builder()
-                        .harvestLevel(4)
+                        .harvestLevel(6)
                         .miningSpeed(8.0f)
                         .attackDamage(7.0f)
                         .durabilityPerIngot(1100)
@@ -1622,7 +1653,7 @@ public final class SoaSmitheryMaterials {
 
         VIBRANIUM = id("vibranium");
         SmitheryAPI.registerMaterial(VIBRANIUM, binderSlots(MaterialStats.builder()
-                        .harvestLevel(5)
+                        .harvestLevel(7)
                         .miningSpeed(9.0f)
                         .attackDamage(8.0f)
                         .durabilityPerIngot(1400)
@@ -1696,7 +1727,7 @@ public final class SoaSmitheryMaterials {
 
         YRDEEN = id("yrdeen");
         SmitheryAPI.registerMaterial(YRDEEN, binderSlots(MaterialStats.builder()
-                        .harvestLevel(5)
+                        .harvestLevel(4)
                         .miningSpeed(10.0f)
                         .attackDamage(9.5f)
                         .durabilityPerIngot(1800)

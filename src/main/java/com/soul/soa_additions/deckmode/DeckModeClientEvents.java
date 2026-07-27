@@ -1,5 +1,8 @@
 package com.soul.soa_additions.deckmode;
 
+import com.soul.soa_additions.liteboot.DeckMode;
+import com.soul.soa_additions.liteboot.LiteMode;
+
 import com.soul.soa_additions.SoaAdditions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -29,10 +32,38 @@ public final class DeckModeClientEvents {
     private static final ResourceLocation LITE_ICON =
             new ResourceLocation(SoaAdditions.MODID, "textures/gui/lite_mode.png");
 
+    /**
+     * Whether {@code soa_litemode.jar} is present.
+     *
+     * <p>Deck/Lite Mode rename jars in the mods folder, which has to happen
+     * before the mod loader opens them — so that half lives in a separate
+     * boot-layer jar that ships with the modpack, not with this mod. A
+     * standalone install of soa_additions (e.g. straight from CurseForge) has
+     * nothing to disable and won't include it, so the toggles have to degrade
+     * to "not offered" rather than throwing NoClassDefFoundError and taking the
+     * title screen down with them.
+     */
+    private static final boolean LITE_BOOT_PRESENT = liteBootPresent();
+
+    private static boolean liteBootPresent() {
+        try {
+            Class.forName("com.soul.soa_additions.liteboot.LiteMode", false,
+                    DeckModeClientEvents.class.getClassLoader());
+            return true;
+        } catch (Throwable t) {
+            org.slf4j.LoggerFactory.getLogger("soa_additions").info(
+                    "soa_litemode.jar not present — Deck/Lite Mode toggles hidden");
+            return false;
+        }
+    }
+
     private DeckModeClientEvents() {}
 
     @SubscribeEvent
     public static void onScreenInit(ScreenEvent.Init.Post event) {
+        if (!LITE_BOOT_PRESENT) {
+            return;
+        }
         if (!(event.getScreen() instanceof TitleScreen screen)) {
             return;
         }

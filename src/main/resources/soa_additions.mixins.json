@@ -1,0 +1,14 @@
+{
+  "required": false,
+  "minVersion": "0.8",
+  "package": "com.soul.soa_additions.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "",
+  "mixins": [
+    "thinair.AirQualityCacheMixin",
+    "solarflux.AvaritiaCompatRecipesMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "_comment": "GC port: Construct's Armory 'Resistance' (conarm:resist_mat, Guardian II quest reward) -> soa_additions:resistance_mat. Armor counterpart of reinforced_ingot; same unit scheme as smithery's native reinforcement source.",
+  "source_item": "soa_additions:resistance_mat",
+  "modifier": "smithery:resistant",
+  "params": {
+    "level": 1
+  },
+  "unit_value": 4
+}

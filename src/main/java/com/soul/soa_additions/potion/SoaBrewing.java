@@ -113,6 +113,35 @@ public final class SoaBrewing {
         addPotion(SoaBrewingPotions.REVIVAL,       Items.GLOWSTONE_DUST, SoaBrewingPotions.STRONG_REVIVAL);
         addPotion(SoaBrewingPotions.TELEPORT,      Items.GLOWSTONE_DUST, SoaBrewingPotions.STRONG_TELEPORT);
 
+        // === GreedyCraft PotionCore families (ported 2026-07-23) ===
+        // blindness (GC reagent dye:0 = ink sac)
+        addItem(  "minecraft:awkward", Items.INK_SAC,                     SoaBrewingPotions.BLINDNESS);
+        addPotion(SoaBrewingPotions.BLINDNESS, Items.GLOWSTONE_DUST,      SoaBrewingPotions.STRONG_BLINDNESS);
+        addPotion(SoaBrewingPotions.BLINDNESS, Items.REDSTONE,            SoaBrewingPotions.LONG_BLINDNESS);
+        // levitation (shulker shell)
+        addItem(  "minecraft:awkward", Items.SHULKER_SHELL,              SoaBrewingPotions.LEVITATION);
+        addPotion(SoaBrewingPotions.LEVITATION, Items.GLOWSTONE_DUST,    SoaBrewingPotions.STRONG_LEVITATION);
+        addPotion(SoaBrewingPotions.LEVITATION, Items.REDSTONE,          SoaBrewingPotions.LONG_LEVITATION);
+        // love (scalinghealth heart dust)
+        addItem(  "minecraft:awkward", "scalinghealth:heart_dust",       SoaBrewingPotions.LOVE);
+        // magic_focus (GC tconevo:part_arcane_focus -> SoA arcane focus)
+        addItem(  "minecraft:awkward", "soa_additions:astrium_arcane_focus", SoaBrewingPotions.MAGIC_FOCUS);
+        addPotion(SoaBrewingPotions.MAGIC_FOCUS, Items.GLOWSTONE_DUST,   SoaBrewingPotions.STRONG_MAGIC_FOCUS);
+        addPotion(SoaBrewingPotions.MAGIC_FOCUS, Items.REDSTONE,         SoaBrewingPotions.LONG_MAGIC_FOCUS);
+        // drown (raw salmon)
+        addItem(  "minecraft:awkward", Items.SALMON,                     SoaBrewingPotions.DROWN);
+        addPotion(SoaBrewingPotions.DROWN, Items.REDSTONE,              SoaBrewingPotions.LONG_DROWN);
+        // climb (string)
+        addTag(   "minecraft:awkward", "forge:string",                   SoaBrewingPotions.CLIMB);
+        addPotion(SoaBrewingPotions.CLIMB, Items.REDSTONE,              SoaBrewingPotions.LONG_CLIMB);
+        // vulnerable (glass block)
+        addItem(  "minecraft:awkward", Items.GLASS,                      SoaBrewingPotions.VULNERABLE);
+        addPotion(SoaBrewingPotions.VULNERABLE, Items.GLOWSTONE_DUST,    SoaBrewingPotions.STRONG_VULNERABLE);
+        addPotion(SoaBrewingPotions.VULNERABLE, Items.REDSTONE,          SoaBrewingPotions.LONG_VULNERABLE);
+        // burst (GC cyclicmagic:ender_tnt_1 -> thermal:ender_tnt)
+        addItem(  "minecraft:awkward", "thermal:ender_tnt",              SoaBrewingPotions.BURST);
+        addPotion(SoaBrewingPotions.BURST, Items.GLOWSTONE_DUST,         SoaBrewingPotions.STRONG_BURST);
+
         // Ore-sight system: water + thaumon:mutagen → mutagenic; mutagenic + ore →
         // ore_sight (NBT-tagged); ore_sight + redstone → long_ore_sight. Ore matching
         // is dynamic so any modded ore (forge:ores tag or *_ore in id) just works.

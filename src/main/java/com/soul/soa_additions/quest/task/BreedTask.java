@@ -28,6 +28,9 @@ public record BreedTask(ResourceLocation entity, int count) implements QuestTask
     }
 
     public static BreedTask fromJson(JsonObject body) {
+        if (!body.has("entity") || body.get("entity").isJsonNull()) {
+            throw new IllegalArgumentException("breed task requires an \"entity\" field");
+        }
         return new BreedTask(
                 new ResourceLocation(body.get("entity").getAsString()),
                 body.has("count") ? body.get("count").getAsInt() : 1);

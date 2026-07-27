@@ -1,9 +1,0 @@
-{
-  "ingredient": {
-    "tag": "forge:ingots/lumix"
-  },
-  "material": "taiga:lumix",
-  "needed": 1,
-  "type": "tconstruct:material",
-  "value": 1
-}

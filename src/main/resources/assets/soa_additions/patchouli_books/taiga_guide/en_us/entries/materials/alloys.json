@@ -7,7 +7,7 @@
     {
       "type": "patchouli:text",
       "title": "Low-tier alloys",
-      "text": "Mixed in the TC3 smeltery from base metals and common vanilla fluids:$(br2)$(item)Terrax$(), $(item)Triberium$(), $(item)Fractum$(), $(item)Violium$(), $(item)Proxii$(), $(item)Tritonite$(), $(item)Ignitz$(), $(item)Imperomite$()."
+      "text": "Mixed in the Smithery smeltery from base metals and common vanilla fluids:$(br2)$(item)Terrax$(), $(item)Triberium$(), $(item)Fractum$(), $(item)Violium$(), $(item)Proxii$(), $(item)Tritonite$(), $(item)Ignitz$(), $(item)Imperomite$()."
     },
     {
       "type": "patchouli:text",
@@ -17,7 +17,7 @@
     {
       "type": "patchouli:text",
       "title": "High-tier alloys",
-      "text": "$(item)Yrdeen$(), $(item)Iox$(), $(item)Nucleum$(), $(item)Dyonite$(), $(item)Nitronite$().$(br2)These are the endgame TC3 materials — expensive but unique trait combinations. Consult JEI for the exact inputs and ratios."
+      "text": "$(item)Yrdeen$(), $(item)Iox$(), $(item)Nucleum$(), $(item)Dyonite$(), $(item)Nitronite$().$(br2)These are the endgame materials — expensive but unique trait combinations. Consult JEI for the exact inputs and ratios."
     }
   ]
 }

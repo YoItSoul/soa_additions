@@ -31,12 +31,30 @@ public final class SmitheryIntegration {
     private static final ResourceLocation NUGGET_PT =
             ResourceLocation.fromNamespaceAndPath("smithery", "nugget");
 
+    /**
+     * Enables DE module grids on gear composed from the draconic-tier TConEvo/PlusTiC
+     * materials. Tier indices follow BrandonsCore TechLevel: 1=WYVERN, 2=DRACONIC, 3=CHAOTIC.
+     */
+    private static void registerDraconicTiers() {
+        com.soul.smithery.compat.draconic.DraconicCompat.registerMaterialTier(soaId("draconium"), 0);
+        com.soul.smithery.compat.draconic.DraconicCompat.registerMaterialTier(soaId("wyvern_metal"), 1);
+        com.soul.smithery.compat.draconic.DraconicCompat.registerMaterialTier(soaId("wyvern_plustic"), 1);
+        com.soul.smithery.compat.draconic.DraconicCompat.registerMaterialTier(soaId("draconic_metal"), 2);
+        com.soul.smithery.compat.draconic.DraconicCompat.registerMaterialTier(soaId("chaotic_metal"), 3);
+        com.soul.smithery.compat.draconic.DraconicCompat.registerMaterialTier(soaId("chaotic_plustic"), 3);
+    }
+
+    private static ResourceLocation soaId(String path) {
+        return ResourceLocation.fromNamespaceAndPath("soa_additions", path);
+    }
+
     public static void init(IEventBus modEventBus) {
         SoaSmitheryModifiers.register();
         SoaSmitheryMaterials.register();
         SoaSmitheryAlloys.register();
         SoaSmitheryFuels.register();
         SoaSmitheryMelting.register();
+        registerDraconicTiers();
 
         Set<String> existingFluidPaths = new HashSet<>();
         for (ResourceLocation id : SmitheryFluids.entries().keySet()) {
@@ -226,6 +244,17 @@ public final class SmitheryIntegration {
         castIngot("pigiron",     "soa_additions", "pigiron_ingot",     "pigiron_nugget");
         castIngot("knightslime", "soa_additions", "knightslime_ingot", "knightslime_nugget");
         castIngot("alubrass",    "soa_additions", "alubrass_ingot",    "alubrass_nugget");
+
+        // TConstruct "Coagulated Blood" (tconstruct:edible:3, oredict slimeballBlood):
+        // pouring smithery's mob-blood into an ingot cast coagulates it. Material lives
+        // in smithery: (SmitheryMaterials.BLOOD), so register directly (helpers assume
+        // soa_additions: material ids). Melting back is registered in SoaSmitheryMelting.
+        ResourceLocation bloodMat = ResourceLocation.fromNamespaceAndPath("smithery", "blood");
+        ResourceLocation coagulated = ResourceLocation.fromNamespaceAndPath("soa_additions", "coagulated_blood");
+        CastResults.register(bloodMat, INGOT_PT, () -> {
+            Item item = ForgeRegistries.ITEMS.getValue(coagulated);
+            return item == Items.AIR ? null : item;
+        });
 
         // Malum
         castIngot("soul_stained_steel", "malum", "soul_stained_steel_ingot", "soul_stained_steel_nugget");

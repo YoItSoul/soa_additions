@@ -7,7 +7,7 @@
     },
     {
       "type": "minecraft:count",
-      "count": 20
+      "count": 31
     },
     {
       "type": "minecraft:in_square"
@@ -17,7 +17,7 @@
       "height": {
         "type": "minecraft:uniform",
         "min_inclusive": {
-          "absolute": 5
+          "absolute": -64
         },
         "max_inclusive": {
           "absolute": 128

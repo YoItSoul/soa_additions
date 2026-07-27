@@ -1,9 +1,0 @@
-{
-  "ingredient": {
-    "tag": "forge:ingots/karmesine"
-  },
-  "material": "taiga:karmesine",
-  "needed": 1,
-  "type": "tconstruct:material",
-  "value": 1
-}

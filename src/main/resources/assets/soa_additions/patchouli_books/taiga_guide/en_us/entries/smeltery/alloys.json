@@ -16,8 +16,8 @@
     },
     {
       "type": "patchouli:text",
-      "title": "Porting note",
-      "text": "The original 1.12 TAIGA used $(item)Ardite$() in several recipes. The TC3 port substitutes $(item)Amethyst Bronze$() wherever Ardite was called for — TC3 retired Ardite in 1.16+. Cobalt and obsidian references use standard $(o)tconstruct:molten_cobalt$() / $(o)tconstruct:molten_obsidian$() fluids."
+      "title": "Smeltery note",
+      "text": "These alloys are produced in the Smithery forge by melting components into molten fluids and combining them. Molten metals such as $(o)smithery:molten_cobalt$() and $(o)smithery:molten_obsidian$() feed the higher-tier recipes — consult JEI for exact input ratios."
     }
   ]
 }

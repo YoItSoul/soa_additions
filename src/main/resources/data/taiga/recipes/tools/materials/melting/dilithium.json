@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_melting",
-  "input": "taiga:dilithium",
-  "result": {
-    "amount": 90,
-    "fluid": "taiga:molten_dilithium"
-  },
-  "temperature": 800
-}

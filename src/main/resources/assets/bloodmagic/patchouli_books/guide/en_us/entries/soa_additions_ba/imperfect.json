@@ -1,13 +1,13 @@
 {
   "name": "Imperfect Rituals",
-  "icon": "bloodmagic:imperfectritualstone",
+  "icon": "bloodmagic:ritualstone",
   "category": "bloodmagic:soa_additions_ba",
   "sortnum": 12,
   "pages": [
     {
       "type": "patchouli:text",
       "title": "One stone, one block",
-      "text": "Imperfect rituals skip the full-array overhead. Place an $(l:bloodmagic:rituals/imperfect)Imperfect Ritual Stone$() with the right block directly on top of it, then right-click to trigger. The Arsenal ports four from 1.12:"
+      "text": "Imperfect rituals skip the full-array overhead. Place the right block directly on top of a blank $(item)Ritual Stone$(), then right-click the stone with an $(bold)empty hand$() to trigger. LP is drained and the topper block is consumed. The Arsenal ports four from 1.12:"
     },
     {
       "type": "patchouli:text",

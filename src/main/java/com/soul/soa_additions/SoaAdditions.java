@@ -49,9 +49,13 @@ public final class SoaAdditions {
         com.soul.soa_additions.nyx.NyxEnchantments.register(modEventBus);
         com.soul.soa_additions.nyx.NyxEntities.register(modEventBus);
         com.soul.soa_additions.nyx.NyxSounds.register(modEventBus);
+        com.soul.soa_additions.sound.ModSounds.register(modEventBus);
         com.soul.soa_additions.nyx.NyxConfig.register();
         ModFeatures.register(modEventBus);
         com.soul.soa_additions.worldgen.ModPoi.register(modEventBus);
+        // Forced top-priority datapack shadowing other mods' data files
+        // (ScalingHealth difficulty, ProgressiveBosses stats, Terralith toast).
+        modEventBus.addListener(com.soul.soa_additions.datapack.SoaOverridesPack::onAddPackFinders);
         // Curios soft-dep: queue GreedyBag onto ModItems.ITEMS before the
         // DeferredRegister fires. CuriosIntegration never gets class-loaded
         // when Curios is absent, so GreedyBagItem (implements ICurio) stays
@@ -74,8 +78,14 @@ public final class SoaAdditions {
         com.soul.soa_additions.potion.SoaBrewingPotions.register(modEventBus);
         com.soul.soa_additions.potion.TconEvoEffects.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(com.soul.soa_additions.potion.SoaPotionEvents.class);
+        // GC tick rules (motion clamp, boss y-cap, effect hygiene, portal
+        // gates) — ported from KubeJS tick handlers in 3.58.3, see SoaTickRules.
+        MinecraftForge.EVENT_BUS.register(com.soul.soa_additions.event.SoaTickRules.class);
+        // GC endgame admin commands (/executor, /infinitykill) — see GcParityCommands.
+        MinecraftForge.EVENT_BUS.register(com.soul.soa_additions.command.GcParityCommands.class);
         com.soul.soa_additions.loot.LootModifierSerializers.register(modEventBus);
         com.soul.soa_additions.loot.artifact.TconevoArtifacts.register(modEventBus);
+        com.soul.soa_additions.item.SoaRecipeSerializers.register(modEventBus);
         com.soul.soa_additions.loot.LootConditions.register(modEventBus);
         com.soul.soa_additions.donor.ModEntities.register(modEventBus);
 
@@ -119,6 +129,12 @@ public final class SoaAdditions {
 
         if (ModList.get().isLoaded("smithery")) {
             com.soul.soa_additions.smithery.SmitheryIntegration.init(modEventBus);
+        }
+
+        // Client-only: extract the bundled SoA Radiance shaderpack. Was dead
+        // code until 3.58.2 — install() existed but nothing ever called it.
+        if (net.minecraftforge.fml.loading.FMLEnvironment.dist.isClient()) {
+            ShaderpackInstaller.install();
         }
 
         // Thaumic Remnants — removed (dead feature).

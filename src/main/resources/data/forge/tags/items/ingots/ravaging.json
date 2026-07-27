@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "soa_additions:ravaging_ingot"
+    "soa_additions:ravaging_ingot",
+    "defiledlands:ravaging_ingot"
   ]
 }

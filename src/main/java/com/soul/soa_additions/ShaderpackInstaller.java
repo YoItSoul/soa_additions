@@ -10,10 +10,16 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 /**
  * Extracts the bundled SoA Radiance shaderpack into the game's shaderpacks
- * directory.  Uses a version stamp file to decide when to overwrite:
+ * directory.  The pack is bundled as a single zip resource
+ * ({@code assets/soa_additions/shaderpacks/SoA_Radiance.zip}, produced by the
+ * {@code zipShaderpack} gradle task from the repo-root {@code SoA_Radiance/}
+ * folder) so the file list can never drift out of date.
+ * Uses a version stamp file to decide when to overwrite:
  * <ul>
  *   <li>No stamp file (legacy / first install) &rarr; always extract</li>
  *   <li>Stamp present but older than current mod version &rarr; extract</li>
@@ -24,33 +30,8 @@ public final class ShaderpackInstaller {
 
     private static final Logger LOG = LoggerFactory.getLogger("soa_additions");
     private static final String PACK_NAME = "SoA_Radiance";
-    private static final String RESOURCE_ROOT = "/assets/soa_additions/shaderpacks/" + PACK_NAME + "/shaders/";
+    private static final String PACK_ZIP = "/assets/soa_additions/shaderpacks/" + PACK_NAME + ".zip";
     private static final String STAMP_FILE = ".soa_version";
-
-    private static final String[] SHADER_FILES = {
-        "shaders.properties",
-        "lib/distortion.glsl",
-        "shadow.vsh",
-        "shadow.fsh",
-        "gbuffers_basic.vsh",
-        "gbuffers_basic.fsh",
-        "gbuffers_textured.vsh",
-        "gbuffers_textured.fsh",
-        "gbuffers_textured_lit.vsh",
-        "gbuffers_textured_lit.fsh",
-        "gbuffers_terrain.vsh",
-        "gbuffers_terrain.fsh",
-        "gbuffers_water.vsh",
-        "gbuffers_water.fsh",
-        "gbuffers_skybasic.vsh",
-        "gbuffers_skybasic.fsh",
-        "gbuffers_entities.vsh",
-        "gbuffers_entities.fsh",
-        "composite.vsh",
-        "composite.fsh",
-        "final.vsh",
-        "final.fsh",
-    };
 
     private ShaderpackInstaller() {}
 
@@ -86,21 +67,25 @@ public final class ShaderpackInstaller {
             LOG.info("Installing SoA Radiance shaderpack v{} to {}", currentVersion, packDir);
         }
 
-        // Extract all shader files
-        try {
-            Path shadersDir = packDir.resolve("shaders");
-            Files.createDirectories(shadersDir.resolve("lib"));
+        // Extract the bundled zip
+        try (InputStream raw = ShaderpackInstaller.class.getResourceAsStream(PACK_ZIP)) {
+            if (raw == null) {
+                LOG.error("Bundled shaderpack zip missing from jar: {}", PACK_ZIP);
+                return;
+            }
 
             int extracted = 0;
-            for (String file : SHADER_FILES) {
-                String resourcePath = RESOURCE_ROOT + file;
-                try (InputStream in = ShaderpackInstaller.class.getResourceAsStream(resourcePath)) {
-                    if (in == null) {
-                        LOG.warn("Missing bundled shader resource: {}", resourcePath);
+            try (ZipInputStream zip = new ZipInputStream(raw)) {
+                Path packDirNormalized = packDir.normalize();
+                for (ZipEntry entry; (entry = zip.getNextEntry()) != null; ) {
+                    if (entry.isDirectory()) continue;
+                    Path target = packDir.resolve(entry.getName()).normalize();
+                    if (!target.startsWith(packDirNormalized)) { // zip-slip guard
+                        LOG.warn("Skipping suspicious zip entry: {}", entry.getName());
                         continue;
                     }
-                    Path target = shadersDir.resolve(file.replace('/', java.io.File.separatorChar));
-                    Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
+                    Files.createDirectories(target.getParent());
+                    Files.copy(zip, target, StandardCopyOption.REPLACE_EXISTING);
                     extracted++;
                 }
             }

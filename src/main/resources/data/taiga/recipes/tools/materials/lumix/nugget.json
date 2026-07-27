@@ -1,9 +1,0 @@
-{
-  "ingredient": {
-    "tag": "forge:nuggets/lumix"
-  },
-  "material": "taiga:lumix",
-  "needed": 9,
-  "type": "tconstruct:material",
-  "value": 1
-}

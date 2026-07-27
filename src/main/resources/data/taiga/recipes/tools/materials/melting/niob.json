@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_melting",
-  "input": "taiga:niob",
-  "result": {
-    "amount": 90,
-    "fluid": "taiga:molten_niob"
-  },
-  "temperature": 800
-}

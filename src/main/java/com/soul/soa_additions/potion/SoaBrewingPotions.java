@@ -2,6 +2,7 @@ package com.soul.soa_additions.potion;
 
 import com.soul.soa_additions.SoaAdditions;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -119,6 +120,35 @@ public final class SoaBrewingPotions {
     public static final RegistryObject<Potion> MASTER_ORE_SIGHT      = base("master_ore_sight", SoaPotions.MASTER_ORE_SIGHT);
     public static final RegistryObject<Potion> LONG_MASTER_ORE_SIGHT = lng("long_master_ore_sight", SoaPotions.MASTER_ORE_SIGHT);
 
+    // === GreedyCraft PotionCore families (ported 2026-07-23) ===
+    // blindness / levitation reuse vanilla MobEffects; the rest are SoaPotions.
+    public static final RegistryObject<Potion> BLINDNESS         = baseS("blindness", () -> MobEffects.BLINDNESS);
+    public static final RegistryObject<Potion> LONG_BLINDNESS    = lngS("long_blindness", () -> MobEffects.BLINDNESS);
+    public static final RegistryObject<Potion> STRONG_BLINDNESS  = strongS("strong_blindness", () -> MobEffects.BLINDNESS);
+
+    public static final RegistryObject<Potion> LEVITATION        = baseS("levitation", () -> MobEffects.LEVITATION);
+    public static final RegistryObject<Potion> LONG_LEVITATION   = lngS("long_levitation", () -> MobEffects.LEVITATION);
+    public static final RegistryObject<Potion> STRONG_LEVITATION = strongS("strong_levitation", () -> MobEffects.LEVITATION);
+
+    public static final RegistryObject<Potion> LOVE              = base("love", SoaPotions.LOVE);
+
+    public static final RegistryObject<Potion> MAGIC_FOCUS        = base("magic_focus", SoaPotions.MAGIC_FOCUS);
+    public static final RegistryObject<Potion> LONG_MAGIC_FOCUS   = lng("long_magic_focus", SoaPotions.MAGIC_FOCUS);
+    public static final RegistryObject<Potion> STRONG_MAGIC_FOCUS = strong("strong_magic_focus", SoaPotions.MAGIC_FOCUS);
+
+    public static final RegistryObject<Potion> DROWN             = base("drown", SoaPotions.DROWN);
+    public static final RegistryObject<Potion> LONG_DROWN        = lng("long_drown", SoaPotions.DROWN);
+
+    public static final RegistryObject<Potion> CLIMB             = base("climb", SoaPotions.CLIMB);
+    public static final RegistryObject<Potion> LONG_CLIMB        = lng("long_climb", SoaPotions.CLIMB);
+
+    public static final RegistryObject<Potion> VULNERABLE        = base("vulnerable", SoaPotions.VULNERABLE);
+    public static final RegistryObject<Potion> LONG_VULNERABLE   = lng("long_vulnerable", SoaPotions.VULNERABLE);
+    public static final RegistryObject<Potion> STRONG_VULNERABLE = strong("strong_vulnerable", SoaPotions.VULNERABLE);
+
+    public static final RegistryObject<Potion> BURST             = base("burst", SoaPotions.BURST);
+    public static final RegistryObject<Potion> STRONG_BURST      = strong("strong_burst", SoaPotions.BURST);
+
     private SoaBrewingPotions() {}
 
     private static RegistryObject<Potion> base(String name, net.minecraftforge.registries.RegistryObject<? extends net.minecraft.world.effect.MobEffect> effect) {
@@ -134,6 +164,18 @@ public final class SoaBrewingPotions {
     private static RegistryObject<Potion> strong(String name, net.minecraftforge.registries.RegistryObject<? extends net.minecraft.world.effect.MobEffect> effect) {
         return POTIONS.register(name, () -> new Potion(name,
                 new MobEffectInstance(effect.get(), STRONG_TICKS, 1)));
+    }
+
+    // Supplier overloads — for vanilla MobEffects (blindness, levitation) that
+    // aren't SoA-registered RegistryObjects.
+    private static RegistryObject<Potion> baseS(String name, java.util.function.Supplier<net.minecraft.world.effect.MobEffect> effect) {
+        return POTIONS.register(name, () -> new Potion(name, new MobEffectInstance(effect.get(), BASE_TICKS, 0)));
+    }
+    private static RegistryObject<Potion> lngS(String name, java.util.function.Supplier<net.minecraft.world.effect.MobEffect> effect) {
+        return POTIONS.register(name, () -> new Potion(name, new MobEffectInstance(effect.get(), LONG_TICKS, 0)));
+    }
+    private static RegistryObject<Potion> strongS(String name, java.util.function.Supplier<net.minecraft.world.effect.MobEffect> effect) {
+        return POTIONS.register(name, () -> new Potion(name, new MobEffectInstance(effect.get(), STRONG_TICKS, 1)));
     }
 
     public static void register(IEventBus modEventBus) {

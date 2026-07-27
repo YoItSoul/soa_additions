@@ -1,9 +1,0 @@
-{
-  "ingredient": {
-    "tag": "forge:nuggets/jauxum"
-  },
-  "material": "taiga:jauxum",
-  "needed": 9,
-  "type": "tconstruct:material",
-  "value": 1
-}

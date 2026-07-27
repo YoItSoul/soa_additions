@@ -1,0 +1,17 @@
+{
+  "_comment": "Mangonade disc: any music disc + stick re-presses it.",
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "minecraft:music_discs"
+    },
+    {
+      "item": "minecraft:stick"
+    }
+  ],
+  "result": {
+    "item": "soa_additions:music_disc_stencil"
+  },
+  "show_notification": true
+}

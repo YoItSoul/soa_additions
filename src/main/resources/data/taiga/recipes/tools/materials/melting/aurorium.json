@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_melting",
-  "input": "taiga:aurorium",
-  "result": {
-    "amount": 90,
-    "fluid": "taiga:molten_aurorium"
-  },
-  "temperature": 800
-}

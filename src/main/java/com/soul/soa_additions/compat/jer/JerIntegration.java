@@ -70,17 +70,17 @@ public final class JerIntegration {
         // ───── soa_additions ores ─────
         // Block ID                                count, size, minY, maxY,  restriction
         addOre(reg, "soa_additions:abyssal_ore_block",   12, 3,  -50, -10,  Restriction.OVERWORLD);
-        addOre(reg, "soa_additions:aeroite_ore",         20, 8,    5, 128,  Restriction.OVERWORLD);  // rarity 1/2 baked into count
-        addOre(reg, "soa_additions:aqualite_ore",         3, 8,    5,  40,  Restriction.OVERWORLD);
+        addOre(reg, "soa_additions:aeroite_ore",         31, 8,  -64, 128,  Restriction.OVERWORLD);  // rarity 1/2 baked into count
+        addOre(reg, "soa_additions:aqualite_ore",         9, 8,  -64,  40,  Restriction.OVERWORLD);
         addOreInDimension(reg, "soa_additions:asgardium_ore", 5, 4, 15, 90, "aether", "the_aether");
-        addOre(reg, "soa_additions:chromium_ore",         2, 4,    5,  24,  Restriction.OVERWORLD);  // rarity 1/3 baked into count
-        addOre(reg, "soa_additions:cryonium_ore",         6, 4,    5,  32,  Restriction.OVERWORLD);
-        addOre(reg, "soa_additions:cytosinite_ore",       2, 4,    5,  55,  Restriction.OVERWORLD);
+        addOre(reg, "soa_additions:chromium_ore",         9, 4,  -64,  24,  Restriction.OVERWORLD);  // rarity 1/3 baked into count
+        addOre(reg, "soa_additions:cryonium_ore",        21, 4,  -64,  32,  Restriction.OVERWORLD);
+        addOre(reg, "soa_additions:cytosinite_ore",       5, 4,  -64,  55,  Restriction.OVERWORLD);
         addOre(reg, "soa_additions:ether_ore_block",     16, 3,    0,  20,  Restriction.END);
-        addOre(reg, "soa_additions:experience_ore",       1, 4,    5,  32,  Restriction.OVERWORLD);
-        addOre(reg, "soa_additions:manganese_ore",        8, 4,    3,  36,  Restriction.OVERWORLD);
+        addOre(reg, "soa_additions:experience_ore",       3, 4,  -64,  32,  Restriction.OVERWORLD);
+        addOre(reg, "soa_additions:manganese_ore",       24, 4,  -64,  36,  Restriction.OVERWORLD);
         addOre(reg, "soa_additions:infernium_ore_block",  8, 4,    1,  25,  Restriction.NETHER);
-        addOre(reg, "soa_additions:shadowium_ore",        1, 4,    5,  50,  Restriction.OVERWORLD);
+        addOre(reg, "soa_additions:shadowium_ore",        2, 4,  -64,  50,  Restriction.OVERWORLD);
         addOre(reg, "soa_additions:titanium_ore",         1, 4,    5,  80,  Restriction.END);
         addOre(reg, "soa_additions:void_ore_block",       4, 3,  -64, -60,  Restriction.OVERWORLD);
         // uru_ore is placed by the custom DuraniteMeteorFeature analog
@@ -94,20 +94,20 @@ public final class JerIntegration {
         addOre(reg, "taiga:jauxum_ore",      8, 1,   0,  96, Restriction.OVERWORLD);
 
         // Vibranium primary — 5 specific biomes.
-        addOreInBiomes(reg, "taiga:vibranium_ore", 8, 4, 0, 64,
+        addOreInBiomes(reg, "taiga:vibranium_ore", 16, 4, -64, 64,
                 "minecraft:forest", "minecraft:plains", "minecraft:taiga",
                 "minecraft:snowy_plains", "minecraft:desert");
         // Vibranium secondary — rare global, 1/7 chance per chunk.
-        addOre(reg, "taiga:vibranium_ore",   1, 3,   0, 128, Restriction.OVERWORLD);
+        addOre(reg, "taiga:vibranium_ore",   2, 3, -64, 128, Restriction.OVERWORLD);
 
         // Dilithium — 7 specific biomes.
-        addOreInBiomes(reg, "taiga:dilithium_ore", 12, 5, 0, 64,
+        addOreInBiomes(reg, "taiga:dilithium_ore", 24, 5, -64, 64,
                 "minecraft:desert", "minecraft:forest", "minecraft:badlands",
                 "minecraft:ocean", "minecraft:deep_ocean",
                 "minecraft:frozen_ocean", "minecraft:mushroom_fields");
 
         // Special replacers (lava, bedrock).
-        addOre(reg, "taiga:basalt_block",   12, 1,   0,  64, Restriction.OVERWORLD);  // replaces lava
+        addOre(reg, "taiga:basalt_block",   24, 1, -64,  64, Restriction.OVERWORLD);  // replaces lava
         addOre(reg, "taiga:eezo_ore",        3, 1, -60, -50, Restriction.OVERWORLD);  // replaces bedrock
 
         // Nether ores.

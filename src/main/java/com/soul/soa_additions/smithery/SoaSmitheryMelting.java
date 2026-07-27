@@ -3,7 +3,10 @@ package com.soul.soa_additions.smithery;
 import com.soul.smithery.api.SmitheryAPI;
 import com.soul.smithery.api.forge.ForgeMobDrops;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.animal.IronGolem;
+import net.minecraft.world.entity.animal.SnowGolem;
+import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.ZombifiedPiglin;
 
 public final class SoaSmitheryMelting {
@@ -19,6 +22,14 @@ public final class SoaSmitheryMelting {
     }
 
     private static void registerEntityMelting() {
+        // GC tconstruct.zs entity melting, complete set:
+        //   cow->milk, enderman->ender, snowman->water, iron golem->iron, zombie piglin->gold
+        ForgeMobDrops.register(Cow.class,
+                ResourceLocation.fromNamespaceAndPath("soa_additions", "milk"));
+        ForgeMobDrops.register(EnderMan.class,
+                ResourceLocation.fromNamespaceAndPath("soa_additions", "ender"));
+        ForgeMobDrops.register(SnowGolem.class,
+                ResourceLocation.fromNamespaceAndPath("soa_additions", "water"));
         ForgeMobDrops.register(IronGolem.class,
                 ResourceLocation.fromNamespaceAndPath("smithery", "iron"));
         ForgeMobDrops.register(ZombifiedPiglin.class,
@@ -26,6 +37,11 @@ public final class SoaSmitheryMelting {
     }
 
     private static void registerMeltingRecipes() {
+
+        // TConstruct "Coagulated Blood" (edible:3): melts back to smithery mob-blood at
+        // the ingot-cast volume so cast->melt is lossless. Cast side registered in
+        // SmitheryIntegration (smithery:blood x ingot cast -> coagulated_blood).
+        recipe("soa_additions:coagulated_blood", "smithery:blood", INGOT_MB);
 
         // ================================================================
         // SOA-registered custom metals (ingots/blocks/ores in soa_additions)

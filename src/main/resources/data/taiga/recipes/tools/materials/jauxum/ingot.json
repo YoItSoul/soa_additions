@@ -1,9 +1,0 @@
-{
-  "ingredient": {
-    "tag": "forge:ingots/jauxum"
-  },
-  "material": "taiga:jauxum",
-  "needed": 1,
-  "type": "tconstruct:material",
-  "value": 1
-}

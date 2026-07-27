@@ -19,6 +19,9 @@ public final class ModFeatures {
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> DURANITE_METEOR =
             FEATURES.register("duranite_meteor", () -> new DuraniteMeteorFeature(NoneFeatureConfiguration.CODEC));
 
+    public static final RegistryObject<Feature<HardenedStoneSealFeature.Config>> HARDENED_STONE_SEAL =
+            FEATURES.register("hardened_stone_seal", () -> new HardenedStoneSealFeature(HardenedStoneSealFeature.Config.CODEC));
+
     private ModFeatures() {}
 
     public static void register(IEventBus eventBus) {
