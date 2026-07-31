@@ -1,5 +1,6 @@
 package com.soul.soa_additions.item;
 
+import com.soul.soa_additions.util.ItemDelivery;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -108,10 +109,29 @@ public class RewardTicketItem extends StageItem {
             bag.setHoverName(held.getHoverName());
         }
 
+        // Hand over the bag BEFORE consuming the ticket, and never leave the
+        // hand slot as the destination.  Inventory#add fills the lowest free
+        // slot; if the ticket were shrunk first and it was the last of its
+        // stack, that free slot can be the hand slot itself — and vanilla's
+        // ServerPlayerGameMode#useItem then overwrites the hand with EMPTY
+        // (our returned stack is empty), silently deleting the bag the player
+        // just paid a ticket for.  Adding while the ticket is still in hand
+        // keeps that slot occupied, so the bag lands anywhere but there.
+        boolean stored = player.getInventory().add(bag);
+
         held.shrink(1);
 
-        if (!player.getInventory().add(bag)) {
-            player.drop(bag, false);
+        if (!stored) {
+            // Inventory was full. If that was the last ticket the hand slot is
+            // free now, so return the bag as the new held stack (vanilla puts
+            // holder.getObject() in the hand) instead of dropping it.
+            if (held.isEmpty()) {
+                level.playSound(null, player.getX(), player.getY(), player.getZ(),
+                        SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 0.8F, 1.4F);
+                return InteractionResultHolder.consume(bag);
+            }
+            // Genuinely no room — Q-drop it in front of the player.
+            ItemDelivery.drop(player, bag);
         }
 
         level.playSound(null, player.getX(), player.getY(), player.getZ(),

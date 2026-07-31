@@ -312,4 +312,19 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+
+    // Silence javac's [removal] category. Every hit is a Forge forward-compat
+    // hint for 1.21, not something that actually disappears on 1.20.1:
+    //
+    //   new ResourceLocation(..)   -> ResourceLocation.fromNamespaceAndPath/parse
+    //   ModLoadingContext.get()    -> "use the context from your mod constructor"
+    //
+    // Neither replacement is usable here. The ResourceLocation statics were
+    // only added in Forge 47.4, and we ship forge_version_range=[47,) — calling
+    // them would hand anyone on 47.0-47.3 a NoSuchMethodError on nearly every
+    // registry lookup. ModLoadingContext.registerConfig is likewise reachable
+    // only through the deprecated get() on this Forge line.
+    //
+    // Revisit if the pack ever pins Forge >= 47.4 or moves to 1.21.
+    options.compilerArgs << '-Xlint:-removal'
 }

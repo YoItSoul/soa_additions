@@ -177,7 +177,7 @@ public final class RightClickActions {
             List<ItemStack> loot = table.getRandomItems(params);
             for (ItemStack s : loot) {
                 if (s.isEmpty()) continue;
-                if (!player.getInventory().add(s)) player.drop(s, false);
+                com.soul.soa_additions.util.ItemDelivery.give(player, s);
             }
             level.playSound(null, player.getX(), player.getY(), player.getZ(),
                     SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 0.8F, 1.4F);

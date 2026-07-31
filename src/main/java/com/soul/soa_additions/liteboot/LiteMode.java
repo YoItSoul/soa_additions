@@ -19,10 +19,13 @@ import java.util.stream.Stream;
  * turns ModernFix dynamic resources on, for the lightest possible pack.
  * Combined with Deck Mode this is the minimum-footprint configuration.
  *
- * dynamic_resources is ALWAYS ON as of 3.58.4: Better Foliage (whose baked
- * models crashed under it, and which used to couple the flag to this toggle)
- * was removed from the pack 2026-07-26. The toggle now only re-asserts the
- * flag so stale user configs heal themselves; it never turns it off.
+ * dynamic_resources follows this toggle again as of 2026-07-31: 3.58.4 pinned
+ * it ON pack-wide once Better Foliage (whose baked models crashed under it) was
+ * removed, but with it on ModernFix's on-demand model path fails to bake ~1400
+ * blockstates whose models are present in their jars — JAOPCA, Create Food, Ars
+ * Nouveau, Malum, TofuCraft, Blood Arsenal, Sculk Horde — and each failure
+ * renders as the purple missing-model. That trade is only worth taking in Lite
+ * Mode, so enabling sets it true and disabling sets it false.
  *
  * <p><b>How the renames are applied</b> (deliberately transparent for users
  * and for platform malware scanners): toggling registers a JVM shutdown hook
@@ -163,10 +166,10 @@ public final class LiteMode {
     public static int applyToggle() {
         boolean enabling = !isActive();
         List<Path[]> renames = pendingRenames();
-        // dynamic_resources is pack-wide ON since Better Foliage was removed
-        // (2026-07-26). Re-assert true on every toggle so configs from older
-        // versions (which wrote false on lite-disable) self-heal.
-        setDynamicResources(true);
+        // Lite Mode owns dynamic_resources again (see class javadoc): on for the
+        // RAM saving while lite, off otherwise so the full pack doesn't render
+        // missing-models for every mod ModernFix fails to bake on demand.
+        setDynamicResources(enabling);
         if (renames.isEmpty()) {
             return 0;
         }

@@ -273,11 +273,9 @@ public final class QuestLifecycleHandler {
 
         var book = new net.minecraft.world.item.ItemStack(
                 com.soul.soa_additions.item.ModItems.QUEST_BOOK.get());
-        if (!player.getInventory().add(book)) {
-            // Inventory was full somehow — drop at the player's feet so the
-            // book is never silently lost on first login.
-            player.drop(book, false);
-        }
+        // Inventory full on first login — ItemDelivery drops it on the player
+        // rather than throwing it, so the book is never silently lost.
+        com.soul.soa_additions.util.ItemDelivery.give(player, book);
     }
 
     @SubscribeEvent

@@ -37,7 +37,10 @@ public class FallingMeteorEntity extends FallingStarEntity {
     public boolean spawnNoBlocks;
 
     public FallingMeteorEntity(EntityType<? extends FallingMeteorEntity> type, Level level) {
-        super((EntityType<? extends FallingStarEntity>)(EntityType<?>) type, level);
+        // No cast needed: FallingMeteorEntity extends FallingStarEntity, so
+        // EntityType<? extends FallingMeteorEntity> already widens to
+        // EntityType<? extends FallingStarEntity> by wildcard subtyping.
+        super(type, level);
         this.entityData.set(SIZE, level.random.nextInt(3) + 1);
         initTrajectory(2.0f * speedModifier);
     }

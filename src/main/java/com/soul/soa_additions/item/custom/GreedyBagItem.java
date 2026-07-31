@@ -20,6 +20,8 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICurio;
+import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
+import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -101,7 +103,8 @@ public class GreedyBagItem extends Item implements ICurio {
      * Scan the player's inventory for restricted items and absorb them
      * into this bag. Walks main + armor + offhand to match ItemStages'
      * own tick-scan range — anything we skip would be dropped on the
-     * ground by ItemStages on the next tick.
+     * ground by ItemStages on the next tick — plus every Curios slot,
+     * which ItemStages' inventory scan never looks at.
      */
     public void absorbRestrictedItems(ServerPlayer player, ItemStack bag) {
         Inventory inv = player.getInventory();
@@ -115,6 +118,44 @@ public class GreedyBagItem extends Item implements ICurio {
             if (restriction != null && restriction.isRestricted(slot)) {
                 storeItem(bag, slot.copy());
                 inv.setItem(i, ItemStack.EMPTY);
+            }
+        }
+
+        absorbFromCurios(player, bag);
+    }
+
+    /**
+     * Same sweep across every Curios slot (functional and cosmetic).
+     * A restricted trinket equipped into a Curios slot never passes through
+     * the vanilla inventory, so the inventory scan above can't see it and it
+     * sits there, usable, until the bag picks it up here.
+     */
+    private void absorbFromCurios(ServerPlayer player, ItemStack bag) {
+        try {
+            CuriosApi.getCuriosInventory(player).ifPresent(handler -> {
+                for (ICurioStacksHandler stacks : handler.getCurios().values()) {
+                    absorbFromStacks(player, bag, stacks.getStacks());
+                    absorbFromStacks(player, bag, stacks.getCosmeticStacks());
+                }
+            });
+        } catch (NoClassDefFoundError | NullPointerException ignored) {
+            // Curios absent or the capability isn't attached yet (early login).
+        }
+    }
+
+    private void absorbFromStacks(ServerPlayer player, ItemStack bag, IDynamicStackHandler stacks) {
+        if (stacks == null) return;
+        for (int i = 0; i < stacks.getSlots(); i++) {
+            ItemStack slot = stacks.getStackInSlot(i);
+            // Identity check as well as the type check: the bag doing the
+            // absorbing may itself be the equipped curio.
+            if (slot.isEmpty() || slot == bag || slot.getItem() instanceof GreedyBagItem) continue;
+
+            Restriction restriction = RestrictionManager.INSTANCE
+                    .getRestriction(player, slot);
+            if (restriction != null && restriction.isRestricted(slot)) {
+                storeItem(bag, slot.copy());
+                stacks.setStackInSlot(i, ItemStack.EMPTY);
             }
         }
     }

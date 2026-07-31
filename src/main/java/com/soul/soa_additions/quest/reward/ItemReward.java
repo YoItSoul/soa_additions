@@ -25,9 +25,7 @@ public record ItemReward(ResourceLocation item, int count, RewardScope scope) im
         Item it = BuiltInRegistries.ITEM.get(item);
         if (it == null || it == net.minecraft.world.item.Items.AIR) return;
         ItemStack stack = new ItemStack(it, count);
-        if (!player.getInventory().add(stack)) {
-            player.drop(stack, false);
-        }
+        com.soul.soa_additions.util.ItemDelivery.give(player, stack);
     }
 
     @Override public void writeJson(JsonObject out) {

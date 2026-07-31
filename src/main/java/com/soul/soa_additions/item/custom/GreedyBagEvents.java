@@ -13,6 +13,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.event.CurioChangeEvent;
 
 import java.util.Map;
 import java.util.UUID;
@@ -90,6 +91,20 @@ public final class GreedyBagEvents {
         LAST_INV_CHANGE.put(sp.getUUID(), changes);
 
         handleChange(sp);
+    }
+
+    /**
+     * The tick absorber above gates on {@link Inventory#getTimesChanged()},
+     * which Curios does not bump — a stack that only ever moves between Curios
+     * slots would otherwise sit there unabsorbed until something happened to
+     * touch the vanilla inventory. This fires whenever a Curios slot's
+     * contents change, so equipping a restricted trinket is caught at once.
+     */
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onCurioChange(CurioChangeEvent event) {
+        if (event.getEntity() instanceof ServerPlayer sp) {
+            handleChange(sp);
+        }
     }
 
     @SubscribeEvent

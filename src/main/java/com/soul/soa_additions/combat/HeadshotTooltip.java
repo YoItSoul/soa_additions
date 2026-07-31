@@ -4,36 +4,41 @@ import com.soul.soa_additions.SoaAdditions;
 import com.soul.soa_additions.config.HeadshotConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 /**
- * Adds a single "Headshot Protection: N%" line to every helmet tooltip. The
- * number is derived from the same {@link HeadshotConfig#profileFor} call the
- * damage handler uses, so the tooltip and the actual mitigation can never
- * drift out of sync — if a config value changes, tooltips update on the next
- * frame because profiles are recomputed on demand.
+ * Puts the headshot protection percentage and GC's qualitative rating on any
+ * item that can be worn on the head. Both lines read the same
+ * {@link HeadgearProtection} call the damage handler uses, so the tooltip can
+ * never drift from the actual mitigation.
  */
 @Mod.EventBusSubscriber(modid = SoaAdditions.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class HeadshotTooltip {
+
+    private static final String[] PROTECTION_LEVELS = {
+            "no", "weak", "miserable", "awful", "bad",
+            "normal", "good", "excellent", "marvelous", "exceptional", "perfect"
+    };
 
     private HeadshotTooltip() {}
 
     @SubscribeEvent
     public static void onTooltip(ItemTooltipEvent event) {
-        if (!(event.getItemStack().getItem() instanceof ArmorItem armor)) return;
-        if (armor.getEquipmentSlot() != EquipmentSlot.HEAD) return;
+        if (HeadshotConfig.PLAYERS_HAVE_NO_HEADS.get()) return;
 
-        HeadshotConfig.Profile prof = HeadshotConfig.profileFor(armor);
-        int pct = Math.round((1.0F - prof.damageTakenMult()) * 100F);
+        ItemStack stack = event.getItemStack();
+        if (HeadgearProtection.getProtection(stack) == 1.0F) return;
 
-        event.getToolTip().add(
-                Component.literal("Headshot Protection: ").withStyle(ChatFormatting.BLUE)
-                        .append(Component.literal(pct + "%").withStyle(ChatFormatting.WHITE))
-        );
+        int percent = HeadgearProtection.getProtectionPercent(stack);
+        int tier = Math.min(percent / 10, PROTECTION_LEVELS.length - 1);
+
+        event.getToolTip().add(Component.translatable("soa_additions.headshot_protection", percent)
+                .withStyle(ChatFormatting.LIGHT_PURPLE));
+        event.getToolTip().add(Component.translatable("soa_additions.protection_level." + PROTECTION_LEVELS[tier])
+                .withStyle(ChatFormatting.LIGHT_PURPLE));
     }
 }
