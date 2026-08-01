@@ -289,6 +289,7 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.TIME_FRAGMENT.get());
                         output.accept(ModItems.TIME_SHARD.get());
                         output.accept(ModItems.TITANIUM_NUGGET.get());
+                        output.accept(ModItems.TOWER_CHEST.get());
                         output.accept(ModItems.TOWER_CHEST_KEY.get());
                         output.accept(ModItems.TOWER_CHEST_UNLOCKED.get());
                         output.accept(ModItems.TRUE_EYE_OF_ENDER.get());

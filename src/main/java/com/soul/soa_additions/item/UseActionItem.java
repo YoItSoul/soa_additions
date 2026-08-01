@@ -28,14 +28,27 @@ public class UseActionItem extends Item {
     private final boolean foil;
     private final String[] tooltipLines;
     private final UseAction action;
+    @Nullable private final UseAction sneakAction;
     private final boolean consumeOnUse;
 
     public UseActionItem(Properties props, boolean foil, boolean consumeOnUse,
                          UseAction action, String... tooltip) {
+        this(props, foil, consumeOnUse, action, null, tooltip);
+    }
+
+    /**
+     * @param sneakAction taken instead of {@code action} when the player is
+     *                    sneaking. GreedyCraft paired these as right-click and
+     *                    left-click effect bundles; sneak is the 1.20.1 flavour,
+     *                    since left clicks never reach the server as item use.
+     */
+    public UseActionItem(Properties props, boolean foil, boolean consumeOnUse,
+                         UseAction action, @Nullable UseAction sneakAction, String... tooltip) {
         super(props);
         this.foil = foil;
         this.tooltipLines = tooltip;
         this.action = action;
+        this.sneakAction = sneakAction;
         this.consumeOnUse = consumeOnUse;
     }
 
@@ -63,7 +76,8 @@ public class UseActionItem extends Item {
             return InteractionResultHolder.pass(held);
         }
 
-        boolean ok = action.apply(serverLevel, serverPlayer, held);
+        UseAction chosen = (sneakAction != null && player.isShiftKeyDown()) ? sneakAction : action;
+        boolean ok = chosen.apply(serverLevel, serverPlayer, held);
         if (!ok) return InteractionResultHolder.pass(held);
 
         if (consumeOnUse && !player.getAbilities().instabuild) {

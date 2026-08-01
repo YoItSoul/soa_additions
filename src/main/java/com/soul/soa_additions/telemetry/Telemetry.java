@@ -503,14 +503,28 @@ public final class Telemetry {
                 out.add("[redacted]");
                 continue;
             }
-            // Strip obvious home dir paths from display (preserves the flag shape)
-            String scrubbed = arg
-                    .replaceAll("(?i)([A-Z]:\\\\Users\\\\)[^\\\\\"]+", "$1<user>")
-                    .replaceAll("/home/[^/\"]+", "/home/<user>")
-                    .replaceAll("/Users/[^/\"]+", "/Users/<user>");
-            out.add(scrubbed);
+            out.add(scrubPaths(arg));
         }
         return out;
+    }
+
+    /**
+     * Any absolute path, Windows ({@code E:\dir\file}) or POSIX ({@code /dir/file}).
+     * The previous scrubber only knew the three standard home directories, so an
+     * install rooted anywhere else — {@code E:\curseforge}, {@code /srv/mc} — shipped
+     * its whole directory tree in {@code --module-path} and friends, which the consent
+     * screen promises we never send. Keeps the final segment: jar and native library
+     * names are the part that is actually diagnostic.
+     */
+    private static final Pattern ABSOLUTE_PATH = Pattern.compile(
+            "([A-Za-z]:[\\\\/]|(?<![\\w.])/)(?:[^;,\"\\s:]*[\\\\/])*");
+
+    private static String scrubPaths(String arg) {
+        java.util.regex.Matcher m = ABSOLUTE_PATH.matcher(arg);
+        StringBuilder sb = new StringBuilder(arg.length());
+        while (m.find()) m.appendReplacement(sb, "<path>/");
+        m.appendTail(sb);
+        return sb.toString();
     }
 
     /**
@@ -521,21 +535,60 @@ public final class Telemetry {
      */
     private static final String LEAKED_INSTALL_ID = "db26574e-c088-4c89-9044-2e63f2e7bb1a";
 
+    /**
+     * Hash binding an install_id to the machine that generated it. Blacklisting the
+     * one leaked UUID only fixed the leak we knew about; any future export that
+     * carries a config folder repeats it. A copied install_id.txt fails this check on
+     * every machine except the one that wrote it, so each install rotates to a fresh
+     * id instead of every player collapsing into a single row. Local only — the
+     * binding is never sent, and the inputs are hashed, never transmitted raw.
+     */
+    private static String machineBinding() {
+        String seed = System.getProperty("user.name", "?")
+                + '\0' + System.getProperty("user.home", "?")
+                + '\0' + System.getProperty("os.name", "?");
+        try {
+            byte[] digest = java.security.MessageDigest.getInstance("SHA-256")
+                    .digest(seed.getBytes(StandardCharsets.UTF_8));
+            StringBuilder sb = new StringBuilder(32);
+            for (int i = 0; i < 16; i++) sb.append(String.format("%02x", digest[i]));
+            return sb.toString();
+        } catch (Exception e) {
+            return "nobinding";
+        }
+    }
+
     private static String getOrCreateInstallId() {
         try {
             Path dir = Path.of("config", "soa_additions");
             Files.createDirectories(dir);
             Path file = dir.resolve("install_id.txt");
+            String binding = machineBinding();
             if (Files.exists(file)) {
-                String id = Files.readString(file).trim();
-                if (!id.isEmpty() && !id.equalsIgnoreCase(LEAKED_INSTALL_ID)) return id;
+                List<String> lines = Files.readAllLines(file);
+                String id = lines.isEmpty() ? "" : lines.get(0).trim();
+                String storedBinding = lines.size() > 1 ? lines.get(1).trim() : null;
+                boolean usable = !id.isEmpty() && !id.equalsIgnoreCase(LEAKED_INSTALL_ID);
+                if (usable && storedBinding == null) {
+                    // Single-line file written before bindings existed. Adopt the id so
+                    // existing installs keep their identity on the dashboard, and bind
+                    // it now so a copy of this file can't be reused elsewhere.
+                    writeInstallId(file, id, binding);
+                    return id;
+                }
+                if (usable && binding.equals(storedBinding)) return id;
             }
             String id = UUID.randomUUID().toString();
-            Files.writeString(file, id, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+            writeInstallId(file, id, binding);
             return id;
         } catch (IOException e) {
             return "unknown-" + UUID.randomUUID();
         }
+    }
+
+    private static void writeInstallId(Path file, String id, String binding) throws IOException {
+        Files.writeString(file, id + System.lineSeparator() + binding,
+                StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
     }
 
     private static String readModVersion() {

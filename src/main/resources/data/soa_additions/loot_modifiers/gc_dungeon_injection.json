@@ -37,6 +37,7 @@
     { "item": "soa_additions:experience_ingot",       "weight": 18, "min": 2,  "max": 12 },
     { "item": "soa_additions:delivery_order",         "weight": 3,  "min": 1,  "max": 1  },
     { "item": "soa_additions:tower_chest_key",        "weight": 2,  "min": 1,  "max": 1  },
+    { "item": "soa_additions:tower_chest",            "weight": 2,  "min": 1,  "max": 1  },
     { "item": "soa_additions:sunny_doll",             "weight": 4,  "min": 1,  "max": 1  },
     { "item": "soa_additions:bag_of_dyes",            "weight": 6,  "min": 1,  "max": 3  },
     { "item": "soa_additions:true_eye_of_ender",      "weight": 1,  "min": 1,  "max": 1  },

@@ -1,0 +1,79 @@
+package com.soul.soa_additions.item;
+
+import java.util.List;
+
+/**
+ * GreedyCraft's canonical game-stage list, copied verbatim from
+ * {@code scripts/global/list_stages.zs} ({@code global listStages}). It is what
+ * GC's {@code /unlockallstages} and {@code /lockallstages} iterated over, so the
+ * Passport reproduces those commands exactly by walking this list.
+ */
+public final class GcStages {
+
+    private GcStages() {}
+
+    public static final List<String> ALL = List.of(
+            "getting_started",
+            "novice_tinker",
+            "skilled_tinker",
+            "master_tinker",
+            "novice_engineer",
+            "skilled_engineer",
+            "master_engineer",
+            "novice_wizard",
+            "skilled_wizard",
+            "master_wizard",
+            "qualified_botanian",
+            "alchemist",
+            "zealot",
+            "twilight_shield",
+            "valkyrie_smasher",
+            "lunatic_cultist",
+            "twilight_conquerer",
+            "sun_killer",
+            "forest_keeper",
+            "hardmode",
+            "wither_slayer",
+            "the_awakened",
+            "wielder_of_infinity",
+            "cosmic_dominator",
+            "fearless_man",
+            "challenger_a",
+            "challenger_b",
+            "challenger_c",
+            "challenger_d",
+            "challenger_e",
+            "challenger_f",
+            "challenger_g",
+            "challenger_all",
+            "transmutation_table",
+            "wand_blueprint",
+            "tactic_blueprint",
+            "shuriken_blueprint",
+            "laser_gun_blueprint",
+            "abyssal_conquerer",
+            "cosmic_ripper",
+            "gatekeeper",
+            "gaia",
+            "wyvern",
+            "awakened",
+            "chaotic",
+            "twilight_forest",
+            "chaotic_dominator",
+            "ender_charm",
+            "nether",
+            "super_hardmode",
+            "infinite_solar_energy",
+            "space_treasure_hunter",
+            "archaeologist",
+            "fusion_matrix",
+            "staff_wielder",
+            "energy_matter_core",
+            "thaumaturge",
+            "storage_maniac",
+            "descendant_of_the_sun",
+            "graduated",
+            "qualified_ocd",
+            "disabled",
+            "roughmobsboss");
+}

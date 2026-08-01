@@ -246,9 +246,12 @@ public final class ModItems {
             "\u00a7bRight click to enter Super Hardmode.",
             "\u00a7bLeft click air to exit Super Hardmode");
 
+    // Behaviour lives in the pack's soa_difficulty_items.js: right-click raises
+    // by 10, sneak-right-click lowers by 10. Wiring a Java half here would make
+    // a sneak-right-click apply twice.
     public static final RegistryObject<Item> DIFFICULTY_CHANGER = stageItem("difficulty_changer",
             new Item.Properties().stacksTo(1), false,
-            "\u00a7eLeft click to lower difficulty, right click to raise.",
+            "\u00a7eShift-right-click to lower difficulty and right click to raise difficulty.",
             "\u00a7a\u00a7oDoes not consume");
 
     // ========== Descendant of the Sun stage ==========
@@ -310,13 +313,15 @@ public final class ModItems {
     // ========== Fusion Matrix stage ==========
 
     public static final RegistryObject<Item> BEAST_HAND = stageItem("beast_hand", false,
-            "\u00a7eShift-right-click a Summoning Altar to summon Frostmaw");
+            "\u00a7eShift-right-click a \u00a7cSummoning Altar\u00a7e to summon \u00a7bFrostmaw");
 
     // ========== Graduated stage ==========
 
-    public static final RegistryObject<Item> CREATIVE_CONTROLLER = stageItem("creative_controller",
-            new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), false,
-            "\u00a7bRight click for creative mode, left click to switch back.",
+    public static final RegistryObject<Item> CREATIVE_CONTROLLER = useItemSneakPair("creative_controller",
+            new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), false, false,
+            RightClickActions.setGameMode(net.minecraft.world.level.GameType.CREATIVE),
+            RightClickActions.setGameMode(net.minecraft.world.level.GameType.SURVIVAL),
+            "\u00a7bRight click to switch to creative mode and shift-right-click to switch back.",
             "\u00a76You are unstoppable now.");
 
     // GreedyCraft 'Creative Modifier' (was tconstruct:materials:50). Modifier part;
@@ -452,7 +457,7 @@ public final class ModItems {
             "\u00a76A new ore will spawn in the Nether");
 
     public static final RegistryObject<Item> SUN_TOTEM = stageItem("sun_totem", true,
-            "\u00a7eShift-right-click a Summoning Altar to summon Barako, the Sun Chief");
+            "\u00a7eShift-right-click a \u00a7cSummoning Altar\u00a7e to summon \u00a76Barako, the Sun Chief");
 
     public static final RegistryObject<Item> SOLAR_SEED = stageItem("solar_seed", false,
             "\u00a7eCombine with a broken solarium star to activate its real power.");
@@ -544,9 +549,12 @@ public final class ModItems {
             "\u00a77Looks awesome.");
     public static final RegistryObject<Item> BOUNTY_HUNTER_MEDAL_BRONZE = stageItem("bounty_hunter_medal_bronze", false,
             "\u00a7eCan be obtained from bounties.");
-    public static final RegistryObject<Item> BOUNTY_HUNTER_MEDAL_EMERALD = stageItem("bounty_hunter_medal_emerald", false,
+    public static final RegistryObject<Item> BOUNTY_HUNTER_MEDAL_EMERALD = useItemPersistent(
+            "bounty_hunter_medal_emerald", new Item.Properties(), false,
+            RightClickActions.bountyMerchants(5.0),
             "\u00a7bThis medal looks very special!",
-            "\u00a7eRight click to turn nearby villagers into Bounty Merchants.");
+            "\u00a7eRight click to turn nearby villagers into Bounty Merchants.",
+            "\u00a77Has a chance to be rewarded by bounties.");
     public static final RegistryObject<Item> BOUNTY_HUNTER_MEDAL_SILVER = stageItem("bounty_hunter_medal_silver", false);
     public static final RegistryObject<Item> CATALYST_STAR = stageItem("catalyst_star", true,
             "\u00a7eA super efficient catalyst.");
@@ -565,7 +573,9 @@ public final class ModItems {
     public static final RegistryObject<Item> CRYONIC_ARTIFACT = stageItem("cryonic_artifact",
             new Item.Properties().stacksTo(1), true,
             "\u00a73It is cold enough to freeze the sun.");
-    public static final RegistryObject<Item> DEATH_COUNTER = stageItem("death_counter", false,
+    public static final RegistryObject<Item> DEATH_COUNTER = useItemPersistent("death_counter",
+            new Item.Properties(), false,
+            RightClickActions.showDeathLeaderboard(),
             "\u00a77\u00a7oRight click to show the death leaderboard.");
     public static final RegistryObject<Item> DELIVERY_ORDER = useItem("delivery_order", false,
             rollTable("containers/delivery_order"),
@@ -573,8 +583,10 @@ public final class ModItems {
             "\u00a76Right click to use");
     public static final RegistryObject<Item> DIFFICULTY_SYNCER = stageItem("difficulty_syncer",
             new Item.Properties().stacksTo(1), true,
-            "\u00a7dSyncs your difficulty to your current game stage.",
-            "\u00a7eDoes not consume");
+            "\u00a7dWhen used, set your difficulty to the supposed difficulty at your game stage.",
+            "\u00a76Used to fix some bugs",
+            "\u00a7eDoes not consume",
+            "\u00a77\u00a7m/syncdifficulty does this too but this is for people who can't remember commands.");
     public static final RegistryObject<Item> ELYSIA_PROJECT_LORE = ITEMS.register("elysia_project_lore",
             () -> new BookOpenItem(new Item.Properties().stacksTo(1), false, "the_elysia_project"));
     public static final RegistryObject<Item> EMERGENCY_BUTTON = useItem("emergency_button",
@@ -658,8 +670,12 @@ public final class ModItems {
                     list.add(Component.literal("\u00a7c\u00a7oHuman beings are strong because we can change ourselves."));
                 }
             });
-    public static final RegistryObject<Item> PASSPORT = stageItem("passport", false,
+    public static final RegistryObject<Item> PASSPORT = useItemSneakPair("passport",
+            new Item.Properties(), false, false,
+            RightClickActions.unlockAllStages(),
+            RightClickActions.lockAllStages(),
             "\u00a76Right click to unlock all game stages",
+            "\u00a76Shift-right-click to lock all game stages",
             "\u00a7bCreative mode only");
     public static final RegistryObject<Item> PEARL_OF_KNOWLEDGE = useItem("pearl_of_knowledge", true,
             RightClickActions.grantXp(59049),
@@ -692,7 +708,8 @@ public final class ModItems {
                     .build()),
                     false, 32, false,
                     "\u00a7b????????"));
-    public static final RegistryObject<Item> PURIFYING_DUST = stageItem("purifying_dust", false,
+    public static final RegistryObject<Item> PURIFYING_DUST = useItem("purifying_dust", false,
+            RightClickActions.pureDaisyBurst(7),
             "\u00a72When used, converts nearby blocks like a pure daisy.");
     public static final RegistryObject<Item> RAW_HUMAN_MEAT = ITEMS.register("raw_human_meat",
             () -> new StageFoodItem(new Item.Properties().food(new FoodProperties.Builder()
@@ -737,7 +754,8 @@ public final class ModItems {
             new Item.Properties().stacksTo(1), true,
             "\u00a76Resets all your skills.",
             "\u00a7cNo XP will be given back.");
-    public static final RegistryObject<Item> SLIME_CROWN = stageItem("slime_crown", false,
+    public static final RegistryObject<Item> SLIME_CROWN = useItem("slime_crown", false,
+            RightClickActions.summonSlimeKing(),
             "\u00a7eSummons the Slime God",
             "\u00a76Right click to use");
     public static final RegistryObject<Item> STAINLESS_STEEL_BALL = stageItem("stainless_steel_ball", false);
@@ -752,14 +770,19 @@ public final class ModItems {
             "\u00a7bSeems to be debris from another dimension.");
     public static final RegistryObject<Item> TIME_SHARD = stageItem("time_shard", true);
     public static final RegistryObject<Item> TITANIUM_NUGGET = stageItem("titanium_nugget", false);
+    /** Locked loot chest found in battle towers \u2014 useless until combined with a
+     *  {@link #TOWER_CHEST_KEY} in a crafting grid (see recipes/tower_chest_unlocked.json). */
+    public static final RegistryObject<Item> TOWER_CHEST = stageItem("tower_chest", false,
+            "\u00a7eSeems like it needs a key to open.");
     public static final RegistryObject<Item> TOWER_CHEST_KEY = stageItem("tower_chest_key",
             new Item.Properties().stacksTo(1), false,
             "\u00a7eUnlock Tower Chests by putting them in crafting table!");
-    public static final RegistryObject<Item> TOWER_CHEST_UNLOCKED = stageItem("tower_chest_unlocked", false,
+    public static final RegistryObject<Item> TOWER_CHEST_UNLOCKED = useItem("tower_chest_unlocked", false,
+            RightClickActions.rollTreasureChest(1, 10),
             "\u00a76Right click to open");
     public static final RegistryObject<Item> TRUE_EYE_OF_ENDER = stageItem("true_eye_of_ender",
             new Item.Properties().stacksTo(1), true,
-            "\u00a7ePrevents endermen and endermites from teleporting you.");
+            "\u00a7ePut it in inventory to prevent yourself from being teleported by endermen and endermites.");
     public static final RegistryObject<Item> TWILIGHT_GEM = stageItem("twilight_gem", true,
             "\u00a7bA gem that gives out a mystical glow.",
             "\u00a76Used to activate the Twilight Forest portal.");
@@ -849,6 +872,18 @@ public final class ModItems {
     private static RegistryObject<Item> useItemPersistent(String name, Item.Properties props, boolean foil,
                                                           UseActionItem.UseAction action, String... tooltip) {
         return ITEMS.register(name, () -> new UseActionItem(props, foil, false, action, tooltip));
+    }
+
+    /** Right-click / sneak-right-click pair — the 1.20.1 flavour of
+     *  GreedyCraft's paired {@code item_right_click} / {@code item_left_click}
+     *  effect bundles. */
+    private static RegistryObject<Item> useItemSneakPair(String name, Item.Properties props, boolean foil,
+                                                         boolean consumeOnUse,
+                                                         UseActionItem.UseAction rightClick,
+                                                         UseActionItem.UseAction sneakRightClick,
+                                                         String... tooltip) {
+        return ITEMS.register(name, () -> new UseActionItem(props, foil, consumeOnUse,
+                rightClick, sneakRightClick, tooltip));
     }
 
     /** Build a loot-table-rolling action from a path under
