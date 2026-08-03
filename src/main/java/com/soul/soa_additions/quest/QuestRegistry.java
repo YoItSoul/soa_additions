@@ -51,7 +51,6 @@ public final class QuestRegistry {
         chaptersById = ch;
         questsByFullId = qs;
         rebuildTaskIndex();
-        com.soul.soa_additions.quest.web.QuestWebServer.invalidateLayoutCache();
         com.soul.soa_additions.quest.progress.QuestEvaluator.resetCycleWarning();
     }
 
@@ -71,7 +70,6 @@ public final class QuestRegistry {
         chaptersById = ch;
         questsByFullId = qs;
         rebuildTaskIndex();
-        com.soul.soa_additions.quest.web.QuestWebServer.invalidateLayoutCache();
     }
 
     /** Drop a chapter and every quest inside it. Used by the editor's

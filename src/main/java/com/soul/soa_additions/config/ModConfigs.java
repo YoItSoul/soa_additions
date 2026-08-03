@@ -13,9 +13,6 @@ public final class ModConfigs {
     public static final ForgeConfigSpec.IntValue JVM_PROFILER_INTERVAL_SECONDS;
     public static final ForgeConfigSpec.IntValue JVM_PROFILER_KEEP_SESSIONS;
     public static final ForgeConfigSpec.BooleanValue JVM_PROFILER_AUTO_JFR;
-    public static final ForgeConfigSpec.BooleanValue ENABLE_QUEST_WEB_OVERLAY;
-    public static final ForgeConfigSpec.IntValue QUEST_WEB_OVERLAY_PORT;
-    public static final ForgeConfigSpec.ConfigValue<String> QUEST_WEB_OVERLAY_BIND;
     public static final ForgeConfigSpec.BooleanValue ENABLE_TELEMETRY;
     public static final ForgeConfigSpec.ConfigValue<String> TELEMETRY_ENDPOINT;
     public static final ForgeConfigSpec.BooleanValue TELEMETRY_AUTO_SPARK;
@@ -66,27 +63,11 @@ public final class ModConfigs {
                 .define("autoJfrOnSpike", true);
         builder.pop();
 
-        builder.push("questWebOverlay");
-        ENABLE_QUEST_WEB_OVERLAY = builder
-                .comment(
-                        "Starts a lightweight HTTP server that serves a quest book overlay page.",
-                        "Players get a unique URL on login so they can view their quest progress",
-                        "on a second screen (phone, tablet, second monitor) with live updates.",
-                        "Default: true."
-                )
-                .define("enabled", true);
-        QUEST_WEB_OVERLAY_PORT = builder
-                .comment("HTTP port for the quest overlay server. Default: 25580.")
-                .defineInRange("port", 25580, 1024, 65535);
-        QUEST_WEB_OVERLAY_BIND = builder
-                .comment(
-                        "Network interface the overlay server binds to.",
-                        "\"127.0.0.1\" (default) keeps the overlay private to this machine.",
-                        "To view it from a phone/tablet, deliberately expose it on your network by",
-                        "setting this to your LAN IP (or \"0.0.0.0\" for all interfaces)."
-                )
-                .define("bindAddress", "127.0.0.1");
-        builder.pop();
+        // The "questWebOverlay" block is deliberately gone (v3.63.0). It configured an
+        // embedded HTTP server that served the quest book to a browser; the feature was
+        // removed because a mod binding a listening socket is one of the loudest signals
+        // in CurseForge's upload scanner. Stale [questWebOverlay] entries left in an
+        // existing config file are ignored by ForgeConfigSpec.
 
         builder.push("telemetry");
         ENABLE_TELEMETRY = builder

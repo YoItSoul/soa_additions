@@ -73,8 +73,6 @@ public record QuestSyncPacket(PackMode packMode, boolean serverEnforced, List<Qu
                 PacketDistributor.PLAYER.with(() -> player),
                 build(player)
         );
-        // Push live update to any connected web overlay clients
-        com.soul.soa_additions.quest.web.QuestWebServer.pushUpdate(player);
     }
 
     /** Send the same snapshot to every online team member — used after claims.

@@ -536,58 +536,48 @@ public final class Telemetry {
     private static final String LEAKED_INSTALL_ID = "db26574e-c088-4c89-9044-2e63f2e7bb1a";
 
     /**
-     * Hash binding an install_id to the machine that generated it. Blacklisting the
-     * one leaked UUID only fixed the leak we knew about; any future export that
-     * carries a config folder repeats it. A copied install_id.txt fails this check on
-     * every machine except the one that wrote it, so each install rotates to a fresh
-     * id instead of every player collapsing into a single row. Local only — the
-     * binding is never sent, and the inputs are hashed, never transmitted raw.
+     * The install_id is a plain random UUID with no machine binding.
+     *
+     * <p>v3.61.5 through v3.62.0 hashed {@code user.name} + {@code user.home} into a
+     * second "binding" line, so an install_id.txt copied between machines would fail
+     * the check and rotate. That closed the copied-id bug class, but reading the OS
+     * user name and home directory, hashing them, persisting the digest and then
+     * POSTing from the same class is — to a static analyzer — an unbroken user
+     * fingerprinting chain, and it put every upload into CurseForge's manual review
+     * queue. The inputs were never transmitted, but a scanner cannot know that.
+     *
+     * <p>It is also redundant: the composite builder on the telemetry host strips
+     * install_id/telemetry_consent/playtime_minutes from every repack (deployed
+     * 2026-08-01), so an id can no longer leave this machine inside a pack export in
+     * the first place. Residual duplicates are handled server-side at ingest.
      */
-    private static String machineBinding() {
-        String seed = System.getProperty("user.name", "?")
-                + '\0' + System.getProperty("user.home", "?")
-                + '\0' + System.getProperty("os.name", "?");
-        try {
-            byte[] digest = java.security.MessageDigest.getInstance("SHA-256")
-                    .digest(seed.getBytes(StandardCharsets.UTF_8));
-            StringBuilder sb = new StringBuilder(32);
-            for (int i = 0; i < 16; i++) sb.append(String.format("%02x", digest[i]));
-            return sb.toString();
-        } catch (Exception e) {
-            return "nobinding";
-        }
-    }
-
     private static String getOrCreateInstallId() {
         try {
             Path dir = Path.of("config", "soa_additions");
             Files.createDirectories(dir);
             Path file = dir.resolve("install_id.txt");
-            String binding = machineBinding();
             if (Files.exists(file)) {
                 List<String> lines = Files.readAllLines(file);
                 String id = lines.isEmpty() ? "" : lines.get(0).trim();
-                String storedBinding = lines.size() > 1 ? lines.get(1).trim() : null;
-                boolean usable = !id.isEmpty() && !id.equalsIgnoreCase(LEAKED_INSTALL_ID);
-                if (usable && storedBinding == null) {
-                    // Single-line file written before bindings existed. Adopt the id so
-                    // existing installs keep their identity on the dashboard, and bind
-                    // it now so a copy of this file can't be reused elsewhere.
-                    writeInstallId(file, id, binding);
+                if (!id.isEmpty() && !id.equalsIgnoreCase(LEAKED_INSTALL_ID)) {
+                    // Files written by 3.61.5-3.62.0 carry a binding hash on line 2.
+                    // Keep the id — rotating it would churn the identity of every
+                    // install that updated through those versions — and drop the
+                    // second line on the way out.
+                    if (lines.size() > 1) writeInstallId(file, id);
                     return id;
                 }
-                if (usable && binding.equals(storedBinding)) return id;
             }
             String id = UUID.randomUUID().toString();
-            writeInstallId(file, id, binding);
+            writeInstallId(file, id);
             return id;
         } catch (IOException e) {
             return "unknown-" + UUID.randomUUID();
         }
     }
 
-    private static void writeInstallId(Path file, String id, String binding) throws IOException {
-        Files.writeString(file, id + System.lineSeparator() + binding,
+    private static void writeInstallId(Path file, String id) throws IOException {
+        Files.writeString(file, id,
                 StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
     }
 

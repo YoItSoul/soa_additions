@@ -103,7 +103,6 @@ public record QuestDeltaPacket(List<QuestSnapshotEntry> entries) {
                     sendTo(p, tp);
                 }
             }
-            com.soul.soa_additions.quest.web.QuestWebServer.pushUpdate(actor);
         }
 
         private void sendTo(ServerPlayer viewer, TeamQuestProgress tp) {

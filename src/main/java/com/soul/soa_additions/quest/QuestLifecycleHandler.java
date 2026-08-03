@@ -19,7 +19,6 @@ import com.soul.soa_additions.quest.progress.TeamQuestProgress;
 import com.soul.soa_additions.quest.reward.LockPackmodeReward;
 import com.soul.soa_additions.quest.team.QuestTeam;
 import com.soul.soa_additions.quest.team.TeamData;
-import com.soul.soa_additions.quest.web.QuestWebServer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -132,11 +131,6 @@ public final class QuestLifecycleHandler {
         org.slf4j.LoggerFactory.getLogger("soa_additions/quest")
                 .info("Quest system online (world={}, packmode={})",
                         worldDir.getFileName(), PackModeData.get(server).mode());
-
-        // Start the quest web overlay server if enabled
-        if (ModConfigs.ENABLE_QUEST_WEB_OVERLAY.get()) {
-            QuestWebServer.start(server, ModConfigs.QUEST_WEB_OVERLAY_PORT.get());
-        }
     }
 
     @SubscribeEvent
@@ -253,12 +247,6 @@ public final class QuestLifecycleHandler {
         }
     }
 
-    @SubscribeEvent
-    public static void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
-        if (!(event.getEntity() instanceof ServerPlayer player)) return;
-        QuestWebServer.revokeToken(player);
-    }
-
     /** Give the player a quest book the first time they join this world.
      *  Uses Forge's persistent NBT sub-compound so the flag survives logout
      *  and dimension changes — re-rolling a new world starts a fresh flag,
@@ -280,7 +268,6 @@ public final class QuestLifecycleHandler {
 
     @SubscribeEvent
     public static void onServerStopped(ServerStoppedEvent event) {
-        QuestWebServer.stop();
         EditModeTracker.clearAll();
         storage = null;
     }
