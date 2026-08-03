@@ -102,7 +102,7 @@ public record RewardDraft(
     public QuestReward toReward() {
         try {
             return switch (type) {
-                case ITEM -> new ItemReward(new ResourceLocation(value), Math.max(1, count), scope);
+                case ITEM -> new ItemReward(new ResourceLocation(value), Math.max(1, count), null, scope);
                 case XP -> new XpReward(Math.max(0, count), levels, scope);
                 case COMMAND -> new CommandReward(value == null ? "" : value, scope);
                 case GRANT_STAGE -> new GrantStageReward(value == null ? "" : value, scope);
@@ -122,7 +122,10 @@ public record RewardDraft(
     /** Build a draft from a live reward, round-tripping unknown types via
      *  {@link QuestReward#writeJson(JsonObject)} into {@code aux}. */
     public static RewardDraft fromReward(QuestReward r) {
-        if (r instanceof ItemReward it) {
+        // NBT item rewards fall through to the verbatim branch: the ITEM form row
+        // only edits id/count/scope, so round-tripping one through Type.ITEM would
+        // silently drop its tag (composed tools, named gear) on the next save.
+        if (r instanceof ItemReward it && it.nbt() == null) {
             return new RewardDraft(Type.ITEM, it.item().toString(), it.count(), false, it.scope(), "");
         }
         if (r instanceof XpReward xp) {

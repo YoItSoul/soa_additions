@@ -97,7 +97,7 @@ public final class Quests {
 
     // ---------- reward shortcuts (default PLAYER scope) ----------
     public static QuestReward itemReward(String item, int count) {
-        return new ItemReward(new ResourceLocation(item), count, RewardScope.PLAYER);
+        return new ItemReward(new ResourceLocation(item), count, null, RewardScope.PLAYER);
     }
     public static QuestReward xp(int amount) { return new XpReward(amount, false, RewardScope.PLAYER); }
     public static QuestReward levels(int amount) { return new XpReward(amount, true, RewardScope.PLAYER); }
@@ -107,7 +107,7 @@ public final class Quests {
 
     // ---------- explicitly team-scoped variants ----------
     public static QuestReward teamItem(String item, int count) {
-        return new ItemReward(new ResourceLocation(item), count, RewardScope.TEAM);
+        return new ItemReward(new ResourceLocation(item), count, null, RewardScope.TEAM);
     }
     public static QuestReward teamXp(int amount) { return new XpReward(amount, false, RewardScope.TEAM); }
     public static QuestReward teamLevels(int amount) { return new XpReward(amount, true, RewardScope.TEAM); }

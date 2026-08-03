@@ -1770,7 +1770,10 @@ public final class QuestBookScreen extends Screen {
             for (var reward : q.rewards()) {
                 if (line >= y + h - 30) break;
                 if (reward instanceof com.soul.soa_additions.quest.reward.ItemReward ir) {
-                    ItemStack stack = new ItemStack(BuiltInRegistries.ITEM.get(ir.item()));
+                    // Single-item copy: the count is drawn as the "Nx " text
+                    // prefix below, not as a stack-size overlay on the icon.
+                    ItemStack stack = ir.toStack();
+                    if (!stack.isEmpty()) stack.setCount(1);
                     if (!stack.isEmpty()) {
                         // Draw a 10×10 inline icon so the reward is visually
                         // identifiable at a glance; the name stays as a

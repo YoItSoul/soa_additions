@@ -154,8 +154,8 @@ public final class SoaJeiPlugin implements IModPlugin {
                 List<ItemStack> rewards = new ArrayList<>();
                 for (var reward : quest.rewards()) {
                     if (reward instanceof com.soul.soa_additions.quest.reward.ItemReward ir) {
-                        var item = ForgeRegistries.ITEMS.getValue(ir.item());
-                        if (item != null && item != Items.AIR) rewards.add(new ItemStack(item, ir.count()));
+                        ItemStack stack = ir.toStack();
+                        if (!stack.isEmpty()) rewards.add(stack);
                     } else if (reward instanceof com.soul.soa_additions.quest.reward.CommandReward cr) {
                         ItemStack given = parseGiveCommand(cr.command());
                         if (given != null) rewards.add(given);
