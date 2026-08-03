@@ -85,7 +85,11 @@ public final class AntiCheatHandler {
             "reload", "datapack", "save-all", "saveall", "save-on", "saveon",
             "save-off", "saveoff", "stop", "publish",
             // diagnostics
-            "debug", "perf"
+            "debug", "perf",
+            // player self-service — /unstuck (see UnstuckCommand) kills the
+            // caller and does nothing else. That's a penalty, not a progression
+            // bypass, so OPs can run it unflagged.
+            "unstuck"
     );
 
     /**
