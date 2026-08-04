@@ -40,6 +40,7 @@ public final class SoaAdditions {
         com.soul.soa_additions.config.QuestBookConfig.register();
         com.soul.soa_additions.config.HeadshotConfig.register();
         com.soul.soa_additions.config.LiteModeConfig.register();
+        com.soul.soa_additions.config.CyclicFisherConfig.register();
 
         ModBlocks.register(modEventBus);
         com.soul.soa_additions.taiga.TaigaBlocks.register(modEventBus);
@@ -81,6 +82,9 @@ public final class SoaAdditions {
         // GC tick rules (motion clamp, boss y-cap, effect hygiene, portal
         // gates) — ported from KubeJS tick handlers in 3.58.3, see SoaTickRules.
         MinecraftForge.EVENT_BUS.register(com.soul.soa_additions.event.SoaTickRules.class);
+        // Harvest Moon luck boon — grants the vanilla Luck attribute for the
+        // night, which is where hand-cast fishing reads player luck from.
+        MinecraftForge.EVENT_BUS.register(com.soul.soa_additions.nyx.event.HarvestMoonLuck.class);
         // GC endgame admin commands (/executor, /infinitykill) — see GcParityCommands.
         MinecraftForge.EVENT_BUS.register(com.soul.soa_additions.command.GcParityCommands.class);
         com.soul.soa_additions.loot.LootModifierSerializers.register(modEventBus);
@@ -155,6 +159,11 @@ public final class SoaAdditions {
     }
 
     private void onLoadComplete(final FMLLoadCompleteEvent event) {
+        // Cyclic Fishing Net x Aquaculture. Deferred to load-complete because it
+        // reports on mixin application, which is only knowable once every mod is
+        // constructed and the transformer has run. Logs what it found either way.
+        com.soul.soa_additions.cyclicaqua.CyclicAquaFisher.detect();
+
         // Fire one telemetry report per launch, async, daemon thread. No startup cost.
         String mcVersion;
         try {

@@ -4365,6 +4365,8 @@
   "soa_additions.tablet_of_enlightenment.tooltip.4": "§dPut this into a crafting table to duplicate it.",
   "soa_additions.tablet_of_enlightenment.tooltip.5": "§cCan only be used by the owner.",
   "soa_additions.tablet_of_enlightenment.unlock": "You unlocked game stage:",
+  "tooltip.soa_additions.cursed_skull": "§cThe Cursed Skull",
+  "tooltip.soa_additions.unknown_item": "§5§ka§r §dUnknown Item §5§ka§r",
   "tooltip.soa_additions.modifier_tome.modifier": "%s (Level %d)",
   "tooltip.soa_additions.modifier_tome.ready": "Ready to Upgrade!",
   "tooltip.soa_additions.sacrifice_amulet.lp": "Stored LP: %s / %s",

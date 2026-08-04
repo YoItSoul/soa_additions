@@ -198,6 +198,17 @@ dependencies {
 
     // Thin Air — target of the AirQualityCacheMixin perf patch
     compileOnly fg.deobf("maven.modrinth:thin-air:v8.1.7-1.20.1-Forge")
+
+    // Cyclic + Aquaculture — the two halves of the Fishing Net integration
+    // (com.soul.soa_additions.cyclicaqua). Cyclic supplies the TileFisher mixin
+    // target and its chance config; Aquaculture supplies hooks, bait and the
+    // loot tables. Both are compile-only and every class that names them lives
+    // behind the CyclicAquaFisher.isActive() gate, so neither is required at
+    // runtime. Both coordinates sha1-verified byte-identical to the pack's jars:
+    // Cyclic     f5e2a09fea3345f0bd891b613452d6ccb64b9865
+    // Aquaculture 308a0e92401e29bdb9cae24532a3b07a1bf6e757
+    compileOnly fg.deobf("maven.modrinth:cyclic:1.20.1-1.13.7")
+    compileOnly fg.deobf("maven.modrinth:aquaculture:2.5.7")
 }
 
 // Bundle the SoA Radiance shaderpack (repo-root SoA_Radiance/, the canonical

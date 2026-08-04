@@ -30,6 +30,8 @@ public final class NyxConfig {
     public static final ForgeConfigSpec.BooleanValue HARVEST_MOON_ON_FULL;
     public static final ForgeConfigSpec.IntValue HARVEST_MOON_GROW_AMOUNT;
     public static final ForgeConfigSpec.IntValue HARVEST_MOON_GROW_INTERVAL;
+    public static final ForgeConfigSpec.DoubleValue HARVEST_MOON_LUCK;
+    public static final ForgeConfigSpec.BooleanValue HARVEST_MOON_PLAYER_LUCK;
     public static final ForgeConfigSpec.BooleanValue MOON_EVENT_TINT;
     public static final ForgeConfigSpec.ConfigValue<List<? extends Integer>> LUNAR_WATER_TICKS;
     public static final ForgeConfigSpec.DoubleValue METEOR_CHANCE;
@@ -108,6 +110,17 @@ public final class NyxConfig {
         HARVEST_MOON_START_NIGHT = b.defineInRange("harvestMoonStartNight", 1, 0, 1000);
         HARVEST_MOON_INTERVAL = b.defineInRange("harvestMoonInterval", 0, 0, 1000);
         HARVEST_MOON_GRACE = b.defineInRange("harvestMoonGracePeriod", 4, 0, 1000);
+        HARVEST_MOON_LUCK = b.comment(
+                        "Luck granted for the night of a Harvest Moon. Applied as the vanilla Luck",
+                        "attribute to players in a dimension the moon is running in, and added to the",
+                        "Cyclic Fishing Net's own roll, which has no player to read it from.",
+                        "Luck mainly steers fishing: it pushes the roll toward treasure and away from",
+                        "junk. 0 disables the boon entirely.")
+                .defineInRange("harvestMoonLuckBonus", 1.0, 0.0, 64.0);
+        HARVEST_MOON_PLAYER_LUCK = b.comment(
+                        "Give players the Luck attribute for the duration of a Harvest Moon. Turn off",
+                        "to leave the boon to automated fishing only.")
+                .define("harvestMoonPlayerLuck", true);
         b.pop();
 
         b.push("fallingStars");

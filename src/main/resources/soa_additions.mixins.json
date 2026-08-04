@@ -6,7 +6,13 @@
   "refmap": "",
   "mixins": [
     "thinair.AirQualityCacheMixin",
-    "solarflux.AvaritiaCompatRecipesMixin"
+    "solarflux.AvaritiaCompatRecipesMixin",
+    "cyclic.TileFisherMixin",
+    "itemstages.RestrictionDefaultsMixin",
+    "itemstages.RestrictionManagerAccessor"
+  ],
+  "client": [
+    "itemstages.ItemRendererUnknownMixin"
   ],
   "injectors": {
     "defaultRequire": 0
