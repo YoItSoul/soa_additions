@@ -39,7 +39,6 @@
     "blood_infused_iron": "novice_wizard",
     "crimsonite": "skilled_wizard",
     "end_steel": "novice_engineer",
-    "stellar_alloy": "wither_slayer",
     "enderium": "skilled_engineer",
     "lumium": "nether",
     "mirion": "abyssal_conquerer",
@@ -70,7 +69,9 @@
     "aeonsteel": "hardmode",
     "chromasteel": "awakened",
     "durasteel": "nether",
-    "gaiasteel": "wither_slayer"
+    "gaiasteel": "wither_slayer",
+    "stellar_alloy_gc": "wither_slayer",
+    "xu_withering": "wither_slayer"
   },
   "tool_types": {
     "smithery:sceptre": "wand_blueprint",
@@ -79,6 +80,6 @@
     "smithery:shuriken": "shuriken_blueprint"
   },
   "modifiers": {
-    "smithery:mending_moss": "hardmode"
+    "soa_additions:mending_moss": "hardmode"
   }
 }

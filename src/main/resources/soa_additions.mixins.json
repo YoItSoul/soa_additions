@@ -9,10 +9,8 @@
     "solarflux.AvaritiaCompatRecipesMixin",
     "cyclic.TileFisherMixin",
     "itemstages.RestrictionDefaultsMixin",
-    "itemstages.RestrictionManagerAccessor"
-  ],
-  "client": [
-    "itemstages.ItemRendererUnknownMixin"
+    "itemstages.RestrictionManagerAccessor",
+    "itemstages.RestrictionManagerReloadMixin"
   ],
   "injectors": {
     "defaultRequire": 0

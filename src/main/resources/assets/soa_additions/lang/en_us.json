@@ -4385,5 +4385,6 @@
   "item.soa_additions.music_disc_stencil": "Music Disc",
   "item.soa_additions.music_disc_stencil.desc": "Mangonade - Stencil",
   "item.soa_additions.music_disc_sunrise": "Music Disc",
-  "item.soa_additions.music_disc_sunrise.desc": "Mangonade - Sunrise"
+  "item.soa_additions.music_disc_sunrise.desc": "Mangonade - Sunrise",
+  "item.soa_additions.unknown_item": "Unknown Item"
 }

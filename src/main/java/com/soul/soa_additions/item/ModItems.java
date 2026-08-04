@@ -231,6 +231,24 @@ public final class ModItems {
     public static final RegistryObject<Item> ORB_OF_AVARICE = ITEMS.register("orb_of_avarice",
             com.soul.soa_additions.donor.DonorTokenItem::new);
 
+    /**
+     * Never obtainable — registered purely so that
+     * {@code assets/soa_additions/models/item/unknown_item.json} is baked as an
+     * ordinary item model, which is what
+     * {@link com.soul.soa_additions.itemstages.UnknownItemModels} swaps in for a
+     * staged non-block item. It was previously requested through
+     * {@code ModelEvent.RegisterAdditional}, which did not yield a model
+     * retrievable under {@code unknown_item#inventory}, so every hidden item fell
+     * through to the question-mark cube instead of the flat sprite.
+     *
+     * <p>Deliberately in no creative tab, which also keeps it out of JEI — JEI
+     * builds its ingredient list from creative tab contents. This mirrors
+     * {@code ModBlocks.UNKNOWN_BLOCK}, registered the same way for the same
+     * reason.</p>
+     */
+    public static final RegistryObject<Item> UNKNOWN_ITEM = ITEMS.register("unknown_item",
+            () -> new Item(new Item.Properties()));
+
     // ========== Singularities (chaotic stage) ==========
 
     public static final RegistryObject<Item> FLUX_SINGULARITY = stageItem("flux_singularity", false);
