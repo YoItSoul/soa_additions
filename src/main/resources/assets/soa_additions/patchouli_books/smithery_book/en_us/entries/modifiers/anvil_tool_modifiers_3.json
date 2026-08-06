@@ -1,0 +1,44 @@
+{
+  "name": "Anvil Modifiers — Tools (3)",
+  "icon": "minecraft:redstone",
+  "category": "smithery:modifiers",
+  "sortnum": 12,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "tconevo:artifact_unsealer",
+      "text": "Slowly self-repairs 1 durability every 10s while mining$(br2)$(l)Apply with:$() Plate of Unsealing at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Tconevo.artifact"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "draconicevolution:chaos_shard",
+      "text": "Adds 1 to 4 random bonus damage on hit$(br2)$(l)Apply with:$() Chaos Shard at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Tconevo.entropic"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "draconicevolution:wyvern_capacitor",
+      "text": "Sets the target on fire for 3 seconds on hit$(br2)$(l)Apply with:$() Wyvern Capacitor at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Tconevo.flux Burn"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "mekanismgenerators:solar_generator",
+      "text": "Repairs 1 durability every 100 ticks in daylight under open sky$(br2)$(l)Apply with:$() Solar Generator at an anvil.$(br)$(l)Goes on:$() tools$(br)$(l)Cost:$() one per level, single use",
+      "title": "Tconevo.photovoltaic"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "draconicevolution:draconic_capacitor",
+      "text": "Adds 3 bonus attack damage and 3 mining speed$(br2)$(l)Apply with:$() Draconic Capacitor at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Tconevo.primordial"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:cobweb",
+      "text": "Inflicts Slowness III for 2 seconds on hit$(br2)$(l)Apply with:$() Cobweb at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Webbed"
+    }
+  ]
+}

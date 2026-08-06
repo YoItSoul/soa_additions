@@ -1,0 +1,58 @@
+{
+  "name": "Material Traits 3",
+  "icon": "smithery:iron_pick_head",
+  "category": "soa_additions:traits",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Barrett",
+      "text": "Chance scaling with missing health to deal 1.5x damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Garfax"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Berserk",
+      "text": "Doubles bonus attack damage and mining speed$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Adamant"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Blasting",
+      "text": "8% chance per level to trigger a harmless explosion on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Fusewood"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Blind",
+      "text": "1% chance (3% at night) to inflict Blindness or Nausea on hit or block break$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Prometheum"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Blindbandit",
+      "text": "Adds +3 damage when attacking in darkness (light level below 5)$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Awakened (PlusTiC), Racheline, Wyvern Metal (PlusTiC)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Bloodlust",
+      "text": "§oThe weaker you are, the stronger I am! §r\\n§fDeal additional damage depending on the percentage of health that the target has lost.$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Heart Crystal, Ruby, Sakura Diamond"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Bloodymary",
+      "text": "Deals extra damage scaling with the target's missing health$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Bloodwood (PlusTiC), Signalum (PlusTiC)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Botanical",
+      "text": "Bonemeals adjacent growable blocks when breaking a block$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Livingwood (PlusTiC)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Bouncy",
+      "text": "Reduces fall distance by 50%$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Pink Slime"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Bouncy",
+      "text": "Negates fall damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Red Slime, Slime, Slimeknightium"
+    }
+  ]
+}

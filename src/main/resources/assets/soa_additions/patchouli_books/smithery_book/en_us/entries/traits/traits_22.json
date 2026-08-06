@@ -1,0 +1,58 @@
+{
+  "name": "Material Traits 22",
+  "icon": "smithery:iron_pick_head",
+  "category": "soa_additions:traits",
+  "sortnum": 21,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Spartan",
+      "text": "Below 33% HP deals up to 2.5x damage; as armor reduces up to 75% incoming damage$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Alubrass, Cincinnasite, Stellar Alloy, Terrax"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Spartan",
+      "text": "Below 33% HP deals up to 2.5x more damage and takes greatly reduced damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Alubrass, Cincinnasite, Stellar Alloy, Stellar Alloy"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Spiny",
+      "text": "Chance to prick melee attackers$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Coral, Flint"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Splintering",
+      "text": "Adds +2 bonus attack damage$(br2)$(l)Granted from:$() the tool's head$(br)$(l)Materials:$() Bone"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Splitting",
+      "text": "Adds 1 extra item to each block drop$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Bone, Stainless Steel"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Squeaky",
+      "text": "Deals no damage on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Alpha Fur, Cheese, Rubber, Sponge"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Stalwart",
+      "text": "Grants knockback resistance$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Knightmetal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Stalwart",
+      "text": "Grants knockback resistance$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Bedrock, Netherite, Stone"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Starfishy",
+      "text": "Heals 1 health every 2s while underwater$(br2)$(l)Granted from:$() the tool's head$(br)$(l)Materials:$() Enori (PlusTiC)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Steady",
+      "text": "Pushes the target away in your look direction on hit$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Dark Steel, End Steel, Ender Biotite, Knightmetal, Manganese Steel, Stainless Steel"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "_comment": "GreedyCraft 'Leveled Defence' (ore:plateHonor). The SAME Plate of Honor feeds Leveled Damage on tools; the anvil now resolves a source by whether the target is armour, so one item covers both exactly as GC's two forges did.",
+  "source_item": "soa_additions:plate_of_honor",
+  "modifier": "soa_additions:levelingdefense_trait",
+  "unit_value": 1
+}

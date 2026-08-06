@@ -115,7 +115,7 @@ public final class SoaSmitheryAlloys {
                 out("pigiron", 144));
 
         alloy("knightslime", 0,
-                List.of(sm("iron", 72), in("slime", 125), sm("stone", 144)),
+                List.of(sm("iron", 72), sm("slime", 125), sm("stone", 144)),
                 out("knightslime", 72));
 
         alloy("alubrass", 0,

@@ -1,0 +1,6 @@
+{
+  "_comment": "1.12 accepted any solar panel (AA/EnderIO/Mekanism/SFR); Mekanism's is the one this pack ships.",
+  "source_item": "mekanismgenerators:solar_generator",
+  "modifier": "soa_additions:tconevo.photovoltaic",
+  "unit_value": 1
+}

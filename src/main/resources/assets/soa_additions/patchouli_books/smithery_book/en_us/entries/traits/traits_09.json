@@ -1,0 +1,58 @@
+{
+  "name": "Material Traits 9",
+  "icon": "smithery:iron_pick_head",
+  "category": "soa_additions:traits",
+  "sortnum": 8,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Enderport",
+      "text": "30% chance to randomly teleport the target up to 16 blocks away on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Pulsating Iron"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Endspeed",
+      "text": "+3 mining speed$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Ender Crystal, Enderium (PlusTiC), Endrod, Mana Pearl"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Endurance",
+      "text": "Reduces incoming damage by 20% when it is below 5% of max health$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Durasteel, Insanium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Energized",
+      "text": "Move faster while worn$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Redstone"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Enlightened",
+      "text": "5% chance to drop an Aether ambrosium shard when mining$(br2)$(l)Granted from:$() the tool's head$(br)$(l)Materials:$() Holystone"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Established",
+      "text": "Adds +1 attack damage and +10% durability$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Emerald (PlusTiC), Essence-Infused, Knowledge, Osmium, Palis, Xu Enchanted Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Executioner",
+      "text": "§oMeet your end!§r\\n§fDirectly kills the opponent that has less than 20% (10% for bosses) of health.$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Chromasteel, Cosmilite, Orichalcos"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Featherweight",
+      "text": "Reduces fall distance by 50%$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Aeroite, Alubrass"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Festive",
+      "text": "Deals 1.5x damage against monsters$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Candy Cane"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Fiery",
+      "text": "Sets targets on fire$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Blaze"
+    }
+  ]
+}

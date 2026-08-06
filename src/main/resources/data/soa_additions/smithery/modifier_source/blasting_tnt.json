@@ -1,0 +1,6 @@
+{
+  "_comment": "GC/TConstruct 'Blasting' - 3 TNT per level in 1.12, so level_cost 3 with unit_value 1. TNT also feeds smithery:blast_resistant on armour (code-registered); the anvil picks by gear class.",
+  "source_item": "minecraft:tnt",
+  "modifier": "soa_additions:blasting_mining",
+  "unit_value": 1
+}

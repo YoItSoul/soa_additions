@@ -1,0 +1,6 @@
+{
+  "_comment": "1.12 botania:ancientwill(verac).",
+  "source_item": "botania:ancient_will_verac",
+  "modifier": "soa_additions:tconevo.gaia_will_verac_armor",
+  "unit_value": 1
+}

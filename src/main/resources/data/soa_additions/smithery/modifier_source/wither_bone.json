@@ -1,5 +1,9 @@
 {
+  "_comment": "ConArm 'Parasitic' (armour feeds off you to repair itself); ingredient tconstruct:materials:17 Necrotic Bone -> soa_additions:wither_bone. REPOINTED: this file currently maps wither_bone to soa_additions:necrotic, but GreedyCraft REMOVES the necrotic modifier (tweakersconstruct.cfg) while KEEPING the Necrotic Bone item, and ConArm Parasitic (same bone) is not removed.",
   "source_item": "soa_additions:wither_bone",
-  "modifier": "soa_additions:necrotic",
+  "modifier": "soa_additions:parasitic_armor",
+  "params": {
+    "interval_ticks": 600
+  },
   "unit_value": 1
 }

@@ -1,0 +1,58 @@
+{
+  "name": "Material Traits 31",
+  "icon": "smithery:iron_pick_head",
+  "category": "soa_additions:traits",
+  "sortnum": 30,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.stifling",
+      "text": "Inflicts Weakness for 3s on attackers when hit$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Shadowium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.sundering",
+      "text": "Inflicts Weakness for 60 ticks per level on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Darkwood, Essence-Infused, Livingrock, Nihilite"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.superdense",
+      "text": "Increases durability by 50%$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Draconium, Electronium, Red Matter"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.thundergod Wrath",
+      "text": "Strikes lightning on targets hit at full health or killed in one blow$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Weather Crystal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.ultradense",
+      "text": "Doubles durability$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Protonium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.warping",
+      "text": "15% chance to blind attackers and 5% chance to nauseate yourself when hit$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Nihilite, Osgloglas, Void Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.warping",
+      "text": "10% chance to inflict Darkness and Weakness; 5% chance to confuse yourself$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Osgloglas, Void Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.will Strength",
+      "text": "Grants Immortality while at full health$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Terrasteel"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.willful",
+      "text": "Increases durability by 15%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Crimsonite, Remorseful Gem, Sentient"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.willful",
+      "text": "Increases durability by 15%$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Crimsonite, Sentient"
+    }
+  ]
+}

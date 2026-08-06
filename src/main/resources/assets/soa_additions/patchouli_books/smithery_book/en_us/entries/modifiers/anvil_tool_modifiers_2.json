@@ -1,0 +1,80 @@
+{
+  "name": "Anvil Modifiers — Tools (2)",
+  "icon": "minecraft:redstone",
+  "category": "smithery:modifiers",
+  "sortnum": 11,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:lapis_block",
+      "text": "Each level boosts ore drops and mob drops, scaling like Fortune and Looting$(br2)$(l)Apply with:$() Block of Lapis Lazuli (counts 9), Lapis Lazuli at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() 96 per level, up to level 10",
+      "title": "Lapis Blessing"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:plate_of_honor",
+      "text": "§oGo big or go home!§r\\n§fGet increasingly high damage as your tool levels up.$(br2)$(l)Apply with:$() §6Plate of Honor at an anvil.$(br)$(l)Goes on:$() tools$(br)$(l)Cost:$() one per level, single use",
+      "title": "Leveled Damage"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:red_mushroom",
+      "text": "Inflicts Nausea for 5s on hit$(br2)$(l)Apply with:$() Red Mushroom at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Magicmushroom"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:mending_moss",
+      "text": "Repairs 1 durability every 200 ticks while breaking blocks$(br2)$(l)Apply with:$() Mending Moss at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Mending Moss"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:netherite_scrap",
+      "text": "Breaks nearby matching blocks in a radius, up to 32 blocks$(br2)$(l)Apply with:$() Netherite Scrap at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Oreexcavate"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "tconstruct:obsidian_reinforcement",
+      "text": "Increases durability per level$(br2)$(l)Apply with:$() Obsidian Reinforcement (counts 4) at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, up to level 3",
+      "title": "Reinforced"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:resistance_mat",
+      "text": "Reduces all damage taken per level, per piece$(br2)$(l)Apply with:$() Resistance (counts 4) at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Resistant"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:quartz",
+      "text": "Adds bonus attack damage on hit$(br2)$(l)Apply with:$() Nether Quartz, Block of Quartz (counts 4) at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() 64 per level, up to level 10",
+      "title": "Sharp"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:shulker_shell",
+      "text": "Applies Levitation to the target for 2 seconds on hit$(br2)$(l)Apply with:$() Shulker Shell at an anvil.$(br)$(l)Goes on:$() tools$(br)$(l)Cost:$() one per level, single use",
+      "title": "Shulking"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:silky_jewel",
+      "text": "Harvests blocks intact$(br2)$(l)Apply with:$() Silky Jewel at an anvil.$(br)$(l)Goes on:$() tools$(br)$(l)Cost:$() one per level, single use",
+      "title": "Silky"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:consecrated_soil",
+      "text": "Adds 3 bonus damage against undead$(br2)$(l)Apply with:$() Consecrated Soil at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Smite"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:nether_star",
+      "text": "Stays in your inventory through one death, then is spent$(br2)$(l)Apply with:$() Nether Star at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Soulbound"
+    }
+  ]
+}

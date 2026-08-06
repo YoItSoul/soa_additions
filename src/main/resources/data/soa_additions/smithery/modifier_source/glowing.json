@@ -1,0 +1,6 @@
+{
+  "_comment": "TConstruct/Constructs Armory 1.12 Glowing (tools): two glowstone dust + an eye of ender together. Pre-crafted into soa_additions:glowing_eye so the vanilla anvil's single ingredient slot can carry all three.",
+  "source_item": "soa_additions:glowing_eye",
+  "modifier": "soa_additions:glowing",
+  "unit_value": 1
+}

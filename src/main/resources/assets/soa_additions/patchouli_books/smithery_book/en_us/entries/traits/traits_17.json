@@ -1,0 +1,58 @@
+{
+  "name": "Material Traits 17",
+  "icon": "smithery:iron_pick_head",
+  "category": "soa_additions:traits",
+  "sortnum": 16,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Morganlefay",
+      "text": "Adds +0.5 to +4 random bonus damage on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Diamatine (PlusTiC), Morganine"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Motion",
+      "text": "§oNewton's second law!§r\\n§fGreatly increases damage and knockback when sprinting, but you also become more vulnerable!$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Dimensional Shard, Draconium, Electronium, Nickel, Vibrant Alloy"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Motion",
+      "text": "Deals 1.33x damage while sprinting; as armor reduces incoming damage 7% while sprinting$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Dimensional Shard, Draconium, Electronium, Nickel, Vibrant Alloy"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Mundane Armor1",
+      "text": "Reduces incoming damage by 15% when the attacker is unarmed$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Alpha Fur, Dark Steel, End Steel"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Musicofthespheres",
+      "text": "Plays a random note-block sound on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aethium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Mutate",
+      "text": "Broken natural blocks sometimes mutate into something else instead of dropping.$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Nucleum"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Naphtha",
+      "text": "Sets the target on fire for 5s on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Flame String (PlusTiC), Infernium, Nylon Cloth"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Naturebound",
+      "text": "Slowly repairs armor over grass, leaves, or moss, but decays on other ground$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Yrdeen"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Naturesblessing",
+      "text": "Heals you for 10% of the damage you deal on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Cytosinite, Kyronite, Peridot, Terra Alloy, Terrestrial Gem"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Naturespower",
+      "text": "Sets the target on fire for 3s on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Adamant, Cytosinite, Terrestrial Gem, Topaz"
+    }
+  ]
+}

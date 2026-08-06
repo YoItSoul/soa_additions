@@ -704,8 +704,6 @@ public final class SoaSmitheryMelting {
         recipe("minecraft:glowstone",                   "soa_additions:glowstone", 1000);
         recipe("minecraft:ender_pearl",                 "soa_additions:ender", 250);
         recipe("minecraft:rotten_flesh",                "smithery:blood", 40);
-        recipe("minecraft:slime_ball",                  "soa_additions:slime", 125);
-        recipe("minecraft:slime_block",                 "soa_additions:slime", 1125);
         recipe("minecraft:magma_block",                 "soa_additions:lava", 250);
     }
 

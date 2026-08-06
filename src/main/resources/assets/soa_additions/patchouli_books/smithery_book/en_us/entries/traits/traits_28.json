@@ -1,0 +1,58 @@
+{
+  "name": "Material Traits 28",
+  "icon": "smithery:iron_pick_head",
+  "category": "soa_additions:traits",
+  "sortnum": 27,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.infinitum",
+      "text": "Adds 10 bonus attack damage$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Cosmilite, Infinity Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.juggernaut",
+      "text": "Scales damage with your missing health (currently inactive)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Gelid Enderium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.luminiferous",
+      "text": "Applies Glowing to targets on hit, scaling duration with level$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Lumium, Refined Glowstone, Rubber Band, Sunnarium, Yellorium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.mana Affinity",
+      "text": "Self-repairs 1 durability every 10 seconds while worn$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Elementium, Manasteel, Terrasteel"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.mana Infused",
+      "text": "Slowly self-repairs 1 durability every 30 seconds$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Durasteel, Elementium, Gaia, Gaiasteel, Manasteel, Mithril, Orichalcos, Terrasteel"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.mana Infused",
+      "text": "Slowly self-repairs 1 durability every 200 ticks while mining$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Dragonstone, Durasteel, Elementium, Gaia, Gaiasteel, Mana Diamond, Mana Pearl, Mana String and 4 more"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.modifiable",
+      "text": "Allows the item to receive additional modifiers$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Livingwood, Lonsdaleite, Mica, Quicksilver, Thaumium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.modifiable1",
+      "text": "Provides extra modifier slots for further upgrades$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Adaminite, Aeonsteel, Chocolate, Mithrillium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.modifiable2",
+      "text": "Provides an extra upgrade slot with no active effect$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Chromasteel, Mithminite"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.mortal Wounds",
+      "text": "Inflicts Mortal Wounds on hit, suppressing enemy healing for 100 ticks per level$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Enderium, Gaia, Mithril, Pink Metal, Terrasteel"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "name": "Material Traits 34",
+  "icon": "smithery:iron_pick_head",
+  "category": "soa_additions:traits",
+  "sortnum": 33,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Vindictive",
+      "text": "Adds 2 bonus attack damage$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Chaotic Metal (PlusTiC), Emeradic (PlusTiC), Erodium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Vision",
+      "text": "§oSee through the darkness!§r\\n§fGain night vision when holding this tool.$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Asgardium, Meteor, Vibranium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Vision",
+      "text": "Grants Night Vision while worn$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Asgardium, Meteor, Vibranium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Voltaic",
+      "text": "20% chance when hit to shock nearby enemies for 3 damage$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Fluix"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Warded",
+      "text": "Reduces magic damage taken$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Lapis"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Warm",
+      "text": "Reduces damage by 5% in snowy biomes, or 7.5% if also raining$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Alpha Fur"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Warp Drain",
+      "text": "Every 100 ticks removes a harmful effect and grants Regeneration$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Primal Metal, Terrestrial Gem"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Whirl",
+      "text": "Removes all water blocks within 3 blocks when breaking a block$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Tritonite"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Writable",
+      "text": "Provides extra modifier slots for customization$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Paper, Redstone Alloy"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Writable1",
+      "text": "Provides extra modifier slots for further customization$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Knowledge"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "name": "Anvil Modifiers — Tools",
+  "icon": "minecraft:redstone",
+  "category": "smithery:modifiers",
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:fermented_spider_eye",
+      "text": "Adds 5 bonus damage against arthropod mobs$(br2)$(l)Apply with:$() Fermented Spider Eye at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Bane of Arthropods"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:obsidian_pearl",
+      "text": "10% chance to drop the victim's head on kill$(br2)$(l)Apply with:$() Obsidian Pearl at an anvil.$(br)$(l)Goes on:$() tools$(br)$(l)Cost:$() one per level, up to level 10",
+      "title": "Beheading"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:tnt",
+      "text": "Mines any block at full speed, but the block drops nothing$(br2)$(l)Apply with:$() TNT at an anvil.$(br)$(l)Goes on:$() tools$(br)$(l)Cost:$() 3 per level, up to level 3",
+      "title": "Blasting"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:creative_modifier",
+      "text": "No description.$(br2)$(l)Apply with:$() §dCreative Modifier at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, up to level 999",
+      "title": "Creative"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:diamond",
+      "text": "+50% durability$(br2)$(l)Apply with:$() Diamond at an anvil.$(br)$(l)Goes on:$() tools$(br)$(l)Cost:$() one per level, single use",
+      "title": "Diamond"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:emerald",
+      "text": "Increases durability by 50%$(br2)$(l)Apply with:$() Emerald at an anvil.$(br)$(l)Goes on:$() tools$(br)$(l)Cost:$() one per level, single use",
+      "title": "Emerald"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:ender_pearl",
+      "text": "Chance to teleport your target a short distance on hit$(br2)$(l)Apply with:$() Ender Pearl at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Ender Affinity"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:cod",
+      "text": "Arrows fired from this weapon ignore water drag$(br2)$(l)Apply with:$() Raw Cod at an anvil.$(br)$(l)Goes on:$() tools$(br)$(l)Cost:$() 2 per level, single use",
+      "title": "Fins"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:blue_ice",
+      "text": "Freezes water beneath your steps$(br2)$(l)Apply with:$() Blue Ice at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, up to level 2",
+      "title": "Frost Walker"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:glowing_eye",
+      "text": "Applies Glowing to the target for 10 seconds on hit$(br2)$(l)Apply with:$() Glowing Eye at an anvil.$(br)$(l)Goes on:$() tools$(br)$(l)Cost:$() one per level, single use",
+      "title": "Glowing"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:redstone",
+      "text": "Each level adds +1.5 mining and attack speed$(br2)$(l)Apply with:$() Redstone Dust, Block of Redstone (counts 9) at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() 96 per level, up to level 10",
+      "title": "Haste"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:piston",
+      "text": "Hits send targets flying$(br2)$(l)Apply with:$() Piston, Sticky Piston at an anvil.$(br)$(l)Goes on:$() tools$(br)$(l)Cost:$() 10 per level, up to level 99",
+      "title": "Knockback"
+    }
+  ]
+}

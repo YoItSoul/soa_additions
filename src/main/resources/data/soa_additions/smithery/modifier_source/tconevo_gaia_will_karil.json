@@ -1,0 +1,6 @@
+{
+  "_comment": "1.12 botania:ancientwill(karil).",
+  "source_item": "botania:ancient_will_karil",
+  "modifier": "soa_additions:tconevo.gaia_will_karil_armor",
+  "unit_value": 1
+}

@@ -1,0 +1,80 @@
+{
+  "name": "Anvil Modifiers — Armor (2)",
+  "icon": "minecraft:amethyst_shard",
+  "category": "smithery:modifiers",
+  "sortnum": 12,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:wither_bone",
+      "text": "Repairs 1 durability every 600 ticks while worn$(br2)$(l)Apply with:$() §8Wither Bone at an anvil.$(br)$(l)Goes on:$() armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Parasitic"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "tconstruct:obsidian_reinforcement",
+      "text": "Increases durability per level$(br2)$(l)Apply with:$() Obsidian Reinforcement (counts 4) at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, up to level 3",
+      "title": "Reinforced"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:resistance_mat",
+      "text": "Reduces all damage taken per level, per piece$(br2)$(l)Apply with:$() Resistance (counts 4) at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Resistant"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:quartz",
+      "text": "Adds bonus attack damage on hit$(br2)$(l)Apply with:$() Nether Quartz, Block of Quartz (counts 4) at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() 64 per level, up to level 10",
+      "title": "Sharp"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:shulker_shell",
+      "text": "Reduces incoming damage by 5%$(br2)$(l)Apply with:$() Shulker Shell at an anvil.$(br)$(l)Goes on:$() armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Shulkerweight"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:consecrated_soil",
+      "text": "Adds 3 bonus damage against undead$(br2)$(l)Apply with:$() Consecrated Soil at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Smite"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:nether_star",
+      "text": "Stays in your inventory through one death, then is spent$(br2)$(l)Apply with:$() Nether Star at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Soulbound"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:cobweb",
+      "text": "Melee attackers are slowed$(br2)$(l)Apply with:$() Cobweb at an anvil.$(br)$(l)Goes on:$() armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Sticky"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "forestry:woven_silk",
+      "text": "Negates all damage taken from bees$(br2)$(l)Apply with:$() Woven Silk at an anvil.$(br)$(l)Goes on:$() armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Tconevo.apiary Affinity"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "tconevo:artifact_unsealer",
+      "text": "Slowly self-repairs 1 durability every 10s while mining$(br2)$(l)Apply with:$() Plate of Unsealing at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Tconevo.artifact"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "draconicevolution:dragon_heart",
+      "text": "Reduces incoming damage by 10%$(br2)$(l)Apply with:$() Dragon Heart at an anvil.$(br)$(l)Goes on:$() armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Tconevo.chaos Resistance"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "draconicevolution:chaos_shard",
+      "text": "Adds 1 to 4 random bonus damage on hit$(br2)$(l)Apply with:$() Chaos Shard at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Tconevo.entropic"
+    }
+  ]
+}

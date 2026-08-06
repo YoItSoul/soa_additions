@@ -1,0 +1,9 @@
+{
+  "_comment": "GC/TConstruct 'Bane of Arthropods'. Same ingredient as 1.12. The upstream typo in the id ('arthopods') is preserved on both sides.",
+  "source_item": "minecraft:fermented_spider_eye",
+  "modifier": "soa_additions:bane_of_arthopods",
+  "params": {
+    "damage": 7.0
+  },
+  "unit_value": 1
+}

@@ -1,0 +1,58 @@
+{
+  "name": "Material Traits 10",
+  "icon": "smithery:iron_pick_head",
+  "category": "soa_additions:traits",
+  "sortnum": 9,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "First Guard",
+      "text": "Reduces incoming damage by 10% (up to 80%)$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Chromasteel, Ethaxium, Coalescence Matrix, Heart Crystal, Titanium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Flammable",
+      "text": "Sets targets on fire for 3 seconds on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Fierymetal, Hephaestite, Infernium, Magmaslime, Meteor, Thorium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Fortified",
+      "text": "§oThicc armor!§r\\n§fGet resistant II effect when successfully blocking attacks.$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Adamant, Durasteel, Stainless Steel"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Fortified",
+      "text": "Grants Resistance II after each hit and reduces incoming projectile damage 15%$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Adamant, Modularium, Stainless Steel, Titanium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Fracture",
+      "text": "Chance to shatter a line of blocks behind the one you mine, scaling with remaining durability$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Fractum"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Fractured",
+      "text": "Reduces durability by 10%$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Bone"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Fragile",
+      "text": "On block break, durability-scaled chance to randomly damage or repair the tool$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Triberium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Freezing",
+      "text": "25% chance to inflict Slowness for 5 seconds on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Constantan, Cryonium, Ice, Rime, Tanzanite"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Fruitsalad",
+      "text": "5% chance to drop an apple when breaking blocks$(br2)$(l)Granted from:$() the tool's head$(br)$(l)Materials:$() Kyronite"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Gamble",
+      "text": "45% chance for 2x outgoing damage; armor: random chance to take 2x or 0.5x incoming$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Vibranium"
+    }
+  ]
+}

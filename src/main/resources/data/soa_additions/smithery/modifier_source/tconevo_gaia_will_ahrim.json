@@ -1,0 +1,6 @@
+{
+  "_comment": "1.12 botania:ancientwill(ahrim); Botania split the metas into per-will items in 1.20.",
+  "source_item": "botania:ancient_will_ahrim",
+  "modifier": "soa_additions:tconevo.gaia_will_ahrim_armor",
+  "unit_value": 1
+}

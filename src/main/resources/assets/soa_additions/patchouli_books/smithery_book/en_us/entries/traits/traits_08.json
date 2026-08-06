@@ -1,0 +1,58 @@
+{
+  "name": "Material Traits 8",
+  "icon": "smithery:iron_pick_head",
+  "category": "soa_additions:traits",
+  "sortnum": 7,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Dreadplague",
+      "text": "Inflicts Wither II and Poison for 5s on hit$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Dreadium, Ethaxium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Dreadpurity",
+      "text": "Adds +4 damage against undead enemies$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Abyssalnite, Dreadium, Ethaxium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Duritos",
+      "text": "+20% durability$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Durasteel, Invar, Supremium, Manganese, Obsidian, Obsidiorite, Refined Obsidian, Refinedobsidian and 2 more"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Duritos Ranch",
+      "text": "Increases durability by 20%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Astral Metal, Durasteel, Manganese, Obsidiorite, Refined Obsidian, Scorched, Terra Alloy, Vibranium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Ecological",
+      "text": "Slowly repairs 1 durability every 30 seconds while worn$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Bloodwood, Cytosinite, Terra Alloy"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Ecological",
+      "text": "Slowly repairs itself while worn$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Bloodwood, Bloodwood (PlusTiC), Cytosinite, Darkwood, Darkwood (PlusTiC), Dreamwood, Fusewood, Fusewood (PlusTiC) and 6 more"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Ecological",
+      "text": "Slowly repairs itself while worn$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Wood"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Elemental",
+      "text": "On hit randomly sets afire 3s, applies Slowness II, or Poison for 3s$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Adamant, Elementium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Enderference",
+      "text": "30% chance to randomly teleport the target up to 16 blocks on hit$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Dark Steel, Desh, End Steel, Ender Biotite, Enderium, Enderium (PlusTiC), Endstone, Pulsating Crystal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Enderport",
+      "text": "30% chance on hit to randomly teleport the target up to 16 blocks away$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Ender Biotite, Endstone, Pulsating Iron"
+    }
+  ]
+}

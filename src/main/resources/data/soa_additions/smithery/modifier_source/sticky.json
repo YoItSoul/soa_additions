@@ -1,0 +1,10 @@
+{
+  "_comment": "ConArm 'Sticky' (slows anyone who attacks you). smithery:sticky already implements exactly this on onDamaged but ships no source. Cobweb is claimed by the tool-side Webbed, so honey block carries it. 1.12 ingredient restored: Sticky and Knockback shared the slime ball; the anvil now picks by gear class. 1.12 ingredient restored via soa_exports lookup.",
+  "source_item": "minecraft:cobweb",
+  "modifier": "smithery:sticky",
+  "params": {
+    "duration_ticks": 60,
+    "amplifier": 1
+  },
+  "unit_value": 1
+}

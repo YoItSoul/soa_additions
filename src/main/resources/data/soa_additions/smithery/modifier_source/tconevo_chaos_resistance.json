@@ -1,0 +1,6 @@
+{
+  "_comment": "TConEvo 'Chaos Resistance' (armour). Ingredient ported 1:1.",
+  "source_item": "draconicevolution:dragon_heart",
+  "modifier": "soa_additions:tconevo.chaos_resistance_armor",
+  "unit_value": 1
+}

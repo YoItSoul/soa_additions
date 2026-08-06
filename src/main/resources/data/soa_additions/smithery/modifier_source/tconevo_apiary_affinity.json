@@ -1,0 +1,6 @@
+{
+  "_comment": "TConEvo 'Apiary Affinity' (armour). Ingredient ported 1:1 (forestry:craftingMaterial woven_silk -> forestry:woven_silk).",
+  "source_item": "forestry:woven_silk",
+  "modifier": "soa_additions:tconevo.apiary_affinity_armor",
+  "unit_value": 1
+}

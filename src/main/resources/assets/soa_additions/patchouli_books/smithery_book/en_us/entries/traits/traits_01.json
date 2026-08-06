@@ -1,0 +1,58 @@
+{
+  "name": "Material Traits 1",
+  "icon": "smithery:iron_pick_head",
+  "category": "soa_additions:traits",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Absorbent",
+      "text": "Restores air supply while underwater$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Aqualite, Aquamarine"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Alien",
+      "text": "10% chance to repair 1 durability when breaking a block$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Desh, Iridium, Obsidiorite"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Alluring",
+      "text": "Draws experience orbs toward you$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Gold"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Ambitious",
+      "text": "Multiplies XP gained from kills by 1.5x$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Energetic Alloy, Knowledge, Sakura Diamond, Xu Enchanted Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Analysing",
+      "text": "10% chance to void drops on break or kill, and randomizes XP amounts$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Duranite"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Anticorrosion",
+      "text": "25% chance to inflict Poison for 5s on hit$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Enori (PlusTiC), Modularium, Osmiridium, Platinum (PlusTiC), Stainless Steel, Titanium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Antigrav",
+      "text": "Applies Levitation for 1 second to targets on hit$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Aeroite, Gravitite"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Apocalypse",
+      "text": "25% chance to inflict Wither for 5s on hit$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Adamant, Awakened (PlusTiC), Infinity Avaritia (PlusTiC), Remorseful Gem, Thorium, Witherbone"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Aquadynamic",
+      "text": "Swim faster while worn$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aqualite, Aquamarine, Guardianscale, Sapphire, Sapphire Aoa"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Aquadynamic",
+      "text": "Swim faster while worn$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Prismarine"
+    }
+  ]
+}

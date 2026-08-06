@@ -1,0 +1,6 @@
+{
+  "_comment": "TConstruct 1.12 Mending Moss (tconstruct:materials@19), max 3 levels, one moss per level.",
+  "source_item": "soa_additions:mending_moss",
+  "modifier": "soa_additions:mending_moss",
+  "unit_value": 1
+}

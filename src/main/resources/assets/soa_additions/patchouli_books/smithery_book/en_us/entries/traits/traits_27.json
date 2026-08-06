@@ -1,0 +1,58 @@
+{
+  "name": "Material Traits 27",
+  "icon": "smithery:iron_pick_head",
+  "category": "soa_additions:traits",
+  "sortnum": 26,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.evolved",
+      "text": "Adds +2 attack damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Chaotic Metal, Cosmilite, Draconic Metal, Wyvern Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.executor",
+      "text": "Up to 20% more damage per level scaling with the target's missing health$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aethium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.fae Voice",
+      "text": "10% chance to summon a Botania pixie to attack the target on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Dragonstone, Elementium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.fae Voice",
+      "text": "10% chance to summon a Botania pixie against attackers when hurt$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Elementium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.fertilizing",
+      "text": "Bonemeals adjacent growable plants when you break a block$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Apatite, Cytosinite"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.foot Fleet",
+      "text": "Grants Speed for 3s on a damaging hit, scaling with level$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Ghostwood, Polyethylene, Titanium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.gaia Wrath",
+      "text": "Sets the target on fire for 3 seconds on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Gaia, Gaiasteel, Orichalcos, Terrasteel"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.gale Force",
+      "text": "Increases movement speed by 4%$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Chaotic Metal, Draconic Metal, Infinity Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.gale Force Armor1",
+      "text": "Grants +6% movement speed$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Cosmilite, Primal Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.impact Force",
+      "text": "Adds bonus damage scaling with your movement speed$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Advanced Alloy"
+    }
+  ]
+}

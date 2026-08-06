@@ -1,0 +1,6 @@
+{
+  "_comment": "TConstruct 1.12 Smite: Consecrated Soil (tconstruct:soil@4), 24 per level, up to 5 levels.",
+  "source_item": "soa_additions:consecrated_soil",
+  "modifier": "soa_additions:smite",
+  "unit_value": 1
+}

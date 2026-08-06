@@ -1,0 +1,10 @@
+{
+  "_comment": "GreedyCraft 'Excavate' (oeintegration:excavatemodifier): vanilla recipe removed, re-gated behind gear recipes, max 5 levels. soa_additions:oreexcavate vein-mines same-block neighbours. Netherite scrap is an unclaimed, deliberately non-trivial source; consider also gating it via smithery/stages.",
+  "source_item": "minecraft:netherite_scrap",
+  "modifier": "soa_additions:oreexcavate",
+  "params": {
+    "radius": 1,
+    "max_blocks": 32
+  },
+  "unit_value": 1
+}

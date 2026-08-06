@@ -1,0 +1,6 @@
+{
+  "_comment": "1.12 botania:ancientwill(dharok).",
+  "source_item": "botania:ancient_will_dharok",
+  "modifier": "soa_additions:tconevo.gaia_will_dharok_armor",
+  "unit_value": 1
+}

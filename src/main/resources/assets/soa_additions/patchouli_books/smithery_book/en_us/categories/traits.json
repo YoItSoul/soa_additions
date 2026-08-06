@@ -1,0 +1,6 @@
+{
+  "name": "Material Traits",
+  "description": "Traits a material carries into anything built from it. A trait marked $(l)the tool's head$() only counts when that material is the head part.",
+  "icon": "smithery:iron_sword_blade",
+  "sortnum": 5
+}

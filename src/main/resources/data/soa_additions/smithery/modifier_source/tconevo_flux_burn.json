@@ -1,0 +1,9 @@
+{
+  "_comment": "TConEvo 'Flux Burn'. Ingredient ported 1:1.",
+  "source_item": "draconicevolution:wyvern_capacitor",
+  "modifier": "soa_additions:tconevo.flux_burn",
+  "params": {
+    "seconds": 3
+  },
+  "unit_value": 1
+}

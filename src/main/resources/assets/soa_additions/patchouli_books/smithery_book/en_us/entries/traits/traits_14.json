@@ -1,0 +1,58 @@
+{
+  "name": "Material Traits 14",
+  "icon": "smithery:iron_pick_head",
+  "category": "soa_additions:traits",
+  "sortnum": 13,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Jaded",
+      "text": "Adds +1.0 mining speed$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Jade"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Jagged",
+      "text": "Deals more damage the more worn it is$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Litherite"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Jagged",
+      "text": "Deals more damage the more worn it is$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Flint"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Knowledgeful",
+      "text": "Tool: +0.2% damage per XP level (up to +60%); armor: scales damage reduction with XP up to 36%$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Adaminite, Astral Metal, Knowledge, Mithminite, Mithrillium, Xu Enchanted Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Knowledgeful",
+      "text": "Damage and incoming reduction scale with your XP level (up to 300)$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Adaminite, Astral Metal, Knowledge, Mithminite, Mithrillium, Xu Enchanted Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Kungfu",
+      "text": "4% chance to fully dodge a non-armor-bypassing hit, gaining Speed IV for 5s$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Alpha Fur, Manganese, Tofudiamond, Tofumetal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Launching",
+      "text": "Launches struck enemies upward into the air$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aeroite, Gravitite"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Lightning",
+      "text": "4% chance to strike the target with a visual lightning bolt on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Asgardium, Electronium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Lightweight",
+      "text": "Increases movement speed by 2%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Aeroite, Certus Quartz, Draconium, Electrical Steel, Manasteel, Nagascale, Soularium, Tofumetal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Lightweight",
+      "text": "Adds +1.5 mining speed$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aeroite, Aluminium, Carbon Fiber, Certus Quartz, Cobalt, Conductive Iron, Electrical Steel, Erodium and 2 more"
+    }
+  ]
+}

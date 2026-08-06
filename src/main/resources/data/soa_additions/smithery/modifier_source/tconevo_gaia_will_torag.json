@@ -1,0 +1,6 @@
+{
+  "_comment": "1.12 botania:ancientwill(torag).",
+  "source_item": "botania:ancient_will_torag",
+  "modifier": "soa_additions:tconevo.gaia_will_torag_armor",
+  "unit_value": 1
+}

@@ -1,0 +1,6 @@
+{
+  "_comment": "TConstruct 1.12 Silky: applied with the Silky Jewel (tconstruct:materials@16), now ported as soa_additions:silky_jewel.",
+  "source_item": "soa_additions:silky_jewel",
+  "modifier": "smithery:silky",
+  "unit_value": 1
+}

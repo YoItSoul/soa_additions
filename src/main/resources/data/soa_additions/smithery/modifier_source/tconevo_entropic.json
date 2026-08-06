@@ -1,0 +1,6 @@
+{
+  "_comment": "TConEvo 'Entropic'. Ingredient ported 1:1.",
+  "source_item": "draconicevolution:chaos_shard",
+  "modifier": "soa_additions:tconevo.entropic",
+  "unit_value": 1
+}

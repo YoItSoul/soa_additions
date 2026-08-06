@@ -1,0 +1,58 @@
+{
+  "name": "Material Traits 13",
+  "icon": "smithery:iron_pick_head",
+  "category": "soa_additions:traits",
+  "sortnum": 12,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Hold Ground",
+      "text": "Deals 1.25x damage while sneaking; takes 8% less damage while sneaking$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Aeonsteel, Cryonium, Manganese Steel, Refined Obsidian, Titanium, Zanite"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Hollow",
+      "text": "1% chance to make the target invisible and heal it; 90% chance to void mob drops$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Imperomite"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Holy",
+      "text": "Adds 4 bonus damage against undead$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Energetic Alloy, Silver, Tofudiamond"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Hovering",
+      "text": "Halves fall distance and fall damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Coalescence Matrix"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Ignoble",
+      "text": "Reduces mining speed by 1$(br2)$(l)Granted from:$() the tool's head$(br)$(l)Materials:$() Dark Matter"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Illuminati",
+      "text": "Applies Glowing for 10s to targets on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Ionite, Lumium (PlusTiC), Refinedglowstone"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Indomitable",
+      "text": "Reduces all incoming damage by 8%$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Aeonsteel, Stainless Steel"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Inferno",
+      "text": "20% chance to set the attacker on fire for 8s when hit$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Infernium, Ravaging"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Insatiable",
+      "text": "Adds up to 4 bonus damage scaling with your missing health$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Crystal Matrix, Manyullyn, Mithminite"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Invigorating",
+      "text": "Adds +4 max health while worn$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Adamant, Chromasteel, Modularium, Ravaging"
+    }
+  ]
+}

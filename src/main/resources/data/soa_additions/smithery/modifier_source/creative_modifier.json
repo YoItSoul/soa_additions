@@ -1,6 +1,9 @@
 {
+  "_comment": "TConstruct/GreedyCraft 'Creative Modifier' (tconstruct:materials@50) -> soa_additions:creative_modifier, the item GreedyCraft already ports. Grants a modifier slot per level.",
   "source_item": "soa_additions:creative_modifier",
   "modifier": "soa_additions:creative",
-  "params": { "bonus_slots_per_level": 1 },
+  "params": {
+    "bonus_slots_per_level": 1
+  },
   "unit_value": 1
 }

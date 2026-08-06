@@ -1,0 +1,80 @@
+{
+  "name": "Anvil Modifiers — Armor",
+  "icon": "minecraft:amethyst_shard",
+  "category": "smithery:modifiers",
+  "sortnum": 11,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:fermented_spider_eye",
+      "text": "Adds 5 bonus damage against arthropod mobs$(br2)$(l)Apply with:$() Fermented Spider Eye at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Bane of Arthropods"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:invisible_ink",
+      "text": "Grants brief Invisibility every second while crouching$(br2)$(l)Apply with:$() Invisible Ink at an anvil.$(br)$(l)Goes on:$() armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Concealed"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:creative_modifier",
+      "text": "No description.$(br2)$(l)Apply with:$() §dCreative Modifier at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, up to level 999",
+      "title": "Creative"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:ender_pearl",
+      "text": "Chance to teleport your target a short distance on hit$(br2)$(l)Apply with:$() Ender Pearl at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Ender Affinity"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:blue_ice",
+      "text": "Freezes water beneath your steps$(br2)$(l)Apply with:$() Blue Ice at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, up to level 2",
+      "title": "Frost Walker"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:glowing_eye",
+      "text": "Applies Glowing for 10s to attackers who hit you$(br2)$(l)Apply with:$() Glowing Eye at an anvil.$(br)$(l)Goes on:$() armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Glowing"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:redstone",
+      "text": "Each level adds +1.5 mining and attack speed$(br2)$(l)Apply with:$() Redstone Dust, Block of Redstone (counts 9) at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() 96 per level, up to level 10",
+      "title": "Haste"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:lapis_block",
+      "text": "Each level boosts ore drops and mob drops, scaling like Fortune and Looting$(br2)$(l)Apply with:$() Block of Lapis Lazuli (counts 9), Lapis Lazuli at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() 96 per level, up to level 10",
+      "title": "Lapis Blessing"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:plate_of_honor",
+      "text": "§oGo big or go home!§r\\n§fIncreases damage reduction according to your armor's level.$(br2)$(l)Apply with:$() §6Plate of Honor at an anvil.$(br)$(l)Goes on:$() armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Leveled Defense"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:red_mushroom",
+      "text": "Inflicts Nausea for 5s on hit$(br2)$(l)Apply with:$() Red Mushroom at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Magicmushroom"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "soa_additions:mending_moss",
+      "text": "Repairs 1 durability every 200 ticks while breaking blocks$(br2)$(l)Apply with:$() Mending Moss at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Mending Moss"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:netherite_scrap",
+      "text": "Breaks nearby matching blocks in a radius, up to 32 blocks$(br2)$(l)Apply with:$() Netherite Scrap at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Oreexcavate"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "_comment": "TConstruct 1.12 Beheading: ender pearl + obsidian together, one pair per level, up to 10 levels. The pair is pre-crafted into soa_additions:obsidian_pearl because a vanilla anvil has a single ingredient slot.",
+  "source_item": "soa_additions:obsidian_pearl",
+  "modifier": "soa_additions:beheading",
+  "unit_value": 1
+}

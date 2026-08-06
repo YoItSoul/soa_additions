@@ -1,0 +1,58 @@
+{
+  "name": "Material Traits 16",
+  "icon": "smithery:iron_pick_head",
+  "category": "soa_additions:traits",
+  "sortnum": 15,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Matter Condensing",
+      "text": "§oEverything is matter!§r\\n§fGain EMC from damage dealt with this weapon.$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Red Matter"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Matter Condensing EX",
+      "text": "§oEverything is matter! §d§o§nDeluxe Edition§r\\n§fGain EMC from damage dealt with this weapon.$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Protonium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Matter Trait11",
+      "text": "Grants EMC equal to 10% of damage on hostile-mob hits (ProjectE integration stubbed)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Red Matter"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Matter Trait12",
+      "text": "Grants EMC equal to 25% of damage dealt to hostile mobs (ProjectE stub)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Protonium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Melting",
+      "text": "2.5% chance to turn mined stone, cobble, netherrack, or obsidian into lava$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Ignitz"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Milky",
+      "text": "§oI have a strong immune system!§r\\n§fOccasionally clears all potion effects (even the good ones)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Cheese"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Milky",
+      "text": "Clears all status effects every 18000 ticks$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Cheese"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Mirabile",
+      "text": "Increases durability by 15%$(br2)$(l)Granted from:$() the tool's head$(br)$(l)Materials:$() Mirion"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Momentum",
+      "text": "Mining speeds up as you chain block breaks$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Alubrass, Astral Metal, Cobalt, Emeraldic, Iridium, Manasteel, Soularium, Stellar Alloy and 1 more"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Momentum",
+      "text": "Mining speeds up as you chain block breaks$(br2)$(l)Granted from:$() the tool's head$(br)$(l)Materials:$() Amethyst"
+    }
+  ]
+}

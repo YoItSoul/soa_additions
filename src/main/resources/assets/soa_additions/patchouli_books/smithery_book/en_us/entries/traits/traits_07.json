@@ -1,0 +1,58 @@
+{
+  "name": "Material Traits 7",
+  "icon": "smithery:iron_pick_head",
+  "category": "soa_additions:traits",
+  "sortnum": 6,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Defiled",
+      "text": "Inflicts Weakness for 4s on hit$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Remorseful Gem, Scarlite"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Dense",
+      "text": "Increases durability by 20%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Chromium, Dark Matter, Coalescence Matrix, Manganese, Modularium, Neutronium, Osmium, Red Matter"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Dense",
+      "text": "Increases durability by 20%$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Advanced Alloy, Bronze, Chromium, Dark Matter, Dark Steel, Coalescence Matrix, Iridium, Modularium and 4 more"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Depthdigger",
+      "text": "Adds +2 mining speed$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Black Quartz, Coal, Erodium, Shadowium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Devilsstrength",
+      "text": "Adds +3 bonus damage on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Black Quartz (PlusTiC), Invar, Osmiridium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Diffuse",
+      "text": "35% chance to destroy a block's drops when mining$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Uru"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Dissolving",
+      "text": "80% chance to void kill XP, otherwise multiplies it 2x-4x$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Eezo"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Divineshield",
+      "text": "Reduces fire damage by 10%$(br2)$(l)Granted from:$() the tool's head$(br)$(l)Materials:$() Guardianscale"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Dprk",
+      "text": "8% chance to trigger a 1.5 explosion on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Fusewood (PlusTiC), Redmatter"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Dramatic",
+      "text": "Reduces incoming damage by 30% when below 30% health$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Knightmetal"
+    }
+  ]
+}

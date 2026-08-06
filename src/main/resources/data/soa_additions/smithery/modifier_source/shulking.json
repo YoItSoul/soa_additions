@@ -1,0 +1,6 @@
+{
+  "_comment": "GC/TConstruct 'Shulking' - levitation on hit. Same ingredient as 1.12.",
+  "source_item": "minecraft:shulker_shell",
+  "modifier": "soa_additions:shulking",
+  "unit_value": 1
+}

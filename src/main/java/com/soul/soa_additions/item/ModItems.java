@@ -816,6 +816,67 @@ public final class ModItems {
             "\u00a78A bone steeped in wither energy.",
             "\u00a77Drops from Wither Skeletons.");
 
+    // ========== Tinkers' modifier ingredients (GreedyCraft parity) ==========
+    // The four modifier ingredients GreedyCraft had that this pack was missing, so Silky,
+    // Mending Moss, Smite and Concealed had nothing to apply them with. Recipes below are the
+    // 1.12 ones, read out of the TConstruct/Constructs Armory jars, not re-invented.
+
+    /** Intermediate for the Silky Jewel: 8 string around a gold ingot (TConstruct 1.12). */
+    public static final RegistryObject<Item> SILKY_CLOTH = stageItem("silky_cloth", false,
+            "§7Woven fine enough to lift a block whole.");
+
+    /** Applies Silky (silk touch) at the anvil. 1.12: 4 silky cloth around an emerald. */
+    public static final RegistryObject<Item> SILKY_JEWEL = stageItem("silky_jewel", true,
+            "§aKeeps what it takes, exactly as it was.",
+            "§7Smithery modifier: Silky");
+
+    /** 1.12: nine mossy cobblestone. Becomes Mending Moss at an enchanting table. */
+    public static final RegistryObject<Item> BALL_OF_MOSS = stageItem("ball_of_moss", false,
+            "§2Damp, and stubbornly alive.",
+            "§7Use on an enchanting table with 10 levels.");
+
+    /** Applies Mending Moss. 1.12 had no recipe for it - it is the XP conversion above. */
+    public static final RegistryObject<Item> MENDING_MOSS = stageItem("mending_moss", true,
+            "§2It feeds on experience and mends what holds it.",
+            "§7Smithery modifier: Mending Moss");
+
+    /** 1.12: dirt + rotten flesh + bone meal. Smelts into Consecrated Soil. */
+    public static final RegistryObject<Item> GRAVEYARD_SOIL = stageItem("graveyard_soil", false,
+            "§8Dirt that has held too many bodies.");
+
+    /** Applies Smite. 1.12: smelt graveyard soil. */
+    public static final RegistryObject<Item> CONSECRATED_SOIL = stageItem("consecrated_soil", false,
+            "§fBlessed ground. The restless hate it.",
+            "§7Smithery modifier: Smite");
+
+    /** Applies Concealed to armour. 1.12 (Constructs Armory): bottle + lapis + glass + ender pearl. */
+    public static final RegistryObject<Item> INVISIBLE_INK = stageItem("invisible_ink", false,
+            "§9Writes nothing anyone can read.",
+            "§7Smithery modifier: Concealed");
+
+    /**
+     * Beheading's ingredient, fused.
+     *
+     * <p>Tinkers 1.12 applied Beheading with an ender pearl AND obsidian together in the Tool
+     * Station's multi-slot grid. Smithery applies modifiers on a vanilla anvil, which has one
+     * ingredient slot, so the pair is crafted into a single item first: same two ingredients, same
+     * one-per-level cost, expressible in two slots.</p>
+     */
+    public static final RegistryObject<Item> OBSIDIAN_PEARL = stageItem("obsidian_pearl", false,
+            "§5Cold volcanic glass wrapped around an ender pearl.",
+            "§7Smithery modifier: Beheading");
+
+    /**
+     * Glowing's ingredient, fused.
+     *
+     * <p>Tinkers 1.12 applied Glowing with two glowstone dust and an eye of ender placed together
+     * ("Some glowstone and a magical ender eye"). Same reason as {@link #OBSIDIAN_PEARL}: the anvil
+     * has one ingredient slot, so the three go into a single item at the same total cost.</p>
+     */
+    public static final RegistryObject<Item> GLOWING_EYE = stageItem("glowing_eye", false,
+            "§eAn ender eye lit from the inside.",
+            "§7Smithery modifier: Glowing");
+
     // ========== Nyx items moved to NyxItems.java (nyx: namespace) ==========
 
     // ========== Ore Sight potions (custom items for dynamic per-block names) ==========

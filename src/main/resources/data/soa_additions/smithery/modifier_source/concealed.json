@@ -1,0 +1,6 @@
+{
+  "_comment": "Constructs Armory 1.12 Concealed: Invisible Ink (conarm:invisible_ink), now soa_additions:invisible_ink.",
+  "source_item": "soa_additions:invisible_ink",
+  "modifier": "soa_additions:concealed_armor",
+  "unit_value": 1
+}

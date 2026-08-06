@@ -56,6 +56,8 @@ public final class SoaSmitheryModifiers {
     public static ResourceLocation BERSERK;
     public static ResourceLocation BLAST_RESISTANT_ARMOR;
     public static ResourceLocation BLASTING;
+    /** Tinkers' mining "Blasting": full speed on any block, at the cost of its drops. */
+    public static ResourceLocation BLASTING_MINING;
     public static ResourceLocation BLESSED_ARMOR;
     public static ResourceLocation BLIND;
     public static ResourceLocation BLINDBANDIT;
@@ -563,6 +565,7 @@ public final class SoaSmitheryModifiers {
                                 ctx.wearer().getAirSupply() + 1));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         ALIEN_ARMOR = id("alien_armor");
@@ -574,6 +577,7 @@ public final class SoaSmitheryModifiers {
                         if (stack.getDamageValue() > 0) stack.setDamageValue(stack.getDamageValue() - 1);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         AMBITIOUS_ARMOR = id("ambitious_armor");
@@ -582,6 +586,7 @@ public final class SoaSmitheryModifiers {
                 .onKill((effect, ctx) -> {
                     ctx.setXp(Math.round(ctx.xp() * effect.paramFloat("xp_multiplier", 1.5f)));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         AMPHIBIOUS_ARMOR = id("amphibious_armor");
@@ -594,6 +599,7 @@ public final class SoaSmitheryModifiers {
                                 ctx.wearer().getAirSupply() + 1));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         ANALYSING = id("analysing");
@@ -687,6 +693,7 @@ public final class SoaSmitheryModifiers {
                                 ctx.wearer().getAirSupply() + 1));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         ARCANE = id("arcane");
@@ -719,6 +726,7 @@ public final class SoaSmitheryModifiers {
                     stats.bonusMiningSpeed += effect.paramFloat("speed", 2.0f);
                     stats.bonusAttackDamage += effect.paramFloat("damage", 1.0f);
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         ARIDICULOUS_ARMOR = id("aridiculous_armor");
@@ -727,6 +735,7 @@ public final class SoaSmitheryModifiers {
                 .onHurt((effect, ctx) -> {
                     ctx.amount().set(ctx.amount().get() * 0.95f);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         ASSASSINTRAIT = id("assassin_trait");
@@ -757,6 +766,7 @@ public final class SoaSmitheryModifiers {
                     var stack = ctx.armor();
                     if (stack.getDamageValue() > 0) stack.setDamageValue(stack.getDamageValue() - 1);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         AUTOREPAIR = id("autorepair");
@@ -801,6 +811,7 @@ public final class SoaSmitheryModifiers {
                         ctx.target().level().addFreshEntity(drop);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         BACONLICIOUS_ARMOR = id("baconlicious_armor");
@@ -814,6 +825,7 @@ public final class SoaSmitheryModifiers {
                         ctx.target().level().addFreshEntity(drop);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         BANE_OF_ARTHOPODS = id("bane_of_arthopods");
@@ -859,6 +871,9 @@ public final class SoaSmitheryModifiers {
         BEHEADING = id("beheading");
         SmitheryAPI.registerModifier(Modifier.builder(BEHEADING)
                 .category(Modifier.ModifierCategory.ACTIVE)
+                // 1.12: LevelAspect(10) and +10% head chance per level.
+                .appliesTo(Modifier.AppliesTo.TOOLS)
+                .maxLevel(10)
                 .onKill((effect, ctx) -> {
                     if (ctx.victim() == null) return;
                     float chance = effect.paramFloat("chance", 0.1f);
@@ -899,6 +914,7 @@ public final class SoaSmitheryModifiers {
                             float pct = effect.paramFloat("pct", 0.1f);
                     ctx.amount().set(ctx.amount().get() * (1.0f - Math.min(0.8f, pct)));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         BLASTING = id("blasting");
@@ -918,6 +934,18 @@ public final class SoaSmitheryModifiers {
                 })
                 .build());
 
+        BLASTING_MINING = id("blasting_mining");
+        // Behavior lives in SmitheryTraitEvents: mining any block at full speed needs Forge's
+        // BreakSpeed event (no Modifier hook sees an ineffective block), and suppressing the drop
+        // needs the break itself cancelled. Distinct id from BLASTING above, which is TConEvo's
+        // explode-on-hit trait and unrelated despite the shared 1.12 word.
+        SmitheryAPI.registerModifier(Modifier.builder(BLASTING_MINING)
+                .category(Modifier.ModifierCategory.ACTIVE)
+                .appliesTo(Modifier.AppliesTo.TOOLS)
+                .maxLevel(3)
+                .levelCost(3)
+                .build());
+
         BLESSED_ARMOR = id("blessed_armor");
         SmitheryAPI.registerModifier(Modifier.builder(BLESSED_ARMOR)
                 .category(Modifier.ModifierCategory.ACTIVE)
@@ -929,6 +957,7 @@ public final class SoaSmitheryModifiers {
                                 effect.paramInt("duration_ticks", 100), effect.paramInt("amplifier", 0)));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         BLIND = id("blind");
@@ -1016,6 +1045,7 @@ public final class SoaSmitheryModifiers {
                     float pct = effect.paramFloat("pct", 0.5f);
                     ctx.distance().set(ctx.distance().get() * (1.0 - Math.min(1.0f, pct)));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         BREAKABLE = id("breakable");
@@ -1074,6 +1104,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().heal(0.5f);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         CAMDAIBAY_ARMOR = id("camdaibay_armor");
@@ -1082,6 +1113,7 @@ public final class SoaSmitheryModifiers {
                 .onHurt((effect, ctx) -> {
                     ctx.amount().set(ctx.amount().get() * 0.95f);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         CASCADE = id("cascade");
@@ -1148,24 +1180,28 @@ public final class SoaSmitheryModifiers {
         SmitheryAPI.registerModifier(Modifier.builder(CHEAP)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.durabilityMultiplier *= 1.0f + effect.paramFloat("bonus", 0.2f))
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         CHEAP_ARMOR = id("cheap_armor");
         SmitheryAPI.registerModifier(Modifier.builder(CHEAP_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.durabilityMultiplier *= 1.0f + effect.paramFloat("bonus", 0.2f))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         CHEAPSKATE = id("cheapskate");
         SmitheryAPI.registerModifier(Modifier.builder(CHEAPSKATE)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.durabilityMultiplier *= 1.0f - effect.paramFloat("penalty", 0.1f))
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         CHEAPSKATE_ARMOR = id("cheapskate_armor");
         SmitheryAPI.registerModifier(Modifier.builder(CHEAPSKATE_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.durabilityMultiplier *= 1.0f - effect.paramFloat("penalty", 0.1f))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         CHUNKY = id("chunky");
@@ -1191,6 +1227,7 @@ public final class SoaSmitheryModifiers {
                         attacker.setSecondsOnFire(3);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         CONCEALED_ARMOR = id("concealed_armor");
@@ -1201,6 +1238,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 40, 0, true, false));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         CONGENIAL = id("congenial");
@@ -1312,6 +1350,7 @@ public final class SoaSmitheryModifiers {
                     attacker.addEffect(new net.minecraft.world.effect.MobEffectInstance(
                         net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN, 200, 2, false, false));
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         CRYONICTRAIT_ARMOR = id("cryonic_trait_armor");
@@ -1325,6 +1364,7 @@ public final class SoaSmitheryModifiers {
                     attacker.addEffect(new net.minecraft.world.effect.MobEffectInstance(
                         net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN, 200, 2, false, false));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         CRYSTALTRAIT = id("crystal_trait");
@@ -1352,6 +1392,7 @@ public final class SoaSmitheryModifiers {
                     float frac = 1.0F - (float) armor.getDamageValue() / (float) max;
                     ctx.amount().set(dmg * (1.05F - frac * 0.12F));
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         CRYSTALTRAIT_ARMOR = id("crystal_trait_armor");
@@ -1379,6 +1420,7 @@ public final class SoaSmitheryModifiers {
                     float frac = 1.0F - (float) armor.getDamageValue() / (float) max;
                     ctx.amount().set(dmg * (1.05F - frac * 0.12F));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         CURSED = id("cursed");
@@ -1488,12 +1530,14 @@ public final class SoaSmitheryModifiers {
         SmitheryAPI.registerModifier(Modifier.builder(DENSE)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.durabilityMultiplier *= 1.0f + effect.paramFloat("bonus", 0.2f))
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         DENSE_ARMOR = id("dense_armor");
         SmitheryAPI.registerModifier(Modifier.builder(DENSE_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.durabilityMultiplier *= 1.0f + effect.paramFloat("bonus", 0.2f))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         DEPTHDIGGER = id("depthdigger");
@@ -1514,18 +1558,21 @@ public final class SoaSmitheryModifiers {
         SmitheryAPI.registerModifier(Modifier.builder(DEXTEROUS_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.bonusMiningSpeed += effect.paramFloat("speed", 2.0f))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         DIAMOND = id("diamond");
         SmitheryAPI.registerModifier(Modifier.builder(DIAMOND)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.durabilityMultiplier *= 1.0f + effect.paramFloat("bonus", 0.5f))
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         DIAMOND_ARMOR = id("diamond_armor");
         SmitheryAPI.registerModifier(Modifier.builder(DIAMOND_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.durabilityMultiplier *= 1.0f + effect.paramFloat("bonus", 0.5f))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         DIFFUSE = id("diffuse");
@@ -1579,6 +1626,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(ctx.amount().get() * 0.7f);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         DREADPLAGUE = id("dreadplague");
@@ -1605,6 +1653,7 @@ public final class SoaSmitheryModifiers {
         SmitheryAPI.registerModifier(Modifier.builder(DUNANSTRANSPORT_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .onCompose(composeArmorAttribute("dunanstransport_armor", () -> Attributes.ARMOR_TOUGHNESS, "amount", 2.0f, AttributeModifier.Operation.ADDITION))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         DURITOS = id("duritos");
@@ -1617,6 +1666,7 @@ public final class SoaSmitheryModifiers {
         SmitheryAPI.registerModifier(Modifier.builder(DURITOS_RANCH_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.durabilityMultiplier *= 1.0f + effect.paramFloat("bonus", 0.2f))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         ECOLOGICAL = id("ecological");
@@ -1628,6 +1678,7 @@ public final class SoaSmitheryModifiers {
                         if (tool.getDamageValue() > 0) tool.setDamageValue(tool.getDamageValue() - 1);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         ECOLOGICAL_ARMOR = id("ecological_armor");
@@ -1639,6 +1690,7 @@ public final class SoaSmitheryModifiers {
                     var stack = ctx.armor();
                     if (stack.getDamageValue() > 0) stack.setDamageValue(stack.getDamageValue() - 1);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         ELEMENTAL = id("elemental");
@@ -1657,12 +1709,14 @@ public final class SoaSmitheryModifiers {
         SmitheryAPI.registerModifier(Modifier.builder(EMERALD)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.durabilityMultiplier *= 1.0f + effect.paramFloat("bonus", 0.5f))
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         EMERALD_ARMOR = id("emerald_armor");
         SmitheryAPI.registerModifier(Modifier.builder(EMERALD_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.durabilityMultiplier *= 1.0f + effect.paramFloat("bonus", 0.5f))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         ENDERFERENCE = id("enderference");
@@ -1702,6 +1756,7 @@ public final class SoaSmitheryModifiers {
                     double z = target.getZ() + (target.getRandom().nextDouble() - 0.5) * 16;
                     target.randomTeleport(x, y, z, true);
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         ENDERPORT_ARMOR = id("enderport_armor");
@@ -1715,6 +1770,7 @@ public final class SoaSmitheryModifiers {
                     double z = target.getZ() + (target.getRandom().nextDouble() - 0.5) * 16;
                     target.randomTeleport(x, y, z, true);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         ENDSPEED = id("endspeed");
@@ -1747,6 +1803,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(dmg * 0.8F);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         ENLIGHTENED = id("enlightened");
@@ -1807,11 +1864,13 @@ public final class SoaSmitheryModifiers {
         EXTRATRAIT = id("extratrait");
         SmitheryAPI.registerModifier(Modifier.builder(EXTRATRAIT)
                                 .category(Modifier.ModifierCategory.PASSIVE)
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         EXTRATRAIT_ARMOR = id("extratrait_armor");
         SmitheryAPI.registerModifier(Modifier.builder(EXTRATRAIT_ARMOR)
                                 .category(Modifier.ModifierCategory.PASSIVE)
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         FEATHERWEIGHT_ARMOR = id("featherweight_armor");
@@ -1821,6 +1880,7 @@ public final class SoaSmitheryModifiers {
                     float pct = effect.paramFloat("pct", 0.5f);
                     ctx.distance().set(ctx.distance().get() * (1.0 - Math.min(1.0f, pct)));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         FESTIVE = id("festive");
@@ -1842,9 +1902,15 @@ public final class SoaSmitheryModifiers {
                 .build());
 
         FINS = id("fins");
+        // Tinkers 1.12 Fins: "attaching fins to the projectiles makes them travel like normal
+        // underwater" - it cancels water drag on what the weapon fires. It was stubbed here as a
+        // mining-speed passive, which is a different modifier entirely. Behavior now lives in
+        // FinsEvents; this registration is the marker the launcher carries.
         SmitheryAPI.registerModifier(Modifier.builder(FINS)
-                .category(Modifier.ModifierCategory.PASSIVE)
-                .passive((effect, stats) -> stats.bonusMiningSpeed += effect.paramFloat("speed", 4.0f))
+                .category(Modifier.ModifierCategory.ACTIVE)
+                .appliesTo(Modifier.AppliesTo.TOOLS)
+                .maxLevel(1)
+                .levelCost(2)
                 .build());
 
         FIRE_RESISTANT_ARMOR = id("fire_resistant_armor");
@@ -1855,6 +1921,7 @@ public final class SoaSmitheryModifiers {
                             float pct = effect.paramFloat("pct", 0.1f);
                     ctx.amount().set(ctx.amount().get() * (1.0f - Math.min(0.8f, pct)));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         FIRSTGUARDTRAIT = id("first_guard_trait");
@@ -1864,6 +1931,7 @@ public final class SoaSmitheryModifiers {
                             float pct = effect.paramFloat("pct", 0.1f);
                     ctx.amount().set(ctx.amount().get() * (1.0f - Math.min(0.8f, pct)));
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         FIRSTGUARDTRAIT_ARMOR = id("first_guard_trait_armor");
@@ -1873,6 +1941,7 @@ public final class SoaSmitheryModifiers {
                             float pct = effect.paramFloat("pct", 0.1f);
                     ctx.amount().set(ctx.amount().get() * (1.0f - Math.min(0.8f, pct)));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         FLAMMABLE = id("flammable");
@@ -1899,6 +1968,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(dmg * 0.85F);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         FORTIFIEDTRAIT_ARMOR = id("fortified_trait_armor");
@@ -1917,13 +1987,14 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(dmg * 0.85F);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
+        // FORTIFY is defined by data/soa_additions/smithery/modifier/fortify.json
+        // (GC's harvest-level lift, applied with flint). Registering it here too made
+        // SimpleRegistry throw "Modifier already contains soa_additions:fortify" during
+        // the datapack reload, which aborted every world load.
         FORTIFY = id("fortify");
-        SmitheryAPI.registerModifier(Modifier.builder(FORTIFY)
-                .category(Modifier.ModifierCategory.PASSIVE)
-                .passive((effect, stats) -> stats.durabilityMultiplier *= 1.0f + effect.paramFloat("bonus", 0.3f))
-                .build());
 
         FRACTURE = id("fracture");
         SmitheryAPI.registerModifier(Modifier.builder(FRACTURE)
@@ -2008,6 +2079,7 @@ public final class SoaSmitheryModifiers {
                         }
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         FRUITSALAD = id("fruitsalad");
@@ -2048,6 +2120,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(dmg * 0.5F);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         GAMBLETRAIT = id("gamble_trait");
@@ -2098,6 +2171,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(dmg * 0.5F);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         GARISHLY = id("garishly");
@@ -2229,6 +2303,7 @@ public final class SoaSmitheryModifiers {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
                         ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.GLOWING, 200, 0));
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         GLOWING_ARMOR = id("glowing_armor");
@@ -2239,6 +2314,7 @@ public final class SoaSmitheryModifiers {
                         attacker.addEffect(new MobEffectInstance(MobEffects.GLOWING, 200, 0));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         GOODFRIDAYAGREEMENT_ARMOR = id("goodfridayagreement_armor");
@@ -2249,6 +2325,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(ctx.amount().get() * 0.7f);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         HAILHYDRA = id("hailhydra");
@@ -2284,6 +2361,7 @@ public final class SoaSmitheryModifiers {
                                 effect.paramInt("duration_ticks", 100), effect.paramInt("amplifier", 0)));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         HARVESTHEIGHT = id("harvestheight");
@@ -2318,12 +2396,14 @@ public final class SoaSmitheryModifiers {
         SmitheryAPI.registerModifier(Modifier.builder(HEAVY)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.bonusAttackDamage += effect.paramFloat("damage", 1.0f))
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         HEAVY_ARMOR = id("heavy_armor");
         SmitheryAPI.registerModifier(Modifier.builder(HEAVY_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .onCompose(composeArmorAttribute("heavy_armor", () -> Attributes.KNOCKBACK_RESISTANCE, "amount", 0.1f, AttributeModifier.Operation.ADDITION))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         HEAVY_METAL = id("heavy_metal");
@@ -2366,6 +2446,7 @@ public final class SoaSmitheryModifiers {
         SmitheryAPI.registerModifier(Modifier.builder(HIGH_STRIDE_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .onCompose(composeArmorAttribute("high_stride_armor", () -> ForgeMod.STEP_HEIGHT_ADDITION.get(), "amount", 0.5f, AttributeModifier.Operation.ADDITION))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         HITECH = id("hitech");
@@ -2421,6 +2502,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(dmg * 0.92F);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         HOLD_GROUND_ARMOR = id("hold_ground_armor");
@@ -2443,6 +2525,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(dmg * 0.92F);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         HOLLOW = id("hollow");
@@ -2520,6 +2603,7 @@ public final class SoaSmitheryModifiers {
                 .onHurt((effect, ctx) -> {
                     ctx.amount().set(ctx.amount().get() * 0.92f);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         INFERNAL_ARMOR = id("infernal_armor");
@@ -2529,6 +2613,7 @@ public final class SoaSmitheryModifiers {
                             float pct = effect.paramFloat("pct", 0.1f);
                     ctx.amount().set(ctx.amount().get() * (1.0f - Math.min(0.8f, pct)));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         INFERNOTRAIT = id("inferno_trait");
@@ -2541,6 +2626,7 @@ public final class SoaSmitheryModifiers {
                     if (ctx.wearer().getRandom().nextFloat() >= 0.2F) return;
                     src.getEntity().setSecondsOnFire(8);
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         INFERNOTRAIT_ARMOR = id("inferno_trait_armor");
@@ -2553,6 +2639,7 @@ public final class SoaSmitheryModifiers {
                     if (ctx.wearer().getRandom().nextFloat() >= 0.2F) return;
                     src.getEntity().setSecondsOnFire(8);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         INSATIABLE = id("insatiable");
@@ -2572,12 +2659,14 @@ public final class SoaSmitheryModifiers {
                 .onKill((effect, ctx) -> {
                     ctx.setXp(Math.round(ctx.xp() * effect.paramFloat("xp_multiplier", 1.5f)));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         INVIGORATING_ARMOR = id("invigorating_armor");
         SmitheryAPI.registerModifier(Modifier.builder(INVIGORATING_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .onCompose(composeArmorAttribute("invigorating_armor", () -> Attributes.MAX_HEALTH, "amount", 4.0f, AttributeModifier.Operation.ADDITION))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         JADED = id("jaded");
@@ -2661,6 +2750,7 @@ public final class SoaSmitheryModifiers {
                         : (float) Math.pow(1.0F - reduction, 0.25);
                     ctx.amount().set(dmg * perPiece);
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         KNOWLEDGEFULTRAIT = id("knowledgeful_trait");
@@ -2713,6 +2803,7 @@ public final class SoaSmitheryModifiers {
                         : (float) Math.pow(1.0F - reduction, 0.25);
                     ctx.amount().set(dmg * perPiece);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         KUNGFUTRAIT = id("kungfu_trait");
@@ -2747,6 +2838,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(0.0F);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         LAUNCHING = id("launching");
@@ -2771,6 +2863,7 @@ public final class SoaSmitheryModifiers {
                     float mult = Math.min(1.5F, 1.0F + 0.05F * level);
                     ctx.amount().set(dmg * mult);
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         LEVELINGDEFENSETRAIT = id("levelingdefense_trait");
@@ -2783,6 +2876,7 @@ public final class SoaSmitheryModifiers {
                     float reduction = Math.min(0.5F, 0.03F * level);
                     ctx.amount().set(dmg * (1.0F - reduction));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         LIGHT = id("light");
@@ -2819,12 +2913,14 @@ public final class SoaSmitheryModifiers {
         SmitheryAPI.registerModifier(Modifier.builder(LIGHTWEIGHT)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.bonusMiningSpeed += effect.paramFloat("speed", 1.5f))
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         LIGHTWEIGHT_ARMOR = id("lightweight_armor");
         SmitheryAPI.registerModifier(Modifier.builder(LIGHTWEIGHT_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .onCompose(composeArmorAttribute("lightweight_armor", () -> Attributes.MOVEMENT_SPEED, "pct", 0.02f, AttributeModifier.Operation.MULTIPLY_TOTAL))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         LIVING = id("living");
@@ -2868,6 +2964,7 @@ public final class SoaSmitheryModifiers {
                     ctx.wearer().addEffect(new net.minecraft.world.effect.MobEffectInstance(
                         net.minecraft.world.effect.MobEffects.LUCK, 25, 0, false, false));
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         LUCKYTRAIT_ARMOR = id("lucky_trait_armor");
@@ -2880,6 +2977,7 @@ public final class SoaSmitheryModifiers {
                     ctx.wearer().addEffect(new net.minecraft.world.effect.MobEffectInstance(
                         net.minecraft.world.effect.MobEffects.LUCK, 25, 0, false, false));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         MADNESSTRAIT = id("madness_trait");
@@ -2915,6 +3013,7 @@ public final class SoaSmitheryModifiers {
                         drop.setPickUpDelay(0);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         MAGNETIC_ARMOR = id("magnetic_armor");
@@ -2933,6 +3032,7 @@ public final class SoaSmitheryModifiers {
                         drop.setDeltaMovement(toward.normalize().scale(0.35));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         MAGNETIC_ARMOR1 = id("magnetic_armor1");
@@ -3104,6 +3204,7 @@ public final class SoaSmitheryModifiers {
                         ctx.tool().setDamageValue(ctx.tool().getDamageValue() - 1);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         // TConstruct base trait: heal 10% of damage dealt per level.
@@ -3150,6 +3251,7 @@ public final class SoaSmitheryModifiers {
                     var stack = ctx.armor();
                     if (stack.getDamageValue() > 0) stack.setDamageValue(stack.getDamageValue() - 1);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         MENDING_MOSS = id("mending_moss");
@@ -3178,6 +3280,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().removeAllEffects();
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         MILKYTRAIT_ARMOR = id("milky_trait_armor");
@@ -3195,6 +3298,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().removeAllEffects();
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         MIND = id("mind");
@@ -3249,6 +3353,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(dmg * 0.93F);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         MOTIONTRAIT_ARMOR = id("motion_trait_armor");
@@ -3271,6 +3376,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(dmg * 0.93F);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         MUNDANE_ARMOR = id("mundane_armor");
@@ -3280,6 +3386,7 @@ public final class SoaSmitheryModifiers {
                             float pct = effect.paramFloat("pct", 0.1f);
                     ctx.amount().set(ctx.amount().get() * (1.0f - Math.min(0.8f, pct)));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         MUNDANE_ARMOR1 = id("mundane_armor1");
@@ -3434,6 +3541,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 260, 0, true, false));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         OREEXCAVATE = id("oreexcavate");
@@ -3472,6 +3580,7 @@ public final class SoaSmitheryModifiers {
                     var stack = ctx.armor();
                     if (stack.getDamageValue() > 0) stack.setDamageValue(stack.getDamageValue() - 1);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         PENETRATIONTRAIT = id("penetration_trait");
@@ -3521,6 +3630,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(Math.round(dmg / 5.0F) * 5.0F);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         PERFECTIONISTTRAIT_ARMOR = id("perfectionist_trait_armor");
@@ -3538,6 +3648,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(Math.round(dmg / 5.0F) * 5.0F);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         PETRAMOR = id("petramor");
@@ -3559,6 +3670,7 @@ public final class SoaSmitheryModifiers {
                     var stack = ctx.armor();
                     if (stack.getDamageValue() > 0) stack.setDamageValue(stack.getDamageValue() - 1);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         PINKYTRAIT = id("pinky_trait");
@@ -3598,6 +3710,7 @@ public final class SoaSmitheryModifiers {
         SmitheryAPI.registerModifier(Modifier.builder(POLISHED_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .onCompose(composeArmorAttribute("polished_armor", () -> Attributes.ARMOR_TOUGHNESS, "amount", 2.0f, AttributeModifier.Operation.ADDITION))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         POOPTRAIT = id("poop_trait");
@@ -3638,6 +3751,7 @@ public final class SoaSmitheryModifiers {
                     ctx.wearer().addEffect(new net.minecraft.world.effect.MobEffectInstance(
                         net.minecraft.world.effect.MobEffects.CONFUSION, 25, 0, false, false));
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         POOPY_ARMOR = id("poopy_armor");
@@ -3658,6 +3772,7 @@ public final class SoaSmitheryModifiers {
                     ctx.wearer().addEffect(new net.minecraft.world.effect.MobEffectInstance(
                         net.minecraft.world.effect.MobEffects.CONFUSION, 25, 0, false, false));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         PORTED = id("ported");
@@ -3731,12 +3846,14 @@ public final class SoaSmitheryModifiers {
                         }
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         POWERFUL_ARMOR = id("powerful_armor");
         SmitheryAPI.registerModifier(Modifier.builder(POWERFUL_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.bonusAttackDamage += effect.paramFloat("damage", 2.0f))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         PRECIPITATE = id("precipitate");
@@ -3766,6 +3883,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(ctx.amount().get() * 0.85f);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         PROJECTILE_RESISTANT_ARMOR = id("projectile_resistant_armor");
@@ -3776,6 +3894,7 @@ public final class SoaSmitheryModifiers {
                             float pct = effect.paramFloat("pct", 0.1f);
                     ctx.amount().set(ctx.amount().get() * (1.0f - Math.min(0.8f, pct)));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         PROSPEROUS = id("prosperous");
@@ -3825,6 +3944,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().removeEffect(net.minecraft.world.effect.MobEffects.WITHER);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         PURIFYINGTRAIT_ARMOR = id("purifying_trait_armor");
@@ -3837,6 +3957,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().removeEffect(net.minecraft.world.effect.MobEffects.WITHER);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         RAGING = id("raging");
@@ -3902,12 +4023,14 @@ public final class SoaSmitheryModifiers {
         SmitheryAPI.registerModifier(Modifier.builder(REINFORCED)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.durabilityMultiplier *= 1.0f + effect.paramFloat("bonus", 0.2f))
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         REINFORCED_ARMOR = id("reinforced_armor");
         SmitheryAPI.registerModifier(Modifier.builder(REINFORCED_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.durabilityMultiplier *= 1.0f + effect.paramFloat("bonus", 0.2f))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         RELIABLETRAIT = id("reliable_trait");
@@ -3923,6 +4046,7 @@ public final class SoaSmitheryModifiers {
                             float pct = effect.paramFloat("pct", 0.1f);
                     ctx.amount().set(ctx.amount().get() * (1.0f - Math.min(0.8f, pct)));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         RESONANCE = id("resonance");
@@ -4007,6 +4131,7 @@ public final class SoaSmitheryModifiers {
                         }
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         SECONDLIFETRAIT_ARMOR = id("second_life_trait_armor");
@@ -4030,6 +4155,7 @@ public final class SoaSmitheryModifiers {
                         }
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         SENTIENCE = id("sentience");
@@ -4077,6 +4203,7 @@ public final class SoaSmitheryModifiers {
                             float pct = effect.paramFloat("pct", 0.1f);
                     ctx.amount().set(ctx.amount().get() * (1.0f - Math.min(0.8f, pct)));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         SHOCKING = id("shocking");
@@ -4095,6 +4222,7 @@ public final class SoaSmitheryModifiers {
                 .onHurt((effect, ctx) -> {
                     ctx.amount().set(ctx.amount().get() * 0.95f);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         SHULKING = id("shulking");
@@ -4104,6 +4232,7 @@ public final class SoaSmitheryModifiers {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
                         ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.LEVITATION, 40, 0));
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         SILKTOUCH = id("silktouch");
@@ -4122,6 +4251,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(ctx.amount().get() * 0.85f);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         SKYROOTED = id("skyrooted");
@@ -4175,6 +4305,7 @@ public final class SoaSmitheryModifiers {
                         ctx.level().addFreshEntity(drop);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         SLIMEY_ARMOR = id("slimey_armor");
@@ -4188,6 +4319,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().level().addFreshEntity(drop);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         SMITE = id("smite");
@@ -4225,16 +4357,28 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 260, 0, true, false));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         SOULBOUND = id("soulbound");
+        // Behavior lives in SoulboundEvents: the stack has to be pulled out of the inventory on
+        // LivingDeathEvent, which no per-modifier hook can reach. maxLevel 1 because it is a
+        // one-shot save, spent when it fires (Tinkers 1.12 "single use").
         SmitheryAPI.registerModifier(Modifier.builder(SOULBOUND)
                                 .category(Modifier.ModifierCategory.ACTIVE)
+                .appliesTo(Modifier.AppliesTo.BOTH)
+                .maxLevel(1)
                 .build());
 
         SOULBOUND_ARMOR = id("soulbound_armor");
+        // GreedyCraft listed a separate armor-side Soulbound; SoulboundEvents honors this id too,
+        // so armor that carries it behaves identically. Nothing grants it today - the Nether Star
+        // source applies the tool id to armor as well - but it stays registered so an armor
+        // material that wants its own Soulbound has an id to hang it on.
         SmitheryAPI.registerModifier(Modifier.builder(SOULBOUND_ARMOR)
                                 .category(Modifier.ModifierCategory.ACTIVE)
+                .appliesTo(Modifier.AppliesTo.ARMOR)
+                .maxLevel(1)
                 .build());
 
         SOULCHARGE = id("soulcharge");
@@ -4332,6 +4476,7 @@ public final class SoaSmitheryModifiers {
                         : (float) Math.pow(1.0F - reduction, 0.25);
                     ctx.amount().set(dmg * perPiece);
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         SPARTANTRAIT = id("spartan_trait");
@@ -4388,12 +4533,14 @@ public final class SoaSmitheryModifiers {
                         : (float) Math.pow(1.0F - reduction, 0.25);
                     ctx.amount().set(dmg * perPiece);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         SPEEDY_ARMOR = id("speedy_armor");
         SmitheryAPI.registerModifier(Modifier.builder(SPEEDY_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .onCompose(composeArmorAttribute("speedy_armor", () -> Attributes.MOVEMENT_SPEED, "pct", 0.03f, AttributeModifier.Operation.MULTIPLY_TOTAL))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         SPIKY = id("spiky");
@@ -4414,6 +4561,7 @@ public final class SoaSmitheryModifiers {
                     if (attacker == ctx.wearer()) return;
                     attacker.hurt(ctx.wearer().damageSources().thorns(ctx.wearer()), 2.0f);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         SPLINTERING = id("splintering");
@@ -4477,6 +4625,7 @@ public final class SoaSmitheryModifiers {
                     target.push(dir.x * str, 0.3, dir.z * str);
                     target.hurtMarked = true;
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         STICKY_ARMOR = id("sticky_armor");
@@ -4488,6 +4637,7 @@ public final class SoaSmitheryModifiers {
                     attacker.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,
                             effect.paramInt("duration_ticks", 60), effect.paramInt("amplifier", 0)));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         STIFF = id("stiff");
@@ -4533,6 +4683,7 @@ public final class SoaSmitheryModifiers {
                         }
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         STRONGVACCINETRAIT_ARMOR = id("strong_vaccine_trait_armor");
@@ -4549,6 +4700,7 @@ public final class SoaSmitheryModifiers {
                     }
                     player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 60, 0, true, false));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         SUBTERRANEAN_ARMOR = id("subterranean_armor");
@@ -4559,6 +4711,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(ctx.amount().get() * 0.9f);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         SUPERHEAT = id("superheat");
@@ -4613,6 +4766,7 @@ public final class SoaSmitheryModifiers {
                         attacker.setSecondsOnFire(5);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         SUPERKNOCKBACK = id("superknockback");
@@ -4696,6 +4850,7 @@ public final class SoaSmitheryModifiers {
                         ctx.target().level().addFreshEntity(drop);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TASTY_ARMOR = id("tasty_armor");
@@ -4709,6 +4864,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().level().addFreshEntity(drop);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_ABSORPTION_ARMOR = id("tconevo.absorption_armor");
@@ -4717,6 +4873,7 @@ public final class SoaSmitheryModifiers {
                 .onHurt((effect, ctx) -> {
                     ctx.amount().set(ctx.amount().get() * 0.95f);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_AFTERSHOCK = id("tconevo.aftershock");
@@ -4763,6 +4920,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(0f);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_ARTIFACT = id("tconevo.artifact");
@@ -4780,12 +4938,14 @@ public final class SoaSmitheryModifiers {
         SmitheryAPI.registerModifier(Modifier.builder(TCONEVO_ASTRAL)
                                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.bonusAttackDamage += 2.0f)
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_ASTRAL_ARMOR = id("tconevo.astral_armor");
         SmitheryAPI.registerModifier(Modifier.builder(TCONEVO_ASTRAL_ARMOR)
                                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onHurt((effect, ctx) -> ctx.amount().set(ctx.amount().get() * 0.9f))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_ATTUNED_AEVITAS = id("tconevo.attuned_aevitas");
@@ -4796,6 +4956,7 @@ public final class SoaSmitheryModifiers {
                         ctx.attacker().heal(1.0f);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_ATTUNED_AEVITAS_ARMOR = id("tconevo.attuned_aevitas_armor");
@@ -4806,6 +4967,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().heal(0.5f);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_ATTUNED_ARMARA = id("tconevo.attuned_armara");
@@ -4815,6 +4977,7 @@ public final class SoaSmitheryModifiers {
                     float reduced = Math.max(0f, ctx.amount().get() - 1.5f);
                     ctx.amount().set(reduced);
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_ATTUNED_ARMARA_ARMOR = id("tconevo.attuned_armara_armor");
@@ -4824,6 +4987,7 @@ public final class SoaSmitheryModifiers {
                             float pct = effect.paramFloat("pct", 0.1f);
                     ctx.amount().set(ctx.amount().get() * (1.0f - Math.min(0.8f, pct)));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_ATTUNED_BOOTES = id("tconevo.attuned_bootes");
@@ -4839,6 +5003,7 @@ public final class SoaSmitheryModifiers {
                             target.getZ(), new ItemStack(food));
                     target.level().addFreshEntity(drop);
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_ATTUNED_BOOTES_ARMOR = id("tconevo.attuned_bootes_armor");
@@ -4851,24 +5016,28 @@ public final class SoaSmitheryModifiers {
                         player.getFoodData().setFoodLevel(player.getFoodData().getFoodLevel() + 1);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_ATTUNED_DISCIDIA = id("tconevo.attuned_discidia");
         SmitheryAPI.registerModifier(Modifier.builder(TCONEVO_ATTUNED_DISCIDIA)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.bonusAttackDamage += effect.paramFloat("damage", 2.0f))
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_ATTUNED_DISCIDIA_ARMOR = id("tconevo.attuned_discidia_armor");
         SmitheryAPI.registerModifier(Modifier.builder(TCONEVO_ATTUNED_DISCIDIA_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.bonusAttackDamage += effect.paramFloat("damage", 2.0f))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_ATTUNED_EVORSIO = id("tconevo.attuned_evorsio");
         SmitheryAPI.registerModifier(Modifier.builder(TCONEVO_ATTUNED_EVORSIO)
                                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.bonusMiningSpeed += 2.0f)
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_ATTUNED_EVORSIO_ARMOR = id("tconevo.attuned_evorsio_armor");
@@ -4879,6 +5048,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 60, 0, true, false));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_ATTUNED_FORNAX = id("tconevo.attuned_fornax");
@@ -4887,6 +5057,7 @@ public final class SoaSmitheryModifiers {
                 .onAttackEntity((effect, ctx) -> {
                     ctx.target().setSecondsOnFire(effect.paramInt("seconds", 3));
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_ATTUNED_FORNAX_ARMOR = id("tconevo.attuned_fornax_armor");
@@ -4897,6 +5068,7 @@ public final class SoaSmitheryModifiers {
                             float pct = effect.paramFloat("pct", 0.1f);
                     ctx.amount().set(ctx.amount().get() * (1.0f - Math.min(0.8f, pct)));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_ATTUNED_HOROLOGIUM = id("tconevo.attuned_horologium");
@@ -4911,6 +5083,7 @@ public final class SoaSmitheryModifiers {
                         }
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_ATTUNED_HOROLOGIUM_ARMOR = id("tconevo.attuned_horologium_armor");
@@ -4925,6 +5098,7 @@ public final class SoaSmitheryModifiers {
                         }
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_ATTUNED_LUCERNA = id("tconevo.attuned_lucerna");
@@ -4934,6 +5108,7 @@ public final class SoaSmitheryModifiers {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
                     target.addEffect(new MobEffectInstance(MobEffects.GLOWING, 100, 0));
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_ATTUNED_LUCERNA_ARMOR = id("tconevo.attuned_lucerna_armor");
@@ -4944,6 +5119,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 260, 0, true, false));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_ATTUNED_MINERALIS = id("tconevo.attuned_mineralis");
@@ -4957,6 +5133,7 @@ public final class SoaSmitheryModifiers {
                         drop.setItem(stack);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_ATTUNED_MINERALIS_ARMOR = id("tconevo.attuned_mineralis_armor");
@@ -4970,12 +5147,14 @@ public final class SoaSmitheryModifiers {
                         drop.setItem(stack);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_ATTUNED_OCTANS = id("tconevo.attuned_octans");
         SmitheryAPI.registerModifier(Modifier.builder(TCONEVO_ATTUNED_OCTANS)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.bonusMiningSpeed += effect.paramFloat("speed", 2.0f))
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_ATTUNED_OCTANS_ARMOR = id("tconevo.attuned_octans_armor");
@@ -4988,6 +5167,7 @@ public final class SoaSmitheryModifiers {
                                 ctx.wearer().getAirSupply() + 1));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_ATTUNED_PELOTRIO = id("tconevo.attuned_pelotrio");
@@ -4999,6 +5179,7 @@ public final class SoaSmitheryModifiers {
                         if (tool.getDamageValue() > 0) tool.setDamageValue(tool.getDamageValue() - 1);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_ATTUNED_PELOTRIO_ARMOR = id("tconevo.attuned_pelotrio_armor");
@@ -5010,6 +5191,7 @@ public final class SoaSmitheryModifiers {
                     var stack = ctx.armor();
                     if (stack.getDamageValue() > 0) stack.setDamageValue(stack.getDamageValue() - 1);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_ATTUNED_VICIO = id("tconevo.attuned_vicio");
@@ -5021,6 +5203,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(ctx.amount().get() * 1.3f);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_ATTUNED_VICIO_ARMOR = id("tconevo.attuned_vicio_armor");
@@ -5031,6 +5214,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 60, 0, true, false));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_AURA_INFUSED_ARMOR = id("tconevo.aura_infused_armor");
@@ -5043,6 +5227,7 @@ public final class SoaSmitheryModifiers {
                     if (player.tickCount % 10 != 0) return;
                     vazkii.botania.api.mana.ManaItemHandler.instance().dispatchMana(ctx.armor(), player, 2, true);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_AURA_SIPHON = id("tconevo.aura_siphon");
@@ -5096,6 +5281,7 @@ public final class SoaSmitheryModifiers {
         SmitheryAPI.registerModifier(Modifier.builder(TCONEVO_BLOODBOUND)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.bonusAttackDamage += effect.paramFloat("damage", 1.5f))
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_BLOODBOUND_ARMOR = id("tconevo.bloodbound_armor");
@@ -5104,6 +5290,7 @@ public final class SoaSmitheryModifiers {
                 .onHurt((effect, ctx) -> {
                     ctx.amount().set(ctx.amount().get() * 0.95f);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_BULWARK_ARMOR = id("tconevo.bulwark_armor");
@@ -5114,6 +5301,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(ctx.amount().get() * 0.7f);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_CASCADING = id("tconevo.cascading");
@@ -5149,6 +5337,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().heal(0.5f);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_CHAIN_LIGHTNING = id("tconevo.chain_lightning");
@@ -5197,6 +5386,7 @@ public final class SoaSmitheryModifiers {
                 .onHurt((effect, ctx) -> {
                     ctx.amount().set(ctx.amount().get() * 0.9f);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_CHILLING_TOUCH_ARMOR = id("tconevo.chilling_touch_armor");
@@ -5208,6 +5398,7 @@ public final class SoaSmitheryModifiers {
                     attacker.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,
                             effect.paramInt("duration_ticks", 60), effect.paramInt("amplifier", 0)));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_CONDENSING = id("tconevo.condensing");
@@ -5288,6 +5479,7 @@ public final class SoaSmitheryModifiers {
                 .onHurt((effect, ctx) -> {
                     ctx.amount().set(ctx.amount().get() * 0.92f);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_DRACONIC_ARROW_DAMAGE = id("tconevo.draconic_arrow_damage");
@@ -5368,12 +5560,14 @@ public final class SoaSmitheryModifiers {
                     int level = effect.paramInt("level", 1);
                     stats.bonusAttackDamage += 3.0f * level;
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_DRACONIC_ENERGY_ARMOR = id("tconevo.draconic_energy_armor");
         SmitheryAPI.registerModifier(Modifier.builder(TCONEVO_DRACONIC_ENERGY_ARMOR)
                                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onHurt((effect, ctx) -> ctx.amount().set(ctx.amount().get() * 0.8f))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_DRACONIC_JUMP_BOOST_ARMOR = id("tconevo.draconic_jump_boost_armor");
@@ -5381,12 +5575,14 @@ public final class SoaSmitheryModifiers {
                                 .category(Modifier.ModifierCategory.PASSIVE)
                 .onCompose(composeArmorAttribute("draconic_jump", () -> ForgeMod.STEP_HEIGHT_ADDITION.get(),
                         "amount", 1.0f, AttributeModifier.Operation.ADDITION))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_DRACONIC_MOVE_SPEED_ARMOR = id("tconevo.draconic_move_speed_armor");
         SmitheryAPI.registerModifier(Modifier.builder(TCONEVO_DRACONIC_MOVE_SPEED_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .onCompose(composeArmorAttribute("tconevo.draconic_move_speed_armor", () -> Attributes.MOVEMENT_SPEED, "pct", 0.03f, AttributeModifier.Operation.MULTIPLY_TOTAL))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_DRACONIC_SHIELD_CAPACITY_ARMOR = id("tconevo.draconic_shield_capacity_armor");
@@ -5396,6 +5592,7 @@ public final class SoaSmitheryModifiers {
                     if (!(ctx.wearer() instanceof Player player)) return;
                     player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 100, 0, true, false));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_DRACONIC_SHIELD_RECOVERY_ARMOR = id("tconevo.draconic_shield_recovery_armor");
@@ -5406,12 +5603,14 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().heal(0.5f);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_ELECTRIC = id("tconevo.electric");
         SmitheryAPI.registerModifier(Modifier.builder(TCONEVO_ELECTRIC)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.bonusAttackDamage += effect.paramFloat("damage", 2.0f))
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_ELECTRIC_ARMOR = id("tconevo.electric_armor");
@@ -5420,12 +5619,14 @@ public final class SoaSmitheryModifiers {
                 .onHurt((effect, ctx) -> {
                     ctx.amount().set(ctx.amount().get() * 0.95f);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_ENERGIZED = id("tconevo.energized");
         SmitheryAPI.registerModifier(Modifier.builder(TCONEVO_ENERGIZED)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.bonusMiningSpeed += effect.paramFloat("speed", 3.0f))
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_ENERGIZED_ARMOR = id("tconevo.energized_armor");
@@ -5434,6 +5635,7 @@ public final class SoaSmitheryModifiers {
                 .onHurt((effect, ctx) -> {
                     ctx.amount().set(ctx.amount().get() * 0.93f);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_ENERGIZED_ARMOR2 = id("tconevo.energized_armor2");
@@ -5490,12 +5692,14 @@ public final class SoaSmitheryModifiers {
                                 45, 0, true, false));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_EVOLVED = id("tconevo.evolved");
         SmitheryAPI.registerModifier(Modifier.builder(TCONEVO_EVOLVED)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.bonusAttackDamage += effect.paramFloat("damage", 2.0f))
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_EVOLVED_ARMOR = id("tconevo.evolved_armor");
@@ -5504,6 +5708,7 @@ public final class SoaSmitheryModifiers {
                 .onHurt((effect, ctx) -> {
                     ctx.amount().set(ctx.amount().get() * 0.95f);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_EXECUTOR = id("tconevo.executor");
@@ -5535,6 +5740,7 @@ public final class SoaSmitheryModifiers {
                     pixie.setProps(target, player, 0, 4.0f);
                     player.level().addFreshEntity(pixie);
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_FAE_VOICE_ARMOR = id("tconevo.fae_voice_armor");
@@ -5553,6 +5759,7 @@ public final class SoaSmitheryModifiers {
                     pixie.setProps(attacker, player, 0, 4.0f);
                     player.level().addFreshEntity(pixie);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_FERTILIZING = id("tconevo.fertilizing");
@@ -5582,6 +5789,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().heal(4.0f);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_FLUX_BURN = id("tconevo.flux_burn");
@@ -5596,6 +5804,7 @@ public final class SoaSmitheryModifiers {
         SmitheryAPI.registerModifier(Modifier.builder(TCONEVO_FLUXED)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.bonusAttackDamage += effect.paramFloat("damage", 1.5f))
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_FLUXED_ARMOR = id("tconevo.fluxed_armor");
@@ -5604,6 +5813,7 @@ public final class SoaSmitheryModifiers {
                 .onHurt((effect, ctx) -> {
                     ctx.amount().set(ctx.amount().get() * 0.95f);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_FOOT_FLEET = id("tconevo.foot_fleet");
@@ -5630,6 +5840,7 @@ public final class SoaSmitheryModifiers {
                                 effect.paramInt("duration_ticks", 100), effect.paramInt("amplifier", 0)));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_GAIA_WILL_DHAROK_ARMOR = id("tconevo.gaia_will_dharok_armor");
@@ -5641,6 +5852,7 @@ public final class SoaSmitheryModifiers {
                     float missingPct = 1.0f - attacker.getHealth() / attacker.getMaxHealth();
                     ctx.amount().set(ctx.amount().get() * (1.0f + missingPct));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_GAIA_WILL_GUTHAN_ARMOR = id("tconevo.gaia_will_guthan_armor");
@@ -5654,6 +5866,7 @@ public final class SoaSmitheryModifiers {
                         attacker.heal(ctx.damageDealt() * 0.25f);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_GAIA_WILL_KARIL_ARMOR = id("tconevo.gaia_will_karil_armor");
@@ -5667,6 +5880,7 @@ public final class SoaSmitheryModifiers {
                                 effect.paramInt("duration_ticks", 100), effect.paramInt("amplifier", 0)));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_GAIA_WILL_TORAG_ARMOR = id("tconevo.gaia_will_torag_armor");
@@ -5678,6 +5892,7 @@ public final class SoaSmitheryModifiers {
                     attacker.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,
                             effect.paramInt("duration_ticks", 60), effect.paramInt("amplifier", 0)));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_GAIA_WILL_VERAC_ARMOR = id("tconevo.gaia_will_verac_armor");
@@ -5690,6 +5905,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(ctx.amount().get() * 1.5f);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_GAIA_WRATH = id("tconevo.gaia_wrath");
@@ -5702,6 +5918,7 @@ public final class SoaSmitheryModifiers {
         SmitheryAPI.registerModifier(Modifier.builder(TCONEVO_GALE_FORCE_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .onCompose(composeArmorAttribute("tconevo_gale_force", () -> Attributes.MOVEMENT_SPEED, "pct", 0.04f, AttributeModifier.Operation.MULTIPLY_TOTAL))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_GALE_FORCE_ARMOR1 = id("tconevo.gale_force_armor1");
@@ -5718,6 +5935,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().heal(1.0f);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_IMPACT_FORCE = id("tconevo.impact_force");
@@ -5780,6 +5998,7 @@ public final class SoaSmitheryModifiers {
                         armor.setDamageValue(armor.getDamageValue() - 1);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_MANA_INFUSED = id("tconevo.mana_infused");
@@ -5791,6 +6010,7 @@ public final class SoaSmitheryModifiers {
                         if (tool.getDamageValue() > 0) tool.setDamageValue(tool.getDamageValue() - 1);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_MANA_INFUSED_ARMOR = id("tconevo.mana_infused_armor");
@@ -5802,6 +6022,7 @@ public final class SoaSmitheryModifiers {
                     var stack = ctx.armor();
                     if (stack.getDamageValue() > 0) stack.setDamageValue(stack.getDamageValue() - 1);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_MODIFIABLE = id("tconevo.modifiable");
@@ -5840,6 +6061,7 @@ public final class SoaSmitheryModifiers {
                     // 1.12: 25% reduction
                     ctx.amount().set(ctx.amount().get() * 0.75f);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         // Crystalline — bonus damage scaling with remaining durability (GC: +20% max)
@@ -5887,6 +6109,7 @@ public final class SoaSmitheryModifiers {
                     ctx.armor().hurtAndBreak(ctx.armor().getMaxDamage(), ctx.wearer(),
                             e -> e.broadcastBreakEvent(ctx.slot()));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         // Strength of Will — taking a hit at full health grants Immortality (GC: 200 ticks)
@@ -5900,6 +6123,7 @@ public final class SoaSmitheryModifiers {
                                 200, 0, true, true));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_OMNIPOTENCE = id("tconevo.omnipotence");
@@ -5948,6 +6172,7 @@ public final class SoaSmitheryModifiers {
                         if (tool.getDamageValue() > 0) tool.setDamageValue(tool.getDamageValue() - 1);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_PHOTOSYNTHETIC_ARMOR = id("tconevo.photosynthetic_armor");
@@ -5959,6 +6184,7 @@ public final class SoaSmitheryModifiers {
                     var stack = ctx.armor();
                     if (stack.getDamageValue() > 0) stack.setDamageValue(stack.getDamageValue() - 1);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_PHOTOVOLTAIC = id("tconevo.photovoltaic");
@@ -5971,6 +6197,7 @@ public final class SoaSmitheryModifiers {
                         if (stack.getDamageValue() > 0) stack.setDamageValue(stack.getDamageValue() - 1);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_PHOTOVOLTAIC_ARMOR = id("tconevo.photovoltaic_armor");
@@ -5983,6 +6210,7 @@ public final class SoaSmitheryModifiers {
                         if (stack.getDamageValue() > 0) stack.setDamageValue(stack.getDamageValue() - 1);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_PIEZOELECTRIC = id("tconevo.piezoelectric");
@@ -6013,6 +6241,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().addEffect(new MobEffectInstance(MobEffects.GLOWING, 260, 0, true, false));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_REACTIVE_ARMOR = id("tconevo.reactive_armor");
@@ -6027,6 +6256,7 @@ public final class SoaSmitheryModifiers {
                         attacker.hurtMarked = true;
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_REAPING = id("tconevo.reaping");
@@ -6079,6 +6309,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().heal(0.5f);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_SENTIENT = id("tconevo.sentient");
@@ -6087,6 +6318,7 @@ public final class SoaSmitheryModifiers {
                 .onDealDamage((effect, ctx) -> {
                     ctx.amount().set(ctx.amount().get() + effect.paramFloat("damage", 2.0f));
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_SENTIENT_ARMOR = id("tconevo.sentient_armor");
@@ -6095,6 +6327,7 @@ public final class SoaSmitheryModifiers {
                 .onHurt((effect, ctx) -> {
                     ctx.amount().set(ctx.amount().get() * 0.93f);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_SHADOWSTEP_ARMOR = id("tconevo.shadowstep_armor");
@@ -6105,6 +6338,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 40, 1, true, false));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_SOUL_GUARD_ARMOR = id("tconevo.soul_guard_armor");
@@ -6113,6 +6347,7 @@ public final class SoaSmitheryModifiers {
                 .onHurt((effect, ctx) -> {
                     ctx.amount().set(ctx.amount().get() * 0.93f);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_SOUL_REND = id("tconevo.soul_rend");
@@ -6171,6 +6406,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 40, 0, true, false));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_STAGGERING = id("tconevo.staggering");
@@ -6197,6 +6433,7 @@ public final class SoaSmitheryModifiers {
                         attacker.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 60, 0));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_STONEBOUND_ARMOR = id("tconevo.stonebound_armor");
@@ -6209,6 +6446,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(ctx.amount().get() * (1.0f - 0.15f * wornPct));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_SUNDERING = id("tconevo.sundering");
@@ -6227,6 +6465,7 @@ public final class SoaSmitheryModifiers {
         SmitheryAPI.registerModifier(Modifier.builder(TCONEVO_SUPERDENSE_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.durabilityMultiplier *= 1.0f + effect.paramFloat("bonus", 0.5f))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_THUNDERGOD_FAVOUR_ARMOR = id("tconevo.thundergod_favour_armor");
@@ -6237,6 +6476,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().heal(ctx.damage() * 0.5f);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_THUNDERGOD_WRATH = id("tconevo.thundergod_wrath");
@@ -6262,6 +6502,7 @@ public final class SoaSmitheryModifiers {
         SmitheryAPI.registerModifier(Modifier.builder(TCONEVO_ULTRADENSE_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.durabilityMultiplier *= 1.0f + effect.paramFloat("bonus", 1.0f))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_VAMPIRIC = id("tconevo.vampiric");
@@ -6294,6 +6535,7 @@ public final class SoaSmitheryModifiers {
                         ctx.attacker().addEffect(new MobEffectInstance(MobEffects.CONFUSION, 40, 0));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_WARPING_ARMOR = id("tconevo.warping_armor");
@@ -6309,24 +6551,28 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().addEffect(new MobEffectInstance(MobEffects.CONFUSION, 40, 0));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TCONEVO_WILLFUL = id("tconevo.willful");
         SmitheryAPI.registerModifier(Modifier.builder(TCONEVO_WILLFUL)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.durabilityMultiplier *= 1.0f + effect.paramFloat("bonus", 0.15f))
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TCONEVO_WILLFUL_ARMOR = id("tconevo.willful_armor");
         SmitheryAPI.registerModifier(Modifier.builder(TCONEVO_WILLFUL_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.durabilityMultiplier *= 1.0f + effect.paramFloat("bonus", 0.15f))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TELEKINETIC_ARMOR = id("telekinetic_armor");
         SmitheryAPI.registerModifier(Modifier.builder(TELEKINETIC_ARMOR)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .onCompose(composeArmorAttribute("telekinetic_armor", () -> ForgeMod.ENTITY_REACH.get(), "amount", 1.0f, AttributeModifier.Operation.ADDITION))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TERRAFIRMA = id("terrafirma");
@@ -6374,6 +6620,7 @@ public final class SoaSmitheryModifiers {
                     float refl = Math.min(10.0F, attacker.getMaxHealth() * 0.025F);
                     attacker.hurt(entity.damageSources().thorns(entity), refl);
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         THRONYTRAIT = id("throny_trait");
@@ -6420,6 +6667,7 @@ public final class SoaSmitheryModifiers {
                     float refl = Math.min(10.0F, attacker.getMaxHealth() * 0.025F);
                     attacker.hurt(entity.damageSources().thorns(entity), refl);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         THUNDERING = id("thundering");
@@ -6475,6 +6723,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(dmg * 1.33F);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TIDALFORCETRAIT_ARMOR = id("tidal_force_trait_armor");
@@ -6497,6 +6746,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(dmg * 1.33F);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TIDAL_FORCE = id("tidal_force");
@@ -6514,6 +6764,7 @@ public final class SoaSmitheryModifiers {
                     attacker.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,
                             effect.paramInt("duration_ticks", 60), effect.paramInt("amplifier", 0)));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TRASH = id("trash");
@@ -6540,6 +6791,7 @@ public final class SoaSmitheryModifiers {
                 })
                 .onCompose(composeArmorAttribute("travel_belt", () -> ForgeMod.STEP_HEIGHT_ADDITION.get(),
                         "step_height", 0.5f, AttributeModifier.Operation.ADDITION))
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TRAVEL_GOGGLES_ARMOR = id("travel_goggles_armor");
@@ -6550,6 +6802,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 260, 0, true, false));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TRAVEL_SACK_ARMOR = id("travel_sack_armor");
@@ -6569,6 +6822,7 @@ public final class SoaSmitheryModifiers {
                         drop.setDeltaMovement(toward.normalize().scale(0.4));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TRAVEL_SLOWFALL_ARMOR = id("travel_slowfall_armor");
@@ -6577,6 +6831,7 @@ public final class SoaSmitheryModifiers {
                 .onFall((effect, ctx) -> {
                     ctx.damageMultiplier().set(0.0f);
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TRAVEL_SNEAK_ARMOR = id("travel_sneak_armor");
@@ -6587,6 +6842,7 @@ public final class SoaSmitheryModifiers {
                         ctx.wearer().addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 40, 0, true, false));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TRUEDEFENSETRAIT = id("true_defense_trait");
@@ -6599,6 +6855,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(dmg * 0.9F);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         TRUEDEFENSETRAIT_ARMOR = id("true_defense_trait_armor");
@@ -6611,6 +6868,7 @@ public final class SoaSmitheryModifiers {
                         ctx.amount().set(dmg * 0.9F);
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         TWILIT = id("twilit");
@@ -6696,6 +6954,7 @@ public final class SoaSmitheryModifiers {
                         }
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         VACCINETRAIT_ARMOR = id("vaccine_trait_armor");
@@ -6712,6 +6971,7 @@ public final class SoaSmitheryModifiers {
                         }
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         VEILED = id("veiled");
@@ -6735,6 +6995,7 @@ public final class SoaSmitheryModifiers {
                         attacker.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 0));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         VINDICTIVE = id("vindictive");
@@ -6755,6 +7016,7 @@ public final class SoaSmitheryModifiers {
                     ctx.wearer().addEffect(new net.minecraft.world.effect.MobEffectInstance(
                         net.minecraft.world.effect.MobEffects.NIGHT_VISION, 330, 2, false, false));
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         VISIONTRAIT_ARMOR = id("vision_trait_armor");
@@ -6769,6 +7031,7 @@ public final class SoaSmitheryModifiers {
                     ctx.wearer().addEffect(new net.minecraft.world.effect.MobEffectInstance(
                         net.minecraft.world.effect.MobEffects.NIGHT_VISION, 330, 2, false, false));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         VOLTAIC_ARMOR = id("voltaic_armor");
@@ -6785,6 +7048,7 @@ public final class SoaSmitheryModifiers {
                         }
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         WARMTRAIT = id("warm_trait");
@@ -6804,6 +7068,7 @@ public final class SoaSmitheryModifiers {
                     if (entity.level().isRaining()) reduction += 0.025F;
                     ctx.amount().set(dmg * (1.0F - reduction));
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         WARMTRAIT_ARMOR = id("warm_trait_armor");
@@ -6823,6 +7088,7 @@ public final class SoaSmitheryModifiers {
                     if (entity.level().isRaining()) reduction += 0.025F;
                     ctx.amount().set(dmg * (1.0F - reduction));
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         WARPDRAINTRAIT = id("warp_drain_trait");
@@ -6843,6 +7109,7 @@ public final class SoaSmitheryModifiers {
                         default -> player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200, 0));
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         WARPDRAINTRAIT_ARMOR = id("warp_drain_trait_armor");
@@ -6860,6 +7127,7 @@ public final class SoaSmitheryModifiers {
                         }
                     }
                 })
+                .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
         WEBBED = id("webbed");

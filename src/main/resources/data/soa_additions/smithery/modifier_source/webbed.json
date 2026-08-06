@@ -1,0 +1,6 @@
+{
+  "_comment": "1.12 minecraft:web is minecraft:cobweb in 1.20 — same item, renamed.",
+  "source_item": "minecraft:cobweb",
+  "modifier": "soa_additions:webbed",
+  "unit_value": 1
+}

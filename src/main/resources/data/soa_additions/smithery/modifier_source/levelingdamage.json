@@ -1,0 +1,9 @@
+{
+  "_comment": "GreedyCraft-authored 'Leveled Damage' (ContentTweaker TraitBuilder + addItem(<ore:plateHonor>)). GC item additions:greedycraft-plate_of_honor is already ported as soa_additions:plate_of_honor.",
+  "source_item": "soa_additions:plate_of_honor",
+  "modifier": "soa_additions:levelingdamage_trait",
+  "params": {
+    "level": 1
+  },
+  "unit_value": 1
+}

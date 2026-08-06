@@ -1,0 +1,9 @@
+{
+  "_comment": "GC/TConstruct 'Emerald' (durability). 1.12 ingredient restored; Smithery's own emerald->Silky mapping was removed because 1.12 applied Silky with a Silky Jewel, an item this pack does not have yet.",
+  "source_item": "minecraft:emerald",
+  "modifier": "soa_additions:emerald",
+  "params": {
+    "bonus": 0.5
+  },
+  "unit_value": 1
+}

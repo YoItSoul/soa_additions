@@ -1,0 +1,58 @@
+{
+  "name": "Material Traits 5",
+  "icon": "smithery:iron_pick_head",
+  "category": "soa_additions:traits",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Cheapskate",
+      "text": "Reduces durability by 10%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Black Quartz, Cincinnasite, Coal, Seared, Sky Stone"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cheapskate",
+      "text": "Reduces durability by 10%$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Apatite, Cincinnasite, Coal, Construction Alloy, Holystone, Seared, Sky Stone, Void"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Chunky",
+      "text": "Increases durability by 25%$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Insanium, Ma.soulium, Soularium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Coldblooded",
+      "text": "Inflicts Slowness II for 3s on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Adaminite, Durasteel, Emeraldic, Manyullyn, Platinum"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Conductive",
+      "text": "Grounds out almost all lightning damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Copper"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Congenial",
+      "text": "Binds to a mob's name on kill; up to 10x damage to matching names, reduced against others$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Valyrium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Coraliumplague",
+      "text": "Inflicts Wither for 3 seconds on hit$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Refined Coralium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Corrosive",
+      "text": "Chance to inflict Weakness on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Copper"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cotlifesteal",
+      "text": "33% chance to heal 5% of damage dealt (up to 5) when hitting non-undead mobs$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Blood Infused Iron, Chromasteel, Crimsonite, Heart Crystal, Scarlite"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Crude",
+      "text": "Adds +1.5 bonus attack damage$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Black Quartz (PlusTiC), Conductive Iron, Litherite, Lonsdaleite, Polyethylene, Redstone Alloy, Rubber, Tin and 1 more"
+    }
+  ]
+}

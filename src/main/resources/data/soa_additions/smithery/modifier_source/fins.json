@@ -1,0 +1,9 @@
+{
+  "_comment": "TConstruct 1.12 Fins: 2 raw fish per unit (oredict 'fish'), projectile launchers only. level_cost 2 on the modifier means two cod complete it. The ignores_water_drag param is what Smithery reads on the arrow, so no addon id is hardcoded in the base mod.",
+  "source_item": "minecraft:cod",
+  "modifier": "soa_additions:fins",
+  "unit_value": 1,
+  "params": {
+    "ignores_water_drag": 1
+  }
+}

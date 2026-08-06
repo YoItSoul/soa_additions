@@ -1,0 +1,6 @@
+{
+  "_comment": "1.12 copied the tool modifier's matchers; the advanced panel is the armour tier.",
+  "source_item": "mekanismgenerators:advanced_solar_generator",
+  "modifier": "soa_additions:tconevo.photovoltaic_armor",
+  "unit_value": 1
+}

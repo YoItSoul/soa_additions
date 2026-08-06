@@ -1,0 +1,9 @@
+{
+  "_comment": "GC/TConstruct 'Diamond' (1 diamond, one-shot durability upgrade). soa_additions:diamond is appliesTo BOTH, so this one file covers tools and armor (ConArm 'Diamond' too); soa_additions:diamond_armor stays unsourced.",
+  "source_item": "minecraft:diamond",
+  "modifier": "soa_additions:diamond",
+  "params": {
+    "bonus": 0.5
+  },
+  "unit_value": 1
+}

@@ -1,0 +1,6 @@
+{
+  "_comment": "GreedyCraft re-gated toolprogression:magic_mushroom behind a Draconium/Manasteel recipe and the 'awakened' stage (items.zs:126). Add \"soa_additions:magicmushroom\": \"awakened\" to the modifiers map in data/soa_additions/smithery/stages/gc_parity.json to keep that gate.",
+  "source_item": "minecraft:red_mushroom",
+  "modifier": "soa_additions:magicmushroom",
+  "unit_value": 1
+}

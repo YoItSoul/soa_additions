@@ -1,0 +1,58 @@
+{
+  "name": "Material Traits 30",
+  "icon": "smithery:iron_pick_head",
+  "category": "soa_additions:traits",
+  "sortnum": 29,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.ruination",
+      "text": "Deals bonus 4% of the target's current health as extra damage on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() UU-Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.second Wind",
+      "text": "Slowly heals while below 30% health$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Terrasteel"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.sentient",
+      "text": "Reduces incoming damage by 7%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Crimsonite, Sentient"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.sentient",
+      "text": "Adds +2 flat damage on hit$(br2)$(l)Granted from:$() the tool's head$(br)$(l)Materials:$() Sentient"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.soul Guard",
+      "text": "Reduces all incoming damage by 7%$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Blood Infused Iron, Bound, Crimsonite, Soularium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.soul Rend",
+      "text": "Heals you for 10% of damage dealt per level on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Chaotic Metal, Draconic Metal, Wyvern Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.soul Rend1",
+      "text": "Heals you for 10% of damage dealt per level on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Draconium, Spectre"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.soul Rend3",
+      "text": "Heals for 10% of damage dealt per level on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Cosmilite"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.spectral",
+      "text": "Grants brief Invisibility when below half health$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Dimensional Shard, Spectre"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.staggering",
+      "text": "Applies Slowness V on hit and plays an anvil sound$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Terrasteel"
+    }
+  ]
+}

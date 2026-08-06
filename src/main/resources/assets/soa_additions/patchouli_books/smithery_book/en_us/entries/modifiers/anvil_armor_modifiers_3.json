@@ -1,0 +1,62 @@
+{
+  "name": "Anvil Modifiers — Armor (3)",
+  "icon": "minecraft:amethyst_shard",
+  "category": "smithery:modifiers",
+  "sortnum": 13,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "draconicevolution:wyvern_capacitor",
+      "text": "Sets the target on fire for 3 seconds on hit$(br2)$(l)Apply with:$() Wyvern Capacitor at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Tconevo.flux Burn"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "botania:ancient_will_ahrim",
+      "text": "25% chance to inflict Weakness on hit$(br2)$(l)Apply with:$() Will of Ahrim at an anvil.$(br)$(l)Goes on:$() armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Tconevo.gaia Will Ahrim"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "botania:ancient_will_dharok",
+      "text": "Damage scales up with your missing health$(br2)$(l)Apply with:$() Will of Dharok at an anvil.$(br)$(l)Goes on:$() armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Tconevo.gaia Will Dharok"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "botania:ancient_will_karil",
+      "text": "25% chance to inflict Wither for 5 seconds on hit$(br2)$(l)Apply with:$() Will of Karil at an anvil.$(br)$(l)Goes on:$() armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Tconevo.gaia Will Karil"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "botania:ancient_will_torag",
+      "text": "Applies Slowness to attackers who hit you$(br2)$(l)Apply with:$() Will of Torag at an anvil.$(br)$(l)Goes on:$() armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Tconevo.gaia Will Torag"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "botania:ancient_will_verac",
+      "text": "25% chance to deal 1.5x damage on hit$(br2)$(l)Apply with:$() Will of Verac at an anvil.$(br)$(l)Goes on:$() armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Tconevo.gaia Will Verac"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "mekanismgenerators:advanced_solar_generator",
+      "text": "Repairs 1 durability every 5s in daylight under open sky$(br2)$(l)Apply with:$() Advanced Solar Generator at an anvil.$(br)$(l)Goes on:$() armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Tconevo.photovoltaic"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "draconicevolution:draconic_capacitor",
+      "text": "Adds 3 bonus attack damage and 3 mining speed$(br2)$(l)Apply with:$() Draconic Capacitor at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Tconevo.primordial"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:cobweb",
+      "text": "Inflicts Slowness III for 2 seconds on hit$(br2)$(l)Apply with:$() Cobweb at an anvil.$(br)$(l)Goes on:$() tools & armor$(br)$(l)Cost:$() one per level, single use",
+      "title": "Webbed"
+    }
+  ]
+}

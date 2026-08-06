@@ -1,9 +1,0 @@
-{
-  "_comment": "GC port: TConstruct 'Reinforcement' (tconstruct:materials:14, Guardian II quest reward) -> soa_additions:reinforced_ingot. Values mirror smithery's native obsidian_reinforcement source (dead in this pack since tconstruct is absent).",
-  "source_item": "soa_additions:reinforced_ingot",
-  "modifier": "smithery:reinforced",
-  "params": {
-    "level": 1
-  },
-  "unit_value": 4
-}

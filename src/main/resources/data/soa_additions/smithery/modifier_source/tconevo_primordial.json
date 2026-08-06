@@ -1,0 +1,10 @@
+{
+  "_comment": "TConEvo 'Primordial'. Ingredient ported 1:1.",
+  "source_item": "draconicevolution:draconic_capacitor",
+  "modifier": "soa_additions:tconevo.primordial",
+  "params": {
+    "damage": 3.0,
+    "speed": 3.0
+  },
+  "unit_value": 1
+}

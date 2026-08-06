@@ -1,0 +1,6 @@
+{
+  "_comment": "Soulbound is applied at the anvil with a Nether Star, the same ingredient Tinkers' Construct 1.12 used (TinkerModifiers: modSoulbound.addItem(Items.NETHER_STAR)). appliesTo BOTH on the modifier means one source covers tools and armor, so armor does not need a second star recipe.",
+  "source_item": "minecraft:nether_star",
+  "modifier": "soa_additions:soulbound",
+  "unit_value": 1
+}

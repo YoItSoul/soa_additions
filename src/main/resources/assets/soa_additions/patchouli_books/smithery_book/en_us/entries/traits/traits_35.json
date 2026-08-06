@@ -1,0 +1,28 @@
+{
+  "name": "Material Traits 35",
+  "icon": "smithery:iron_pick_head",
+  "category": "soa_additions:traits",
+  "sortnum": 34,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Writable2",
+      "text": "Adds extra modifier slots to the tool$(br2)$(l)Granted from:$() any part of a tool and the tool's head and armor$(br)$(l)Materials:$() Knowledge, Paper"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Xu Whispering",
+      "text": "15% chance to inflict Weakness for 5 seconds on hit$(br2)$(l)Granted from:$() the tool's head and armor$(br)$(l)Materials:$() Xu Demonic Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Xu Withering",
+      "text": "Multiplies block drops by adding up to 1 extra per drop$(br2)$(l)Granted from:$() the tool's head and armor$(br)$(l)Materials:$() Xu Evil Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Zany",
+      "text": "Adds up to +2 mining speed scaling with missing durability$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Imperomite"
+    }
+  ]
+}

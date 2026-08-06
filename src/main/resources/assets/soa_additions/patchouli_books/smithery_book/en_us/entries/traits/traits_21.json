@@ -1,0 +1,58 @@
+{
+  "name": "Material Traits 21",
+  "icon": "smithery:iron_pick_head",
+  "category": "soa_additions:traits",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Shielding",
+      "text": "Reduces magic-type damage by 10%$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Adaminite, Dark Steel, Durasteel, Elementium, End Steel, Coalescence Matrix, Mithminite, Mithril and 6 more"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Shocking",
+      "text": "Inflicts Slowness and Weakness for 2s on hit$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Amber, Cryonium, Electrical Steel, Electrum, Ender Biotite, Fluix, Redstone Alloy"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Skeletal",
+      "text": "Reduces projectile damage by 15%$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Meteor"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Skyrooted",
+      "text": "Doubles Aether item drops when mining$(br2)$(l)Granted from:$() the tool's head$(br)$(l)Materials:$() Skyroot"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Slashing",
+      "text": "Adds +1.5 bonus attack damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Mica"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Slaughtering",
+      "text": "Duplicates a random mob drop in a stack of 1-4 on kill$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Terrax"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Slimey",
+      "text": "10% chance to drop a slime ball when breaking blocks$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Blue Slime, Pink Slime"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Softy",
+      "text": "Increases mining speed by 30%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Basalt, Mud, Poop"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Souleater",
+      "text": "Builds up bonus damage from kills based on victim max health$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Nihilite"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Spades",
+      "text": "Boosts damage by missing health when below 33% health$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Palis (PlusTiC)"
+    }
+  ]
+}

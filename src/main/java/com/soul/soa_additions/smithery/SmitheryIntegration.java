@@ -48,7 +48,36 @@ public final class SmitheryIntegration {
         return ResourceLocation.fromNamespaceAndPath("soa_additions", path);
     }
 
+    /**
+     * Registers every material's polishing stone as a source of Constructs Armory's "Polished".
+     *
+     * <p>1.12 generated one ModPolished per armour material and applied it with that material's
+     * Polishing Kit; Smithery's per-material polishing stones are the same object, so each one
+     * registers its own source. Damaged armour is repaired by the stone instead — the anvil handler
+     * defers to RepairHandler on gear that has taken damage.</p>
+     *
+     * <p>Must run after item registration.</p>
+     */
+    public static void registerPolishingKitSources() {
+        int n = 0;
+        for (Material mat : SmitheryAPI.MATERIALS.all()) {
+            var stone = com.soul.smithery.registry.SmitheryItems.findPart(
+                    mat.id(), com.soul.smithery.content.SmitheryPartTypes.POLISHING_STONE.id());
+            if (stone == null) continue;
+            com.soul.smithery.api.modifier.ModifierSources.register(stone,
+                    com.soul.smithery.api.modifier.ModifierEffect.of(
+                            SoaSmitheryModifiers.POLISHED_ARMOR, java.util.Map.of("level", 1)));
+            n++;
+        }
+        LOG_POLISH.info("Registered {} polishing stones as Polished sources", n);
+    }
+
+    private static final org.apache.logging.log4j.Logger LOG_POLISH =
+            org.apache.logging.log4j.LogManager.getLogger("SOA-SmitheryPolish");
+
     public static void init(IEventBus modEventBus) {
+        modEventBus.addListener((net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent e) ->
+                e.enqueueWork(SmitheryIntegration::registerPolishingKitSources));
         SoaSmitheryModifiers.register();
         SoaSmitheryMaterials.register();
         SoaSmitheryAlloys.register();

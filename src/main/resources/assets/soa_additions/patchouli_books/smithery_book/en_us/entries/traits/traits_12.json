@@ -1,0 +1,58 @@
+{
+  "name": "Material Traits 12",
+  "icon": "smithery:iron_pick_head",
+  "category": "soa_additions:traits",
+  "sortnum": 11,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Goodfridayagreement",
+      "text": "Reduces explosion damage by 30%$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Emerald (PlusTiC)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Hailhydra",
+      "text": "Increases XP dropped from mined blocks by 1.5x$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Chaotic Metal (PlusTiC), Kelline"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Halloween",
+      "text": "§oTrick or Treat!§r\\n§fHave a chance to loot candy bags from mobs!$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Pumpkin"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Hearts",
+      "text": "Adds 2 bonus attack damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Restonia (PlusTiC)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Heavy",
+      "text": "Adds +0.1 knockback resistance$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Chaotic Metal, Chromium, Dark Matter, Draconic Metal, Neutronium, Osmium, Terrasteel, Wyvern Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Heavy",
+      "text": "Adds +1 bonus attack damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Chromium, Dark Matter, Lead, Neutronium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Heavy Metal",
+      "text": "Adds +2 attack damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Platinum (PlusTiC), Tungsten"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Hellish",
+      "text": "Sets targets on fire for 4s on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Infernium, Netherrack"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Heroic",
+      "text": "Deals 1.5x damage at low durability, otherwise 0.9x$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Vibranium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Hold Ground",
+      "text": "Tool: 1.25x damage while sneaking; armor: -8% damage taken while sneaking$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aeonsteel, Cryonium, Manganese Steel, Refined Obsidian, Titanium, Zanite"
+    }
+  ]
+}

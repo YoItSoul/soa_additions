@@ -1,0 +1,6 @@
+{
+  "_comment": "ConArm 'Shulkerweight' (jump power, up to 20 levels). Shulker shells are claimed by the tool-side Shulking, so rabbit's foot - the vanilla jump reagent - carries it. 1.12 ingredient restored: shulker shells feed Shulking on tools and Shulkerweight on armour.",
+  "source_item": "minecraft:shulker_shell",
+  "modifier": "soa_additions:shulkerweight_armor",
+  "unit_value": 1
+}

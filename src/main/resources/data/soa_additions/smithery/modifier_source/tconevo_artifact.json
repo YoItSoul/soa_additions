@@ -1,0 +1,6 @@
+{
+  "_comment": "TConEvo 'Artifact' - ingredient ported 1:1 (tconevo:material ARTIFACT_UNSEALER -> tconevo:artifact_unsealer, 'Plate of Unsealing').",
+  "source_item": "tconevo:artifact_unsealer",
+  "modifier": "soa_additions:tconevo.artifact",
+  "unit_value": 1
+}
