@@ -58,6 +58,14 @@ public final class CheaterModeCommand {
         boolean enabled = BoolArgumentType.getBool(ctx, "enabled");
         CheaterModeOptIn.setEnabled(player, enabled);
 
+        // Opting in is the answer to a detection already waiting on the server. Apply it now,
+        // rather than leaving the player opted-in-but-unflagged until the scanner next fires.
+        if (enabled) {
+            CheatEnforcement.acceptPendingChoice(player);
+        } else {
+            CheatEnforcement.forgetPendingChoice(player);
+        }
+
         Component state = enabled
                 ? Component.literal("ENABLED").withStyle(ChatFormatting.RED)
                 : Component.literal("disabled").withStyle(ChatFormatting.GREEN);

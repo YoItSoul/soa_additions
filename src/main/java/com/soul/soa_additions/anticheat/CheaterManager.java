@@ -1,6 +1,7 @@
 package com.soul.soa_additions.anticheat;
 
 import com.soul.soa_additions.SoaAdditions;
+import com.soul.soa_additions.compat.GameStagesCompat;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.nbt.CompoundTag;
@@ -81,6 +82,7 @@ public final class CheaterManager {
 
         writePlayerNbt(player, reason);
         grantAdvancement(player);
+        brandWuss(player);
 
         if (newlyFlagged) {
             LOG.warn("Flagged {} ({}): {}", player.getGameProfile().getName(), player.getUUID(), reason);
@@ -142,6 +144,26 @@ public final class CheaterManager {
         // still has it so we don't overwrite the original flag reason.
         String reason = resolveReason(data, player);
         flag(player, reason);
+    }
+
+    /**
+     * Applies the {@code iswuss} brand that the rest of the pack already understands.
+     *
+     * <p>The KubeJS join handler grants this on a creative-mode join, and casual grants it on mode
+     * change, but nothing granted it for a cheat the Java detector caught — so an xray player was
+     * flagged in the anti-cheat's own backends while the terminal still let them through. Applied
+     * here rather than at the call sites so every route to a flag brands identically.
+     *
+     * <p>Re-applied alongside the other backends on login cross-check, which also repairs a save
+     * where the stage was stripped. GameStages is a soft dependency; the bridge no-ops without it.
+     */
+    private static void brandWuss(ServerPlayer player) {
+        if (!GameStagesCompat.addStage(player, "iswuss")) {
+            // GameStages is a soft dependency, but this pack ships it — a false here means the
+            // brand did not land, and the terminal would still let a flagged player through.
+            LOG.warn("Could not brand {} with 'iswuss' — GameStages missing or its API changed",
+                    player.getGameProfile().getName());
+        }
     }
 
     private static String resolveReason(CheaterData data, ServerPlayer player) {

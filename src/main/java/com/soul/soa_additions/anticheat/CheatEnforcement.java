@@ -11,6 +11,10 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.PacketDistributor;
 
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * Decides what happens when a cheat method is found on a player.
  *
@@ -40,6 +44,19 @@ public final class CheatEnforcement {
     private CheatEnforcement() {}
 
     /**
+     * Detections that opened a choice screen and are waiting on an answer.
+     *
+     * <p>Accepting sets the opt-in, but the opt-in alone only affects the <em>next</em> detection —
+     * and the detection that raised the screen has already been handled by then, so without this
+     * the player clicked "yes" and nothing happened until they relogged. Holding the detection here
+     * lets the answer apply to the thing they were actually asked about.
+     *
+     * <p>Server-side so the reason written to the log is the one the server detected, not whatever
+     * a client sends back.
+     */
+    private static final Map<UUID, String> AWAITING_CHOICE = new ConcurrentHashMap<>();
+
+    /**
      * Handles a detection.
      *
      * @return true when the player is allowed to keep playing
@@ -60,6 +77,7 @@ public final class CheatEnforcement {
             // offering a trade they made when they picked the mode. Let them play.
             if (isCasual(player)) return true;
 
+            AWAITING_CHOICE.put(player.getUUID(), category + ":" + detail);
             send(player, CheatDetectedPacket.Mode.CHOICE, category, detail);
             return true;
         }
@@ -82,6 +100,25 @@ public final class CheatEnforcement {
      * True for the host of a singleplayer world. LAN guests deliberately fall through to the server
      * path — the host's opt-in is theirs alone, and a guest with xray is on someone else's world.
      */
+    /**
+     * Applies the flag for the detection this player was asked about and accepted.
+     *
+     * <p>Called when cheater mode is switched on, so clicking "Yes, mark this world" and typing
+     * {@code /soa quests cheatermode true} land in the same place. No pending detection means
+     * nothing to apply — someone opting in ahead of time is not yet a cheater.
+     */
+    public static void acceptPendingChoice(ServerPlayer player) {
+        String pending = AWAITING_CHOICE.remove(player.getUUID());
+        if (pending != null) {
+            CheaterManager.flag(player, pending);
+        }
+    }
+
+    /** Drops any unanswered detection, so it can't be applied in a later session. */
+    public static void forgetPendingChoice(ServerPlayer player) {
+        AWAITING_CHOICE.remove(player.getUUID());
+    }
+
     /**
      * True when this world is on Casual.
      *
