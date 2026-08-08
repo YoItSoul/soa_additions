@@ -3,6 +3,8 @@ package com.soul.soa_additions.anticheat;
 import com.soul.soa_additions.config.ModConfigs;
 import com.soul.soa_additions.network.CheatDetectedPacket;
 import com.soul.soa_additions.network.ModNetworking;
+import com.soul.soa_additions.quest.PackMode;
+import com.soul.soa_additions.quest.PackModeData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
@@ -51,6 +53,13 @@ public final class CheatEnforcement {
         }
 
         if (isSingleplayerOwner(player)) {
+            // Casual has already spent everything the flag would take. The mode grants every
+            // progression stage and brands the player 'iswuss', which the terminal checks and
+            // refuses — so the run cannot be completed either way. Asking a casual player to
+            // choose between "nothing is recorded" and "your world can never be completed" is
+            // offering a trade they made when they picked the mode. Let them play.
+            if (isCasual(player)) return true;
+
             send(player, CheatDetectedPacket.Mode.CHOICE, category, detail);
             return true;
         }
@@ -73,6 +82,19 @@ public final class CheatEnforcement {
      * True for the host of a singleplayer world. LAN guests deliberately fall through to the server
      * path — the host's opt-in is theirs alone, and a guest with xray is on someone else's world.
      */
+    /**
+     * True when this world is on Casual.
+     *
+     * <p>Deliberately not applied to servers: casual there is the admin's setting for everyone, and
+     * an xray player still ruins the game for the people around them. Progression integrity is what
+     * casual has already given up; fairness to other players is not.
+     */
+    private static boolean isCasual(ServerPlayer player) {
+        MinecraftServer server = player.getServer();
+        return server != null
+                && PackModeData.get(server).mode() == PackMode.CASUAL;
+    }
+
     private static boolean isSingleplayerOwner(ServerPlayer player) {
         MinecraftServer server = player.getServer();
         return server != null && !server.isDedicatedServer()
@@ -88,23 +110,18 @@ public final class CheatEnforcement {
     public static Component disconnectReason(String category, String detail) {
         return Component.empty()
                 .append(Component.literal("Cheat detected\n\n").withStyle(ChatFormatting.RED, ChatFormatting.BOLD))
-                .append(Component.literal("Souls of Avarice found a " + category + " that lets you cheat:\n")
+                .append(Component.literal("Souls of Avarice found a file that lets you cheat:\n")
                         .withStyle(ChatFormatting.WHITE))
                 .append(Component.literal(detail + "\n\n").withStyle(ChatFormatting.YELLOW))
-                .append(Component.literal("Remove it and you can join straight back in — ")
+                .append(Component.literal("Delete the file and you can join straight back in — ")
                         .withStyle(ChatFormatting.GRAY))
-                .append(Component.literal("nothing has been recorded against you.\n\n")
+                .append(Component.literal("nothing is recorded against you.\n")
                         .withStyle(ChatFormatting.GREEN))
-                .append(Component.literal("Resource packs live in your instance's ")
+                .append(Component.literal(CheatCopy.NOTHING_RECORDED + "\n\n")
                         .withStyle(ChatFormatting.GRAY))
-                .append(Component.literal("resourcepacks").withStyle(ChatFormatting.AQUA))
-                .append(Component.literal(" folder. Deleting the file is enough — disabling it in the\n")
+                .append(Component.literal(CheatCopy.FILE_LOCATION + "\n")
                         .withStyle(ChatFormatting.GRAY))
-                .append(Component.literal("pack selector is not, because it is still on disk.\n\n")
-                        .withStyle(ChatFormatting.GRAY))
-                .append(Component.literal("If you would rather keep it, run ").withStyle(ChatFormatting.GRAY))
-                .append(Component.literal("/soa quests cheatermode true").withStyle(ChatFormatting.WHITE))
-                .append(Component.literal(" in singleplayer first.\nYou will be marked as playing modified, and the server may still refuse you.")
+                .append(Component.literal(CheatCopy.DELETE_NOT_DISABLE)
                         .withStyle(ChatFormatting.DARK_GRAY));
     }
 

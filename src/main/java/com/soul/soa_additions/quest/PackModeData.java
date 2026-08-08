@@ -70,6 +70,25 @@ public final class PackModeData extends SavedData {
         }
     }
 
+    /**
+     * In singleplayer the mode belongs to the world, not the session.
+     *
+     * <p>The choice is made once, on the create-world screen, and is fixed from then on — a world
+     * cannot be started on casual and finished on expert. Applied on every load rather than only at
+     * creation, so worlds made before this existed are covered too.
+     *
+     * <p>Servers are left alone deliberately: which mode a server runs is the admin's call, and
+     * changing it later is a decision they are entitled to make for their own players.
+     * {@code /soa packmode force} still overrides this, at permission 4, and the anti-cheat already
+     * treats it as a cheat command.
+     */
+    public void enforceSingleplayerLock(MinecraftServer server) {
+        if (!server.isDedicatedServer() && !locked) {
+            locked = true;
+            setDirty();
+        }
+    }
+
     /** Called once, on first access in a new world, to stamp creation time. */
     public void ensureStamped() {
         if (worldCreatedMillis == 0L) {
@@ -117,6 +136,7 @@ public final class PackModeData extends SavedData {
         );
         data.ensureStamped();
         data.applyServerConfig();
+        data.enforceSingleplayerLock(server);
         // Keep the KubeJS-facing mirror in step with the authoritative value,
         // so a cold start (where no server/level exists during datapack load)
         // still resolves this world's mode. See PackModeBridge.

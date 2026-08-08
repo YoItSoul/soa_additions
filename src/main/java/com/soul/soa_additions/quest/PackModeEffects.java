@@ -2,8 +2,6 @@ package com.soul.soa_additions.quest;
 
 import com.soul.soa_additions.SoaAdditions;
 import com.soul.soa_additions.config.ModConfigs;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Difficulty;
@@ -134,14 +132,10 @@ public final class PackModeEffects {
         boolean keepInv = mode != PackMode.EXPERT;
         rules.getRule(GameRules.RULE_KEEPINVENTORY).set(keepInv, server);
 
-        Component msg = Component.literal(
-                "[SOA] Pack mode effects applied: " + mode.lower()
-                        + " (keepInventory=" + keepInv + ")")
-                .withStyle(ChatFormatting.GOLD);
-        for (ServerPlayer p : server.getPlayerList().getPlayers()) {
-            p.sendSystemMessage(msg);
-        }
-
+        // Deliberately not announced in chat. This fires on every join and on every datapack
+        // reload, and "Pack mode effects applied: casual (keepInventory=true)" is a line about
+        // internal bookkeeping — the player already chose the mode and can see it in the quest
+        // book. The server log keeps the record.
         LOG.info("Applied packmode={} gamerules (keepInventory={})", mode.lower(), keepInv);
     }
 

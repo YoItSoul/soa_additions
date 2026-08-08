@@ -1,5 +1,6 @@
 package com.soul.soa_additions.anticheat.client;
 
+import com.soul.soa_additions.anticheat.CheatCopy;
 import com.soul.soa_additions.network.CheatDetectedPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -7,6 +8,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.FormattedCharSequence;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,13 +20,25 @@ import java.util.List;
  * they had an xray pack should not have to guess what to do. Quitting to fix it leaves no record;
  * enabling cheating writes the opt-in and flags the save. There is deliberately no "ignore" — the
  * screen would otherwise become something you dismiss without reading.</p>
+ *
+ * <p>Both consequences are spelled out on the screen rather than hidden behind a "what does that
+ * mean?" button. Someone deciding whether to flag their own save is exactly the person who needs
+ * the detail, and they are the least likely to go looking for it.</p>
  */
 public final class CheatChoiceScreen extends Screen {
 
-    private static final int WIDTH = 340;
+    private static final int WIDTH = 400;
+    private static final int LINE_H = 11;
+    private static final int TITLE_H = 18;
+    private static final int BUTTON_W = 220;
+    private static final int BUTTON_H = 20;
+    private static final int BUTTON_GAP = 4;
 
     private final CheatDetectedPacket detection;
-    private final List<Component> body = new ArrayList<>();
+    private final List<FormattedCharSequence> body = new ArrayList<>();
+    private int contentTop;
+    /** Second stage: the player has asked to continue and must confirm it. */
+    private boolean confirming;
 
     public CheatChoiceScreen(CheatDetectedPacket detection) {
         super(Component.literal("Cheat Detected"));
@@ -34,35 +48,84 @@ public final class CheatChoiceScreen extends Screen {
     @Override
     protected void init() {
         body.clear();
-        body.add(Component.literal("Souls of Avarice found a " + detection.category()
-                + " that lets you cheat:").withStyle(ChatFormatting.WHITE));
-        body.add(Component.literal(detection.detail()).withStyle(ChatFormatting.YELLOW));
-        body.add(Component.empty());
-        body.add(Component.literal("This is your own world, so it is your call.")
-                .withStyle(ChatFormatting.GRAY));
-        body.add(Component.empty());
-        body.add(Component.literal("Quit and remove it and nothing is recorded against you.")
-                .withStyle(ChatFormatting.GRAY));
-        body.add(Component.literal("Deleting the file is what counts — turning a pack off in the")
-                .withStyle(ChatFormatting.DARK_GRAY));
-        body.add(Component.literal("selector leaves it on disk, and it will be found again.")
-                .withStyle(ChatFormatting.DARK_GRAY));
+        if (confirming) {
+            buildConfirm();
+        } else {
+            buildChoice();
+        }
 
-        int y = this.height / 2 + 40;
-        int btnW = 220;
-        int x = (this.width - btnW) / 2;
+        int bodyH = body.size() * LINE_H;
+        int buttonsH = BUTTON_H * 2 + BUTTON_GAP;
+        int total = TITLE_H + bodyH + 12 + buttonsH;
+        contentTop = Math.max(4, (this.height - total) / 2);
+
+        int x = (this.width - BUTTON_W) / 2;
+        // Anchored under the text so a long detection line can't sit on top of the buttons, and
+        // clamped so the buttons stay on screen even if it does. Verified to clear the text at a
+        // 240px GUI height, which is the shortest anyone realistically plays at.
+        int y = Math.min(contentTop + TITLE_H + bodyH + 12, this.height - buttonsH - 4);
+
+        int y2 = y + BUTTON_H + BUTTON_GAP;
+
+        if (confirming) {
+            // The destructive button deliberately takes the TOP slot here, because the button that
+            // got us to this screen was in the bottom one. A double-click that carries through the
+            // first press lands on "Go back", not on the irreversible answer.
+            this.addRenderableWidget(Button.builder(
+                    Component.literal("Yes, mark this world").withStyle(ChatFormatting.RED),
+                    b -> enableCheating()).bounds(x, y, BUTTON_W, BUTTON_H).build());
+
+            this.addRenderableWidget(Button.builder(
+                    Component.literal("Go back").withStyle(ChatFormatting.GREEN),
+                    b -> {
+                        confirming = false;
+                        rebuildWidgets();
+                    }).bounds(x, y2, BUTTON_W, BUTTON_H).build());
+            return;
+        }
+
+        // Labels mirror the two paragraphs above them, so the button a player clicks says the
+        // same thing as the warning they just read.
+        this.addRenderableWidget(Button.builder(
+                Component.literal("Quit and delete the file").withStyle(ChatFormatting.GREEN),
+                b -> quitToTitle()).bounds(x, y, BUTTON_W, BUTTON_H).build());
 
         this.addRenderableWidget(Button.builder(
-                Component.literal("Quit and fix it").withStyle(ChatFormatting.GREEN),
-                b -> quitToTitle()).bounds(x, y, btnW, 20).build());
+                Component.literal("Continue as a cheater world").withStyle(ChatFormatting.RED),
+                b -> {
+                    confirming = true;
+                    rebuildWidgets();
+                }).bounds(x, y2, BUTTON_W, BUTTON_H).build());
+    }
 
-        this.addRenderableWidget(Button.builder(
-                Component.literal("Enable cheating for this world").withStyle(ChatFormatting.RED),
-                b -> enableCheating()).bounds(x, y + 24, btnW, 20).build());
+    private void buildChoice() {
+        line("Souls of Avarice found a file that lets you cheat:", ChatFormatting.WHITE);
+        line(detection.detail(), ChatFormatting.YELLOW);
+        blank();
 
-        this.addRenderableWidget(Button.builder(
-                Component.literal("What does that mean?").withStyle(ChatFormatting.DARK_GRAY),
-                b -> explain()).bounds(x, y + 48, btnW, 20).build());
+        line("Delete the file and nothing is recorded against you.", ChatFormatting.GREEN);
+        line(CheatCopy.NOTHING_RECORDED, ChatFormatting.GRAY);
+        line(CheatCopy.DELETE_NOT_DISABLE, ChatFormatting.DARK_GRAY);
+        blank();
+
+        line("Keep it and this world is marked as a cheater world.", ChatFormatting.RED);
+        line(CheatCopy.CHEATER_WORLD, ChatFormatting.GRAY);
+    }
+
+    private void buildConfirm() {
+        line("Mark this world as a cheater world?", ChatFormatting.WHITE);
+        blank();
+        line("This cannot be undone.", ChatFormatting.RED);
+        line(CheatCopy.CHEATER_WORLD, ChatFormatting.GRAY);
+    }
+
+    /** Wraps to {@link #WIDTH} so the copy can be written as sentences rather than hand-cut lines. */
+    private void line(String text, ChatFormatting style) {
+        body.addAll(this.font.split(Component.literal(text).withStyle(style), WIDTH));
+    }
+
+    private void blank() {
+        body.add(FormattedCharSequence.EMPTY);
     }
 
     private void quitToTitle() {
@@ -72,22 +135,19 @@ public final class CheatChoiceScreen extends Screen {
         mc.setScreen(new net.minecraft.client.gui.screens.TitleScreen());
     }
 
+    /**
+     * Marks the world immediately — this screen is the confirmation, so there is no second one.
+     *
+     * <p>Runs the opt-in command rather than sending a packet of its own: the command is the single
+     * source of truth for the flag, and duplicating that state change would give it two ways to be
+     * set and one of them to drift.
+     */
     private void enableCheating() {
         Minecraft mc = Minecraft.getInstance();
         if (mc.player != null) {
-            // The command is the single source of truth for the opt-in, so the button runs it
-            // rather than duplicating the state change over another packet.
             mc.player.connection.sendCommand("soa quests cheatermode true");
         }
         this.onClose();
-    }
-
-    private void explain() {
-        body.add(Component.empty());
-        body.add(Component.literal("Enabling cheating marks this save as modified. Quests still")
-                .withStyle(ChatFormatting.GRAY));
-        body.add(Component.literal("work; the mark travels with the save and servers may refuse it.")
-                .withStyle(ChatFormatting.GRAY));
     }
 
     @Override
@@ -110,14 +170,14 @@ public final class CheatChoiceScreen extends Screen {
     public void render(GuiGraphics g, int mouseX, int mouseY, float partial) {
         this.renderBackground(g);
         int cx = this.width / 2;
-        int y = this.height / 2 - 80;
+        int y = contentTop;
 
         g.drawCenteredString(this.font, Component.literal("Cheat Detected")
                 .withStyle(ChatFormatting.RED, ChatFormatting.BOLD), cx, y, 0xFFFFFF);
-        y += 18;
-        for (Component line : body) {
-            g.drawCenteredString(this.font, line, cx, y, 0xFFFFFF);
-            y += 11;
+        y += TITLE_H;
+        for (FormattedCharSequence l : body) {
+            g.drawCenteredString(this.font, l, cx, y, 0xFFFFFF);
+            y += LINE_H;
         }
         super.render(g, mouseX, mouseY, partial);
     }
