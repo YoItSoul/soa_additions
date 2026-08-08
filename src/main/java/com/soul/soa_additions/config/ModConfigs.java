@@ -9,6 +9,7 @@ public final class ModConfigs {
     public static final ForgeConfigSpec SPEC;
     public static final ForgeConfigSpec.BooleanValue ENABLE_TOOL_REQUIREMENTS;
     public static final ForgeConfigSpec.DoubleValue TOOL_DAMAGE_MULTIPLIER;
+    public static final ForgeConfigSpec.BooleanValue SHOW_MINING_LEVEL_TOOLTIP;
     public static final ForgeConfigSpec.BooleanValue ENABLE_JVM_PROFILER;
     public static final ForgeConfigSpec.IntValue JVM_PROFILER_INTERVAL_SECONDS;
     public static final ForgeConfigSpec.IntValue JVM_PROFILER_KEEP_SESSIONS;
@@ -20,6 +21,9 @@ public final class ModConfigs {
 
     // --- Pack mode server enforcement ---
     public static final ForgeConfigSpec.ConfigValue<String> SERVER_PACKMODE;
+
+    // --- Anti-cheat ---
+    public static final ForgeConfigSpec.BooleanValue ALLOW_CHEATING_PLAYERS;
 
     // --- Pack mode difficulty ---
     public static final ForgeConfigSpec.BooleanValue PACKMODE_FORCE_HARD_DIFFICULTY;
@@ -43,6 +47,13 @@ public final class ModConfigs {
         TOOL_DAMAGE_MULTIPLIER = builder
                 .comment("Damage multiplier applied to tools that break blocks they cannot mine.")
                 .defineInRange("toolDamageMultiplier", 10.0D, 1.0D, 100.0D);
+        SHOW_MINING_LEVEL_TOOLTIP = builder
+                .comment(
+                        "If true, digging tools get a 'Mining Level' tooltip line naming their rank on the",
+                        "GreedyCraft ladder (Fragile through Infinity). Client-side display only.",
+                        "The matching block-side readout is the Jade 'mining_level' provider, toggled in Jade's own config."
+                )
+                .define("showMiningLevelTooltip", true);
 
         builder.push("jvmProfiler");
         ENABLE_JVM_PROFILER = builder
@@ -122,6 +133,17 @@ public final class ModConfigs {
                         "Intended for dedicated/multiplayer servers where the admin picks the mode."
                 )
                 .define("serverPackMode", "");
+
+        ALLOW_CHEATING_PLAYERS = builder
+                .comment(
+                        "If true, players with an active cheat method (xray pack, cheat client, etc.) are",
+                        "allowed to join anyway — they are still flagged, and still told what was detected,",
+                        "but they are not disconnected. Off by default: on a normal server a detected cheat",
+                        "gets a disconnect explaining what to remove and how to come back.",
+                        "Singleplayer never disconnects regardless of this setting; it shows the player a",
+                        "screen offering to fix the problem or to enable cheating for that world."
+                )
+                .define("allowCheatingPlayers", false);
 
         builder.push("packmodeDifficulty");
         builder.comment("Gameplay effects applied per pack mode, inspired by GreedyCraft.");

@@ -298,6 +298,18 @@ public final class ModCreativeTabs {
                     })
                     .build());
 
+    /** Ore-sight potions get their own tab: the entry count scales with the
+     *  pack's ore count, so folding them into SOA_TAB would bury everything
+     *  else. */
+    public static final RegistryObject<CreativeModeTab> ORE_SIGHT_TAB =
+            CREATIVE_MODE_TABS.register("ore_sight_potions_tab",
+                    () -> CreativeModeTab.builder()
+                            .title(Component.translatable("itemGroup.ore_sight_potions_tab"))
+                            .icon(com.soul.soa_additions.oresight.OreSightCreativeEntries::icon)
+                            .displayItems((parameters, output) ->
+                                    com.soul.soa_additions.oresight.OreSightCreativeEntries.addTo(output))
+                            .build());
+
     private ModCreativeTabs() {}
 
     private static net.minecraft.world.item.ItemStack makeBook(net.minecraft.world.item.Item bookItem, String bookId) {

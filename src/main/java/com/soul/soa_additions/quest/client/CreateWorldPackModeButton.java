@@ -31,6 +31,23 @@ public final class CreateWorldPackModeButton {
     private static final int BTN_H = 20;
     private static final int MARGIN = 5;
 
+    /**
+     * Drop a selection the player made and then abandoned.
+     *
+     * <p>Reaching the world-select or title screen means no world was created
+     * from the current selection — creating one goes straight to the loading
+     * screen instead. Without this an abandoned choice stayed in
+     * {@link PendingPackMode}, and because KubeJS reads it during datapack load,
+     * the next world opened would build its recipes for the wrong mode.</p>
+     */
+    @SubscribeEvent
+    public static void onMenuScreenInit(ScreenEvent.Init.Post event) {
+        if (event.getScreen() instanceof net.minecraft.client.gui.screens.worldselection.SelectWorldScreen
+                || event.getScreen() instanceof net.minecraft.client.gui.screens.TitleScreen) {
+            PendingPackMode.clear();
+        }
+    }
+
     @SubscribeEvent
     public static void onScreenInit(ScreenEvent.Init.Post event) {
         if (!(event.getScreen() instanceof CreateWorldScreen screen)) return;

@@ -2669,10 +2669,17 @@ public final class SoaSmitheryModifiers {
                 .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
+        // PlusTiC's Jaded (landmaster.plustic.traits.Jaded): every hit stacks a wound level to a
+        // cap of 3 and refreshes an 80-tick window during which the victim's healing is throttled
+        // to (3 - level)/3 — fully negated at level 3. The throttle itself lives in
+        // SmitheryTraitEvents.onHeal, since Smithery has no heal hook.
         JADED = id("jaded");
         SmitheryAPI.registerModifier(Modifier.builder(JADED)
-                .category(Modifier.ModifierCategory.PASSIVE)
-                .passive((effect, stats) -> stats.bonusMiningSpeed += effect.paramFloat("speed", 1.0f))
+                .category(Modifier.ModifierCategory.ACTIVE)
+                .onAttackEntity((effect, ctx) -> SmitheryTraitEvents.applyJaded(
+                        ctx.target(),
+                        effect.paramInt("max_level", 3),
+                        effect.paramInt("duration", 80)))
                 .build());
 
         JAGGED = id("jagged");

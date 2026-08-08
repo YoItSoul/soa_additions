@@ -10,6 +10,8 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.soul.soa_additions.SoaAdditions;
 import net.minecraft.ChatFormatting;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.DisplayInfo;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.Holder;
@@ -53,6 +55,7 @@ import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.TridentItem;
+import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.Structure;
@@ -65,6 +68,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLPaths;
 
+import java.lang.reflect.Field;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -84,7 +88,8 @@ import java.util.stream.Collectors;
  * {@code <gamedir>/soa_exports/}. Useful for building wikis, checklists, or
  * feeding other tooling. Targets: {@code items}, {@code blocks}, {@code entities},
  * {@code structures}, {@code biomes}, {@code dimensions}, {@code equipment},
- * {@code books}, {@code all}.
+ * {@code books}, {@code recipes}, {@code loot_tables}, {@code brewing},
+ * {@code advancements}, {@code spawns}, {@code villager_trades}, {@code all}.
  */
 @Mod.EventBusSubscriber(modid = SoaAdditions.MODID)
 public final class RegistryExportCommand {
@@ -109,7 +114,9 @@ public final class RegistryExportCommand {
                                             "bosses", "structures", "biomes", "dimensions", "effects",
                                             "enchantments", "fluids", "sounds", "particles",
                                             "block_entities", "villager_professions", "tags",
-                                            "tinker_materials", "equipment", "books"}) {
+                                            "smithery_materials", "equipment", "books", "recipes",
+                                            "loot_tables", "brewing", "advancements",
+                                            "spawns", "villager_trades", "jei"}) {
                                         b.suggest(s);
                                     }
                                     return b.buildFuture();
@@ -118,6 +125,14 @@ public final class RegistryExportCommand {
     }
 
     private static int run(CommandSourceStack src, String target) {
+        if ("jei".equalsIgnoreCase(target)) {
+            // handled client-side by JeiRecipeExport; if we got here the client
+            // command did not intercept, which means JEI is not installed.
+            src.sendFailure(Component.literal(
+                    "The jei target is a client-side export and needs JEI installed. "
+                    + "Run it from a client, not a dedicated server."));
+            return 0;
+        }
         MinecraftServer server = src.getServer();
         Path outDir = FMLPaths.GAMEDIR.get().resolve("soa_exports");
         try {
@@ -163,10 +178,25 @@ public final class RegistryExportCommand {
                 totals.put("villager_professions", write(outDir.resolve("villager_professions.json"), dumpIds(BuiltInRegistries.VILLAGER_PROFESSION)));
             if (all || "tags".equalsIgnoreCase(target))
                 totals.put("tags", write(outDir.resolve("tags.json"), dumpAllTags(server)));
+            if (all || "smithery_materials".equalsIgnoreCase(target))
+                totals.put("smithery_materials",
+                        write(outDir.resolve("smithery_materials.json"), dumpSmitheryMaterials()));
             if (all || "equipment".equalsIgnoreCase(target))
                 totals.put("equipment", write(outDir.resolve("equipment.json"), dumpEquipment()));
             if (all || "books".equalsIgnoreCase(target))
                 totals.put("books", write(outDir.resolve("books.json"), dumpBooks()));
+            if (all || "recipes".equalsIgnoreCase(target))
+                totals.put("recipes", write(outDir.resolve("recipes.json"), dumpRecipes(server)));
+            if (all || "loot_tables".equalsIgnoreCase(target))
+                totals.put("loot_tables", write(outDir.resolve("loot_tables.json"), dumpLootTables(server)));
+            if (all || "brewing".equalsIgnoreCase(target))
+                totals.put("brewing", write(outDir.resolve("brewing.json"), dumpBrewing()));
+            if (all || "advancements".equalsIgnoreCase(target))
+                totals.put("advancements", write(outDir.resolve("advancements.json"), dumpAdvancements(server)));
+            if (all || "spawns".equalsIgnoreCase(target))
+                totals.put("spawns", write(outDir.resolve("spawns.json"), dumpSpawns(server)));
+            if (all || "villager_trades".equalsIgnoreCase(target))
+                totals.put("villager_trades", write(outDir.resolve("villager_trades.json"), dumpVillagerTrades()));
         } catch (IOException e) {
             src.sendFailure(Component.literal("Export failed: " + e.getMessage()));
             return 0;
@@ -760,6 +790,464 @@ public final class RegistryExportCommand {
 
     // ---------- helpers ----------
 
+    /**
+     * Dumps every recipe the server actually has loaded, read straight off the
+     * live {@code RecipeManager}. That is the only complete view: it includes
+     * mod-jar recipes, recipes nested inside JarJar sub-mods, datapack recipes,
+     * {@code kubejs/data} JSON <em>and</em> recipes added by KubeJS scripts —
+     * none of which can be reconstructed reliably by scanning files on disk.
+     *
+     * <p>Ingredients are emitted as their own {@code Ingredient.toJson()} form
+     * ({@code {"item": ...}} or {@code {"tag": ...}}), so tags stay unresolved
+     * and compact; resolve them against {@code tags.json} if needed.</p>
+     *
+     * <p>Recipes with a custom {@link net.minecraft.world.item.crafting.Recipe}
+     * implementation may not populate {@code getIngredients()} or
+     * {@code getResultItem()}. Those cases are flagged explicitly with
+     * {@code ingredients_available: false} / {@code result_available: false}
+     * rather than being written out as if they had none — an empty list and
+     * "the API would not tell us" are different facts.</p>
+     */
+    private static JsonArray dumpRecipes(MinecraftServer server) {
+        JsonArray arr = new JsonArray();
+        List<net.minecraft.world.item.crafting.Recipe<?>> recipes =
+                new ArrayList<>(server.getRecipeManager().getRecipes());
+        recipes.sort(Comparator.comparing(r -> r.getId().toString()));
+
+        for (net.minecraft.world.item.crafting.Recipe<?> recipe : recipes) {
+            ResourceLocation id = recipe.getId();
+            JsonObject o = new JsonObject();
+            o.addProperty("id", id.toString());
+            o.addProperty("mod", id.getNamespace());
+            safe(() -> {
+                ResourceLocation t = BuiltInRegistries.RECIPE_TYPE.getKey(recipe.getType());
+                if (t != null) o.addProperty("type", t.toString());
+            });
+            safe(() -> {
+                ResourceLocation s = BuiltInRegistries.RECIPE_SERIALIZER.getKey(recipe.getSerializer());
+                if (s != null) o.addProperty("serializer", s.toString());
+            });
+            safe(() -> o.addProperty("class", recipe.getClass().getName()));
+            safe(() -> {
+                String g = recipe.getGroup();
+                if (g != null && !g.isEmpty()) o.addProperty("group", g);
+            });
+            safe(() -> { if (recipe.isSpecial()) o.addProperty("special", true); });
+
+            // ---- result ----
+            // ~25% of loaded recipes are custom machine types whose Recipe class
+            // returns nothing from getResultItem(RegistryAccess) — Blood Magic
+            // altar, Malum spirit_infusion, Thermal press, EnderIO alloy_smelting,
+            // Create mixing, CustomMachinery, and so on. Fall back through the
+            // mod's own accessors and then declared fields, and always record
+            // which path produced the value via `result_source`.
+            String[] resultSource = {null};
+            safe(() -> {
+                ItemStack out = recipe.getResultItem(server.registryAccess());
+                if (out != null && !out.isEmpty()) {
+                    o.add("result", stackJson(out));
+                    resultSource[0] = "api";
+                }
+            });
+            if (resultSource[0] == null) {
+                safe(() -> {
+                    ItemStack out = reflectResult(recipe);
+                    if (out != null && !out.isEmpty()) {
+                        o.add("result", stackJson(out));
+                        resultSource[0] = "reflected";
+                    }
+                });
+            }
+            if (resultSource[0] != null) o.addProperty("result_source", resultSource[0]);
+            else o.addProperty("result_available", false);
+
+            // ---- ingredients ----
+            String[] ingSource = {null};
+            safe(() -> {
+                JsonArray ings = new JsonArray();
+                for (net.minecraft.world.item.crafting.Ingredient ing : recipe.getIngredients()) {
+                    safe(() -> ings.add(ing.toJson()));
+                }
+                if (ings.size() > 0) {
+                    o.add("ingredients", ings);
+                    ingSource[0] = "api";
+                }
+            });
+            if (ingSource[0] == null) {
+                safe(() -> {
+                    JsonArray ings = reflectIngredients(recipe);
+                    if (ings.size() > 0) {
+                        o.add("ingredients", ings);
+                        ingSource[0] = "reflected";
+                    }
+                });
+            }
+            if (ingSource[0] != null) o.addProperty("ingredients_source", ingSource[0]);
+            else o.addProperty("ingredients_available", false);
+
+            arr.add(o);
+        }
+        return arr;
+    }
+
+    /** Common no-arg output accessors used by modded recipe classes. */
+    private static final String[] RESULT_METHODS = {
+            "getResultItem", "getOutput", "getResult", "getOutputItem",
+            "output", "result", "getRecipeOutput", "assemble",
+    };
+
+    /** Last-resort output discovery: the mod's own accessor, then declared fields. */
+    private static ItemStack reflectResult(Object recipe) {
+        for (String name : RESULT_METHODS) {
+            try {
+                java.lang.reflect.Method m = recipe.getClass().getMethod(name);
+                if (!ItemStack.class.isAssignableFrom(m.getReturnType())) continue;
+                m.setAccessible(true);
+                ItemStack s = (ItemStack) m.invoke(recipe);
+                if (s != null && !s.isEmpty()) return s;
+            } catch (Throwable ignored) {}
+        }
+        for (Class<?> c = recipe.getClass(); c != null && c != Object.class; c = c.getSuperclass()) {
+            for (Field f : c.getDeclaredFields()) {
+                try {
+                    f.setAccessible(true);
+                    Object v = f.get(recipe);
+                    if (v instanceof ItemStack s && !s.isEmpty()) return s;
+                    if (v instanceof List<?> list && !list.isEmpty()
+                            && list.get(0) instanceof ItemStack s2 && !s2.isEmpty()) return s2;
+                    if (v instanceof ItemStack[] a && a.length > 0 && !a[0].isEmpty()) return a[0];
+                } catch (Throwable ignored) {}
+            }
+        }
+        return null;
+    }
+
+    /** Last-resort input discovery for recipes that leave getIngredients() empty. */
+    private static JsonArray reflectIngredients(Object recipe) {
+        JsonArray out = new JsonArray();
+        for (Class<?> c = recipe.getClass(); c != null && c != Object.class; c = c.getSuperclass()) {
+            for (Field f : c.getDeclaredFields()) {
+                try {
+                    f.setAccessible(true);
+                    Object v = f.get(recipe);
+                    if (v instanceof net.minecraft.world.item.crafting.Ingredient ing) {
+                        if (!ing.isEmpty()) out.add(ing.toJson());
+                    } else if (v instanceof List<?> list) {
+                        for (Object o : list) {
+                            if (o instanceof net.minecraft.world.item.crafting.Ingredient i2 && !i2.isEmpty())
+                                out.add(i2.toJson());
+                        }
+                    } else if (v instanceof net.minecraft.world.item.crafting.Ingredient[] a) {
+                        for (net.minecraft.world.item.crafting.Ingredient i2 : a) {
+                            if (i2 != null && !i2.isEmpty()) out.add(i2.toJson());
+                        }
+                    }
+                } catch (Throwable ignored) {}
+            }
+            if (out.size() > 0) break;
+        }
+        return out;
+    }
+
+    // ------------------------------------------------------------------
+    //  Obtainability exports: where does an item actually come from?
+    // ------------------------------------------------------------------
+
+    /** Walks a serialized loot table and collects every {@code minecraft:item} entry name. */
+    private static void collectLootItems(com.google.gson.JsonElement el, java.util.Set<String> out) {
+        if (el == null) return;
+        if (el.isJsonArray()) {
+            for (com.google.gson.JsonElement child : el.getAsJsonArray()) collectLootItems(child, out);
+            return;
+        }
+        if (!el.isJsonObject()) return;
+        JsonObject o = el.getAsJsonObject();
+        if (o.has("type") && o.has("name")) {
+            String t = o.get("type").getAsString();
+            if (t.equals("minecraft:item") || t.equals("item")) {
+                safe(() -> out.add(o.get("name").getAsString()));
+            }
+        }
+        // loot-modifying functions can also add items (set_item, etc.)
+        if (o.has("function") && o.has("item")) safe(() -> out.add(o.get("item").getAsString()));
+        for (Map.Entry<String, com.google.gson.JsonElement> e : o.entrySet()) {
+            collectLootItems(e.getValue(), out);
+        }
+    }
+
+    /**
+     * Every loot table the server has loaded, as its own serialized JSON plus a
+     * flattened {@code items} list of everything it can drop. This is the answer
+     * to "is this item obtainable at all" for anything that isn't crafted —
+     * mob drops, chest loot, block drops, boss bags.
+     *
+     * <p>Also dumps Forge global loot modifiers, which is how several mods inject
+     * items into <em>vanilla</em> tables (Forbidden &amp; Arcanus puts Elementarium
+     * into temple chests this way). The modifier registry is not public API, so it
+     * is read reflectively; if that fails the entry says so instead of being
+     * silently omitted.</p>
+     */
+    private static JsonArray dumpLootTables(MinecraftServer server) {
+        JsonArray arr = new JsonArray();
+        com.google.gson.Gson lootGson =
+                net.minecraft.world.level.storage.loot.Deserializers.createLootTableSerializer().create();
+
+        List<ResourceLocation> ids = new ArrayList<>(
+                server.getLootData().getKeys(net.minecraft.world.level.storage.loot.LootDataType.TABLE));
+        ids.sort(Comparator.comparing(ResourceLocation::toString));
+
+        for (ResourceLocation id : ids) {
+            JsonObject o = new JsonObject();
+            o.addProperty("id", id.toString());
+            o.addProperty("mod", id.getNamespace());
+            o.addProperty("kind", "loot_table");
+            safe(() -> {
+                net.minecraft.world.level.storage.loot.LootTable table = server.getLootData().getElement(
+                        new net.minecraft.world.level.storage.loot.LootDataId<>(
+                                net.minecraft.world.level.storage.loot.LootDataType.TABLE, id));
+                if (table == null) {
+                    o.addProperty("table_available", false);
+                    return;
+                }
+                com.google.gson.JsonElement json = lootGson.toJsonTree(table);
+                java.util.Set<String> items = new java.util.TreeSet<>();
+                collectLootItems(json, items);
+                JsonArray itemArr = new JsonArray();
+                items.forEach(itemArr::add);
+                o.add("items", itemArr);
+                o.add("table", json);
+            });
+            arr.add(o);
+        }
+
+        // ---- Forge global loot modifiers ----
+        JsonObject glm = new JsonObject();
+        glm.addProperty("id", "forge:global_loot_modifiers");
+        glm.addProperty("mod", "forge");
+        glm.addProperty("kind", "global_loot_modifiers");
+        boolean[] ok = {false};
+        safe(() -> {
+            java.lang.reflect.Method m = Class.forName("net.minecraftforge.common.ForgeInternalHandler")
+                    .getDeclaredMethod("getLootModifierManager");
+            m.setAccessible(true);
+            Object manager = m.invoke(null);
+            Field f = manager.getClass().getDeclaredField("registeredLootModifiers");
+            f.setAccessible(true);
+            @SuppressWarnings("unchecked")
+            Map<ResourceLocation, ?> mods = (Map<ResourceLocation, ?>) f.get(manager);
+            JsonArray list = new JsonArray();
+            mods.entrySet().stream()
+                    .sorted(Map.Entry.comparingByKey(Comparator.comparing(ResourceLocation::toString)))
+                    .forEach(e -> {
+                        JsonObject mo = new JsonObject();
+                        mo.addProperty("id", e.getKey().toString());
+                        safe(() -> mo.addProperty("class", e.getValue().getClass().getName()));
+                        list.add(mo);
+                    });
+            glm.add("modifiers", list);
+            ok[0] = true;
+        });
+        if (!ok[0]) glm.addProperty("modifiers_available", false);
+        arr.add(glm);
+
+        return arr;
+    }
+
+    /**
+     * Brewing recipes. These live in {@link net.minecraft.world.item.alchemy.PotionBrewing}
+     * and Forge's {@code BrewingRecipeRegistry} — <em>not</em> in the RecipeManager —
+     * so {@code /soa export recipes} does not cover them.
+     */
+    private static JsonArray dumpBrewing() {
+        JsonArray arr = new JsonArray();
+
+        // Vanilla + mod-registered mixes (private static lists, read reflectively).
+        String[] listFields = {"POTION_MIXES", "CONTAINER_MIXES"};
+        for (String fieldName : listFields) {
+            boolean[] ok = {false};
+            safe(() -> {
+                Field f = net.minecraft.world.item.alchemy.PotionBrewing.class.getDeclaredField(fieldName);
+                f.setAccessible(true);
+                List<?> mixes = (List<?>) f.get(null);
+                for (Object mix : mixes) {
+                    JsonObject o = new JsonObject();
+                    o.addProperty("kind", fieldName.equals("POTION_MIXES") ? "potion_mix" : "container_mix");
+                    safe(() -> {
+                        Field from = mix.getClass().getField("from");
+                        Field to = mix.getClass().getField("to");
+                        Field ing = mix.getClass().getField("ingredient");
+                        Holder.Reference<?> fromH = (Holder.Reference<?>) from.get(mix);
+                        Holder.Reference<?> toH = (Holder.Reference<?>) to.get(mix);
+                        o.addProperty("from", fromH.key().location().toString());
+                        o.addProperty("to", toH.key().location().toString());
+                        o.addProperty("mod", toH.key().location().getNamespace());
+                        net.minecraft.world.item.crafting.Ingredient i =
+                                (net.minecraft.world.item.crafting.Ingredient) ing.get(mix);
+                        o.add("ingredient", i.toJson());
+                    });
+                    arr.add(o);
+                }
+                ok[0] = true;
+            });
+            if (!ok[0]) {
+                JsonObject o = new JsonObject();
+                o.addProperty("kind", fieldName.toLowerCase(java.util.Locale.ROOT));
+                o.addProperty("mod", "minecraft");
+                o.addProperty("available", false);
+                arr.add(o);
+            }
+        }
+
+        // Forge IBrewingRecipe instances (custom mod brewing).
+        safe(() -> {
+            for (net.minecraftforge.common.brewing.IBrewingRecipe r :
+                    net.minecraftforge.common.brewing.BrewingRecipeRegistry.getRecipes()) {
+                JsonObject o = new JsonObject();
+                o.addProperty("kind", "forge_brewing_recipe");
+                o.addProperty("class", r.getClass().getName());
+                o.addProperty("mod", r.getClass().getName().split("\\.")[0]);
+                if (r instanceof net.minecraftforge.common.brewing.BrewingRecipe br) {
+                    safe(() -> o.add("input", br.getInput().toJson()));
+                    safe(() -> o.add("ingredient", br.getIngredient().toJson()));
+                    safe(() -> {
+                        ItemStack out = br.getOutput();
+                        if (out != null && !out.isEmpty())
+                            o.addProperty("output", BuiltInRegistries.ITEM.getKey(out.getItem()).toString());
+                    });
+                } else {
+                    // e.g. VanillaBrewingRecipe — its data is the mix lists above.
+                    o.addProperty("details_available", false);
+                }
+                arr.add(o);
+            }
+        });
+        return arr;
+    }
+
+    /** All loaded advancements — quest tasks reference these and mods gate content on them. */
+    private static JsonArray dumpAdvancements(MinecraftServer server) {
+        JsonArray arr = new JsonArray();
+        List<Advancement> advs = new ArrayList<>(server.getAdvancements().getAllAdvancements());
+        advs.sort(Comparator.comparing(a -> a.getId().toString()));
+        for (Advancement a : advs) {
+            JsonObject o = new JsonObject();
+            o.addProperty("id", a.getId().toString());
+            o.addProperty("mod", a.getId().getNamespace());
+            safe(() -> { if (a.getParent() != null) o.addProperty("parent", a.getParent().getId().toString()); });
+            safe(() -> {
+                DisplayInfo d = a.getDisplay();
+                if (d != null) {
+                    o.addProperty("title", d.getTitle().getString());
+                    o.addProperty("description", d.getDescription().getString());
+                    o.addProperty("frame", d.getFrame().getName());
+                    o.addProperty("hidden", d.isHidden());
+                    safe(() -> o.addProperty("icon",
+                            BuiltInRegistries.ITEM.getKey(d.getIcon().getItem()).toString()));
+                }
+            });
+            safe(() -> {
+                JsonArray crit = new JsonArray();
+                a.getCriteria().keySet().stream().sorted().forEach(crit::add);
+                o.add("criteria", crit);
+            });
+            arr.add(o);
+        }
+        return arr;
+    }
+
+    /** Mob spawn entries per biome — answers "where do I actually find this creature". */
+    private static JsonArray dumpSpawns(MinecraftServer server) {
+        JsonArray arr = new JsonArray();
+        Registry<Biome> biomes = server.registryAccess().registryOrThrow(Registries.BIOME);
+        List<ResourceLocation> ids = new ArrayList<>(biomes.keySet());
+        ids.sort(Comparator.comparing(ResourceLocation::toString));
+        for (ResourceLocation id : ids) {
+            Biome biome = biomes.get(id);
+            if (biome == null) continue;
+            JsonObject o = new JsonObject();
+            o.addProperty("id", id.toString());
+            o.addProperty("mod", id.getNamespace());
+            safe(() -> {
+                JsonArray spawns = new JsonArray();
+                for (net.minecraft.world.entity.MobCategory cat : net.minecraft.world.entity.MobCategory.values()) {
+                    for (net.minecraft.world.level.biome.MobSpawnSettings.SpawnerData sd
+                            : biome.getMobSettings().getMobs(cat).unwrap()) {
+                        JsonObject s = new JsonObject();
+                        s.addProperty("category", cat.getName());
+                        safe(() -> s.addProperty("entity",
+                                BuiltInRegistries.ENTITY_TYPE.getKey(sd.type).toString()));
+                        safe(() -> s.addProperty("weight", sd.getWeight().asInt()));
+                        s.addProperty("min_count", sd.minCount);
+                        s.addProperty("max_count", sd.maxCount);
+                        spawns.add(s);
+                    }
+                }
+                o.add("spawns", spawns);
+            });
+            arr.add(o);
+        }
+        return arr;
+    }
+
+    /**
+     * Villager and wandering trader offers. {@code ItemListing} builds its offer at
+     * runtime, so each listing is invoked once with a fixed seed — offers with
+     * randomised contents will show one representative roll, and the listing class
+     * is always recorded so a non-deterministic entry is identifiable.
+     */
+    private static JsonArray dumpVillagerTrades() {
+        JsonArray arr = new JsonArray();
+        net.minecraft.util.RandomSource rng = net.minecraft.util.RandomSource.create(0L);
+
+        safe(() -> net.minecraft.world.entity.npc.VillagerTrades.TRADES.entrySet().stream()
+                .sorted(Comparator.comparing(e -> String.valueOf(
+                        BuiltInRegistries.VILLAGER_PROFESSION.getKey(e.getKey()))))
+                .forEach(entry -> {
+                    ResourceLocation prof = BuiltInRegistries.VILLAGER_PROFESSION.getKey(entry.getKey());
+                    entry.getValue().forEach((level, listings) ->
+                            addTradeRows(arr, prof == null ? "?" : prof.toString(), level, listings, rng));
+                }));
+
+        safe(() -> net.minecraft.world.entity.npc.VillagerTrades.WANDERING_TRADER_TRADES.forEach(
+                (level, listings) -> addTradeRows(arr, "minecraft:wandering_trader", level, listings, rng)));
+
+        return arr;
+    }
+
+    private static void addTradeRows(JsonArray arr, String profession, int level,
+                                     net.minecraft.world.entity.npc.VillagerTrades.ItemListing[] listings,
+                                     net.minecraft.util.RandomSource rng) {
+        if (listings == null) return;
+        for (net.minecraft.world.entity.npc.VillagerTrades.ItemListing listing : listings) {
+            JsonObject o = new JsonObject();
+            o.addProperty("profession", profession);
+            o.addProperty("mod", profession.contains(":") ? profession.split(":")[0] : "?");
+            o.addProperty("level", level);
+            safe(() -> o.addProperty("listing_class", listing.getClass().getName()));
+            boolean[] ok = {false};
+            safe(() -> {
+                MerchantOffer offer = listing.getOffer(null, rng);
+                if (offer != null) {
+                    safe(() -> o.add("cost_a", stackJson(offer.getBaseCostA())));
+                    safe(() -> { if (!offer.getCostB().isEmpty()) o.add("cost_b", stackJson(offer.getCostB())); });
+                    safe(() -> o.add("result", stackJson(offer.getResult())));
+                    safe(() -> o.addProperty("max_uses", offer.getMaxUses()));
+                    safe(() -> o.addProperty("xp", offer.getXp()));
+                    ok[0] = true;
+                }
+            });
+            if (!ok[0]) o.addProperty("offer_available", false);
+            arr.add(o);
+        }
+    }
+
+    private static JsonObject stackJson(ItemStack stack) {
+        JsonObject o = new JsonObject();
+        o.addProperty("item", BuiltInRegistries.ITEM.getKey(stack.getItem()).toString());
+        o.addProperty("count", stack.getCount());
+        return o;
+    }
+
     private static int write(Path path, JsonArray array) throws IOException {
         // Also build a by_mod count map and wrap.
         Map<String, Integer> byMod = new HashMap<>();
@@ -785,5 +1273,14 @@ public final class RegistryExportCommand {
 
     private static void safe(ThrowingRunnable r) {
         try { r.run(); } catch (Throwable ignored) {}
+    }
+
+    /**
+     * Every registered Smithery material with its full stat block. Empty when Smithery is absent —
+     * the class doing the work names Smithery types, so it must not load without it.
+     */
+    private static JsonArray dumpSmitheryMaterials() {
+        if (!net.minecraftforge.fml.ModList.get().isLoaded("smithery")) return new JsonArray();
+        return com.soul.soa_additions.smithery.SmitheryMaterialExport.dump();
     }
 }

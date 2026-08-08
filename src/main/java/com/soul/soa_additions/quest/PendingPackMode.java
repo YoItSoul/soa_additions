@@ -29,4 +29,19 @@ public final class PendingPackMode {
         pending = null;
         return p;
     }
+
+    /**
+     * Discard a selection that was never used to create a world.
+     *
+     * <p>The choice is only consumed when a brand-new world seeds its
+     * {@code PackModeData}. If the player opens the create-world screen, picks a
+     * mode and then backs out, the value would otherwise linger — and because
+     * KubeJS reads it during datapack load, the <em>next</em> world loaded would
+     * build its recipes for the abandoned mode. Backing out always lands on the
+     * world-select or title screen, so those screens clear it; creating a world
+     * goes straight to the loading screen and never touches this.</p>
+     */
+    public static void clear() {
+        pending = null;
+    }
 }

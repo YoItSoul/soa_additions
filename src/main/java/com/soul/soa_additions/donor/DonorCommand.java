@@ -123,9 +123,14 @@ public final class DonorCommand {
                 () -> Component.literal("[SOA] Donors (" + donors.size() + "):")
                         .withStyle(ChatFormatting.GOLD), false);
         for (DonorData d : donors) {
+            // Same styling as chat and the wall: the name carries the tier ramp,
+            // everything around it stays quiet. Note tier().color is ARGB and is
+            // only safe for GUI fills — a Style needs the RGB stop from the ramp.
+            DonorStyles.Gradient ramp = DonorStyles.of(d.tier(), d.isOwner());
             ctx.getSource().sendSuccess(
-                    () -> Component.literal("  " + d.tier().symbol + " ")
-                            .append(Component.literal(d.name()).withStyle(s -> s.withColor(d.tier().color)))
+                    () -> Component.literal("  ")
+                            .append(Component.literal(d.name())
+                                    .withStyle(s -> s.withColor(ramp.staticColor()).withFont(ramp.font())))
                             .append(Component.literal(" — " + d.tier().display)
                                     .withStyle(ChatFormatting.GRAY)),
                     false);

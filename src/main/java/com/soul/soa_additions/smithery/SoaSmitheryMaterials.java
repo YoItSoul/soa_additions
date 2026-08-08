@@ -267,7 +267,6 @@ public final class SoaSmitheryMaterials {
     public static ResourceLocation KARMESINE;
     public static ResourceLocation KELLINE;
     public static ResourceLocation KNIGHTMETAL;
-    public static ResourceLocation KNIGHTSLIME;
     public static ResourceLocation EXPERIENCE;
     public static ResourceLocation SILENTGEMSKUNZITE;
     public static ResourceLocation SILENTGEMSKUNZITE_SUPER;
@@ -624,6 +623,20 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.AQUASPEED_ARMOR), armorPieces()));
         retune("slime", b -> b
                 .addUniversalModifier(SoaSmitheryModifiers.SLIMEY));
+
+        // Knightslime was the same duplication one name removed: Smithery's slimeknightium — which
+        // its own alloy file calls a tribute alloy — already carried GC's knightslime numbers
+        // exactly (harvest 3, 5.8 speed, 5.1 damage, 850/ingot, 0.5 binder, 3 slots). Only the melt
+        // temperature and the trait pair differed, so those are all that need layering. Smithery's
+        // Bouncy-on-boots and its armour stat block survive the retune; SOA's knightslime defined
+        // neither, so merging into slimeknightium strictly gains armour support.
+        retune("slimeknightium", b -> b
+                .meltingTemp(1500.0f)
+                .addUniversalModifier(SoaSmitheryModifiers.UNNATURAL)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.CRUMBLING),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD,
+                        SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD,
+                        SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD));
     }
 
     /** Retunes a {@code smithery:} material, warning rather than failing silently if it is absent. */
@@ -801,6 +814,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.DREADPURITY), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.STRONGVACCINETRAIT_ARMOR), armorPieces())
                 .armor(420.0f, 42.6f, 76.8f, 4.6f, 4.0f, 76.8f)
+                .bow(0.7407f, 1.3f, 12.2f)
                 .build());
 
         REFINED_CORALIUM = id("refined_coralium");
@@ -852,6 +866,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.INVIGORATING_ARMOR), armorPieces())
                 .armor(440.0f, 41.0f, 30.0f, 4.2f, 3.5f, 70.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.BERSERK), allToolTypes())
+                .bow(0.35f, 1.85f, 9.4f)
                 .build());
 
         ASTRIUM = id("astrium");
@@ -866,6 +881,7 @@ public final class SoaSmitheryMaterials {
                 , 4)
                 .armor(210.0f, 23.0f, 30.0f, 2.2f, 2.5f, 80.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.PORTED), allToolTypes())
+                .bow(0.7f, 0.8f, 2.0f)
                 .build());
 
         AURORIUM = id("aurorium");
@@ -880,6 +896,7 @@ public final class SoaSmitheryMaterials {
                 , 4)
                 .armor(110.0f, 32.0f, 110.0f, 2.1f, 1.5f, 83.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.ARCANE), allToolTypes())
+                .bow(0.45f, 1.0f, 1.0f)
                 .build());
 
         // GC TCon entity melting fluids — fluid-only materials (pattern: smithery BLOOD).
@@ -1044,6 +1061,7 @@ public final class SoaSmitheryMaterials {
                 , 4)
                 .armor(170.0f, 24.0f, 130.0f, 2.8f, 1.0f, 40.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.ANALYSING), allToolTypes())
+                .bow(0.3f, 1.4f, 2.0f)
                 .build());
 
         DYONITE = id("dyonite");
@@ -1167,6 +1185,7 @@ public final class SoaSmitheryMaterials {
                 .armor(150.0f, 30.0f, 50.0f, 1.8f, 2.0f, 100.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.MELTING), allToolTypes())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.GARISHLY), allToolTypes())
+                .bow(0.8f, 0.8f, 3.0f)
                 .build());
 
         IMPEROMITE = id("imperomite");
@@ -1183,6 +1202,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.ZANY), armorPieces())
                 .armor(120.0f, 36.0f, 50.0f, 1.9f, 1.5f, 120.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.HOLLOW), allToolTypes())
+                .bow(1.2f, 1.8f, 2.0f)
                 .build());
 
         INERT_WITHERIUM = id("inert_witherium");
@@ -1247,6 +1267,7 @@ public final class SoaSmitheryMaterials {
                 .armor(140.0f, 24.0f, 110.0f, 0.8f, 1.25f, 20.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.BRIGHT), allToolTypes())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.GLIMMER), allToolTypes())
+                .bow(0.8f, 1.3f, 1.0f)
                 .build());
 
         LUNAR = id("lunar");
@@ -1319,6 +1340,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_WARPING_ARMOR), armorPieces())
                 .armor(360.0f, 43.0f, 35.0f, 4.0f, 2.4f, 25.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SOULEATER), allToolTypes())
+                .bow(1.5f, 0.8f, 14.4f)
                 .build());
 
         NIOB = id("niob");
@@ -1414,6 +1436,7 @@ public final class SoaSmitheryMaterials {
                 .armor(220.0f, 24.0f, 90.0f, 2.0f, 2.25f, 110.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.DARK), allToolTypes())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CURSED), allToolTypes())
+                .bow(0.5f, 0.2f, 3.0f)
                 .build());
 
         PANDORIUM = id("pandorium");
@@ -1442,6 +1465,7 @@ public final class SoaSmitheryMaterials {
                 .armor(110.0f, 17.0f, 120.0f, 1.2f, 0.0f, 30.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.BLIND), allToolTypes())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CATCHER), allToolTypes())
+                .bow(0.2f, 0.6f, 3.0f)
                 .build());
 
         PROUSTITE = id("proustite");
@@ -1562,6 +1586,7 @@ public final class SoaSmitheryMaterials {
                 .armor(200.0f, 33.0f, 130.0f, 1.0f, 1.75f, 140.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SUPERHEAVY), allToolTypes())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CRUSHING), allToolTypes())
+                .bow(0.8f, 1.5f, 5.0f)
                 .build());
 
         STELLARIUM = id("stellarium");
@@ -1640,6 +1665,9 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.FORTIFIEDTRAIT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.HOLD_GROUND_ARMOR), armorPieces())
                 .armor(800.0f, 77.6f, 300.0f, 15.0f, 6.0f, 200.0f)
+                .bow(0.8333f, 1.3f, 23.3f)
+                .arrowShaft(2.4f, 32)
+                .fletching(1.0f, 1.3f)
                 .build());
 
         TRIBERIUM = id("triberium");
@@ -1682,6 +1710,7 @@ public final class SoaSmitheryMaterials {
                 , 4)
                 .armor(120.0f, 26.0f, 90.0f, 2.0f, 1.25f, 30.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.DIFFUSE), allToolTypes())
+                .bow(1.3f, 0.8f, 6.0f)
                 .build());
 
         VALYRIANSTEEL = id("valyriansteel");
@@ -1709,6 +1738,7 @@ public final class SoaSmitheryMaterials {
                 , 4)
                 .armor(220.0f, 37.0f, 120.0f, 3.0f, 3.0f, 30.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CONGENIAL), allToolTypes())
+                .bow(1.1f, 1.2f, 4.0f)
                 .build());
 
         VARSIUM = id("varsium");
@@ -1743,7 +1773,9 @@ public final class SoaSmitheryMaterials {
                 .armor(250.0f, 39.0f, 170.0f, 3.2f, 2.5f, 50.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.RESONANCE), allToolTypes())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.HEROIC), allToolTypes())
-                .addUniversalModifier(SoaSmitheryModifiers.DURITOS)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.DURITOS),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(1.1f, 1.8f, 4.0f)
                 .build());
 
         VIOLIUM = id("violium");
@@ -1758,6 +1790,7 @@ public final class SoaSmitheryMaterials {
                 , 4)
                 .armor(140.0f, 24.0f, 110.0f, 1.5f, 1.0f, 40.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.ARCANE), allToolTypes())
+                .bow(0.45f, 0.95f, 1.0f)
                 .build());
 
         WEEZER = id("weezer");
@@ -1835,6 +1868,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MODIFIABLE1, java.util.Map.of("bonus_slots", 1)), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SHIELDING_ARMOR), armorPieces())
                 .armor(400.0f, 42.0f, 100.0f, 5.2f, 3.0f, 120.0f)
+                .bow(1.4286f, 1.2f, 12.0f)
                 .build());
 
         AEONSTEEL = id("aeonsteel");
@@ -1855,6 +1889,8 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.INDOMITABLE_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TRUEDEFENSETRAIT_ARMOR), armorPieces())
                 .armor(480.0f, 62.0f, 250.0f, 6.0f, 5.25f, 150.0f)
+                .bow(0.4545f, 1.75f, 14.0f)
+                .arrowShaft(2.25f, 2)
                 .build());
 
         AEROITE = id("aeroite");
@@ -1874,7 +1910,9 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.LIGHTWEIGHT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_REACTIVE_ARMOR), armorPieces())
                 .armor(200.0f, 23.4f, 25.6f, 3.0f, 2.25f, 25.6f)
-                .addUniversalModifier(SoaSmitheryModifiers.LIGHTWEIGHT)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.LIGHTWEIGHT),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(1.4286f, 6.0f, 2.0f)
                 .build());
 
         ALUBRASS = id("alubrass");
@@ -1892,6 +1930,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.FEATHERWEIGHT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SPARTAN_ARMOR), armorPieces())
                 .armor(50.0f, 14.6f, 13.0f, 1.1f, 0.5f, 11.0f)
+                .bow(0.6061f, 1.3f, 6.2f)
                 .build());
 
         AQUALITE = id("aqualite");
@@ -1910,7 +1949,9 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.AQUASPEED_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TIDALFORCETRAIT_ARMOR), armorPieces())
                 .armor(280.0f, 26.5f, 80.0f, 3.0f, 3.75f, 70.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.TIDAL_FORCE)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TIDAL_FORCE),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(1.6667f, 1.5f, 2.6f)
                 .build());
 
         ASGARDIUM = id("asgardium");
@@ -1930,6 +1971,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.PRIDEFUL_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.VISIONTRAIT_ARMOR), armorPieces())
                 .armor(240.0f, 25.2f, 76.8f, 3.2f, 3.25f, 76.8f)
+                .bow(0.6667f, 1.2f, 8.0f)
                 .build());
 
         ASTRAL_METAL = id("astral_metal");
@@ -1950,6 +1992,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.KNOWLEDGEFUL_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TERRAFIRMA2), armorPieces())
                 .armor(700.0f, 58.0f, 800.0f, 6.4f, 6.0f, 600.0f)
+                .bow(1.0f, 1.4f, 11.0f)
                 .build());
 
         BLOODSTONE = id("bloodstone");
@@ -1980,7 +2023,9 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.PURIFYINGTRAIT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TASTY_ARMOR), armorPieces())
                 .armor(80.0f, 4.0f, 10.0f, 0.25f, 0.25f, 20.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.TASTY)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TASTY),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.8333f, 1.0f, 0.2f)
                 .build());
 
         CHOCOLATE = id("chocolate");
@@ -1998,7 +2043,9 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MODIFIABLE1, java.util.Map.of("bonus_slots", 1)), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TASTY_ARMOR), armorPieces())
                 .armor(40.0f, 6.0f, 5.0f, 1.0f, 0.5f, 3.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.TASTY)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TASTY),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.3333f, 1.0f, 1.0f)
                 .build());
 
         CHROMASTEEL = id("chromasteel");
@@ -2020,6 +2067,8 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.INVIGORATING_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SECONDLIFETRAIT_ARMOR), armorPieces())
                 .armor(800.0f, 92.0f, 400.0f, 8.0f, 4.0f, 560.0f)
+                .bow(2.0f, 1.25f, 4.5f)
+                .arrowShaft(4.0f, 1)
                 .build());
 
         CHROMIUM = id("chromium");
@@ -2038,8 +2087,11 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.DENSE_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.HEAVY_ARMOR), armorPieces())
                 .armor(120.0f, 21.0f, 25.6f, 1.8f, 1.25f, 25.6f)
-                .addUniversalModifier(SoaSmitheryModifiers.DENSE)
-                .addUniversalModifier(SoaSmitheryModifiers.HEAVY)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.DENSE),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.HEAVY),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.7143f, 1.2f, 1.6f)
                 .build());
 
         CINCINNASITE = id("cincinnasite");
@@ -2058,7 +2110,9 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CHEAPSKATE_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SPARTAN_ARMOR), armorPieces())
                 .armor(40.0f, 13.0f, 5.0f, 0.5f, 0.5f, 2.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.CHEAPSKATE)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.CHEAPSKATE),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.5556f, 1.4f, 1.5f)
                 .build());
 
         COAL = id("coal");
@@ -2076,7 +2130,9 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CHEAPSKATE_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SUBTERRANEAN_ARMOR), armorPieces())
                 .armor(10.0f, 4.0f, 1.92f, 0.3f, 0.0f, 1.92f)
-                .addUniversalModifier(SoaSmitheryModifiers.CHEAPSKATE)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.CHEAPSKATE),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.5556f, 1.0f, 0.1f)
                 .build());
 
         FUSION_MATRIX = id("fusion_matrix");
@@ -2096,7 +2152,10 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.FIRSTGUARDTRAIT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SHIELDING_ARMOR), armorPieces())
                 .armor(240.0f, 50.0f, -3.84f, 3.6f, 4.25f, -3.84f)
-                .addUniversalModifier(SoaSmitheryModifiers.DENSE)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.DENSE),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.8333f, 1.2f, 9.6f)
+                .arrowShaft(1.75f, 40)
                 .build());
 
         COSMILITE = id("cosmilite");
@@ -2119,7 +2178,9 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_GALE_FORCE_ARMOR1), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_INFINITUM), armorPieces())
                 .armor(6400.0f, 144.0f, 33554.43f, 28.0f, 15.0f, 33554.43f)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_EVOLVED)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_EVOLVED),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(3.125f, 3.0f, 38.0f)
                 .build());
 
         CRIMSONITE = id("crimsonite");
@@ -2141,8 +2202,11 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_SENTIENT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_SOUL_GUARD_ARMOR), armorPieces())
                 .armor(280.0f, 30.0f, 200.0f, 3.0f, 4.25f, 140.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_BLOODBOUND)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_WILLFUL)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_BLOODBOUND),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_WILLFUL),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(1.3333f, 1.25f, 4.5f)
                 .build());
 
         CRYONIUM = id("cryonium");
@@ -2161,6 +2225,8 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CRYONICTRAIT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.HOLD_GROUND_ARMOR), armorPieces())
                 .armor(300.0f, 52.8f, 75.0f, 5.0f, 4.0f, 40.0f)
+                .bow(0.8333f, 1.3f, 8.9f)
+                .arrowShaft(1.5f, 32)
                 .build());
 
         CRYSTAL_LEAF = id("crystal_leaf");
@@ -2172,6 +2238,7 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFF65C3D4)
                         .binderMultiplier(1.0f)
+                .fletching(0.8f, 2.0f)
                 .build());
 
         CRYSTALLITE = id("crystallite");
@@ -2203,7 +2270,9 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SECONDLIFETRAIT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.VENGEFUL_ARMOR), armorPieces())
                 .armor(300.0f, 44.2f, 70.0f, 4.2f, 2.5f, 50.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.ECOLOGICAL)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.ECOLOGICAL),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(1.25f, 1.1f, 7.8f)
                 .build());
 
         DIMENSIONAL_SHARD = id("dimensional_shard");
@@ -2223,6 +2292,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.MOTIONTRAIT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_SPECTRAL_ARMOR), armorPieces())
                 .armor(100.0f, 23.0f, 23.0f, 1.3f, 2.0f, 12.0f)
+                .bow(0.8333f, 1.2f, 6.0f)
                 .build());
 
         DURASTEEL = id("durasteel");
@@ -2243,8 +2313,12 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.ENDURANCE_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SHIELDING_ARMOR), armorPieces())
                 .armor(320.0f, 32.0f, 160.0f, 3.2f, 4.0f, 120.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.DURITOS)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.DURITOS),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD, SmitheryPartTypes.ARROW_SHAFT)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED),
+                        SmitheryPartTypes.BOW_LIMB)
+                .bow(1.0f, 1.5f, 6.0f)
+                .arrowShaft(1.5f, 4)
                 .build());
 
         ELECTRONIUM = id("electronium");
@@ -2283,6 +2357,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.PURIFYINGTRAIT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.STEADY_ARMOR), armorPieces())
                 .armor(180.0f, 30.0f, 12.0f, 2.3f, 2.0f, 4.0f)
+                .bow(0.7143f, 1.5f, 7.8f)
                 .build());
 
         GHOSTLYSTONE = id("ghostlystone");
@@ -2311,6 +2386,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.BLOODLUSTTRAIT), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.FIRSTGUARDTRAIT_ARMOR), armorPieces())
                 .armor(88.0f, 7.0f, 12.0f, 1.8f, 3.5f, 4.0f)
+                .bow(0.9091f, 1.2f, 4.0f)
                 .build());
 
         HEPHAESTITE = id("hephaestite");
@@ -2327,6 +2403,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SUPERHEAT), allToolTypes())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SUPERHOT_ARMOR), armorPieces())
                 .armor(40.0f, 13.6f, 40.0f, 0.6f, 0.5f, 10.0f)
+                .bow(0.7692f, 1.0f, 1.5f)
                 .build());
 
         STRONG_TOFU_GEM = id("strong_tofu_gem");
@@ -2346,6 +2423,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TASTY_ARMOR), armorPieces())
                 .armor(150.0f, 22.0f, 32.0f, 1.7f, 1.5f, 12.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TASTY), armorPieces())
+                .bow(0.8333f, 1.2f, 2.8f)
                 .build());
 
         INFERNIUM = id("infernium");
@@ -2366,6 +2444,8 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.AUTOFORGE_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.INFERNOTRAIT_ARMOR), armorPieces())
                 .armor(120.0f, 70.2f, 131.072f, 8.8f, 5.0f, 131.072f)
+                .bow(0.8333f, 1.2f, 12.4f)
+                .arrowShaft(2.0f, 30)
                 .build());
 
         INSANIUM = id("insanium");
@@ -2386,6 +2466,8 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.PROSPEROUS), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TRUEDEFENSETRAIT_ARMOR), armorPieces())
                 .armor(300.0f, 52.2f, 100.0f, 4.5f, 5.0f, 70.0f)
+                .bow(1.1364f, 2.5f, 8.2f)
+                .arrowShaft(2.25f, 10)
                 .build());
 
         EXPERIENCE = id("experience");
@@ -2407,6 +2489,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.WRITABLE1, java.util.Map.of("bonus_slots", 1)), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.WRITABLE2, java.util.Map.of("bonus_slots", 1)), armorPieces())
                 .armor(12.0f, 16.2f, 10.0f, 1.2f, 1.0f, 8.0f)
+                .bow(1.3889f, 1.1f, 1.0f)
                 .build());
 
         LIMONITE = id("limonite");
@@ -2436,7 +2519,9 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.DENSE_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.KUNGFU_ARMOR), armorPieces())
                 .armor(100.0f, 16.0f, 100.0f, 1.5f, 1.75f, 70.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.DURITOS)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.DURITOS),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.4545f, 1.5f, 3.6f)
                 .build());
 
         MANGANESE_STEEL = id("manganese_steel");
@@ -2453,6 +2538,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.HOLD_GROUND_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.STEADY_ARMOR), armorPieces())
                 .armor(200.0f, 19.0f, 200.0f, 2.0f, 2.5f, 140.0f)
+                .bow(0.3448f, 1.8f, 7.6f)
                 .build());
 
         SLIMELEAF_ORANGE = id("slimeleaf_orange");
@@ -2464,6 +2550,7 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFFE8923E)
                         .binderMultiplier(1.0f)
+                .fletching(0.8f, 1.25f)
                 .build());
 
         SLIMELEAF_PURPLE = id("slimeleaf_purple");
@@ -2475,6 +2562,7 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFFA86FD8)
                         .binderMultiplier(1.0f)
+                .fletching(0.8f, 1.25f)
                 .build());
 
         SLIMEVINE_ORANGE = id("slimevine_orange");
@@ -2517,6 +2605,8 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SKELETAL_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.VISIONTRAIT_ARMOR), armorPieces())
                 .armor(200.0f, 24.0f, 76.8f, 2.1f, 2.25f, 76.8f)
+                .bow(0.2778f, 2.8f, 22.0f)
+                .arrowShaft(1.5f, 5)
                 .build());
 
         MITHMINITE = id("mithminite");
@@ -2540,6 +2630,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MODIFIABLE2, java.util.Map.of("bonus_slots", 1)), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SHIELDING_ARMOR), armorPieces())
                 .armor(500.0f, 52.0f, 120.0f, 8.0f, 4.5f, 140.0f)
+                .bow(1.5385f, 1.4f, 18.0f)
                 .build());
 
         MITHRILLIUM = id("mithrillium");
@@ -2559,6 +2650,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MODIFIABLE1, java.util.Map.of("bonus_slots", 1)), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SHIELDING_ARMOR), armorPieces())
                 .armor(340.0f, 36.0f, 80.0f, 4.0f, 2.0f, 100.0f)
+                .bow(1.25f, 1.0f, 10.0f)
                 .build());
 
         MODULARIUM = id("modularium");
@@ -2578,7 +2670,9 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.FORTIFIEDTRAIT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.INVIGORATING_ARMOR), armorPieces())
                 .armor(128.0f, 15.5f, 32.0f, 1.4f, 1.0f, 20.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.DENSE)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.DENSE),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.8333f, 1.2f, 3.0f)
                 .build());
 
         MUD = id("mud");
@@ -2594,6 +2688,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SOFTY), allToolTypes())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SOFTY), armorPieces())
                 .armor(20.0f, 4.5f, 1.28f, 0.2f, 0.25f, 1.28f)
+                .bow(0.6667f, 1.0f, 1.0f)
                 .build());
 
         NYLON_CLOTH = id("nylon_cloth");
@@ -2606,6 +2701,7 @@ public final class SoaSmitheryMaterials {
                         .partColor(0xFF3949AB)
                         .binderMultiplier(1.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.NAPHTHA), allToolTypes())
+                .fletching(1.0f, 2.5f)
                 .build());
 
         NYLON_STRING = id("nylon_string");
@@ -2617,6 +2713,7 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFF3949AB)
                         .binderMultiplier(1.0f)
+                .bowstring(2.25f)
                 .build());
 
         PERFECT = id("perfect");
@@ -2633,7 +2730,9 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.LUCKYTRAIT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.PERFECTIONISTTRAIT_ARMOR), armorPieces())
                 .armor(500.0f, 25.0f, 100.0f, 4.0f, 5.0f, 100.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.PERFECTIONIST)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.PERFECTIONIST),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(1.0f, 2.0f, 5.0f)
                 .build());
 
         PHOENIXITE = id("phoenixite");
@@ -2664,6 +2763,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.POOPY_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SOFTY), armorPieces())
                 .armor(11.0f, 4.5f, 19.0f, 1.4f, 1.9f, 810.0f)
+                .bow(0.9091f, 4.5f, 1.4f)
                 .build());
 
         PROTONIUM = id("protonium");
@@ -2683,6 +2783,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_ULTRADENSE_ARMOR), armorPieces())
                 .armor(800.0f, 78.0f, 819.2f, 14.0f, 10.0f, 819.2f)
                 .addUniversalModifier(SoaSmitheryModifiers.MATTERTRAIT2)
+                .bow(0.0833f, 5.0f, 80.0f)
                 .build());
 
         PROXII = id("proxii");
@@ -2697,6 +2798,7 @@ public final class SoaSmitheryMaterials {
                 , 5)
                 .armor(150.0f, 31.0f, 100.0f, 1.1f, 2.0f, 30.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CURVATURE), allToolTypes())
+                .bow(0.35f, 0.5f, 3.0f)
                 .build());
 
         PUMPKIN = id("pumpkin");
@@ -2712,6 +2814,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.HALLOWEENTRAIT), allToolTypes())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.LUCKYTRAIT_ARMOR), armorPieces())
                 .armor(40.0f, 12.0f, 16.64f, 0.8f, 0.5f, 16.64f)
+                .bow(0.7143f, 1.2f, 1.4f)
                 .build());
 
         RAVAGING = id("ravaging");
@@ -2731,6 +2834,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.INVIGORATING_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.PULVERIZING), armorPieces())
                 .armor(240.0f, 25.2f, 50.0f, 3.0f, 1.5f, 38.0f)
+                .bow(4.0f, 1.2f, 0.0f)
                 .build());
 
         REMORSEFUL = id("remorseful");
@@ -2750,6 +2854,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SECONDLIFETRAIT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_WILLFUL_ARMOR), armorPieces())
                 .armor(230.0f, 27.5f, 64.0f, 3.2f, 2.5f, 32.0f)
+                .bow(0.1667f, 5.0f, 23.5f)
                 .build());
 
         RIME = id("rime");
@@ -2767,6 +2872,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CRYONICTRAIT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CRYSTALTRAIT_ARMOR), armorPieces())
                 .armor(180.0f, 22.0f, 36.0f, 2.5f, 2.0f, 32.0f)
+                .bow(0.8333f, 2.0f, 3.5f)
                 .build());
 
         RUBBER_BAND = id("rubber_band");
@@ -2779,7 +2885,8 @@ public final class SoaSmitheryMaterials {
                         .partColor(0xFFEF6C00)
                         .binderMultiplier(1.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_LUMINIFEROUS), allToolTypes())
-                .addUniversalModifier(SoaSmitheryModifiers.LIGHTWEIGHT)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.LIGHTWEIGHT), SmitheryPartTypes.BOWSTRING)
+                .bowstring(2.5f)
                 .build());
 
         SAKURA_DIAMOND = id("sakura_diamond");
@@ -2798,6 +2905,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.AMBITIOUS_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CRYSTALTRAIT_ARMOR), armorPieces())
                 .armor(100.0f, 18.0f, 40.0f, 1.5f, 2.0f, 24.0f)
+                .bow(0.9091f, 1.2f, 4.0f)
                 .build());
 
         SCARLITE = id("scarlite");
@@ -2817,6 +2925,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CRYSTALTRAIT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.DEFILED), armorPieces())
                 .armor(150.0f, 21.2f, 23.0f, 1.8f, 4.0f, 12.0f)
+                .bow(0.6667f, 1.0f, 2.5f)
                 .build());
 
         SCORCHED = id("scorched");
@@ -2834,7 +2943,9 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.ARIDICULOUS_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.THRONY_ARMOR), armorPieces())
                 .armor(20.0f, 13.0f, 28.16f, 1.3f, 1.0f, 28.16f)
-                .addUniversalModifier(SoaSmitheryModifiers.DURITOS)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.DURITOS),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.7143f, 1.2f, 2.0f)
                 .build());
 
         SEARED = id("seared");
@@ -2853,8 +2964,11 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CHEAPSKATE_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SUBTERRANEAN_ARMOR), armorPieces())
                 .armor(30.0f, 9.0f, 15.36f, 1.1f, 0.25f, 15.36f)
-                .addUniversalModifier(SoaSmitheryModifiers.CHEAP)
-                .addUniversalModifier(SoaSmitheryModifiers.CHEAPSKATE)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.CHEAP),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.CHEAPSKATE),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.625f, 1.1f, 1.2f)
                 .build());
 
         SHADOWIUM = id("shadowium");
@@ -2873,6 +2987,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_STIFLING_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SUBTERRANEAN_ARMOR), armorPieces())
                 .armor(300.0f, 47.2f, 70.0f, 5.0f, 4.0f, 50.0f)
+                .bow(2.2222f, 1.5f, 4.0f)
                 .build());
 
         SKELETAL = id("skeletal");
@@ -2897,6 +3012,7 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFF6FB8D8)
                         .binderMultiplier(1.0f)
+                .fletching(0.8f, 1.25f)
                 .build());
 
         SLIMEVINE_BLUE = id("slimevine_blue");
@@ -2924,6 +3040,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_SOUL_REND1), allToolTypes())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_SPECTRAL_ARMOR), armorPieces())
                 .armor(200.0f, 23.3f, 100.0f, 1.6f, 2.0f, 70.0f)
+                .bow(0.6667f, 1.0f, 2.5f)
                 .build());
 
         SPECTRE_STRING = id("spectre_string");
@@ -2935,6 +3052,7 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFFBDE0DD)
                         .binderMultiplier(1.0f)
+                .bowstring(2.0f)
                 .build());
 
         STAINLESS_STEEL = id("stainless_steel");
@@ -2955,6 +3073,8 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.INDOMITABLE_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.STEADY_ARMOR), armorPieces())
                 .armor(256.0f, 27.0f, 100.0f, 2.7f, 3.5f, 60.0f)
+                .bow(0.3846f, 2.4f, 15.6f)
+                .arrowShaft(2.0f, 10)
                 .build());
 
         STELLAR_ALLOY = id("stellar_alloy");
@@ -2993,8 +3113,10 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SUPERHOT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.VENGEFUL_ARMOR), armorPieces())
                 .armor(800.0f, 82.0f, 120.0f, 8.0f, 8.0f, 80.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.ECOLOGICAL)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.ECOLOGICAL),
+                        SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.ECOLOGICAL), armorPieces())
+                .bow(0.25f, 2.0f, 34.0f)
                 .build());
 
         TERRESTRIAL = id("terrestrial");
@@ -3014,6 +3136,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TERRAFIRMA1), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.WARPDRAINTRAIT_ARMOR), armorPieces())
                 .armor(300.0f, 50.0f, 120.0f, 5.0f, 4.0f, 70.0f)
+                .bow(0.8333f, 3.2f, 16.4f)
                 .build());
 
         TOFU_GEM = id("tofu_gem");
@@ -3031,7 +3154,9 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CHEAP_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CRYSTALTRAIT_ARMOR), armorPieces())
                 .armor(100.0f, 15.0f, 12.0f, 1.6f, 1.0f, 4.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.CHEAP)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.CHEAP),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.7143f, 1.2f, 1.8f)
                 .build());
 
         TRITANIUM = id("tritanium");
@@ -3074,6 +3199,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.DECAY), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_RADIANT_ARMOR), armorPieces())
                 .armor(160.0f, 21.0f, 10.0f, 2.2f, 1.0f, 8.0f)
+                .bow(0.6667f, 1.2f, 3.0f)
                 .build());
 
     }
@@ -3091,6 +3217,7 @@ public final class SoaSmitheryMaterials {
                 , 3)
                 .addUniversalModifier(SoaSmitheryModifiers.DENSE)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_IMPACT_FORCE)
+                .bow(0.85f, 1.25f, 2.0f)
                 .build());
 
         ALUMINIUM = id("aluminium");
@@ -3104,6 +3231,7 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(0.9f)
                 , 1)
                 .addUniversalModifier(SoaSmitheryModifiers.LIGHTWEIGHT)
+                .bow(1.0f, 1.1f, 1.0f)
                 .build());
 
         APATITE = id("apatite");
@@ -3132,6 +3260,7 @@ public final class SoaSmitheryMaterials {
                 , 2)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.DEPTHDIGGER), allToolTypes())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CHEAPSKATE_ARMOR), armorPieces())
+                .bow(1.2f, 1.0f, 0.0f)
                 .build());
 
         BLOODWOOD = id("bloodwood");
@@ -3147,6 +3276,8 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.ECOLOGICAL_ARMOR), allToolTypes())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.ECOLOGICAL_ARMOR), armorPieces())
                 .addUniversalModifier(SoaSmitheryModifiers.ECOLOGICAL)
+                .bow(0.8f, 1.2f, 2.5f)
+                .arrowShaft(1.5f, 0)
                 .build());
 
         CARBON_FIBER = id("carbon_fiber");
@@ -3161,6 +3292,7 @@ public final class SoaSmitheryMaterials {
                 , 2)
                 .addUniversalModifier(SoaSmitheryModifiers.LIGHTWEIGHT)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_RELENTLESS)
+                .bow(1.6f, 1.0f, 1.5f)
                 .build());
 
         CRYSTAL_MATRIX = id("crystal_matrix");
@@ -3179,6 +3311,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CRYSTALTRAIT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.PRIDEFUL_ARMOR), armorPieces())
                 .armor(600.0f, 38.0f, 400.0f, 4.0f, 3.0f, 300.0f)
+                .bow(1.5f, 1.0f, 2.0f)
                 .build());
 
         DARKWOOD = id("darkwood");
@@ -3193,6 +3326,8 @@ public final class SoaSmitheryMaterials {
                 , 1)
                 .addUniversalModifier(SoaSmitheryModifiers.ECOLOGICAL)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_SUNDERING)
+                .bow(0.9f, 1.1f, 1.0f)
+                .arrowShaft(1.0f, 10)
                 .build());
 
         DIAMANTINE_CRYSTAL = id("diamantine_crystal");
@@ -3207,6 +3342,7 @@ public final class SoaSmitheryMaterials {
                 , 3)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_AFTERSHOCK)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_CRYSTALLINE)
+                .bow(1.0f, 1.2f, 4.0f)
                 .build());
 
         DRAGONSTONE = id("dragonstone");
@@ -3218,8 +3354,10 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFFE771B9)
                         .binderMultiplier(1.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_FAE_VOICE)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_FAE_VOICE),
+                        SmitheryPartTypes.ARCANE_FOCUS)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED),
+                        SmitheryPartTypes.ARCANE_FOCUS)
                 .build());
 
         DREAMWOOD = id("dreamwood");
@@ -3234,6 +3372,8 @@ public final class SoaSmitheryMaterials {
                 , 1)
                 .addUniversalModifier(SoaSmitheryModifiers.ECOLOGICAL)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_AURA_SIPHON)
+                .bow(1.1f, 1.1f, 1.0f)
+                .arrowShaft(1.25f, 25)
                 .build());
 
         EMERALDIC_CRYSTAL = id("emeraldic_crystal");
@@ -3246,9 +3386,11 @@ public final class SoaSmitheryMaterials {
                         .partColor(0xFF07CD03)
                         .binderMultiplier(1.25f)
                 , 4)
-                .addUniversalModifier(SoaSmitheryModifiers.COLDBLOODED)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.COLDBLOODED),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD, SmitheryPartTypes.ARCANE_FOCUS, SmitheryPartTypes.ARROW_HEAD, SmitheryPartTypes.SHURIKEN_BLADE)
                 .addUniversalModifier(SoaSmitheryModifiers.MOMENTUM)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_CRYSTALLINE)
+                .bow(0.85f, 1.3f, 6.0f)
                 .build());
 
         ENDERIUM = id("enderium");
@@ -3262,7 +3404,9 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(1.25f)
                 , 5)
                 .addUniversalModifier(SoaSmitheryModifiers.ENDERFERENCE)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_MORTAL_WOUNDS)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MORTAL_WOUNDS),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD, SmitheryPartTypes.ARCANE_FOCUS, SmitheryPartTypes.ARROW_HEAD, SmitheryPartTypes.SHURIKEN_BLADE)
+                .bow(0.75f, 1.5f, 7.0f)
                 .build());
 
         ENERGETIC_METAL = id("energetic_metal");
@@ -3276,6 +3420,7 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(0.8f)
                 , 3)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_ELECTRIC)
+                .bow(0.75f, 1.0f, 3.5f)
                 .build());
 
         ENORI_CRYSTAL = id("enori_crystal");
@@ -3290,6 +3435,7 @@ public final class SoaSmitheryMaterials {
                 , 2)
                 .addUniversalModifier(SoaSmitheryModifiers.MAGNETIC)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_CRYSTALLINE)
+                .bow(0.7f, 1.35f, 2.0f)
                 .build());
 
         ESSENCE_METAL = id("essence_metal");
@@ -3304,6 +3450,7 @@ public final class SoaSmitheryMaterials {
                 , 2)
                 .addUniversalModifier(SoaSmitheryModifiers.ESTABLISHED)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_SUNDERING)
+                .bow(1.5f, 0.7f, 0.0f)
                 .build());
 
         FLUIX_STEEL = id("fluix_steel");
@@ -3317,7 +3464,9 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(0.9f)
                 , 3)
                 .addUniversalModifier(SoaSmitheryModifiers.MAGNETIC)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_PIEZOELECTRIC)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_PIEZOELECTRIC),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD, SmitheryPartTypes.ARCANE_FOCUS, SmitheryPartTypes.ARROW_HEAD, SmitheryPartTypes.SHURIKEN_BLADE)
+                .bow(0.7f, 1.3f, 6.0f)
                 .build());
 
         FLUX_CRYSTAL = id("flux_crystal");
@@ -3333,6 +3482,7 @@ public final class SoaSmitheryMaterials {
                 , 4)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_AFTERSHOCK)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_ENERGIZED)
+                .bow(1.2f, 1.0f, 0.0f)
                 .build());
 
         FLUXED_STRING = id("fluxed_string");
@@ -3344,7 +3494,9 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFFF7F7F7)
                         .binderMultiplier(1.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_AFTERSHOCK)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_AFTERSHOCK),
+                        SmitheryPartTypes.BOWSTRING)
+                .bowstring(1.25f)
                 .build());
 
         FLUXED_ELECTRUM = id("fluxed_electrum");
@@ -3359,6 +3511,7 @@ public final class SoaSmitheryMaterials {
                 , 4)
                 .addUniversalModifier(SoaSmitheryModifiers.MAGNETIC)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_ENERGIZED)
+                .bow(0.8f, 1.25f, 2.0f)
                 .build());
 
         FUSEWOOD = id("fusewood");
@@ -3373,6 +3526,8 @@ public final class SoaSmitheryMaterials {
                 , 2)
                 .addUniversalModifier(SoaSmitheryModifiers.BLASTING)
                 .addUniversalModifier(SoaSmitheryModifiers.ECOLOGICAL)
+                .bow(0.75f, 1.25f, 4.0f)
+                .arrowShaft(1.25f, 4)
                 .build());
 
         GELID_ENDERIUM = id("gelid_enderium");
@@ -3391,6 +3546,7 @@ public final class SoaSmitheryMaterials {
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_JUGGERNAUT)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_CHILLING_TOUCH_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_ENERGIZED_ARMOR), armorPieces())
+                .bow(0.75f, 1.5f, 6.5f)
                 .build());
 
         GELID_GEM = id("gelid_gem");
@@ -3405,6 +3561,7 @@ public final class SoaSmitheryMaterials {
                 , 5)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_AFTERSHOCK)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_ENERGIZED)
+                .bow(1.5f, 1.1f, 7.2f)
                 .build());
 
         GHOSTWOOD = id("ghostwood");
@@ -3419,6 +3576,9 @@ public final class SoaSmitheryMaterials {
                 , 1)
                 .addUniversalModifier(SoaSmitheryModifiers.ECOLOGICAL)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_FOOT_FLEET)
+                .bow(1.5f, 1.0f, 0.0f)
+                .arrowShaft(0.9f, 12)
+                .fletching(1.0f, 0.9f)
                 .build());
 
         POLYETHYLENE = id("polyethylene");
@@ -3434,6 +3594,8 @@ public final class SoaSmitheryMaterials {
                 .addUniversalModifier(SoaSmitheryModifiers.CHEAP)
                 .addUniversalModifier(SoaSmitheryModifiers.CRUDE)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_FOOT_FLEET)
+                .bow(1.75f, 0.6f, 0.0f)
+                .arrowShaft(0.75f, 75)
                 .build());
 
         INFINITY_METAL = id("infinity_metal");
@@ -3449,11 +3611,13 @@ public final class SoaSmitheryMaterials {
                 , 5)
                 .armor(24000.0f, 4096.0f, 1337.0f, 666.0f, 128.0f, 10000.0f)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_INFINITUM)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_OMNIPOTENCE)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_OMNIPOTENCE),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD, SmitheryPartTypes.ARCANE_FOCUS, SmitheryPartTypes.ARROW_HEAD, SmitheryPartTypes.SHURIKEN_BLADE)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_CELESTIAL_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_ETERNITY_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_GALE_FORCE_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_NULL_ALMIGHTY_ARMOR), armorPieces())
+                .bow(100.0f, 3.0f, 9999.0f)
                 .build());
 
         LIVINGROCK = id("livingrock");
@@ -3467,7 +3631,9 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(0.9f)
                 , 1)
                 .addUniversalModifier(SoaSmitheryModifiers.STONEBOUND)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_SUNDERING)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_SUNDERING),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD, SmitheryPartTypes.ARCANE_FOCUS, SmitheryPartTypes.ARROW_HEAD, SmitheryPartTypes.SHURIKEN_BLADE)
+                .bow(0.6f, 0.9f, 0.0f)
                 .build());
 
         LIVINGWOOD = id("livingwood");
@@ -3482,6 +3648,8 @@ public final class SoaSmitheryMaterials {
                 , 1)
                 .addUniversalModifier(SoaSmitheryModifiers.ECOLOGICAL)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_MODIFIABLE, java.util.Map.of("bonus_slots", 1))
+                .bow(1.2f, 1.0f, 0.0f)
+                .arrowShaft(1.0f, 0)
                 .build());
 
         LONSDALEITE = id("lonsdaleite");
@@ -3496,6 +3664,7 @@ public final class SoaSmitheryMaterials {
                 , 3)
                 .addUniversalModifier(SoaSmitheryModifiers.CRUDE)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_MODIFIABLE, java.util.Map.of("bonus_slots", 1))
+                .bow(0.9f, 1.2f, 1.5f)
                 .build());
 
         LUMIUM = id("lumium");
@@ -3508,8 +3677,10 @@ public final class SoaSmitheryMaterials {
                         .partColor(0xFFCE7F2D)
                         .binderMultiplier(0.8f)
                 , 1)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_LUMINIFEROUS)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_LUMINIFEROUS),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD, SmitheryPartTypes.ARCANE_FOCUS, SmitheryPartTypes.ARROW_HEAD, SmitheryPartTypes.SHURIKEN_BLADE)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_OPPORTUNIST)
+                .bow(1.0f, 1.15f, 2.0f)
                 .build());
 
         MANA_DIAMOND = id("mana_diamond");
@@ -3521,8 +3692,10 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFF00869B)
                         .binderMultiplier(1.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_CRYSTALLINE)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_CRYSTALLINE),
+                        SmitheryPartTypes.ARCANE_FOCUS)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED),
+                        SmitheryPartTypes.ARCANE_FOCUS)
                 .build());
 
         MANA_PEARL = id("mana_pearl");
@@ -3534,8 +3707,9 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFF00E4E5)
                         .binderMultiplier(1.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.ENDSPEED)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.ENDSPEED), SmitheryPartTypes.ARCANE_FOCUS)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED),
+                        SmitheryPartTypes.ARCANE_FOCUS)
                 .build());
 
         MANA_STRING = id("mana_string");
@@ -3547,7 +3721,9 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFF9DFFF4)
                         .binderMultiplier(1.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED),
+                        SmitheryPartTypes.BOWSTRING)
+                .bowstring(1.0f)
                 .build());
 
         MEAT_METAL = id("meat_metal");
@@ -3577,10 +3753,12 @@ public final class SoaSmitheryMaterials {
                 .armor(1000.0f, 60.0f, 800.0f, 10.0f, 6.0f, 600.0f)
                 .addUniversalModifier(SoaSmitheryModifiers.DENSE)
                 .addUniversalModifier(SoaSmitheryModifiers.HEAVY)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_CONDENSING)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_CONDENSING),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD, SmitheryPartTypes.ARCANE_FOCUS, SmitheryPartTypes.ARROW_HEAD, SmitheryPartTypes.SHURIKEN_BLADE)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.DENSE_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.HEAVY_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_REACTIVE_ARMOR), armorPieces())
+                .bow(0.25f, 4.0f, 20.0f)
                 .build());
 
         OBDISIAN = id("obdisian");
@@ -3607,6 +3785,7 @@ public final class SoaSmitheryMaterials {
                 , 2)
                 .addUniversalModifier(SoaSmitheryModifiers.ESTABLISHED)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_CRYSTALLINE)
+                .bow(0.75f, 1.1f, 0.0f)
                 .build());
 
         PINK_METAL = id("pink_metal");
@@ -3621,6 +3800,7 @@ public final class SoaSmitheryMaterials {
                 , 5)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_MORTAL_WOUNDS)
                 .addUniversalModifier(SoaSmitheryModifiers.UNNATURAL)
+                .bow(1.1f, 1.0f, 4.0f)
                 .build());
 
         PLATINUM = id("platinum");
@@ -3634,10 +3814,12 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(0.8f)
                 , 4)
                 .armor(4.0f, 18.0f, -10.08f, 31.7647f, 0.0f, -10.08f)
-                .addUniversalModifier(SoaSmitheryModifiers.COLDBLOODED)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.COLDBLOODED),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD, SmitheryPartTypes.ARCANE_FOCUS, SmitheryPartTypes.ARROW_HEAD, SmitheryPartTypes.SHURIKEN_BLADE)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_DEADLY_PRECISION)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.PRIDEFUL_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_DIVINE_GRACE_ARMOR), armorPieces())
+                .bow(1.0f, 0.8f, 8.0f)
                 .build());
 
         QUICKSILVER = id("quicksilver");
@@ -3664,6 +3846,7 @@ public final class SoaSmitheryMaterials {
                 , 2)
                 .addUniversalModifier(SoaSmitheryModifiers.SHARP)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_LUMINIFEROUS)
+                .bow(1.0f, 1.25f, 4.0f)
                 .build());
 
         REFINED_OBSIDIAN = id("refined_obsidian");
@@ -3681,6 +3864,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.DURITOS_RANCH_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.HOLD_GROUND_ARMOR), armorPieces())
                 .addUniversalModifier(SoaSmitheryModifiers.DURITOS)
+                .bow(0.65f, 1.35f, 7.0f)
                 .build());
 
         RESTONIA_CRYSTAL = id("restonia_crystal");
@@ -3694,7 +3878,9 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(0.75f)
                 , 2)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_CRYSTALLINE)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_PIEZOELECTRIC)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_PIEZOELECTRIC),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD, SmitheryPartTypes.ARCANE_FOCUS, SmitheryPartTypes.ARROW_HEAD, SmitheryPartTypes.SHURIKEN_BLADE)
+                .bow(1.5f, 0.8f, 0.0f)
                 .build());
 
         RUBBER = id("rubber");
@@ -3708,7 +3894,9 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(0.5f)
                 , 1)
                 .addUniversalModifier(SoaSmitheryModifiers.CRUDE)
-                .addUniversalModifier(SoaSmitheryModifiers.SQUEAKY)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.SQUEAKY),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD, SmitheryPartTypes.ARCANE_FOCUS, SmitheryPartTypes.ARROW_HEAD, SmitheryPartTypes.SHURIKEN_BLADE)
+                .bow(2.0f, 0.5f, 0.0f)
                 .build());
 
         SIGNALUM = id("signalum");
@@ -3737,6 +3925,7 @@ public final class SoaSmitheryMaterials {
                 , 5)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_LUMINIFEROUS)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_PHOTOSYNTHETIC)
+                .bow(2.0f, 1.1f, 4.0f)
                 .build());
 
         TIN = id("tin");
@@ -3750,6 +3939,7 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(0.8f)
                 , 1)
                 .addUniversalModifier(SoaSmitheryModifiers.CRUDE)
+                .bow(0.9f, 1.25f, 0.0f)
                 .build());
 
         UNIVERSAL_METAL = id("universal_metal");
@@ -3764,6 +3954,7 @@ public final class SoaSmitheryMaterials {
                 , 5)
                 .addUniversalModifier(SoaSmitheryModifiers.CRUMBLING)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_RUINATION)
+                .bow(1.25f, 1.25f, 0.0f)
                 .build());
 
         VOID_CRYSTAL = id("void_crystal");
@@ -3778,6 +3969,7 @@ public final class SoaSmitheryMaterials {
                 , 2)
                 .addUniversalModifier(SoaSmitheryModifiers.CHEAPSKATE)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_CRYSTALLINE)
+                .bow(1.25f, 0.6f, 0.0f)
                 .build());
 
         VOID_METAL = id("void_metal");
@@ -3795,7 +3987,9 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_WARPING_ARMOR), allToolTypes())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_CHILLING_TOUCH_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_WARPING_ARMOR), armorPieces())
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_WARPING)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_WARPING),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(1.4f, 0.8f, 8.0f)
                 .build());
 
         WEATHER_CRYSTAL = id("weather_crystal");
@@ -3807,7 +4001,8 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFFC9A8D3)
                         .binderMultiplier(1.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_THUNDERGOD_WRATH)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_THUNDERGOD_WRATH),
+                        SmitheryPartTypes.ARCANE_FOCUS)
                 .build());
 
     }
@@ -3826,6 +4021,7 @@ public final class SoaSmitheryMaterials {
                 .addUniversalModifier(SoaSmitheryModifiers.MUSICOFTHESPHERES)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_CORRUPTING)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_EXECUTOR)
+                .bow(0.38f, 3.0f, 12.0f)
                 .build());
 
         ALUMITE = id("alumite");
@@ -3839,6 +4035,7 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(1.1f)
                 , 3)
                 .addUniversalModifier(SoaSmitheryModifiers.GLOBAL)
+                .bow(0.65f, 1.6f, 7.0f)
                 .build());
 
         AMBER = id("amber");
@@ -3853,8 +4050,11 @@ public final class SoaSmitheryMaterials {
                 , 3)
                 .armor(100.0f, 16.5f, 11.2f, 1.6f, 1.5f, 11.2f)
                 .addUniversalModifier(SoaSmitheryModifiers.SHOCKING)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_OPPORTUNIST)
-                .addUniversalModifier(SoaSmitheryModifiers.THUNDERING)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_OPPORTUNIST),
+                        SmitheryPartTypes.ARCANE_FOCUS)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.THUNDERING),
+                        SmitheryPartTypes.ARROW_HEAD, SmitheryPartTypes.SHURIKEN_BLADE, SmitheryPartTypes.ARROW_SHAFT)
+                .arrowShaft(1.0f, 5)
                 .build());
 
         AQUAMARINE = id("aquamarine");
@@ -3871,6 +4071,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CRYSTALTRAIT), allToolTypes())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.ABSORBENT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CRYSTALTRAIT_ARMOR), armorPieces())
+                .bow(0.75f, 1.0f, 0.0f)
                 .build());
 
         SAPPHIRE_AOA = id("sapphire_aoa");
@@ -3885,6 +4086,7 @@ public final class SoaSmitheryMaterials {
                 , 4)
                 .armor(120.0f, 34.56f, 46.08f, 31.7647f, 0.0f, 46.08f)
                 .addUniversalModifier(SoaSmitheryModifiers.AQUADYNAMIC)
+                .bow(1.3f, 1.5f, 4.0f)
                 .build());
 
         AWAKENED_PLUSTIC = id("awakened_plustic");
@@ -3901,8 +4103,11 @@ public final class SoaSmitheryMaterials {
                 .addUniversalModifier(SoaSmitheryModifiers.APOCALYPSE)
                 .addUniversalModifier(SoaSmitheryModifiers.BLINDBANDIT)
                 .addUniversalModifier(SoaSmitheryModifiers.GLOBAL)
-                .addHeadModifier(SoaSmitheryModifiers.BROWNMAGIC)
-                .addHeadModifier(SoaSmitheryModifiers.RUDEAWAKENING)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.BROWNMAGIC),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.RUDEAWAKENING),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(1.9f, 2.8f, 20.0f)
                 .build());
 
         BLACKQUARTZ_PLUSTIC = id("blackquartz_plustic");
@@ -3933,6 +4138,7 @@ public final class SoaSmitheryMaterials {
                 .armor(25.0f, 22.5f, 19.04f, 29.6471f, 0.0f, 19.04f)
                 .addUniversalModifier(SoaSmitheryModifiers.BLOODYMARY)
                 .addUniversalModifier(SoaSmitheryModifiers.ECOLOGICAL)
+                .bow(1.6f, 1.4f, 7.0f)
                 .build());
 
         CERTUSQUARTZ_PLUSTIC = id("certusquartz_plustic");
@@ -3963,6 +4169,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CRYSTALTRAIT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.LIGHTWEIGHT_ARMOR), armorPieces())
                 .addUniversalModifier(SoaSmitheryModifiers.LIGHTWEIGHT)
+                .bow(1.15f, 1.0f, 0.0f)
                 .build());
 
         CHAOTIC_PLUSTIC = id("chaotic_plustic");
@@ -3978,8 +4185,11 @@ public final class SoaSmitheryMaterials {
                 , 5)
                 .armor(120.0f, 50.0f, 89.6f, 48.7059f, 0.0f, 89.6f)
                 .addUniversalModifier(SoaSmitheryModifiers.DARKTRAVELER)
-                .addHeadModifier(SoaSmitheryModifiers.HAILHYDRA)
-                .addHeadModifier(SoaSmitheryModifiers.VINDICTIVE)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.HAILHYDRA),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.VINDICTIVE),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(2.3f, 4.0f, 24.0f)
                 .build());
 
         DARKMATTER = id("darkmatter");
@@ -3995,6 +4205,7 @@ public final class SoaSmitheryMaterials {
                 .armor(81.0f, 47.25f, 12.432f, 36.0f, 0.0f, 12.432f)
                 .addUniversalModifier(SoaSmitheryModifiers.DARKTRAVELER)
                 .addHeadModifier(SoaSmitheryModifiers.IGNOBLE)
+                .bow(0.85f, 1.5f, 4.0f)
                 .build());
 
         DARKWOOD_PLUSTIC = id("darkwood_plustic");
@@ -4010,6 +4221,7 @@ public final class SoaSmitheryMaterials {
                 .armor(16.0f, 13.5f, 10.08f, 27.5294f, 0.0f, 10.08f)
                 .addUniversalModifier(SoaSmitheryModifiers.DARKTRAVELER)
                 .addUniversalModifier(SoaSmitheryModifiers.ECOLOGICAL)
+                .bow(1.2f, 1.3f, 3.0f)
                 .build());
 
         DESH = id("desh");
@@ -4026,6 +4238,7 @@ public final class SoaSmitheryMaterials {
                 .addUniversalModifier(SoaSmitheryModifiers.ALIEN)
                 .addUniversalModifier(SoaSmitheryModifiers.BROWNMAGIC)
                 .addUniversalModifier(SoaSmitheryModifiers.ENDERFERENCE)
+                .bow(0.3679f, 2.72f, 12.0f)
                 .build());
 
         DIAMATINE_ACTADD_PLUSTIC = id("diamatine_actadd_plustic");
@@ -4040,6 +4253,7 @@ public final class SoaSmitheryMaterials {
                 , 4)
                 .armor(120.0f, 22.68f, 28.16f, 20.3294f, 0.0f, 28.16f)
                 .addUniversalModifier(SoaSmitheryModifiers.MORGANLEFAY)
+                .bow(0.7f, 2.0f, 11.0f)
                 .build());
 
         ELEMENTIUM = id("elementium");
@@ -4055,15 +4269,18 @@ public final class SoaSmitheryMaterials {
                 .armor(25.0f, 27.0f, 6.72f, 26.4706f, 0.0f, 6.72f)
                 .addUniversalModifier(SoaSmitheryModifiers.MANA)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_CASCADING)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_FAE_VOICE)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_FAE_VOICE),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD, SmitheryPartTypes.ARCANE_FOCUS, SmitheryPartTypes.ARROW_HEAD, SmitheryPartTypes.SHURIKEN_BLADE)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_OPPORTUNIST)
-                .addHeadModifier(SoaSmitheryModifiers.ELEMENTAL)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.ELEMENTAL),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SHIELDING_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_DIVINE_GRACE_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_FAE_VOICE_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MANA_AFFINITY_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED_ARMOR), armorPieces())
+                .bow(0.75f, 1.25f, 7.0f)
                 .build());
 
         EMERADIC_ACTADD_PLUSTIC = id("emeradic_actadd_plustic");
@@ -4078,6 +4295,7 @@ public final class SoaSmitheryMaterials {
                 , 4)
                 .armor(120.0f, 27.72f, 24.704f, 18.6353f, 0.0f, 24.704f)
                 .addUniversalModifier(SoaSmitheryModifiers.VINDICTIVE)
+                .bow(1.1f, 2.0f, 7.0f)
                 .build());
 
         EMERALD_PLUSTIC = id("emerald_plustic");
@@ -4095,6 +4313,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CRYSTALTRAIT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.GOODFRIDAYAGREEMENT_ARMOR), armorPieces())
                 .armor(100.0f, 18.0f, 45.0f, 1.4f, 1.75f, 30.0f)
+                .bow(1.1f, 1.0f, 0.9f)
                 .build());
 
         ENDERIUM_PLUSTIC = id("enderium_plustic");
@@ -4109,9 +4328,13 @@ public final class SoaSmitheryMaterials {
                 , 4)
                 .armor(37.0f, 31.5f, 7.28f, 22.2353f, 0.0f, 7.28f)
                 .addUniversalModifier(SoaSmitheryModifiers.ENDERFERENCE)
-                .addUniversalModifier(SoaSmitheryModifiers.ENDSPEED)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.ENDSPEED),
+                        SmitheryPartTypes.ARROW_HEAD, SmitheryPartTypes.SHURIKEN_BLADE, SmitheryPartTypes.ARROW_SHAFT)
                 .addUniversalModifier(SoaSmitheryModifiers.GLOBAL)
-                .addHeadModifier(SoaSmitheryModifiers.PORTLY)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.PORTLY),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.9f, 1.9f, 8.0f)
+                .arrowShaft(1.0f, 12)
                 .build());
 
         ENORI_ACTADD_PLUSTIC = id("enori_actadd_plustic");
@@ -4126,7 +4349,9 @@ public final class SoaSmitheryMaterials {
                 , 3)
                 .armor(70.0f, 18.72f, 24.064f, 20.3294f, 0.0f, 24.064f)
                 .addUniversalModifier(SoaSmitheryModifiers.ANTICORROSION)
-                .addHeadModifier(SoaSmitheryModifiers.STARFISHY)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.STARFISHY),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(1.2f, 1.2f, 5.1f)
                 .build());
 
         ERODIUM = id("erodium");
@@ -4143,6 +4368,7 @@ public final class SoaSmitheryMaterials {
                 .addUniversalModifier(SoaSmitheryModifiers.LIGHTWEIGHT)
                 .addUniversalModifier(SoaSmitheryModifiers.NATURESWRATH)
                 .addUniversalModifier(SoaSmitheryModifiers.VINDICTIVE)
+                .bow(0.85f, 1.2f, 1.5f)
                 .build());
 
         FLAMESTRING_PLUSTIC = id("flamestring_plustic");
@@ -4155,6 +4381,7 @@ public final class SoaSmitheryMaterials {
                         .partColor(0xFFB15E31)
                         .binderMultiplier(1.0f)
                 .addUniversalModifier(SoaSmitheryModifiers.NAPHTHA)
+                .bowstring(1.2f)
                 .build());
 
         FLUIX = id("fluix");
@@ -4173,6 +4400,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CRYSTALTRAIT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.PURIFYINGTRAIT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.VOLTAIC_ARMOR), armorPieces())
+                .bow(0.9f, 1.25f, 4.0f)
                 .build());
 
         FLUIXCRYSTAL_PLUSTIC = id("fluixcrystal_plustic");
@@ -4214,6 +4442,7 @@ public final class SoaSmitheryMaterials {
                 .armor(20.0f, 18.0f, 5.6f, 21.1765f, 0.0f, 5.6f)
                 .addUniversalModifier(SoaSmitheryModifiers.DPRK)
                 .addUniversalModifier(SoaSmitheryModifiers.ECOLOGICAL)
+                .bow(0.7f, 2.0f, 7.0f)
                 .build());
 
         GARFAX = id("garfax");
@@ -4242,6 +4471,7 @@ public final class SoaSmitheryMaterials {
                 .armor(14.0f, 11.25f, 11.2f, 23.2941f, 0.0f, 11.2f)
                 .addUniversalModifier(SoaSmitheryModifiers.ECOLOGICAL)
                 .addUniversalModifier(SoaSmitheryModifiers.GHASTLY)
+                .bow(1.6f, 1.1f, 2.0f)
                 .build());
 
         INFINITY_AVARITIA_PLUSTIC = id("infinity_avaritia_plustic");
@@ -4259,6 +4489,7 @@ public final class SoaSmitheryMaterials {
                 .addUniversalModifier(SoaSmitheryModifiers.APOCALYPSE)
                 .addUniversalModifier(SoaSmitheryModifiers.BROWNMAGIC)
                 .addUniversalModifier(SoaSmitheryModifiers.GLOBAL)
+                .bow(2.0f, 2.8f, 16.0f)
                 .build());
 
         INVAR = id("invar");
@@ -4274,7 +4505,10 @@ public final class SoaSmitheryMaterials {
                 .addUniversalModifier(SoaSmitheryModifiers.DEVILSSTRENGTH)
                 .addUniversalModifier(SoaSmitheryModifiers.DURITOS)
                 .addUniversalModifier(SoaSmitheryModifiers.MAGNETIC)
-                .addUniversalModifier(SoaSmitheryModifiers.STIFF)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.STIFF),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD, SmitheryPartTypes.ARCANE_FOCUS, SmitheryPartTypes.ARROW_HEAD, SmitheryPartTypes.SHURIKEN_BLADE)
+                .bow(0.5f, 1.75f, 6.0f)
+                .fletching(1.0f, 1.15f)
                 .build());
 
         IONITE = id("ionite");
@@ -4290,7 +4524,9 @@ public final class SoaSmitheryMaterials {
                 .addUniversalModifier(SoaSmitheryModifiers.ILLUMINATI)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_CHAIN_LIGHTNING)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_DEADLY_PRECISION)
-                .addHeadModifier(SoaSmitheryModifiers.CHADTHUNDER)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.CHADTHUNDER),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.38f, 3.0f, 8.0f)
                 .build());
 
         IRIDIUM = id("iridium");
@@ -4306,7 +4542,9 @@ public final class SoaSmitheryMaterials {
                 .addUniversalModifier(SoaSmitheryModifiers.DENSE)
                 .addUniversalModifier(SoaSmitheryModifiers.MOMENTUM)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_OVERWHELM)
-                .addHeadModifier(SoaSmitheryModifiers.ALIEN)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.ALIEN),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.6f, 2.0f, 5.5f)
                 .build());
 
         JADE = id("jade");
@@ -4321,6 +4559,7 @@ public final class SoaSmitheryMaterials {
                 , 4)
                 .armor(75.0f, 22.5f, 5.6f, 28.5882f, 0.0f, 5.6f)
                 .addUniversalModifier(SoaSmitheryModifiers.JADED)
+                .bow(1.5f, 1.3f, 4.0f)
                 .build());
 
         KELLINE = id("kelline");
@@ -4334,6 +4573,7 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(1.3f)
                 , 5)
                 .addUniversalModifier(SoaSmitheryModifiers.HAILHYDRA)
+                .bow(0.8f, 1.0f, 14.0f)
                 .build());
 
         KYRONITE = id("kyronite");
@@ -4348,7 +4588,9 @@ public final class SoaSmitheryMaterials {
                 , 4)
                 .addUniversalModifier(SoaSmitheryModifiers.NATURESBLESSING)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_BATTLE_FUROR)
-                .addHeadModifier(SoaSmitheryModifiers.FRUITSALAD)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.FRUITSALAD),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.6f, 1.6f, 5.0f)
                 .build());
 
         LANDIUM = id("landium");
@@ -4362,6 +4604,7 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(1.5f)
                 , 3)
                 .addUniversalModifier(SoaSmitheryModifiers.PORTLY)
+                .bow(1.2f, 1.6f, 7.0f)
                 .build());
 
         LITHERITE = id("litherite");
@@ -4377,7 +4620,9 @@ public final class SoaSmitheryMaterials {
                 .addUniversalModifier(SoaSmitheryModifiers.CRUDE)
                 .addUniversalModifier(SoaSmitheryModifiers.JAGGED)
                 .addUniversalModifier(SoaSmitheryModifiers.PETRAMOR)
-                .addHeadModifier(SoaSmitheryModifiers.STONEBOUND)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.STONEBOUND),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.75f, 1.25f, 2.0f)
                 .build());
 
         LIVINGWOOD_PLUSTIC = id("livingwood_plustic");
@@ -4393,6 +4638,8 @@ public final class SoaSmitheryMaterials {
                 .armor(2.0f, 12.6f, 2.24f, 24.3529f, 0.0f, 2.24f)
                 .addUniversalModifier(SoaSmitheryModifiers.BOTANICAL)
                 .addUniversalModifier(SoaSmitheryModifiers.ECOLOGICAL)
+                .bow(1.1f, 1.1f, 1.8f)
+                .arrowShaft(1.0f, 6)
                 .build());
 
         LUMIUM_PLUSTIC = id("lumium_plustic");
@@ -4408,6 +4655,7 @@ public final class SoaSmitheryMaterials {
                 .armor(39.0f, 29.25f, 6.72f, 23.2941f, 0.0f, 6.72f)
                 .addUniversalModifier(SoaSmitheryModifiers.GLOWING)
                 .addUniversalModifier(SoaSmitheryModifiers.ILLUMINATI)
+                .bow(1.5f, 1.8f, 4.0f)
                 .build());
 
         MALACHITE_GEM = id("malachite_gem");
@@ -4422,6 +4670,7 @@ public final class SoaSmitheryMaterials {
                 , 3)
                 .armor(260.0f, 20.0f, 100.0f, 2.0f, 2.25f, 80.0f)
                 .addUniversalModifier(SoaSmitheryModifiers.NATURESWRATH)
+                .bow(1.4f, 1.4f, 4.0f)
                 .build());
 
         MANASTEEL = id("manasteel");
@@ -4441,6 +4690,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.LIGHTWEIGHT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MANA_AFFINITY_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED_ARMOR), armorPieces())
+                .bow(0.5f, 1.5f, 7.0f)
                 .build());
 
         MICA = id("mica");
@@ -4455,6 +4705,7 @@ public final class SoaSmitheryMaterials {
                 , 3)
                 .addUniversalModifier(SoaSmitheryModifiers.SLASHING)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_MODIFIABLE, java.util.Map.of("bonus_slots", 1))
+                .bow(1.75f, 0.75f, 0.0f)
                 .build());
 
         MIRION = id("mirion");
@@ -4469,7 +4720,9 @@ public final class SoaSmitheryMaterials {
                 , 5)
                 .armor(250.0f, 30.0f, 40.0f, 3.0f, 3.0f, 32.0f)
                 .addUniversalModifier(SoaSmitheryModifiers.MANA)
-                .addHeadModifier(SoaSmitheryModifiers.MIRABILE)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.MIRABILE),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.8f, 1.5f, 8.7f)
                 .build());
 
         MORGANINE = id("morganine");
@@ -4483,6 +4736,7 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(1.2f)
                 , 5)
                 .addUniversalModifier(SoaSmitheryModifiers.MORGANLEFAY)
+                .bow(1.2f, 1.2f, 6.0f)
                 .build());
 
         NICKEL = id("nickel");
@@ -4503,6 +4757,8 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.MOTIONTRAIT_ARMOR), armorPieces())
                 .addUniversalModifier(SoaSmitheryModifiers.MAGNETIC)
                 .addUniversalModifier(SoaSmitheryModifiers.MAGNETIC)
+                .bow(0.65f, 1.5f, 2.0f)
+                .fletching(0.95f, 1.05f)
                 .build());
 
         OSGLOGLAS = id("osgloglas");
@@ -4521,7 +4777,9 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.GLOBAL), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_WARPING_ARMOR), armorPieces())
                 .armor(500.0f, 36.0f, 11.2f, 7.2f, 3.5f, 11.2f)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_WARPING)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_WARPING),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.6f, 1.8f, 8.2f)
                 .build());
 
         OSMIRIDIUM = id("osmiridium");
@@ -4536,7 +4794,9 @@ public final class SoaSmitheryMaterials {
                 , 4)
                 .armor(400.0f, 28.0f, 8.96f, 5.2f, 3.5f, 8.96f)
                 .addUniversalModifier(SoaSmitheryModifiers.DEVILSSTRENGTH)
-                .addHeadModifier(SoaSmitheryModifiers.ANTICORROSION)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.ANTICORROSION),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.38f, 2.05f, 10.0f)
                 .build());
 
         OSMIUM = id("osmium");
@@ -4555,6 +4815,7 @@ public final class SoaSmitheryMaterials {
                 .addUniversalModifier(SoaSmitheryModifiers.STIFF)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.DENSE_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.HEAVY_ARMOR), armorPieces())
+                .bow(0.65f, 1.3f, 5.7f)
                 .build());
 
         PALIS_ACTADD_PLUSTIC = id("palis_actadd_plustic");
@@ -4584,6 +4845,7 @@ public final class SoaSmitheryMaterials {
                 .armor(230.0f, 20.0f, 100.0f, 2.0f, 2.0f, 80.0f)
                 .addUniversalModifier(SoaSmitheryModifiers.NATURESBLESSING)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TOM_AND_JERRY_ARMOR), armorPieces())
+                .bow(1.4f, 1.4f, 4.0f)
                 .build());
 
         PINK_SLIME = id("pink_slime");
@@ -4599,6 +4861,7 @@ public final class SoaSmitheryMaterials {
                 .armor(84.0f, 8.1f, 27.216f, 50.0f, 0.0f, 27.216f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.BOUNCY_ARMOR), armorPieces())
                 .addUniversalModifier(SoaSmitheryModifiers.SLIMEY)
+                .bow(1.3f, 0.85f, 0.0f)
                 .build());
 
         PLADIUM = id("pladium");
@@ -4613,6 +4876,7 @@ public final class SoaSmitheryMaterials {
                 , 4)
                 .addUniversalModifier(SoaSmitheryModifiers.STOPBEINGSELFISH)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_RELENTLESS)
+                .bow(0.49f, 2.2f, 6.5f)
                 .build());
 
         PLATINUM_PLUSTIC = id("platinum_plustic");
@@ -4628,7 +4892,9 @@ public final class SoaSmitheryMaterials {
                 .armor(33.0f, 27.0f, 6.72f, 22.2353f, 0.0f, 6.72f)
                 .addUniversalModifier(SoaSmitheryModifiers.ANTICORROSION)
                 .addUniversalModifier(SoaSmitheryModifiers.HEAVY_METAL)
-                .addHeadModifier(SoaSmitheryModifiers.GLOBAL)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.GLOBAL),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.85f, 1.8f, 8.0f)
                 .build());
 
         PSIGEM = id("psigem");
@@ -4644,6 +4910,7 @@ public final class SoaSmitheryMaterials {
                 .armor(58.0f, 27.0f, 7.68f, 33.0353f, 0.0f, 7.68f)
                 .addUniversalModifier(SoaSmitheryModifiers.PORTLY)
                 .addUniversalModifier(SoaSmitheryModifiers.PSICOLOGICAL)
+                .bow(1.0f, 1.6f, 4.0f)
                 .build());
 
         PSIMETAL = id("psimetal");
@@ -4659,6 +4926,7 @@ public final class SoaSmitheryMaterials {
                 .armor(58.0f, 27.0f, 7.68f, 33.0353f, 0.0f, 7.68f)
                 .addUniversalModifier(SoaSmitheryModifiers.GLOBAL)
                 .addUniversalModifier(SoaSmitheryModifiers.PSICOLOGICAL)
+                .bow(1.0f, 1.6f, 4.0f)
                 .build());
 
         RACHELINE = id("racheline");
@@ -4672,6 +4940,7 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(1.0f)
                 , 5)
                 .addUniversalModifier(SoaSmitheryModifiers.BLINDBANDIT)
+                .bow(1.3f, 0.7f, 15.0f)
                 .build());
 
         REDMATTER = id("redmatter");
@@ -4686,6 +4955,7 @@ public final class SoaSmitheryMaterials {
                 , 5)
                 .armor(94.0f, 50.0f, 11.76f, 42.3529f, 0.0f, 11.76f)
                 .addUniversalModifier(SoaSmitheryModifiers.DPRK)
+                .bow(0.75f, 2.0f, 10.0f)
                 .build());
 
         REFINEDGLOWSTONE = id("refinedglowstone");
@@ -4700,6 +4970,7 @@ public final class SoaSmitheryMaterials {
                 , 2)
                 .armor(21.0f, 45.0f, 11.2f, 19.0588f, 0.0f, 11.2f)
                 .addUniversalModifier(SoaSmitheryModifiers.ILLUMINATI)
+                .bow(1.0f, 1.25f, 4.0f)
                 .build());
 
         REFINEDOBSIDIAN = id("refinedobsidian");
@@ -4715,6 +4986,7 @@ public final class SoaSmitheryMaterials {
                 .armor(117.0f, 49.5f, 17.92f, 31.7647f, 0.0f, 17.92f)
                 .addUniversalModifier(SoaSmitheryModifiers.DENSE)
                 .addUniversalModifier(SoaSmitheryModifiers.DURITOS)
+                .bow(0.65f, 1.35f, 7.0f)
                 .build());
 
         RESTONIA_ACTADD_PLUSTIC = id("restonia_actadd_plustic");
@@ -4729,6 +5001,7 @@ public final class SoaSmitheryMaterials {
                 , 3)
                 .armor(75.0f, 21.96f, 28.8f, 18.6353f, 0.0f, 28.8f)
                 .addUniversalModifier(SoaSmitheryModifiers.HEARTS)
+                .bow(1.4f, 1.7f, 5.7f)
                 .build());
 
         RUBY = id("ruby");
@@ -4746,6 +5019,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.BLOODLUSTTRAIT), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.LUCKYTRAIT_ARMOR), armorPieces())
                 .armor(220.0f, 18.0f, 100.0f, 2.0f, 2.0f, 80.0f)
+                .bow(1.5f, 1.4f, 4.0f)
                 .build());
 
         SAPPHIRE = id("sapphire");
@@ -4761,6 +5035,7 @@ public final class SoaSmitheryMaterials {
                 .armor(240.0f, 19.0f, 100.0f, 2.0f, 2.0f, 80.0f)
                 .addUniversalModifier(SoaSmitheryModifiers.AQUADYNAMIC)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.AQUASPEED_ARMOR), armorPieces())
+                .bow(1.0f, 1.5f, 4.0f)
                 .build());
 
         SIGNALUM_PLUSTIC = id("signalum_plustic");
@@ -4775,6 +5050,7 @@ public final class SoaSmitheryMaterials {
                 , 3)
                 .armor(32.0f, 23.4f, 6.16f, 25.4118f, 0.0f, 6.16f)
                 .addUniversalModifier(SoaSmitheryModifiers.BLOODYMARY)
+                .bow(1.2f, 1.6f, 4.4f)
                 .build());
 
         SKY_STONE = id("sky_stone");
@@ -4788,7 +5064,8 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(1.0f)
                 , 2)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CHEAPSKATE_ARMOR), allToolTypes())
-                .addUniversalModifier(SoaSmitheryModifiers.CHEAPSKATE)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.CHEAPSKATE), SmitheryPartTypes.FLETCHING)
+                .bow(0.5f, 1.25f, 2.0f)
                 .build());
 
         STARMETAL = id("starmetal");
@@ -4808,6 +5085,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.MAGNETIC_ARMOR2), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.PRIDEFUL_ARMOR), armorPieces())
                 .armor(100.0f, 18.4f, 50.0f, 1.2f, 1.0f, 40.0f)
+                .bow(0.5f, 1.5f, 7.5f)
                 .build());
 
         TANZANITE = id("tanzanite");
@@ -4839,14 +5117,17 @@ public final class SoaSmitheryMaterials {
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_GAIA_WRATH)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_MORTAL_WOUNDS)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_STAGGERING)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_STAGGERING),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD, SmitheryPartTypes.ARCANE_FOCUS, SmitheryPartTypes.ARROW_HEAD, SmitheryPartTypes.SHURIKEN_BLADE)
                 .addUniversalModifier(SoaSmitheryModifiers.TERRAFIRMA1)
-                .addHeadModifier(SoaSmitheryModifiers.TERRAFIRMA2)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TERRAFIRMA2),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.HEAVY_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MANA_AFFINITY_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_SECOND_WIND_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_WILL_STRENGTH_ARMOR), armorPieces())
+                .bow(0.4f, 1.75f, 9.0f)
                 .build());
 
         THAUMIUM = id("thaumium");
@@ -4864,6 +5145,7 @@ public final class SoaSmitheryMaterials {
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_OPPORTUNIST)
                 .addUniversalModifier(SoaSmitheryModifiers.THAUMIC)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SHIELDING_ARMOR), armorPieces())
+                .bow(0.7f, 1.3f, 7.0f)
                 .build());
 
         THORIUM = id("thorium");
@@ -4877,7 +5159,8 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(0.7f)
                 , 2)
                 .addUniversalModifier(SoaSmitheryModifiers.FLAMMABLE)
-                .addHeadModifier(SoaSmitheryModifiers.APOCALYPSE)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.APOCALYPSE),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
                 .build());
 
         TOPAZ = id("topaz");
@@ -4892,6 +5175,7 @@ public final class SoaSmitheryMaterials {
                 , 3)
                 .armor(200.0f, 14.0f, 100.0f, 2.0f, 1.75f, 80.0f)
                 .addUniversalModifier(SoaSmitheryModifiers.NATURESPOWER)
+                .bow(0.4f, 1.4f, 7.0f)
                 .build());
 
         TUNGSTEN = id("tungsten");
@@ -4919,7 +5203,9 @@ public final class SoaSmitheryMaterials {
                 , 3)
                 .armor(56.0f, 15.84f, 44.8f, 16.9412f, 0.0f, 44.8f)
                 .addUniversalModifier(SoaSmitheryModifiers.CRUDE)
-                .addHeadModifier(SoaSmitheryModifiers.UNNAMED)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.UNNAMED),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(1.0f, 1.3f, 3.5f)
                 .build());
 
         WYVERN_PLUSTIC = id("wyvern_plustic");
@@ -4934,8 +5220,11 @@ public final class SoaSmitheryMaterials {
                 , 5)
                 .armor(94.0f, 50.0f, 26.88f, 33.8824f, 0.0f, 26.88f)
                 .addUniversalModifier(SoaSmitheryModifiers.PORTLY)
-                .addHeadModifier(SoaSmitheryModifiers.BLINDBANDIT)
-                .addHeadModifier(SoaSmitheryModifiers.BROWNMAGIC)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.BLINDBANDIT),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.BROWNMAGIC),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(1.6f, 2.0f, 11.0f)
                 .build());
 
     }
@@ -6207,6 +6496,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.MUNDANE_ARMOR1), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.WARMTRAIT_ARMOR), armorPieces())
                 .armor(100.0f, 19.5f, 50.0f, 1.8f, 2.5f, 20.0f)
+                .bow(1.0f, 0.3f, 1.0f)
                 .build());
 
         FIERYMETAL = id("fierymetal");
@@ -6225,6 +6515,8 @@ public final class SoaSmitheryMaterials {
                 .addHeadModifier(SoaSmitheryModifiers.AUTOSMELT)
                 .addHeadModifier(SoaSmitheryModifiers.SUPERHEAT)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SUPERHOT_ARMOR), armorPieces())
+                .bow(1.0f, 0.9f, 4.0f)
+                .arrowShaft(0.8f, 0)
                 .build());
 
         FIERY = id("fiery");
@@ -6271,6 +6563,8 @@ public final class SoaSmitheryMaterials {
                 .addUniversalModifier(SoaSmitheryModifiers.TWILIT)
                 .addUniversalModifier(SoaSmitheryModifiers.PRECIPITATE)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.LIGHTWEIGHT_ARMOR), armorPieces())
+                .bow(0.6f, 2.0f, 0.0f)
+                .arrowShaft(1.4f, 20)
                 .build());
 
         RAVEN_FEATHER = id("raven_feather");
@@ -6284,6 +6578,7 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(1.0f)
                 .addUniversalModifier(SoaSmitheryModifiers.TWILIT)
                 .addUniversalModifier(SoaSmitheryModifiers.VEILED)
+                .fletching(0.95f, 1.15f)
                 .build());
 
         STEELEAF = id("steeleaf");
@@ -6301,6 +6596,9 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.LUCKYTRAIT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SYNERGY), armorPieces())
                 .armor(50.0f, 17.5f, 15.0f, 1.3f, 1.25f, 5.0f)
+                .bow(1.2f, 1.5f, 2.0f)
+                .arrowShaft(0.6f, 10)
+                .fletching(1.0f, 0.8f)
                 .build());
 
     }
@@ -6570,7 +6868,8 @@ public final class SoaSmitheryMaterials {
                         .partColor(0xFF6FA89F)
                         .binderMultiplier(1.0f)
                 .addUniversalModifier(SoaSmitheryModifiers.AQUADYNAMIC)
-                .addHeadModifier(SoaSmitheryModifiers.DIVINESHIELD)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.DIVINESHIELD),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
                 .build());
 
         HARD_SPIDER_LEG = id("hard_spider_leg");
@@ -6813,7 +7112,8 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(1.4f)
                 , 4)
                 .addUniversalModifier(SoaSmitheryModifiers.PETRAMOR)
-                .addHeadModifier(SoaSmitheryModifiers.STONEBOUND)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.STONEBOUND),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
                 .build());
 
         BLUESLIME = id("blueslime");
@@ -6840,8 +7140,9 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(1.1f)
                 , 1)
                 .addUniversalModifier(SoaSmitheryModifiers.FRACTURED)
-                .addUniversalModifier(SoaSmitheryModifiers.SPLITTING)
-                .addHeadModifier(SoaSmitheryModifiers.SPLINTERING)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.SPLITTING), SmitheryPartTypes.ARROW_SHAFT)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.SPLINTERING),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
                 .build());
 
         BRONZE = id("bronze");
@@ -6884,7 +7185,8 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(0.9f)
                 , 4)
                 .addUniversalModifier(SoaSmitheryModifiers.LIGHTWEIGHT)
-                .addHeadModifier(SoaSmitheryModifiers.MOMENTUM)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.MOMENTUM),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
                 .build());
 
         ELECTRUM = id("electrum");
@@ -6925,6 +7227,7 @@ public final class SoaSmitheryMaterials {
                         .partColor(0xFF9C9691)
                         .binderMultiplier(1.0f)
                 .addUniversalModifier(SoaSmitheryModifiers.ENDSPEED)
+                .arrowShaft(0.7f, 1)
                 .build());
 
         FEATHER = id("feather");
@@ -6936,6 +7239,7 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFFD3D3D3)
                         .binderMultiplier(1.0f)
+                .fletching(1.0f, 1.0f)
                 .build());
 
         FIREWOOD = id("firewood");
@@ -6961,21 +7265,11 @@ public final class SoaSmitheryMaterials {
                         .partColor(0xFF45BEDC)
                         .binderMultiplier(1.0f)
                 .addUniversalModifier(SoaSmitheryModifiers.FREEZING)
+                .arrowShaft(0.95f, 3)
                 .build());
 
-        KNIGHTSLIME = id("knightslime");
-        SmitheryAPI.registerMaterial(KNIGHTSLIME, binderSlots(MaterialStats.builder()
-                        .harvestLevel(3)
-                        .miningSpeed(5.8f)
-                        .attackDamage(5.1f)
-                        .durabilityPerIngot(850)
-                        .meltingTemp(1500.0f)
-                        .partColor(0xFFF0C1F4)
-                        .binderMultiplier(0.5f)
-                , 3)
-                .addUniversalModifier(SoaSmitheryModifiers.UNNATURAL)
-                .addHeadModifier(SoaSmitheryModifiers.CRUMBLING)
-                .build());
+        // knightslime is gone — it was a duplicate of Smithery's slimeknightium and is now
+        // layered onto it in retuneBuiltinMaterials().
 
         LEAD = id("lead");
         SmitheryAPI.registerMaterial(LEAD, binderSlots(MaterialStats.builder()
@@ -7000,6 +7294,7 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFFD8D8D8)
                         .binderMultiplier(1.0f)
+                .fletching(0.5f, 1.5f)
                 .build());
 
         MAGMA = id("magma");
@@ -7012,6 +7307,7 @@ public final class SoaSmitheryMaterials {
                         .partColor(0xFF893E20)
                         .colorCycle(24, 0xFF4A1919, 0xFF652828, 0xFFEE7A21) // [auto-color]
                         .binderMultiplier(1.0f)
+                .bowstring(0.85f)
                 .build());
 
         MAGMASLIME = id("magmaslime");
@@ -7025,7 +7321,8 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(0.85f)
                 , 1)
                 .addUniversalModifier(SoaSmitheryModifiers.FLAMMABLE)
-                .addHeadModifier(SoaSmitheryModifiers.SUPERHEAT)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.SUPERHEAT),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
                 .build());
 
         MANYULLYN = id("manyullyn");
@@ -7039,7 +7336,8 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(0.5f)
                 , 4)
                 .addUniversalModifier(SoaSmitheryModifiers.COLDBLOODED)
-                .addHeadModifier(SoaSmitheryModifiers.INSATIABLE)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.INSATIABLE),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
                 .build());
 
         NETHERRACK = id("netherrack");
@@ -7053,7 +7351,8 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(0.85f)
                 , 1)
                 .addUniversalModifier(SoaSmitheryModifiers.HELLISH)
-                .addHeadModifier(SoaSmitheryModifiers.ARIDICULOUS)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.ARIDICULOUS),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
                 .build());
 
         OBSIDIAN = id("obsidian");
@@ -7081,6 +7380,7 @@ public final class SoaSmitheryMaterials {
                 , 1)
                 .addUniversalModifier(SoaSmitheryModifiers.WRITABLE, java.util.Map.of("bonus_slots", 1))
                 .addHeadModifier(SoaSmitheryModifiers.WRITABLE2, java.util.Map.of("bonus_slots", 1))
+                .arrowShaft(0.7f, 20)
                 .build());
 
         PIGIRON = id("pigiron");
@@ -7094,7 +7394,8 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(1.2f)
                 , 2)
                 .addUniversalModifier(SoaSmitheryModifiers.TASTY)
-                .addHeadModifier(SoaSmitheryModifiers.BACONLICIOUS)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.BACONLICIOUS),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
                 .build());
 
         REED = id("reed");
@@ -7107,6 +7408,7 @@ public final class SoaSmitheryMaterials {
                         .partColor(0xFF744728)
                         .binderMultiplier(1.0f)
                 .addUniversalModifier(SoaSmitheryModifiers.BREAKABLE)
+                .arrowShaft(1.5f, 3)
                 .build());
 
         SILVER = id("silver");
@@ -7146,7 +7448,9 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(0.9f)
                 , 3)
                 .addUniversalModifier(SoaSmitheryModifiers.STIFF)
-                .addHeadModifier(SoaSmitheryModifiers.SHARP)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.SHARP),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.4f, 1.5f, 5.0f)
                 .build());
 
         TREATEDWOOD = id("treatedwood");
@@ -7171,6 +7475,7 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFF838383)
                         .binderMultiplier(1.0f)
+                .bowstring(1.0f)
                 .build());
 
     }
@@ -7335,9 +7640,11 @@ public final class SoaSmitheryMaterials {
                 , 4)
                 .armor(260.0f, 24.0f, 120.0f, 2.8f, 3.0f, 100.0f)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_BLOODBOUND)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_CRYSTALYS)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_CRYSTALYS),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD, SmitheryPartTypes.ARCANE_FOCUS, SmitheryPartTypes.ARROW_HEAD, SmitheryPartTypes.SHURIKEN_BLADE)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_BLOODBOUND_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_SOUL_GUARD_ARMOR), armorPieces())
+                .bow(0.6f, 1.4f, 7.2f)
                 .build());
 
         COAGULATED_BLOOD_SAND = id("coagulated_blood_sand");
@@ -7368,8 +7675,11 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_SENTIENT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_WILLFUL_ARMOR), armorPieces())
                 .armor(220.0f, 21.0f, 80.0f, 2.2f, 2.0f, 40.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_WILLFUL)
-                .addHeadModifier(SoaSmitheryModifiers.TCONEVO_SENTIENT)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_WILLFUL),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_SENTIENT),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.75f, 1.25f, 6.0f)
                 .build());
 
     }
@@ -7452,6 +7762,7 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFFF5C825)
                         .binderMultiplier(1.0f)
+                .fletching(1.0f, 2.0f)
                 .build());
 
         GOLDEN_OAK_LEAF = id("golden_oak_leaf");
@@ -7463,6 +7774,7 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFFD8A82E)
                         .binderMultiplier(1.0f)
+                .fletching(0.7f, 1.7f)
                 .build());
 
         GRAVITITE = id("gravitite");
@@ -7477,8 +7789,10 @@ public final class SoaSmitheryMaterials {
                 , 3)
                 .armor(240.0f, 23.0f, 10.08f, 2.0f, 1.5f, 10.08f)
                 .addUniversalModifier(SoaSmitheryModifiers.LAUNCHING)
-                .addHeadModifier(SoaSmitheryModifiers.ANTIGRAV)
-                .addHeadModifier(SoaSmitheryModifiers.GILDED)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.ANTIGRAV),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.GILDED),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
                 .build());
 
         HOLIDAY_LEAF = id("holiday_leaf");
@@ -7490,6 +7804,7 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFF2E8F3E)
                         .binderMultiplier(1.0f)
+                .fletching(0.9f, 1.8f)
                 .build());
 
         HOLYSTONE = id("holystone");
@@ -7504,8 +7819,10 @@ public final class SoaSmitheryMaterials {
                 , 1)
                 .armor(100.0f, 13.0f, 2.8f, 0.7f, 0.5f, 2.8f)
                 .addUniversalModifier(SoaSmitheryModifiers.CHEAP)
-                .addHeadModifier(SoaSmitheryModifiers.CHEAPSKATE)
-                .addHeadModifier(SoaSmitheryModifiers.ENLIGHTENED)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.CHEAPSKATE),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.ENLIGHTENED),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
                 .build());
 
         ICESTONE = id("icestone");
@@ -7534,7 +7851,10 @@ public final class SoaSmitheryMaterials {
                 , 1)
                 .armor(1.0f, 9.0f, 2.24f, 23.2941f, 0.0f, 2.24f)
                 .addUniversalModifier(SoaSmitheryModifiers.ECOLOGICAL)
-                .addHeadModifier(SoaSmitheryModifiers.SKYROOTED)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.SKYROOTED),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(1.05f, 1.05f, 0.05f)
+                .arrowShaft(1.05f, 0)
                 .build());
 
         SKYROOT_LEAF = id("skyroot_leaf");
@@ -7546,6 +7866,7 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFF9FC970)
                         .binderMultiplier(1.0f)
+                .fletching(0.5f, 1.6f)
                 .build());
 
         SWET = id("swet");
@@ -7560,6 +7881,7 @@ public final class SoaSmitheryMaterials {
                 , 1)
                 .armor(200.0f, 16.0f, 40.32f, 1.4f, 0.0f, 40.32f)
                 .addUniversalModifier(SoaSmitheryModifiers.SWETTY)
+                .bow(1.0f, 1.5f, 0.5f)
                 .build());
 
         VALKYRIE = id("valkyrie");
@@ -7574,7 +7896,8 @@ public final class SoaSmitheryMaterials {
                 , 4)
                 .armor(160.0f, 26.8f, 30.0f, 2.5f, 2.75f, 20.0f)
                 .addUniversalModifier(SoaSmitheryModifiers.REACH)
-                .addHeadModifier(SoaSmitheryModifiers.GILDED)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.GILDED),
+                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
                 .build());
 
         ZANITE = id("zanite");
@@ -7611,12 +7934,14 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(3.75f)
                 , 5)
                 .armor(720.0f, 108.0f, 160.0f, 24.0f, 8.0f, 256.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_EVOLVED)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_EVOLVED),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD, SmitheryPartTypes.ARCANE_FOCUS, SmitheryPartTypes.ARROW_HEAD, SmitheryPartTypes.SHURIKEN_BLADE)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_SOUL_REND)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.HEAVY_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_CELESTIAL_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_EVOLVED_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_GALE_FORCE_ARMOR), armorPieces())
+                .bow(1.2f, 2.0f, 28.6f)
                 .build());
 
         DRACONIC_METAL = id("draconic_metal");
@@ -7631,12 +7956,14 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(2.5f)
                 , 5)
                 .armor(480.0f, 74.0f, 128.0f, 16.0f, 3.6f, 144.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_EVOLVED)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_EVOLVED),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD, SmitheryPartTypes.ARCANE_FOCUS, SmitheryPartTypes.ARROW_HEAD, SmitheryPartTypes.SHURIKEN_BLADE)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_SOUL_REND)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.HEAVY_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_CELESTIAL_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_EVOLVED_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_GALE_FORCE_ARMOR), armorPieces())
+                .bow(0.85f, 1.6f, 17.2f)
                 .build());
 
         DRACONIUM = id("draconium");
@@ -7656,6 +7983,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.MOTIONTRAIT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_SUPERDENSE_ARMOR), armorPieces())
                 .armor(124.0f, 46.0f, 54.0f, 5.2f, 2.5f, 40.0f)
+                .bow(0.95f, 1.1f, 8.0f)
                 .build());
 
         PRIMAL_METAL = id("primal_metal");
@@ -7675,6 +8003,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SECONDLIFETRAIT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.WARPDRAINTRAIT_ARMOR), armorPieces())
                 .armor(400.0f, 64.0f, 99.0f, 5.5f, 3.0f, 125.0f)
+                .bow(1.5f, 1.0f, 19.2f)
                 .build());
 
         WYVERN_METAL = id("wyvern_metal");
@@ -7688,10 +8017,12 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(1.75f)
                 , 5)
                 .armor(340.0f, 56.0f, 96.0f, 10.0f, 2.4f, 108.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_EVOLVED)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_EVOLVED),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD, SmitheryPartTypes.ARCANE_FOCUS, SmitheryPartTypes.ARROW_HEAD, SmitheryPartTypes.SHURIKEN_BLADE)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_SOUL_REND)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.HEAVY_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_EVOLVED_ARMOR), armorPieces())
+                .bow(0.9f, 1.3f, 10.0f)
                 .build());
 
     }
@@ -7775,7 +8106,7 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFFBFE6D4)
                         .binderMultiplier(1.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.ENDSPEED)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.ENDSPEED), SmitheryPartTypes.ARCANE_FOCUS)
                 .build());
 
         ENDORIUM = id("endorium");
@@ -7832,7 +8163,7 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFFA1FEFB)
                         .binderMultiplier(1.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.ENDERFERENCE)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.ENDERFERENCE), SmitheryPartTypes.ARCANE_FOCUS)
                 .build());
 
         PULSATING_IRON = id("pulsating_iron");
@@ -7900,6 +8231,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SHIELDING_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SPARTAN_ARMOR), armorPieces())
                 .armor(240.0f, 30.5f, 80.0f, 3.0f, 6.0f, 40.0f)
+                .bow(1.6667f, 1.0f, 1.0f)
                 .build());
 
         VIBRANT_ALLOY = id("vibrant_alloy");
@@ -7927,7 +8259,8 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFFB2FF9D)
                         .binderMultiplier(1.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_CHAIN_LIGHTNING)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_CHAIN_LIGHTNING),
+                        SmitheryPartTypes.ARCANE_FOCUS)
                 .build());
 
     }
@@ -7943,8 +8276,10 @@ public final class SoaSmitheryMaterials {
                         .partColor(0xFF793C17)
                         .binderMultiplier(0.85f)
                 , 2)
-                .addUniversalModifier(SoaSmitheryModifiers.ARIDICULOUS)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.ARIDICULOUS),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD, SmitheryPartTypes.ARCANE_FOCUS, SmitheryPartTypes.ARROW_HEAD, SmitheryPartTypes.SHURIKEN_BLADE)
                 .addUniversalModifier(SoaSmitheryModifiers.FREEZING)
+                .bow(0.75f, 1.25f, 3.0f)
                 .build());
 
         MITHRIL = id("mithril");
@@ -7963,7 +8298,10 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SHIELDING_ARMOR), armorPieces())
                 .armor(180.0f, 21.2f, 160.0f, 2.4f, 2.0f, 220.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.7692f, 1.5f, 2.5f)
+                .arrowShaft(1.75f, 2)
                 .build());
 
     }
@@ -7984,8 +8322,11 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CALCIC_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SUPERHEAVY), armorPieces())
                 .armor(200.0f, 28.4f, 100.0f, 4.0f, 2.5f, 80.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.DENSE)
-                .addUniversalModifier(SoaSmitheryModifiers.HEAVY)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.DENSE),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.FLETCHING, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD, SmitheryPartTypes.ARROW_SHAFT)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.HEAVY),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.FLETCHING, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD, SmitheryPartTypes.ARROW_SHAFT)
+                .bow(0.85f, 1.5f, 4.0f)
                 .build());
 
         RED_MATTER = id("red_matter");
@@ -8005,8 +8346,9 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SHIELDING_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_SUPERDENSE_ARMOR), armorPieces())
                 .armor(500.0f, 35.4f, 200.0f, 8.0f, 3.5f, 100.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.DENSE)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.DENSE), SmitheryPartTypes.BOW_LIMB)
                 .addUniversalModifier(SoaSmitheryModifiers.MATTERTRAIT1)
+                .bow(0.75f, 2.0f, 10.0f)
                 .build());
 
     }
@@ -8106,7 +8448,9 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_DIVINE_GRACE_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED_ARMOR), armorPieces())
                 .armor(300.0f, 28.6f, 50.0f, 2.8f, 2.0f, 40.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.7143f, 1.2f, 10.0f)
                 .build());
 
         GAIASTEEL = id("gaiasteel");
@@ -8126,7 +8470,9 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SECONDLIFETRAIT_ARMOR), armorPieces())
                 .armor(500.0f, 33.2f, 100.0f, 3.4f, 3.0f, 70.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.4348f, 1.2f, 18.0f)
                 .build());
 
         ORICHALCOS = id("orichalcos");
@@ -8146,7 +8492,9 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TERRAFIRMA2), armorPieces())
                 .armor(320.0f, 52.0f, 100.0f, 10.0f, 5.0f, 80.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .bow(0.7143f, 1.3f, 13.0f)
                 .build());
 
     }
@@ -8184,7 +8532,8 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.PURIFYINGTRAIT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TASTY_ARMOR), armorPieces())
                 .armor(140.0f, 21.4f, 30.0f, 2.4f, 1.0f, 20.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.TASTY)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TASTY),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
                 .build());
 
         TOFUMETAL = id("tofumetal");
@@ -8202,8 +8551,10 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.KUNGFU_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TASTY_ARMOR), armorPieces())
                 .armor(70.0f, 17.2f, 20.0f, 1.2f, 0.5f, 10.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.LIGHTWEIGHT)
-                .addUniversalModifier(SoaSmitheryModifiers.TASTY)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.LIGHTWEIGHT),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TASTY),
+                        SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
                 .build());
 
     }

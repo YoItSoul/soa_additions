@@ -52,6 +52,19 @@ public final class CheaterData extends SavedData {
         return Collections.unmodifiableSet(flagged.keySet());
     }
 
+    /**
+     * Removes a flag. Returns true if one was present.
+     *
+     * <p>Only the amnesty pass uses this — flags are permanent by design otherwise. It exists
+     * because earlier builds flagged silently on detection, so the stored set contains people who
+     * were never told and never chose anything.</p>
+     */
+    public boolean clearFlag(UUID uuid) {
+        if (flagged.remove(uuid) == null) return false;
+        setDirty();
+        return true;
+    }
+
     /** Returns true if the UUID was newly added. */
     public boolean flag(UUID uuid, String reason) {
         if (flagged.containsKey(uuid)) return false;

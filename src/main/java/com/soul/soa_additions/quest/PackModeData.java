@@ -53,11 +53,13 @@ public final class PackModeData extends SavedData {
         }
         this.mode = newMode;
         setDirty();
+        PackModeBridge.remember(newMode);
     }
 
     /** Forced set — bypasses the lock. Used only by console + op-level commands. */
     public void forceMode(PackMode newMode) {
         this.mode = newMode;
+        PackModeBridge.remember(newMode);
         setDirty();
     }
 
@@ -115,6 +117,10 @@ public final class PackModeData extends SavedData {
         );
         data.ensureStamped();
         data.applyServerConfig();
+        // Keep the KubeJS-facing mirror in step with the authoritative value,
+        // so a cold start (where no server/level exists during datapack load)
+        // still resolves this world's mode. See PackModeBridge.
+        PackModeBridge.remember(data.mode);
         return data;
     }
 

@@ -114,9 +114,12 @@ public final class SoaSmitheryAlloys {
                 List.of(sm("iron", 144), sm("blood", 40), in("clay", 72)),
                 out("pigiron", 144));
 
+        // GC's knightslime recipe now yields Smithery's slimeknightium — the two were the same
+        // material under two names. Smithery keeps its own red_slime + iron route to it; two
+        // recipes reaching one alloy is intentional, not a leftover duplicate.
         alloy("knightslime", 0,
                 List.of(sm("iron", 72), sm("slime", 125), sm("stone", 144)),
-                out("knightslime", 72));
+                smOut("slimeknightium", 72));
 
         alloy("alubrass", 0,
                 List.of(sm("copper", 144), in("aluminium", 432)),

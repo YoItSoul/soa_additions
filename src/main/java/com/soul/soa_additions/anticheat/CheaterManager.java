@@ -161,6 +161,58 @@ public final class CheaterManager {
         LOG.warn("Tamper detected for {} ({}): {}", player.getGameProfile().getName(), player.getUUID(), label);
     }
 
+    // ---------- amnesty ----------
+
+    /** Marker so the amnesty runs once per player, not on every login. */
+    private static final String NBT_AMNESTY_KEY = "soa_cheater_amnesty_v1";
+
+    /**
+     * One-time amnesty for flags written by builds that flagged silently on detection.
+     *
+     * <p>Those flags were applied without the player being told, with no way to undo them and no
+     * consequence attached, so they carry no information about intent — and they cannot be left in
+     * place now that a flag actually costs something. Clears all three backends and records that it
+     * has run, so a flag earned <em>after</em> this point (by opting in) stays permanent as
+     * intended.</p>
+     */
+    public static void applyAmnestyOnce(ServerPlayer player) {
+        CompoundTag root = player.getPersistentData();
+        CompoundTag persisted = root.getCompound(Player.PERSISTED_NBT_TAG);
+        if (persisted.getBoolean(NBT_AMNESTY_KEY)) return;
+
+        // Marked first: if anything below throws, the amnesty must not retry forever, and it must
+        // never come back later and undo a flag the player has since chosen.
+        persisted.putBoolean(NBT_AMNESTY_KEY, true);
+        persisted.remove(NBT_KEY);
+        persisted.remove(NBT_REASON_KEY);
+        root.put(Player.PERSISTED_NBT_TAG, persisted);
+
+        MinecraftServer server = player.getServer();
+        boolean had = server != null && CheaterData.get(server).clearFlag(player.getUUID());
+        had |= revokeAdvancement(player);
+        if (had) {
+            LOG.info("Amnesty: cleared legacy cheat flag for {} ({})",
+                    player.getGameProfile().getName(), player.getUUID());
+        }
+    }
+
+    /** Revokes the cheat advancement. Returns true if the player had it. */
+    private static boolean revokeAdvancement(ServerPlayer player) {
+        MinecraftServer server = player.getServer();
+        if (server == null) return false;
+        Advancement adv = server.getAdvancements().getAdvancement(CHEAT_ADVANCEMENT_ID);
+        if (adv == null) return false;
+        AdvancementProgress progress = player.getAdvancements().getOrStartProgress(adv);
+        if (!progress.isDone()) return false;
+        // Copy first — revoke mutates the progress we would otherwise be iterating.
+        java.util.List<String> completed = new java.util.ArrayList<>();
+        progress.getCompletedCriteria().forEach(completed::add);
+        for (String criterion : completed) {
+            player.getAdvancements().revoke(adv, criterion);
+        }
+        return true;
+    }
+
     // ---------- advancement handling ----------
 
     public static boolean hasCheatAdvancement(ServerPlayer player) {

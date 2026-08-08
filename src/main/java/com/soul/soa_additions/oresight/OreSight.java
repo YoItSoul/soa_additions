@@ -8,8 +8,11 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.Set;
 
 /**
  * Static helpers for the ore-sight system.
@@ -26,18 +29,34 @@ public final class OreSight {
     /** Forge's standard ores block tag. */
     public static final TagKey<Block> FORGE_ORES = BlockTags.create(new ResourceLocation("forge", "ores"));
 
+    /** {@code forge:ores/netherite_scrap} — checked directly because it is the
+     *  only vanilla ore whose id carries no {@code _ore} marker, so it has no
+     *  fallback if a pack datapack overrides {@code forge:ores}. */
+    public static final TagKey<Block> FORGE_ORES_NETHERITE_SCRAP =
+            BlockTags.create(new ResourceLocation("forge", "ores/netherite_scrap"));
+
+    /**
+     * Ore blocks that neither carry {@code _ore} in their registry path nor can
+     * be relied on to survive a pack's {@code forge:ores} override. Ancient
+     * debris is the vanilla case; add modded strays here as they turn up.
+     */
+    private static final Set<ResourceLocation> EXTRA_ORES = Set.of(
+            new ResourceLocation("minecraft", "ancient_debris"));
+
     private OreSight() {}
 
     /**
      * True iff this block qualifies as an ore for the ore-sight system —
-     * either tagged {@code forge:ores} or its registry path contains
-     * {@code _ore}.
+     * tagged {@code forge:ores} (or {@code forge:ores/netherite_scrap}), listed
+     * in {@link #EXTRA_ORES}, or its registry path contains {@code _ore}.
      */
     public static boolean isOreBlock(Block block) {
         if (block == null || block == Blocks.AIR) return false;
-        if (block.defaultBlockState().is(FORGE_ORES)) return true;
+        BlockState state = block.defaultBlockState();
+        if (state.is(FORGE_ORES) || state.is(FORGE_ORES_NETHERITE_SCRAP)) return true;
         ResourceLocation id = ForgeRegistries.BLOCKS.getKey(block);
-        return id != null && id.getPath().contains("_ore");
+        if (id == null) return false;
+        return EXTRA_ORES.contains(id) || id.getPath().contains("_ore");
     }
 
     /**

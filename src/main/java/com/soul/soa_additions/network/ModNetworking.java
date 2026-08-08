@@ -124,5 +124,11 @@ public final class ModNetworking {
                 .decoder(com.soul.soa_additions.nyx.net.NyxSyncPacket::decode)
                 .consumerMainThread(com.soul.soa_additions.nyx.net.NyxSyncPacket::handle)
                 .add();
+
+        CHANNEL.messageBuilder(CheatDetectedPacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(CheatDetectedPacket::encode)
+                .decoder(CheatDetectedPacket::decode)
+                .consumerMainThread(CheatDetectedPacket::handle)
+                .add();
     }
 }

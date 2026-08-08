@@ -454,10 +454,14 @@ public final class SoaSmitheryMelting {
         recipe("soa_additions:obsidiorite",     "soa_additions:obsidiorite", ORE_MB);
 
         // TConstruct classic alloy items (re-meltable)
-        for (String mat : new String[]{"manyullyn", "pigiron", "knightslime", "alubrass"}) {
+        for (String mat : new String[]{"manyullyn", "pigiron", "alubrass"}) {
             recipe("soa_additions:" + mat + "_ingot",  "soa_additions:" + mat, INGOT_MB);
             recipe("soa_additions:" + mat + "_nugget", "soa_additions:" + mat, NUGGET_MB);
         }
+        // Knightslime merged into Smithery's slimeknightium: the items keep their soa_additions
+        // ids but melt into the smithery: material, so they fall outside the loop above.
+        recipe("soa_additions:knightslime_ingot",  "smithery:slimeknightium", INGOT_MB);
+        recipe("soa_additions:knightslime_nugget", "smithery:slimeknightium", NUGGET_MB);
 
         // ================================================================
         // Malum metals

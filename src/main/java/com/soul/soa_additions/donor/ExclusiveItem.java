@@ -94,11 +94,11 @@ public class ExclusiveItem extends Item {
         if (bound != null) {
             CompoundTag tag = stack.getTag();
             String name = tag != null && tag.contains("BoundName") ? tag.getString("BoundName") : bound.toString();
-            tooltip.add(Component.literal("\u2764 Bound to " + name)
+            tooltip.add(Component.literal("Bound to " + name)
                     .withStyle(ChatFormatting.GOLD, ChatFormatting.ITALIC));
         }
         if (donorOnly) {
-            tooltip.add(Component.literal("\u2B50 Donor Exclusive")
+            tooltip.add(Component.literal("Donor Exclusive")
                     .withStyle(ChatFormatting.LIGHT_PURPLE));
         }
     }

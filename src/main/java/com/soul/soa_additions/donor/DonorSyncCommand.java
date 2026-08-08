@@ -38,7 +38,9 @@ import java.util.UUID;
  * Returns a JSON array of supporter objects with fields:
  * {@code name}, {@code tier}, {@code ign}, {@code message}, {@code date}.
  * The {@code ign} field is the Minecraft username (may be null).
- * The {@code tier} field is one of: "draconium", "voidmetal", "netherite".
+ * The {@code tier} field is one of: "void", "infernium", "ether" — the same
+ * three names {@link DonorData.Tier} carries, which is why
+ * {@link DonorData.Tier#fromName} resolves them on its exact-match pass.
  * Entries without an {@code ign} are skipped.</p>
  */
 @Mod.EventBusSubscriber(modid = SoaAdditions.MODID)

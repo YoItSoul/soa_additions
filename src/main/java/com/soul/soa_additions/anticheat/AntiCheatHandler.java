@@ -12,6 +12,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.forgespi.language.IModInfo;
+import net.minecraftforge.network.ConnectionData;
+import net.minecraftforge.network.NetworkHooks;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -114,7 +116,8 @@ public final class AntiCheatHandler {
             "donor", "donors",    // donor wall + sync — no item grants
             "packmode show",      // read-only
             "packmode lock",      // tightens progression rather than loosening
-            "worldgen"            // read-only scan of generated chunks
+            "worldgen",           // read-only scan of generated chunks
+            "materials"           // Smithery material catalog — read-only reference UI, grants nothing
     );
 
     /** Players whose session has already been flagged — prevents repeat logging. */
@@ -147,14 +150,64 @@ public final class AntiCheatHandler {
     public static void handleClientReport(ServerPlayer player, ClientModReportPacket report) {
         if (alreadyFlagged(player)) return;
 
+        // Content verdicts first: they survive a rename, so they are both the strongest evidence
+        // and the most specific thing we can tell the player.
+        for (String finding : report.findings()) {
+            String[] parts = finding.split("\\|", 3);
+            if (parts.length < 2) continue;
+            String kind = parts[0];
+            String evidence = parts.length > 2 ? parts[1] + " (" + parts[2] + ")" : parts[1];
+            String category = switch (kind) {
+                case "xray" -> "resource pack";
+                case "fullbright" -> "resource pack";
+                case "class" -> "cheat client";
+                default -> kind;
+            };
+            // Fullbright overriding core shaders is suspicious, not proof — log it, don't act.
+            if ("fullbright".equals(kind)) {
+                LOGGER.info("[soa anticheat] {} ships core shaders (possible fullbright): {}",
+                        player.getGameProfile().getName(), evidence);
+                continue;
+            }
+            logDetection(player, category, evidence);
+            CheatEnforcement.onCheatDetected(player, category, evidence);
+            return;
+        }
+
         String hit = findForbiddenIn(report.mods());
         if (hit != null) {
-            flag(player, "mod", hit);
+            logDetection(player, "mod", hit);
+            CheatEnforcement.onCheatDetected(player, "mod", hit);
             return;
         }
         hit = findForbiddenIn(report.resourcePacks());
         if (hit != null) {
-            flag(player, "resource pack", hit);
+            logDetection(player, "resource pack", hit);
+            CheatEnforcement.onCheatDetected(player, "resource pack", hit);
+        }
+    }
+
+    /**
+     * Checks the mod list Forge itself negotiated during the handshake.
+     *
+     * <p>Independent of {@link ClientModScanner}: that report is a packet our own code sends, so a
+     * recompiled copy of this mod can simply lie in it. The handshake list is Forge's own
+     * connection data, which the client also has to satisfy to connect at all — defeating both
+     * costs meaningfully more than defeating one. Free, server-side, no protocol of ours involved.</p>
+     */
+    private static void checkHandshakeMods(ServerPlayer player) {
+        if (alreadyFlagged(player)) return;
+        try {
+            if (player.connection == null) return;
+            ConnectionData data = NetworkHooks.getConnectionData(player.connection.connection);
+            if (data == null) return;   // singleplayer / local connection has none
+            String hit = findForbiddenIn(data.getModList());
+            if (hit != null) {
+                logDetection(player, "mod", hit + " (forge handshake)");
+                CheatEnforcement.onCheatDetected(player, "mod", hit);
+            }
+        } catch (Throwable t) {
+            LOGGER.debug("Handshake mod-list check failed: {}", t.toString());
         }
     }
 
@@ -166,9 +219,17 @@ public final class AntiCheatHandler {
     public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
 
-        // Cross-check the three cheater backends first so that a stripped
+        // Amnesty first, or the cross-check below would faithfully restore the very legacy flag
+        // the amnesty exists to clear.
+        CheaterManager.applyAmnestyOnce(player);
+
+        // Cross-check the three cheater backends so that a stripped
         // advancement or edited NBT is re-applied before any gameplay starts.
         CheaterManager.crossCheckOnLogin(player);
+
+        // Forge's own handshake data — does not depend on our scanner packet arriving, or on it
+        // telling the truth.
+        checkHandshakeMods(player);
 
         // Player may have logged in already in creative/spectator — the gamemode-change
         // event doesn't fire for the initial mode, so check it explicitly here.
@@ -371,6 +432,23 @@ public final class AntiCheatHandler {
     private static boolean alreadyFlagged(ServerPlayer player) {
         if (FLAGGED_THIS_SESSION.contains(player.getUUID())) return true;
         return CheaterManager.isFlagged(player);
+    }
+
+    /**
+     * Records a detection in the log without touching the player's flag state.
+     *
+     * <p>Detection is not commitment — see {@link CheatEnforcement}. The admin still wants the line
+     * in the log, because "someone tried to join with xray and was turned away" is worth knowing
+     * even though nothing was written against the account.</p>
+     */
+    private static void logDetection(ServerPlayer player, String category, String detail) {
+        String address = player.connection == null ? "?" : player.connection.connection.getRemoteAddress().toString();
+        LOGGER.warn("══════════ SOA CHEAT DETECTED ══════════");
+        LOGGER.warn("  player   : {} ({})", player.getGameProfile().getName(), player.getUUID());
+        LOGGER.warn("  address  : {}", address);
+        LOGGER.warn("  category : {}", category);
+        LOGGER.warn("  detail   : {}", detail);
+        LOGGER.warn("════════════════════════════════════════");
     }
 
     private static void flag(ServerPlayer player, String category, String detail) {

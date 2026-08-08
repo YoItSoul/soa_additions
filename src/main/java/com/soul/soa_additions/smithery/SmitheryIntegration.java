@@ -271,8 +271,22 @@ public final class SmitheryIntegration {
         // TConstruct classic alloys (items in soa_additions:)
         castIngot("manyullyn",   "soa_additions", "manyullyn_ingot",   "manyullyn_nugget");
         castIngot("pigiron",     "soa_additions", "pigiron_ingot",     "pigiron_nugget");
-        castIngot("knightslime", "soa_additions", "knightslime_ingot", "knightslime_nugget");
         castIngot("alubrass",    "soa_additions", "alubrass_ingot",    "alubrass_nugget");
+
+        // Knightslime merged into Smithery's slimeknightium: the material now lives in smithery:
+        // while its ingot and nugget stay soa_additions: items. The helpers above assume both
+        // share the soa_additions namespace, so this pours directly (same shape as blood below).
+        ResourceLocation slimeknightiumMat = ResourceLocation.fromNamespaceAndPath("smithery", "slimeknightium");
+        ResourceLocation knightslimeIngot = ResourceLocation.fromNamespaceAndPath("soa_additions", "knightslime_ingot");
+        ResourceLocation knightslimeNugget = ResourceLocation.fromNamespaceAndPath("soa_additions", "knightslime_nugget");
+        CastResults.register(slimeknightiumMat, INGOT_PT, () -> {
+            Item item = ForgeRegistries.ITEMS.getValue(knightslimeIngot);
+            return item == Items.AIR ? null : item;
+        });
+        CastResults.register(slimeknightiumMat, NUGGET_PT, () -> {
+            Item item = ForgeRegistries.ITEMS.getValue(knightslimeNugget);
+            return item == Items.AIR ? null : item;
+        });
 
         // TConstruct "Coagulated Blood" (tconstruct:edible:3, oredict slimeballBlood):
         // pouring smithery's mob-blood into an ingot cast coagulates it. Material lives

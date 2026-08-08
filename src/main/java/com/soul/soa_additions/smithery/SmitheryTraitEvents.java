@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
@@ -199,5 +200,51 @@ public final class SmitheryTraitEvents {
         player.level().playSound(null, player.blockPosition(), SoundEvents.BOTTLE_EMPTY,
                 SoundSource.PLAYERS, 0.7f, 1.0f);
         event.setCanceled(true);
+    }
+
+    /** Wound level stacked on a Jaded victim, 1..max. */
+    private static final String JADED_LEVEL = "soa_jaded_level";
+    /** Game time the current Jaded window expires at. */
+    private static final String JADED_UNTIL = "soa_jaded_until";
+
+    /**
+     * Stacks a Jaded wound on the victim and refreshes its window. Ports PlusTiC's
+     * {@code Jaded#applyJaded}: the level climbs by one per hit up to {@code maxLevel}, and every
+     * hit restarts the {@code duration}-tick window. Called from the modifier's attack hook, which
+     * fires for arrows as well as melee — Jaded was one of the two 1.12 traits implementing
+     * {@code IProjectileTrait}, so a jade-tipped arrow wounds exactly like a jade blade.
+     */
+    public static void applyJaded(Entity target, int maxLevel, int duration) {
+        if (!(target instanceof LivingEntity victim) || victim.level().isClientSide()) return;
+        CompoundTag data = victim.getPersistentData();
+        long now = victim.level().getGameTime();
+        int level = data.getLong(JADED_UNTIL) > now ? data.getInt(JADED_LEVEL) : 0;
+        data.putInt(JADED_LEVEL, Math.min(level + 1, Math.max(1, maxLevel)));
+        data.putLong(JADED_UNTIL, now + duration);
+    }
+
+    /**
+     * Throttles healing on a Jaded victim. 1.12 undid the heal from a tick handler, letting
+     * through {@code (3 - level) / 3} of it — a third of the victim's healing lost per wound
+     * level, nothing at all at level 3. Forge's heal event scales it at the source instead of
+     * rubber-banding health after the fact.
+     */
+    @SubscribeEvent
+    public static void onHeal(LivingHealEvent event) {
+        LivingEntity victim = event.getEntity();
+        if (victim.level().isClientSide()) return;
+        CompoundTag data = victim.getPersistentData();
+        if (!data.contains(JADED_UNTIL)) return;
+        if (data.getLong(JADED_UNTIL) <= victim.level().getGameTime()) {
+            data.remove(JADED_UNTIL);
+            data.remove(JADED_LEVEL);
+            return;
+        }
+        float allowed = (3 - Math.min(3, Math.max(0, data.getInt(JADED_LEVEL)))) / 3.0f;
+        if (allowed <= 0f) {
+            event.setCanceled(true);
+        } else {
+            event.setAmount(event.getAmount() * allowed);
+        }
     }
 }

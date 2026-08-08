@@ -1,0 +1,4 @@
+# Allows KubeJS scripts to call into soa_additions.
+# _packmode.js reads PackModeBridge.current() so the KubeJS pack mode
+# follows the mode chosen on the create-world screen instead of a constant.
++com.soul.soa_additions

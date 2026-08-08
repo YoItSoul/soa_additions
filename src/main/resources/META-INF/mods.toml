@@ -30,10 +30,13 @@ description='''${mod_description}'''
     ordering="NONE"
     side="BOTH"
 
+# Floor is 1.9.8: SmitheryToolLevels calls SmitheryToolItem#harvestLevelApplies, added in that
+# version. Still optional — but if Smithery IS present it has to be new enough, so an old copy
+# fails loading with a readable message instead of a NoSuchMethodError on the first tooltip.
 [[dependencies.${mod_id}]]
     modId="smithery"
     mandatory=false
-    versionRange="[0,)"
+    versionRange="[1.9.8,)"
     ordering="AFTER"
     side="BOTH"
 
@@ -62,6 +65,15 @@ description='''${mod_description}'''
     versionRange="[0,)"
     ordering="AFTER"
     side="BOTH"
+
+# Jade — SoaJadePlugin names the mining tiers SoaTiers registers above netherite,
+# which Jade's built-in harvest-tool line runs out of vanilla tools to describe.
+[[dependencies.${mod_id}]]
+    modId="jade"
+    mandatory=false
+    versionRange="[11.13,)"
+    ordering="AFTER"
+    side="CLIENT"
 
 [[dependencies.${mod_id}]]
     modId="insanelib"

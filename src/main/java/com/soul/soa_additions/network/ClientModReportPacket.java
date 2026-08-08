@@ -9,19 +9,26 @@ import java.util.List;
 import java.util.function.Supplier;
 
 /**
- * Sent from client to server immediately after login. Carries the client's loaded mod list and
- * selected resource packs so the server can scan for forbidden entries (xray / baritone / etc.).
- * Each entry is a single string of form {@code id|name|description}.
+ * Sent from client to server after login. Carries the client's loaded mod list, its resource packs,
+ * and — the part a rename cannot defeat — what those packs actually <em>contain</em>.
+ *
+ * <p>Mods and packs are {@code id|name|description} strings, which only ever described what
+ * something calls itself: renaming a folder defeated the whole scan. {@code findings} carries
+ * verdicts from {@link com.soul.soa_additions.anticheat.client.PackContentScanner} instead, in the
+ * form {@code <kind>|<pack id>|<evidence>} — a pack that makes stone invisible is an xray pack
+ * whatever it is named.</p>
  */
-public record ClientModReportPacket(List<String> mods, List<String> resourcePacks) {
+public record ClientModReportPacket(List<String> mods, List<String> resourcePacks, List<String> findings) {
 
     public void encode(FriendlyByteBuf buf) {
         buf.writeCollection(mods, FriendlyByteBuf::writeUtf);
         buf.writeCollection(resourcePacks, FriendlyByteBuf::writeUtf);
+        buf.writeCollection(findings, FriendlyByteBuf::writeUtf);
     }
 
     public static ClientModReportPacket decode(FriendlyByteBuf buf) {
         return new ClientModReportPacket(
+                buf.readList(FriendlyByteBuf::readUtf),
                 buf.readList(FriendlyByteBuf::readUtf),
                 buf.readList(FriendlyByteBuf::readUtf)
         );

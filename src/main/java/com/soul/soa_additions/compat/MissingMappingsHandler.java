@@ -28,6 +28,10 @@ public final class MissingMappingsHandler {
 
     private static final String MOLTEN_PREFIX = "molten_";
 
+    /** knightslime was merged into Smithery's slimeknightium; see remapOrIgnore. */
+    private static final String KNIGHTSLIME = "knightslime";
+    private static final String SLIMEKNIGHTIUM = "slimeknightium";
+
     private static final Set<String> NYX_ITEMS = Set.of(
             "meteor_ingot", "meteor_dust", "meteor_shard", "fallen_star",
             "unrefined_crystal", "meteor_finder", "scythe",
@@ -100,6 +104,24 @@ public final class MissingMappingsHandler {
 
             if (REMOVED_NAMESPACES.contains(ns)) {
                 mapping.ignore();
+                continue;
+            }
+
+            // knightslime merged into slimeknightium. Smithery registers a part item and a molten
+            // fluid per material, so dropping the duplicate orphans a couple of dozen smithery:
+            // entries in any world that already had them — remap rather than strand a player on
+            // the missing-registry screen. Covers parts (knightslime_pick_head) and fluids
+            // (molten_knightslime) alike, since both just carry the material name in their path.
+            if ("smithery".equals(ns) && path.contains(KNIGHTSLIME)) {
+                ResourceLocation merged = ResourceLocation.fromNamespaceAndPath(
+                        ns, path.replace(KNIGHTSLIME, SLIMEKNIGHTIUM));
+                if (registry.containsKey(merged)) {
+                    mapping.remap(registry.getValue(merged));
+                    LOG.info("Remapped {} -> {}", mapping.getKey(), merged);
+                } else {
+                    mapping.ignore();
+                    LOG.warn("No slimeknightium equivalent for {}, ignoring", mapping.getKey());
+                }
                 continue;
             }
 

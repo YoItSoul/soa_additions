@@ -59,7 +59,7 @@ public class DonorTokenItem extends Item {
         tooltip.add(Component.literal("Equip in your Donor slot to summon a glowing companion.")
                 .withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.empty());
-        tooltip.add(Component.literal("\u2764 Donor Exclusive")
+        tooltip.add(Component.literal("Donor Exclusive")
                 .withStyle(ChatFormatting.GOLD));
     }
 }

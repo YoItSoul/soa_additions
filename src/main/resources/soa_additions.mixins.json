@@ -12,6 +12,9 @@
     "itemstages.RestrictionManagerAccessor",
     "itemstages.RestrictionManagerReloadMixin"
   ],
+  "client": [
+    "donor.DonorGradientMixin"
+  ],
   "injectors": {
     "defaultRequire": 0
   }

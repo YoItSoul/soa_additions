@@ -66,8 +66,7 @@ public final class DonorWallScreen extends Screen {
         g.fill(0, 0, this.width, HEADER_H, COL_HEADER_BG);
         g.fill(0, HEADER_H - 1, this.width, HEADER_H, COL_SEPARATOR);
 
-        // Title with decorative lines
-        String title = "\u2728  DONOR WALL  \u2728";
+        String title = "DONOR WALL";
         int titleW = this.font.width(title);
         int titleX = (this.width - titleW) / 2;
         g.drawString(this.font, title, titleX, 12, COL_TITLE, true);
@@ -118,7 +117,7 @@ public final class DonorWallScreen extends Screen {
 
                 currentTier = d.tier();
                 // Tier banner
-                String tierLabel = currentTier.symbol + "  " + currentTier.display.toUpperCase() + "S  " + currentTier.symbol;
+                String tierLabel = currentTier.display.toUpperCase() + "S";
                 int tierW = this.font.width(tierLabel);
                 int tierX = (this.width - tierW) / 2;
                 int bannerY = baseY;
@@ -139,7 +138,7 @@ public final class DonorWallScreen extends Screen {
 
             // Only render if visible
             if (cy + CARD_H > viewTop && cy < viewBottom) {
-                renderDonorCard(g, cx, cy, cardW, d, mouseX, mouseY);
+                renderDonorCard(g, cx, cy, cardW, d, mouseX, mouseY, i);
             }
 
             cardIdx++;
@@ -175,7 +174,7 @@ public final class DonorWallScreen extends Screen {
     }
 
     private void renderDonorCard(GuiGraphics g, int x, int y, int w, DonorData d,
-                                  int mouseX, int mouseY) {
+                                  int mouseX, int mouseY, int index) {
         boolean hover = mouseX >= x && mouseX < x + w && mouseY >= y && mouseY < y + CARD_H;
 
         // Card background with tier-tinted top edge
@@ -186,11 +185,10 @@ public final class DonorWallScreen extends Screen {
         // Border
         drawCardBorder(g, x, y, w, CARD_H, hover ? d.tier().color : COL_CARD_BORDER);
 
-        // Tier symbol
-        g.drawString(this.font, d.tier().symbol, x + 6, y + 6, d.tier().color, true);
-
-        // Player name in tier color
-        g.drawString(this.font, d.name(), x + 20, y + 6, d.tier().color, true);
+        // Player name, carrying the same shine it has in chat. Aligned with the
+        // date below it — the tier reads from the badge and the section banner,
+        // so the card needs no glyph of its own.
+        drawShiningName(g, d, x + 6, y + 6, index);
 
         // Tier badge
         String badge = d.tier().display;
@@ -214,6 +212,39 @@ public final class DonorWallScreen extends Screen {
             }
         }
     }
+
+    /**
+     * Draws a donor's name with the same shine it carries in chat.
+     *
+     * <p>Chat gets this by stamping a marker font on the component and letting
+     * the client mixin recolour each glyph. Here we own the draw call outright,
+     * so we call {@link DonorStyles#shine} directly — same curve, same colours,
+     * one glyph at a time.
+     *
+     * <p>Doing it per glyph also buys something chat can't have: a phase offset
+     * per card. Every name in chat starts its run at index 0 and so shines in
+     * unison, which on a wall of thirty cards would read as one flat blink.
+     * Feeding the card's position in as the run offset staggers them, and the
+     * highlight travels down the board instead.
+     *
+     * <p>Positions accumulate per character rather than being measured from the
+     * whole string. That is exact for the default font, whose glyph advances are
+     * whole pixels, and usernames only ever use those glyphs.
+     */
+    private void drawShiningName(GuiGraphics g, DonorData d, int x, int y, int index) {
+        DonorStyles.Gradient ramp = DonorStyles.of(d.tier(), d.isOwner());
+        String name = d.name();
+        int cx = x;
+        for (int i = 0; i < name.length(); i++) {
+            String ch = String.valueOf(name.charAt(i));
+            int rgb = DonorStyles.shine(ramp, i, index * PHASE_PER_CARD);
+            g.drawString(this.font, ch, cx, y, 0xFF000000 | rgb, true);
+            cx += this.font.width(ch);
+        }
+    }
+
+    /** Run-offset added per card, in characters — how far the wave lags down the board. */
+    private static final int PHASE_PER_CARD = 4;
 
     private static void drawCardBorder(GuiGraphics g, int x, int y, int w, int h, int color) {
         g.fill(x, y, x + w, y + 1, color);           // top

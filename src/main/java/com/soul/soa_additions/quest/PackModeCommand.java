@@ -69,6 +69,10 @@ public final class PackModeCommand {
                 .warn("{} {} → {} by {}", force ? "FORCE" : "set", previous, mode, ctx.getSource().getTextName());
         // Hot-reload: immediately apply gamerule/difficulty effects for the new mode
         PackModeEffects.applyGamerules(ctx.getSource().getServer());
+        // KubeJS builds recipes per pack mode at datapack load, so changing the
+        // mode leaves them built for the old one. Rebuild now instead of relying
+        // on anyone remembering to run /reload.
+        PackModeBridge.reloadDatapacks(ctx.getSource().getServer());
         return Command.SINGLE_SUCCESS;
     }
 
