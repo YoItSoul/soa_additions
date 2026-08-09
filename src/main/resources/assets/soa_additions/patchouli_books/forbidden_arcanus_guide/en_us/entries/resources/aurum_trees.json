@@ -1,0 +1,98 @@
+{
+    "name": "Aurum Trees",
+    "icon": "forbidden_arcanus:aurum_sapling",
+    "category": "soa_additions:resources_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Aurum Trees can be found in the Flower Forest biome, and emit particles out of their logs. The leaves of these trees can be broken for Gold Nuggets. "
+        },
+        {
+            "type": "patchouli:multiblock",
+            "multiblock": {
+                "pattern": [
+                    [
+                        "      ",
+                        "      ",
+                        "      ",
+                        "  l   ",
+                        " LlL  ",
+                        "  l   ",
+                        "      "
+                    ],
+                    [
+                        "      ",
+                        "   L  ",
+                        " llll ",
+                        "llLll ",
+                        "lllll ",
+                        "LllLl ",
+                        " lll  "
+                    ],
+                    [
+                        "  Lll ",
+                        " lLllL",
+                        " llllL",
+                        "LllLLl",
+                        "lllll ",
+                        "lllll ",
+                        " lll  "
+                    ],
+                    [
+                        "  lLl ",
+                        " lllll",
+                        " lllll",
+                        "lllllL",
+                        "llWll ",
+                        "Lllll ",
+                        " lLl  "
+                    ],
+                    [
+                        "      ",
+                        "   l  ",
+                        "  lwl ",
+                        "  wl  ",
+                        "  W   ",
+                        "      ",
+                        "      "
+                    ],
+                    [
+                        "      ",
+                        "      ",
+                        "      ",
+                        "   0  ",
+                        "  W   ",
+                        "      ",
+                        "      "
+                    ],
+                    [
+                        "      ",
+                        "      ",
+                        "      ",
+                        "      ",
+                        "  W   ",
+                        "      ",
+                        "      "
+                    ],
+                    [
+                        "      ",
+                        "      ",
+                        "      ",
+                        "      ",
+                        "  W   ",
+                        "      ",
+                        "      "
+                    ]
+                ],
+                "mapping": {
+                    "l": "forbidden_arcanus:aurum_leaves",
+                    "L": "forbidden_arcanus:nuggety_aurum_leaves",
+                    "W": "forbidden_arcanus:aurum_log",
+                    "w": "forbidden_arcanus:aurum_log[axis=x]"
+                },
+                "symmetrical": true
+            },
+            "enable_visualize": false
+        }
+    ]
+}

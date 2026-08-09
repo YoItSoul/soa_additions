@@ -1,0 +1,65 @@
+{
+    "name": "Edelwood",
+    "icon": "forbidden_arcanus:carved_edelwood_log",
+    "category": "soa_additions:resources_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "In Roofed Forest biomes you'll find strange looking red trees. These are Edelwood trees. These trees are very useful, and are required for some recipes."
+        },
+        {
+            "type": "patchouli:multiblock",
+            "multiblock": {
+                "pattern": [
+                    [
+                        " ",
+                        "C",
+                        " "
+                    ],
+                    [
+                        "B",
+                        "L",
+                        "b"
+                    ],
+                    [
+                        "0",
+                        "L",
+                        " "
+                    ]
+                ],
+                "mapping": {
+                    "L": "forbidden_arcanus:edelwood_log",
+                    "C": "forbidden_arcanus:carved_edelwood_log[leaves=true]",
+                    "B": "forbidden_arcanus:edelwood_branch[facing=west]",
+                    "b": "forbidden_arcanus:edelwood_branch[facing=east]"
+                },
+                "symmetrical": true
+            },
+            "enable_visualize": false
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:edelwood_log",
+            "text": "Can be crafted into 2 Edelwood Planks, and smelted into Dark Matter"
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:dark_matter",
+            "anchor": "dark_matter",
+            "text": "Obtained by smelting Edelwood Logs.",
+            "link-recipe": true
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:growing_edelwood",
+            "text": "You can grow your own Edelwood Trees if you're having trouble finding them by using a $(l:resources/souls#corrupt_soul)Corrupt Soul$() on a Dead Bush.",
+            "link-recipe": true
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:edelwood_stick",
+            "text": "Break the branches off of the Edelwood Tree to obtain these.",
+            "link-recipe": true
+        }
+    ]
+}

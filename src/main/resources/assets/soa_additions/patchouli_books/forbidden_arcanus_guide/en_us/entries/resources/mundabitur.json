@@ -1,0 +1,15 @@
+{
+    "name": "Mundabitur Dust",
+    "icon": "forbidden_arcanus:mundabitur_dust",
+    "category": "soa_additions:resources_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Used in crafting as well as to form multiblocks."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:mundabitur_dust"
+        }
+    ]
+}

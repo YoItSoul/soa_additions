@@ -106,7 +106,12 @@ public final class RegistryExportCommand {
     private static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("soa")
                 .then(Commands.literal("export")
-                        .requires(src -> src.hasPermission(2))
+                        // Deliberately ungated. The export is read-only reference data —
+                        // it grants nothing and changes no world state — and it is on
+                        // AntiCheatHandler.SAFE_SOA_SUBPATHS for the same reason. Players
+                        // building checklists/wikis need it without an op asking first.
+                        // Caveat: on a dedicated server the files land in the *server's*
+                        // gamedir, and "all" costs a few seconds of main-thread time.
                         .executes(ctx -> run(ctx.getSource(), "all"))
                         .then(Commands.argument("target", StringArgumentType.word())
                                 .suggests((c, b) -> {

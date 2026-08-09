@@ -1,0 +1,50 @@
+{
+    "name": "Draco Arcanus Tools",
+    "icon": "forbidden_arcanus:draco_arcanus_sword",
+    "category": "soa_additions:trinkets_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Using some Dragon Scales and $(l:resources/obsidian_ingot)Obsidian Ingots you can craft some pretty powerful tools and armour."
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "forbidden_arcanus:dragon_scale"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "forbidden_arcanus:draco_arcanus_helmet",
+            "recipe2": "forbidden_arcanus:draco_arcanus_chestplate"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "forbidden_arcanus:draco_arcanus_leggings",
+            "recipe2": "forbidden_arcanus:draco_arcanus_boots"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "forbidden_arcanus:draco_arcanus_staff",
+            "recipe2": "forbidden_arcanus:draco_arcanus_sword"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "forbidden_arcanus:draco_arcanus_pickaxe",
+            "recipe2": "forbidden_arcanus:draco_arcanus_axe"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "forbidden_arcanus:draco_arcanus_shovel",
+            "recipe2": "forbidden_arcanus:draco_arcanus_hoe"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "recipestages:forbidden_arcanus_dark_nether_star",
+            "recipe2": "forbidden_arcanus:draco_arcanus_scepter"
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:draco_arcanus_scepter",
+            "text": "The Draco Arcanus Scepter will spawn a projectile which summons lighting when it hits a mob, dealing 2.5 hearts of damage."
+        }
+    ]
+}

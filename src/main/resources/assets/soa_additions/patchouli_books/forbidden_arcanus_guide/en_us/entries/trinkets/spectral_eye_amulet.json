@@ -1,0 +1,15 @@
+{
+    "name": "Spectral Eye Amulet",
+    "icon": "forbidden_arcanus:spectral_eye_amulet",
+    "category": "soa_additions:trinkets_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "The Spectral Amulet when activated will highlight nearby mobs within a certain radius. Mobs will appear different colours based on the type of mob that they are. Hostile mobs will be red, passive mobs will be green, and aquatic mobs will be blue."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:spectral_eye_amulet"
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "name": "Lens of Veritatis",
+    "icon": "forbidden_arcanus:lens_of_veritatis",
+    "category": "soa_additions:trinkets_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "The Lens of Veritatis shows nearby mobs that have Aureal. This isn't too helpful, as Aureal can only be given through $(l:resources/aureal#splash_aureal_bottle)Splash Aureal Bottles$()."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:lens_of_veritatis"
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "name": "Obsidian Ingot",
+    "icon": "forbidden_arcanus:obsidian_ingot",
+    "category": "soa_additions:resources_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Crafting material, made by smelting Obsidian With Iron."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:obsidian_ingot"
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:obsidian_with_iron"
+        }
+    ]
+}

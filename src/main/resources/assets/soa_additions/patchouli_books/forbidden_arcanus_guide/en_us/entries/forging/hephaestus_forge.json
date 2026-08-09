@@ -1,0 +1,94 @@
+{
+    "name": "Hephaestus Forge",
+    "icon": "forbidden_arcanus:hephaestus_forge",
+    "category": "soa_additions:forging_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "The Hephaestus Forge is a multiblock which allows you to craft certain items. You can upgrade it up to 5 times with certain rituals. The Forge requires 4 additional essences for recipes: $(li)$(l:resources/aureal)Aureal$()$(li)$(l:resources/souls)Souls$()$(li)$(l:resources/blood)Blood$()$(li)$(l:resources/experience)Experience$()"
+        },
+        {
+            "type": "patchouli:text",
+            "text": "The Hephaestus Forge has 1 main input in it's GUI, and up to 8 additional inputs placed on Darkstone Pedestals. These pedestals can only be placed on the Arcane Chiseled Polished Darkstone (not to be confused with Chiseled Arcane Polished Darkstone) around the edge of the multiblock.$(br)$(br)After setting up a recipe with items on pedestals and enough essence, Right Click with a $(l:trinkets/blacksmith_gavel)Blacksmith Gavel$() on the Hephaestus Forge to start crafting."
+        },
+        {
+            "type": "patchouli:multiblock",
+            "multiblock": {
+                "pattern": [
+                    [
+                        "         ",
+                        "         ",
+                        "         ",
+                        "         ",
+                        "    0    ",
+                        "         ",
+                        "         ",
+                        "         ",
+                        "         "
+                    ],
+                    [
+                        "___DDD___",
+                        "_DDDADDD_",
+                        "_DADDDAD_",
+                        "DDDDCDDDD",
+                        "DADCACDAD",
+                        "DDDDCDDDD",
+                        "_DADDDAD_",
+                        "_DDDADDD_",
+                        "___DDD___"
+                    ]
+                ],
+                "mapping": {
+                    "D": "forbidden_arcanus:polished_darkstone",
+                    "A": "forbidden_arcanus:arcane_chiseled_polished_darkstone",
+                    "C": "forbidden_arcanus:chiseled_arcane_polished_darkstone",
+                    "0": "minecraft:smithing_table"
+                },
+                "symmetrical": true
+            }
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:mundabitur_dust",
+            "text": "Formed using $(l:resources/mundabitur)Mundabitur Dust$() on the Smithing Table"
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:darkstone_pedestal",
+            "text": "Used as input for the Hephaestus Forge. Can be upgraded with by Shift + Right Clicking a $(l:forging/item_modifiers#ferrognetic_mixture)Ferrognetic Mixture$() onto it."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:magnetized_darkstone_pedestal",
+            "title": "Upgraded Pedestal",
+            "text": "The upgraded form of the Darkstone Pedestal. Any items thrown on top of it will automatically be put into the pedestal, allowing for automation of Rituals."
+        },
+        {
+            "type": "patchouli:multiblock",
+            "anchor": "arcane_crystal_obelisk",
+            "multiblock": {
+                "pattern": [
+                    [
+                        "A"
+                    ],
+                    [
+                        "A"
+                    ],
+                    [
+                        "0"
+                    ]
+                ],
+                "mapping": {
+                    "A": "forbidden_arcanus:arcane_crystal_block",
+                    "0": "forbidden_arcanus:arcane_polished_darkstone"
+                },
+                "symmetrical": true
+            }
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:arcane_crystal_obelisk",
+            "text": "The Arcane Crystal Obelisk will generate Aureal automatically over time when placed in place of a Darkstone Pedestal. You won't be able to use this for every Ritual though, as some require all 8 slots. After forming the multiblock with Mundabitur Dust, you can mine it with a pickaxe to move it around."
+        }
+    ]
+}

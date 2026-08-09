@@ -1,0 +1,37 @@
+{
+    "name": "Experience",
+    "icon": "forbidden_arcanus:xpetrified_orb",
+    "category": "soa_additions:resources_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Experience points are used in the Hephaestus Forge for certain recipes, but must be provided using items."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "minecraft:experience_bottle",
+            "text": "Provides 15 Experience Points to the Hephaestus Forge"
+        },
+        {
+            "type": "patchouli:spotlight",
+            "anchor": "xpetrified_orb",
+            "item": "forbidden_arcanus:xpetrified_orb",
+            "text": "Provides 91 Experience Points to the Hephaestus Forge. Obtained from Xpetrified Ore found underground. Right Click to grant 91 XP points to yourself."
+        },
+        {
+            "type": "patchouli:multiblock",
+            "multiblock": {
+                "pattern": [
+                    [
+                        "0"
+                    ]
+                ],
+                "mapping": {
+                    "0": "forbidden_arcanus:xpetrified_ore"
+                },
+                "symmetrical": true
+            },
+            "enable_visualize": false
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "name": "Arcane Dragon Egg",
+    "icon": "forbidden_arcanus:arcane_dragon_egg",
+    "category": "soa_additions:misc_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Purely decorative block. Show off your wealth!"
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:arcane_dragon_egg"
+        }
+    ]
+}

@@ -1,0 +1,47 @@
+{
+    "name": "Rune",
+    "icon": "forbidden_arcanus:rune",
+    "category": "soa_additions:resources_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Runes can be mined from Runic Ore underground. This ore can only drop 1 Rune, and is not affected by Fortune. You can process Runic Stone in the Clibano, so it's advised to collect it with Silk Touch and smelt it this way to make the most out of your ore."
+        },
+        {
+            "type": "patchouli:multiblock",
+            "multiblock": {
+                "pattern": [
+                    [
+                        "S"
+                    ],
+                    [
+                        "0"
+                    ],
+                    [
+                        "D"
+                    ]
+                ],
+                "mapping": {
+                    "S": "forbidden_arcanus:runic_stone",
+                    "0": "forbidden_arcanus:runic_deepslate",
+                    "D": "forbidden_arcanus:runic_darkstone"
+                },
+                "symmetrical": true
+            },
+            "enable_visualize": false
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:rune"
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:dark_rune"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "forbidden_arcanus:runic_glass",
+            "recipe2": "forbidden_arcanus:dark_runic_glass"
+        }
+    ]
+}

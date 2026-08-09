@@ -1,0 +1,44 @@
+{
+    "name": "Arcane Crystal",
+    "icon": "forbidden_arcanus:arcane_crystal",
+    "category": "soa_additions:resources_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Arcane Crystal is a crafting material used throughout Forbidden and Arcanus. The ore spawns uncommonly in underground, and drops can be boosted using Fortune."
+        },
+        {
+            "type": "patchouli:multiblock",
+            "multiblock": {
+                "pattern": [
+                    [
+                        "S"
+                    ],
+                    [
+                        "0"
+                    ],
+                    [
+                        "D"
+                    ]
+                ],
+                "mapping": {
+                    "S": "forbidden_arcanus:arcane_crystal_ore",
+                    "D": "forbidden_arcanus:deepslate_arcane_crystal_ore"
+                },
+                "symmetrical": true
+            },
+            "enable_visualize": false
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:arcane_crystal",
+            "text": "It's crystal form. Isn't it pretty?"
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:arcane_crystal_dust",
+            "anchor": "arcane_crystal_dust",
+            "text": "Obtained by smelting Arcane Crystal, or crafting from Arcane Crystal Dust. Can also be used to craft $(l:misc/magical_farmland#arcane_bone_meal)Arcane Bone Meal$()"
+        }
+    ]
+}

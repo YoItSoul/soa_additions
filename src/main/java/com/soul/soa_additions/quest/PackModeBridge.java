@@ -48,7 +48,40 @@ public final class PackModeBridge {
      * calls this during script evaluation and an exception there would take
      * every recipe script down with it.
      */
+    /** The value most recently handed to KubeJS, i.e. what the loaded recipes were built with. */
+    private static volatile String servedToScripts;
+
     public static String current() {
+        String resolved = resolve();
+        servedToScripts = resolved;
+        return resolved;
+    }
+
+    /**
+     * Rebuild recipes if the ones currently loaded were built for a different
+     * mode than this world actually uses.
+     *
+     * <p>Minecraft builds recipes during world <em>creation</em>, before the new
+     * world's {@link PackModeData} exists — so on the create-world path
+     * {@link #current()} can only fall back to the outgoing world's mode or the
+     * mirror file, and KubeJS bakes recipes for the wrong packmode. By the time
+     * the server has started the real mode is known, so compare and reload.</p>
+     *
+     * <p>Costs one extra datapack reload on the first load of a world whose mode
+     * differs from the last one, and nothing at all otherwise.</p>
+     */
+    public static void reconcileAfterStart(MinecraftServer server) {
+        if (server == null) return;
+        String served = servedToScripts;
+        String actual = PackModeData.get(server).mode().lower();
+        if (served == null || served.equalsIgnoreCase(actual)) return;
+        org.slf4j.LoggerFactory.getLogger("soa_additions/packmode").info(
+                "Recipes were built for pack mode '{}' but this world is '{}' — reloading datapacks.",
+                served, actual);
+        reloadDatapacks(server);
+    }
+
+    private static String resolve() {
         try {
             // 1. Brand-new world: the create-world screen already picked a mode.
             //    Peek without consuming — PackModeData.get() consumes it later

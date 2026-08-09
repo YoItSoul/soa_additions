@@ -1,0 +1,15 @@
+{
+    "name": "Orb of Temporary Flight",
+    "icon": "forbidden_arcanus:orb_of_temporary_flight",
+    "category": "soa_additions:trinkets_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Found in End City Chests, grants 5 minutes of creative flight"
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:orb_of_temporary_flight"
+        }
+    ]
+}

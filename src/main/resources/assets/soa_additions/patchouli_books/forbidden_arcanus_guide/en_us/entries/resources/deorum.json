@@ -1,0 +1,48 @@
+{
+    "name": "Deorum",
+    "icon": "forbidden_arcanus:deorum_ingot",
+    "category": "soa_additions:resources_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Deorum is an expensive crafting material used frequently in F&A recipes. It can be grown and made renewably from Golden Orchid Seeds on $(l:misc/magical_farmland)Magical Farmland$()"
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:deorum_ingot",
+            "text": "Crafted from $(l:resources/mundabitur)Mundabitur Dust$(), Gold, Charcoal and $(l:resources/arcane_crystal#arcane_crystal_dust)Arcane Crystal Dust$()"
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:golden_orchid_seeds",
+            "text": "Crafted from Deorum and Yellow Orchids. Yellow Orchids can be bought from a Wandering Trader or found in Flower Forest biomes. $(br)Only grows on $(l:misc/magical_farmland)Magical Farmland$()."
+        },
+        {
+            "type": "patchouli:multiblock",
+            "multiblock": {
+                "pattern": [
+                    [
+                        "OOO",
+                        "O0O",
+                        "OOO",
+                        "___"
+                    ],
+                    [
+                        "FFF",
+                        "FFF",
+                        "FFF",
+                        "_W_"
+                    ]
+                ],
+                "mapping": {
+                    "O": "forbidden_arcanus:golden_orchid[age=6]",
+                    "0": "forbidden_arcanus:golden_orchid[age=6]",
+                    "F": "forbidden_arcanus:magical_farmland[moisture=7]",
+                    "W": "minecraft:water"
+                },
+                "symmetrical": true
+            },
+            "enable_visualize": false
+        }
+    ]
+}

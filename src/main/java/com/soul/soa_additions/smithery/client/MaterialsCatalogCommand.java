@@ -14,9 +14,16 @@ import net.minecraftforge.fml.common.Mod;
 /**
  * Registers <code>/soa materials</code>, which opens {@link MaterialsCatalogScreen}.
  *
- * <p>Client-side so opening the screen needs no packet round-trip. It is also listed in
- * {@code AntiCheatHandler.SAFE_SOA_SUBPATHS} — the anti-cheat treats any OP-run command as a cheat
- * unless whitelisted, and this one is a read-only reference UI that grants nothing.</p>
+ * <p>Client-side so opening the screen needs no packet round-trip. Forge tries the client
+ * dispatcher first, so this is the path that normally runs. A client-only command is invisible
+ * to the command tree the server sends, though, which costs tab-completion and leaves nothing
+ * to fall back on if the client dispatcher misses it — so
+ * {@code MaterialsCatalogServerCommand} registers the same path server-side and opens the screen
+ * over {@code MaterialsCatalogOpenPacket}. Keep the two in sync.</p>
+ *
+ * <p>Ungated, and listed in {@code AntiCheatHandler.SAFE_SOA_SUBPATHS} — the anti-cheat treats
+ * any OP-run command as a cheat unless whitelisted, and this one is a read-only reference UI
+ * that grants nothing.</p>
  */
 @Mod.EventBusSubscriber(modid = SoaAdditions.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public final class MaterialsCatalogCommand {

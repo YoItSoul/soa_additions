@@ -1,0 +1,38 @@
+{
+    "name": "Petrified Root",
+    "icon": "forbidden_arcanus:petrified_root",
+    "category": "soa_additions:resources_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Underground you can find Petrified Roots which drop Sticks and rarely a Strange Root. "
+        },
+        {
+            "type": "patchouli:multiblock",
+            "multiblock": {
+                "pattern": [
+                    [
+                        "R"
+                    ],
+                    [
+                        "0"
+                    ],
+                    [
+                        "R"
+                    ]
+                ],
+                "mapping": {
+                    "0": "forbidden_arcanus:petrified_root",
+                    "R": "forbidden_arcanus:petrified_root"
+                },
+                "symmetrical": true
+            },
+            "enable_visualize": false
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:strange_root",
+            "text": "Can be used in place of Nether Wart in the Brewing Stand."
+        }
+    ]
+}

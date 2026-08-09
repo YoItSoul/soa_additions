@@ -1,0 +1,11 @@
+{
+  "name": "Forbidden and Arcanus",
+  "landing_text": "Unofficial Forbidden and Arcanus Guide Book - Written by Atticool",
+  "version": 1,
+  "creative_tab": "soa_additions:soa_additions_tab",
+  "model": "patchouli:book_purple",
+  "book_texture": "patchouli:textures/gui/book_purple.png",
+  "i18n": false,
+  "use_resource_pack": true,
+  "show_progress": false
+}

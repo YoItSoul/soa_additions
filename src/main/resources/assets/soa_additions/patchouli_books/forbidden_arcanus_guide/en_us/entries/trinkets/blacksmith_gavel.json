@@ -1,0 +1,48 @@
+{
+    "name": "Blacksmith Gavels",
+    "icon": "forbidden_arcanus:reinforced_deorum_blacksmith_gavel",
+    "category": "soa_additions:trinkets_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Blacksmith Gavels are a useful tool. They can be used as pickaxes with a 30% chance of doubling the ore that they mine. Additionally, they can be used to start Rituals in the $(l:patchouli:forging/hephaestus_forge)Hephaestus Forge$()."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:wooden_blacksmith_gavel",
+            "text": "Wooden Blacksmith Gavel. $(br)Wooden mining speed and durability, and has only 1 ritual use."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:stone_blacksmith_gavel",
+            "text": "Wooden Blacksmith Gavel. $(br)Stone mining speed and durability, and has 3 ritual uses."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:golden_blacksmith_gavel",
+            "text": "Wooden Blacksmith Gavel. $(br)Golden mining speed and durability, and has 2 ritual uses."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:iron_blacksmith_gavel",
+            "text": "Wooden Blacksmith Gavel. $(br)Iron mining speed and durability, and has 10 ritual uses."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:diamond_blacksmith_gavel",
+            "text": "Wooden Blacksmith Gavel. $(br)Diamond mining speed and durability, and has 30 ritual uses."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:netherite_blacksmith_gavel",
+            "title": "Netherite B. Gavel",
+            "text": "Wooden Blacksmith Gavel. $(br)Netherite mining speed and durability, and has 60 ritual uses."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:reinforced_deorum_blacksmith_gavel",
+            "title": "Reinf. Deorum B. Gavel",
+            "text": "Wooden Blacksmith Gavel. $(br)Netherite mining speed, better than netherite durability, diamond harvest level, and has 80 ritual uses."
+        }
+    ]
+}

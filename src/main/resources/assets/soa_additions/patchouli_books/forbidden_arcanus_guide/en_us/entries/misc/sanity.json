@@ -1,0 +1,25 @@
+{
+    "name": "Sanity",
+    "icon": "forbidden_arcanus:sanity_meter",
+    "category": "soa_additions:misc_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "As you kill mobs, you will occasionally gain 'Corruption'. If too much of this corruption builds up, you will recieve negative effects. Corruption will decrease over time automatically. These effects include randomly getting bad potion effects, sounds getting played nearby, and the weather changing."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:sanity_meter",
+            "text": "Right click to view your Corruption and Aureal."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:wet_purifying_soap",
+            "text": "Right click to decrease your sanity. Obtained by throwing Purifying Soap in water."
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "forbidden_arcanus:purifying_soap"
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "name": "Magical Farmland",
+    "icon": "forbidden_arcanus:magical_farmland",
+    "category": "soa_additions:misc_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Right clicking on farmland with Arcane Bone Meal will turn it into Magical Farmland. Most crops will have double drops when harvested and Golden Orchids can only grow on this farmland."
+        },
+        {
+            "type": "patchouli:multiblock",
+            "multiblock": {
+                "pattern": [
+                    [
+                        "0"
+                    ]
+                ],
+                "mapping": {
+                    "0": "forbidden_arcanus:magical_farmland"
+                },
+                "symmetrical": true
+            },
+            "enable_visualize": false
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:arcane_bone_meal",
+            "title": "Arcane Bone Meal",
+            "anchor": "arcane_bone_meal",
+            "text": "Right click on farmland using this."
+        }
+    ]
+}

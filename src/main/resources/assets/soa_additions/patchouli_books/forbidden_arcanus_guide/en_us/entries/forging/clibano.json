@@ -1,0 +1,52 @@
+{
+    "name": "Clibano",
+    "icon": "forbidden_arcanus:clibano_core",
+    "category": "soa_additions:forging_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "The Clibano acts as a fast furnace which can smelt 2 items at once. The Clibano can only process certain recipes, usually Ores and Raw Ores, but it can process other recipes as well. The Clibano consumes Furnace Fuel to run, and can be boosted using $(l:resources/souls)Souls$()."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "When using the Clibano, you'll notice that it occasionally produces 'Residue'. After a certain amount of this builds up, it will produce an item. Usually this will produce a Block of the material when it reaches 9, such as with Netherite or Copper.$(br)$(br)The Clibano can also be automated through the ports in the sides. The top port is smelting input, the sides are fuel input and the bottom is smelting output."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:clibano_core",
+            "text": "The core of the multiblock. Only 1 is required"
+        },
+        {
+            "type": "patchouli:multiblock",
+            "multiblock": {
+                "pattern": [
+                    [
+                        "PBP",
+                        "BBB",
+                        "PBP"
+                    ],
+                    [
+                        "BBB",
+                        "B0B",
+                        "BCB"
+                    ],
+                    [
+                        "PBP",
+                        "BBB",
+                        "PBP"
+                    ]
+                ],
+                "mapping": {
+                    "P": "forbidden_arcanus:polished_darkstone",
+                    "B": "forbidden_arcanus:polished_darkstone_bricks",
+                    "C": "forbidden_arcanus:clibano_core"
+                },
+                "symmetrical": true
+            }
+        },
+        {
+            "type": "patchouli:text",
+            "text": "To form the multiblock use a $(l:resources/mundabitur)Mundabitur Dust$() on the Clibano Core"
+        }
+    ]
+}

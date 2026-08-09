@@ -1,0 +1,42 @@
+{
+    "name": "Item Modifiers",
+    "icon": "forbidden_arcanus:eternal_stella",
+    "category": "soa_additions:forging_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "What you're most likely using the mod for. Item Modifiers will give tools and armour special abilities when applied in a Smithing Table. You can't combine multiple modifiers on a single item, you just have to pick one."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:eternal_stella",
+            "text": "Makes the tool or armour unbreakable. Can also be right clicked to repair all items in your inventory. Requires a Tier 3 Forge and a $(l:resources/stellarite)Stellarite Piece$()"
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:ferrognetic_mixture",
+            "anchor": "ferrognetic_mixture",
+            "text": "Increases Item Pickup radius. Can also be used to upgrade Darkstone Pedestals."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:smelter_prism",
+            "text": "Automatically smelts mined blocks. This works on top of Fortune. Requires an $(l:forging/enhancer_relics#elementarium)Elementarium$() enhancer relic."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:terrastomp_prism",
+            "text": "Makes a tool mine a 3x3 area. Requires an $(l:forging/enhancer_relics#elementarium)Elementarium$() enhancer relic."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:sea_prism",
+            "text": "Gives slight regeneration when underwater. Requires an $(l:forging/enhancer_relics#elementarium)Elementarium$() enhancer relic."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:whirlwind_prism",
+            "text": "Doesn't currently have a use. Requires an $(l:forging/enhancer_relics#elementarium)Elementarium$() enhancer relic."
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "name": "Nipa",
+    "icon": "forbidden_arcanus:nipa",
+    "category": "soa_additions:resources_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Occasionally you'll find a small structure, either floating in the sky or on the ground which has a strange plant in the centre. This plant, Nipa, will produce Arcane Crystal Dust Specks over time, which can be crafted into $(l:resources/arcane_crystal#arcane_crystal_dust)Arcane Crystal Dust$(). "
+        },
+        {
+            "type": "patchouli:multiblock",
+            "multiblock": {
+                "pattern": [
+                    [
+                        "0"
+                    ],
+                    [
+                        "N"
+                    ]
+                ],
+                "mapping": {
+                    "N": "forbidden_arcanus:nipa"
+                },
+                "symmetrical": true
+            },
+            "enable_visualize": false
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:arcane_crystal_dust_speck",
+            "title": "Crystal Dust Speck"
+        }
+    ]
+}

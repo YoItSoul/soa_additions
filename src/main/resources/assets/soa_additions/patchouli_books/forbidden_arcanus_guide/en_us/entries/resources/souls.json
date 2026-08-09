@@ -1,0 +1,37 @@
+{
+    "name": "Souls",
+    "icon": "forbidden_arcanus:soul",
+    "category": "soa_additions:resources_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Souls are used in both the $(l:forging/hephaestus_forge)Hephaestus Forge$() and the $(l:forging/clibano)Clibano$(). Souls and Corrupt Souls have a value of 1 and Enchanted Souls have a value of 10 in the Hephaestus Forge, and Souls, Corrupt Souls and Enchanted Souls make the Clibano faster and produce more residue, where Enchanted Souls are the fastest. "
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:soul_extractor",
+            "text": "Hold Right Click on Soul Sand to steal its soul, or on Lost Souls throughout the world. All Lost Souls can only take damage from the Soul Extractor"
+        },
+        {
+            "type": "patchouli:entity",
+            "entity": "forbidden_arcanus:lost_soul"
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:soul",
+            "text": "Harvested from Soul Sand or found naturally spawning around the world."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:corrupt_soul",
+            "anchor": "corrupt_soul",
+            "text": "Occasionally killing a mob will spawn a blue Lost Soul which will run away from you. Use the Soul Extractor on it to obtain a Corrupt Soul."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "anchor": "enchanted_soul",
+            "item": "forbidden_arcanus:enchanted_soul",
+            "text": "Found very rarely around the world, but can also be obtained by throwing a Splash Aureal Bottle onto a Lost Soul"
+        }
+    ]
+}

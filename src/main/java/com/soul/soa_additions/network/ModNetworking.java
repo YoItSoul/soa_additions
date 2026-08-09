@@ -130,5 +130,12 @@ public final class ModNetworking {
                 .decoder(CheatDetectedPacket::decode)
                 .consumerMainThread(CheatDetectedPacket::handle)
                 .add();
+
+        CHANNEL.messageBuilder(com.soul.soa_additions.smithery.MaterialsCatalogOpenPacket.class, id++,
+                        NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(com.soul.soa_additions.smithery.MaterialsCatalogOpenPacket::encode)
+                .decoder(com.soul.soa_additions.smithery.MaterialsCatalogOpenPacket::decode)
+                .consumerMainThread(com.soul.soa_additions.smithery.MaterialsCatalogOpenPacket::handle)
+                .add();
     }
 }

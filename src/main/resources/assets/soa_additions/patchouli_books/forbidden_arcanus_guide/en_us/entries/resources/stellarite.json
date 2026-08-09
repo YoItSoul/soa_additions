@@ -1,0 +1,30 @@
+{
+    "name": "Stellarite",
+    "icon": "forbidden_arcanus:stellarite_piece",
+    "category": "soa_additions:resources_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Stellarite can be obtained by mining Stella Arcanum. Stella Arcanum can be found rarely and explodes when mined, but drops 1 Stellarite Piece. This is not affected by fortune, but the block itself can be obtained safely using Silk Touch."
+        },
+        {
+            "type": "patchouli:multiblock",
+            "multiblock": {
+                "pattern": [
+                    [
+                        "0"
+                    ]
+                ],
+                "mapping": {
+                    "0": "forbidden_arcanus:stella_arcanum"
+                },
+                "symmetrical": true
+            },
+            "enable_visualize": false
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:stellarite_piece"
+        }
+    ]
+}

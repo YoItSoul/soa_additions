@@ -1,0 +1,15 @@
+{
+    "name": "Slimec Pickaxe",
+    "icon": "forbidden_arcanus:slimec_pickaxe",
+    "category": "soa_additions:trinkets_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "The Slimec Pickaxe acts as if it has Silk Touch. It can mine faster than a Gold Pickaxe, has more durability than a Netherite Pickaxe, and has the harvest level of a Diamond Pickaxe."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:slimec_pickaxe"
+        }
+    ]
+}

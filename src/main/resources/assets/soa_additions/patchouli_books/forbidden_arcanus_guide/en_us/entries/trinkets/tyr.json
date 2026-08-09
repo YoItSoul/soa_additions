@@ -1,0 +1,26 @@
+{
+    "name": "Tyr Armor",
+    "icon": "forbidden_arcanus:tyr_chestplate",
+    "category": "soa_additions:trinkets_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Tyr Armour is stronger than $(l:trinkets/draco_arcanus)Draco Arcanus$() Armour, but is more expensive as well."
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "forbidden_arcanus:aquatic_dragon_scale",
+            "recipe2": "forbidden_arcanus:golden_dragon_scale"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "forbidden_arcanus:tyr_helmet",
+            "recipe2": "forbidden_arcanus:tyr_chestplate"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "forbidden_arcanus:tyr_leggings",
+            "recipe2": "forbidden_arcanus:tyr_boots"
+        }
+    ]
+}

@@ -22,6 +22,7 @@ import com.soul.soa_additions.quest.team.TeamData;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -59,6 +60,17 @@ public final class QuestLifecycleHandler {
     private static FileQuestOverrideStorage storage;
 
     public static FileQuestOverrideStorage storage() { return storage; }
+
+    /**
+     * Minecraft builds recipes during world creation, before the new world's
+     * PackModeData exists — so KubeJS can bake them for the previous world's
+     * pack mode. Once the server is up the real mode is known, so reconcile.
+     * No-op when they already agree, which is the normal case.
+     */
+    @SubscribeEvent
+    public static void onServerStarted(ServerStartedEvent event) {
+        PackModeBridge.reconcileAfterStart(event.getServer());
+    }
 
     @SubscribeEvent
     public static void onServerStarting(ServerStartingEvent event) {

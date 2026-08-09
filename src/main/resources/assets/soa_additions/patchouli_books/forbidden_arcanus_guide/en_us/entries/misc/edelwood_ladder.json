@@ -1,0 +1,15 @@
+{
+    "name": "Edelwood Ladder",
+    "icon": "forbidden_arcanus:edelwood_ladder",
+    "category": "soa_additions:misc_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Can be climbed faster than a regular ladder."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:edelwood_ladder"
+        }
+    ]
+}

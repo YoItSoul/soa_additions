@@ -1,0 +1,16 @@
+{
+    "name": "Blood",
+    "icon": "forbidden_arcanus:blood_test_tube{Blood: 3000}",
+    "category": "soa_additions:resources_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Blood is a resource used in the Hephaestus Forge. It can only be collected by dealing damage to mobs with a $(l:trinkets/mystical_dagger)Mystical Dagger$(), and having Test Tubes in your inventory."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:test_tube",
+            "text": "Crafted from a Rune and a Glass Bottle. Will be filled up one by one when in your inventory"
+        }
+    ]
+}

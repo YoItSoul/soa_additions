@@ -1,0 +1,15 @@
+{
+    "name": "Spawner Scrap",
+    "icon": "forbidden_arcanus:spawner_scrap",
+    "category": "soa_additions:resources_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Spawner Scrap can be obtained by breaking Spawners. "
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:spawner_scrap"
+        }
+    ]
+}

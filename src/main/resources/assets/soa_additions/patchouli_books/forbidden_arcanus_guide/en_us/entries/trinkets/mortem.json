@@ -1,0 +1,21 @@
+{
+    "name": "Mortem Armor",
+    "icon": "forbidden_arcanus:mortem_chestplate",
+    "category": "soa_additions:trinkets_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Mortem armor is a cheap armor set which looks cool. It's not very strong."
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "forbidden_arcanus:mortem_helmet",
+            "recipe2": "forbidden_arcanus:mortem_chestplate"
+        },
+        {
+            "type": "patchouli:crafting",
+            "recipe": "forbidden_arcanus:mortem_leggings",
+            "recipe2": "forbidden_arcanus:mortem_boots"
+        }
+    ]
+}

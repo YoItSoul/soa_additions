@@ -1,0 +1,22 @@
+{
+    "name": "Aureal",
+    "icon": "forbidden_arcanus:aureal_bottle",
+    "category": "soa_additions:resources_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Aureal is a Hephaestus Forge resource. You can obtain this by adding Aureal Bottles and Splash Aureal Bottles to the forge GUI. Aureal Bottles can be found in chests, and can also be crafted from Regeneration Potions and $(l:resources/arcane_crystal#arcane_crystal_dust)Arcane Crystal Dust$(). Aureal can also be generated automatically constructing $(l:forging/hephaestus_forge#arcane_crystal_obelisk)Arcane Crystal Obelisks$() around the Hephaestus Forge."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:aureal_bottle",
+            "text": "Can be added to the Hephaestus Forge for 35 Aureal"
+        },
+        {
+            "type": "patchouli:spotlight",
+            "anchor": "splash_aureal_bottle",
+            "item": "forbidden_arcanus:splash_aureal_bottle",
+            "text": "Can be added to the Hephaestus Forge for 30 Aureal, but can convert Lost Souls into $(l:resources/souls#enchanted_soul)Enchanted Souls$()"
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "name": "Darkstone",
+    "icon": "forbidden_arcanus:darkstone",
+    "category": "soa_additions:resources_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Darkstone can be found near bedrock. Rarely you can find Gilded Darkstone, which can be mined with Silk Touch and smelted to get Deorum Nuggets."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:darkstone"
+        }
+    ]
+}

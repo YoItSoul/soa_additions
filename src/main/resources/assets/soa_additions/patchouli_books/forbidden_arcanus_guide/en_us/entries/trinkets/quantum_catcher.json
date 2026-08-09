@@ -1,0 +1,15 @@
+{
+    "name": "Quantum Catcher",
+    "icon": "forbidden_arcanus:quantum_catcher",
+    "category": "soa_additions:trinkets_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "The Quantum Catcher can be used to move mobs around. Right click on a mob to pick them up and store them, and Right click on the ground to spawn them again."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:quantum_catcher"
+        }
+    ]
+}

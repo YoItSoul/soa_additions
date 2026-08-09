@@ -1,0 +1,15 @@
+{
+    "name": "Edelwood Bucket",
+    "icon": "forbidden_arcanus:edelwood_bucket",
+    "category": "soa_additions:misc_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Made from Edelwood, this bucket can store multiple buckets of water, milk, lava and snow, as well as some stews. To handle lava, it needs to be enchanted with Permafrost"
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:edelwood_bucket"
+        }
+    ]
+}

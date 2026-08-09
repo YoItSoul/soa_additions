@@ -1,0 +1,15 @@
+{
+    "name": "Utrem Jar",
+    "icon": "forbidden_arcanus:utrem_jar",
+    "category": "soa_additions:misc_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "A block which can store a bucket of liquid, for display or for storage"
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:utrem_jar"
+        }
+    ]
+}

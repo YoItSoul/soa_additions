@@ -1,0 +1,35 @@
+{
+    "name": "Enhancer Relics",
+    "icon": "forbidden_arcanus:elementarium",
+    "category": "soa_additions:forging_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Enhancer Relics can be put into the Hephaestus Forge to unlock new recipes or add bonuses. Several of these are unimplemented and have no use."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:elementarium",
+            "anchor": "elementarium",
+            "text": "Can be found in Desert Pyramids, Jungle Temples, and Underwater Ruins. Allows you to craft Elemental Prisms."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:artisan_relic",
+            "anchor": "artisan_relic",
+            "text": "Reduces experience usage. Can be found in Villager houses, namely the Armorer, Toolsmith and Weaponsmith."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:crimson_stone",
+            "anchor": "crimson_stone",
+            "text": "Reduces Soul Usage. Can be found in Pillager Outposts."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:maledictus_pact",
+            "anchor": "crimson_stone",
+            "text": "Unlocks new recipes, but unused by default. Can be found in Bastion Treasure Rooms."
+        }
+    ]
+}

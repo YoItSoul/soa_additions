@@ -1,0 +1,25 @@
+{
+    "name": "Obsidian Skull",
+    "icon": "forbidden_arcanus:obsidian_skull",
+    "category": "soa_additions:trinkets_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "When in your inventory, will stop you from recieving fire damage for up to 30 seconds. Your armour will still take damage."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:obsidian_skull"
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:eternal_obsidian_skull",
+            "text": "An upgraded version of the obsidian skull, works infinitely."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:obsidian_skull_shield",
+            "text": "A shield version of the Obsidian Skull."
+        }
+    ]
+}

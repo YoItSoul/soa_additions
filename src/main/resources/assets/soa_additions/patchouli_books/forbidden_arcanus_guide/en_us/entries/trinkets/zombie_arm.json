@@ -1,0 +1,21 @@
+{
+    "name": "Zombie Arm",
+    "icon": "forbidden_arcanus:zombie_arm",
+    "category": "soa_additions:trinkets_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "A mediocre weapon which rarely drops from Zombies"
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:zombie_arm",
+            "text": "Drops from Zombies"
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:shiny_zombie_arm",
+            "text": "Drops from Drowned"
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "name": "Corrupti Dust",
+    "icon": "forbidden_arcanus:corrupti_dust",
+    "category": "soa_additions:resources_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Used in crafting."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "forbidden_arcanus:corrupti_dust"
+        }
+    ]
+}

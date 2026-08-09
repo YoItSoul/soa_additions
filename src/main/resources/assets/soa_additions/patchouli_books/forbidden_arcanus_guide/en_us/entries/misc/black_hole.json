@@ -1,0 +1,26 @@
+{
+    "name": "Black Hole",
+    "icon": "forbidden_arcanus:dark_matter",
+    "category": "soa_additions:misc_category",
+    "pages": [
+        {
+            "type": "patchouli:text",
+            "text": "Throwing a piece of $(l:resources/edelwood#dark_matter)Dark Matter$() and $(l:resources/corrupti_dust)Corrupti Dust$() on the ground will create a Black Hole, which will vacuum nearby experience orbs and items. Items will be voided, but experience orbs will be collected and output in the form of $(l:resources/experience#xpetrified_orb)Xpetrified Orbs$()."
+        },
+        {
+            "type": "patchouli:multiblock",
+            "multiblock": {
+                "pattern": [
+                    [
+                        "0"
+                    ]
+                ],
+                "mapping": {
+                    "0": "forbidden_arcanus:black_hole"
+                },
+                "symmetrical": true
+            },
+            "enable_visualize": false
+        }
+    ]
+}
