@@ -832,10 +832,10 @@ public final class SoaSmitheryMelting {
 
         recipe("soa_additions:topaz",                       "soa_additions:topaz", INGOT_MB);
 
-        recipe("defiledlands:umbrium_ingot",                "soa_additions:umbrium", INGOT_MB);
-        recipe("defiledlands:umbrium_block",                "soa_additions:umbrium", BLOCK_MB);
-        recipe("defiledlands:umbrium_nugget",               "soa_additions:umbrium", NUGGET_MB);
-        recipe("defiledlands:umbrium_ore",                  "soa_additions:umbrium", ORE_MB);
+        recipe("defiled_lands_preborn:umbrium_ingot",                "soa_additions:umbrium", INGOT_MB);
+        recipe("defiled_lands_preborn:umbrium_block",                "soa_additions:umbrium", BLOCK_MB);
+        recipe("defiled_lands_preborn:umbrium_nugget",               "soa_additions:umbrium", NUGGET_MB);
+        recipe("defiled_lands_preborn:umbrium_ore",                  "soa_additions:umbrium", ORE_MB);
 
         recipe("enderio:vibrant_crystal",                   "soa_additions:vibrant_crystal", INGOT_MB);
 
