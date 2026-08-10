@@ -6,38 +6,13 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Reviving",
-      "text": "Self-repairs 1 durability every 30 seconds while worn$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Niob"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Rudeawakening",
-      "text": "Deals bonus damage to sleeping targets$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Awakened (PlusTiC)"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Sacrificial",
-      "text": "§oThe final battle!§r\\n§fEvery critical attack reduces your health to deal very high amount of damage. The increased damage and health consumption depends on your max health.$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Remorseful Gem, Scarlite, Terrax"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Second Life",
-      "text": "5% chance to negate a lethal hit and grant Absorption, Regen and Resistance$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Chromasteel, Cytosinite, Gaiasteel, Primal Metal, Remorseful Gem, Terra Alloy, Terrestrial Gem"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Sharp",
-      "text": "Adds bonus attack damage on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Refined Glowstone, Steel"
-    },
-    {
-      "type": "patchouli:text",
       "title": "Shielding",
       "text": "Reduces magic-type damage by 10%$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Adaminite, Dark Steel, Durasteel, Elementium, End Steel, Coalescence Matrix, Mithminite, Mithril and 6 more"
     },
     {
       "type": "patchouli:text",
       "title": "Shocking",
-      "text": "Inflicts Slowness and Weakness for 2s on hit$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Amber, Cryonium, Electrum, Ender Biotite, Fluix, Redstone Alloy"
+      "text": "Inflicts Slowness and Weakness for 2s on hit$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Amber, Cryonium, Electrical Steel, Electrum, Ender Biotite, Fluix, Redstone Alloy"
     },
     {
       "type": "patchouli:text",
@@ -53,6 +28,31 @@
       "type": "patchouli:text",
       "title": "Slashing",
       "text": "Adds +1.5 bonus attack damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Mica"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Slimey",
+      "text": "10% chance to drop a slime ball when breaking blocks$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Blue Slime, Pink Slime"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Softy",
+      "text": "Increases mining speed by 30%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Basalt, Mud, Poop"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Soul Stained",
+      "text": "Slain foes have their souls shattered, dropping arcane spirits as if felled by a scythe.$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Sunnarium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Souleater",
+      "text": "Builds up bonus damage from kills based on victim max health$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Sunnarium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Spartan",
+      "text": "Below 33% HP deals up to 2.5x damage; as armor reduces up to 75% incoming damage$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Alubrass, Cincinnasite, Stellar Alloy, Terrax"
     }
   ]
 }

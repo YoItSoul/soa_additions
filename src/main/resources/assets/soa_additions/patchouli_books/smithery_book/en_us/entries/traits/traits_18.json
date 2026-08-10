@@ -6,36 +6,6 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Precipitate",
-      "text": "Adds 3 bonus mining speed$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Nagascale"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Prickly",
-      "text": "Deals 2 thorns damage to melee attackers$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Cactus"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Prideful",
-      "text": "Reduces incoming damage by 15% while at full health$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Asgardium, Crystal Matrix, Platinum, Starmetal"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Prosperous",
-      "text": "Doubles XP dropped from broken blocks$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Insanium, Ma.base Essence, Inferium, Intermedium, Prudentium, Superium, Supremium"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Pulverizing",
-      "text": "Mining speed ramps up as durability drops; 60% chance to destroy drops$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Meteorite, Ravaging"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Purifying",
-      "text": "Continuously removes the Wither effect while worn$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Cheese, Ender Biotite, Fluix, Tofudiamond"
-    },
-    {
-      "type": "patchouli:text",
       "title": "Raging",
       "text": "Deals 1.25x damage on normal hits but 0.75x on critical hits$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Cincinnasite, Ruby, High-Powered Tofu Gem"
     },
@@ -53,6 +23,36 @@
       "type": "patchouli:text",
       "title": "Reliable",
       "text": "§oComes in handy!§r\\n§fWhen using this tool above 90% health reduces durability consumption to 1/4, otherwise decreases durability double as fast.$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aeonsteel, Chromasteel, Insanium, Mithril, Stainless Steel, Titanium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Resonance",
+      "text": "33% chance to knock back the target with random strength on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Sunnarium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Reviving",
+      "text": "Self-repairs 1 durability every 30 seconds while worn$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Niob"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Rudeawakening",
+      "text": "Deals bonus damage to sleeping targets$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Awakened (PlusTiC)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Sacrificial",
+      "text": "§oThe final battle!§r\\n§fEvery critical attack reduces your health to deal very high amount of damage. The increased damage and health consumption depends on your max health.$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Remorseful Gem, Scarlite, Terrax"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Second Life",
+      "text": "5% chance to negate a lethal hit and grant Absorption, Regen and Resistance$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Chromasteel, Cytosinite, Gaiasteel, Primal Metal, Remorseful Gem, Terra Alloy, Terrestrial Gem"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Sharp",
+      "text": "Adds bonus attack damage on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Refined Glowstone, Steel"
     }
   ]
 }

@@ -6,16 +6,6 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Vision",
-      "text": "Grants Night Vision while worn$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Asgardium, Meteor, Vibranium"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Voltaic",
-      "text": "20% chance when hit to shock nearby enemies for 3 damage$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Fluix"
-    },
-    {
-      "type": "patchouli:text",
       "title": "Warded",
       "text": "Reduces magic damage taken$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Lapis"
     },
@@ -32,7 +22,7 @@
     {
       "type": "patchouli:text",
       "title": "Whirl",
-      "text": "Removes all water blocks within 3 blocks when breaking a block$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Tritonite"
+      "text": "Removes all water blocks within 3 blocks when breaking a block$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Sunnarium, Tritonite"
     },
     {
       "type": "patchouli:text",
@@ -53,6 +43,16 @@
       "type": "patchouli:text",
       "title": "Xu Whispering",
       "text": "15% chance to inflict Weakness for 5 seconds on hit$(br2)$(l)Granted from:$() the tool's head and armor$(br)$(l)Materials:$() Xu Demonic Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Xu Withering",
+      "text": "Multiplies block drops by adding up to 1 extra per drop$(br2)$(l)Granted from:$() the tool's head and armor$(br)$(l)Materials:$() Xu Evil Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Zany",
+      "text": "Adds up to +2 mining speed scaling with missing durability$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Imperomite"
     }
   ]
 }

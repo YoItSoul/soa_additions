@@ -593,8 +593,6 @@ public final class SoaSmitheryMelting {
         // ================================================================
         // Cross-mod items — Twilight Forest
         // ================================================================
-        recipe("twilightforest:fiery_ingot",            "soa_additions:fiery", INGOT_MB);
-        recipe("twilightforest:fiery_block",            "soa_additions:fiery", BLOCK_MB);
         recipe("twilightforest:knightmetal_ingot",      "soa_additions:knightmetal", INGOT_MB);
         recipe("twilightforest:knightmetal_block",      "soa_additions:knightmetal", BLOCK_MB);
         recipe("twilightforest:steeleaf_ingot",         "soa_additions:steeleaf", INGOT_MB);
@@ -765,8 +763,6 @@ public final class SoaSmitheryMelting {
 
         recipe("aether:icestone",                           "soa_additions:icestone", INGOT_MB);
 
-        recipe("valoria:jade",                              "soa_additions:jade", INGOT_MB);
-        recipe("valoria:jade_ore",                          "soa_additions:jade", ORE_MB);
 
         recipe("botania:livingrock",                        "soa_additions:livingrock", INGOT_MB);
 
@@ -864,12 +860,8 @@ public final class SoaSmitheryMelting {
         recipe("minecraft:end_stone",                       "soa_additions:endstone", INGOT_MB);
         recipe("minecraft:magma_cream",                     "soa_additions:magmaslime", INGOT_MB);
         recipe("minecraft:sugar_cane",                      "soa_additions:reed", INGOT_MB);
-        recipe("mca:rose_gold_ingot",                       "soa_additions:rosegold", INGOT_MB);
-        recipe("mca:rose_gold_block",                       "soa_additions:rosegold", BLOCK_MB);
-        recipe("mca:rose_gold_dust",                        "soa_additions:rosegold", INGOT_MB);
         recipe("rftoolsbase:dimensionalshard",              "soa_additions:dimensional_shard", INGOT_MB);
         recipe("soa_additions:terrestrial_artifact",        "soa_additions:terrestrial", INGOT_MB);
-        recipe("soa_additions:wither_bone",                 "soa_additions:witherbone", INGOT_MB);
         recipe("soa_additions:stellar_alloy_ingot",         "soa_additions:stellar_alloy_gc", INGOT_MB);
         // malachite_gem: SOA already ships the gem (ModItems.MALACHITE); it was never wired.
         recipe("soa_additions:malachite",              "soa_additions:malachite_gem", INGOT_MB);
@@ -884,6 +876,14 @@ public final class SoaSmitheryMelting {
 
         // End rod is vanilla; no port needed.
         recipe("minecraft:end_rod",                    "soa_additions:endrod", INGOT_MB);
+        // Classic TC alloys: SOA ships the ingot and nugget and casts into them, but nothing
+        // melted them back, so the round-trip was one-way.
+        recipe("soa_additions:alubrass_ingot",       "soa_additions:alubrass", INGOT_MB);
+        recipe("soa_additions:alubrass_nugget",      "soa_additions:alubrass", NUGGET_MB);
+        recipe("soa_additions:manyullyn_ingot",      "soa_additions:manyullyn", INGOT_MB);
+        recipe("soa_additions:manyullyn_nugget",     "soa_additions:manyullyn", NUGGET_MB);
+        recipe("soa_additions:pigiron_ingot",        "soa_additions:pigiron", INGOT_MB);
+        recipe("soa_additions:pigiron_nugget",       "soa_additions:pigiron", NUGGET_MB);
     }
 
     private static void thermal(String name) {

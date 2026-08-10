@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    {
-      "id": "#forge:gems/gelid_crystal",
-      "required": false
-    }
-  ]
-}

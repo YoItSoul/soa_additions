@@ -7,7 +7,7 @@
     {
       "type": "patchouli:text",
       "title": "Arcane",
-      "text": "5% chance at night to repair 1-8 durability when breaking blocks or attacking$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Adaminite, Aurorium, Mithminite, Mithrillium, Violium"
+      "text": "5% chance at night to repair 1-8 durability when breaking blocks or attacking$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Adaminite, Aurorium, Mithminite, Mithrillium, Sunnarium, Violium"
     },
     {
       "type": "patchouli:text",
@@ -51,8 +51,8 @@
     },
     {
       "type": "patchouli:text",
-      "title": "Barrett",
-      "text": "Chance scaling with missing health to deal 1.5x damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Garfax"
+      "title": "Berserk",
+      "text": "Doubles bonus attack damage and mining speed$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Sunnarium"
     }
   ]
 }

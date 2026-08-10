@@ -6,21 +6,6 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Holy",
-      "text": "Adds 4 bonus damage against undead$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Energetic Alloy, Silver, Tofudiamond"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Hovering",
-      "text": "Halves fall distance and fall damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Coalescence Matrix"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Illuminati",
-      "text": "Applies Glowing for 10s to targets on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Ionite"
-    },
-    {
-      "type": "patchouli:text",
       "title": "Indomitable",
       "text": "Reduces all incoming damage by 8%$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Aeonsteel, Stainless Steel"
     },
@@ -41,11 +26,6 @@
     },
     {
       "type": "patchouli:text",
-      "title": "Jaded",
-      "text": "Hits hinder the target's healing; stacks up to 3, fully stopping it$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Jade"
-    },
-    {
-      "type": "patchouli:text",
       "title": "Jagged",
       "text": "Deals more damage the more worn it is$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Litherite"
     },
@@ -53,6 +33,26 @@
       "type": "patchouli:text",
       "title": "Jagged",
       "text": "Deals more damage the more worn it is$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Flint"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Knowledgeful",
+      "text": "Tool: +0.2% damage per XP level (up to +60%); armor: scales damage reduction with XP up to 36%$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Adaminite, Astral Metal, Knowledge, Mithminite, Mithrillium, Xu Enchanted Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Knowledgeful",
+      "text": "Damage and incoming reduction scale with your XP level (up to 300)$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Adaminite, Astral Metal, Knowledge, Mithminite, Mithrillium, Xu Enchanted Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Kungfu",
+      "text": "4% chance to fully dodge a non-armor-bypassing hit, gaining Speed IV for 5s$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Alpha Fur, Manganese, Tofudiamond, Tofumetal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Launching",
+      "text": "Launches struck enemies upward into the air$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aeroite, Gravitite"
     }
   ]
 }

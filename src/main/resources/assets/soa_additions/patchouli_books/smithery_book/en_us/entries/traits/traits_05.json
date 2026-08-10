@@ -32,7 +32,7 @@
     {
       "type": "patchouli:text",
       "title": "Crude",
-      "text": "Adds +1.5 bonus attack damage$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Conductive Iron, Litherite, Redstone Alloy, Rubber, Tin"
+      "text": "Adds +1.5 bonus attack damage$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Conductive Iron, Litherite, Lonsdaleite, Polyethylene, Redstone Alloy, Rubber, Tin"
     },
     {
       "type": "patchouli:text",
@@ -52,7 +52,7 @@
     {
       "type": "patchouli:text",
       "title": "Crystal",
-      "text": "Damage scales with tool durability; reduces incoming damage more at high armor durability$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Aquamarine, Certus Quartz, Crystal Matrix, Dimensional Shard, Fluix, Rime, Sakura Diamond, Scarlite and 3 more"
+      "text": "Damage scales with tool durability; reduces incoming damage more at high armor durability$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Aquamarine, Certus Quartz, Crystal Matrix, Dimensional Shard, Emerald Plustic, Fluix, Rime, Sakura Diamond and 4 more"
     }
   ]
 }

@@ -6,21 +6,6 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Tconevo.evolved",
-      "text": "Reduces incoming damage by 5%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Chaotic Metal, Cosmilite, Draconic Metal, Wyvern Metal"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Tconevo.evolved",
-      "text": "Adds +2 attack damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Chaotic Metal, Cosmilite, Draconic Metal, Wyvern Metal"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Tconevo.executor",
-      "text": "Up to 20% more damage per level scaling with the target's missing health$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aethium"
-    },
-    {
-      "type": "patchouli:text",
       "title": "Tconevo.fae Voice",
       "text": "10% chance to summon a Botania pixie to attack the target on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Dragonstone, Elementium"
     },
@@ -37,7 +22,7 @@
     {
       "type": "patchouli:text",
       "title": "Tconevo.foot Fleet",
-      "text": "Grants Speed for 3s on a damaging hit, scaling with level$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Ghostwood, Titanium"
+      "text": "Grants Speed for 3s on a damaging hit, scaling with level$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Ghostwood, Polyethylene, Titanium"
     },
     {
       "type": "patchouli:text",
@@ -53,6 +38,21 @@
       "type": "patchouli:text",
       "title": "Tconevo.gale Force Armor1",
       "text": "Grants +6% movement speed$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Cosmilite, Primal Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.impact Force",
+      "text": "Adds bonus damage scaling with your movement speed$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Advanced Alloy"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.infinitum",
+      "text": "Adds 10 bonus attack damage$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Cosmilite, Infinity Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.juggernaut",
+      "text": "Scales damage with your missing health (currently inactive)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Gelid Enderium"
     }
   ]
 }

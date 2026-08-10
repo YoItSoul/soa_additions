@@ -6,26 +6,6 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Matter Trait12",
-      "text": "Grants EMC equal to 25% of damage dealt to hostile mobs (ProjectE stub)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Protonium"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Melting",
-      "text": "2.5% chance to turn mined stone, cobble, netherrack, or obsidian into lava$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Ignitz"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Milky",
-      "text": "§oI have a strong immune system!§r\\n§fOccasionally clears all potion effects (even the good ones)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Cheese"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Milky",
-      "text": "Clears all status effects every 18000 ticks$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Cheese"
-    },
-    {
-      "type": "patchouli:text",
       "title": "Mirabile",
       "text": "Increases durability by 15%$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Mirion"
     },
@@ -41,11 +21,6 @@
     },
     {
       "type": "patchouli:text",
-      "title": "Morganlefay",
-      "text": "Adds +0.5 to +4 random bonus damage on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Morganine"
-    },
-    {
-      "type": "patchouli:text",
       "title": "Motion",
       "text": "§oNewton's second law!§r\\n§fGreatly increases damage and knockback when sprinting, but you also become more vulnerable!$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Dimensional Shard, Draconium, Electronium, Nickel, Vibrant Alloy"
     },
@@ -53,6 +28,31 @@
       "type": "patchouli:text",
       "title": "Motion",
       "text": "Deals 1.33x damage while sprinting; as armor reduces incoming damage 7% while sprinting$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Dimensional Shard, Draconium, Electronium, Nickel, Vibrant Alloy"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Mundane Armor1",
+      "text": "Reduces incoming damage by 15% when the attacker is unarmed$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Alpha Fur, Dark Steel, End Steel"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Musicofthespheres",
+      "text": "Plays a random note-block sound on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aethium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Mutate",
+      "text": "Broken natural blocks sometimes mutate into something else instead of dropping.$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Nucleum"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Naphtha",
+      "text": "Sets the target on fire for 5s on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Flame String (PlusTiC), Infernium, Nylon Cloth"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Naturebound",
+      "text": "Slowly repairs armor over grass, leaves, or moss, but decays on other ground$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Sunnarium, Yrdeen"
     }
   ]
 }

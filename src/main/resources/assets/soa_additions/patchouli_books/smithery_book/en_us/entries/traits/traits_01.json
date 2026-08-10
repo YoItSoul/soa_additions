@@ -22,7 +22,7 @@
     {
       "type": "patchouli:text",
       "title": "Analysing",
-      "text": "10% chance to void drops on break or kill, and randomizes XP amounts$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Duranite"
+      "text": "10% chance to void drops on break or kill, and randomizes XP amounts$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Duranite, Sunnarium"
     },
     {
       "type": "patchouli:text",
@@ -37,12 +37,12 @@
     {
       "type": "patchouli:text",
       "title": "Apocalypse",
-      "text": "25% chance to inflict Wither for 5s on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Adamant, Awakened (PlusTiC), Remorseful Gem, Thorium, Witherbone"
+      "text": "25% chance to inflict Wither for 5s on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Adamant, Awakened (PlusTiC), Remorseful Gem"
     },
     {
       "type": "patchouli:text",
       "title": "Aquadynamic",
-      "text": "Swim faster while worn$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aqualite, Aquamarine, Guardianscale, Sapphire"
+      "text": "Swim faster while worn$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aqualite, Aquamarine, Sapphire"
     },
     {
       "type": "patchouli:text",

@@ -8,6 +8,7 @@
     "thinair.AirQualityCacheMixin",
     "solarflux.AvaritiaCompatRecipesMixin",
     "cyclic.TileFisherMixin",
+    "defiledlands.BlastemChunkStallMixin",
     "itemstages.RestrictionDefaultsMixin",
     "itemstages.RestrictionManagerAccessor",
     "itemstages.RestrictionManagerReloadMixin"

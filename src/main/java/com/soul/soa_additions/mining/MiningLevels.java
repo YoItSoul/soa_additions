@@ -36,8 +36,12 @@ import net.minecraftforge.fml.ModList;
  */
 public final class MiningLevels {
 
-    /** Returned by {@link #harvestLevelOf} when a stack carries no mining level. */
-    public static final int NONE = Integer.MIN_VALUE;
+    /**
+     * Returned by {@link #harvestLevelOf} when a stack carries no mining level. Aliased to
+     * {@link com.soul.soa_additions.smithery.tool.SmitheryTools#NO_LEVEL} rather than restated,
+     * so the two sentinels can never drift apart — results flow between the two classes freely.
+     */
+    public static final int NONE = com.soul.soa_additions.smithery.tool.SmitheryTools.NO_LEVEL;
 
     private static final int[] ROMAN_VALUES = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
     private static final String[] ROMAN_SYMBOLS = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};

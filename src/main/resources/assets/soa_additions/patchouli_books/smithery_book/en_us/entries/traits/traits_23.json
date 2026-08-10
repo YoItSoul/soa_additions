@@ -6,21 +6,6 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Tconevo.battle Furor",
-      "text": "Builds up Strength on hit, stacking up to a per-level cap$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Kyronite"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Tconevo.blasting",
-      "text": "8% chance per level to trigger an explosion on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Meteor"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Tconevo.bloodbound",
-      "text": "Reduces incoming damage by 5%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Blood Infused Iron, Bound, Crimsonite"
-    },
-    {
-      "type": "patchouli:text",
       "title": "Tconevo.bloodbound",
       "text": "Adds +1.5 attack damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Bound, Crimsonite"
     },
@@ -53,6 +38,21 @@
       "type": "patchouli:text",
       "title": "Tconevo.corrupting",
       "text": "Stacks escalating Wither on hit, up to a per-level cap$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aethium, Primal Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.crystalline",
+      "text": "Deals bonus damage on hit scaling with tool durability (up to 20% of hit damage)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Diamantine, Emeraldic, Enori, Mana Diamond, Palis, Restonia, Void"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.crystalys",
+      "text": "Adds up to +50% damage per level, scaling with remaining durability$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Bound, Crimsonite"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.culling",
+      "text": "Deals double damage to baby mobs (scales with level)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Primal Metal"
     }
   ]
 }

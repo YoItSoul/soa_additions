@@ -50,6 +50,9 @@ public final class ModCreativeTabs {
                         output.accept(ModBlocks.ETHER_ORE_BLOCK.get());
                         output.accept(ModBlocks.INFERNIUM_ORE_BLOCK.get());
                         output.accept(ModBlocks.VOID_ORE_BLOCK.get());
+
+                        // Storage blocks
+                        output.accept(ModBlocks.INFERNIUM_BLOCK.get());
                     })
                     .build());
 
@@ -295,6 +298,114 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.TRUE_EYE_OF_ENDER.get());
                         output.accept(ModItems.TWILIGHT_GEM.get());
                         output.accept(ModItems.TWILIGHT_SHIELD.get());
+
+                        // Ported metals — ingots, nuggets, dusts
+                        output.accept(ModItems.MANYULLYN_INGOT.get());
+                        output.accept(ModItems.MANYULLYN_NUGGET.get());
+                        output.accept(ModItems.PIGIRON_INGOT.get());
+                        output.accept(ModItems.PIGIRON_NUGGET.get());
+                        output.accept(ModItems.KNIGHTSLIME_INGOT.get());
+                        output.accept(ModItems.KNIGHTSLIME_NUGGET.get());
+                        output.accept(ModItems.ALUBRASS_INGOT.get());
+                        output.accept(ModItems.ALUBRASS_NUGGET.get());
+                        output.accept(ModItems.IRIDIUM_INGOT.get());
+                        output.accept(ModItems.IRIDIUM_NUGGET.get());
+                        output.accept(ModItems.IRIDIUM_DUST.get());
+                        output.accept(ModItems.PLATINUM_INGOT.get());
+                        output.accept(ModItems.PLATINUM_NUGGET.get());
+                        output.accept(ModItems.PLATINUM_DUST.get());
+                        output.accept(ModItems.ARDITE_INGOT.get());
+                        output.accept(ModItems.ARDITE_NUGGET.get());
+                        output.accept(ModItems.EVIL_METAL_INGOT.get());
+                        output.accept(ModItems.DEMONIC_METAL_INGOT.get());
+                        output.accept(ModItems.VALKYRIE_INGOT.get());
+                        output.accept(ModItems.VALKYRIE_NUGGET.get());
+                        output.accept(ModItems.THAUMIUM_INGOT.get());
+                        output.accept(ModItems.THAUMIUM_NUGGET.get());
+                        output.accept(ModItems.VOID_METAL_INGOT.get());
+                        output.accept(ModItems.VOID_METAL_NUGGET.get());
+                        output.accept(ModItems.FLUIX_STEEL_INGOT.get());
+                        output.accept(ModItems.DREADIUM_INGOT.get());
+                        output.accept(ModItems.MELODIC_ALLOY_INGOT.get());
+                        output.accept(ModItems.STELLAR_ALLOY_INGOT.get());
+                        output.accept(ModItems.GAIA_STEEL_INGOT.get());
+                        output.accept(ModItems.PRISMARINE_INGOT.get());
+                        output.accept(ModItems.REINFORCED_INGOT.get());
+
+                        // Ported ores
+                        output.accept(ModBlocks.CINNABAR_ORE.get());
+                        output.accept(ModBlocks.AMBER_ORE.get());
+                        output.accept(ModBlocks.URU_ORE.get());
+                        output.accept(ModBlocks.AEROITE_ORE.get());
+                        output.accept(ModBlocks.AQUALITE_ORE.get());
+                        output.accept(ModBlocks.ASGARDIUM_ORE.get());
+                        output.accept(ModBlocks.CHROMIUM_ORE.get());
+                        output.accept(ModBlocks.CRYONIUM_ORE.get());
+                        output.accept(ModBlocks.CYTOSINITE_ORE.get());
+                        output.accept(ModBlocks.EXPERIENCE_ORE.get());
+                        output.accept(ModBlocks.MANGANESE_ORE.get());
+                        output.accept(ModBlocks.SHADOWIUM_ORE.get());
+                        output.accept(ModBlocks.SHADOWNIUM_ORE.get());
+                        output.accept(ModBlocks.TITANIUM_ORE.get());
+                        output.accept(ModBlocks.IRIDIUM_ORE.get());
+                        output.accept(ModBlocks.PLATINUM_ORE.get());
+                        output.accept(ModBlocks.ARDITE_ORE.get());
+
+                        // Storage blocks
+                        output.accept(ModItems.THAUMIUM_BLOCK.get());
+                        output.accept(ModItems.VOID_METAL_BLOCK.get());
+                        output.accept(ModBlocks.URU_BLOCK.get());
+                        output.accept(ModBlocks.AEONSTEEL_BLOCK.get());
+                        output.accept(ModBlocks.AQUALITE_BLOCK.get());
+                        output.accept(ModBlocks.ASTRAL_METAL_BLOCK.get());
+                        output.accept(ModBlocks.CHROMASTEEL_BLOCK.get());
+                        output.accept(ModBlocks.COSMILITE_BLOCK.get());
+                        output.accept(ModBlocks.CRIMSONITE_BLOCK.get());
+                        output.accept(ModBlocks.CRYONIUM_BLOCK.get());
+                        output.accept(ModBlocks.CYTOSINITE_BLOCK.get());
+                        output.accept(ModBlocks.DURASTEEL_BLOCK.get());
+                        output.accept(ModBlocks.ELECTRONIUM_BLOCK.get());
+                        output.accept(ModBlocks.EXPERIENCE_BLOCK_BLOCK.get());
+                        output.accept(ModBlocks.FUSION_MATRIX_BLOCK.get());
+                        output.accept(ModBlocks.MANGANESE_STEEL_BLOCK.get());
+                        output.accept(ModBlocks.MATTER_BLOCK.get());
+                        output.accept(ModBlocks.MODULARIUM_BLOCK.get());
+                        output.accept(ModBlocks.PROTONIUM_BLOCK.get());
+                        output.accept(ModBlocks.STAINLESS_STEEL_BLOCK.get());
+                        output.accept(ModBlocks.TERRA_ALLOY_BLOCK.get());
+                        output.accept(ModBlocks.TITANIUM_BLOCK.get());
+                        output.accept(ModBlocks.COMPRESSED_EXPERIENCE_BLOCK.get());
+                        output.accept(ModBlocks.INFINITY_BLOCK_BLOCK.get());
+                        output.accept(ModBlocks.INFINITY_BLOCK_BLOCK_BLOCK.get());
+                        output.accept(ModBlocks.IRIDIUM_BLOCK.get());
+                        output.accept(ModBlocks.PLATINUM_BLOCK.get());
+                        output.accept(ModBlocks.ARDITE_BLOCK.get());
+                        output.accept(ModBlocks.EVIL_METAL_BLOCK.get());
+                        output.accept(ModBlocks.DEMONIC_METAL_BLOCK.get());
+                        output.accept(ModBlocks.VALKYRIE_BLOCK.get());
+
+                        // Remaining ported items and world blocks
+                        output.accept(ModItems.QUICKSILVER.get());
+                        output.accept(ModItems.SWET_CRYSTAL.get());
+                        output.accept(ModItems.ENDER_BIOTITE.get());
+                        output.accept(ModItems.PERFECT.get());
+                        output.accept(ModItems.CRYSTAL_LEAF.get());
+                        output.accept(ModItems.SKYROOT_LEAF.get());
+                        output.accept(ModItems.RESISTANCE_MAT.get());
+                        output.accept(ModItems.CHAOTIC_ENERGY_CORE.get());
+                        output.accept(ModItems.COAGULATED_BLOOD.get());
+                        output.accept(ModItems.TABLET_OF_ENLIGHTENMENT.get());
+                        output.accept(ModItems.HONEY_DROP.get());
+                        output.accept(ModItems.RAINBOW_PETAL.get());
+                        output.accept(ModItems.TERRESTRIAL_ARTIFACT.get());
+                        output.accept(ModItems.UNSTABLE_MATRIX.get());
+                        output.accept(ModItems.RAINBOW_RUNE.get());
+                        output.accept(ModItems.ORB_OF_AVARICE.get());
+                        output.accept(ModItems.MUSIC_DISC_STENCIL.get());
+                        output.accept(ModItems.MUSIC_DISC_SUNRISE.get());
+                        output.accept(ModBlocks.OBSIDIORITE.get());
+                        output.accept(ModBlocks.HARDENED_STONE.get());
+                        output.accept(ModBlocks.TF_MACHINE_CASE.get());
                     })
                     .build());
 

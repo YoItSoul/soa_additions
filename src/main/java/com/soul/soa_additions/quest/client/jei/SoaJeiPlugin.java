@@ -65,6 +65,23 @@ public final class SoaJeiPlugin implements IModPlugin {
         }
     }
 
+    /**
+     * Teach JEI how to draw the pack's two {@code CustomRecipe} crafting recipes. Without this
+     * JEI logs "Failed to create recipe extension" for each on every load and neither shows up
+     * in the recipe list — see {@link SoaCraftingExtensions}.
+     */
+    @Override
+    public void registerVanillaCategoryExtensions(
+            mezz.jei.api.registration.IVanillaCategoryExtensionRegistration registration) {
+        var crafting = registration.getCraftingCategory();
+        crafting.addCategoryExtension(
+                com.soul.soa_additions.loot.artifact.UnsealArtifactRecipe.class,
+                SoaCraftingExtensions.Unseal::new);
+        crafting.addCategoryExtension(
+                com.soul.soa_additions.item.TabletDupeRecipe.class,
+                SoaCraftingExtensions.TabletDupe::new);
+    }
+
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(ModItems.QUEST_BOOK.get()), QuestRewardCategory.TYPE);

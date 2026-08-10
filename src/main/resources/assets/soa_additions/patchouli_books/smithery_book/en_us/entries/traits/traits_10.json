@@ -6,11 +6,6 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Fragile",
-      "text": "On block break, durability-scaled chance to randomly damage or repair the tool$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Triberium"
-    },
-    {
-      "type": "patchouli:text",
       "title": "Freezing",
       "text": "25% chance to inflict Slowness for 5 seconds on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Constantan, Cryonium, Ice, Rime, Tanzanite"
     },
@@ -36,11 +31,6 @@
     },
     {
       "type": "patchouli:text",
-      "title": "Getlucky",
-      "text": "30% chance to randomly teleport the target within 16 blocks on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Phoenixite"
-    },
-    {
-      "type": "patchouli:text",
       "title": "Giantslayer",
       "text": "Up to 2.5x bonus damage against targets with more health than you$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Draconium, Ethaxium, Insanium, Red Matter"
     },
@@ -53,6 +43,16 @@
       "type": "patchouli:text",
       "title": "Gilded",
       "text": "Ore breaks grant extra experience$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Gold"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Glimmer",
+      "text": "Grants Night Vision while worn; 5% chance for Night Vision on hit or block break$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Lumix, Sunnarium, Yellorium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Global",
+      "text": "Adds +1.5 mining speed$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Alumite, Awakened (PlusTiC), Osgloglas"
     }
   ]
 }

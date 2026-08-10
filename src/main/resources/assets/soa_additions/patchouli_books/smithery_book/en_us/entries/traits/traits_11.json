@@ -6,18 +6,8 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Glimmer",
-      "text": "Grants Night Vision while worn; 5% chance for Night Vision on hit or block break$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Lumix, Yellorium"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Global",
-      "text": "Adds +1.5 mining speed$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Alumite, Awakened (PlusTiC), Osgloglas"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Hailhydra",
-      "text": "Increases XP dropped from mined blocks by 1.5x$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Kelline"
+      "title": "Goodfridayagreement",
+      "text": "Reduces explosion damage by 30%$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Emerald Plustic"
     },
     {
       "type": "patchouli:text",
@@ -36,11 +26,6 @@
     },
     {
       "type": "patchouli:text",
-      "title": "Heavy Metal",
-      "text": "Adds +2 attack damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Tungsten"
-    },
-    {
-      "type": "patchouli:text",
       "title": "Hellish",
       "text": "Sets targets on fire for 4s on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Infernium, Netherrack"
     },
@@ -53,6 +38,21 @@
       "type": "patchouli:text",
       "title": "Hold Ground",
       "text": "Deals 1.25x damage while sneaking; takes 8% less damage while sneaking$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Aeonsteel, Cryonium, Manganese Steel, Refined Obsidian, Titanium, Zanite"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Holy",
+      "text": "Adds 4 bonus damage against undead$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Energetic Alloy, Silver, Tofudiamond"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Hovering",
+      "text": "Halves fall distance and fall damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Coalescence Matrix"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Illuminati",
+      "text": "Applies Glowing for 10s to targets on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Ionite"
     }
   ]
 }

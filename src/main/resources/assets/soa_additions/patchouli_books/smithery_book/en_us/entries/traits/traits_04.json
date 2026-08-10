@@ -27,22 +27,22 @@
     {
       "type": "patchouli:text",
       "title": "Cheap",
-      "text": "Increases durability by 20%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Seared, High-Powered Tofu Gem, Tofu Gem"
+      "text": "Increases durability by 20%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Construction Alloy, Seared, High-Powered Tofu Gem, Tofu Gem"
     },
     {
       "type": "patchouli:text",
       "title": "Cheap",
-      "text": "Increases durability by 20% but is cheaply made$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Holystone, Seared, Tofu Gem"
+      "text": "Increases durability by 20% but is cheaply made$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Holystone, Polyethylene, Seared, Tofu Gem"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cheapskate",
+      "text": "Reduces durability by 10%$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Apatite, Cincinnasite, Coal, Construction Alloy, Holystone, Seared, Sky Stone, Void"
     },
     {
       "type": "patchouli:text",
       "title": "Cheapskate",
       "text": "Reduces durability by 10%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Black Quartz, Cincinnasite, Coal, Seared, Sky Stone"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Cheapskate",
-      "text": "Reduces durability by 10%$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Apatite, Cincinnasite, Coal, Holystone, Seared, Sky Stone, Void"
     },
     {
       "type": "patchouli:text",

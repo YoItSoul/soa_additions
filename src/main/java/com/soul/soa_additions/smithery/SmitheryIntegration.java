@@ -89,6 +89,74 @@ public final class SmitheryIntegration {
         SoaSmitheryAlloys.register();
         SoaSmitheryFuels.register();
         SoaSmitheryMelting.register();
+        // Smithery allow-lists the bowstring part to five smithery: materials, and a non-empty
+        // allow-list excludes everything else - without these, a SoA string could hold the stat
+        // but never produce the part.
+        net.minecraft.resources.ResourceLocation bowstringId =
+                com.soul.smithery.content.SmitheryPartTypes.BOWSTRING.id();
+        for (String bs : new String[]{
+                "vine", "slimevine_blue", "slimevine_purple", "nylon_string", "rubber_band", "spectre_string", "mana_string", "flamestring_plustic", "soularium"}) {
+            com.soul.smithery.api.part.PartEligibility.allow(bowstringId,
+                    net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(
+                            com.soul.soa_additions.SoaAdditions.MODID, bs));
+        }
+
+        // Part-press inputs: the craftable route. These materials have no melting temperature so
+        // they never get a fluid and the forge/cast pipeline cannot reach them; in Tinkers they
+        // were part-builder-only. Without an entry the item is inert.
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("aether:blue_aercloud",                        "soa_additions:aercloud_blue");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("aether:cold_aercloud",                        "soa_additions:aercloud_cold");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("aether:golden_aercloud",                      "soa_additions:aercloud_gold");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("soa_additions:blood_infused_log",             "soa_additions:blood_infused_wood");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("soa_additions:blood_infused_planks",          "soa_additions:blood_infused_wood");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("aether:candy_cane",                           "soa_additions:candy_cane");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("refurbished_furniture:cheese",                "soa_additions:cheese");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("soa_additions:chocolate_bar",                 "soa_additions:chocolate");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("minecraft:coal",                              "soa_additions:coal");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("minecraft:coal_block",                        "soa_additions:coal");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("soa_additions:crystal_leaf",                  "soa_additions:crystal_leaf");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("taiga:dilithium_crystal",                     "soa_additions:dilithium");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("taiga:dilithium_ingot",                       "soa_additions:dilithium");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("botania:dragonstone",                         "soa_additions:dragonstone");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("botania:dragonstone_block",                   "soa_additions:dragonstone");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("botania:dreamwood",                           "soa_additions:dreamwood");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("enderio:ender_crystal",                       "soa_additions:ender_crystal");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("minecraft:end_rod",                           "soa_additions:endrod");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("minecraft:feather",                           "soa_additions:feather");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("soa_additions:ghostwood_log",                 "soa_additions:ghostwood");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("aether:golden_feather",                       "soa_additions:golden_feather");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("aether:golden_oak_leaves",                    "soa_additions:golden_oak_leaf");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("aether:holiday_leaves",                       "soa_additions:holiday_leaf");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("minecraft:ice",                               "soa_additions:ice");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("botania:livingwood",                          "soa_additions:livingwood");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("mysticalagriculture:prosperity_block",        "soa_additions:ma.prosperity");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("mysticalagriculture:prosperity_shard",        "soa_additions:ma.prosperity");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("minecraft:magma_cream",                       "soa_additions:magmaslime");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("botania:mana_diamond",                        "soa_additions:mana_diamond");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("botania:mana_diamond_block",                  "soa_additions:mana_diamond");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("botania:mana_pearl",                          "soa_additions:mana_pearl");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("botania:mana_string",                         "soa_additions:mana_string");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("soa_additions:meat_metal_ingot",              "soa_additions:meat_metal");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("minecraft:mud",                               "soa_additions:mud");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("soa_additions:nylon_cloth",                   "soa_additions:nylon_cloth");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("soa_additions:nylon_string",                  "soa_additions:nylon_string");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("taiga:osram_ingot",                           "soa_additions:osram");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("minecraft:paper",                             "soa_additions:paper");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("soa_additions:pink_slime_crystal",            "soa_additions:pink_slime");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("soa_additions:poop",                          "soa_additions:poop");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("enderio:pulsating_crystal",                   "soa_additions:pulsating_crystal");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("soa_additions:quicksilver",                   "soa_additions:quicksilver");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("twilightforest:raven_feather",                "soa_additions:raven_feather");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("minecraft:sugar_cane",                        "soa_additions:reed");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("soa_additions:rubber_band",                   "soa_additions:rubber_band");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("aether:skyroot_log",                          "soa_additions:skyroot");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("soa_additions:skyroot_leaf",                  "soa_additions:skyroot_leaf");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("soa_additions:spectre_string",                "soa_additions:spectre_string");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("minecraft:sponge",                            "soa_additions:sponge");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("soa_additions:swet_crystal",                  "soa_additions:swet");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("enderio:vibrant_crystal",                     "soa_additions:vibrant_crystal");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("minecraft:vine",                              "soa_additions:vine");
+        com.soul.smithery.api.SmitheryAPI.registerPressInput("enderio:weather_crystal",                     "soa_additions:weather_crystal");
         registerDraconicTiers();
 
         Set<String> existingFluidPaths = new HashSet<>();
@@ -198,7 +266,10 @@ public final class SmitheryIntegration {
         castIngot("osmium",            "bno",      "osmium_ingot",            "osmium_nugget");
 
         // Twilight Forest
-        castIngotOnly("fiery",       "twilightforest", "fiery_ingot");
+        // "fierymetal", not "fiery": the material was registered under the shorter id at one
+        // point and this cast kept pointing at the old one, so TF's fiery ingots had no cast
+        // result and data/forge/tags/fluids failed to resolve smithery:molten_fiery.
+        castIngotOnly("fierymetal",  "twilightforest", "fiery_ingot");
         castIngotOnly("knightmetal", "twilightforest", "knightmetal_ingot");
         castIngotOnly("steeleaf",    "twilightforest", "steeleaf_ingot");
 

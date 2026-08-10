@@ -6,11 +6,6 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Executioner",
-      "text": "§oMeet your end!§r\\n§fDirectly kills the opponent that has less than 20% (10% for bosses) of health.$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Chromasteel, Cosmilite, Orichalcos"
-    },
-    {
-      "type": "patchouli:text",
       "title": "Featherweight",
       "text": "Reduces fall distance by 50%$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Aeroite, Alubrass"
     },
@@ -32,7 +27,7 @@
     {
       "type": "patchouli:text",
       "title": "Flammable",
-      "text": "Sets targets on fire for 3 seconds on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Fierymetal, Hephaestite, Infernium, Magmaslime, Meteor, Thorium"
+      "text": "Sets targets on fire for 3 seconds on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Fierymetal, Hephaestite, Infernium, Magmaslime, Meteor"
     },
     {
       "type": "patchouli:text",
@@ -53,6 +48,11 @@
       "type": "patchouli:text",
       "title": "Fractured",
       "text": "Reduces durability by 10%$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Bone"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Fragile",
+      "text": "On block break, durability-scaled chance to randomly damage or repair the tool$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Triberium"
     }
   ]
 }

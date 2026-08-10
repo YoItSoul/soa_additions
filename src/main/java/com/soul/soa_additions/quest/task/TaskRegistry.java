@@ -71,5 +71,6 @@ public final class TaskRegistry {
         register("xp", XpTask::fromJson);
         register("emc", EmcTask::fromJson);
         register("mana", ManaTask::fromJson);
+        register("harvest_level", HarvestLevelTask::fromJson);
     }
 }

@@ -17,7 +17,7 @@
     {
       "type": "patchouli:text",
       "title": "Blindbandit",
-      "text": "Adds +3 damage when attacking in darkness (light level below 5)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Awakened (PlusTiC), Racheline"
+      "text": "Adds +3 damage when attacking in darkness (light level below 5)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Awakened (PlusTiC)"
     },
     {
       "type": "patchouli:text",

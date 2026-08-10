@@ -7,12 +7,12 @@
     {
       "type": "patchouli:text",
       "title": "Crystal Force",
-      "text": "§oKeep your tool shiny!§r\\n§fDeals higher damage when at almost full durability, but decreases damage when at low durability.$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aquamarine, Certus Quartz, Crystal Matrix, Dimensional Shard, Fluix, Rime, Sakura Diamond, Scarlite and 3 more"
+      "text": "§oKeep your tool shiny!§r\\n§fDeals higher damage when at almost full durability, but decreases damage when at low durability.$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aquamarine, Certus Quartz, Crystal Matrix, Dimensional Shard, Emerald Plustic, Fluix, Rime, Sakura Diamond and 4 more"
     },
     {
       "type": "patchouli:text",
       "title": "Cursed",
-      "text": "Randomly deals up to half your max health as damage while worn, escalating over time$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Palladium"
+      "text": "Randomly deals up to half your max health as damage while worn, escalating over time$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Palladium, Sunnarium"
     },
     {
       "type": "patchouli:text",
@@ -22,7 +22,7 @@
     {
       "type": "patchouli:text",
       "title": "Dark",
-      "text": "Deals up to 1.5x damage at night, reduced damage by day$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Palladium, Shadowium, Void Metal"
+      "text": "Deals up to 1.5x damage at night, reduced damage by day$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Palladium, Shadowium, Sunnarium, Void Metal"
     },
     {
       "type": "patchouli:text",
@@ -37,12 +37,12 @@
     {
       "type": "patchouli:text",
       "title": "Dense",
-      "text": "Increases durability by 20%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Chromium, Dark Matter, Coalescence Matrix, Manganese, Modularium, Neutronium, Osmium, Red Matter"
+      "text": "Increases durability by 20%$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Advanced Alloy, Bronze, Chromium, Dark Matter, Dark Steel, Coalescence Matrix, Iridium, Modularium and 3 more"
     },
     {
       "type": "patchouli:text",
       "title": "Dense",
-      "text": "Increases durability by 20%$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Bronze, Chromium, Dark Matter, Dark Steel, Coalescence Matrix, Iridium, Modularium, Neutronium and 2 more"
+      "text": "Increases durability by 20%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Chromium, Dark Matter, Coalescence Matrix, Manganese, Modularium, Neutronium, Osmium, Red Matter"
     },
     {
       "type": "patchouli:text",

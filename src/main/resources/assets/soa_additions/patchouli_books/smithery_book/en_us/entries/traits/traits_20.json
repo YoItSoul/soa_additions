@@ -6,21 +6,6 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Slimey",
-      "text": "10% chance to drop a slime ball when breaking blocks$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Blue Slime, Pink Slime"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Softy",
-      "text": "Increases mining speed by 30%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Basalt, Mud, Poop"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Spartan",
-      "text": "Below 33% HP deals up to 2.5x damage; as armor reduces up to 75% incoming damage$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Alubrass, Cincinnasite, Stellar Alloy, Terrax"
-    },
-    {
-      "type": "patchouli:text",
       "title": "Spartan",
       "text": "Below 33% HP deals up to 2.5x more damage and takes greatly reduced damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Alubrass, Cincinnasite, Stellar Alloy"
     },
@@ -53,6 +38,21 @@
       "type": "patchouli:text",
       "title": "Stalwart",
       "text": "Grants knockback resistance$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Bedrock, Netherite, Stone"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Steady",
+      "text": "Pushes the target away in your look direction on hit$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Dark Steel, End Steel, Ender Biotite, Knightmetal, Manganese Steel, Stainless Steel"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Sticky",
+      "text": "Melee attackers are slowed$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Resin"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Stiff",
+      "text": "+0.1 knockback resistance$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Invar, Osmium, Steel"
     }
   ]
 }

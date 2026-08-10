@@ -6,21 +6,6 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Superhot",
-      "text": "Sets melee attackers on fire for 5 seconds when hit$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Fierymetal, Hephaestite, Terra Alloy"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Superknockback",
-      "text": "Greatly increases knockback on critical hits$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Meteor"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Swetty",
-      "text": "Inflicts Slowness II for 2 seconds on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Swet"
-    },
-    {
-      "type": "patchouli:text",
       "title": "Synergy",
       "text": "Adds +1 attack damage and +1 mining speed$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Steeleaf"
     },
@@ -42,7 +27,7 @@
     {
       "type": "patchouli:text",
       "title": "Tconevo.aftershock",
-      "text": "Deals +2 bonus magic damage per level on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Diamantine, Flux, Signalum"
+      "text": "Deals +2 bonus magic damage per level on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Diamantine, Flux, Fluxed String, Gelid Gem, Signalum"
     },
     {
       "type": "patchouli:text",
@@ -53,6 +38,21 @@
       "type": "patchouli:text",
       "title": "Tconevo.aura Siphon",
       "text": "Generates Botania mana on hit, 50 per damage dealt$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Dreamwood"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.battle Furor",
+      "text": "Builds up Strength on hit, stacking up to a per-level cap$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Kyronite"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.blasting",
+      "text": "8% chance per level to trigger an explosion on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Meteor"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.bloodbound",
+      "text": "Reduces incoming damage by 5%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Blood Infused Iron, Bound, Crimsonite"
     }
   ]
 }

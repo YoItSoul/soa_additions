@@ -6,11 +6,6 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Tconevo.second Wind",
-      "text": "Slowly heals while below 30% health$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Terrasteel"
-    },
-    {
-      "type": "patchouli:text",
       "title": "Tconevo.sentient",
       "text": "Reduces incoming damage by 7%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Crimsonite, Sentient"
     },
@@ -53,6 +48,11 @@
       "type": "patchouli:text",
       "title": "Tconevo.stifling",
       "text": "Inflicts Weakness for 3s on attackers when hit$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Shadowium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Tconevo.sundering",
+      "text": "Inflicts Weakness for 60 ticks per level on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Darkwood, Essence-Infused, Livingrock, Nihilite"
     }
   ]
 }

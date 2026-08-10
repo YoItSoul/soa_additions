@@ -6,26 +6,6 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Madness",
-      "text": "§oDemonic whispers echo around you...§r\\n§fWielding this tool will sometimes give you warp, but the more you are warped, the higher damage you deal.$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Nihilite, Shadowium, Void Metal"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Magical Modifier",
-      "text": "Adds +2 bonus attack damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Xu Magical Wood"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Magnetic",
-      "text": "Pulls mined block drops toward you$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Enori, Fluix Steel, Fluxed Electrum, Invar, Nickel"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Magnetic Armor1",
-      "text": "Pulls nearby dropped items toward you within 8 blocks$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Conductive Iron, Nickel, Redstone Alloy, Starmetal"
-    },
-    {
-      "type": "patchouli:text",
       "title": "Magnetic Armor2",
       "text": "Pulls nearby dropped items toward you within 12 blocks$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Nickel, Starmetal, Terra Alloy"
     },
@@ -53,6 +33,26 @@
       "type": "patchouli:text",
       "title": "Matter Trait11",
       "text": "Grants EMC equal to 10% of damage on hostile-mob hits (ProjectE integration stubbed)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Red Matter"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Matter Trait12",
+      "text": "Grants EMC equal to 25% of damage dealt to hostile mobs (ProjectE stub)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Protonium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Melting",
+      "text": "2.5% chance to turn mined stone, cobble, netherrack, or obsidian into lava$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Ignitz, Sunnarium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Milky",
+      "text": "§oI have a strong immune system!§r\\n§fOccasionally clears all potion effects (even the good ones)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Cheese"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Milky",
+      "text": "Clears all status effects every 18000 ticks$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Cheese"
     }
   ]
 }

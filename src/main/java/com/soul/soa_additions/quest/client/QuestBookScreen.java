@@ -1241,12 +1241,29 @@ public final class QuestBookScreen extends Screen {
             ItemStack stack = new ItemStack(BuiltInRegistries.BLOCK.get(pt.block()));
             return stack.isEmpty() ? null : stack;
         }
+        // A harvest-level task has no single item — anything at or above the level satisfies it.
+        // Rotate through buildable examples so the row shows what actually qualifies and the
+        // JEI link opens the tool the player is looking at. Returns null when Smithery is
+        // absent (or nothing reaches the level), which drops the row to the describe() text.
+        if (task instanceof com.soul.soa_additions.quest.task.HarvestLevelTask ht) {
+            List<ItemStack> examples = com.soul.soa_additions.smithery.tool.SmitheryTools
+                    .exampleGear(ht.level(), ht.toolType());
+            if (examples.isEmpty()) return null;
+            return examples.get((int) ((net.minecraft.Util.getMillis() / 1500L) % examples.size()));
+        }
         return null;
     }
 
     private static String linkVerb(com.soul.soa_additions.quest.model.QuestTask task) {
         if (task instanceof com.soul.soa_additions.quest.task.CraftTask) return "Craft";
         if (task instanceof com.soul.soa_additions.quest.task.PlaceTask) return "Place";
+        // The rotating example is illustrative, not the requirement — say so, and keep the
+        // level itself in the row rather than letting the item name imply one specific tool.
+        if (task instanceof com.soul.soa_additions.quest.task.HarvestLevelTask ht) {
+            return "Obtain a mining level "
+                    + com.soul.soa_additions.mining.MiningLevels.levelName(ht.level()).getString()
+                    + " tool, e.g.";
+        }
         return "Obtain";
     }
 
