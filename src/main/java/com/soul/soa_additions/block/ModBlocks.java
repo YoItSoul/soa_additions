@@ -53,6 +53,14 @@ public final class ModBlocks {
     public static final RegistryObject<Block> VOID_ORE_BLOCK      = registerBlock("void_ore_block",      () -> new Block(ORE_PROPERTIES));
     public static final RegistryObject<Block> ABYSSAL_ORE_BLOCK   = registerBlock("abyssal_ore_block",   () -> new Block(ORE_PROPERTIES));
     public static final RegistryObject<Block> ETHER_ORE_BLOCK     = registerBlock("ether_ore_block",     () -> new Block(ORE_PROPERTIES));
+    // Thaumcraft's cinnabar ore, ported 1:1 from ThaumcraftWorldGenerator.generateOres: overworld
+    // only (it returns early on dimension -1), single blocks rather than veins, 18 attempts per
+    // chunk, y 0-51 (rand.nextInt(worldHeight / 5)). Mined it drops itself and smelts to quicksilver.
+    public static final RegistryObject<Block> CINNABAR_ORE        = registerBlock("cinnabar_ore",        () -> new Block(ORE_PROPERTIES));
+    // Thaumcraft's amber ore, same generateOres pass: 20 attempts per chunk, single blocks, but placed
+    // relative to the terrain top (world.getHeight(x, z) - rand.nextInt(25)) rather than at a fixed
+    // depth. Drops 1-2 amber; TC's 6.6% amber-curio swap has no 1.20 analogue and is omitted.
+    public static final RegistryObject<Block> AMBER_ORE           = registerBlock("amber_ore",           () -> new Block(ORE_PROPERTIES));
 
     // End-exclusive taiga-style formations
     public static final RegistryObject<Block> OBSIDIORITE = registerBlock("obsidiorite", () -> new Block(OBSIDIORITE_PROPERTIES));

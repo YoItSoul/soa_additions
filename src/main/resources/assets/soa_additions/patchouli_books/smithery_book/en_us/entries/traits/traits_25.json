@@ -6,53 +6,53 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Tconevo.blasting",
-      "text": "8% chance per level to trigger an explosion on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Meteor"
+      "title": "Tconevo.evolved",
+      "text": "Reduces incoming damage by 5%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Chaotic Metal, Cosmilite, Draconic Metal, Wyvern Metal"
     },
     {
       "type": "patchouli:text",
-      "title": "Tconevo.bloodbound",
-      "text": "Reduces incoming damage by 5%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Blood Infused Iron, Bound, Crimsonite"
+      "title": "Tconevo.evolved",
+      "text": "Adds +2 attack damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Chaotic Metal, Cosmilite, Draconic Metal, Wyvern Metal"
     },
     {
       "type": "patchouli:text",
-      "title": "Tconevo.bloodbound",
-      "text": "Adds +1.5 attack damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Bound, Crimsonite"
+      "title": "Tconevo.executor",
+      "text": "Up to 20% more damage per level scaling with the target's missing health$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aethium"
     },
     {
       "type": "patchouli:text",
-      "title": "Tconevo.cascading",
-      "text": "Mines the entire vertical column of a falling block$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Elementium"
+      "title": "Tconevo.fae Voice",
+      "text": "10% chance to summon a Botania pixie to attack the target on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Dragonstone, Elementium"
     },
     {
       "type": "patchouli:text",
-      "title": "Tconevo.celestial",
-      "text": "Heals 0.5 health every 10 seconds during daytime while worn$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Chaotic Metal, Cosmilite, Draconic Metal, Infinity Metal"
+      "title": "Tconevo.fae Voice",
+      "text": "10% chance to summon a Botania pixie against attackers when hurt$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Elementium"
     },
     {
       "type": "patchouli:text",
-      "title": "Tconevo.chain Lightning",
-      "text": "15% chance per level to chain lightning to up to 4 nearby foes for 50% damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Ionite, Vibrant Crystal"
+      "title": "Tconevo.fertilizing",
+      "text": "Bonemeals adjacent growable plants when you break a block$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Apatite, Cytosinite"
     },
     {
       "type": "patchouli:text",
-      "title": "Tconevo.chilling Touch",
-      "text": "Inflicts Slowness on attackers when hit$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Gelid Enderium, Void Metal"
+      "title": "Tconevo.foot Fleet",
+      "text": "Grants Speed for 3s on a damaging hit, scaling with level$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Ghostwood, Titanium"
     },
     {
       "type": "patchouli:text",
-      "title": "Tconevo.condensing",
-      "text": "Generates EMC when hitting hostile mobs (requires ProjectE)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Neutronium"
+      "title": "Tconevo.gaia Wrath",
+      "text": "Sets the target on fire for 3 seconds on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Gaia, Gaiasteel, Orichalcos, Terrasteel"
     },
     {
       "type": "patchouli:text",
-      "title": "Tconevo.corrupting",
-      "text": "Stacks escalating Wither on hit, up to a per-level cap$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aethium, Primal Metal"
+      "title": "Tconevo.gale Force",
+      "text": "Increases movement speed by 4%$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Chaotic Metal, Draconic Metal, Infinity Metal"
     },
     {
       "type": "patchouli:text",
-      "title": "Tconevo.crystalline",
-      "text": "Deals bonus damage on hit scaling with tool durability (up to 20% of hit damage)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Diamantine, Emeraldic, Enori, Mana Diamond, Palis, Restonia, Void"
+      "title": "Tconevo.gale Force Armor1",
+      "text": "Grants +6% movement speed$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Cosmilite, Primal Metal"
     }
   ]
 }

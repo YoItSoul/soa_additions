@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "soa_additions:item/alubrass_ingot"
+    "layer0": "soa_additions:item/material_ingot"
   }
 }

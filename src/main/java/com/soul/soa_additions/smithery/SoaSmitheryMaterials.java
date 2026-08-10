@@ -20,106 +20,58 @@ public final class SoaSmitheryMaterials {
     public static ResourceLocation ABYSSUM;
     public static ResourceLocation ADAMANT;
     public static ResourceLocation ADAMINITE;
-    public static ResourceLocation ADVANCED_ALLOY;
     public static ResourceLocation AEONSTEEL;
     public static ResourceLocation AEROITE;
     public static ResourceLocation AETHIUM;
-    public static ResourceLocation SILENTGEMSAGATE;
-    public static ResourceLocation SILENTGEMSAGATE_SUPER;
-    public static ResourceLocation SILENTGEMSALEXANDRITE;
-    public static ResourceLocation SILENTGEMSALEXANDRITE_SUPER;
     public static ResourceLocation ALPHA_FUR;
     public static ResourceLocation ALUBRASS;
     public static ResourceLocation ALUMINIUM;
     public static ResourceLocation ALUMITE;
     public static ResourceLocation AMBER;
-    public static ResourceLocation SILENTGEMSAMBER;
-    public static ResourceLocation SILENTGEMSAMBER_SUPER;
-    public static ResourceLocation SILENTGEMSAMETHYST;
-    public static ResourceLocation SILENTGEMSAMETHYST_SUPER;
-    public static ResourceLocation SILENTGEMSAMETRINE;
-    public static ResourceLocation SILENTGEMSAMETRINE_SUPER;
-    public static ResourceLocation SILENTGEMSAMMOLITE;
-    public static ResourceLocation SILENTGEMSAMMOLITE_SUPER;
-    public static ResourceLocation FEATHERAMPHITHERE;
     public static ResourceLocation APATITE;
-    public static ResourceLocation SILENTGEMSAPATITE;
-    public static ResourceLocation SILENTGEMSAPATITE_SUPER;
     public static ResourceLocation AQUALITE;
     public static ResourceLocation AQUAMARINE;
-    public static ResourceLocation SILENTGEMSAQUAMARINE;
-    public static ResourceLocation SILENTGEMSAQUAMARINE_SUPER;
     public static ResourceLocation ARDITE;
-    public static ResourceLocation SAPPHIRE_AOA;
     public static ResourceLocation ASGARDIUM;
     public static ResourceLocation ASTRAL_METAL;
     public static ResourceLocation ASTRIUM;
     public static ResourceLocation AURORIUM;
     public static ResourceLocation AWAKENED_PLUSTIC;
-    public static ResourceLocation BARONYTE;
     // GC TCon entity-melting fluids (cow->milk, enderman->ender, snowman->water)
     public static ResourceLocation MILK;
     public static ResourceLocation ENDER;
     public static ResourceLocation WATER;
     public static ResourceLocation BASALT;
     public static ResourceLocation MA_BASE_ESSENCE;
-    public static ResourceLocation SILENTGEMSBERYL;
-    public static ResourceLocation SILENTGEMSBERYL_SUPER;
-    public static ResourceLocation SILENTGEMSBLACK_DIAMOND;
-    public static ResourceLocation SILENTGEMSBLACK_DIAMOND_SUPER;
-    public static ResourceLocation BLACKQUARTZ_PLUSTIC;
     public static ResourceLocation BLACK_QUARTZ;
-    public static ResourceLocation BLAZIUM;
     public static ResourceLocation BLOOD_INFUSED_IRON;
-    public static ResourceLocation BLOOD_INFUSED_WOOD;
     public static ResourceLocation BLOODSTONE;
-    public static ResourceLocation BLOODWOOD_PLUSTIC;
     public static ResourceLocation BLOODWOOD;
     public static ResourceLocation AERCLOUD_BLUE;
-    public static ResourceLocation SCALEBLUEDRAGON;
-    public static ResourceLocation SCALEBLUESEASERPENT;
     public static ResourceLocation BLUESLIME;
-    public static ResourceLocation SILENTGEMSBLUE_TOPAZ;
-    public static ResourceLocation SILENTGEMSBLUE_TOPAZ_SUPER;
     public static ResourceLocation BONE;
+    public static ResourceLocation BLOOD_INFUSED_WOOD;
     public static ResourceLocation BOUND_METAL;
     public static ResourceLocation BRONZE;
-    public static ResourceLocation SCALEBRONZEDRAGON;
-    public static ResourceLocation SCALEBRONZESEASERPENT;
-    public static ResourceLocation CHITINBROWNDEATHWORM;
     public static ResourceLocation CACTUS;
     public static ResourceLocation CANDY_CANE;
-    public static ResourceLocation CARBON_FIBER;
-    public static ResourceLocation SILENTGEMSCARNELIAN;
-    public static ResourceLocation SILENTGEMSCARNELIAN_SUPER;
-    public static ResourceLocation SILENTGEMSCATS_EYE;
-    public static ResourceLocation SILENTGEMSCATS_EYE_SUPER;
-    public static ResourceLocation CERTUSQUARTZ_PLUSTIC;
     public static ResourceLocation CERTUS_QUARTZ;
-    public static ResourceLocation CHAOTIC_PLUSTIC;
     public static ResourceLocation CHAOTIC_METAL;
     public static ResourceLocation CHARGER;
     public static ResourceLocation CHEESE;
     public static ResourceLocation CHOCOLATE;
     public static ResourceLocation CHROMASTEEL;
     public static ResourceLocation CHROMIUM;
-    public static ResourceLocation SILENTGEMSCHRYSOPRASE;
-    public static ResourceLocation SILENTGEMSCHRYSOPRASE_SUPER;
     public static ResourceLocation CINCINNASITE;
-    public static ResourceLocation SILENTGEMSCITRINE;
-    public static ResourceLocation SILENTGEMSCITRINE_SUPER;
     public static ResourceLocation CLOUD;
-    public static ResourceLocation COAGULATED_BLOOD_SAND;
     public static ResourceLocation COAL;
     public static ResourceLocation FUSION_MATRIX;
     public static ResourceLocation COBALT;
     public static ResourceLocation AERCLOUD_COLD;
     public static ResourceLocation CONDUCTIVE_IRON;
+    public static ResourceLocation COPPER_ALLOY;
     public static ResourceLocation CONSTANTAN;
-    public static ResourceLocation SILENTGEMSCORAL;
-    public static ResourceLocation SILENTGEMSCORAL_SUPER;
     public static ResourceLocation CORRUPTED;
-    public static ResourceLocation CORUNDUM;
     public static ResourceLocation COSMILITE;
     public static ResourceLocation CRIMSONITE;
     public static ResourceLocation CRYONIUM;
@@ -127,25 +79,15 @@ public final class SoaSmitheryMaterials {
     public static ResourceLocation CRYSTAL_MATRIX;
     public static ResourceLocation CRYSTALLITE;
     public static ResourceLocation CYTOSINITE;
-    public static ResourceLocation DARKMATTER;
     public static ResourceLocation DARK_MATTER;
     public static ResourceLocation DARK_STEEL;
-    public static ResourceLocation DARKWOOD_PLUSTIC;
     public static ResourceLocation DARKWOOD;
-    public static ResourceLocation SCALEDEEPBLUESEASERPENT;
     public static ResourceLocation XU_DEMONIC_METAL;
-    public static ResourceLocation DESERT_MYRMEX;
-    public static ResourceLocation CHITINDESERTMYRMEX;
-    public static ResourceLocation DESH;
-    public static ResourceLocation DIAMATINE_ACTADD_PLUSTIC;
     public static ResourceLocation DIAMANTINE_CRYSTAL;
     public static ResourceLocation DILITHIUM;
     public static ResourceLocation DIMENSIONAL_SHARD;
-    public static ResourceLocation DOGBEARIUM;
     public static ResourceLocation DRACONIC_METAL;
     public static ResourceLocation DRACONIUM;
-    public static ResourceLocation BONEDRAGON;
-    public static ResourceLocation DRAGONBONE;
     public static ResourceLocation DRAGONSTONE;
     public static ResourceLocation DREADIUM;
     public static ResourceLocation DREAMWOOD;
@@ -153,28 +95,20 @@ public final class SoaSmitheryMaterials {
     public static ResourceLocation DURASTEEL;
     public static ResourceLocation DYONITE;
     public static ResourceLocation EEZO;
-    public static ResourceLocation ELECANIUM;
-    public static ResourceLocation ELECTRICAL_STEEL;
     public static ResourceLocation ELECTRONIUM;
     public static ResourceLocation ELECTRUM;
     public static ResourceLocation ELEMENTIUM;
-    public static ResourceLocation EMBERSTONE;
-    public static ResourceLocation EMERADIC_ACTADD_PLUSTIC;
+    public static ResourceLocation ETHER;
     public static ResourceLocation EMERALDIC_CRYSTAL;
-    public static ResourceLocation EMERALD_PLUSTIC;
     public static ResourceLocation XU_ENCHANTED_METAL;
     public static ResourceLocation ENDSTONE;
     public static ResourceLocation END_STEEL;
     public static ResourceLocation ENDER_BIOTITE;
     public static ResourceLocation ENDER_CRYSTAL;
-    public static ResourceLocation ENDER_DRAGON_SQUAMA;
-    public static ResourceLocation ENDERIUM_PLUSTIC;
     public static ResourceLocation ENDERIUM;
-    public static ResourceLocation ENDORIUM;
     public static ResourceLocation ENDROD;
     public static ResourceLocation ENERGETIC_ALLOY;
     public static ResourceLocation ENERGETIC_METAL;
-    public static ResourceLocation ENORI_ACTADD_PLUSTIC;
     public static ResourceLocation ENORI_CRYSTAL;
     public static ResourceLocation ERODIUM;
     public static ResourceLocation ESSENCE_METAL;
@@ -183,118 +117,65 @@ public final class SoaSmitheryMaterials {
     public static ResourceLocation FEATHER;
     public static ResourceLocation FIERYMETAL;
     public static ResourceLocation FIERY;
-    public static ResourceLocation DRAGONSTEEL_FIRE;
     public static ResourceLocation FIREWOOD;
     public static ResourceLocation FLAMESTRING_PLUSTIC;
     public static ResourceLocation FLUIX;
-    public static ResourceLocation FLUIXCRYSTAL_PLUSTIC;
     public static ResourceLocation FLUIX_STEEL;
-    public static ResourceLocation SILENTGEMSFLUORITE;
-    public static ResourceLocation SILENTGEMSFLUORITE_SUPER;
     public static ResourceLocation FLUX_CRYSTAL;
-    public static ResourceLocation FLUXED_STRING;
     public static ResourceLocation FLUXED_ELECTRUM;
-    public static ResourceLocation LEATHERFORESTTROLL;
     public static ResourceLocation FRACTUM;
     public static ResourceLocation FRISCION;
-    public static ResourceLocation LEATHERFROSTTROLL;
-    public static ResourceLocation FROSTSTEEL;
-    public static ResourceLocation FULGURITE;
-    public static ResourceLocation FUSEWOOD_PLUSTIC;
     public static ResourceLocation FUSEWOOD;
     public static ResourceLocation GAIA;
     public static ResourceLocation GAIASTEEL;
     public static ResourceLocation GARFAX;
-    public static ResourceLocation SILENTGEMSGARNET;
-    public static ResourceLocation SILENTGEMSGARNET_SUPER;
     public static ResourceLocation GELID_ENDERIUM;
-    public static ResourceLocation GELID_GEM;
-    public static ResourceLocation GHASTLY;
     public static ResourceLocation GHOSTLYSTONE;
-    public static ResourceLocation GHOSTWOOD_PLUSTIC;
     public static ResourceLocation GHOSTWOOD;
-    public static ResourceLocation GHOULISH;
     public static ResourceLocation AERCLOUD_GOLD;
     public static ResourceLocation GOLDEN_AMBER;
-    public static ResourceLocation SILENTGEMSGOLDEN_BERYL;
-    public static ResourceLocation SILENTGEMSGOLDEN_BERYL_SUPER;
     public static ResourceLocation GOLDEN_FEATHER;
     public static ResourceLocation GOLDEN_OAK_LEAF;
     public static ResourceLocation GRAIN;
     public static ResourceLocation GRAVITITE;
-    public static ResourceLocation SCALEGRAYDRAGON;
-    public static ResourceLocation SCALEGREENDRAGON;
-    public static ResourceLocation SCALEGREENSEASERPENT;
     public static ResourceLocation GUARDIANSCALE;
-    public static ResourceLocation HARD_SPIDER_LEG;
-    public static ResourceLocation POLYETHYLENE;
     public static ResourceLocation HEART_CRYSTAL;
-    public static ResourceLocation SILENTGEMSHELIODOR;
-    public static ResourceLocation SILENTGEMSHELIODOR_SUPER;
     public static ResourceLocation HEPHAESTITE;
     public static ResourceLocation STRONG_TOFU_GEM;
     public static ResourceLocation HOLIDAY_LEAF;
     public static ResourceLocation HOLYSTONE;
     public static ResourceLocation ICE;
-    public static ResourceLocation DRAGONSTEEL_ICE;
     public static ResourceLocation ICESTONE;
     public static ResourceLocation IGNITZ;
     public static ResourceLocation IMPEROMITE;
-    public static ResourceLocation SILENTGEMSINDICOLITE;
-    public static ResourceLocation SILENTGEMSINDICOLITE_SUPER;
-    public static ResourceLocation INERT_WITHERIUM;
     public static ResourceLocation MA_INFERIUM;
     public static ResourceLocation INFERNIUM;
-    public static ResourceLocation INFINITY_AVARITIA_PLUSTIC;
     public static ResourceLocation INFINITY_METAL;
     public static ResourceLocation INSANIUM;
     public static ResourceLocation MA_INTERMEDIUM;
     public static ResourceLocation INVAR;
-    public static ResourceLocation SILENTGEMSIOLITE;
-    public static ResourceLocation SILENTGEMSIOLITE_SUPER;
     public static ResourceLocation IONITE;
     public static ResourceLocation IOX;
     public static ResourceLocation IRIDIUM;
-    public static ResourceLocation CONSTRUCTION_ALLOY;
     public static ResourceLocation JADE;
-    public static ResourceLocation SILENTGEMSJADE;
-    public static ResourceLocation SILENTGEMSJADE_SUPER;
-    public static ResourceLocation SILENTGEMSJASPER;
-    public static ResourceLocation SILENTGEMSJASPER_SUPER;
     public static ResourceLocation JAUXUM;
-    public static ResourceLocation JUNGLE_MYRMEX;
-    public static ResourceLocation CHITINJUNGLEMYRMEX;
     public static ResourceLocation KARMESINE;
     public static ResourceLocation KELLINE;
     public static ResourceLocation KNIGHTMETAL;
     public static ResourceLocation EXPERIENCE;
-    public static ResourceLocation SILENTGEMSKUNZITE;
-    public static ResourceLocation SILENTGEMSKUNZITE_SUPER;
-    public static ResourceLocation SILENTGEMSKYANITE;
-    public static ResourceLocation SILENTGEMSKYANITE_SUPER;
     public static ResourceLocation KYRONITE;
     public static ResourceLocation LANDIUM;
     public static ResourceLocation LEAD;
     public static ResourceLocation LEAF;
-    public static ResourceLocation SILENTGEMSLEPIDOLITE;
-    public static ResourceLocation SILENTGEMSLEPIDOLITE_SUPER;
-    public static ResourceLocation LIMONITE;
     public static ResourceLocation LITHERITE;
     public static ResourceLocation LIVINGROCK;
-    public static ResourceLocation LIVINGWOOD_PLUSTIC;
     public static ResourceLocation LIVINGWOOD;
-    public static ResourceLocation LONSDALEITE;
-    public static ResourceLocation LUMIUM_PLUSTIC;
     public static ResourceLocation LUMIUM;
     public static ResourceLocation LUMIX;
     public static ResourceLocation LUNAR;
-    public static ResourceLocation LYON;
     public static ResourceLocation XU_MAGICAL_WOOD;
-    public static ResourceLocation MAGMA;
     public static ResourceLocation MAGMASLIME;
     public static ResourceLocation MALACHITE_GEM;
-    public static ResourceLocation SILENTGEMSMALACHITE;
-    public static ResourceLocation SILENTGEMSMALACHITE_SUPER;
     public static ResourceLocation MANA_DIAMOND;
     public static ResourceLocation MANA_PEARL;
     public static ResourceLocation MANA_STRING;
@@ -315,161 +196,94 @@ public final class SoaSmitheryMaterials {
     public static ResourceLocation MITHRIL;
     public static ResourceLocation MITHRILLIUM;
     public static ResourceLocation MODULARIUM;
-    public static ResourceLocation SILENTGEMSMOLDAVITE;
-    public static ResourceLocation SILENTGEMSMOLDAVITE_SUPER;
-    public static ResourceLocation SILENTGEMSMOONSTONE;
-    public static ResourceLocation SILENTGEMSMOONSTONE_SUPER;
     public static ResourceLocation MORGANINE;
-    public static ResourceLocation SILENTGEMSMORGANITE;
-    public static ResourceLocation SILENTGEMSMORGANITE_SUPER;
-    public static ResourceLocation LEATHERMOUNTAINTROLL;
     public static ResourceLocation MUD;
-    public static ResourceLocation MYSTITE;
     public static ResourceLocation NAGASCALE;
     public static ResourceLocation NETHERRACK;
     public static ResourceLocation NEUTRONIUM;
     public static ResourceLocation NICKEL;
     public static ResourceLocation NIHILITE;
     public static ResourceLocation NIOB;
-    public static ResourceLocation NITRONITE;
     public static ResourceLocation NUCLEUM;
     public static ResourceLocation NYLON_CLOTH;
     public static ResourceLocation NYLON_STRING;
     public static ResourceLocation OBSIDIAN;
-    public static ResourceLocation OBDISIAN;
     public static ResourceLocation OBSIDIORITE;
-    public static ResourceLocation SILENTGEMSONYX;
-    public static ResourceLocation SILENTGEMSONYX_SUPER;
-    public static ResourceLocation SILENTGEMSOPAL;
-    public static ResourceLocation SILENTGEMSOPAL_SUPER;
     public static ResourceLocation ORICHALCOS;
-    public static ResourceLocation ORICHALCUM;
     public static ResourceLocation OSGLOGLAS;
     public static ResourceLocation OSMIRIDIUM;
     public static ResourceLocation OSMIUM;
     public static ResourceLocation OSRAM;
     public static ResourceLocation OVIUM;
-    public static ResourceLocation PALIS_ACTADD_PLUSTIC;
     public static ResourceLocation PALIS_CRYSTAL;
     public static ResourceLocation PALLADIUM;
-    public static ResourceLocation PANDORIUM;
     public static ResourceLocation PAPER;
-    public static ResourceLocation SILENTGEMSPEARL;
-    public static ResourceLocation SILENTGEMSPEARL_SUPER;
     public static ResourceLocation PERFECT;
     public static ResourceLocation PERIDOT;
-    public static ResourceLocation SILENTGEMSPERIDOT;
-    public static ResourceLocation SILENTGEMSPERIDOT_SUPER;
     public static ResourceLocation PHOENIXITE;
     public static ResourceLocation PIGIRON;
     public static ResourceLocation PINK_METAL;
     public static ResourceLocation PINK_SLIME;
     public static ResourceLocation PLADIUM;
-    public static ResourceLocation PLATINUM_PLUSTIC;
     public static ResourceLocation PLATINUM;
     public static ResourceLocation POOP;
     public static ResourceLocation PRIMAL_METAL;
     public static ResourceLocation PROMETHEUM;
     public static ResourceLocation MA_PROSPERITY;
     public static ResourceLocation PROTONIUM;
-    public static ResourceLocation PROUSTITE;
     public static ResourceLocation PROXII;
     public static ResourceLocation MA_PRUDENTIUM;
-    public static ResourceLocation PSIGEM;
-    public static ResourceLocation PSIMETAL;
     public static ResourceLocation PULSATING_CRYSTAL;
     public static ResourceLocation PULSATING_IRON;
     public static ResourceLocation PUMPKIN;
-    public static ResourceLocation SCALEPURPLESEASERPENT;
-    public static ResourceLocation SILENTGEMSPYROPE;
-    public static ResourceLocation SILENTGEMSPYROPE_SUPER;
-    public static ResourceLocation QUEENSGOLD;
-    public static ResourceLocation QUICKSILVER;
     public static ResourceLocation RACHELINE;
     public static ResourceLocation RAVAGING;
     public static ResourceLocation RAVEN_FEATHER;
-    public static ResourceLocation SCALEREDDRAGON;
-    public static ResourceLocation REDMATTER;
     public static ResourceLocation RED_MATTER;
-    public static ResourceLocation SCALEREDSEASERPENT;
-    public static ResourceLocation REDINS;
     public static ResourceLocation REDSTONE_ALLOY;
     public static ResourceLocation REED;
     public static ResourceLocation REFINED_CORALIUM;
-    public static ResourceLocation REFINEDGLOWSTONE;
+    public static ResourceLocation QUICKSILVER;
     public static ResourceLocation REFINED_GLOWSTONE;
-    public static ResourceLocation REFINEDOBSIDIAN;
     public static ResourceLocation REFINED_OBSIDIAN;
     public static ResourceLocation REMORSEFUL;
-    public static ResourceLocation RESTONIA_ACTADD_PLUSTIC;
     public static ResourceLocation RESTONIA_CRYSTAL;
     public static ResourceLocation RIME;
-    public static ResourceLocation SILENTGEMSROSE_QUARTZ;
-    public static ResourceLocation SILENTGEMSROSE_QUARTZ_SUPER;
     public static ResourceLocation ROSEGOLD;
-    public static ResourceLocation ROSITE;
     public static ResourceLocation RUBBER;
     public static ResourceLocation RUBBER_BAND;
     public static ResourceLocation RUBY;
-    public static ResourceLocation SILENTGEMSRUBY;
-    public static ResourceLocation SILENTGEMSRUBY_SUPER;
     public static ResourceLocation SAKURA_DIAMOND;
     public static ResourceLocation SAPPHIRE;
-    public static ResourceLocation SILENTGEMSSAPPHIRE;
-    public static ResourceLocation SILENTGEMSSAPPHIRE_SUPER;
-    public static ResourceLocation SCALESAPPHIREDRAGON;
     public static ResourceLocation SCARLITE;
     public static ResourceLocation SCORCHED;
     public static ResourceLocation SEARED;
     public static ResourceLocation SEISMUM;
     public static ResourceLocation SENTIENT_METAL;
     public static ResourceLocation SHADOWIUM;
-    public static ResourceLocation SCALESHINY;
-    public static ResourceLocation SHYRESTONE;
-    public static ResourceLocation SIGNALUM_PLUSTIC;
     public static ResourceLocation SIGNALUM;
     public static ResourceLocation SILVER;
-    public static ResourceLocation SCALESILVERDRAGON;
-    public static ResourceLocation SINISTERIUM;
     public static ResourceLocation SKELETAL;
     public static ResourceLocation SKY_STONE;
     public static ResourceLocation SKYROOT;
     public static ResourceLocation SKYROOT_LEAF;
     public static ResourceLocation SLIMELEAF_BLUE;
     public static ResourceLocation SLIMEVINE_BLUE;
-    public static ResourceLocation SILENTGEMSSODALITE;
-    public static ResourceLocation SILENTGEMSSODALITE_SUPER;
     public static ResourceLocation SOLARIUM;
     public static ResourceLocation SOULARIUM;
     public static ResourceLocation MA_SOULIUM;
     public static ResourceLocation SPECTRE;
     public static ResourceLocation SPECTRE_STRING;
-    public static ResourceLocation SPIDER_LEG;
-    public static ResourceLocation SILENTGEMSSPINEL;
-    public static ResourceLocation SILENTGEMSSPINEL_SUPER;
     public static ResourceLocation SPONGE;
     public static ResourceLocation STAINLESS_STEEL;
     public static ResourceLocation STARMETAL;
     public static ResourceLocation STEEL;
     public static ResourceLocation STEELEAF;
-    public static ResourceLocation STELLAR_ALLOY;
     public static ResourceLocation STELLAR_ALLOY_GC;
-    public static ResourceLocation STELLARIUM;
-    public static ResourceLocation STELLARIUM_OBSIDIAN;
-    public static ResourceLocation FEATHERSTYMPHALIANBIRD;
-    public static ResourceLocation SUNNARIUM;
-    public static ResourceLocation SILENTGEMSSUNSTONE;
-    public static ResourceLocation SILENTGEMSSUNSTONE_SUPER;
     public static ResourceLocation MA_SUPERIUM;
     public static ResourceLocation MA_SUPREMIUM;
     public static ResourceLocation SWET;
-    public static ResourceLocation CHITINTANDEATHWORM;
     public static ResourceLocation TANZANITE;
-    public static ResourceLocation SILENTGEMSTANZANITE;
-    public static ResourceLocation SILENTGEMSTANZANITE_SUPER;
-    public static ResourceLocation SCALETEALSEASERPENT;
-    public static ResourceLocation SILENTGEMSTEKTITE;
-    public static ResourceLocation SILENTGEMSTEKTITE_SUPER;
     public static ResourceLocation TERRA_ALLOY;
     public static ResourceLocation TERRASTEEL;
     public static ResourceLocation TERRAX;
@@ -483,48 +297,29 @@ public final class SoaSmitheryMaterials {
     public static ResourceLocation TOFUDIAMOND;
     public static ResourceLocation TOFUMETAL;
     public static ResourceLocation TOPAZ;
-    public static ResourceLocation SILENTGEMSTOPAZ;
-    public static ResourceLocation SILENTGEMSTOPAZ_SUPER;
-    public static ResourceLocation TREATEDWOOD;
     public static ResourceLocation TRIBERIUM;
     public static ResourceLocation TRITANIUM;
     public static ResourceLocation TRITONITE;
     public static ResourceLocation TUNGSTEN;
-    public static ResourceLocation SILENTGEMSTURQUOISE;
-    public static ResourceLocation SILENTGEMSTURQUOISE_SUPER;
     public static ResourceLocation UMBRIUM;
     public static ResourceLocation URU;
     public static ResourceLocation UNIVERSAL_METAL;
     public static ResourceLocation VALKYRIE;
-    public static ResourceLocation VALYRIANSTEEL;
     public static ResourceLocation VALYRIUM;
-    public static ResourceLocation VARSIUM;
     public static ResourceLocation VIBRANIUM;
     public static ResourceLocation VIBRANT_ALLOY;
     public static ResourceLocation VIBRANT_CRYSTAL;
     public static ResourceLocation VINE;
-    public static ResourceLocation SILENTGEMSVIOLET_SAPPHIRE;
-    public static ResourceLocation SILENTGEMSVIOLET_SAPPHIRE_SUPER;
     public static ResourceLocation VIOLIUM;
-    public static ResourceLocation VOID_ACTADD_PLUSTIC;
     public static ResourceLocation VOID_CRYSTAL;
     public static ResourceLocation VOID_METAL;
     public static ResourceLocation WEATHER_CRYSTAL;
-    public static ResourceLocation WEEZER;
-    public static ResourceLocation CHITINWHITEDEATHWORM;
-    public static ResourceLocation SCALEWHITEDRAGON;
     public static ResourceLocation WITHERBONE;
-    public static ResourceLocation BONEWITHER;
     public static ResourceLocation XU_WITHERING;
-    public static ResourceLocation WITHERIUM;
-    public static ResourceLocation WOLFRAMIUM;
-    public static ResourceLocation WYVERN_PLUSTIC;
     public static ResourceLocation WYVERN_METAL;
     public static ResourceLocation YELLORIUM;
     public static ResourceLocation YRDEEN;
     public static ResourceLocation ZANITE;
-    public static ResourceLocation SILENTGEMSZIRCON;
-    public static ResourceLocation SILENTGEMSZIRCON_SUPER;
 
     public static void register() {
         registerAbyssalcraft();
@@ -532,9 +327,7 @@ public final class SoaSmitheryMaterials {
         registerGreedycraftCustom();
         registerTinkersEvolution();
         registerPlustic();
-        registerSilentsGems();
         registerTwilightForest();
-        registerIceAndFireCompat();
         registerTinkersConstructBase();
         registerMysticalAgriculture();
         registerBloodMagic();
@@ -549,6 +342,7 @@ public final class SoaSmitheryMaterials {
         registerTofucraft();
         registerDefiledLands();
         registerMalumValoria();
+        registerSoaMetals();
         registerAlloyFluids();
         retuneBuiltinMaterials();
     }
@@ -683,7 +477,6 @@ public final class SoaSmitheryMaterials {
                 SoaSmitheryModifiers.RESONANCE);
         malumValoria("void",        4, 9.5f, 8.5f, 1200, 1500.0f, 0xFF241B33, 5,
                 SoaSmitheryModifiers.DARK);
-        // valoria ruby/sapphire gems feed the existing Silent's Gems materials (melting only)
     }
 
     private static void malumValoria(String name, int harvest, float speed, float damage,
@@ -699,6 +492,30 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(1.0f + binders * 0.25f)
                 , binders)
                 .addModifier(ModifierEffect.of(trait), allToolTypes())
+                .build());
+    }
+
+    /**
+     * SOA's own rare metals. {@code ether_ingot} ships from {@link com.soul.soa_additions.item.ModItems}
+     * alongside abyssal/infernium/void and is smelted from {@code ether_ore_block}, but had no material
+     * behind it — {@code SoaSmitheryMelting} carried a recipe pointing at an id that was never
+     * registered, so the ingot melted into nothing. GreedyCraft has no ether material to copy, so the
+     * stats are a first-pass placement between abyssalnite (harvest 3) and void (harvest 4), matching
+     * how the Malum/Valoria originals were pitched.
+     */
+    private static void registerSoaMetals() {
+        ETHER = id("ether");
+        SmitheryAPI.registerMaterial(ETHER, binderSlots(MaterialStats.builder()
+                        .harvestLevel(4)
+                        .miningSpeed(8.0f)
+                        .attackDamage(6.8f)
+                        .durabilityPerIngot(1050)
+                        .meltingTemp(1400.0f)
+                        .partColor(0xFF8FA6D8)
+                        .binderMultiplier(1.75f)
+                , 3)
+                .armor(300.0f, 25.0f, 78.0f, 1.75f, 2.5f, 24.0f)
+                .addUniversalModifier(SoaSmitheryModifiers.ENDERFERENCE)
                 .build());
     }
 
@@ -825,6 +642,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(800)
                         .meltingTemp(2000.0f)
                         .partColor(0xFF139A69)
+                        .storageForms()
                         .binderMultiplier(0.95f)
                 , 4)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CORALIUMPLAGUE), allToolTypes())
@@ -865,7 +683,6 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.FORTIFIEDTRAIT_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.INVIGORATING_ARMOR), armorPieces())
                 .armor(440.0f, 41.0f, 30.0f, 4.2f, 3.5f, 70.0f)
-                .addModifier(ModifierEffect.of(SoaSmitheryModifiers.BERSERK), allToolTypes())
                 .bow(0.35f, 1.85f, 9.4f)
                 .build());
 
@@ -933,19 +750,6 @@ public final class SoaSmitheryMaterials {
                         .fluidBase(MaterialStats.FluidBase.WATER)
                 .build());
 
-        BARONYTE = id("baronyte");
-        SmitheryAPI.registerMaterial(BARONYTE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFBFCF3E)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 20.25f, 84.48f, 29.2235f, 0.0f, 84.48f)
-                .build());
-
         BASALT = id("basalt");
         SmitheryAPI.registerMaterial(BASALT, binderSlots(MaterialStats.builder()
                         .harvestLevel(0)
@@ -960,19 +764,6 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SOFTY), allToolTypes())
                 .build());
 
-        BLAZIUM = id("blazium");
-        SmitheryAPI.registerMaterial(BLAZIUM, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFE8722E)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(112.0f, 19.44f, 26.88f, 17.7882f, 0.0f, 26.88f)
-                .build());
-
         CHARGER = id("charger");
         SmitheryAPI.registerMaterial(CHARGER, MaterialStats.builder()
                         .harvestLevel(0)
@@ -981,6 +772,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(0)
                         .meltingTemp(0.0f)
                         .partColor(0xFFBEBEBE)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                         .castOnly(true)
                 .armor(15.0f, 13.5f, 6.912f, 12.7059f, 0.0f, 6.912f)
@@ -994,6 +786,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(0)
                         .meltingTemp(0.0f)
                         .partColor(0xFF7A9DC3)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                         .castOnly(true)
                 .armor(2.0f, 0.0f, -57.6f, 0.0f, 0.0f, -57.6f)
@@ -1007,22 +800,10 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(0)
                         .meltingTemp(0.0f)
                         .partColor(0xFF690305)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                         .castOnly(true)
                 .armor(9.0f, 18.0f, 5.6f, 18.0f, 0.0f, 5.6f)
-                .build());
-
-        CORUNDUM = id("corundum");
-        SmitheryAPI.registerMaterial(CORUNDUM, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF9E3B3B)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(52.0f, 15.75f, 16.0f, 14.8235f, 0.0f, 16.0f)
                 .build());
 
         DILITHIUM = id("dilithium");
@@ -1034,19 +815,6 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(0.0f)
                         .partColor(0xFF305A61)
                         .binderMultiplier(1.0f)
-                .build());
-
-        DOGBEARIUM = id("dogbearium");
-        SmitheryAPI.registerMaterial(DOGBEARIUM, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF8B6F47)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(7.0f, 40.5f, 8.4f, 18.0f, 0.0f, 8.4f)
                 .build());
 
         DURANITE = id("duranite");
@@ -1093,32 +861,6 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SUPERHEAVY), allToolTypes())
                 .build());
 
-        ELECANIUM = id("elecanium");
-        SmitheryAPI.registerMaterial(ELECANIUM, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF3EC8C8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(84.0f, 32.94f, 11.52f, 50.0f, 0.0f, 11.52f)
-                .build());
-
-        EMBERSTONE = id("emberstone");
-        SmitheryAPI.registerMaterial(EMBERSTONE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFD8542E)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(90.0f, 20.52f, 76.8f, 16.5176f, 0.0f, 76.8f)
-                .build());
-
         FRACTUM = id("fractum");
         SmitheryAPI.registerMaterial(FRACTUM, binderSlots(MaterialStats.builder()
                         .harvestLevel(2)
@@ -1133,32 +875,6 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.FRACTURE), allToolTypes())
                 .build());
 
-        FROSTSTEEL = id("froststeel");
-        SmitheryAPI.registerMaterial(FROSTSTEEL, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF9FD8E8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(28.0f, 31.5f, 14.0f, 23.2941f, 0.0f, 14.0f)
-                .build());
-
-        FULGURITE = id("fulgurite");
-        SmitheryAPI.registerMaterial(FULGURITE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF837544)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(60.0f, 22.05f, 38.4f, 0.0f, 0.0f, 38.4f)
-                .build());
-
         GRAIN = id("grain");
         SmitheryAPI.registerMaterial(GRAIN, MaterialStats.builder()
                         .harvestLevel(0)
@@ -1167,6 +883,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(0)
                         .meltingTemp(0.0f)
                         .partColor(0xFFA49A95)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                         .castOnly(true)
                 .armor(28.0f, 9.45f, 8.96f, 15.5647f, 0.0f, 8.96f)
@@ -1201,21 +918,7 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.ZANY), allToolTypes())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.ZANY), armorPieces())
                 .armor(120.0f, 36.0f, 50.0f, 1.9f, 1.5f, 120.0f)
-                .addModifier(ModifierEffect.of(SoaSmitheryModifiers.HOLLOW), allToolTypes())
                 .bow(1.2f, 1.8f, 2.0f)
-                .build());
-
-        INERT_WITHERIUM = id("inert_witherium");
-        SmitheryAPI.registerMaterial(INERT_WITHERIUM, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF4A4A52)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 9.45f, 57.6f, 15.5647f, 0.0f, 57.6f)
                 .build());
 
         IOX = id("iox");
@@ -1278,22 +981,10 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(0)
                         .meltingTemp(0.0f)
                         .partColor(0xFF79498B)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                         .castOnly(true)
                 .armor(93.0f, 10.8f, 49.92f, 22.8706f, 0.0f, 49.92f)
-                .build());
-
-        LYON = id("lyon");
-        SmitheryAPI.registerMaterial(LYON, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFC8CAD8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(118.0f, 21.6f, 145.92f, 26.6824f, 0.0f, 145.92f)
                 .build());
 
         METEORITE = id("meteorite");
@@ -1311,19 +1002,6 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.PULVERIZING), allToolTypes())
                 .build());
 
-        MYSTITE = id("mystite");
-        SmitheryAPI.registerMaterial(MYSTITE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF9FE8C8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(107.0f, 23.22f, 30.72f, 26.6824f, 0.0f, 30.72f)
-                .build());
-
         NIHILITE = id("nihilite");
         SmitheryAPI.registerMaterial(NIHILITE, binderSlots(MaterialStats.builder()
                         .harvestLevel(7)
@@ -1339,7 +1017,6 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SHIELDING_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_WARPING_ARMOR), armorPieces())
                 .armor(360.0f, 43.0f, 35.0f, 4.0f, 2.4f, 25.0f)
-                .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SOULEATER), allToolTypes())
                 .bow(1.5f, 0.8f, 14.4f)
                 .build());
 
@@ -1355,17 +1032,6 @@ public final class SoaSmitheryMaterials {
                 , 4)
                 .armor(320.0f, 30.0f, 110.0f, 2.4f, 2.25f, 80.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.REVIVING), allToolTypes())
-                .build());
-
-        NITRONITE = id("nitronite");
-        SmitheryAPI.registerMaterial(NITRONITE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFE8E82E)
-                        .binderMultiplier(1.0f)
                 .build());
 
         NUCLEUM = id("nucleum");
@@ -1396,7 +1062,6 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.DURITOS_RANCH_ARMOR), allToolTypes())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.DURITOS_RANCH_ARMOR), armorPieces())
                 .armor(80.0f, 24.0f, 130.0f, 2.0f, 0.0f, 81.0f)
-                .addModifier(ModifierEffect.of(SoaSmitheryModifiers.ALIEN), allToolTypes())
                 .addUniversalModifier(SoaSmitheryModifiers.DURITOS)
                 .build());
 
@@ -1439,19 +1104,6 @@ public final class SoaSmitheryMaterials {
                 .bow(0.5f, 0.2f, 3.0f)
                 .build());
 
-        PANDORIUM = id("pandorium");
-        SmitheryAPI.registerMaterial(PANDORIUM, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF8F2EA8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(47.0f, 39.24f, 11.088f, 8.4706f, 0.0f, 11.088f)
-                .build());
-
         PROMETHEUM = id("prometheum");
         SmitheryAPI.registerMaterial(PROMETHEUM, binderSlots(MaterialStats.builder()
                         .harvestLevel(5)
@@ -1468,45 +1120,6 @@ public final class SoaSmitheryMaterials {
                 .bow(0.2f, 0.6f, 3.0f)
                 .build());
 
-        PROUSTITE = id("proustite");
-        SmitheryAPI.registerMaterial(PROUSTITE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFB03A4A)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(24.0f, 12.6f, 11.264f, 12.6f, 0.0f, 11.264f)
-                .build());
-
-        QUEENSGOLD = id("queensgold");
-        SmitheryAPI.registerMaterial(QUEENSGOLD, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFE8C22E)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(3.0f, 13.5f, 2.24f, 22.2353f, 0.0f, 2.24f)
-                .build());
-
-        REDINS = id("redins");
-        SmitheryAPI.registerMaterial(REDINS, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFC23A2E)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 22.05f, 35.2f, 12.6f, 0.0f, 35.2f)
-                .build());
-
         ROSEGOLD = id("rosegold");
         SmitheryAPI.registerMaterial(ROSEGOLD, MaterialStats.builder()
                         .harvestLevel(0)
@@ -1518,19 +1131,6 @@ public final class SoaSmitheryMaterials {
                         .binderMultiplier(1.0f)
                         .castOnly(true)
                 .armor(4.0f, 4.5f, -10.08f, 31.7647f, 0.0f, -10.08f)
-                .build());
-
-        ROSITE = id("rosite");
-        SmitheryAPI.registerMaterial(ROSITE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFE85A7A)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(56.0f, 18.36f, 21.12f, 24.1412f, 0.0f, 21.12f)
                 .build());
 
         SEISMUM = id("seismum");
@@ -1545,32 +1145,6 @@ public final class SoaSmitheryMaterials {
                 , 4)
                 .armor(230.0f, 20.0f, 140.0f, 1.2f, 2.0f, 80.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CASCADE), allToolTypes())
-                .build());
-
-        SHYRESTONE = id("shyrestone");
-        SmitheryAPI.registerMaterial(SHYRESTONE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF6FE8E8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(90.0f, 19.44f, 120.96f, 25.4118f, 0.0f, 120.96f)
-                .build());
-
-        SINISTERIUM = id("sinisterium");
-        SmitheryAPI.registerMaterial(SINISTERIUM, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF6A2E38)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(10.0f, 22.5f, 11.088f, 15.8824f, 0.0f, 11.088f)
                 .build());
 
         SOLARIUM = id("solarium");
@@ -1589,32 +1163,6 @@ public final class SoaSmitheryMaterials {
                 .bow(0.8f, 1.5f, 5.0f)
                 .build());
 
-        STELLARIUM = id("stellarium");
-        SmitheryAPI.registerMaterial(STELLARIUM, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF4A5AA8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(24.0f, 25.2f, 0.0f, 0.0f, 0.0f, 0.0f)
-                .build());
-
-        STELLARIUM_OBSIDIAN = id("stellarium_obsidian");
-        SmitheryAPI.registerMaterial(STELLARIUM_OBSIDIAN, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF2E2A45)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(63.0f, 22.05f, 6.4f, 14.8235f, 0.0f, 6.4f)
-                .build());
-
         TERRAX = id("terrax");
         SmitheryAPI.registerMaterial(TERRAX, binderSlots(MaterialStats.builder()
                         .harvestLevel(4)
@@ -1629,7 +1177,6 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SHIELDING_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SPARTAN_ARMOR), armorPieces())
                 .armor(130.0f, 28.0f, 170.0f, 2.1f, 2.0f, 110.0f)
-                .addModifier(ModifierEffect.of(SoaSmitheryModifiers.SLAUGHTERING), allToolTypes())
                 .build());
 
         TIBERIUM = id("tiberium");
@@ -1713,19 +1260,6 @@ public final class SoaSmitheryMaterials {
                 .bow(1.3f, 0.8f, 6.0f)
                 .build());
 
-        VALYRIANSTEEL = id("valyriansteel");
-        SmitheryAPI.registerMaterial(VALYRIANSTEEL, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF6A7A8A)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(28.0f, 31.5f, 14.0f, 19.0588f, 0.0f, 14.0f)
-                .build());
-
         VALYRIUM = id("valyrium");
         SmitheryAPI.registerMaterial(VALYRIUM, binderSlots(MaterialStats.builder()
                         .harvestLevel(6)
@@ -1739,19 +1273,6 @@ public final class SoaSmitheryMaterials {
                 .armor(220.0f, 37.0f, 120.0f, 3.0f, 3.0f, 30.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CONGENIAL), allToolTypes())
                 .bow(1.1f, 1.2f, 4.0f)
-                .build());
-
-        VARSIUM = id("varsium");
-        SmitheryAPI.registerMaterial(VARSIUM, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF8FA84A)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 21.06f, 96.0f, 25.4118f, 0.0f, 96.0f)
                 .build());
 
         VIBRANIUM = id("vibranium");
@@ -1771,8 +1292,6 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.GAMBLE_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.VISIONTRAIT_ARMOR), armorPieces())
                 .armor(250.0f, 39.0f, 170.0f, 3.2f, 2.5f, 50.0f)
-                .addModifier(ModifierEffect.of(SoaSmitheryModifiers.RESONANCE), allToolTypes())
-                .addModifier(ModifierEffect.of(SoaSmitheryModifiers.HEROIC), allToolTypes())
                 .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.DURITOS),
                         SmitheryPartTypes.BOW_LIMB, SmitheryPartTypes.GUARD, SmitheryPartTypes.BINDER, SmitheryPartTypes.LARGE_PLATE, SmitheryPartTypes.HANDLE, SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
                 .bow(1.1f, 1.8f, 4.0f)
@@ -1791,45 +1310,6 @@ public final class SoaSmitheryMaterials {
                 .armor(140.0f, 24.0f, 110.0f, 1.5f, 1.0f, 40.0f)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.ARCANE), allToolTypes())
                 .bow(0.45f, 0.95f, 1.0f)
-                .build());
-
-        WEEZER = id("weezer");
-        SmitheryAPI.registerMaterial(WEEZER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFFFFFFF)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 50.0f, 192.0f, 38.1176f, 0.0f, 192.0f)
-                .build());
-
-        WITHERIUM = id("witherium");
-        SmitheryAPI.registerMaterial(WITHERIUM, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF2E2E38)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(81.0f, 28.35f, 12.8f, 14.0824f, 0.0f, 12.8f)
-                .build());
-
-        WOLFRAMIUM = id("wolframium");
-        SmitheryAPI.registerMaterial(WOLFRAMIUM, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF5A5A62)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(60.0f, 20.475f, 0.0f, 20.7529f, 0.0f, 0.0f)
                 .build());
 
         YRDEEN = id("yrdeen");
@@ -1923,6 +1403,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(200)
                         .meltingTemp(600.0f)
                         .partColor(0xFFDDB94C)
+                        .storageForms()
                         .binderMultiplier(1.2f)
                 , 1)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.MOMENTUM), allToolTypes())
@@ -2003,6 +1484,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(0)
                         .meltingTemp(0.0f)
                         .partColor(0xFF77231D)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                 .build());
 
@@ -2249,6 +1731,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(0)
                         .meltingTemp(0.0f)
                         .partColor(0xFFD8E8F0)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                 .build());
 
@@ -2368,6 +1851,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(0)
                         .meltingTemp(0.0f)
                         .partColor(0xFFB8C8C8)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                 .build());
 
@@ -2492,19 +1976,6 @@ public final class SoaSmitheryMaterials {
                 .bow(1.3889f, 1.1f, 1.0f)
                 .build());
 
-        LIMONITE = id("limonite");
-        SmitheryAPI.registerMaterial(LIMONITE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFC8923E)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(35.0f, 15.12f, 28.8f, 15.2471f, 0.0f, 28.8f)
-                .build());
-
         MANGANESE = id("manganese");
         SmitheryAPI.registerMaterial(MANGANESE, binderSlots(MaterialStats.builder()
                         .harvestLevel(3)
@@ -2549,6 +2020,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(0)
                         .meltingTemp(0.0f)
                         .partColor(0xFFE8923E)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                 .fletching(0.8f, 1.25f)
                 .build());
@@ -2561,6 +2033,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(0)
                         .meltingTemp(0.0f)
                         .partColor(0xFFA86FD8)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                 .fletching(0.8f, 1.25f)
                 .build());
@@ -2573,6 +2046,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(0)
                         .meltingTemp(0.0f)
                         .partColor(0xFFD8823E)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                 .build());
 
@@ -2584,6 +2058,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(0)
                         .meltingTemp(0.0f)
                         .partColor(0xFF986FC8)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                 .build());
 
@@ -2743,6 +2218,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(0)
                         .meltingTemp(0.0f)
                         .partColor(0xFFE8862E)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                 .addUniversalModifier(SoaSmitheryModifiers.GETLUCKY)
                 .build());
@@ -2936,6 +2412,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(260)
                         .meltingTemp(1000.0f)
                         .partColor(0xFF5A4638)
+                        .storageForms()
                         .binderMultiplier(1.1f)
                 , 2)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.AUTOSMELT), allToolTypes())
@@ -2956,6 +2433,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(100)
                         .meltingTemp(600.0f)
                         .partColor(0xFF4A4440)
+                        .storageForms()
                         .binderMultiplier(0.8f)
                 , 1)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CHEAP_ARMOR), allToolTypes())
@@ -2998,6 +2476,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(0)
                         .meltingTemp(0.0f)
                         .partColor(0xFFC8C4B0)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                         .castOnly(true)
                 .armor(86.0f, 23.22f, 111.36f, 19.0588f, 0.0f, 111.36f)
@@ -3011,6 +2490,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(0)
                         .meltingTemp(0.0f)
                         .partColor(0xFF6FB8D8)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                 .fletching(0.8f, 1.25f)
                 .build());
@@ -3023,6 +2503,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(0)
                         .meltingTemp(0.0f)
                         .partColor(0xFF5FA8C8)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                 .build());
 
@@ -3075,19 +2556,6 @@ public final class SoaSmitheryMaterials {
                 .armor(256.0f, 27.0f, 100.0f, 2.7f, 3.5f, 60.0f)
                 .bow(0.3846f, 2.4f, 15.6f)
                 .arrowShaft(2.0f, 10)
-                .build());
-
-        STELLAR_ALLOY = id("stellar_alloy");
-        SmitheryAPI.registerMaterial(STELLAR_ALLOY, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFDCE8F0)
-                        .binderMultiplier(1.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.SPARTAN)
-                .addUniversalModifier(SoaSmitheryModifiers.MOMENTUM)
                 .build());
 
         TERRA_ALLOY = id("terra_alloy");
@@ -3167,6 +2635,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(0)
                         .meltingTemp(0.0f)
                         .partColor(0xFF324143)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                 .build());
 
@@ -3205,21 +2674,6 @@ public final class SoaSmitheryMaterials {
     }
 
     private static void registerTinkersEvolution() {
-        ADVANCED_ALLOY = id("advanced_alloy");
-        SmitheryAPI.registerMaterial(ADVANCED_ALLOY, binderSlots(MaterialStats.builder()
-                        .harvestLevel(3)
-                        .miningSpeed(7.0f)
-                        .attackDamage(5.5f)
-                        .durabilityPerIngot(800)
-                        .meltingTemp(1500.0f)
-                        .partColor(0xFF8F9AA5)
-                        .binderMultiplier(1.0f)
-                , 3)
-                .addUniversalModifier(SoaSmitheryModifiers.DENSE)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_IMPACT_FORCE)
-                .bow(0.85f, 1.25f, 2.0f)
-                .build());
-
         ALUMINIUM = id("aluminium");
         SmitheryAPI.registerMaterial(ALUMINIUM, binderSlots(MaterialStats.builder()
                         .harvestLevel(1)
@@ -3278,21 +2732,6 @@ public final class SoaSmitheryMaterials {
                 .addUniversalModifier(SoaSmitheryModifiers.ECOLOGICAL)
                 .bow(0.8f, 1.2f, 2.5f)
                 .arrowShaft(1.5f, 0)
-                .build());
-
-        CARBON_FIBER = id("carbon_fiber");
-        SmitheryAPI.registerMaterial(CARBON_FIBER, binderSlots(MaterialStats.builder()
-                        .harvestLevel(2)
-                        .miningSpeed(6.0f)
-                        .attackDamage(5.5f)
-                        .durabilityPerIngot(1200)
-                        .meltingTemp(1000.0f)
-                        .partColor(0xFF33363A)
-                        .binderMultiplier(1.3f)
-                , 2)
-                .addUniversalModifier(SoaSmitheryModifiers.LIGHTWEIGHT)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_RELENTLESS)
-                .bow(1.6f, 1.0f, 1.5f)
                 .build());
 
         CRYSTAL_MATRIX = id("crystal_matrix");
@@ -3485,20 +2924,6 @@ public final class SoaSmitheryMaterials {
                 .bow(1.2f, 1.0f, 0.0f)
                 .build());
 
-        FLUXED_STRING = id("fluxed_string");
-        SmitheryAPI.registerMaterial(FLUXED_STRING, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFF7F7F7)
-                        .binderMultiplier(1.0f)
-                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_AFTERSHOCK),
-                        SmitheryPartTypes.BOWSTRING)
-                .bowstring(1.25f)
-                .build());
-
         FLUXED_ELECTRUM = id("fluxed_electrum");
         SmitheryAPI.registerMaterial(FLUXED_ELECTRUM, binderSlots(MaterialStats.builder()
                         .harvestLevel(4)
@@ -3538,6 +2963,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(1400)
                         .meltingTemp(2500.0f)
                         .partColor(0xFF177C95)
+                        .storageForms()
                         .colorCycle(152, 0xFF2AAFF9, 0xFF0E6363, 0xFF0E6363, 0xFF2AAFF9, 0xFF0E6363, 0xFF0E6363) // [auto-color]
                         .binderMultiplier(1.35f)
                 , 5)
@@ -3547,21 +2973,6 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_CHILLING_TOUCH_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_ENERGIZED_ARMOR), armorPieces())
                 .bow(0.75f, 1.5f, 6.5f)
-                .build());
-
-        GELID_GEM = id("gelid_gem");
-        SmitheryAPI.registerMaterial(GELID_GEM, binderSlots(MaterialStats.builder()
-                        .harvestLevel(5)
-                        .miningSpeed(11.6f)
-                        .attackDamage(8.7f)
-                        .durabilityPerIngot(1200)
-                        .meltingTemp(2500.0f)
-                        .partColor(0xFF29ACBE)
-                        .binderMultiplier(1.25f)
-                , 5)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_AFTERSHOCK)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_ENERGIZED)
-                .bow(1.5f, 1.1f, 7.2f)
                 .build());
 
         GHOSTWOOD = id("ghostwood");
@@ -3579,23 +2990,6 @@ public final class SoaSmitheryMaterials {
                 .bow(1.5f, 1.0f, 0.0f)
                 .arrowShaft(0.9f, 12)
                 .fletching(1.0f, 0.9f)
-                .build());
-
-        POLYETHYLENE = id("polyethylene");
-        SmitheryAPI.registerMaterial(POLYETHYLENE, binderSlots(MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(5.0f)
-                        .attackDamage(3.0f)
-                        .durabilityPerIngot(220)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFE8E8E4)
-                        .binderMultiplier(0.5f)
-                , 1)
-                .addUniversalModifier(SoaSmitheryModifiers.CHEAP)
-                .addUniversalModifier(SoaSmitheryModifiers.CRUDE)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_FOOT_FLEET)
-                .bow(1.75f, 0.6f, 0.0f)
-                .arrowShaft(0.75f, 75)
                 .build());
 
         INFINITY_METAL = id("infinity_metal");
@@ -3650,21 +3044,6 @@ public final class SoaSmitheryMaterials {
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_MODIFIABLE, java.util.Map.of("bonus_slots", 1))
                 .bow(1.2f, 1.0f, 0.0f)
                 .arrowShaft(1.0f, 0)
-                .build());
-
-        LONSDALEITE = id("lonsdaleite");
-        SmitheryAPI.registerMaterial(LONSDALEITE, binderSlots(MaterialStats.builder()
-                        .harvestLevel(3)
-                        .miningSpeed(7.0f)
-                        .attackDamage(6.0f)
-                        .durabilityPerIngot(840)
-                        .meltingTemp(1500.0f)
-                        .partColor(0xFFBFE8E4)
-                        .binderMultiplier(1.2f)
-                , 3)
-                .addUniversalModifier(SoaSmitheryModifiers.CRUDE)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_MODIFIABLE, java.util.Map.of("bonus_slots", 1))
-                .bow(0.9f, 1.2f, 1.5f)
                 .build());
 
         LUMIUM = id("lumium");
@@ -3761,18 +3140,6 @@ public final class SoaSmitheryMaterials {
                 .bow(0.25f, 4.0f, 20.0f)
                 .build());
 
-        OBDISIAN = id("obdisian");
-        SmitheryAPI.registerMaterial(OBDISIAN, binderSlots(MaterialStats.builder()
-                        .harvestLevel(3)
-                        .miningSpeed(0.0f)
-                        .attackDamage(4.2f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(1500.0f)
-                        .partColor(0xFF3A2E4A)
-                        .binderMultiplier(1.0f)
-                , 3)
-                .build());
-
         PALIS_CRYSTAL = id("palis_crystal");
         SmitheryAPI.registerMaterial(PALIS_CRYSTAL, binderSlots(MaterialStats.builder()
                         .harvestLevel(2)
@@ -3822,6 +3189,8 @@ public final class SoaSmitheryMaterials {
                 .bow(1.0f, 0.8f, 8.0f)
                 .build());
 
+        // Thaumcraft supplied the item in 1.12 and has no 1.20 successor, so this is sourced from
+        // Thermal's cinnabar — the same mercury ore, already generating in world.
         QUICKSILVER = id("quicksilver");
         SmitheryAPI.registerMaterial(QUICKSILVER, MaterialStats.builder()
                         .harvestLevel(0)
@@ -3913,21 +3282,6 @@ public final class SoaSmitheryMaterials {
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_RELENTLESS)
                 .build());
 
-        SUNNARIUM = id("sunnarium");
-        SmitheryAPI.registerMaterial(SUNNARIUM, binderSlots(MaterialStats.builder()
-                        .harvestLevel(7)
-                        .miningSpeed(12.0f)
-                        .attackDamage(12.0f)
-                        .durabilityPerIngot(580)
-                        .meltingTemp(4000.0f)
-                        .partColor(0xFFE8D22E)
-                        .binderMultiplier(1.25f)
-                , 5)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_LUMINIFEROUS)
-                .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_PHOTOSYNTHETIC)
-                .bow(2.0f, 1.1f, 4.0f)
-                .build());
-
         TIN = id("tin");
         SmitheryAPI.registerMaterial(TIN, binderSlots(MaterialStats.builder()
                         .harvestLevel(1)
@@ -4016,6 +3370,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(2200)
                         .meltingTemp(3000.0f)
                         .partColor(0xFFE8B25A)
+                        .storageForms()
                         .binderMultiplier(0.9f)
                 , 5)
                 .addUniversalModifier(SoaSmitheryModifiers.MUSICOFTHESPHERES)
@@ -4074,21 +3429,6 @@ public final class SoaSmitheryMaterials {
                 .bow(0.75f, 1.0f, 0.0f)
                 .build());
 
-        SAPPHIRE_AOA = id("sapphire_aoa");
-        SmitheryAPI.registerMaterial(SAPPHIRE_AOA, binderSlots(MaterialStats.builder()
-                        .harvestLevel(4)
-                        .miningSpeed(8.0f)
-                        .attackDamage(6.4f)
-                        .durabilityPerIngot(1400)
-                        .meltingTemp(2000.0f)
-                        .partColor(0xFF3993C2)
-                        .binderMultiplier(1.25f)
-                , 4)
-                .armor(120.0f, 34.56f, 46.08f, 31.7647f, 0.0f, 46.08f)
-                .addUniversalModifier(SoaSmitheryModifiers.AQUADYNAMIC)
-                .bow(1.3f, 1.5f, 4.0f)
-                .build());
-
         AWAKENED_PLUSTIC = id("awakened_plustic");
         SmitheryAPI.registerMaterial(AWAKENED_PLUSTIC, binderSlots(MaterialStats.builder()
                         .harvestLevel(10)
@@ -4110,50 +3450,6 @@ public final class SoaSmitheryMaterials {
                 .bow(1.9f, 2.8f, 20.0f)
                 .build());
 
-        BLACKQUARTZ_PLUSTIC = id("blackquartz_plustic");
-        SmitheryAPI.registerMaterial(BLACKQUARTZ_PLUSTIC, binderSlots(MaterialStats.builder()
-                        .harvestLevel(2)
-                        .miningSpeed(6.0f)
-                        .attackDamage(4.5f)
-                        .durabilityPerIngot(380)
-                        .meltingTemp(1000.0f)
-                        .partColor(0xFF121110)
-                        .binderMultiplier(0.8f)
-                , 2)
-                .armor(44.0f, 16.2f, 16.0f, 13.5529f, 0.0f, 16.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.CRUDE)
-                .addUniversalModifier(SoaSmitheryModifiers.DEVILSSTRENGTH)
-                .build());
-
-        BLOODWOOD_PLUSTIC = id("bloodwood_plustic");
-        SmitheryAPI.registerMaterial(BLOODWOOD_PLUSTIC, binderSlots(MaterialStats.builder()
-                        .harvestLevel(4)
-                        .miningSpeed(7.0f)
-                        .attackDamage(5.0f)
-                        .durabilityPerIngot(550)
-                        .meltingTemp(2000.0f)
-                        .partColor(0xFF6E1B10)
-                        .binderMultiplier(1.4f)
-                , 4)
-                .armor(25.0f, 22.5f, 19.04f, 29.6471f, 0.0f, 19.04f)
-                .addUniversalModifier(SoaSmitheryModifiers.BLOODYMARY)
-                .addUniversalModifier(SoaSmitheryModifiers.ECOLOGICAL)
-                .bow(1.6f, 1.4f, 7.0f)
-                .build());
-
-        CERTUSQUARTZ_PLUSTIC = id("certusquartz_plustic");
-        SmitheryAPI.registerMaterial(CERTUSQUARTZ_PLUSTIC, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFBADBFF)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(11.0f, 20.25f, 7.84f, 16.9412f, 0.0f, 7.84f)
-                .build());
-
         CERTUS_QUARTZ = id("certus_quartz");
         SmitheryAPI.registerMaterial(CERTUS_QUARTZ, binderSlots(MaterialStats.builder()
                         .harvestLevel(2)
@@ -4170,90 +3466,6 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.LIGHTWEIGHT_ARMOR), armorPieces())
                 .addUniversalModifier(SoaSmitheryModifiers.LIGHTWEIGHT)
                 .bow(1.15f, 1.0f, 0.0f)
-                .build());
-
-        CHAOTIC_PLUSTIC = id("chaotic_plustic");
-        SmitheryAPI.registerMaterial(CHAOTIC_PLUSTIC, binderSlots(MaterialStats.builder()
-                        .harvestLevel(12)
-                        .miningSpeed(12.0f)
-                        .attackDamage(48.0f)
-                        .durabilityPerIngot(10000)
-                        .meltingTemp(1000.0f)
-                        .partColor(0xFF2F3236)
-                        .colorCycle(48, 0xFF53585E, 0xFF212326, 0xFF292C30, 0xFF212326) // [auto-color]
-                        .binderMultiplier(2.3f)
-                , 5)
-                .armor(120.0f, 50.0f, 89.6f, 48.7059f, 0.0f, 89.6f)
-                .addUniversalModifier(SoaSmitheryModifiers.DARKTRAVELER)
-                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.HAILHYDRA),
-                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
-                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.VINDICTIVE),
-                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
-                .bow(2.3f, 4.0f, 24.0f)
-                .build());
-
-        DARKMATTER = id("darkmatter");
-        SmitheryAPI.registerMaterial(DARKMATTER, binderSlots(MaterialStats.builder()
-                        .harvestLevel(5)
-                        .miningSpeed(14.0f)
-                        .attackDamage(10.0f)
-                        .durabilityPerIngot(4096)
-                        .meltingTemp(2500.0f)
-                        .partColor(0xFF0F0029)
-                        .binderMultiplier(1.5f)
-                , 5)
-                .armor(81.0f, 47.25f, 12.432f, 36.0f, 0.0f, 12.432f)
-                .addUniversalModifier(SoaSmitheryModifiers.DARKTRAVELER)
-                .addHeadModifier(SoaSmitheryModifiers.IGNOBLE)
-                .bow(0.85f, 1.5f, 4.0f)
-                .build());
-
-        DARKWOOD_PLUSTIC = id("darkwood_plustic");
-        SmitheryAPI.registerMaterial(DARKWOOD_PLUSTIC, binderSlots(MaterialStats.builder()
-                        .harvestLevel(4)
-                        .miningSpeed(5.0f)
-                        .attackDamage(3.0f)
-                        .durabilityPerIngot(350)
-                        .meltingTemp(2000.0f)
-                        .partColor(0xFF1E3972)
-                        .binderMultiplier(1.3f)
-                , 4)
-                .armor(16.0f, 13.5f, 10.08f, 27.5294f, 0.0f, 10.08f)
-                .addUniversalModifier(SoaSmitheryModifiers.DARKTRAVELER)
-                .addUniversalModifier(SoaSmitheryModifiers.ECOLOGICAL)
-                .bow(1.2f, 1.3f, 3.0f)
-                .build());
-
-        DESH = id("desh");
-        SmitheryAPI.registerMaterial(DESH, binderSlots(MaterialStats.builder()
-                        .harvestLevel(4)
-                        .miningSpeed(8.54f)
-                        .attackDamage(8.0f)
-                        .durabilityPerIngot(1729)
-                        .meltingTemp(2000.0f)
-                        .partColor(0xFF8F8A82)
-                        .binderMultiplier(2.0f)
-                , 4)
-                .armor(81.0f, 36.0f, 28.784f, 34.2642f, 0.0f, 28.784f)
-                .addUniversalModifier(SoaSmitheryModifiers.ALIEN)
-                .addUniversalModifier(SoaSmitheryModifiers.BROWNMAGIC)
-                .addUniversalModifier(SoaSmitheryModifiers.ENDERFERENCE)
-                .bow(0.3679f, 2.72f, 12.0f)
-                .build());
-
-        DIAMATINE_ACTADD_PLUSTIC = id("diamatine_actadd_plustic");
-        SmitheryAPI.registerMaterial(DIAMATINE_ACTADD_PLUSTIC, binderSlots(MaterialStats.builder()
-                        .harvestLevel(4)
-                        .miningSpeed(8.0f)
-                        .attackDamage(6.3f)
-                        .durabilityPerIngot(1700)
-                        .meltingTemp(2000.0f)
-                        .partColor(0xFFB8D8E8)
-                        .binderMultiplier(1.2f)
-                , 4)
-                .armor(120.0f, 22.68f, 28.16f, 20.3294f, 0.0f, 28.16f)
-                .addUniversalModifier(SoaSmitheryModifiers.MORGANLEFAY)
-                .bow(0.7f, 2.0f, 11.0f)
                 .build());
 
         ELEMENTIUM = id("elementium");
@@ -4283,77 +3495,6 @@ public final class SoaSmitheryMaterials {
                 .bow(0.75f, 1.25f, 7.0f)
                 .build());
 
-        EMERADIC_ACTADD_PLUSTIC = id("emeradic_actadd_plustic");
-        SmitheryAPI.registerMaterial(EMERADIC_ACTADD_PLUSTIC, binderSlots(MaterialStats.builder()
-                        .harvestLevel(4)
-                        .miningSpeed(8.0f)
-                        .attackDamage(7.7f)
-                        .durabilityPerIngot(1400)
-                        .meltingTemp(2000.0f)
-                        .partColor(0xFF3EC85A)
-                        .binderMultiplier(1.1f)
-                , 4)
-                .armor(120.0f, 27.72f, 24.704f, 18.6353f, 0.0f, 24.704f)
-                .addUniversalModifier(SoaSmitheryModifiers.VINDICTIVE)
-                .bow(1.1f, 2.0f, 7.0f)
-                .build());
-
-        EMERALD_PLUSTIC = id("emerald_plustic");
-        SmitheryAPI.registerMaterial(EMERALD_PLUSTIC, binderSlots(MaterialStats.builder()
-                        .harvestLevel(3)
-                        .miningSpeed(7.0f)
-                        .attackDamage(6.5f)
-                        .durabilityPerIngot(1222)
-                        .meltingTemp(1500.0f)
-                        .partColor(0xFF17DD62)
-                        .binderMultiplier(1.1f)
-                , 3)
-                .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CRYSTALTRAIT), allToolTypes())
-                .addModifier(ModifierEffect.of(SoaSmitheryModifiers.ESTABLISHED), allToolTypes())
-                .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CRYSTALTRAIT_ARMOR), armorPieces())
-                .addModifier(ModifierEffect.of(SoaSmitheryModifiers.GOODFRIDAYAGREEMENT_ARMOR), armorPieces())
-                .armor(100.0f, 18.0f, 45.0f, 1.4f, 1.75f, 30.0f)
-                .bow(1.1f, 1.0f, 0.9f)
-                .build());
-
-        ENDERIUM_PLUSTIC = id("enderium_plustic");
-        SmitheryAPI.registerMaterial(ENDERIUM_PLUSTIC, binderSlots(MaterialStats.builder()
-                        .harvestLevel(4)
-                        .miningSpeed(7.5f)
-                        .attackDamage(7.0f)
-                        .durabilityPerIngot(800)
-                        .meltingTemp(2000.0f)
-                        .partColor(0xFF0B494A)
-                        .binderMultiplier(1.05f)
-                , 4)
-                .armor(37.0f, 31.5f, 7.28f, 22.2353f, 0.0f, 7.28f)
-                .addUniversalModifier(SoaSmitheryModifiers.ENDERFERENCE)
-                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.ENDSPEED),
-                        SmitheryPartTypes.ARROW_HEAD, SmitheryPartTypes.SHURIKEN_BLADE, SmitheryPartTypes.ARROW_SHAFT)
-                .addUniversalModifier(SoaSmitheryModifiers.GLOBAL)
-                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.PORTLY),
-                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
-                .bow(0.9f, 1.9f, 8.0f)
-                .arrowShaft(1.0f, 12)
-                .build());
-
-        ENORI_ACTADD_PLUSTIC = id("enori_actadd_plustic");
-        SmitheryAPI.registerMaterial(ENORI_ACTADD_PLUSTIC, binderSlots(MaterialStats.builder()
-                        .harvestLevel(3)
-                        .miningSpeed(7.0f)
-                        .attackDamage(5.2f)
-                        .durabilityPerIngot(600)
-                        .meltingTemp(1500.0f)
-                        .partColor(0xFFD2D2D2)
-                        .binderMultiplier(1.2f)
-                , 3)
-                .armor(70.0f, 18.72f, 24.064f, 20.3294f, 0.0f, 24.064f)
-                .addUniversalModifier(SoaSmitheryModifiers.ANTICORROSION)
-                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.STARFISHY),
-                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
-                .bow(1.2f, 1.2f, 5.1f)
-                .build());
-
         ERODIUM = id("erodium");
         SmitheryAPI.registerMaterial(ERODIUM, binderSlots(MaterialStats.builder()
                         .harvestLevel(3)
@@ -4362,6 +3503,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(1000)
                         .meltingTemp(1500.0f)
                         .partColor(0xFF3E9FDF)
+                        .storageForms()
                         .binderMultiplier(0.9f)
                 , 3)
                 .addUniversalModifier(SoaSmitheryModifiers.DEPTHDIGGER)
@@ -4379,6 +3521,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(0)
                         .meltingTemp(0.0f)
                         .partColor(0xFFB15E31)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                 .addUniversalModifier(SoaSmitheryModifiers.NAPHTHA)
                 .bowstring(1.2f)
@@ -4403,19 +3546,6 @@ public final class SoaSmitheryMaterials {
                 .bow(0.9f, 1.25f, 4.0f)
                 .build());
 
-        FLUIXCRYSTAL_PLUSTIC = id("fluixcrystal_plustic");
-        SmitheryAPI.registerMaterial(FLUIXCRYSTAL_PLUSTIC, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF1D2547)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(32.0f, 27.9f, 8.4f, 21.1765f, 0.0f, 8.4f)
-                .build());
-
         FRISCION = id("friscion");
         SmitheryAPI.registerMaterial(FRISCION, binderSlots(MaterialStats.builder()
                         .harvestLevel(4)
@@ -4424,25 +3554,10 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(1100)
                         .meltingTemp(2000.0f)
                         .partColor(0xFF8FC8E8)
+                        .storageForms()
                         .binderMultiplier(0.8f)
                 , 4)
                 .addUniversalModifier(SoaSmitheryModifiers.TRASH)
-                .build());
-
-        FUSEWOOD_PLUSTIC = id("fusewood_plustic");
-        SmitheryAPI.registerMaterial(FUSEWOOD_PLUSTIC, binderSlots(MaterialStats.builder()
-                        .harvestLevel(4)
-                        .miningSpeed(6.0f)
-                        .attackDamage(4.0f)
-                        .durabilityPerIngot(430)
-                        .meltingTemp(2000.0f)
-                        .partColor(0xFF0D352C)
-                        .binderMultiplier(1.0f)
-                , 4)
-                .armor(20.0f, 18.0f, 5.6f, 21.1765f, 0.0f, 5.6f)
-                .addUniversalModifier(SoaSmitheryModifiers.DPRK)
-                .addUniversalModifier(SoaSmitheryModifiers.ECOLOGICAL)
-                .bow(0.7f, 2.0f, 7.0f)
                 .build());
 
         GARFAX = id("garfax");
@@ -4453,43 +3568,10 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(1300)
                         .meltingTemp(2500.0f)
                         .partColor(0xFF4A7A4A)
+                        .storageForms()
                         .binderMultiplier(0.9f)
                 , 5)
                 .addUniversalModifier(SoaSmitheryModifiers.BARRETT)
-                .build());
-
-        GHOSTWOOD_PLUSTIC = id("ghostwood_plustic");
-        SmitheryAPI.registerMaterial(GHOSTWOOD_PLUSTIC, binderSlots(MaterialStats.builder()
-                        .harvestLevel(4)
-                        .miningSpeed(4.9f)
-                        .attackDamage(2.5f)
-                        .durabilityPerIngot(300)
-                        .meltingTemp(2000.0f)
-                        .partColor(0xFF282828)
-                        .binderMultiplier(1.1f)
-                , 4)
-                .armor(14.0f, 11.25f, 11.2f, 23.2941f, 0.0f, 11.2f)
-                .addUniversalModifier(SoaSmitheryModifiers.ECOLOGICAL)
-                .addUniversalModifier(SoaSmitheryModifiers.GHASTLY)
-                .bow(1.6f, 1.1f, 2.0f)
-                .build());
-
-        INFINITY_AVARITIA_PLUSTIC = id("infinity_avaritia_plustic");
-        SmitheryAPI.registerMaterial(INFINITY_AVARITIA_PLUSTIC, binderSlots(MaterialStats.builder()
-                        .harvestLevel(10)
-                        .miningSpeed(18.0f)
-                        .attackDamage(40.0f)
-                        .durabilityPerIngot(7000)
-                        .meltingTemp(8000.0f)
-                        .partColor(0xFFE5C4C4)
-                        .colorCycle(233, 0xFFFFBEBF, 0xFFE9B8B8, 0xFFE2C6C7, 0xFFE2DFDD, 0xFFD8D0CB, 0xFFDEB2B3) // [auto-color]
-                        .binderMultiplier(2.0f)
-                , 5)
-                .armor(120.0f, 50.0f, 156.8f, 42.3529f, 0.0f, 156.8f)
-                .addUniversalModifier(SoaSmitheryModifiers.APOCALYPSE)
-                .addUniversalModifier(SoaSmitheryModifiers.BROWNMAGIC)
-                .addUniversalModifier(SoaSmitheryModifiers.GLOBAL)
-                .bow(2.0f, 2.8f, 16.0f)
                 .build());
 
         INVAR = id("invar");
@@ -4519,6 +3601,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(1900)
                         .meltingTemp(2500.0f)
                         .partColor(0xFFB86FE8)
+                        .storageForms()
                         .binderMultiplier(0.9f)
                 , 5)
                 .addUniversalModifier(SoaSmitheryModifiers.ILLUMINATI)
@@ -4542,8 +3625,6 @@ public final class SoaSmitheryMaterials {
                 .addUniversalModifier(SoaSmitheryModifiers.DENSE)
                 .addUniversalModifier(SoaSmitheryModifiers.MOMENTUM)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_OVERWHELM)
-                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.ALIEN),
-                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
                 .bow(0.6f, 2.0f, 5.5f)
                 .build());
 
@@ -4570,6 +3651,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(2500)
                         .meltingTemp(5000.0f)
                         .partColor(0xFF4CBB17)
+                        .storageForms()
                         .binderMultiplier(1.3f)
                 , 5)
                 .addUniversalModifier(SoaSmitheryModifiers.HAILHYDRA)
@@ -4584,6 +3666,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(1300)
                         .meltingTemp(2000.0f)
                         .partColor(0xFFE8B8C8)
+                        .storageForms()
                         .binderMultiplier(0.9f)
                 , 4)
                 .addUniversalModifier(SoaSmitheryModifiers.NATURESBLESSING)
@@ -4601,6 +3684,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(1500)
                         .meltingTemp(1500.0f)
                         .partColor(0xFF9A7B4F)
+                        .storageForms()
                         .binderMultiplier(1.5f)
                 , 3)
                 .addUniversalModifier(SoaSmitheryModifiers.PORTLY)
@@ -4615,6 +3699,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(700)
                         .meltingTemp(1500.0f)
                         .partColor(0xFFCADF3E)
+                        .storageForms()
                         .binderMultiplier(0.9f)
                 , 3)
                 .addUniversalModifier(SoaSmitheryModifiers.CRUDE)
@@ -4623,39 +3708,6 @@ public final class SoaSmitheryMaterials {
                 .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.STONEBOUND),
                         SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
                 .bow(0.75f, 1.25f, 2.0f)
-                .build());
-
-        LIVINGWOOD_PLUSTIC = id("livingwood_plustic");
-        SmitheryAPI.registerMaterial(LIVINGWOOD_PLUSTIC, binderSlots(MaterialStats.builder()
-                        .harvestLevel(1)
-                        .miningSpeed(5.1f)
-                        .attackDamage(2.8f)
-                        .durabilityPerIngot(50)
-                        .meltingTemp(600.0f)
-                        .partColor(0xFF421909)
-                        .binderMultiplier(1.15f)
-                , 1)
-                .armor(2.0f, 12.6f, 2.24f, 24.3529f, 0.0f, 2.24f)
-                .addUniversalModifier(SoaSmitheryModifiers.BOTANICAL)
-                .addUniversalModifier(SoaSmitheryModifiers.ECOLOGICAL)
-                .bow(1.1f, 1.1f, 1.8f)
-                .arrowShaft(1.0f, 6)
-                .build());
-
-        LUMIUM_PLUSTIC = id("lumium_plustic");
-        SmitheryAPI.registerMaterial(LUMIUM_PLUSTIC, binderSlots(MaterialStats.builder()
-                        .harvestLevel(4)
-                        .miningSpeed(7.0f)
-                        .attackDamage(6.5f)
-                        .durabilityPerIngot(830)
-                        .meltingTemp(2000.0f)
-                        .partColor(0xFFCE7F2D)
-                        .binderMultiplier(1.1f)
-                , 4)
-                .armor(39.0f, 29.25f, 6.72f, 23.2941f, 0.0f, 6.72f)
-                .addUniversalModifier(SoaSmitheryModifiers.GLOWING)
-                .addUniversalModifier(SoaSmitheryModifiers.ILLUMINATI)
-                .bow(1.5f, 1.8f, 4.0f)
                 .build());
 
         MALACHITE_GEM = id("malachite_gem");
@@ -4701,6 +3753,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(680)
                         .meltingTemp(1500.0f)
                         .partColor(0xFFC9C2A8)
+                        .storageForms()
                         .binderMultiplier(0.9f)
                 , 3)
                 .addUniversalModifier(SoaSmitheryModifiers.SLASHING)
@@ -4733,6 +3786,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(1600)
                         .meltingTemp(3000.0f)
                         .partColor(0xFFE8A0B8)
+                        .storageForms()
                         .binderMultiplier(1.2f)
                 , 5)
                 .addUniversalModifier(SoaSmitheryModifiers.MORGANLEFAY)
@@ -4818,20 +3872,6 @@ public final class SoaSmitheryMaterials {
                 .bow(0.65f, 1.3f, 5.7f)
                 .build());
 
-        PALIS_ACTADD_PLUSTIC = id("palis_actadd_plustic");
-        SmitheryAPI.registerMaterial(PALIS_ACTADD_PLUSTIC, binderSlots(MaterialStats.builder()
-                        .harvestLevel(4)
-                        .miningSpeed(7.5f)
-                        .attackDamage(5.8f)
-                        .durabilityPerIngot(800)
-                        .meltingTemp(2000.0f)
-                        .partColor(0xFF0D0E7F)
-                        .binderMultiplier(1.3f)
-                , 4)
-                .armor(94.0f, 20.88f, 32.0f, 22.0235f, 0.0f, 32.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.SPADES)
-                .build());
-
         PERIDOT = id("peridot");
         SmitheryAPI.registerMaterial(PERIDOT, binderSlots(MaterialStats.builder()
                         .harvestLevel(3)
@@ -4872,61 +3912,12 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(1600)
                         .meltingTemp(2000.0f)
                         .partColor(0xFF6FD8A8)
+                        .storageForms()
                         .binderMultiplier(0.9f)
                 , 4)
                 .addUniversalModifier(SoaSmitheryModifiers.STOPBEINGSELFISH)
                 .addUniversalModifier(SoaSmitheryModifiers.TCONEVO_RELENTLESS)
                 .bow(0.49f, 2.2f, 6.5f)
-                .build());
-
-        PLATINUM_PLUSTIC = id("platinum_plustic");
-        SmitheryAPI.registerMaterial(PLATINUM_PLUSTIC, binderSlots(MaterialStats.builder()
-                        .harvestLevel(4)
-                        .miningSpeed(8.0f)
-                        .attackDamage(6.0f)
-                        .durabilityPerIngot(720)
-                        .meltingTemp(2000.0f)
-                        .partColor(0xFF4771C0)
-                        .binderMultiplier(1.05f)
-                , 4)
-                .armor(33.0f, 27.0f, 6.72f, 22.2353f, 0.0f, 6.72f)
-                .addUniversalModifier(SoaSmitheryModifiers.ANTICORROSION)
-                .addUniversalModifier(SoaSmitheryModifiers.HEAVY_METAL)
-                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.GLOBAL),
-                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
-                .bow(0.85f, 1.8f, 8.0f)
-                .build());
-
-        PSIGEM = id("psigem");
-        SmitheryAPI.registerMaterial(PSIGEM, binderSlots(MaterialStats.builder()
-                        .harvestLevel(3)
-                        .miningSpeed(7.0f)
-                        .attackDamage(4.0f)
-                        .durabilityPerIngot(300)
-                        .meltingTemp(1500.0f)
-                        .partColor(0xFF7AB8D8)
-                        .binderMultiplier(0.9f)
-                , 3)
-                .armor(58.0f, 27.0f, 7.68f, 33.0353f, 0.0f, 7.68f)
-                .addUniversalModifier(SoaSmitheryModifiers.PORTLY)
-                .addUniversalModifier(SoaSmitheryModifiers.PSICOLOGICAL)
-                .bow(1.0f, 1.6f, 4.0f)
-                .build());
-
-        PSIMETAL = id("psimetal");
-        SmitheryAPI.registerMaterial(PSIMETAL, binderSlots(MaterialStats.builder()
-                        .harvestLevel(2)
-                        .miningSpeed(6.5f)
-                        .attackDamage(3.5f)
-                        .durabilityPerIngot(250)
-                        .meltingTemp(1000.0f)
-                        .partColor(0xFFE0DCD0)
-                        .binderMultiplier(0.85f)
-                , 2)
-                .armor(58.0f, 27.0f, 7.68f, 33.0353f, 0.0f, 7.68f)
-                .addUniversalModifier(SoaSmitheryModifiers.GLOBAL)
-                .addUniversalModifier(SoaSmitheryModifiers.PSICOLOGICAL)
-                .bow(1.0f, 1.6f, 4.0f)
                 .build());
 
         RACHELINE = id("racheline");
@@ -4937,71 +3928,11 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(2000)
                         .meltingTemp(4000.0f)
                         .partColor(0xFF9A6FD0)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                 , 5)
                 .addUniversalModifier(SoaSmitheryModifiers.BLINDBANDIT)
                 .bow(1.3f, 0.7f, 15.0f)
-                .build());
-
-        REDMATTER = id("redmatter");
-        SmitheryAPI.registerMaterial(REDMATTER, binderSlots(MaterialStats.builder()
-                        .harvestLevel(5)
-                        .miningSpeed(18.0f)
-                        .attackDamage(12.0f)
-                        .durabilityPerIngot(8192)
-                        .meltingTemp(2500.0f)
-                        .partColor(0xFFFEEC57)
-                        .binderMultiplier(2.0f)
-                , 5)
-                .armor(94.0f, 50.0f, 11.76f, 42.3529f, 0.0f, 11.76f)
-                .addUniversalModifier(SoaSmitheryModifiers.DPRK)
-                .bow(0.75f, 2.0f, 10.0f)
-                .build());
-
-        REFINEDGLOWSTONE = id("refinedglowstone");
-        SmitheryAPI.registerMaterial(REFINEDGLOWSTONE, binderSlots(MaterialStats.builder()
-                        .harvestLevel(2)
-                        .miningSpeed(8.0f)
-                        .attackDamage(5.5f)
-                        .durabilityPerIngot(300)
-                        .meltingTemp(1000.0f)
-                        .partColor(0xFFFFEA86)
-                        .binderMultiplier(0.9f)
-                , 2)
-                .armor(21.0f, 45.0f, 11.2f, 19.0588f, 0.0f, 11.2f)
-                .addUniversalModifier(SoaSmitheryModifiers.ILLUMINATI)
-                .bow(1.0f, 1.25f, 4.0f)
-                .build());
-
-        REFINEDOBSIDIAN = id("refinedobsidian");
-        SmitheryAPI.registerMaterial(REFINEDOBSIDIAN, binderSlots(MaterialStats.builder()
-                        .harvestLevel(4)
-                        .miningSpeed(7.0f)
-                        .attackDamage(6.0f)
-                        .durabilityPerIngot(2500)
-                        .meltingTemp(2000.0f)
-                        .partColor(0xFF7861A2)
-                        .binderMultiplier(1.3f)
-                , 4)
-                .armor(117.0f, 49.5f, 17.92f, 31.7647f, 0.0f, 17.92f)
-                .addUniversalModifier(SoaSmitheryModifiers.DENSE)
-                .addUniversalModifier(SoaSmitheryModifiers.DURITOS)
-                .bow(0.65f, 1.35f, 7.0f)
-                .build());
-
-        RESTONIA_ACTADD_PLUSTIC = id("restonia_actadd_plustic");
-        SmitheryAPI.registerMaterial(RESTONIA_ACTADD_PLUSTIC, binderSlots(MaterialStats.builder()
-                        .harvestLevel(3)
-                        .miningSpeed(8.8f)
-                        .attackDamage(6.1f)
-                        .durabilityPerIngot(640)
-                        .meltingTemp(1500.0f)
-                        .partColor(0xFFF10000)
-                        .binderMultiplier(1.1f)
-                , 3)
-                .armor(75.0f, 21.96f, 28.8f, 18.6353f, 0.0f, 28.8f)
-                .addUniversalModifier(SoaSmitheryModifiers.HEARTS)
-                .bow(1.4f, 1.7f, 5.7f)
                 .build());
 
         RUBY = id("ruby");
@@ -5036,21 +3967,6 @@ public final class SoaSmitheryMaterials {
                 .addUniversalModifier(SoaSmitheryModifiers.AQUADYNAMIC)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.AQUASPEED_ARMOR), armorPieces())
                 .bow(1.0f, 1.5f, 4.0f)
-                .build());
-
-        SIGNALUM_PLUSTIC = id("signalum_plustic");
-        SmitheryAPI.registerMaterial(SIGNALUM_PLUSTIC, binderSlots(MaterialStats.builder()
-                        .harvestLevel(3)
-                        .miningSpeed(7.5f)
-                        .attackDamage(5.2f)
-                        .durabilityPerIngot(690)
-                        .meltingTemp(1500.0f)
-                        .partColor(0xFFCF4606)
-                        .binderMultiplier(1.2f)
-                , 3)
-                .armor(32.0f, 23.4f, 6.16f, 25.4118f, 0.0f, 6.16f)
-                .addUniversalModifier(SoaSmitheryModifiers.BLOODYMARY)
-                .bow(1.2f, 1.6f, 4.4f)
                 .build());
 
         SKY_STONE = id("sky_stone");
@@ -5156,6 +4072,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(500)
                         .meltingTemp(1000.0f)
                         .partColor(0xFF2D2D2D)
+                        .storageForms()
                         .binderMultiplier(0.7f)
                 , 2)
                 .addUniversalModifier(SoaSmitheryModifiers.FLAMMABLE)
@@ -5186,1298 +4103,28 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(700)
                         .meltingTemp(1000.0f)
                         .partColor(0xFF4D4D4D)
+                        .storageForms()
                         .binderMultiplier(1.4f)
                 , 2)
                 .addUniversalModifier(SoaSmitheryModifiers.HEAVY_METAL)
                 .build());
 
-        VOID_ACTADD_PLUSTIC = id("void_actadd_plustic");
-        SmitheryAPI.registerMaterial(VOID_ACTADD_PLUSTIC, binderSlots(MaterialStats.builder()
-                        .harvestLevel(3)
-                        .miningSpeed(7.0f)
-                        .attackDamage(4.4f)
-                        .durabilityPerIngot(480)
-                        .meltingTemp(1500.0f)
-                        .partColor(0xFF520CA2)
+        // PlusTiC's guardian scale — filed under the Ice & Fire group before that
+        // group was removed as GreedyCraft ghost data.
+        GUARDIANSCALE = id("guardianscale");
+        SmitheryAPI.registerMaterial(GUARDIANSCALE, MaterialStats.builder()
+                        .harvestLevel(0)
+                        .miningSpeed(0.0f)
+                        .attackDamage(0.0f)
+                        .durabilityPerIngot(0)
+                        .meltingTemp(0.0f)
+                        .partColor(0xFF6FA89F)
+                        .storageForms()
                         .binderMultiplier(1.0f)
-                , 3)
-                .armor(56.0f, 15.84f, 44.8f, 16.9412f, 0.0f, 44.8f)
-                .addUniversalModifier(SoaSmitheryModifiers.CRUDE)
-                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.UNNAMED),
+                .addUniversalModifier(SoaSmitheryModifiers.AQUADYNAMIC)
+                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.DIVINESHIELD),
                         SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
-                .bow(1.0f, 1.3f, 3.5f)
                 .build());
-
-        WYVERN_PLUSTIC = id("wyvern_plustic");
-        SmitheryAPI.registerMaterial(WYVERN_PLUSTIC, binderSlots(MaterialStats.builder()
-                        .harvestLevel(8)
-                        .miningSpeed(8.0f)
-                        .attackDamage(15.0f)
-                        .durabilityPerIngot(2000)
-                        .meltingTemp(5000.0f)
-                        .partColor(0xFF5B4273)
-                        .binderMultiplier(1.6f)
-                , 5)
-                .armor(94.0f, 50.0f, 26.88f, 33.8824f, 0.0f, 26.88f)
-                .addUniversalModifier(SoaSmitheryModifiers.PORTLY)
-                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.BLINDBANDIT),
-                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
-                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.BROWNMAGIC),
-                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
-                .bow(1.6f, 2.0f, 11.0f)
-                .build());
-
-    }
-
-    private static void registerSilentsGems() {
-        SILENTGEMSAGATE = ResourceLocation.fromNamespaceAndPath("silentgems", "agate");
-        SmitheryAPI.registerMaterial(SILENTGEMSAGATE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFC97F6B)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(24.0f, 16.2f, 8.192f, 22.2353f, 0.0f, 8.192f)
-                .build());
-
-        SILENTGEMSAGATE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "agate_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSAGATE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFC97F6B)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(96.0f, 32.4f, 32.768f, 22.2353f, 0.0f, 32.768f)
-                .build());
-
-        SILENTGEMSALEXANDRITE = ResourceLocation.fromNamespaceAndPath("silentgems", "alexandrite");
-        SmitheryAPI.registerMaterial(SILENTGEMSALEXANDRITE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF6FBF8F)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(72.0f, 16.2f, 24.576f, 22.2353f, 0.0f, 24.576f)
-                .build());
-
-        SILENTGEMSALEXANDRITE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "alexandrite_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSALEXANDRITE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF6FBF8F)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 32.4f, 98.304f, 22.2353f, 0.0f, 98.304f)
-                .build());
-
-        SILENTGEMSAMBER = ResourceLocation.fromNamespaceAndPath("silentgems", "amber");
-        SmitheryAPI.registerMaterial(SILENTGEMSAMBER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFF09D34)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(18.0f, 10.8f, 6.144f, 22.2353f, 0.0f, 6.144f)
-                .build());
-
-        SILENTGEMSAMBER_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "amber_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSAMBER_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFF09D34)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(72.0f, 27.0f, 24.576f, 22.2353f, 0.0f, 24.576f)
-                .build());
-
-        SILENTGEMSAMETHYST = ResourceLocation.fromNamespaceAndPath("silentgems", "amethyst");
-        SmitheryAPI.registerMaterial(SILENTGEMSAMETHYST, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF4B207F)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(36.0f, 16.2f, 12.288f, 22.2353f, 0.0f, 12.288f)
-                .build());
-
-        SILENTGEMSAMETHYST_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "amethyst_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSAMETHYST_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF4B207F)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 32.4f, 49.152f, 22.2353f, 0.0f, 49.152f)
-                .build());
-
-        SILENTGEMSAMETRINE = ResourceLocation.fromNamespaceAndPath("silentgems", "ametrine");
-        SmitheryAPI.registerMaterial(SILENTGEMSAMETRINE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFB585D0)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(48.0f, 21.6f, 16.384f, 22.2353f, 0.0f, 16.384f)
-                .build());
-
-        SILENTGEMSAMETRINE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "ametrine_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSAMETRINE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFB585D0)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 37.8f, 65.536f, 22.2353f, 0.0f, 65.536f)
-                .build());
-
-        SILENTGEMSAMMOLITE = ResourceLocation.fromNamespaceAndPath("silentgems", "ammolite");
-        SmitheryAPI.registerMaterial(SILENTGEMSAMMOLITE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF4FA88A)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(24.0f, 16.2f, 8.192f, 22.2353f, 0.0f, 8.192f)
-                .build());
-
-        SILENTGEMSAMMOLITE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "ammolite_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSAMMOLITE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF4FA88A)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(96.0f, 32.4f, 32.768f, 22.2353f, 0.0f, 32.768f)
-                .build());
-
-        SILENTGEMSAPATITE = ResourceLocation.fromNamespaceAndPath("silentgems", "apatite");
-        SmitheryAPI.registerMaterial(SILENTGEMSAPATITE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF3495D4)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(24.0f, 10.8f, 8.192f, 22.2353f, 0.0f, 8.192f)
-                .build());
-
-        SILENTGEMSAPATITE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "apatite_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSAPATITE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF3495D4)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(96.0f, 27.0f, 32.768f, 22.2353f, 0.0f, 32.768f)
-                .build());
-
-        SILENTGEMSAQUAMARINE = ResourceLocation.fromNamespaceAndPath("silentgems", "aquamarine");
-        SmitheryAPI.registerMaterial(SILENTGEMSAQUAMARINE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF006FC1)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(36.0f, 16.2f, 12.288f, 22.2353f, 0.0f, 12.288f)
-                .build());
-
-        SILENTGEMSAQUAMARINE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "aquamarine_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSAQUAMARINE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF006FC1)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 32.4f, 49.152f, 22.2353f, 0.0f, 49.152f)
-                .build());
-
-        SILENTGEMSBERYL = ResourceLocation.fromNamespaceAndPath("silentgems", "beryl");
-        SmitheryAPI.registerMaterial(SILENTGEMSBERYL, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF7FD3A8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(48.0f, 21.6f, 16.384f, 22.2353f, 0.0f, 16.384f)
-                .build());
-
-        SILENTGEMSBERYL_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "beryl_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSBERYL_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF7FD3A8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 37.8f, 65.536f, 22.2353f, 0.0f, 65.536f)
-                .build());
-
-        SILENTGEMSBLACK_DIAMOND = ResourceLocation.fromNamespaceAndPath("silentgems", "black_diamond");
-        SmitheryAPI.registerMaterial(SILENTGEMSBLACK_DIAMOND, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF3B3844)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(96.0f, 16.2f, 32.768f, 22.2353f, 0.0f, 32.768f)
-                .build());
-
-        SILENTGEMSBLACK_DIAMOND_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "black_diamond_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSBLACK_DIAMOND_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF3B3844)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 32.4f, 131.072f, 22.2353f, 0.0f, 131.072f)
-                .build());
-
-        SILENTGEMSBLUE_TOPAZ = ResourceLocation.fromNamespaceAndPath("silentgems", "blue_topaz");
-        SmitheryAPI.registerMaterial(SILENTGEMSBLUE_TOPAZ, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF3E8FD8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(72.0f, 16.2f, 24.576f, 22.2353f, 0.0f, 24.576f)
-                .build());
-
-        SILENTGEMSBLUE_TOPAZ_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "blue_topaz_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSBLUE_TOPAZ_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF3E8FD8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 32.4f, 98.304f, 22.2353f, 0.0f, 98.304f)
-                .build());
-
-        SILENTGEMSCARNELIAN = ResourceLocation.fromNamespaceAndPath("silentgems", "carnelian");
-        SmitheryAPI.registerMaterial(SILENTGEMSCARNELIAN, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFC24E33)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(36.0f, 10.8f, 12.288f, 22.2353f, 0.0f, 12.288f)
-                .build());
-
-        SILENTGEMSCARNELIAN_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "carnelian_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSCARNELIAN_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFC24E33)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 27.0f, 49.152f, 22.2353f, 0.0f, 49.152f)
-                .build());
-
-        SILENTGEMSCATS_EYE = ResourceLocation.fromNamespaceAndPath("silentgems", "cats_eye");
-        SmitheryAPI.registerMaterial(SILENTGEMSCATS_EYE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFC7B24A)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(72.0f, 16.2f, 24.576f, 22.2353f, 0.0f, 24.576f)
-                .build());
-
-        SILENTGEMSCATS_EYE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "cats_eye_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSCATS_EYE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFC7B24A)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 32.4f, 98.304f, 22.2353f, 0.0f, 98.304f)
-                .build());
-
-        SILENTGEMSCHRYSOPRASE = ResourceLocation.fromNamespaceAndPath("silentgems", "chrysoprase");
-        SmitheryAPI.registerMaterial(SILENTGEMSCHRYSOPRASE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF57C785)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(48.0f, 16.2f, 16.384f, 22.2353f, 0.0f, 16.384f)
-                .build());
-
-        SILENTGEMSCHRYSOPRASE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "chrysoprase_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSCHRYSOPRASE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF57C785)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 32.4f, 65.536f, 22.2353f, 0.0f, 65.536f)
-                .build());
-
-        SILENTGEMSCITRINE = ResourceLocation.fromNamespaceAndPath("silentgems", "citrine");
-        SmitheryAPI.registerMaterial(SILENTGEMSCITRINE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFE0A62B)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(48.0f, 21.6f, 16.384f, 22.2353f, 0.0f, 16.384f)
-                .build());
-
-        SILENTGEMSCITRINE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "citrine_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSCITRINE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFE0A62B)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 37.8f, 65.536f, 22.2353f, 0.0f, 65.536f)
-                .build());
-
-        SILENTGEMSCORAL = ResourceLocation.fromNamespaceAndPath("silentgems", "coral");
-        SmitheryAPI.registerMaterial(SILENTGEMSCORAL, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFE8735A)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(24.0f, 16.2f, 8.192f, 22.2353f, 0.0f, 8.192f)
-                .build());
-
-        SILENTGEMSCORAL_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "coral_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSCORAL_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFE8735A)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(96.0f, 32.4f, 32.768f, 22.2353f, 0.0f, 32.768f)
-                .build());
-
-        SILENTGEMSFLUORITE = ResourceLocation.fromNamespaceAndPath("silentgems", "fluorite");
-        SmitheryAPI.registerMaterial(SILENTGEMSFLUORITE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFC1D5DE)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(24.0f, 10.8f, 8.192f, 22.2353f, 0.0f, 8.192f)
-                .build());
-
-        SILENTGEMSFLUORITE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "fluorite_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSFLUORITE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFC1D5DE)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(96.0f, 27.0f, 32.768f, 22.2353f, 0.0f, 32.768f)
-                .build());
-
-        SILENTGEMSGARNET = ResourceLocation.fromNamespaceAndPath("silentgems", "garnet");
-        SmitheryAPI.registerMaterial(SILENTGEMSGARNET, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF9A1F2E)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(48.0f, 21.6f, 16.384f, 22.2353f, 0.0f, 16.384f)
-                .build());
-
-        SILENTGEMSGARNET_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "garnet_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSGARNET_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF9A1F2E)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 37.8f, 65.536f, 22.2353f, 0.0f, 65.536f)
-                .build());
-
-        SILENTGEMSGOLDEN_BERYL = ResourceLocation.fromNamespaceAndPath("silentgems", "golden_beryl");
-        SmitheryAPI.registerMaterial(SILENTGEMSGOLDEN_BERYL, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFE8C84A)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(48.0f, 10.8f, 16.384f, 22.2353f, 0.0f, 16.384f)
-                .build());
-
-        SILENTGEMSGOLDEN_BERYL_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "golden_beryl_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSGOLDEN_BERYL_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFE8C84A)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 27.0f, 65.536f, 22.2353f, 0.0f, 65.536f)
-                .build());
-
-        SILENTGEMSHELIODOR = ResourceLocation.fromNamespaceAndPath("silentgems", "heliodor");
-        SmitheryAPI.registerMaterial(SILENTGEMSHELIODOR, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFE3D060)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(36.0f, 21.6f, 12.288f, 22.2353f, 0.0f, 12.288f)
-                .build());
-
-        SILENTGEMSHELIODOR_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "heliodor_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSHELIODOR_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFE3D060)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 37.8f, 49.152f, 22.2353f, 0.0f, 49.152f)
-                .build());
-
-        SILENTGEMSINDICOLITE = ResourceLocation.fromNamespaceAndPath("silentgems", "indicolite");
-        SmitheryAPI.registerMaterial(SILENTGEMSINDICOLITE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF2E7FA8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(48.0f, 10.8f, 16.384f, 22.2353f, 0.0f, 16.384f)
-                .build());
-
-        SILENTGEMSINDICOLITE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "indicolite_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSINDICOLITE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF2E7FA8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 27.0f, 65.536f, 22.2353f, 0.0f, 65.536f)
-                .build());
-
-        SILENTGEMSIOLITE = ResourceLocation.fromNamespaceAndPath("silentgems", "iolite");
-        SmitheryAPI.registerMaterial(SILENTGEMSIOLITE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF5A5FB8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(48.0f, 10.8f, 16.384f, 22.2353f, 0.0f, 16.384f)
-                .build());
-
-        SILENTGEMSIOLITE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "iolite_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSIOLITE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF5A5FB8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 27.0f, 65.536f, 22.2353f, 0.0f, 65.536f)
-                .build());
-
-        SILENTGEMSJADE = ResourceLocation.fromNamespaceAndPath("silentgems", "jade");
-        SmitheryAPI.registerMaterial(SILENTGEMSJADE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF4FBC94)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(36.0f, 21.6f, 12.288f, 22.2353f, 0.0f, 12.288f)
-                .build());
-
-        SILENTGEMSJADE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "jade_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSJADE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF4FBC94)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 37.8f, 49.152f, 22.2353f, 0.0f, 49.152f)
-                .build());
-
-        SILENTGEMSJASPER = ResourceLocation.fromNamespaceAndPath("silentgems", "jasper");
-        SmitheryAPI.registerMaterial(SILENTGEMSJASPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF724134)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(36.0f, 16.2f, 12.288f, 22.2353f, 0.0f, 12.288f)
-                .build());
-
-        SILENTGEMSJASPER_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "jasper_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSJASPER_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF724134)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 32.4f, 49.152f, 22.2353f, 0.0f, 49.152f)
-                .build());
-
-        SILENTGEMSKUNZITE = ResourceLocation.fromNamespaceAndPath("silentgems", "kunzite");
-        SmitheryAPI.registerMaterial(SILENTGEMSKUNZITE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFE3A0C8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(36.0f, 27.0f, 12.288f, 22.2353f, 0.0f, 12.288f)
-                .build());
-
-        SILENTGEMSKUNZITE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "kunzite_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSKUNZITE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFE3A0C8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 43.2f, 49.152f, 22.2353f, 0.0f, 49.152f)
-                .build());
-
-        SILENTGEMSKYANITE = ResourceLocation.fromNamespaceAndPath("silentgems", "kyanite");
-        SmitheryAPI.registerMaterial(SILENTGEMSKYANITE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF3F6FC4)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(72.0f, 21.6f, 24.576f, 22.2353f, 0.0f, 24.576f)
-                .build());
-
-        SILENTGEMSKYANITE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "kyanite_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSKYANITE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF3F6FC4)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 37.8f, 98.304f, 22.2353f, 0.0f, 98.304f)
-                .build());
-
-        SILENTGEMSLEPIDOLITE = ResourceLocation.fromNamespaceAndPath("silentgems", "lepidolite");
-        SmitheryAPI.registerMaterial(SILENTGEMSLEPIDOLITE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFB08BC0)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(18.0f, 16.2f, 6.144f, 22.2353f, 0.0f, 6.144f)
-                .build());
-
-        SILENTGEMSLEPIDOLITE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "lepidolite_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSLEPIDOLITE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFB08BC0)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(72.0f, 32.4f, 24.576f, 22.2353f, 0.0f, 24.576f)
-                .build());
-
-        SILENTGEMSMALACHITE = ResourceLocation.fromNamespaceAndPath("silentgems", "malachite");
-        SmitheryAPI.registerMaterial(SILENTGEMSMALACHITE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF16A17A)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(24.0f, 21.6f, 8.192f, 22.2353f, 0.0f, 8.192f)
-                .build());
-
-        SILENTGEMSMALACHITE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "malachite_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSMALACHITE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF16A17A)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(96.0f, 37.8f, 32.768f, 22.2353f, 0.0f, 32.768f)
-                .build());
-
-        SILENTGEMSMOLDAVITE = ResourceLocation.fromNamespaceAndPath("silentgems", "moldavite");
-        SmitheryAPI.registerMaterial(SILENTGEMSMOLDAVITE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF6F8F2F)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(24.0f, 27.0f, 8.192f, 22.2353f, 0.0f, 8.192f)
-                .build());
-
-        SILENTGEMSMOLDAVITE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "moldavite_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSMOLDAVITE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF6F8F2F)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(96.0f, 43.2f, 32.768f, 22.2353f, 0.0f, 32.768f)
-                .build());
-
-        SILENTGEMSMOONSTONE = ResourceLocation.fromNamespaceAndPath("silentgems", "moonstone");
-        SmitheryAPI.registerMaterial(SILENTGEMSMOONSTONE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFD2ECF6)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(36.0f, 16.2f, 12.288f, 22.2353f, 0.0f, 12.288f)
-                .build());
-
-        SILENTGEMSMOONSTONE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "moonstone_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSMOONSTONE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFD2ECF6)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 32.4f, 49.152f, 22.2353f, 0.0f, 49.152f)
-                .build());
-
-        SILENTGEMSMORGANITE = ResourceLocation.fromNamespaceAndPath("silentgems", "morganite");
-        SmitheryAPI.registerMaterial(SILENTGEMSMORGANITE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFEFA8A0)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(36.0f, 21.6f, 12.288f, 22.2353f, 0.0f, 12.288f)
-                .build());
-
-        SILENTGEMSMORGANITE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "morganite_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSMORGANITE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFEFA8A0)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 37.8f, 49.152f, 22.2353f, 0.0f, 49.152f)
-                .build());
-
-        SILENTGEMSONYX = ResourceLocation.fromNamespaceAndPath("silentgems", "onyx");
-        SmitheryAPI.registerMaterial(SILENTGEMSONYX, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF373A3A)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(18.0f, 37.8f, 6.144f, 22.2353f, 0.0f, 6.144f)
-                .build());
-
-        SILENTGEMSONYX_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "onyx_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSONYX_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF373A3A)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(72.0f, 50.0f, 24.576f, 22.2353f, 0.0f, 24.576f)
-                .build());
-
-        SILENTGEMSOPAL = ResourceLocation.fromNamespaceAndPath("silentgems", "opal");
-        SmitheryAPI.registerMaterial(SILENTGEMSOPAL, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFD8E8E0)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(24.0f, 16.2f, 8.192f, 22.2353f, 0.0f, 8.192f)
-                .build());
-
-        SILENTGEMSOPAL_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "opal_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSOPAL_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFD8E8E0)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(96.0f, 32.4f, 32.768f, 22.2353f, 0.0f, 32.768f)
-                .build());
-
-        SILENTGEMSPEARL = ResourceLocation.fromNamespaceAndPath("silentgems", "pearl");
-        SmitheryAPI.registerMaterial(SILENTGEMSPEARL, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF6AA7AD)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(24.0f, 16.2f, 8.192f, 22.2353f, 0.0f, 8.192f)
-                .build());
-
-        SILENTGEMSPEARL_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "pearl_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSPEARL_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF6AA7AD)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(96.0f, 32.4f, 32.768f, 22.2353f, 0.0f, 32.768f)
-                .build());
-
-        SILENTGEMSPERIDOT = ResourceLocation.fromNamespaceAndPath("silentgems", "peridot");
-        SmitheryAPI.registerMaterial(SILENTGEMSPERIDOT, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF314419)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(36.0f, 21.6f, 12.288f, 22.2353f, 0.0f, 12.288f)
-                .build());
-
-        SILENTGEMSPERIDOT_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "peridot_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSPERIDOT_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF314419)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 37.8f, 49.152f, 22.2353f, 0.0f, 49.152f)
-                .build());
-
-        SILENTGEMSPYROPE = ResourceLocation.fromNamespaceAndPath("silentgems", "pyrope");
-        SmitheryAPI.registerMaterial(SILENTGEMSPYROPE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFBF2036)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(48.0f, 32.4f, 16.384f, 22.2353f, 0.0f, 16.384f)
-                .build());
-
-        SILENTGEMSPYROPE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "pyrope_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSPYROPE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFBF2036)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 48.6f, 65.536f, 22.2353f, 0.0f, 65.536f)
-                .build());
-
-        SILENTGEMSROSE_QUARTZ = ResourceLocation.fromNamespaceAndPath("silentgems", "rose_quartz");
-        SmitheryAPI.registerMaterial(SILENTGEMSROSE_QUARTZ, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF9D3964)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(48.0f, 21.6f, 16.384f, 22.2353f, 0.0f, 16.384f)
-                .build());
-
-        SILENTGEMSROSE_QUARTZ_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "rose_quartz_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSROSE_QUARTZ_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF9D3964)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 37.8f, 65.536f, 22.2353f, 0.0f, 65.536f)
-                .build());
-
-        SILENTGEMSRUBY = ResourceLocation.fromNamespaceAndPath("silentgems", "ruby");
-        SmitheryAPI.registerMaterial(SILENTGEMSRUBY, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF6F0735)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(72.0f, 32.4f, 24.576f, 22.2353f, 0.0f, 24.576f)
-                .build());
-
-        SILENTGEMSRUBY_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "ruby_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSRUBY_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF6F0735)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 48.6f, 98.304f, 22.2353f, 0.0f, 98.304f)
-                .build());
-
-        SILENTGEMSSAPPHIRE = ResourceLocation.fromNamespaceAndPath("silentgems", "sapphire");
-        SmitheryAPI.registerMaterial(SILENTGEMSSAPPHIRE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF3993C2)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(72.0f, 21.6f, 24.576f, 22.2353f, 0.0f, 24.576f)
-                .build());
-
-        SILENTGEMSSAPPHIRE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "sapphire_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSSAPPHIRE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF3993C2)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 37.8f, 98.304f, 22.2353f, 0.0f, 98.304f)
-                .build());
-
-        SILENTGEMSSODALITE = ResourceLocation.fromNamespaceAndPath("silentgems", "sodalite");
-        SmitheryAPI.registerMaterial(SILENTGEMSSODALITE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF2F4C9E)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(48.0f, 16.2f, 16.384f, 22.2353f, 0.0f, 16.384f)
-                .build());
-
-        SILENTGEMSSODALITE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "sodalite_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSSODALITE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF2F4C9E)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 32.4f, 65.536f, 22.2353f, 0.0f, 65.536f)
-                .build());
-
-        SILENTGEMSSPINEL = ResourceLocation.fromNamespaceAndPath("silentgems", "spinel");
-        SmitheryAPI.registerMaterial(SILENTGEMSSPINEL, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFD03A50)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(72.0f, 27.0f, 24.576f, 22.2353f, 0.0f, 24.576f)
-                .build());
-
-        SILENTGEMSSPINEL_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "spinel_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSSPINEL_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFD03A50)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 43.2f, 98.304f, 22.2353f, 0.0f, 98.304f)
-                .build());
-
-        SILENTGEMSSUNSTONE = ResourceLocation.fromNamespaceAndPath("silentgems", "sunstone");
-        SmitheryAPI.registerMaterial(SILENTGEMSSUNSTONE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFD14E2C)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(36.0f, 27.0f, 12.288f, 22.2353f, 0.0f, 12.288f)
-                .build());
-
-        SILENTGEMSSUNSTONE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "sunstone_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSSUNSTONE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFD14E2C)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 43.2f, 49.152f, 22.2353f, 0.0f, 49.152f)
-                .build());
-
-        SILENTGEMSTANZANITE = ResourceLocation.fromNamespaceAndPath("silentgems", "tanzanite");
-        SmitheryAPI.registerMaterial(SILENTGEMSTANZANITE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF4F196E)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(48.0f, 16.2f, 16.384f, 22.2353f, 0.0f, 16.384f)
-                .build());
-
-        SILENTGEMSTANZANITE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "tanzanite_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSTANZANITE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF4F196E)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 32.4f, 65.536f, 22.2353f, 0.0f, 65.536f)
-                .build());
-
-        SILENTGEMSTEKTITE = ResourceLocation.fromNamespaceAndPath("silentgems", "tektite");
-        SmitheryAPI.registerMaterial(SILENTGEMSTEKTITE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF4A4238)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(36.0f, 21.6f, 12.288f, 22.2353f, 0.0f, 12.288f)
-                .build());
-
-        SILENTGEMSTEKTITE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "tektite_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSTEKTITE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF4A4238)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 37.8f, 49.152f, 22.2353f, 0.0f, 49.152f)
-                .build());
-
-        SILENTGEMSTOPAZ = ResourceLocation.fromNamespaceAndPath("silentgems", "topaz");
-        SmitheryAPI.registerMaterial(SILENTGEMSTOPAZ, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFF7C5A8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(48.0f, 21.6f, 16.384f, 22.2353f, 0.0f, 16.384f)
-                .build());
-
-        SILENTGEMSTOPAZ_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "topaz_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSTOPAZ_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFF7C5A8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 37.8f, 65.536f, 22.2353f, 0.0f, 65.536f)
-                .build());
-
-        SILENTGEMSTURQUOISE = ResourceLocation.fromNamespaceAndPath("silentgems", "turquoise");
-        SmitheryAPI.registerMaterial(SILENTGEMSTURQUOISE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF40C8C0)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(36.0f, 16.2f, 12.288f, 22.2353f, 0.0f, 12.288f)
-                .build());
-
-        SILENTGEMSTURQUOISE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "turquoise_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSTURQUOISE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF40C8C0)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 32.4f, 49.152f, 22.2353f, 0.0f, 49.152f)
-                .build());
-
-        SILENTGEMSVIOLET_SAPPHIRE = ResourceLocation.fromNamespaceAndPath("silentgems", "violet_sapphire");
-        SmitheryAPI.registerMaterial(SILENTGEMSVIOLET_SAPPHIRE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF7A4FBF)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(72.0f, 21.6f, 24.576f, 22.2353f, 0.0f, 24.576f)
-                .build());
-
-        SILENTGEMSVIOLET_SAPPHIRE_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "violet_sapphire_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSVIOLET_SAPPHIRE_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF7A4FBF)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 37.8f, 98.304f, 22.2353f, 0.0f, 98.304f)
-                .build());
-
-        SILENTGEMSZIRCON = ResourceLocation.fromNamespaceAndPath("silentgems", "zircon");
-        SmitheryAPI.registerMaterial(SILENTGEMSZIRCON, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF9FCADF)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(48.0f, 21.6f, 16.384f, 22.2353f, 0.0f, 16.384f)
-                .build());
-
-        SILENTGEMSZIRCON_SUPER = ResourceLocation.fromNamespaceAndPath("silentgems", "zircon_super");
-        SmitheryAPI.registerMaterial(SILENTGEMSZIRCON_SUPER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF9FCADF)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 37.8f, 65.536f, 22.2353f, 0.0f, 65.536f)
-                .build());
-
     }
 
     private static void registerTwilightForest() {
@@ -6507,6 +4154,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(720)
                         .meltingTemp(1500.0f)
                         .partColor(0xFF301E1E)
+                        .storageForms()
                         .binderMultiplier(0.7f)
                 , 3)
                 .armor(120.0f, 19.0f, 30.0f, 2.0f, 2.25f, 10.0f)
@@ -6603,503 +4251,6 @@ public final class SoaSmitheryMaterials {
 
     }
 
-    private static void registerIceAndFireCompat() {
-        FEATHERAMPHITHERE = id("featheramphithere");
-        SmitheryAPI.registerMaterial(FEATHERAMPHITHERE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF3EA85A)
-                        .binderMultiplier(1.0f)
-                .build());
-
-        SCALEBLUEDRAGON = id("scalebluedragon");
-        SmitheryAPI.registerMaterial(SCALEBLUEDRAGON, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF3E6FC8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(36.0f, 18.0f, 36.0f, 1.875f, 3.0f, 4.5f)
-                .build());
-
-        SCALEBLUESEASERPENT = id("scaleblueseaserpent");
-        SmitheryAPI.registerMaterial(SCALEBLUESEASERPENT, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF3E9FD8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(30.0f, 14.0f, 30.0f, 3.125f, 3.75f, 3.75f)
-                .build());
-
-        SCALEBRONZEDRAGON = id("scalebronzedragon");
-        SmitheryAPI.registerMaterial(SCALEBRONZEDRAGON, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFB87A3E)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(36.0f, 18.0f, 36.0f, 1.875f, 3.0f, 4.5f)
-                .build());
-
-        SCALEBRONZESEASERPENT = id("scalebronzeseaserpent");
-        SmitheryAPI.registerMaterial(SCALEBRONZESEASERPENT, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFC8923E)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(30.0f, 14.0f, 30.0f, 3.125f, 3.75f, 3.75f)
-                .build());
-
-        CHITINBROWNDEATHWORM = id("chitinbrowndeathworm");
-        SmitheryAPI.registerMaterial(CHITINBROWNDEATHWORM, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF8F6F4A)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(15.0f, 14.0f, 15.0f, 0.625f, 2.25f, 1.875f)
-                .build());
-
-        SCALEDEEPBLUESEASERPENT = id("scaledeepblueseaserpent");
-        SmitheryAPI.registerMaterial(SCALEDEEPBLUESEASERPENT, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF2E4A8F)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(30.0f, 14.0f, 30.0f, 3.125f, 3.75f, 3.75f)
-                .build());
-
-        DESERT_MYRMEX = id("desert_myrmex");
-        SmitheryAPI.registerMaterial(DESERT_MYRMEX, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFD8C28F)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(56.0f, 29.7f, 57.6f, 17.7882f, 0.0f, 57.6f)
-                .build());
-
-        CHITINDESERTMYRMEX = id("chitindesertmyrmex");
-        SmitheryAPI.registerMaterial(CHITINDESERTMYRMEX, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFD8C28F)
-                        .binderMultiplier(1.0f)
-                .build());
-
-        BONEDRAGON = id("bonedragon");
-        SmitheryAPI.registerMaterial(BONEDRAGON, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFE0D8C0)
-                        .binderMultiplier(1.0f)
-                .build());
-
-        DRAGONBONE = id("dragonbone");
-        SmitheryAPI.registerMaterial(DRAGONBONE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFE0D8C0)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(42.0f, 32.4f, 76.8f, 33.0353f, 0.0f, 76.8f)
-                .build());
-
-        ENDER_DRAGON_SQUAMA = id("ender_dragon_squama");
-        SmitheryAPI.registerMaterial(ENDER_DRAGON_SQUAMA, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF2E2A38)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 18.9f, 38.4f, 15.5647f, 0.0f, 38.4f)
-                .build());
-
-        DRAGONSTEEL_FIRE = id("dragonsteel_fire");
-        SmitheryAPI.registerMaterial(DRAGONSTEEL_FIRE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF8F2E2E)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 50.0f, 195.84f, 10.1647f, 0.0f, 195.84f)
-                .build());
-
-        LEATHERFORESTTROLL = id("leatherforesttroll");
-        SmitheryAPI.registerMaterial(LEATHERFORESTTROLL, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF6F8F4A)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(20.0f, 14.0f, 20.0f, 1.25f, 1.5f, 2.5f)
-                .build());
-
-        LEATHERFROSTTROLL = id("leatherfrosttroll");
-        SmitheryAPI.registerMaterial(LEATHERFROSTTROLL, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF9FB8C8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(20.0f, 14.0f, 20.0f, 1.25f, 1.5f, 2.5f)
-                .build());
-
-        GHASTLY = id("ghastly");
-        SmitheryAPI.registerMaterial(GHASTLY, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFE8E8E8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(103.0f, 24.3f, 19.2f, 22.8706f, 0.0f, 19.2f)
-                .build());
-
-        GHOULISH = id("ghoulish");
-        SmitheryAPI.registerMaterial(GHOULISH, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFB8D89F)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 17.28f, 161.28f, 33.0353f, 0.0f, 161.28f)
-                .build());
-
-        SCALEGRAYDRAGON = id("scalegraydragon");
-        SmitheryAPI.registerMaterial(SCALEGRAYDRAGON, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF8F8F8F)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(36.0f, 18.0f, 36.0f, 1.875f, 3.0f, 4.5f)
-                .build());
-
-        SCALEGREENDRAGON = id("scalegreendragon");
-        SmitheryAPI.registerMaterial(SCALEGREENDRAGON, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF3E8F3E)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(36.0f, 18.0f, 36.0f, 1.875f, 3.0f, 4.5f)
-                .build());
-
-        SCALEGREENSEASERPENT = id("scalegreenseaserpent");
-        SmitheryAPI.registerMaterial(SCALEGREENSEASERPENT, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF3EA86F)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(30.0f, 14.0f, 30.0f, 3.125f, 3.75f, 3.75f)
-                .build());
-
-        GUARDIANSCALE = id("guardianscale");
-        SmitheryAPI.registerMaterial(GUARDIANSCALE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF6FA89F)
-                        .binderMultiplier(1.0f)
-                .addUniversalModifier(SoaSmitheryModifiers.AQUADYNAMIC)
-                .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.DIVINESHIELD),
-                        SmitheryPartTypes.SWORD_BLADE, SmitheryPartTypes.PICK_HEAD, SmitheryPartTypes.AXE_HEAD, SmitheryPartTypes.SHOVEL_HEAD, SmitheryPartTypes.HOE_HEAD, SmitheryPartTypes.SPEAR_HEAD, SmitheryPartTypes.LARGE_BLADE, SmitheryPartTypes.HAMMER_HEAD, SmitheryPartTypes.KAMA_HEAD)
-                .build());
-
-        HARD_SPIDER_LEG = id("hard_spider_leg");
-        SmitheryAPI.registerMaterial(HARD_SPIDER_LEG, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF4A3A32)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(32.0f, 12.6f, 0.0f, 3.7059f, 0.0f, 0.0f)
-                .build());
-
-        DRAGONSTEEL_ICE = id("dragonsteel_ice");
-        SmitheryAPI.registerMaterial(DRAGONSTEEL_ICE, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF7AC8E8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 50.0f, 195.84f, 10.1647f, 0.0f, 195.84f)
-                .build());
-
-        JUNGLE_MYRMEX = id("jungle_myrmex");
-        SmitheryAPI.registerMaterial(JUNGLE_MYRMEX, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF6FA83E)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(56.0f, 29.7f, 57.6f, 17.7882f, 0.0f, 57.6f)
-                .build());
-
-        CHITINJUNGLEMYRMEX = id("chitinjunglemyrmex");
-        SmitheryAPI.registerMaterial(CHITINJUNGLEMYRMEX, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF6FA83E)
-                        .binderMultiplier(1.0f)
-                .build());
-
-        LEATHERMOUNTAINTROLL = id("leathermountaintroll");
-        SmitheryAPI.registerMaterial(LEATHERMOUNTAINTROLL, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF8F7A5A)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(20.0f, 14.0f, 20.0f, 1.25f, 1.5f, 2.5f)
-                .build());
-
-        SCALEPURPLESEASERPENT = id("scalepurpleseaserpent");
-        SmitheryAPI.registerMaterial(SCALEPURPLESEASERPENT, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF8F3EA8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(30.0f, 14.0f, 30.0f, 3.125f, 3.75f, 3.75f)
-                .build());
-
-        SCALEREDDRAGON = id("scalereddragon");
-        SmitheryAPI.registerMaterial(SCALEREDDRAGON, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFC22E2E)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(36.0f, 18.0f, 36.0f, 1.875f, 3.0f, 4.5f)
-                .build());
-
-        SCALEREDSEASERPENT = id("scaleredseaserpent");
-        SmitheryAPI.registerMaterial(SCALEREDSEASERPENT, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFD23E3E)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(30.0f, 14.0f, 30.0f, 3.125f, 3.75f, 3.75f)
-                .build());
-
-        SCALESAPPHIREDRAGON = id("scalesapphiredragon");
-        SmitheryAPI.registerMaterial(SCALESAPPHIREDRAGON, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF2E5AC8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(36.0f, 18.0f, 36.0f, 1.875f, 3.0f, 4.5f)
-                .build());
-
-        SCALESHINY = id("scaleshiny");
-        SmitheryAPI.registerMaterial(SCALESHINY, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFE8E8F0)
-                        .binderMultiplier(1.0f)
-                .build());
-
-        SCALESILVERDRAGON = id("scalesilverdragon");
-        SmitheryAPI.registerMaterial(SCALESILVERDRAGON, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFC8C8D0)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(36.0f, 18.0f, 36.0f, 1.875f, 3.0f, 4.5f)
-                .build());
-
-        SPIDER_LEG = id("spider_leg");
-        SmitheryAPI.registerMaterial(SPIDER_LEG, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF4A3A32)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(5.0f, 9.45f, 0.0f, 0.0f, 0.0f, 0.0f)
-                .build());
-
-        FEATHERSTYMPHALIANBIRD = id("featherstymphalianbird");
-        SmitheryAPI.registerMaterial(FEATHERSTYMPHALIANBIRD, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFB8A88F)
-                        .binderMultiplier(1.0f)
-                .build());
-
-        CHITINTANDEATHWORM = id("chitintandeathworm");
-        SmitheryAPI.registerMaterial(CHITINTANDEATHWORM, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFD8C28F)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(15.0f, 14.0f, 15.0f, 0.625f, 2.25f, 1.875f)
-                .build());
-
-        SCALETEALSEASERPENT = id("scaletealseaserpent");
-        SmitheryAPI.registerMaterial(SCALETEALSEASERPENT, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF2EA8A8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(30.0f, 14.0f, 30.0f, 3.125f, 3.75f, 3.75f)
-                .build());
-
-        CHITINWHITEDEATHWORM = id("chitinwhitedeathworm");
-        SmitheryAPI.registerMaterial(CHITINWHITEDEATHWORM, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFE8E4D8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(15.0f, 14.0f, 15.0f, 0.625f, 2.25f, 1.875f)
-                .build());
-
-        SCALEWHITEDRAGON = id("scalewhitedragon");
-        SmitheryAPI.registerMaterial(SCALEWHITEDRAGON, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFFE8E8E8)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(36.0f, 18.0f, 36.0f, 1.875f, 3.0f, 4.5f)
-                .build());
-
-        BONEWITHER = id("bonewither");
-        SmitheryAPI.registerMaterial(BONEWITHER, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF3A3A38)
-                        .binderMultiplier(1.0f)
-                .build());
-
-    }
-
     private static void registerTinkersConstructBase() {
         ARDITE = id("ardite");
         SmitheryAPI.registerMaterial(ARDITE, binderSlots(MaterialStats.builder()
@@ -7124,6 +4275,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(780)
                         .meltingTemp(0.0f)
                         .partColor(0xFF71C8D2)
+                        .storageForms()
                         .binderMultiplier(1.3f)
                 , 1)
                 .addUniversalModifier(SoaSmitheryModifiers.SLIMEY)
@@ -7250,6 +4402,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(550)
                         .meltingTemp(600.0f)
                         .partColor(0xFF452629)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                 , 1)
                 .addUniversalModifier(SoaSmitheryModifiers.AUTOSMELT)
@@ -7293,21 +4446,9 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(0)
                         .meltingTemp(0.0f)
                         .partColor(0xFFD8D8D8)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                 .fletching(0.5f, 1.5f)
-                .build());
-
-        MAGMA = id("magma");
-        SmitheryAPI.registerMaterial(MAGMA, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF893E20)
-                        .colorCycle(24, 0xFF4A1919, 0xFF652828, 0xFFEE7A21) // [auto-color]
-                        .binderMultiplier(1.0f)
-                .bowstring(0.85f)
                 .build());
 
         MAGMASLIME = id("magmaslime");
@@ -7333,6 +4474,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(820)
                         .meltingTemp(2000.0f)
                         .partColor(0xFFA87DDE)
+                        .storageForms()
                         .binderMultiplier(0.5f)
                 , 4)
                 .addUniversalModifier(SoaSmitheryModifiers.COLDBLOODED)
@@ -7391,6 +4533,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(380)
                         .meltingTemp(1000.0f)
                         .partColor(0xFF874E52)
+                        .storageForms()
                         .binderMultiplier(1.2f)
                 , 2)
                 .addUniversalModifier(SoaSmitheryModifiers.TASTY)
@@ -7453,19 +4596,6 @@ public final class SoaSmitheryMaterials {
                 .bow(0.4f, 1.5f, 5.0f)
                 .build());
 
-        TREATEDWOOD = id("treatedwood");
-        SmitheryAPI.registerMaterial(TREATEDWOOD, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF7A5B3A)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(3.0f, 10.8f, 7.68f, 25.4118f, 0.0f, 7.68f)
-                .build());
-
         VINE = id("vine");
         SmitheryAPI.registerMaterial(VINE, MaterialStats.builder()
                         .harvestLevel(0)
@@ -7489,6 +4619,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(75)
                         .meltingTemp(0.0f)
                         .partColor(0xFF404040)
+                        .storageForms()
                         .binderMultiplier(0.6f)
                 , 1)
                 .armor(40.0f, 4.0f, 10.0f, 1.1f, 0.25f, 12.0f)
@@ -7615,6 +4746,8 @@ public final class SoaSmitheryMaterials {
                 .armor(240.0f, 20.0f, 80.0f, 1.6f, 2.0f, 100.0f)
                 .build());
 
+        // Blood Arsenal 1.20 ships only the tools, but SOA ported the log/planks itself
+        // (BABlocks.BLOOD_INFUSED_LOG), so the material has a real source again.
         BLOOD_INFUSED_WOOD = id("blood_infused_wood");
         SmitheryAPI.registerMaterial(BLOOD_INFUSED_WOOD, MaterialStats.builder()
                         .harvestLevel(0)
@@ -7645,19 +4778,6 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_BLOODBOUND_ARMOR), armorPieces())
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_SOUL_GUARD_ARMOR), armorPieces())
                 .bow(0.6f, 1.4f, 7.2f)
-                .build());
-
-        COAGULATED_BLOOD_SAND = id("coagulated_blood_sand");
-        SmitheryAPI.registerMaterial(COAGULATED_BLOOD_SAND, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF7A2E2E)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(5.0f, 18.9f, -18.176f, 0.0f, 0.0f, -18.176f)
                 .build());
 
         SENTIENT_METAL = id("sentient_metal");
@@ -8028,6 +5148,22 @@ public final class SoaSmitheryMaterials {
     }
 
     private static void registerEnderio() {
+        // EnderIO 1.20 replaced construction alloy and electrical steel with copper alloy;
+        // SoaSmitheryMelting already generates its recipes. Pitched just under conductive iron.
+        COPPER_ALLOY = id("copper_alloy");
+        SmitheryAPI.registerMaterial(COPPER_ALLOY, binderSlots(MaterialStats.builder()
+                        .harvestLevel(1)
+                        .miningSpeed(4.2f)
+                        .attackDamage(2.8f)
+                        .durabilityPerIngot(95)
+                        .meltingTemp(580.0f)
+                        .partColor(0xFFB87A55)
+                        .binderMultiplier(0.8f)
+                , 1)
+                .armor(72.0f, 5.25f, 26.0f, 0.8f, 1.0f, 26.0f)
+                .addUniversalModifier(SoaSmitheryModifiers.LIGHTWEIGHT)
+                .build());
+
         CONDUCTIVE_IRON = id("conductive_iron");
         SmitheryAPI.registerMaterial(CONDUCTIVE_IRON, binderSlots(MaterialStats.builder()
                         .harvestLevel(1)
@@ -8063,22 +5199,6 @@ public final class SoaSmitheryMaterials {
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.STEADY_ARMOR), armorPieces())
                 .build());
 
-        ELECTRICAL_STEEL = id("electrical_steel");
-        SmitheryAPI.registerMaterial(ELECTRICAL_STEEL, binderSlots(MaterialStats.builder()
-                        .harvestLevel(2)
-                        .miningSpeed(6.0f)
-                        .attackDamage(4.0f)
-                        .durabilityPerIngot(300)
-                        .meltingTemp(1000.0f)
-                        .partColor(0xFF9FA4A8)
-                        .binderMultiplier(0.9f)
-                , 2)
-                .armor(60.0f, 7.8f, 8.4f, 1.0f, 1.0f, 8.4f)
-                .addUniversalModifier(SoaSmitheryModifiers.LIGHTWEIGHT)
-                .addHeadModifier(SoaSmitheryModifiers.SHOCKING)
-                .addModifier(ModifierEffect.of(SoaSmitheryModifiers.LIGHTWEIGHT_ARMOR), armorPieces())
-                .build());
-
         END_STEEL = id("end_steel");
         SmitheryAPI.registerMaterial(END_STEEL, binderSlots(MaterialStats.builder()
                         .harvestLevel(4)
@@ -8109,19 +5229,6 @@ public final class SoaSmitheryMaterials {
                 .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.ENDSPEED), SmitheryPartTypes.ARCANE_FOCUS)
                 .build());
 
-        ENDORIUM = id("endorium");
-        SmitheryAPI.registerMaterial(ENDORIUM, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF2EA89F)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(120.0f, 25.2f, 0.0f, 20.7529f, 0.0f, 0.0f)
-                .build());
-
         ENERGETIC_ALLOY = id("energetic_alloy");
         SmitheryAPI.registerMaterial(ENERGETIC_ALLOY, binderSlots(MaterialStats.builder()
                         .harvestLevel(2)
@@ -8137,21 +5244,6 @@ public final class SoaSmitheryMaterials {
                 .addHeadModifier(SoaSmitheryModifiers.UNNATURAL)
                 .addUniversalModifier(SoaSmitheryModifiers.HOLY)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.AMBITIOUS_ARMOR), armorPieces())
-                .build());
-
-        CONSTRUCTION_ALLOY = id("construction_alloy");
-        SmitheryAPI.registerMaterial(CONSTRUCTION_ALLOY, binderSlots(MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(3.0f)
-                        .attackDamage(1.5f)
-                        .durabilityPerIngot(30)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF8F8F97)
-                        .binderMultiplier(0.5f)
-                , 1)
-                .armor(50.0f, 10.0f, 1.12f, 1.2f, 0.0f, 1.12f)
-                .addUniversalModifier(SoaSmitheryModifiers.CHEAPSKATE)
-                .addModifier(ModifierEffect.of(SoaSmitheryModifiers.CHEAP_ARMOR), armorPieces())
                 .build());
 
         PULSATING_CRYSTAL = id("pulsating_crystal");
@@ -8377,6 +5469,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(400)
                         .meltingTemp(1000.0f)
                         .partColor(0xFF4AC8B8)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                 , 2)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.KNOWLEDGEFUL), allToolTypes())
@@ -8409,6 +5502,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(300)
                         .meltingTemp(600.0f)
                         .partColor(0xFF2E2414)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                 , 1)
                 .armor(70.0f, 10.0f, 1.68f, 1.2f, 1.0f, 1.68f)
@@ -8424,6 +5518,7 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(0)
                         .meltingTemp(0.0f)
                         .partColor(0xFF3F3A42)
+                        .storageForms()
                         .binderMultiplier(1.0f)
                         .castOnly(true)
                 .armor(55.0f, 22.6f, 28.0f, 1.0f, 1.25f, 32.0f)
@@ -8500,19 +5595,6 @@ public final class SoaSmitheryMaterials {
     }
 
     private static void registerMekores() {
-        ORICHALCUM = id("orichalcum");
-        SmitheryAPI.registerMaterial(ORICHALCUM, MaterialStats.builder()
-                        .harvestLevel(0)
-                        .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
-                        .meltingTemp(0.0f)
-                        .partColor(0xFF3EA88F)
-                        .binderMultiplier(1.0f)
-                        .castOnly(true)
-                .armor(8.0f, 28.035f, 3.92f, 23.2941f, 0.0f, 3.92f)
-                .build());
-
     }
 
     private static void registerTofucraft() {

@@ -6,26 +6,6 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Breakable",
-      "text": "Reduces durability by 20%$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Reed"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Bright",
-      "text": "Deals up to 1.5x damage by day but reduced damage at night; 10% chance of Night Vision on block break$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Lumix, Yellorium"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Brittle",
-      "text": "Reduces durability by 15%$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Xu Magical Wood"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Brownmagic",
-      "text": "30% chance to randomly teleport the target up to 16 blocks on hit$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Awakened (PlusTiC), Desh, Infinity Avaritia (PlusTiC), Wyvern Metal (PlusTiC)"
-    },
-    {
-      "type": "patchouli:text",
       "title": "Calcic",
       "text": "Heals 0.5 health every 5s while hurt$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Dark Matter"
     },
@@ -42,17 +22,37 @@
     {
       "type": "patchouli:text",
       "title": "Chadthunder",
-      "text": "10% chance to strike the target with lightning on hit$(br2)$(l)Granted from:$() the tool's head$(br)$(l)Materials:$() Ionite"
+      "text": "10% chance to strike the target with lightning on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Ionite"
     },
     {
       "type": "patchouli:text",
       "title": "Cheap",
-      "text": "Increases durability by 20%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Construction Alloy, Seared, High-Powered Tofu Gem, Tofu Gem"
+      "text": "Increases durability by 20%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Seared, High-Powered Tofu Gem, Tofu Gem"
     },
     {
       "type": "patchouli:text",
       "title": "Cheap",
-      "text": "Increases durability by 20% but is cheaply made$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Holystone, Polyethylene, Seared, Tofu Gem"
+      "text": "Increases durability by 20% but is cheaply made$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Holystone, Seared, Tofu Gem"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cheapskate",
+      "text": "Reduces durability by 10%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Black Quartz, Cincinnasite, Coal, Seared, Sky Stone"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cheapskate",
+      "text": "Reduces durability by 10%$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Apatite, Cincinnasite, Coal, Holystone, Seared, Sky Stone, Void"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Chunky",
+      "text": "Increases durability by 25%$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Insanium, Ma.soulium, Soularium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Coldblooded",
+      "text": "Inflicts Slowness II for 3s on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Adaminite, Durasteel, Emeraldic, Manyullyn, Platinum"
     }
   ]
 }

@@ -6,53 +6,53 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Hold Ground",
-      "text": "Deals 1.25x damage while sneaking; takes 8% less damage while sneaking$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Aeonsteel, Cryonium, Manganese Steel, Refined Obsidian, Titanium, Zanite"
+      "title": "Knowledgeful",
+      "text": "Tool: +0.2% damage per XP level (up to +60%); armor: scales damage reduction with XP up to 36%$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Adaminite, Astral Metal, Knowledge, Mithminite, Mithrillium, Xu Enchanted Metal"
     },
     {
       "type": "patchouli:text",
-      "title": "Hollow",
-      "text": "1% chance to make the target invisible and heal it; 90% chance to void mob drops$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Imperomite"
+      "title": "Knowledgeful",
+      "text": "Damage and incoming reduction scale with your XP level (up to 300)$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Adaminite, Astral Metal, Knowledge, Mithminite, Mithrillium, Xu Enchanted Metal"
     },
     {
       "type": "patchouli:text",
-      "title": "Holy",
-      "text": "Adds 4 bonus damage against undead$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Energetic Alloy, Silver, Tofudiamond"
+      "title": "Kungfu",
+      "text": "4% chance to fully dodge a non-armor-bypassing hit, gaining Speed IV for 5s$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Alpha Fur, Manganese, Tofudiamond, Tofumetal"
     },
     {
       "type": "patchouli:text",
-      "title": "Hovering",
-      "text": "Halves fall distance and fall damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Coalescence Matrix"
+      "title": "Launching",
+      "text": "Launches struck enemies upward into the air$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aeroite, Gravitite"
     },
     {
       "type": "patchouli:text",
-      "title": "Ignoble",
-      "text": "Reduces mining speed by 1$(br2)$(l)Granted from:$() the tool's head$(br)$(l)Materials:$() Dark Matter"
+      "title": "Lightning",
+      "text": "4% chance to strike the target with a visual lightning bolt on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Asgardium, Electronium"
     },
     {
       "type": "patchouli:text",
-      "title": "Illuminati",
-      "text": "Applies Glowing for 10s to targets on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Ionite, Lumium (PlusTiC), Refinedglowstone"
+      "title": "Lightweight",
+      "text": "Increases movement speed by 2%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Aeroite, Certus Quartz, Draconium, Manasteel, Nagascale, Soularium, Tofumetal"
     },
     {
       "type": "patchouli:text",
-      "title": "Indomitable",
-      "text": "Reduces all incoming damage by 8%$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Aeonsteel, Stainless Steel"
+      "title": "Lightweight",
+      "text": "Adds +1.5 mining speed$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aeroite, Aluminium, Certus Quartz, Cobalt, Conductive Iron, Copper Alloy, Erodium, Rubber Band and 1 more"
     },
     {
       "type": "patchouli:text",
-      "title": "Inferno",
-      "text": "20% chance to set the attacker on fire for 8s when hit$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Infernium, Ravaging"
+      "title": "Living2",
+      "text": "Slowly self-repairs 1 durability every 400 ticks while worn$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Blood Infused Iron, Crimsonite"
     },
     {
       "type": "patchouli:text",
-      "title": "Insatiable",
-      "text": "Adds up to 4 bonus damage scaling with your missing health$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Crystal Matrix, Manyullyn, Mithminite"
+      "title": "Lucky",
+      "text": "Grants Luck I while worn$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Perfect, Pumpkin, Ruby, Steeleaf"
     },
     {
       "type": "patchouli:text",
-      "title": "Invigorating",
-      "text": "Adds +4 max health while worn$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Adamant, Chromasteel, Modularium, Ravaging"
+      "title": "Lucky Strike",
+      "text": "Kills grant extra experience$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Gold"
     }
   ]
 }

@@ -6,53 +6,53 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Superknockback",
-      "text": "Greatly increases knockback on critical hits$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Meteor"
+      "title": "Tconevo.crystalline",
+      "text": "Deals bonus damage on hit scaling with tool durability (up to 20% of hit damage)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Diamantine, Emeraldic, Enori, Mana Diamond, Palis, Restonia, Void"
     },
     {
       "type": "patchouli:text",
-      "title": "Swetty",
-      "text": "Inflicts Slowness II for 2 seconds on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Swet"
+      "title": "Tconevo.crystalys",
+      "text": "Adds up to +50% damage per level, scaling with remaining durability$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Bound, Crimsonite"
     },
     {
       "type": "patchouli:text",
-      "title": "Synergy",
-      "text": "Adds +1 attack damage and +1 mining speed$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Steeleaf"
+      "title": "Tconevo.culling",
+      "text": "Deals double damage to baby mobs (scales with level)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Primal Metal"
     },
     {
       "type": "patchouli:text",
-      "title": "Tantrum",
-      "text": "10% chance to trigger an explosion on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Dyonite"
+      "title": "Tconevo.deadly Precision",
+      "text": "Adds bonus damage on critical hits (stub)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Gaiasteel, Ionite, Mithminite, Osgloglas, Platinum, Protonium"
     },
     {
       "type": "patchouli:text",
-      "title": "Tasty",
-      "text": "10% chance to drop cooked beef when hit$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Cheese, Chocolate, High-Powered Tofu Gem, Tofudiamond, Tofumetal"
+      "title": "Tconevo.divine Grace",
+      "text": "Reduces all incoming damage by 8%$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Elementium, Gaia, Gaiasteel, Orichalcos, Platinum"
     },
     {
       "type": "patchouli:text",
-      "title": "Tasty",
-      "text": "15% chance to drop cooked beef on hit$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Candy Cane, Cheese, Chocolate, Meat Metal, Pig Iron, High-Powered Tofu Gem, Tofudiamond, Tofumetal"
+      "title": "Tconevo.electric",
+      "text": "Adds 2 bonus attack damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Energium"
     },
     {
       "type": "patchouli:text",
-      "title": "Tconevo.aftershock",
-      "text": "Deals +2 bonus magic damage per level on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Diamantine, Flux, Fluxed String, Gelid Gem, Signalum"
+      "title": "Tconevo.energized",
+      "text": "Adds +3 mining speed$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Electronium, Flux, Fluxed Electrum, Gelid Enderium"
     },
     {
       "type": "patchouli:text",
-      "title": "Tconevo.aftershock3",
-      "text": "Deals 2 bonus magic damage per level on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Crystal Matrix"
+      "title": "Tconevo.energized",
+      "text": "Reduces incoming damage by 7%$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Gelid Enderium"
     },
     {
       "type": "patchouli:text",
-      "title": "Tconevo.aura Siphon",
-      "text": "Generates Botania mana on hit, 50 per damage dealt$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Dreamwood"
+      "title": "Tconevo.energized Armor2",
+      "text": "Reduces all incoming damage by 10%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Electronium"
     },
     {
       "type": "patchouli:text",
-      "title": "Tconevo.battle Furor",
-      "text": "Builds up Strength on hit, stacking up to a per-level cap$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Kyronite"
+      "title": "Tconevo.eternity",
+      "text": "Grants continuous Immortality while worn$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Infinity Metal"
     }
   ]
 }

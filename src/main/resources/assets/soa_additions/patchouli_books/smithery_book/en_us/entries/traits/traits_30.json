@@ -6,53 +6,53 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Tconevo.ruination",
-      "text": "Deals bonus 4% of the target's current health as extra damage on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() UU-Metal"
+      "title": "Terrafirma2",
+      "text": "Adds +3.5 attack damage$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Astral Metal, Orichalcos, Terra Alloy, Terrasteel"
     },
     {
       "type": "patchouli:text",
-      "title": "Tconevo.second Wind",
-      "text": "Slowly heals while below 30% health$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Terrasteel"
+      "title": "Thaumic",
+      "text": "+1 attack damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Thaumium"
     },
     {
       "type": "patchouli:text",
-      "title": "Tconevo.sentient",
-      "text": "Reduces incoming damage by 7%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Crimsonite, Sentient"
+      "title": "Throny",
+      "text": "Reflects 10% of the attacker's max health as thorns; when worn, 2.5% (up to 10)$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Cactus, Scorched"
     },
     {
       "type": "patchouli:text",
-      "title": "Tconevo.sentient",
-      "text": "Adds +2 flat damage on hit$(br2)$(l)Granted from:$() the tool's head$(br)$(l)Materials:$() Sentient"
+      "title": "Throny",
+      "text": "Reflects 10% of your max health as thorns; armor reflects 2.5% of attacker health$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Cactus"
     },
     {
       "type": "patchouli:text",
-      "title": "Tconevo.soul Guard",
-      "text": "Reduces all incoming damage by 7%$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Blood Infused Iron, Bound, Crimsonite, Soularium"
+      "title": "Thundering",
+      "text": "8% chance to strike targets with lightning on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Amber, Titanium"
     },
     {
       "type": "patchouli:text",
-      "title": "Tconevo.soul Rend",
-      "text": "Heals you for 10% of damage dealt per level on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Chaotic Metal, Draconic Metal, Wyvern Metal"
+      "title": "Tidal Force",
+      "text": "§oI'm the §m§oSeaman§r§oAquaman!§r\\n§fBreathe under water!$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aqualite"
     },
     {
       "type": "patchouli:text",
-      "title": "Tconevo.soul Rend1",
-      "text": "Heals you for 10% of damage dealt per level on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Draconium, Spectre"
+      "title": "Tidal Force",
+      "text": "Armor: grants Water Breathing III; tool: 1.33x damage when the attacker is wet$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Aqualite"
     },
     {
       "type": "patchouli:text",
-      "title": "Tconevo.soul Rend3",
-      "text": "Heals for 10% of damage dealt per level on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Cosmilite"
+      "title": "Tidal Force",
+      "text": "§oI'm the §m§oSeaman§r§9§oAquaman!§r\\n§fWhen holding the tool, you can breathe in water and deal more damage when in water or in rain!$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aqualite"
     },
     {
       "type": "patchouli:text",
-      "title": "Tconevo.spectral",
-      "text": "Grants brief Invisibility when below half health$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Dimensional Shard, Spectre"
+      "title": "Tom And Jerry",
+      "text": "Inflicts Slowness on attackers when hit$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Peridot"
     },
     {
       "type": "patchouli:text",
-      "title": "Tconevo.staggering",
-      "text": "Applies Slowness V on hit and plays an anvil sound$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Terrasteel"
+      "title": "Trash",
+      "text": "25% chance to inflict Slowness on the entity you hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Friscion"
     }
   ]
 }

@@ -11,11 +11,6 @@
     },
     {
       "type": "patchouli:text",
-      "title": "Alien",
-      "text": "10% chance to repair 1 durability when breaking a block$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Desh, Iridium, Obsidiorite"
-    },
-    {
-      "type": "patchouli:text",
       "title": "Alluring",
       "text": "Draws experience orbs toward you$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Gold"
     },
@@ -32,27 +27,32 @@
     {
       "type": "patchouli:text",
       "title": "Anticorrosion",
-      "text": "25% chance to inflict Poison for 5s on hit$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Enori (PlusTiC), Modularium, Osmiridium, Platinum (PlusTiC), Stainless Steel, Titanium"
+      "text": "25% chance to inflict Poison for 5s on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Modularium, Osmiridium, Stainless Steel, Titanium"
     },
     {
       "type": "patchouli:text",
       "title": "Antigrav",
-      "text": "Applies Levitation for 1 second to targets on hit$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Aeroite, Gravitite"
+      "text": "Applies Levitation for 1 second to targets on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aeroite, Gravitite"
     },
     {
       "type": "patchouli:text",
       "title": "Apocalypse",
-      "text": "25% chance to inflict Wither for 5s on hit$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Adamant, Awakened (PlusTiC), Infinity Avaritia (PlusTiC), Remorseful Gem, Thorium, Witherbone"
+      "text": "25% chance to inflict Wither for 5s on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Adamant, Awakened (PlusTiC), Remorseful Gem, Thorium, Witherbone"
     },
     {
       "type": "patchouli:text",
       "title": "Aquadynamic",
-      "text": "Swim faster while worn$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aqualite, Aquamarine, Guardianscale, Sapphire, Sapphire Aoa"
+      "text": "Swim faster while worn$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aqualite, Aquamarine, Guardianscale, Sapphire"
     },
     {
       "type": "patchouli:text",
       "title": "Aquadynamic",
       "text": "Swim faster while worn$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Prismarine"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Aquaspeed",
+      "text": "Restores air supply while underwater$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Aqualite, Sapphire, Terra Alloy"
     }
   ]
 }

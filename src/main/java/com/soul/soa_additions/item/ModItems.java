@@ -32,6 +32,8 @@ public final class ModItems {
 
     public static final RegistryObject<Item> ABYSSAL_INGOT   = registerRareIngot("abyssal_ingot");
     public static final RegistryObject<Item> ETHER_INGOT     = registerRareIngot("ether_ingot");
+    /** Drop of {@code quicksilver_ore} — Thaumcraft's quicksilver, ported since Thaumcraft has no 1.20 build. */
+    public static final RegistryObject<Item> QUICKSILVER     = registerRareIngot("quicksilver");
     public static final RegistryObject<Item> INFERNIUM_INGOT = registerRareIngot("infernium_ingot");
     public static final RegistryObject<Item> VOID_INGOT      = registerRareIngot("void_ingot");
 

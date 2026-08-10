@@ -6,53 +6,13 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Trash",
-      "text": "25% chance to inflict Slowness on the entity you hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Friscion"
+      "title": "Xu Withering",
+      "text": "Multiplies block drops by adding up to 1 extra per drop$(br2)$(l)Granted from:$() the tool's head and armor$(br)$(l)Materials:$() Xu Evil Metal"
     },
     {
       "type": "patchouli:text",
-      "title": "True Defense",
-      "text": "Reduces armor-bypassing damage by 10%$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Aeonsteel, Insanium, Protonium"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Twilit",
-      "text": "Adds +2.5 damage when attacking at night$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Fierymetal, Knightmetal, Nagascale, Raven Feather, Steeleaf"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Unnamed",
-      "text": "Adds 1.5 bonus attack damage$(br2)$(l)Granted from:$() the tool's head$(br)$(l)Materials:$() Void (PlusTiC)"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Unnatural",
-      "text": "Increases mining speed by 2$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Dark Steel, End Steel, Energetic Alloy, Knightslime, Pink Metal, Starmetal"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Unstable",
-      "text": "Random chance to explode on mining or hitting, and may drop gunpowder from kills$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Tiberium"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Vaccine",
-      "text": "Removes one negative effect every 5 seconds while worn$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Refined Coralium"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Veiled",
-      "text": "Grants brief Invisibility every second while worn$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Raven Feather"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Vengeful",
-      "text": "30% chance to inflict Weakness and Slowness on attackers who hit you$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Cytosinite, Terra Alloy"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Verdant",
-      "text": "Chance to inflict Poison on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Copper"
+      "title": "Zany",
+      "text": "Adds up to +2 mining speed scaling with missing durability$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Imperomite"
     }
   ]
 }

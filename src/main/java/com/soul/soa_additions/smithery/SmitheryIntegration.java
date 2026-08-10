@@ -80,6 +80,12 @@ public final class SmitheryIntegration {
                 e.enqueueWork(SmitheryIntegration::registerPolishingKitSources));
         SoaSmitheryModifiers.register();
         SoaSmitheryMaterials.register();
+        // Storage ingots and blocks for our materials that no mod in the pack supplies an item for.
+        // Must follow material registration and precede the registry events the DeferredRegisters
+        // are already attached to, which the constructor ordering guarantees.
+        com.soul.smithery.registry.SmitheryMaterialForms.registerDeclaredForms(
+                com.soul.soa_additions.SoaAdditions.MODID, com.soul.soa_additions.item.ModItems.ITEMS,
+                com.soul.soa_additions.block.ModBlocks.BLOCKS);
         SoaSmitheryAlloys.register();
         SoaSmitheryFuels.register();
         SoaSmitheryMelting.register();

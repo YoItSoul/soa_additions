@@ -6,53 +6,53 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Sticky",
-      "text": "Melee attackers are slowed$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Resin"
+      "title": "Tconevo.battle Furor",
+      "text": "Builds up Strength on hit, stacking up to a per-level cap$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Kyronite"
     },
     {
       "type": "patchouli:text",
-      "title": "Stiff",
-      "text": "+0.1 knockback resistance$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Invar, Osmium, Steel"
+      "title": "Tconevo.blasting",
+      "text": "8% chance per level to trigger an explosion on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Meteor"
     },
     {
       "type": "patchouli:text",
-      "title": "Stonebound",
-      "text": "Mines faster but hits softer as it wears$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Ardite, Litherite, Livingrock"
+      "title": "Tconevo.bloodbound",
+      "text": "Reduces incoming damage by 5%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Blood Infused Iron, Bound, Crimsonite"
     },
     {
       "type": "patchouli:text",
-      "title": "Stonebound",
-      "text": "Mines faster but hits softer as it wears$(br2)$(l)Granted from:$() the tool's head$(br)$(l)Materials:$() Stone"
+      "title": "Tconevo.bloodbound",
+      "text": "Adds +1.5 attack damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Bound, Crimsonite"
     },
     {
       "type": "patchouli:text",
-      "title": "Stopbeingselfish",
-      "text": "Deals more damage per nearby player, up to 3x with allies close$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Pladium"
+      "title": "Tconevo.cascading",
+      "text": "Mines the entire vertical column of a falling block$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Elementium"
     },
     {
       "type": "patchouli:text",
-      "title": "Strong Vaccine",
-      "text": "Every 3s strips harmful effects and grants Resistance while worn$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Dreadium, Ethaxium"
+      "title": "Tconevo.celestial",
+      "text": "Heals 0.5 health every 10 seconds during daytime while worn$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Chaotic Metal, Cosmilite, Draconic Metal, Infinity Metal"
     },
     {
       "type": "patchouli:text",
-      "title": "Subterranean",
-      "text": "Reduces incoming damage 10% while below Y=60$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Coal, Seared, Shadowium"
+      "title": "Tconevo.chain Lightning",
+      "text": "15% chance per level to chain lightning to up to 4 nearby foes for 50% damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Ionite, Vibrant Crystal"
     },
     {
       "type": "patchouli:text",
-      "title": "Superheat",
-      "text": "Auto-smelts block drops as if cooked in a furnace$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Fierymetal, Hephaestite, Infernium, Magmaslime"
+      "title": "Tconevo.chilling Touch",
+      "text": "Inflicts Slowness on attackers when hit$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Gelid Enderium, Void Metal"
     },
     {
       "type": "patchouli:text",
-      "title": "Superheavy",
-      "text": "Mining speed slows the more blocks you break, down to 0.35x$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Dark Matter, Eezo, Solarium"
+      "title": "Tconevo.condensing",
+      "text": "Generates EMC when hitting hostile mobs (requires ProjectE)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Neutronium"
     },
     {
       "type": "patchouli:text",
-      "title": "Superhot",
-      "text": "Sets melee attackers on fire for 5 seconds when hit$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Fierymetal, Hephaestite, Terra Alloy"
+      "title": "Tconevo.corrupting",
+      "text": "Stacks escalating Wither on hit, up to a per-level cap$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aethium, Primal Metal"
     }
   ]
 }

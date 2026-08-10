@@ -6,16 +6,6 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Barrett",
-      "text": "Chance scaling with missing health to deal 1.5x damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Garfax"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Berserk",
-      "text": "Doubles bonus attack damage and mining speed$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Adamant"
-    },
-    {
-      "type": "patchouli:text",
       "title": "Blasting",
       "text": "8% chance per level to trigger a harmless explosion on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Fusewood"
     },
@@ -27,22 +17,12 @@
     {
       "type": "patchouli:text",
       "title": "Blindbandit",
-      "text": "Adds +3 damage when attacking in darkness (light level below 5)$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Awakened (PlusTiC), Racheline, Wyvern Metal (PlusTiC)"
+      "text": "Adds +3 damage when attacking in darkness (light level below 5)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Awakened (PlusTiC), Racheline"
     },
     {
       "type": "patchouli:text",
       "title": "Bloodlust",
       "text": "§oThe weaker you are, the stronger I am! §r\\n§fDeal additional damage depending on the percentage of health that the target has lost.$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Heart Crystal, Ruby, Sakura Diamond"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Bloodymary",
-      "text": "Deals extra damage scaling with the target's missing health$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Bloodwood (PlusTiC), Signalum (PlusTiC)"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Botanical",
-      "text": "Bonemeals adjacent growable blocks when breaking a block$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Livingwood (PlusTiC)"
     },
     {
       "type": "patchouli:text",
@@ -53,6 +33,26 @@
       "type": "patchouli:text",
       "title": "Bouncy",
       "text": "Negates fall damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Red Slime, Slime, Slimeknightium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Breakable",
+      "text": "Reduces durability by 20%$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Reed"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Bright",
+      "text": "Deals up to 1.5x damage by day but reduced damage at night; 10% chance of Night Vision on block break$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Lumix, Yellorium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Brittle",
+      "text": "Reduces durability by 15%$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Xu Magical Wood"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Brownmagic",
+      "text": "30% chance to randomly teleport the target up to 16 blocks on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Awakened (PlusTiC)"
     }
   ]
 }

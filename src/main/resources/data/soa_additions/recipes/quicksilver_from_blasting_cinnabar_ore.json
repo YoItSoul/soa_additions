@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "ingredient": {
+    "item": "soa_additions:cinnabar_ore"
+  },
+  "result": "soa_additions:quicksilver",
+  "experience": 0.7,
+  "cookingtime": 100
+}

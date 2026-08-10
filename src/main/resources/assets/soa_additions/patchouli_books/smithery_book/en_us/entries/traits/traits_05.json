@@ -6,26 +6,6 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Cheapskate",
-      "text": "Reduces durability by 10%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Black Quartz, Cincinnasite, Coal, Seared, Sky Stone"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Cheapskate",
-      "text": "Reduces durability by 10%$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Apatite, Cincinnasite, Coal, Construction Alloy, Holystone, Seared, Sky Stone, Void"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Chunky",
-      "text": "Increases durability by 25%$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Insanium, Ma.soulium, Soularium"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Coldblooded",
-      "text": "Inflicts Slowness II for 3s on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Adaminite, Durasteel, Emeraldic, Manyullyn, Platinum"
-    },
-    {
-      "type": "patchouli:text",
       "title": "Conductive",
       "text": "Grounds out almost all lightning damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Copper"
     },
@@ -52,7 +32,27 @@
     {
       "type": "patchouli:text",
       "title": "Crude",
-      "text": "Adds +1.5 bonus attack damage$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Black Quartz (PlusTiC), Conductive Iron, Litherite, Lonsdaleite, Polyethylene, Redstone Alloy, Rubber, Tin and 1 more"
+      "text": "Adds +1.5 bonus attack damage$(br2)$(l)Granted from:$() any part of a tool and the tool's head$(br)$(l)Materials:$() Conductive Iron, Litherite, Redstone Alloy, Rubber, Tin"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Crumbling",
+      "text": "Adds +2 mining speed$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Meteorite, Ravaging, UU-Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Crushing",
+      "text": "Turns mined stone into a random stone, cobble, gravel, or sand drop$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Solarium"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cryonic",
+      "text": "20% chance to inflict Slowness III for 10s on the attacker when hit$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Cryonium, Rime"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Crystal",
+      "text": "Damage scales with tool durability; reduces incoming damage more at high armor durability$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Aquamarine, Certus Quartz, Crystal Matrix, Dimensional Shard, Fluix, Rime, Sakura Diamond, Scarlite and 3 more"
     }
   ]
 }

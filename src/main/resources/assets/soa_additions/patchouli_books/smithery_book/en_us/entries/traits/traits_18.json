@@ -6,53 +6,53 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Natureswrath",
-      "text": "Sets targets on fire for 3 seconds on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Cytosinite, Erodium, Malachite Gem, Terra Alloy, Terrestrial Gem"
+      "title": "Precipitate",
+      "text": "Adds 3 bonus mining speed$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Nagascale"
     },
     {
       "type": "patchouli:text",
-      "title": "Nimble",
-      "text": "Land as if the fall were shorter$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() NeoForgium"
+      "title": "Prickly",
+      "text": "Deals 2 thorns damage to melee attackers$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Cactus"
     },
     {
       "type": "patchouli:text",
-      "title": "Penetration",
-      "text": "§oYour armor is nothing to me!§r\\n§fDeals extra damage to enemies with high armor points.$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aeonsteel, Blood Infused Iron, Cactus, Fluix"
+      "title": "Prideful",
+      "text": "Reduces incoming damage by 15% while at full health$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Asgardium, Crystal Matrix, Platinum, Starmetal"
     },
     {
       "type": "patchouli:text",
-      "title": "Perfectionist",
-      "text": "§oIt' perfect like a masterpiece!§r\\n§fRounds damage to the nearest multiply of 5 (Does not apply to damage below 5 points, and some calculations are done after rounding)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Perfect"
+      "title": "Prosperous",
+      "text": "Doubles XP dropped from broken blocks$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Insanium, Ma.base Essence, Inferium, Intermedium, Prudentium, Superium, Supremium"
     },
     {
       "type": "patchouli:text",
-      "title": "Perfectionist",
-      "text": "Tool: rounds outgoing damage to nearest 10; armor: rounds incoming damage above 5 to nearest 5$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Perfect"
+      "title": "Pulverizing",
+      "text": "Mining speed ramps up as durability drops; 60% chance to destroy drops$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Meteorite, Ravaging"
     },
     {
       "type": "patchouli:text",
-      "title": "Perfectionist",
-      "text": "§oOCD's savior!§r\\n§fYour base damage gets rounded to the nearest multiply of 10! (Before armor calculations take effect)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Perfect"
+      "title": "Purifying",
+      "text": "Continuously removes the Wither effect while worn$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Cheese, Ender Biotite, Fluix, Tofudiamond"
     },
     {
       "type": "patchouli:text",
-      "title": "Petramor",
-      "text": "10% chance to repair 1 durability when breaking blocks$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Ardite, Energetic Alloy, Litherite"
+      "title": "Raging",
+      "text": "Deals 1.25x damage on normal hits but 0.75x on critical hits$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Cincinnasite, Ruby, High-Powered Tofu Gem"
     },
     {
       "type": "patchouli:text",
-      "title": "Pinky",
-      "text": "§oI like this color!§r\\n§fHave a chance to get sakura diamonds when mining diamong ore. Doesn't work with Silk Touch.$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Sakura Diamond"
+      "title": "Reach",
+      "text": "Increases block reach by 1.5$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Mithminite, Valkyrie Metal"
     },
     {
       "type": "patchouli:text",
-      "title": "Poisonous",
-      "text": "25% chance to inflict Poison for 5s on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Chromium, Lead, Poop, Pulsating Iron"
+      "title": "Refrigeration",
+      "text": "Freezes adjacent water to ice and lava to obsidian when mining$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Icestone"
     },
     {
       "type": "patchouli:text",
-      "title": "Poopy",
-      "text": "0.5% chance to yield a poop item on hitting hostile mobs; as armor inflicts Nausea while worn$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Poop"
+      "title": "Reliable",
+      "text": "§oComes in handy!§r\\n§fWhen using this tool above 90% health reduces durability consumption to 1/4, otherwise decreases durability double as fast.$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aeonsteel, Chromasteel, Insanium, Mithril, Stainless Steel, Titanium"
     }
   ]
 }

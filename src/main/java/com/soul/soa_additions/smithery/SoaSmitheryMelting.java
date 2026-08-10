@@ -136,8 +136,8 @@ public final class SoaSmitheryMelting {
         recipe("jaopca:dusts.cytosinite",               "soa_additions:cytosinite", INGOT_MB);
 
         // Demonic Metal
-        recipe("soa_additions:demonic_metal_ingot",     "soa_additions:demonic_metal", INGOT_MB);
-        recipe("soa_additions:demonic_metal_block",     "soa_additions:demonic_metal", BLOCK_MB);
+        recipe("soa_additions:demonic_metal_ingot",     "soa_additions:xu_demonic_metal", INGOT_MB);
+        recipe("soa_additions:demonic_metal_block",     "soa_additions:xu_demonic_metal", BLOCK_MB);
 
         // Draconic Metal
         recipe("tconevo:draconic_metal_ingot",    "soa_additions:draconic_metal", INGOT_MB);
@@ -174,8 +174,8 @@ public final class SoaSmitheryMelting {
         recipe("jaopca:storage_blocks.ethaxium",        "soa_additions:ethaxium", BLOCK_MB);
 
         // Evil Metal
-        recipe("soa_additions:evil_metal_ingot",        "soa_additions:evil_metal", INGOT_MB);
-        recipe("soa_additions:evil_metal_block",        "soa_additions:evil_metal", BLOCK_MB);
+        recipe("soa_additions:evil_metal_ingot",        "soa_additions:xu_evil_metal", INGOT_MB);
+        recipe("soa_additions:evil_metal_block",        "soa_additions:xu_evil_metal", BLOCK_MB);
 
         // Experience
         recipe("soa_additions:experience_ingot",        "soa_additions:experience", INGOT_MB);
@@ -359,8 +359,8 @@ public final class SoaSmitheryMelting {
         recipe("bigreactors:yellorium_dust",            "soa_additions:yellorium", INGOT_MB);
 
         // Abyssal / Ether / Void (original soa_additions items)
-        recipe("soa_additions:abyssal_ingot",           "soa_additions:abyssal", INGOT_MB);
-        recipe("soa_additions:abyssal_ore_block",       "soa_additions:abyssal", ORE_MB);
+        recipe("soa_additions:abyssal_ingot",           "soa_additions:abyssalnite", INGOT_MB);
+        recipe("soa_additions:abyssal_ore_block",       "soa_additions:abyssalnite", ORE_MB);
         recipe("soa_additions:ether_ingot",             "soa_additions:ether", INGOT_MB);
         recipe("soa_additions:ether_ore_block",         "soa_additions:ether", ORE_MB);
         recipe("soa_additions:infernium_ore_block",     "soa_additions:infernium", ORE_MB);
@@ -522,19 +522,19 @@ public final class SoaSmitheryMelting {
         recipe("soa_additions:remorseful_gem",          "soa_additions:remorseful", INGOT_MB);
         recipe("soa_additions:cincinnasite",            "soa_additions:cincinnasite", INGOT_MB);
         recipe("soa_additions:rime_crystal",            "soa_additions:rime", INGOT_MB);
-        recipe("soa_additions:tofu_gem",                "soa_additions:tofu", INGOT_MB);
-        recipe("soa_additions:strong_tofu_gem",         "soa_additions:strong_tofu", INGOT_MB);
-        recipe("soa_additions:sakura_diamond",          "soa_additions:sakura", INGOT_MB);
+        recipe("soa_additions:tofu_gem",                "soa_additions:tofu_gem", INGOT_MB);
+        recipe("soa_additions:strong_tofu_gem",         "soa_additions:strong_tofu_gem", INGOT_MB);
+        recipe("soa_additions:sakura_diamond",          "soa_additions:sakura_diamond", INGOT_MB);
         recipe("soa_additions:chocolate_bar",           "soa_additions:chocolate", INGOT_MB);
         recipe("soa_additions:flux_crystal",            "soa_additions:flux_crystal", INGOT_MB);
         recipe("soa_additions:aquamarine",              "soa_additions:aquamarine", INGOT_MB);
         recipe("soa_additions:black_quartz",            "soa_additions:black_quartz", INGOT_MB);
-        recipe("soa_additions:restonia_crystal",        "soa_additions:restonia", INGOT_MB);
-        recipe("soa_additions:palis_crystal",           "soa_additions:palis", INGOT_MB);
-        recipe("soa_additions:diamantine_crystal",      "soa_additions:diamantine", INGOT_MB);
-        recipe("soa_additions:void_crystal",            "soa_additions:void_crystal_mat", INGOT_MB);
-        recipe("soa_additions:emeraldic_crystal",       "soa_additions:emeraldic", INGOT_MB);
-        recipe("soa_additions:enori_crystal",           "soa_additions:enori", INGOT_MB);
+        recipe("soa_additions:restonia_crystal",        "soa_additions:restonia_crystal", INGOT_MB);
+        recipe("soa_additions:palis_crystal",           "soa_additions:palis_crystal", INGOT_MB);
+        recipe("soa_additions:diamantine_crystal",      "soa_additions:diamantine_crystal", INGOT_MB);
+        recipe("soa_additions:void_crystal",            "soa_additions:void_crystal", INGOT_MB);
+        recipe("soa_additions:emeraldic_crystal",       "soa_additions:emeraldic_crystal", INGOT_MB);
+        recipe("soa_additions:enori_crystal",           "soa_additions:enori_crystal", INGOT_MB);
         recipe("tconevo:essence_metal_ingot",     "soa_additions:essence_metal", INGOT_MB);
 
         // Ghostwood / Bloodwood / Darkwood / Fusewood logs
@@ -666,29 +666,20 @@ public final class SoaSmitheryMelting {
         recipe("avaritia:neutron_ingot",                "soa_additions:neutronium", INGOT_MB);
         recipe("avaritia:neutron_block",                "soa_additions:neutronium", BLOCK_MB);
         recipe("avaritia:neutron_nugget",               "soa_additions:neutronium", NUGGET_MB);
-        recipe("avaritia:infinity_ingot",               "soa_additions:infinity", INGOT_MB);
-        recipe("avaritia:infinity_block",               "soa_additions:infinity", BLOCK_MB);
-        recipe("avaritia:infinity_nugget",              "soa_additions:infinity", NUGGET_MB);
+        recipe("avaritia:infinity_ingot",               "soa_additions:infinity_metal", INGOT_MB);
+        recipe("avaritia:infinity_block",               "soa_additions:infinity_metal", BLOCK_MB);
+        recipe("avaritia:infinity_nugget",              "soa_additions:infinity_metal", NUGGET_MB);
 
         // ================================================================
         // Cross-mod items — AllTheModium
         // ================================================================
-        recipe("allthemodium:allthemodium_ingot",       "soa_additions:allthemodium", INGOT_MB);
-        recipe("allthemodium:allthemodium_block",       "soa_additions:allthemodium", BLOCK_MB);
-        recipe("allthemodium:allthemodium_nugget",      "soa_additions:allthemodium", NUGGET_MB);
         recipe("allthemodium:vibranium_ingot",          "soa_additions:vibranium", INGOT_MB);
         recipe("allthemodium:vibranium_block",          "soa_additions:vibranium", BLOCK_MB);
         recipe("allthemodium:vibranium_nugget",         "soa_additions:vibranium", NUGGET_MB);
-        recipe("allthemodium:unobtainium_ingot",        "soa_additions:unobtainium", INGOT_MB);
-        recipe("allthemodium:unobtainium_block",        "soa_additions:unobtainium", BLOCK_MB);
-        recipe("allthemodium:unobtainium_nugget",       "soa_additions:unobtainium", NUGGET_MB);
 
         // ================================================================
         // Cross-mod items — Big Reactors
         // ================================================================
-        recipe("bigreactors:cyanite_ingot",             "soa_additions:cyanite", INGOT_MB);
-        recipe("bigreactors:cyanite_block",             "soa_additions:cyanite", BLOCK_MB);
-        recipe("bigreactors:cyanite_dust",              "soa_additions:cyanite", INGOT_MB);
 
         // ================================================================
         // Cross-mod items — Misc
@@ -709,6 +700,190 @@ public final class SoaSmitheryMelting {
         recipe("minecraft:ender_pearl",                 "soa_additions:ender", 250);
         recipe("minecraft:rotten_flesh",                "smithery:blood", 40);
         recipe("minecraft:magma_block",                 "soa_additions:lava", 250);
+
+        // ================================================================
+        // Sourcing gap-fill: materials that were registered with no way in.
+        // Every item below is verified present in the pack's item export.
+        // ================================================================
+
+        recipe("soa_additions:amber",                       "soa_additions:amber", INGOT_MB);
+
+        recipe("thermal:apatite",                           "soa_additions:apatite", INGOT_MB);
+        recipe("thermal:apatite_block",                     "soa_additions:apatite", BLOCK_MB);
+        recipe("forestry:apatite",                          "soa_additions:apatite", INGOT_MB);
+
+        recipe("bloodarsenal:blood_infused_iron_ingot",     "soa_additions:blood_infused_iron", INGOT_MB);
+        recipe("bloodarsenal:blood_infused_iron_block",     "soa_additions:blood_infused_iron", BLOCK_MB);
+
+        recipe("minecraft:bone",                            "soa_additions:bone", INGOT_MB);
+        recipe("minecraft:bone_block",                      "soa_additions:bone", BLOCK_MB);
+
+        recipe("minecraft:cactus",                          "soa_additions:cactus", INGOT_MB);
+
+        recipe("aether:candy_cane",                         "soa_additions:candy_cane", INGOT_MB);
+
+        recipe("ae2:certus_quartz_crystal",                 "soa_additions:certus_quartz", INGOT_MB);
+        recipe("ae2:certus_quartz_dust",                    "soa_additions:certus_quartz", INGOT_MB);
+
+        recipe("refurbished_furniture:cheese",              "soa_additions:cheese", INGOT_MB);
+
+        recipe("minecraft:coal",                            "soa_additions:coal", INGOT_MB);
+        recipe("minecraft:coal_block",                      "soa_additions:coal", BLOCK_MB);
+
+        recipe("soa_additions:crystal_leaf",                "soa_additions:crystal_leaf", INGOT_MB);
+
+        recipe("botania:dragonstone",                       "soa_additions:dragonstone", INGOT_MB);
+        recipe("botania:dragonstone_block",                 "soa_additions:dragonstone", BLOCK_MB);
+
+        recipe("botania:dreamwood",                         "soa_additions:dreamwood", INGOT_MB);
+
+        recipe("soa_additions:ender_biotite",               "soa_additions:ender_biotite", INGOT_MB);
+
+        recipe("enderio:ender_crystal",                     "soa_additions:ender_crystal", INGOT_MB);
+
+        recipe("actuallyadditions:enori_crystal",           "soa_additions:enori_crystal", INGOT_MB);
+        recipe("actuallyadditions:enori_crystal_block",     "soa_additions:enori_crystal", BLOCK_MB);
+        recipe("actuallyadditions:enori_crystal_shard",     "soa_additions:enori_crystal", NUGGET_MB);
+
+        recipe("minecraft:feather",                         "soa_additions:feather", INGOT_MB);
+
+        recipe("ae2:fluix_crystal",                         "soa_additions:fluix", INGOT_MB);
+        recipe("ae2:fluix_dust",                            "soa_additions:fluix", INGOT_MB);
+        recipe("ae2:fluix_block",                           "soa_additions:fluix", BLOCK_MB);
+
+        recipe("aether:golden_amber",                       "soa_additions:golden_amber", INGOT_MB);
+
+        recipe("aether:golden_feather",                     "soa_additions:golden_feather", INGOT_MB);
+
+        recipe("scalinghealth:heart_crystal",               "soa_additions:heart_crystal", INGOT_MB);
+        recipe("scalinghealth:heart_crystal_shard",         "soa_additions:heart_crystal", NUGGET_MB);
+        recipe("scalinghealth:heart_crystal_ore",           "soa_additions:heart_crystal", ORE_MB);
+
+        recipe("aether:holystone",                          "soa_additions:holystone", INGOT_MB);
+
+        recipe("minecraft:ice",                             "soa_additions:ice", INGOT_MB);
+
+        recipe("aether:icestone",                           "soa_additions:icestone", INGOT_MB);
+
+        recipe("valoria:jade",                              "soa_additions:jade", INGOT_MB);
+        recipe("valoria:jade_ore",                          "soa_additions:jade", ORE_MB);
+
+        recipe("botania:livingrock",                        "soa_additions:livingrock", INGOT_MB);
+
+        recipe("botania:livingwood",                        "soa_additions:livingwood", INGOT_MB);
+
+        recipe("botania:mana_diamond",                      "soa_additions:mana_diamond", INGOT_MB);
+        recipe("botania:mana_diamond_block",                "soa_additions:mana_diamond", BLOCK_MB);
+
+        recipe("botania:mana_pearl",                        "soa_additions:mana_pearl", INGOT_MB);
+
+        recipe("botania:mana_string",                       "soa_additions:mana_string", INGOT_MB);
+
+        recipe("soa_additions:meat_metal_ingot",            "soa_additions:meat_metal", INGOT_MB);
+
+        recipe("minecraft:mud",                             "soa_additions:mud", INGOT_MB);
+
+        recipe("minecraft:netherrack",                      "soa_additions:netherrack", INGOT_MB);
+
+        recipe("soa_additions:nylon_cloth",                 "soa_additions:nylon_cloth", INGOT_MB);
+
+        recipe("soa_additions:nylon_string",                "soa_additions:nylon_string", INGOT_MB);
+
+        recipe("actuallyadditions:palis_crystal",           "soa_additions:palis_crystal", INGOT_MB);
+        recipe("actuallyadditions:palis_crystal_block",     "soa_additions:palis_crystal", BLOCK_MB);
+        recipe("actuallyadditions:palis_crystal_shard",     "soa_additions:palis_crystal", NUGGET_MB);
+
+        recipe("minecraft:paper",                           "soa_additions:paper", INGOT_MB);
+
+        recipe("soa_additions:perfect",                     "soa_additions:perfect", INGOT_MB);
+
+        recipe("soa_additions:peridot",                     "soa_additions:peridot", INGOT_MB);
+
+        recipe("soa_additions:pink_slime_crystal",          "soa_additions:pink_slime", INGOT_MB);
+
+        recipe("soa_additions:poop",                        "soa_additions:poop", INGOT_MB);
+
+        recipe("enderio:pulsating_crystal",                 "soa_additions:pulsating_crystal", INGOT_MB);
+
+        recipe("minecraft:pumpkin",                         "soa_additions:pumpkin", INGOT_MB);
+
+        recipe("twilightforest:raven_feather",              "soa_additions:raven_feather", INGOT_MB);
+
+        recipe("actuallyadditions:restonia_crystal",        "soa_additions:restonia_crystal", INGOT_MB);
+        recipe("actuallyadditions:restonia_crystal_block",  "soa_additions:restonia_crystal", BLOCK_MB);
+        recipe("actuallyadditions:restonia_crystal_shard",  "soa_additions:restonia_crystal", NUGGET_MB);
+
+        recipe("thermal:rubber",                            "soa_additions:rubber", INGOT_MB);
+        recipe("thermal:rubber_block",                      "soa_additions:rubber", BLOCK_MB);
+
+        recipe("soa_additions:rubber_band",                 "soa_additions:rubber_band", INGOT_MB);
+
+        recipe("ae2:sky_stone_block",                       "soa_additions:sky_stone", INGOT_MB);
+
+        recipe("soa_additions:skyroot_leaf",                "soa_additions:skyroot_leaf", INGOT_MB);
+
+        recipe("soa_additions:spectre_string",              "soa_additions:spectre_string", INGOT_MB);
+
+        recipe("minecraft:sponge",                          "soa_additions:sponge", INGOT_MB);
+
+        recipe("soa_additions:swet_crystal",                "soa_additions:swet", INGOT_MB);
+
+        recipe("tofucraft:tofu_gem_block",                  "soa_additions:tofu_gem", BLOCK_MB);
+
+        recipe("tofucraft:tofudiamond",                     "soa_additions:tofudiamond", INGOT_MB);
+
+        recipe("tofucraft:tofumetal",                       "soa_additions:tofumetal", INGOT_MB);
+
+        recipe("soa_additions:topaz",                       "soa_additions:topaz", INGOT_MB);
+
+        recipe("defiledlands:umbrium_ingot",                "soa_additions:umbrium", INGOT_MB);
+        recipe("defiledlands:umbrium_block",                "soa_additions:umbrium", BLOCK_MB);
+        recipe("defiledlands:umbrium_nugget",               "soa_additions:umbrium", NUGGET_MB);
+        recipe("defiledlands:umbrium_ore",                  "soa_additions:umbrium", ORE_MB);
+
+        recipe("enderio:vibrant_crystal",                   "soa_additions:vibrant_crystal", INGOT_MB);
+
+        recipe("minecraft:vine",                            "soa_additions:vine", INGOT_MB);
+
+        recipe("actuallyadditions:void_crystal",            "soa_additions:void_crystal", INGOT_MB);
+        recipe("actuallyadditions:void_crystal_block",      "soa_additions:void_crystal", BLOCK_MB);
+        recipe("actuallyadditions:void_crystal_shard",      "soa_additions:void_crystal", NUGGET_MB);
+
+        recipe("enderio:weather_crystal",                   "soa_additions:weather_crystal", INGOT_MB);
+
+        // Cross-mod sources: the item exists under a different mod id than the material name
+        // (Aether aerclouds/leaves, Twilight Forest naga scale + yeti fur, MCA rose gold, RFTools).
+        recipe("aether:blue_aercloud",                      "soa_additions:aercloud_blue", INGOT_MB);
+        recipe("aether:cold_aercloud",                      "soa_additions:aercloud_cold", INGOT_MB);
+        recipe("aether:golden_aercloud",                    "soa_additions:aercloud_gold", INGOT_MB);
+        recipe("aether:golden_oak_leaves",                  "soa_additions:golden_oak_leaf", INGOT_MB);
+        recipe("aether:holiday_leaves",                     "soa_additions:holiday_leaf", INGOT_MB);
+        recipe("aether:skyroot_log",                        "soa_additions:skyroot", INGOT_MB);
+        recipe("twilightforest:naga_scale",                 "soa_additions:nagascale", INGOT_MB);
+        recipe("twilightforest:alpha_yeti_fur",             "soa_additions:alpha_fur", INGOT_MB);
+        recipe("minecraft:end_stone",                       "soa_additions:endstone", INGOT_MB);
+        recipe("minecraft:magma_cream",                     "soa_additions:magmaslime", INGOT_MB);
+        recipe("minecraft:sugar_cane",                      "soa_additions:reed", INGOT_MB);
+        recipe("mca:rose_gold_ingot",                       "soa_additions:rosegold", INGOT_MB);
+        recipe("mca:rose_gold_block",                       "soa_additions:rosegold", BLOCK_MB);
+        recipe("mca:rose_gold_dust",                        "soa_additions:rosegold", INGOT_MB);
+        recipe("rftoolsbase:dimensionalshard",              "soa_additions:dimensional_shard", INGOT_MB);
+        recipe("soa_additions:terrestrial_artifact",        "soa_additions:terrestrial", INGOT_MB);
+        recipe("soa_additions:wither_bone",                 "soa_additions:witherbone", INGOT_MB);
+        recipe("soa_additions:stellar_alloy_ingot",         "soa_additions:stellar_alloy_gc", INGOT_MB);
+        // malachite_gem: SOA already ships the gem (ModItems.MALACHITE); it was never wired.
+        recipe("soa_additions:malachite",              "soa_additions:malachite_gem", INGOT_MB);
+        recipe("jaopca:storage_blocks.malachite",      "soa_additions:malachite_gem", BLOCK_MB);
+
+
+        // Blood-infused wood + quicksilver: both sourced from SOA's own ported blocks/items.
+        // Quicksilver is smelted from the ported cinnabar ore (see ModBlocks.CINNABAR_ORE).
+        recipe("soa_additions:blood_infused_log",      "soa_additions:blood_infused_wood", INGOT_MB);
+        recipe("soa_additions:blood_infused_planks",   "soa_additions:blood_infused_wood", NUGGET_MB * 4);
+        recipe("soa_additions:quicksilver",            "soa_additions:quicksilver", INGOT_MB);
+
+        // End rod is vanilla; no port needed.
+        recipe("minecraft:end_rod",                    "soa_additions:endrod", INGOT_MB);
     }
 
     private static void thermal(String name) {

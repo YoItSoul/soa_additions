@@ -6,53 +6,53 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "title": "Jaded",
-      "text": "Adds +1.0 mining speed$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Jade"
+      "title": "Madness",
+      "text": "§oDemonic whispers echo around you...§r\\n§fWielding this tool will sometimes give you warp, but the more you are warped, the higher damage you deal.$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Nihilite, Shadowium, Void Metal"
     },
     {
       "type": "patchouli:text",
-      "title": "Jagged",
-      "text": "Deals more damage the more worn it is$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Litherite"
+      "title": "Magical Modifier",
+      "text": "Adds +2 bonus attack damage$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Xu Magical Wood"
     },
     {
       "type": "patchouli:text",
-      "title": "Jagged",
-      "text": "Deals more damage the more worn it is$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Flint"
+      "title": "Magnetic",
+      "text": "Pulls mined block drops toward you$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Enori, Fluix Steel, Fluxed Electrum, Invar, Nickel"
     },
     {
       "type": "patchouli:text",
-      "title": "Knowledgeful",
-      "text": "Tool: +0.2% damage per XP level (up to +60%); armor: scales damage reduction with XP up to 36%$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Adaminite, Astral Metal, Knowledge, Mithminite, Mithrillium, Xu Enchanted Metal"
+      "title": "Magnetic Armor1",
+      "text": "Pulls nearby dropped items toward you within 8 blocks$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Conductive Iron, Nickel, Redstone Alloy, Starmetal"
     },
     {
       "type": "patchouli:text",
-      "title": "Knowledgeful",
-      "text": "Damage and incoming reduction scale with your XP level (up to 300)$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Adaminite, Astral Metal, Knowledge, Mithminite, Mithrillium, Xu Enchanted Metal"
+      "title": "Magnetic Armor2",
+      "text": "Pulls nearby dropped items toward you within 12 blocks$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Nickel, Starmetal, Terra Alloy"
     },
     {
       "type": "patchouli:text",
-      "title": "Kungfu",
-      "text": "4% chance to fully dodge a non-armor-bypassing hit, gaining Speed IV for 5s$(br2)$(l)Granted from:$() armor$(br)$(l)Materials:$() Alpha Fur, Manganese, Tofudiamond, Tofumetal"
+      "title": "Magnetized",
+      "text": "Pulls nearby drops toward you$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Iron"
     },
     {
       "type": "patchouli:text",
-      "title": "Launching",
-      "text": "Launches struck enemies upward into the air$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aeroite, Gravitite"
+      "title": "Mana",
+      "text": "15% chance on attack or block break to repair 1 durability$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Elementium, Manasteel, Mirion, Terrasteel"
     },
     {
       "type": "patchouli:text",
-      "title": "Lightning",
-      "text": "4% chance to strike the target with a visual lightning bolt on hit$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Asgardium, Electronium"
+      "title": "Matter Condensing",
+      "text": "§oEverything is matter!§r\\n§fGain EMC from damage dealt with this weapon.$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Red Matter"
     },
     {
       "type": "patchouli:text",
-      "title": "Lightweight",
-      "text": "Increases movement speed by 2%$(br2)$(l)Granted from:$() any part of a tool and armor$(br)$(l)Materials:$() Aeroite, Certus Quartz, Draconium, Electrical Steel, Manasteel, Nagascale, Soularium, Tofumetal"
+      "title": "Matter Condensing EX",
+      "text": "§oEverything is matter! §d§o§nDeluxe Edition§r\\n§fGain EMC from damage dealt with this weapon.$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Protonium"
     },
     {
       "type": "patchouli:text",
-      "title": "Lightweight",
-      "text": "Adds +1.5 mining speed$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Aeroite, Aluminium, Carbon Fiber, Certus Quartz, Cobalt, Conductive Iron, Electrical Steel, Erodium and 2 more"
+      "title": "Matter Trait11",
+      "text": "Grants EMC equal to 10% of damage on hostile-mob hits (ProjectE integration stubbed)$(br2)$(l)Granted from:$() any part of a tool$(br)$(l)Materials:$() Red Matter"
     }
   ]
 }

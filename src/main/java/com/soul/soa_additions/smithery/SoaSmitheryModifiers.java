@@ -233,13 +233,10 @@ public final class SoaSmitheryModifiers {
     public static ResourceLocation MELTING;
     public static ResourceLocation MUTATE;
     public static ResourceLocation SOUL_STAINED;
-    public static ResourceLocation ALIEN;
-    public static ResourceLocation NECROTIC;
     // GreedyCraft Creative Modifier: +1 free modifier slot per application, stacking
     // (Tinkers ModCreative set FreeModifiers = level). Slot count comes from the
     // bonus_slots_per_level param x level, read by SmitheryToolItem.bonusModifierSlots.
     public static ResourceLocation CREATIVE;
-    public static ResourceLocation BLOODYMARY;
     public static ResourceLocation WELL_USED;
     public static ResourceLocation MENDING_ARMOR;
     public static ResourceLocation MENDING_MOSS;
@@ -1656,10 +1653,13 @@ public final class SoaSmitheryModifiers {
                 .appliesTo(Modifier.AppliesTo.ARMOR)
                 .build());
 
+        // Tool-side only: GreedyCraft pairs this with duritos_ranch_armor on core/plates/trim,
+        // so leaving it unscoped would double it up on armour.
         DURITOS = id("duritos");
         SmitheryAPI.registerModifier(Modifier.builder(DURITOS)
                 .category(Modifier.ModifierCategory.PASSIVE)
                 .passive((effect, stats) -> stats.durabilityMultiplier *= 1.0f + effect.paramFloat("bonus", 0.2f))
+                .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
 
         DURITOS_RANCH_ARMOR = id("duritos_ranch_armor");
@@ -3198,47 +3198,6 @@ public final class SoaSmitheryModifiers {
         WELL_USED = id("well_used");
         SmitheryAPI.registerModifier(Modifier.builder(WELL_USED)
                 .category(Modifier.ModifierCategory.PASSIVE)
-                .build());
-
-        // TConstruct base trait: the tool adapts to its wielder over time.
-        // (1.12 randomly grew stats; composed Smithery stats can't mutate, so this
-        // is approximated as slow self-repair — the "living tool" feel.)
-        ALIEN = id("alien");
-        SmitheryAPI.registerModifier(Modifier.builder(ALIEN)
-                .category(Modifier.ModifierCategory.ACTIVE)
-                .onBlockBreak((effect, ctx) -> {
-                    if (ctx.level().getRandom().nextFloat() < 0.1f && ctx.tool().getDamageValue() > 0) {
-                        ctx.tool().setDamageValue(ctx.tool().getDamageValue() - 1);
-                    }
-                })
-                .appliesTo(Modifier.AppliesTo.TOOLS)
-                .build());
-
-        // TConstruct base trait: heal 10% of damage dealt per level.
-        NECROTIC = id("necrotic");
-        SmitheryAPI.registerModifier(Modifier.builder(NECROTIC)
-                .category(Modifier.ModifierCategory.ACTIVE)
-                .onAttackEntity((effect, ctx) -> {
-                    if (ctx.damageDealt() <= 0.0f) return;
-                    int lvl = Math.max(1, effect.paramInt("level", 1));
-                    ctx.attacker().heal(ctx.damageDealt() * 0.1f * lvl);
-                })
-                .build());
-
-        // PlusTiC: damage scales with the target's missing-health ratio ((max/hp)^0.6).
-        BLOODYMARY = id("bloodymary");
-        SmitheryAPI.registerModifier(Modifier.builder(BLOODYMARY)
-                .category(Modifier.ModifierCategory.ACTIVE)
-                .onAttackEntity((effect, ctx) -> {
-                    if (!(ctx.target() instanceof LivingEntity target) || ctx.damageDealt() <= 0.0f) return;
-                    if (target.level().isClientSide || !target.isAlive() || target.getHealth() <= 0.0f) return;
-                    float mult = (float) Math.pow(target.getMaxHealth() / target.getHealth(), 0.6);
-                    float bonus = ctx.damageDealt() * (mult - 1.0f);
-                    if (bonus > 0.1f) {
-                        target.hurt(ctx.attacker().damageSources().mobAttack(ctx.attacker()),
-                                Math.min(bonus, ctx.damageDealt() * 2.0f));
-                    }
-                })
                 .build());
 
         // TAIGA nucleum trait: 5% chance a broken natural block mutates into another
