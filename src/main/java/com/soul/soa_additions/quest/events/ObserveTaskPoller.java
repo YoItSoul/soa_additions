@@ -13,7 +13,10 @@ import com.soul.soa_additions.quest.progress.TeamQuestProgress;
 import com.soul.soa_additions.quest.task.ObserveTask;
 import com.soul.soa_additions.quest.team.QuestTeam;
 import com.soul.soa_additions.quest.team.TeamData;
+import net.minecraft.core.SectionPos;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -97,13 +100,42 @@ public final class ObserveTaskPoller {
                 // chunk loads to soa_additions. Bail to a no-op when the ray
                 // would leave the loaded area; the player will just need to
                 // be a bit closer.
-                net.minecraft.core.BlockPos endPos = net.minecraft.core.BlockPos.containing(end);
-                if (player.level().hasChunkAt(endPos)) {
-                    BlockHitResult bhr = player.level().clip(new ClipContext(
+                // `hasChunkAt` was NOT a safe pre-check. It resolves through
+                // getChunk(x, z, FULL, false), and load=false only skips creating
+                // a ticket — the call still runs managedBlock on the future of any
+                // ChunkHolder that exists but has not finished generating. While a
+                // player travels that is true almost constantly, and this poller
+                // runs every player tick: it measured 58% of the whole server
+                // thread, with ModernFix's watchdog logging 40s+ ticks.
+                //
+                // getChunkNow never waits. clip() can only touch the chunk columns
+                // spanned by eye..end, so verifying those is sufficient, and the
+                // hit block is read from its chunk rather than from the level.
+                ServerLevel lvl = player.serverLevel();
+                int cxA = SectionPos.blockToSectionCoord(Mth.floor(eye.x));
+                int czA = SectionPos.blockToSectionCoord(Mth.floor(eye.z));
+                int cxB = SectionPos.blockToSectionCoord(Mth.floor(end.x));
+                int czB = SectionPos.blockToSectionCoord(Mth.floor(end.z));
+                boolean rayLoaded = true;
+                for (int cx = Math.min(cxA, cxB); cx <= Math.max(cxA, cxB) && rayLoaded; cx++) {
+                    for (int cz = Math.min(czA, czB); cz <= Math.max(czA, czB); cz++) {
+                        if (lvl.getChunkSource().getChunkNow(cx, cz) == null) {
+                            rayLoaded = false;
+                            break;
+                        }
+                    }
+                }
+                if (rayLoaded) {
+                    BlockHitResult bhr = lvl.clip(new ClipContext(
                             eye, end, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, player));
                     if (bhr.getType() == HitResult.Type.BLOCK) {
-                        BlockState state = player.level().getBlockState(bhr.getBlockPos());
-                        hitBlockId = BuiltInRegistries.BLOCK.getKey(state.getBlock());
+                        LevelChunk hitChunk = lvl.getChunkSource().getChunkNow(
+                                SectionPos.blockToSectionCoord(bhr.getBlockPos().getX()),
+                                SectionPos.blockToSectionCoord(bhr.getBlockPos().getZ()));
+                        if (hitChunk != null) {
+                            BlockState state = hitChunk.getBlockState(bhr.getBlockPos());
+                            hitBlockId = BuiltInRegistries.BLOCK.getKey(state.getBlock());
+                        }
                     }
                 }
             }

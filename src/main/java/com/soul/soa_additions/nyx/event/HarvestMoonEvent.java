@@ -13,9 +13,8 @@ import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.GrassBlock;
 import net.minecraft.world.level.block.TallGrassBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.level.chunk.ChunkStatus;
 import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.levelgen.Heightmap;
 
 public class HarvestMoonEvent extends LunarEvent {
 
@@ -52,26 +51,33 @@ public class HarvestMoonEvent extends LunarEvent {
         int interval = NyxConfig.HARVEST_MOON_GROW_INTERVAL.get();
         if (grow <= 0 || level.getGameTime() % interval != 0L) return;
 
-        // Iterate loaded chunks around each player. Use the non-loading
-        // accessor: `getChunk(x, z, FULL, false)` returns null for unloaded
-        // chunks instead of synchronously loading (and, with C2ME, parking
-        // the server thread on the async loader). Using load=true here was
-        // a latent stall — every harvest-moon tick could request 17×17×N
-        // chunks per player, blocking the server while they generated.
+        // Iterate loaded chunks around each player without ever waiting on one.
+        //
+        // `getChunk(x, z, FULL, false)` is NOT safe here, despite appearances:
+        // load=false only skips *creating* a ticket. The call still routes into
+        // ServerChunkCache.getChunkBlocking, which runs managedBlock on the
+        // future of any ChunkHolder that already exists — so whenever a chunk is
+        // mid-generation, which is constantly true while a player travels, this
+        // parks the server thread. ModernFix's watchdog caught it holding a
+        // single tick for over 40 seconds, 17x17 chunks deep per player.
+        //
+        // getChunkNow returns null rather than waiting, and every lookup below
+        // goes through the chunk we already hold, so nothing can re-enter the
+        // chunk source and re-introduce the stall.
         for (var p : level.players()) {
             int cx = p.chunkPosition().x, cz = p.chunkPosition().z;
             for (int dx = -8; dx <= 8; dx++) {
                 for (int dz = -8; dz <= 8; dz++) {
-                    ChunkAccess chunk = level.getChunkSource().getChunk(cx + dx, cz + dz, ChunkStatus.FULL, false);
-                    if (!(chunk instanceof LevelChunk)) continue;
+                    LevelChunk chunk = level.getChunkSource().getChunkNow(cx + dx, cz + dz);
+                    if (chunk == null) continue;
                     for (int i = 0; i < grow; i++) {
-                        int rx = level.random.nextInt(16);
-                        int rz = level.random.nextInt(16);
+                        int wx = (cx + dx) * 16 + level.random.nextInt(16);
+                        int wz = (cz + dz) * 16 + level.random.nextInt(16);
                         BlockPos pos = new BlockPos(
-                                (cx + dx) * 16 + rx,
-                                level.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING, (cx + dx) * 16 + rx, (cz + dz) * 16 + rz),
-                                (cz + dz) * 16 + rz);
-                        BlockState state = level.getBlockState(pos);
+                                wx,
+                                chunk.getHeight(Heightmap.Types.MOTION_BLOCKING, wx, wz),
+                                wz);
+                        BlockState state = chunk.getBlockState(pos);
                         Block b = state.getBlock();
                         if (b instanceof BonemealableBlock growable
                                 && !(b instanceof GrassBlock)

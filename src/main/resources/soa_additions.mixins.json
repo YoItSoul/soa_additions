@@ -8,6 +8,12 @@
     "thinair.AirQualityCacheMixin",
     "solarflux.AvaritiaCompatRecipesMixin",
     "cyclic.TileFisherMixin",
+    "mca.WorldUtilsSpawnMixin",
+    "mca.PoiBedCheckMixin",
+    "lodestone.BlockEntitiesStreamMixin",
+    "projectexpansion.SunExposureMixin",
+    "sculkhorde.AmbientSfxScanMixin",
+    "ba_bt.ObeliskCleanupMixin",
     "itemstages.RestrictionDefaultsMixin",
     "itemstages.RestrictionManagerAccessor",
     "itemstages.RestrictionManagerReloadMixin"
