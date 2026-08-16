@@ -699,6 +699,18 @@ public final class SoaSmitheryMelting {
         recipe("minecraft:rotten_flesh",                "smithery:blood", 40);
         recipe("minecraft:magma_block",                 "soa_additions:lava", 250);
 
+        // The other half of scorched's cast: the bricks it sets as melt back into it, at the same
+        // portions they cast for — 144 mB a Furnace Brick, 576 mB the block — so neither direction
+        // gains or loses material. Scorched declares no storageForms(), so without these it would be
+        // a one-way material with nothing to bank it in.
+        //
+        // These override Smithery's own recipes for the two items, which pour smithery:furnace_brick
+        // instead: melting keys on the input item, so an item melts into exactly one material and the
+        // later registration wins. In a pack with SoA the bricks are scorched's storage form;
+        // smithery:furnace_brick keeps them only where SoA is absent.
+        recipe("smithery:furnace_brick",                "soa_additions:scorched", INGOT_MB);
+        recipe("smithery:furnace_bricks",               "soa_additions:scorched", INGOT_MB * 4);
+
         // ================================================================
         // Sourcing gap-fill: materials that were registered with no way in.
         // Every item below is verified present in the pack's item export.

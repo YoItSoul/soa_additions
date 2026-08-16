@@ -1,10 +1,12 @@
 package com.soul.soa_additions.smithery;
 
 import com.soul.smithery.api.SmitheryAPI;
+import com.soul.smithery.api.cast.CastBlocks;
 import com.soul.smithery.api.cast.CastResults;
 import com.soul.smithery.api.cast.CastTemplates;
 import com.soul.smithery.api.material.Material;
 import com.soul.smithery.api.part.PartType;
+import com.soul.smithery.registry.SmitheryBlocks;
 import com.soul.smithery.registry.SmitheryFluids;
 import com.soul.smithery.registry.SmitheryItems;
 import net.minecraft.resources.ResourceLocation;
@@ -28,6 +30,8 @@ public final class SmitheryIntegration {
 
     private static final ResourceLocation INGOT_PT =
             ResourceLocation.fromNamespaceAndPath("smithery", "ingot");
+    /** Four 144 mB units — what a Furnace Bricks block melts for, and so what a basin charges. */
+    private static final int FURNACE_BRICKS_MB = 4 * 144;
     private static final ResourceLocation NUGGET_PT =
             ResourceLocation.fromNamespaceAndPath("smithery", "nugget");
 
@@ -393,6 +397,29 @@ public final class SmitheryIntegration {
         castIngotOnly("nature",   "valoria", "nature_ingot");
         castIngotOnly("pearlium", "valoria", "pearlium_ingot");
         castIngotOnly("void",     "valoria", "void_ingot");
+
+        castScorchedAsFurnaceBrick();
+    }
+
+    /**
+     * Points molten scorched at Smithery's furnace bricks instead of at a scorched ingot.
+     *
+     * <p>Scorched is a fired brick rather than a metal, so an ingot was never the shape it should
+     * set in: a table pours it into the Furnace Brick, a basin into the Furnace Bricks block. These
+     * are the material's only cast results — it declares no {@code storageForms()} precisely so the
+     * bricks are the one form it stores as.
+     *
+     * <p>Both registrations run after the blanket per-material pass in {@code init}, which registers
+     * an ingot result for every meltable material and would otherwise have the last word.
+     *
+     * <p>The basin portion matches what Smithery charges its own furnace_brick material for the same
+     * block, so the two routes to a Furnace Bricks block cost the same and neither undercuts melting
+     * one back down.
+     */
+    private static void castScorchedAsFurnaceBrick() {
+        ResourceLocation scorched = ResourceLocation.fromNamespaceAndPath("soa_additions", "scorched");
+        CastResults.register(scorched, INGOT_PT, () -> SmitheryItems.FURNACE_BRICK.get());
+        CastBlocks.register(scorched, FURNACE_BRICKS_MB, () -> SmitheryBlocks.FURNACE_BRICKS_ITEM.get());
     }
 
     private static void castIngot(String matPath, String ns, String ingotPath, String nuggetPath) {

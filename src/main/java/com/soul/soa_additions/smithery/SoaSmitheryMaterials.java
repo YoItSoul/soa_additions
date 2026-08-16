@@ -693,6 +693,9 @@ public final class SoaSmitheryMaterials {
      * Fluid-only materials backing the GC alloy recipes (TC 1.12 had these as smeltery
      * fluids with no tool material). Zero combat/mining stats, like magma; meltingTemp
      * must be &gt; 0 or SmitheryFluids.bootstrap() skips the fluid entirely.
+     *
+     * <p>All three are {@code castOnly}: they exist to be alloy ingredients, and without it Smithery
+     * mints them a full set of tool parts backed by those zero stats.
      */
     private static void registerAlloyFluids() {
         SmitheryAPI.registerMaterial(id("clay"), MaterialStats.builder()
@@ -703,6 +706,7 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(700.0f)
                         .partColor(0xFFA0A7B4)
                         .binderMultiplier(1.0f)
+                        .castOnly(true)
                 .build());
 
         SmitheryAPI.registerMaterial(id("glowstone"), MaterialStats.builder()
@@ -713,11 +717,15 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(500.0f)
                         .partColor(0xFFFFBC5E)
                         .binderMultiplier(1.0f)
+                        .castOnly(true)
                 .build());
 
         // "ender" is NOT registered here — it already exists as an entity-melting
         // fluid material (see ENDER above, with moltenColor + castOnly).
 
+        // Bound to vanilla lava rather than given a molten fluid of its own: what a magma block
+        // melts down to is lava, and pouring it out of the forge should hand back the real thing —
+        // which a fuel port accepts, so the forge can drink what it just produced.
         SmitheryAPI.registerMaterial(id("lava"), MaterialStats.builder()
                         .harvestLevel(0)
                         .miningSpeed(0.0f)
@@ -726,6 +734,8 @@ public final class SoaSmitheryMaterials {
                         .meltingTemp(1000.0f)
                         .partColor(0xFFD96415)
                         .binderMultiplier(1.0f)
+                        .castOnly(true)
+                        .boundFluid(ResourceLocation.fromNamespaceAndPath("minecraft", "lava"))
                 .build());
     }
 
@@ -2480,6 +2490,9 @@ public final class SoaSmitheryMaterials {
                 .bow(0.6667f, 1.0f, 2.5f)
                 .build());
 
+        // No storageForms(): scorched is a fired brick, so its stored form is Smithery's Furnace
+        // Brick — see SmitheryIntegration#castScorchedAsFurnaceBrick. A minted scorched ingot and
+        // block would be a second, wrong-shaped way to hold the same material.
         SCORCHED = id("scorched");
         SmitheryAPI.registerMaterial(SCORCHED, binderSlots(MaterialStats.builder()
                         .harvestLevel(2)
@@ -2488,7 +2501,6 @@ public final class SoaSmitheryMaterials {
                         .durabilityPerIngot(260)
                         .meltingTemp(1000.0f)
                         .partColor(0xFF5A4638)
-                        .storageForms()
                         .binderMultiplier(1.1f)
                 , 2)
                 .addModifier(ModifierEffect.of(SoaSmitheryModifiers.AUTOSMELT), allToolTypes())
