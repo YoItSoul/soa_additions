@@ -9,6 +9,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
+      # Smithery is a compile-only dependency that build.gradle resolves as
+      # com.soul:smithery:${smithery_version}. Development builds only ever land
+      # in the developer's ~/.m2 (the mavenLocal() repo), and the GitHub release
+      # assets the ivy repo points at stop at v1.7.7 — so a clean CI checkout has
+      # nowhere to get it from. Build it from source at the pinned commit below
+      # and install it into the runner's ~/.m2 instead.
+      #
+      # When smithery_version in gradle.properties changes, move `ref` to the
+      # matching Smithery commit (its gradle.properties mod_version must equal
+      # smithery_version, or resolution fails).
+      - name: Checkout Smithery
+        uses: actions/checkout@v5
+        with:
+          repository: YoItSoul/smithery
+          ref: 66ac59fbb97858e901a26c98695c6c377ab67791 # forge-1.20.1, mod_version=1.18.0
+          path: smithery
+
       # ForgeGradle 6 cannot run on newer JDKs; 17 also matches the Java
       # toolchain the 1.20.1 mod compiles against.
       - name: Setup JDK 17
@@ -19,6 +36,12 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v5
+
+      # -Pmod_group_id=com.soul overrides Smithery's own com.soul.smithery group
+      # so the installed coordinate matches what build.gradle asks for.
+      - name: Install Smithery into mavenLocal
+        run: ./gradlew publishToMavenLocal -Pmod_group_id=com.soul
+        working-directory: smithery
 
       # SoA_Radiance/ (the bundled shaderpack) is Complementary-licensed and
       # deliberately not in the repo, so CI jars omit SoA_Radiance.zip.
