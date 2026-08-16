@@ -1,6 +1,0 @@
-{
-  "parent": "soa_additions:block/tinted_cube_all",
-  "textures": {
-    "all": "soa_additions:block/material_block"
-  }
-}

@@ -137,5 +137,11 @@ public final class ModNetworking {
                 .decoder(com.soul.soa_additions.smithery.MaterialsCatalogOpenPacket::decode)
                 .consumerMainThread(com.soul.soa_additions.smithery.MaterialsCatalogOpenPacket::handle)
                 .add();
+
+        CHANNEL.messageBuilder(ScanConsentPacket.class, id++, NetworkDirection.PLAY_TO_SERVER)
+                .encoder(ScanConsentPacket::encode)
+                .decoder(ScanConsentPacket::decode)
+                .consumerMainThread(ScanConsentPacket::handle)
+                .add();
     }
 }

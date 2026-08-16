@@ -1,17 +1,14 @@
 package com.soul.soa_additions.telemetry;
 
-import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
-import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 /**
- * Client-only event subscriber. Shows the first-launch consent dialog before
- * the title screen, then runs the telemetry heartbeat for the entire client
- * lifetime (main menu included) and computes is_playing dynamically from
+ * Client-only event subscriber. Runs the telemetry heartbeat for the entire
+ * client lifetime (main menu included) and computes is_playing dynamically from
  * whether the client is currently in a world. LoggingIn/LoggingOut only
  * fire immediate beats so the dashboard flips state instantly.
  */
@@ -24,16 +21,12 @@ public final class ClientTelemetryHooks {
     private static boolean heartbeatStarted = false;
     private static int retryCounter = 0;
 
-    @SubscribeEvent
-    public static void onScreenOpening(ScreenEvent.Opening event) {
-        // Intercept the first title screen of the session with the consent
-        // dialog. Once a choice is recorded shouldShow() goes false, so later
-        // title screens (returning from a world, etc.) open normally.
-        if (!(event.getNewScreen() instanceof TitleScreen title)) return;
-        if (event.getCurrentScreen() instanceof TelemetryConsentScreen) return;
-        if (!TelemetryConsentScreen.shouldShow()) return;
-        event.setNewScreen(new TelemetryConsentScreen(title));
-    }
+    // The consent dialog used to be opened from here, by answering ScreenEvent.Opening for the
+    // title screen. It now lives in com.soul.soa_additions.client.ConsentPrompt, which watches the
+    // client tick instead: the pack ships FancyMenu with a title-screen layout, and answering the
+    // opening event meant racing FancyMenu for the title screen — a race this lost, which is why
+    // the prompt never appeared. Telemetry and the anticheat scan are asked together there, as two
+    // separate checkboxes on one screen.
 
     @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event) {

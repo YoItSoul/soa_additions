@@ -27,8 +27,10 @@ import java.nio.file.StandardOpenOption;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 import java.util.TimeZone;
 import java.util.UUID;
@@ -45,11 +47,13 @@ import java.util.regex.Pattern;
  * with a short connect timeout, so there is no measurable impact on startup time.
  *
  * <p><b>Privacy — strictly opt-in:</b> nothing is ever sent unless the user has
- * explicitly consented via {@link TelemetryConsentScreen} (clients) or the consent
+ * explicitly consented on {@code SoaConsentScreen} (clients) or the consent
  * file (dedicated servers) — see {@link TelemetryConsent}. {@link ModConfigs#ENABLE_TELEMETRY}
  * is an additional master switch, and telemetry is disabled entirely in dev
  * environments. This telemetry exists only to troubleshoot and optimize the pack
- * during development and will be disabled for the stable public release.
+ * against real hardware. It is not time-limited — players who want to keep
+ * contributing after release may, and the consent screen is permanent regardless,
+ * so opting in is always a choice the player made and can always undo.
  *
  * <p>Never sends file paths, environment variables, or any JVM arg matching
  * common secret patterns. An anonymous install UUID is persisted to
@@ -473,6 +477,71 @@ public final class Telemetry {
             .version(HttpClient.Version.HTTP_2)
             .followRedirects(HttpClient.Redirect.NORMAL)
             .build();
+
+    // ---------------------------------------------------------------------
+    // JVM tuning reports — on demand via /soa tune send
+    // ---------------------------------------------------------------------
+
+    /**
+     * Sends one JVM/GC tuning measurement to the {@code jvm_tuning} table.
+     *
+     * <p>Explicitly triggered rather than automatic. These exist to build a picture of how the
+     * pack behaves across real hardware — a Steam Deck's reclaim rate against a desktop's — so
+     * heap sizing and pause targets can be tuned against a population instead of against one
+     * developer machine.</p>
+     *
+     * <p>Routed by {@code event: "jvm_tuning"} on the existing endpoint. The receiver maps
+     * named fields into fixed columns and silently ignores anything it does not recognise, so
+     * these key names must match the table exactly.</p>
+     *
+     * @param onDone receives true only if the server accepted the report
+     */
+    public static void sendJvmTuningAsync(Map<String, Object> fields,
+                                          java.util.function.Consumer<Boolean> onDone) {
+        final String endpoint;
+        try {
+            if (!ModConfigs.ENABLE_TELEMETRY.get() || !TelemetryConsent.isAccepted()) {
+                onDone.accept(false);
+                return;
+            }
+            endpoint = ModConfigs.TELEMETRY_ENDPOINT.get();
+        } catch (Throwable t) {
+            onDone.accept(false);
+            return;
+        }
+        if (endpoint == null || endpoint.isBlank()) {
+            onDone.accept(false);
+            return;
+        }
+
+        Map<String, Object> payload = new LinkedHashMap<>(fields);
+        payload.put("event", "jvm_tuning");
+        payload.put("schema_version", 1);
+        payload.put("install_id", getOrCreateInstallId());
+        payload.put("sent_at", Instant.now().toString());
+
+        // Server-side reports describe the server's JVM, so they are filed as the server and
+        // carry no player name. Attributing a server's heap and GC figures to whichever
+        // operator happened to type the command would make the data unreadable — rows would
+        // look like client reports from a machine nobody owns.
+        payload.put("player_name",
+                FMLEnvironment.dist.isClient() ? ClientIdentity.getUsernameOrNull() : null);
+
+        Thread t = new Thread(() -> {
+            boolean ok = false;
+            try {
+                String json = new GsonBuilder().disableHtmlEscaping().create().toJson(payload);
+                postJson(endpoint, json);
+                ok = true;
+            } catch (Throwable ex) {
+                LOGGER.debug("JVM tuning send failed (ignored): {}", ex.toString());
+            }
+            onDone.accept(ok);
+        }, "SOA-Telemetry-JvmTuning");
+        t.setDaemon(true);
+        t.setPriority(Thread.MIN_PRIORITY);
+        t.start();
+    }
 
     private static void postJson(String endpoint, String json) throws IOException, InterruptedException {
         HttpRequest req = HttpRequest.newBuilder()

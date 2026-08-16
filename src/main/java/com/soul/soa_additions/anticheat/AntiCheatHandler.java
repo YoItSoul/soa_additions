@@ -1,8 +1,12 @@
 package com.soul.soa_additions.anticheat;
 
 import com.soul.soa_additions.SoaAdditions;
+import com.soul.soa_additions.config.ModConfigs;
 import com.soul.soa_additions.network.ClientModReportPacket;
+import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.GameType;
 import net.minecraftforge.event.CommandEvent;
@@ -30,7 +34,12 @@ import java.util.concurrent.ConcurrentHashMap;
  *       {@link ClientModReportPacket} with its full mod list and all available resource packs.
  *       The server scans every entry for forbidden substrings (xray, baritone, known cheat
  *       clients). A match flags the player. Note: a missing report is NOT treated as tampering,
- *       because laggy or slow clients can legitimately send it late or drop the packet.</li>
+ *       because laggy or slow clients can legitimately send it late or drop the packet.
+ *       <p>The scan is opt-in: the client sends nothing until the player ticks the cheat-scan box
+ *       on {@code SoaConsentScreen}, and their answer arrives first as a
+ *       {@link com.soul.soa_additions.network.ScanConsentPacket}. A refusal is answered by
+ *       {@link #handleScanConsent} — on a server that requires the scan the player is turned away
+ *       rather than let in unscanned, so opting out costs access, not detection.</p></li>
  *
  *   <li><b>Command heuristic.</b> Any command executed by a player with OP permissions (level
  *       &ge; 2) is treated as a cheat unless the root command is on a small whitelist of
@@ -117,7 +126,8 @@ public final class AntiCheatHandler {
             "packmode show",      // read-only
             "packmode lock",      // tightens progression rather than loosening
             "worldgen",           // read-only scan of generated chunks
-            "materials"           // Smithery material catalog — read-only reference UI, grants nothing
+            "materials",          // Smithery material catalog — read-only reference UI, grants nothing
+            "anticheat"           // client-side consent control; grants nothing, and refusing costs access
     );
 
     /** Players whose session has already been flagged — prevents repeat logging. */
@@ -146,6 +156,69 @@ public final class AntiCheatHandler {
     // ────────────────────────────────────────────────────────────────────────────────
     // Client report handling (called from packet handler)
     // ────────────────────────────────────────────────────────────────────────────────
+
+    /**
+     * Handles the player's answer to the consent screen, which arrives before any report.
+     *
+     * <p>Consent is the player's to give; joining is the server's to grant. A refusal is not a cheat
+     * detection — nothing is flagged, nothing is written — but on a server that requires the scan it
+     * is not enough to play, so the connection is closed with instructions for allowing it and
+     * coming back. That keeps the consent screen from doubling as an off switch for the anticheat.</p>
+     */
+    public static void handleScanConsent(ServerPlayer player, boolean accepted) {
+        if (accepted) return;
+
+        String name = player.getGameProfile().getName();
+        if (isSingleplayerOwner(player)) {
+            LOGGER.info("[soa anticheat] {} declined the scan in their own singleplayer world.", name);
+            return;
+        }
+        if (!ModConfigs.REQUIRE_SCAN_CONSENT.get()) {
+            LOGGER.warn("[soa anticheat] {} declined the scan; requireScanConsent is off, letting them in "
+                    + "(handshake mod list is the only check that still applies).", name);
+            return;
+        }
+        LOGGER.warn("[soa anticheat] {} declined the scan and this server requires it — disconnecting.", name);
+        player.connection.disconnect(scanRequiredReason());
+    }
+
+    /** True for the host of a singleplayer world; LAN guests are on someone else's world. */
+    private static boolean isSingleplayerOwner(ServerPlayer player) {
+        MinecraftServer server = player.getServer();
+        return server != null && !server.isDedicatedServer()
+                && server.isSingleplayerOwner(player.getGameProfile());
+    }
+
+    /** Deliberately worded as a requirement, not an accusation — declining is not cheating. */
+    private static Component scanRequiredReason() {
+        return Component.empty()
+                .append(Component.literal("Anticheat scan required\n\n")
+                        .withStyle(ChatFormatting.GOLD, ChatFormatting.BOLD))
+                // Worded to fit both an explicit refusal and the rarer case of a player who never
+                // saw the prompt (unwritable config dir, config not loaded in time).
+                .append(Component.literal(
+                                "This server runs the Souls of Avarice anticheat, and your game does not have "
+                                + "your permission to check its installed mods and resource packs.\n\n")
+                        .withStyle(ChatFormatting.WHITE))
+                .append(Component.literal("You are not in trouble and nothing has been recorded against you.\n\n")
+                        .withStyle(ChatFormatting.GREEN))
+                // Point at the button, not the command: the player is staring at a disconnect screen
+                // one click from the main menu, and telling them to load a singleplayer world to type
+                // something is the long way round from exactly where they are standing.
+                .append(Component.literal("To play here: go back to the main menu, click the ")
+                        .withStyle(ChatFormatting.GRAY))
+                .append(Component.literal("C").withStyle(ChatFormatting.GOLD, ChatFormatting.BOLD))
+                .append(Component.literal(" button in the top-left corner, tick ")
+                        .withStyle(ChatFormatting.GRAY))
+                .append(Component.literal("\"Let servers check my mods for cheats\"")
+                        .withStyle(ChatFormatting.YELLOW))
+                .append(Component.literal(", confirm, and reconnect.\n\n")
+                        .withStyle(ChatFormatting.GRAY))
+                .append(Component.literal(
+                                "That screen lists exactly what is sent. In a world you can also use "
+                                + "/soa anticheat allow.")
+                        .withStyle(ChatFormatting.DARK_GRAY));
+    }
 
     public static void handleClientReport(ServerPlayer player, ClientModReportPacket report) {
         if (alreadyFlagged(player)) return;

@@ -2,8 +2,10 @@ package com.soul.soa_additions.anticheat;
 
 import com.soul.soa_additions.SoaAdditions;
 import com.soul.soa_additions.anticheat.client.PackContentScanner;
+import com.soul.soa_additions.config.ModConfigs;
 import com.soul.soa_additions.network.ClientModReportPacket;
 import com.soul.soa_additions.network.ModNetworking;
+import com.soul.soa_additions.network.ScanConsentPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackRepository;
@@ -22,6 +24,10 @@ import java.util.Set;
 /**
  * Client-side scanner: on login, gathers the loaded mod list, every resource pack the launcher can
  * see, and a content verdict on each of those packs.
+ *
+ * <p>None of that happens without permission. {@link AntiCheatConsent} is checked before a single
+ * file is opened, and the player grants it through an in-game screen that lists exactly what is
+ * collected and who receives it (the server being joined, and nobody else).</p>
  *
  * <p>Available-not-selected scanning matters: a cheater can disable their xray pack in the selector
  * before joining, but the file is still on disk and still enumerable here.</p>
@@ -78,6 +84,14 @@ public final class ClientModScanner {
 
     @SubscribeEvent
     public static void onClientLogin(ClientPlayerNetworkEvent.LoggingIn event) {
+        // Consent gate. Everything below this line reads the player's installation, so nothing below
+        // it may run without an explicit yes. The answer goes to the server either way: the server
+        // has to be able to tell a refusal from a dropped packet, or refusing would silently disable
+        // the anticheat instead of costing the player access. See AntiCheatHandler#handleScanConsent.
+        boolean consented = ModConfigs.ENABLE_ANTICHEAT_SCAN.get() && AntiCheatConsent.isAccepted();
+        ModNetworking.CHANNEL.sendToServer(new ScanConsentPacket(consented));
+        if (!consented) return;
+
         if (cachedMods == null) {
             cachedMods = ModList.get().getMods().stream()
                     .map(m -> m.getModId() + "|" + m.getDisplayName() + "|" + m.getDescription())

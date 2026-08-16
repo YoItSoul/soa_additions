@@ -19,11 +19,14 @@ public final class ModConfigs {
     public static final ForgeConfigSpec.BooleanValue TELEMETRY_AUTO_SPARK;
     public static final ForgeConfigSpec.IntValue TELEMETRY_HEARTBEAT_MINUTES;
 
+
     // --- Pack mode server enforcement ---
     public static final ForgeConfigSpec.ConfigValue<String> SERVER_PACKMODE;
 
     // --- Anti-cheat ---
     public static final ForgeConfigSpec.BooleanValue ALLOW_CHEATING_PLAYERS;
+    public static final ForgeConfigSpec.BooleanValue ENABLE_ANTICHEAT_SCAN;
+    public static final ForgeConfigSpec.BooleanValue REQUIRE_SCAN_CONSENT;
 
     // --- Pack mode difficulty ---
     public static final ForgeConfigSpec.BooleanValue PACKMODE_FORCE_HARD_DIFFICULTY;
@@ -70,9 +73,22 @@ public final class ModConfigs {
                 .comment("Number of past session files to retain. Older ones are auto-deleted on startup.")
                 .defineInRange("keepSessions", 20, 1, 1000);
         JVM_PROFILER_AUTO_JFR = builder
-                .comment("If true, automatically capture a 30s Java Flight Recording when a long GC pause or near-OOM heap is detected.")
-                .define("autoJfrOnSpike", true);
+                .comment(
+                        "If true, automatically capture a 30s Java Flight Recording when a long GC pause or near-OOM heap is detected.",
+                        "Default false. This only does anything while the profiler above is enabled, and it is",
+                        "self-reinforcing on a struggling machine: GC spikes trigger recordings, and the recordings",
+                        "cost the machine that is already spiking."
+                )
+                .define("autoJfrOnSpike", false);
         builder.pop();
+
+
+        // The "pregen" block is deliberately gone (2026-08-12). It configured a
+        // world pre-generation flow — a first-entry prompt, a progress screen and a
+        // /soa pregen command. C2ME's parallel chunk generation made travel effectively
+        // instant even at max render distance, which removed the stutter the whole
+        // feature existed to hide. Stale [pregen] entries in an existing config are
+        // harmless and Forge will drop them on rewrite.
 
         // The "questWebOverlay" block is deliberately gone (v3.63.0). It configured an
         // embedded HTTP server that served the quest book to a browser; the feature was
@@ -83,8 +99,9 @@ public final class ModConfigs {
         builder.push("telemetry");
         ENABLE_TELEMETRY = builder
                 .comment(
-                        "DEVELOPMENT-PHASE telemetry, used only to troubleshoot and optimize the pack per",
-                        "player while it is in development. It will be disabled for the stable public release.",
+                        "Telemetry, used only to troubleshoot and optimize the pack per player against real",
+                        "hardware. It is not time-limited: players who want to keep contributing data after",
+                        "the pack is out are welcome to, and the consent screen is permanent either way.",
                         "STRICTLY OPT-IN: nothing is ever sent unless the player explicitly accepts the",
                         "first-launch consent screen. The choice is stored in",
                         "config/soa_additions/telemetry_consent.txt (dedicated servers opt in by writing",
@@ -144,6 +161,39 @@ public final class ModConfigs {
                         "screen offering to fix the problem or to enable cheating for that world."
                 )
                 .define("allowCheatingPlayers", false);
+
+        builder.push("anticheat");
+        ENABLE_ANTICHEAT_SCAN = builder
+                .comment(
+                        "Master switch for the client-side cheat scan (CLIENT setting).",
+                        "The scan reports the player's loaded mods, the resource packs present in their",
+                        "resourcepacks folder, and whether any of those packs contain xray-style block",
+                        "models, to the Minecraft server they are joining — never to the pack author and",
+                        "never anywhere else.",
+                        "STRICTLY OPT-IN: nothing is read or sent unless the player accepts the in-game",
+                        "consent screen, which lists exactly what is collected. The answer lives in",
+                        "config/soa_additions/anticheat_consent.txt and can be changed at any time with",
+                        "/soa anticheat allow or /soa anticheat deny. Delete the file to be asked again.",
+                        "That file must NEVER be shipped inside a pack export — a pre-filled answer is",
+                        "not consent, and the mod treats a missing file as 'ask the player'.",
+                        "Setting this to false disables the prompt and the scan entirely. Default: true",
+                        "(still requires the player's explicit consent)."
+                )
+                .define("enableClientScan", true);
+        REQUIRE_SCAN_CONSENT = builder
+                .comment(
+                        "Whether THIS SERVER requires players to have consented to the scan (SERVER setting).",
+                        "Consent is the player's to give, but joining is the server's to grant: a player who",
+                        "refuses the scan is disconnected with a message telling them exactly how to allow",
+                        "it and rejoin. Nothing is recorded against them — refusing is not cheating, it just",
+                        "isn't enough to play here.",
+                        "The singleplayer host is never disconnected from their own world.",
+                        "Set false to let players who refuse the scan in anyway; the server then falls back",
+                        "to the mod list Forge sends during the connection handshake, which catches renamed",
+                        "cheat jars far less reliably. Default: true."
+                )
+                .define("requireScanConsent", true);
+        builder.pop();
 
         builder.push("packmodeDifficulty");
         builder.comment("Gameplay effects applied per pack mode, inspired by GreedyCraft.");

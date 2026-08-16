@@ -8,7 +8,7 @@
     "thinair.AirQualityCacheMixin",
     "solarflux.AvaritiaCompatRecipesMixin",
     "cyclic.TileFisherMixin",
-    "mca.WorldUtilsSpawnMixin",
+    "mca.VillagerFactorySpawnMixin",
     "mca.PoiBedCheckMixin",
     "lodestone.BlockEntitiesStreamMixin",
     "projectexpansion.SunExposureMixin",
@@ -19,7 +19,9 @@
     "itemstages.RestrictionManagerReloadMixin"
   ],
   "client": [
-    "donor.DonorGradientMixin"
+    "donor.DonorGradientMixin",
+    "mowzies.GeckoRenderPlayerLayersMixin",
+    "chancecubes.GiantCubeRenderTypeMixin"
   ],
   "injectors": {
     "defaultRequire": 0

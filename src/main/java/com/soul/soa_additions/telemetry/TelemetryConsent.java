@@ -12,7 +12,7 @@ import java.util.Locale;
 /**
  * Persistent record of the user's telemetry choice. Nothing is ever sent
  * until this is {@link State#ACCEPTED} — on clients that happens through
- * {@link TelemetryConsentScreen} on first launch; on dedicated servers the
+ * {@code SoaConsentScreen} on first launch; on dedicated servers the
  * owner opts in by writing {@code accepted} to the consent file.
  *
  * <p>File: {@code config/soa_additions/telemetry_consent.txt}. First line is
