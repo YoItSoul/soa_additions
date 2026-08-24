@@ -56,6 +56,8 @@ public final class McaSpawnGuard {
      * @return {@code true} when this method has fully handled the spawn and the caller
      *         must cancel; {@code false} to let MCA's own body run unchanged.
      */
+    // Forge wants ForgeEventFactory.onFinalizeSpawn here, but routing through it would fire MobSpawnEvent.FinalizeSpawn where the original does not, letting other mods veto these spawns.
+    @SuppressWarnings("deprecation")
     public static boolean spawnWithoutBlocking(Level level, Mob mob, MobSpawnType reason) {
         if (!(level instanceof ServerLevel serverLevel)) {
             // Client/other level: not our concern, and getChunkNow is main-thread only.

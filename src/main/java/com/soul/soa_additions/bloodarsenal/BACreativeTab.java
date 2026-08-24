@@ -1,6 +1,5 @@
 package com.soul.soa_additions.bloodarsenal;
 
-import com.soul.soa_additions.SoaAdditions;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;

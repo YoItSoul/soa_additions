@@ -7,6 +7,7 @@ import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.ForgeEventFactory;
 
@@ -32,8 +33,7 @@ public class MeteorBowItem extends BowItem {
     public void releaseUsing(ItemStack stack, Level level, LivingEntity user, int remainingTicks) {
         if (!(user instanceof Player player)) return;
         boolean creativeOrInfinity = player.getAbilities().instabuild
-                || net.minecraft.world.item.enchantment.EnchantmentHelper.getItemEnchantmentLevel(
-                        net.minecraft.world.item.enchantment.Enchantments.INFINITY_ARROWS, stack) > 0;
+                || stack.getEnchantmentLevel(Enchantments.INFINITY_ARROWS) > 0;
         ItemStack ammo = player.getProjectile(stack);
 
         int charge = this.getUseDuration(stack) - remainingTicks;
@@ -56,14 +56,11 @@ public class MeteorBowItem extends BowItem {
                     power * 3.0f * VELOCITY_SCALE, 1.0f);
             if (power == 1.0f) arrow.setCritArrow(true);
 
-            int powerEnch = net.minecraft.world.item.enchantment.EnchantmentHelper.getItemEnchantmentLevel(
-                    net.minecraft.world.item.enchantment.Enchantments.POWER_ARROWS, stack);
+            int powerEnch = stack.getEnchantmentLevel(Enchantments.POWER_ARROWS);
             if (powerEnch > 0) arrow.setBaseDamage(arrow.getBaseDamage() + powerEnch * 0.5 + 0.5);
-            int punch = net.minecraft.world.item.enchantment.EnchantmentHelper.getItemEnchantmentLevel(
-                    net.minecraft.world.item.enchantment.Enchantments.PUNCH_ARROWS, stack);
+            int punch = stack.getEnchantmentLevel(Enchantments.PUNCH_ARROWS);
             if (punch > 0) arrow.setKnockback(punch);
-            if (net.minecraft.world.item.enchantment.EnchantmentHelper.getItemEnchantmentLevel(
-                    net.minecraft.world.item.enchantment.Enchantments.FLAMING_ARROWS, stack) > 0) {
+            if (stack.getEnchantmentLevel(Enchantments.FLAMING_ARROWS) > 0) {
                 arrow.setSecondsOnFire(100);
             }
 

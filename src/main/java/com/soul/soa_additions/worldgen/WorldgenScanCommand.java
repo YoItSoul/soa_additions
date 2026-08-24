@@ -1,6 +1,5 @@
 package com.soul.soa_additions.worldgen;
 
-import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.soul.soa_additions.SoaAdditions;
 import net.minecraft.ChatFormatting;

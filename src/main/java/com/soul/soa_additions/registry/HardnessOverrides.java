@@ -1,7 +1,6 @@
 package com.soul.soa_additions.registry;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -11,6 +10,7 @@ import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import org.slf4j.Logger;
 
 import java.lang.reflect.Field;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * Ports GC's scripts/tweaks/harvestlevel.zs hardness overrides. Harvest-level
@@ -59,13 +59,13 @@ public final class HardnessOverrides {
             }
         } catch (ReflectiveOperationException e) {
             LOG.error("[soa_additions] Failed to set destroy speed on {}: {}",
-                    BuiltInRegistries.BLOCK.getKey(block), e.toString());
+                    ForgeRegistries.BLOCKS.getKey(block), e.toString());
         }
     }
 
     private static void setById(String id, float destroyTime) {
         ResourceLocation rl = new ResourceLocation(id);
-        Block block = BuiltInRegistries.BLOCK.get(rl);
+        Block block = ForgeRegistries.BLOCKS.getValue(rl);
         if (block == Blocks.AIR) return;
         set(block, destroyTime);
     }

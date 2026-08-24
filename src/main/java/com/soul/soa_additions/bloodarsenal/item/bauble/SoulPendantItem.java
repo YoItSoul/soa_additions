@@ -10,8 +10,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.type.capability.ICurio;
 import wayoftime.bloodmagic.api.compat.EnumDemonWillType;
 import wayoftime.bloodmagic.will.PlayerDemonWillHandler;
 
@@ -24,7 +22,7 @@ import java.util.List;
  * Right-click transfers stored will to the player's demon will pool.
  * Curios slot: necklace.
  */
-public class SoulPendantItem extends Item implements ICurio {
+public class SoulPendantItem extends Item {
 
     private static final String TAG_WILL = "demon_will";
     private static final String TAG_WILL_TYPE = "will_type";
@@ -36,16 +34,6 @@ public class SoulPendantItem extends Item implements ICurio {
         super(new Item.Properties().stacksTo(1).rarity(tier >= 3 ? Rarity.RARE : Rarity.UNCOMMON));
         this.tier = tier;
         this.maxWill = maxWill;
-    }
-
-    @Override
-    public net.minecraft.world.item.ItemStack getStack() {
-        return ItemStack.EMPTY;
-    }
-
-    @Override
-    public boolean canEquipFromUse(SlotContext ctx) {
-        return true;
     }
 
     // ── Will storage ────────────────────────────────────────────────────

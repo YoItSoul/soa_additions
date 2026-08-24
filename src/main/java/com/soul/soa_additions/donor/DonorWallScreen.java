@@ -88,8 +88,13 @@ public final class DonorWallScreen extends Screen {
         int viewH = viewBottom - viewTop;
 
         // Compute total content height
-        int rows = (donors.size() + cols - 1) / cols;
-        totalContentHeight = rows * (CARD_H + CARD_GAP) + 20;
+        // Clamp against the height the previous frame actually laid out. The row estimate
+        // ignores the per-tier banners and gaps, so clamping to it stopped the scroll ~70px short
+        // and the last row of cards could never be brought into view.
+        if (totalContentHeight <= 0) {
+            int rows = (donors.size() + cols - 1) / cols;
+            totalContentHeight = rows * (CARD_H + CARD_GAP) + 20;
+        }
         int maxScroll = Math.max(0, totalContentHeight - viewH);
         if (scrollOffset > maxScroll) scrollOffset = maxScroll;
         if (scrollOffset < 0) scrollOffset = 0;
@@ -158,7 +163,9 @@ public final class DonorWallScreen extends Screen {
         // Scroll bar
         if (totalContentHeight > viewH) {
             int barH = Math.max(20, viewH * viewH / totalContentHeight);
-            int barY = viewTop + (int) ((viewH - barH) * scrollOffset / maxScroll);
+            int barY = maxScroll <= 0
+                    ? viewTop
+                    : viewTop + (int) ((viewH - barH) * scrollOffset / maxScroll);
             g.fill(this.width - 6, viewTop, this.width - 2, viewBottom, 0x30FFFFFF);
             g.fill(this.width - 5, barY, this.width - 3, barY + barH, 0x80FFFFFF);
         }

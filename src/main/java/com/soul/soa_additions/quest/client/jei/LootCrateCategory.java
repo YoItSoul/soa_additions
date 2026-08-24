@@ -1,7 +1,6 @@
 package com.soul.soa_additions.quest.client.jei;
 
 import com.soul.soa_additions.SoaAdditions;
-import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;

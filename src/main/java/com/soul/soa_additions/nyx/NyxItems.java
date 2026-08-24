@@ -3,7 +3,6 @@ package com.soul.soa_additions.nyx;
 import com.soul.soa_additions.nyx.item.LunarWaterBottleItem;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.PickaxeItem;

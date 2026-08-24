@@ -13,11 +13,11 @@ import com.soul.soa_additions.quest.task.StatTask;
 import com.soul.soa_additions.quest.team.QuestTeam;
 import com.soul.soa_additions.quest.team.TeamData;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.StatType;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * Dedicated absolute-value poller for {@link StatTask}. Separate from the
@@ -57,11 +57,16 @@ public final class StatTaskPoller {
             int current = lookupStat(player, st.statType(), st.statValue());
             QuestProgress qp = teamProgress.get(quest.fullId());
             TaskProgress tp = qp.task(ref.taskIndex());
-            if (tp.count() != current) {
+            // The counter is shared by the whole team, so it has to ratchet — the same contract
+            // InventoryItemPoller.ratchet keeps. Writing each member's own absolute stat straight
+            // in let the next member's poll drag it back down, flipping a READY quest to VISIBLE
+            // and re-firing its notification every few seconds.
+            int next = Math.min(current, st.target());
+            if (next > tp.count()) {
                 if (capture == null) {
                     capture = com.soul.soa_additions.quest.net.QuestDeltaPacket.Capture.of(player);
                 }
-                tp.setCount(current);
+                tp.setCount(next);
                 qp.touch(tick);
                 if (dirty == null) dirty = new java.util.HashSet<>();
                 dirty.add(quest);
@@ -87,14 +92,14 @@ public final class StatTaskPoller {
     }
 
     private static int lookupStat(ServerPlayer player, ResourceLocation typeId, ResourceLocation valueId) {
-        StatType<?> statType = BuiltInRegistries.STAT_TYPE.get(typeId);
+        StatType<?> statType = ForgeRegistries.STAT_TYPES.getValue(typeId);
         if (statType == null) return 0;
         return lookupStatTyped(player, statType, valueId);
     }
 
-    @SuppressWarnings("unchecked")
+
     private static <T> int lookupStatTyped(ServerPlayer player, StatType<T> statType, ResourceLocation valueId) {
-        Registry<T> valueRegistry = (Registry<T>) statType.getRegistry();
+        Registry<T> valueRegistry = statType.getRegistry();
         T value = valueRegistry.get(valueId);
         if (value == null) return 0;
         Stat<T> stat = statType.get(value);

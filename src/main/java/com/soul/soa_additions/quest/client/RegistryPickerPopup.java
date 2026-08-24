@@ -14,6 +14,7 @@ import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.function.Consumer;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * Searchable registry picker for task value fields. Shows a grid of every
@@ -104,8 +106,8 @@ public final class RegistryPickerPopup {
         List<Entry> out = new ArrayList<>();
         switch (mode) {
             case ITEM -> {
-                for (var item : BuiltInRegistries.ITEM) {
-                    ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
+                for (var item : ForgeRegistries.ITEMS) {
+                    ResourceLocation id = ForgeRegistries.ITEMS.getKey(item);
                     if (id == null) continue;
                     ItemStack stack = new ItemStack(item);
                     String name;
@@ -115,8 +117,8 @@ public final class RegistryPickerPopup {
                 }
             }
             case BLOCK -> {
-                for (Block block : BuiltInRegistries.BLOCK) {
-                    ResourceLocation id = BuiltInRegistries.BLOCK.getKey(block);
+                for (Block block : ForgeRegistries.BLOCKS) {
+                    ResourceLocation id = ForgeRegistries.BLOCKS.getKey(block);
                     if (id == null) continue;
                     var asItem = block.asItem();
                     ItemStack stack = (asItem != Items.AIR) ? new ItemStack(asItem) : new ItemStack(Items.BARRIER);
@@ -127,10 +129,10 @@ public final class RegistryPickerPopup {
                 }
             }
             case ENTITY -> {
-                for (EntityType<?> et : BuiltInRegistries.ENTITY_TYPE) {
-                    ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(et);
+                for (EntityType<?> et : ForgeRegistries.ENTITY_TYPES) {
+                    ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(et);
                     if (id == null) continue;
-                    SpawnEggItem egg = SpawnEggItem.byId(et);
+                    SpawnEggItem egg = ForgeSpawnEggItem.fromEntityType(et);
                     ItemStack stack = (egg != null) ? new ItemStack(egg) : new ItemStack(Items.BARRIER);
                     String name;
                     try { name = et.getDescription().getString(); }
@@ -139,8 +141,8 @@ public final class RegistryPickerPopup {
                 }
             }
             case STAT_TYPE -> {
-                for (StatType<?> st : BuiltInRegistries.STAT_TYPE) {
-                    ResourceLocation id = BuiltInRegistries.STAT_TYPE.getKey(st);
+                for (StatType<?> st : ForgeRegistries.STAT_TYPES) {
+                    ResourceLocation id = ForgeRegistries.STAT_TYPES.getKey(st);
                     if (id == null) continue;
                     // Use a representative icon per stat category.
                     ItemStack stack = switch (id.toString()) {

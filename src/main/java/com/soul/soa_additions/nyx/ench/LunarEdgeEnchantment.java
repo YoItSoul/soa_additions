@@ -26,6 +26,10 @@ public class LunarEdgeEnchantment extends Enchantment {
     @Override
     public int getMaxLevel() { return 5; }
 
+    // Deprecated in favour of the ItemStack-aware Forge overload, but this is the method
+    // EnchantmentHelper still routes to for a plain damage bonus, and the moon multiplier needs
+    // no stack context. Annotated so overriding it is not itself a warning.
+    @Deprecated
     @Override
     public float getDamageBonus(int level, MobType type) {
         float base = 1.25f + Math.max(0, level - 1) * 0.5f;

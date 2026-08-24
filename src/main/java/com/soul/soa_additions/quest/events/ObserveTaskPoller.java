@@ -14,7 +14,6 @@ import com.soul.soa_additions.quest.task.ObserveTask;
 import com.soul.soa_additions.quest.team.QuestTeam;
 import com.soul.soa_additions.quest.team.TeamData;
 import net.minecraft.core.SectionPos;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.resources.ResourceLocation;
@@ -32,6 +31,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.List;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * Once-per-second observe-task poller. Designed for zero overhead when no
@@ -134,7 +134,7 @@ public final class ObserveTaskPoller {
                                 SectionPos.blockToSectionCoord(bhr.getBlockPos().getZ()));
                         if (hitChunk != null) {
                             BlockState state = hitChunk.getBlockState(bhr.getBlockPos());
-                            hitBlockId = BuiltInRegistries.BLOCK.getKey(state.getBlock());
+                            hitBlockId = ForgeRegistries.BLOCKS.getKey(state.getBlock());
                         }
                     }
                 }
@@ -145,7 +145,7 @@ public final class ObserveTaskPoller {
                         player, eye, end, box, e -> !e.isSpectator() && e.isPickable(), maxReach * maxReach);
                 if (ehr != null) {
                     Entity hit = ehr.getEntity();
-                    hitEntityId = BuiltInRegistries.ENTITY_TYPE.getKey(hit.getType());
+                    hitEntityId = ForgeRegistries.ENTITY_TYPES.getKey(hit.getType());
                 }
             }
         }

@@ -106,6 +106,11 @@ public final class SoaJeiPlugin implements IModPlugin {
     }
 
     @Override
+    // createBrewingRecipe: the current JEI API adds a ResourceLocation uid and deprecates the
+    // uid-less overload, but that overload does not exist on older JEI, and mods.toml declares no
+    // jei dependency range to guard it — adopting it would be a NoSuchMethodError for anyone on a
+    // JEI older than the one we compile against. Same trade as the -removal note in build.gradle.
+    @SuppressWarnings("deprecation")
     public void registerRecipes(IRecipeRegistration registration) {
         IVanillaRecipeFactory factory = registration.getVanillaRecipeFactory();
         List<IJeiBrewingRecipe> brewing = new ArrayList<>();
@@ -234,8 +239,8 @@ public final class SoaJeiPlugin implements IModPlugin {
         List<LootCrateCategory.Page> pages = new ArrayList<>();
         var mc = net.minecraft.client.Minecraft.getInstance();
         if (mc.level == null) return pages;
-        var typeObj = net.minecraft.core.registries.BuiltInRegistries.RECIPE_TYPE
-                .get(new ResourceLocation("lootbags", "loot"));
+        var typeObj = net.minecraftforge.registries.ForgeRegistries.RECIPE_TYPES
+                .getValue(new ResourceLocation("lootbags", "loot"));
         if (typeObj == null) return pages;
         @SuppressWarnings("unchecked")
         var lootType = (net.minecraft.world.item.crafting.RecipeType<tech.thatgravyboat.lootbags.common.recipe.Loot>) typeObj;

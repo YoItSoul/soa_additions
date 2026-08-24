@@ -1,6 +1,5 @@
 package com.soul.soa_additions.bloodarsenal.compat.jei;
 
-import com.soul.soa_additions.SoaAdditions;
 import com.soul.soa_additions.bloodarsenal.recipe.SanguineInfusionRecipe;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;

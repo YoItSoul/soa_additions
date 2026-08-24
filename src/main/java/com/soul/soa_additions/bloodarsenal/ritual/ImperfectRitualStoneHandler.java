@@ -11,6 +11,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import wayoftime.bloodmagic.BloodMagic;
+import wayoftime.bloodmagic.core.data.SoulTicket;
 import wayoftime.bloodmagic.ritual.imperfect.IImperfectRitualStone;
 import wayoftime.bloodmagic.ritual.imperfect.ImperfectRitual;
 import wayoftime.bloodmagic.util.helper.NetworkHelper;
@@ -57,7 +58,8 @@ public final class ImperfectRitualStoneHandler {
         event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide()));
         if (level.isClientSide()) return;
 
-        if (!NetworkHelper.getSoulNetwork(player).syphonAndDamage(player, ritual.getActivationCost())) return;
+        if (!NetworkHelper.getSoulNetwork(player)
+                .syphonAndDamage(player, new SoulTicket(ritual.getActivationCost())).isSuccess()) return;
 
         if (ritual.onActivate(new StoneAdapter(level, event.getPos()), player)) {
             level.removeBlock(topperPos, false);

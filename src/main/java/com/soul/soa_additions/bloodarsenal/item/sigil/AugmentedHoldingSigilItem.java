@@ -1,6 +1,5 @@
 package com.soul.soa_additions.bloodarsenal.item.sigil;
 
-import com.soul.soa_additions.bloodarsenal.BAConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -13,7 +12,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import wayoftime.bloodmagic.common.item.IBindable;
 import wayoftime.bloodmagic.common.item.sigil.ItemSigilBase;
 
 import javax.annotation.Nullable;

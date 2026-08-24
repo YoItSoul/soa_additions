@@ -30,17 +30,17 @@ description='''${mod_description}'''
     ordering="NONE"
     side="BOTH"
 
-# Floor is 1.10.0, checked against the jar rather than inferred from changelogs: every API
-# SmitheryToolReader touches — embossedMaterial, activeSynergies, getExtraAttributes,
-# PartEligibility#isAllowed and the modifier slot counts — is already present in 1.10.0.
-# (The previous floor, 1.9.8, covered only SmitheryToolItem#harvestLevelApplies, which the
-# mining tooltip needs.) Still optional — but if Smithery IS present it has to be new enough,
-# so an old copy fails loading with a readable message instead of a NoSuchMethodError on the
-# first tooltip or quest poll.
+# Floor is 1.19.0, checked against the jar rather than inferred from changelogs: the lava
+# material binds to vanilla lava through MaterialStats.Builder#boundFluid, which 1.19.0 adds.
+# (The previous floor, 1.10.0, covered everything SmitheryToolReader touches — embossedMaterial,
+# activeSynergies, getExtraAttributes, PartEligibility#isAllowed and the modifier slot counts —
+# all of which are still present.) Still optional — but if Smithery IS present it has to be new
+# enough, so an old copy fails loading with a readable message instead of a NoSuchMethodError on
+# the first material registration.
 [[dependencies.${mod_id}]]
     modId="smithery"
     mandatory=false
-    versionRange="[1.10.0,)"
+    versionRange="[1.19.0,)"
     ordering="AFTER"
     side="BOTH"
 

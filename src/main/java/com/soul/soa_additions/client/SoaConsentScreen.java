@@ -67,6 +67,13 @@ public final class SoaConsentScreen extends Screen {
     private int telemetryDescY;
     private int anticheatDescY;
     private int footerY;
+    private Button confirmButton;
+    private int telemetryBoxY;
+    private int anticheatBoxY;
+    private int confirmY;
+    /** Content taller than the window scrolls rather than hiding text under the button. */
+    private int scroll;
+    private int maxScroll;
 
     public SoaConsentScreen(Screen parent, boolean forced) {
         super(Component.literal("Souls of Avarice consent"));
@@ -113,6 +120,7 @@ public final class SoaConsentScreen extends Screen {
         introY = y;
         y += font.wordWrapHeight(INTRO, wrapWidth) + 12;
 
+        telemetryBoxY = y;
         telemetryBox = new Checkbox(textX, y, wrapWidth, 20, TELEMETRY_LABEL,
                 TelemetryConsent.get() == TelemetryConsent.State.ACCEPTED);
         addRenderableWidget(telemetryBox);
@@ -120,6 +128,7 @@ public final class SoaConsentScreen extends Screen {
         telemetryDescY = y;
         y += font.wordWrapHeight(TELEMETRY_DESC, wrapWidth - 16) + 12;
 
+        anticheatBoxY = y;
         anticheatBox = new Checkbox(textX, y, wrapWidth, 20, ANTICHEAT_LABEL,
                 AntiCheatConsent.get() == AntiCheatConsent.State.ACCEPTED);
         addRenderableWidget(anticheatBox);
@@ -130,11 +139,17 @@ public final class SoaConsentScreen extends Screen {
         footerY = y;
         y += font.wordWrapHeight(FOOTER, wrapWidth) + 12;
 
-        // Anchor the button to the bottom when there is room to spare, but never above the text.
-        int buttonY = Math.max(y, height - 32);
-        addRenderableWidget(Button.builder(Component.literal("Confirm"), b -> confirm())
-                .bounds(width / 2 - 75, Math.min(buttonY, height - 24), 150, 20)
-                .build());
+        // Anchor the button to the bottom when there is room to spare, but never above the
+        // text. Capping it at height - 24 used to defeat exactly that: on a small window the
+        // button was pulled back on top of the disclosure it is asking the player to accept, and
+        // the paragraphs below the fold had no way to be read at all. Overflow scrolls instead.
+        confirmY = Math.max(y, height - 32);
+        maxScroll = Math.max(0, confirmY + 28 - height);
+        scroll = Math.min(scroll, maxScroll);
+        confirmButton = Button.builder(Component.literal("Confirm"), b -> confirm())
+                .bounds(width / 2 - 75, confirmY - scroll, 150, 20)
+                .build();
+        addRenderableWidget(confirmButton);
 
         // A system that cannot run this launch is not a choice worth offering.
         if (!telemetryOffered()) telemetryBox.visible = telemetryBox.active = false;
@@ -157,16 +172,34 @@ public final class SoaConsentScreen extends Screen {
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         renderBackground(graphics);
-        graphics.drawCenteredString(font, TITLE, width / 2, 20, 0xFFFFFF);
-        graphics.drawWordWrap(font, INTRO, textX, introY, wrapWidth, 0xE0E0E0);
+        // Widgets carry their own coordinates, so the scroll offset has to be pushed into them
+        // before super.render draws — and before any click is tested against their bounds.
+        if (telemetryBox != null) telemetryBox.setY(telemetryBoxY - scroll);
+        if (anticheatBox != null) anticheatBox.setY(anticheatBoxY - scroll);
+        if (confirmButton != null) confirmButton.setY(confirmY - scroll);
+
+        graphics.drawCenteredString(font, TITLE, width / 2, 20 - scroll, 0xFFFFFF);
+        graphics.drawWordWrap(font, INTRO, textX, introY - scroll, wrapWidth, 0xE0E0E0);
         if (telemetryOffered()) {
-            graphics.drawWordWrap(font, TELEMETRY_DESC, textX + 16, telemetryDescY, wrapWidth - 16, 0xA0A0A0);
+            graphics.drawWordWrap(font, TELEMETRY_DESC, textX + 16, telemetryDescY - scroll, wrapWidth - 16, 0xA0A0A0);
         }
         if (anticheatOffered()) {
-            graphics.drawWordWrap(font, ANTICHEAT_DESC, textX + 16, anticheatDescY, wrapWidth - 16, 0xA0A0A0);
+            graphics.drawWordWrap(font, ANTICHEAT_DESC, textX + 16, anticheatDescY - scroll, wrapWidth - 16, 0xA0A0A0);
         }
-        graphics.drawWordWrap(font, FOOTER, textX, footerY, wrapWidth, 0x808080);
+        graphics.drawWordWrap(font, FOOTER, textX, footerY - scroll, wrapWidth, 0x808080);
         super.render(graphics, mouseX, mouseY, partialTick);
+
+        if (maxScroll > 0) {
+            String hint = scroll < maxScroll ? "\u25BC scroll for the rest" : "\u25B2 scroll back up";
+            graphics.drawCenteredString(font, hint, width / 2, height - 10, 0x808080);
+        }
+    }
+
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
+        if (maxScroll <= 0) return super.mouseScrolled(mouseX, mouseY, delta);
+        scroll = net.minecraft.util.Mth.clamp(scroll - (int) (delta * 12), 0, maxScroll);
+        return true;
     }
 
     @Override

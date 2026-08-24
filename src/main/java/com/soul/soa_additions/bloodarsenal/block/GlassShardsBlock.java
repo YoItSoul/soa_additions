@@ -23,11 +23,14 @@ public class GlassShardsBlock extends Block {
     }
 
     @Override
+    // Deprecated only to steer callers to the BlockState overload; overriding it is the intended use.
+    @SuppressWarnings("deprecation")
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
         return SHAPE;
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         if (entity instanceof LivingEntity) {
             entity.hurt(level.damageSources().cactus(), 1.0f);

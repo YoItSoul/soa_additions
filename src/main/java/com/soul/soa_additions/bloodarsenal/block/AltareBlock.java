@@ -2,7 +2,6 @@ package com.soul.soa_additions.bloodarsenal.block;
 
 import com.soul.soa_additions.bloodarsenal.tile.AltareBlockEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.Containers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
@@ -47,6 +46,8 @@ public class AltareBlock extends BaseEntityBlock {
     }
 
     @Override
+    // Deprecated only to steer callers to the BlockState overload; overriding it is the intended use.
+    @SuppressWarnings("deprecation")
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean moved) {
         if (!state.is(newState.getBlock())) {
             BlockEntity be = level.getBlockEntity(pos);

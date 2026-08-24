@@ -13,7 +13,6 @@ import com.soul.smithery.item.tool.SmitheryToolItem;
 import com.soul.smithery.item.tool.ToolComposition;
 import com.soul.smithery.item.tool.ToolCompositions;
 import com.soul.smithery.item.tool.ToolStats;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -23,6 +22,7 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * The one class in Souls of Avarice that reads Smithery's own types. Everything it returns is
@@ -159,7 +159,7 @@ final class SmitheryToolReader {
 
         Item toolItem = null;
         ToolType type = null;
-        for (Item item : BuiltInRegistries.ITEM) {
+        for (Item item : ForgeRegistries.ITEMS) {
             ToolType candidate = toolTypeOf(item);
             if (candidate != null && wantedType.equals(candidate.id())) {
                 toolItem = item;

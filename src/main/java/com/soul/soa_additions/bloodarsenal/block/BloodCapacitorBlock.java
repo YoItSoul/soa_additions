@@ -45,11 +45,14 @@ public class BloodCapacitorBlock extends BaseEntityBlock {
     }
 
     @Override
+    // Deprecated only to steer callers to the BlockState overload; overriding it is the intended use.
+    @SuppressWarnings("deprecation")
     public boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof BloodCapacitorBlockEntity cap) {

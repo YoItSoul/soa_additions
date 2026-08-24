@@ -11,6 +11,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public final class TaigaBlocks {
@@ -69,14 +70,14 @@ public final class TaigaBlocks {
 
     /** Storage blocks for every metal material (original TAIGA 1.12 {mat}_block roster; basalt/
      *  meteorite have world-block forms above, obsidiorite/uru still live in soa_additions:). */
-    private static final String[] STORAGE_MATERIALS = {
+    public static final List<String> STORAGE_MATERIALS = List.of(
             "abyssum", "adamant", "astrium", "aurorium", "dilithium", "duranite",
             "dyonite", "eezo", "fractum", "ignitz", "imperomite", "iox", "jauxum",
             "karmesine", "lumix", "nihilite", "niob", "nucleum", "osram", "ovium",
             "palladium", "prometheum", "proxii", "seismum", "solarium", "terrax",
             "tiberium", "triberium", "tritonite", "valyrium", "vibranium", "violium",
             "yrdeen"
-    };
+    );
 
     static {
         for (String mat : STORAGE_MATERIALS) {

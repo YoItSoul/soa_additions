@@ -12,9 +12,7 @@ import com.soul.soa_additions.quest.progress.TeamQuestProgress;
 import com.soul.soa_additions.quest.task.ItemTask;
 import com.soul.soa_additions.quest.team.QuestTeam;
 import com.soul.soa_additions.quest.team.TeamData;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
@@ -89,7 +87,9 @@ public record QuestSubmitPacket(String fullQuestId, int taskIndex) {
     /** Remove up to {@code wanted} items matching the task's item-or-tag filter. */
     private static int removeFromInventory(Inventory inv, ItemTask task, int wanted) {
         int removed = 0;
-        for (int i = 0; i < inv.getContainerSize() && removed < wanted; i++) {
+        // Main inventory only. getContainerSize() spans armour (36-39) and the offhand (40) too,
+        // so a consume task for a chestplate used to strip the one the player was wearing.
+        for (int i = 0; i < inv.items.size() && removed < wanted; i++) {
             ItemStack stack = inv.getItem(i);
             if (stack.isEmpty()) continue;
             if (!task.matches(stack)) continue;

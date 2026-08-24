@@ -6,8 +6,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -64,6 +62,10 @@ public class FallingStarEntity extends Entity {
         }
     }
 
+    // hasChunkAt is deprecated without a named replacement. Level#isLoaded is NOT equivalent —
+    // it short-circuits on isOutsideBuildHeight, and these positions are deliberately placed high
+    // above the terrain, so tall ground would silently turn a spawn into a skip.
+    @SuppressWarnings("deprecation")
     protected boolean isLoaded() {
         return level().hasChunkAt(blockPosition());
     }

@@ -1,6 +1,5 @@
 package com.soul.soa_additions.bloodarsenal.modifier;
 
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 
 /**

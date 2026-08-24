@@ -5,9 +5,7 @@ import com.soul.soa_additions.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -126,7 +124,8 @@ public final class ModBlocks {
                     .sound(SoundType.STONE)));
     public static final RegistryObject<Block> INFINITY_BLOCK_BLOCK        = registerBlock("infinity_block_block",        () -> new Block(METAL_BLOCK_PROPS));
     public static final RegistryObject<Block> INFINITY_BLOCK_BLOCK_BLOCK  = registerBlock("infinity_block_block_block",  () -> new Block(METAL_BLOCK_PROPS));
-    public static final RegistryObject<Block> UNKNOWN_BLOCK               = registerBlock("unknown_block",               () -> new Block(ORE_PROPERTIES));
+    // Drops and tool requirement defer to whatever block it is standing in for.
+    public static final RegistryObject<Block> UNKNOWN_BLOCK               = registerBlock("unknown_block",               () -> new UnknownBlock(ORE_PROPERTIES));
 
     // External 1.12 mod ports (Thermal Foundation, TConstruct, ExtraUtilities2)
     public static final RegistryObject<Block> IRIDIUM_BLOCK               = registerBlock("iridium_block",               () -> new Block(METAL_BLOCK_PROPS));

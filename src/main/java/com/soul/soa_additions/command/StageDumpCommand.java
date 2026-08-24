@@ -10,7 +10,6 @@ import net.darkhax.itemstages.Restriction;
 import net.darkhax.itemstages.RestrictionManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -28,6 +27,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * {@code /soastagedump} — writes the pack's complete staging state to
@@ -87,7 +87,7 @@ public final class StageDumpCommand {
             final Multimap<String, Restriction> restrictions =
                     ((RestrictionManagerAccessor) RestrictionManager.INSTANCE).soa$restrictions();
 
-            for (Item item : BuiltInRegistries.ITEM) {
+            for (Item item : ForgeRegistries.ITEMS) {
                 final ItemStack stack = new ItemStack(item);
                 if (stack.isEmpty()) {
                     continue;
@@ -95,7 +95,7 @@ public final class StageDumpCommand {
                 for (Map.Entry<String, Restriction> entry : restrictions.entries()) {
                     if (entry.getValue().isRestricted(stack)) {
                         items.computeIfAbsent(entry.getKey(), k -> new ArrayList<>())
-                                .add(new Entry(BuiltInRegistries.ITEM.getKey(item).toString(),
+                                .add(new Entry(ForgeRegistries.ITEMS.getKey(item).toString(),
                                         stack.getHoverName().getString()));
                         itemCount++;
                     }
@@ -124,7 +124,7 @@ public final class StageDumpCommand {
                 final ItemStack result = recipe.getResultItem(access);
                 recipes.computeIfAbsent(stage, k -> new ArrayList<>())
                         .add(new RecipeEntry(recipe.getId().toString(),
-                                result.isEmpty() ? "" : BuiltInRegistries.ITEM.getKey(result.getItem()).toString(),
+                                result.isEmpty() ? "" : ForgeRegistries.ITEMS.getKey(result.getItem()).toString(),
                                 result.isEmpty() ? "" : result.getHoverName().getString()));
                 recipeCount++;
             }

@@ -4,6 +4,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
+import java.util.List;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public final class TaigaItems {
@@ -13,7 +14,7 @@ public final class TaigaItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, TAIGA_ID);
 
-    private static final String[] MATERIALS = {
+    public static final List<String> MATERIALS = List.of(
             "abyssum", "adamant", "astrium", "aurorium", "basalt",
             "dilithium", "duranite", "dyonite", "eezo", "fractum",
             "ignitz", "imperomite", "iox", "jauxum", "karmesine",
@@ -22,7 +23,7 @@ public final class TaigaItems {
             "proxii", "seismum", "solarium", "terrax", "tiberium",
             "triberium", "tritonite", "valyrium", "vibranium", "violium",
             "yrdeen"
-    };
+    );
 
     static {
         for (String mat : MATERIALS) {

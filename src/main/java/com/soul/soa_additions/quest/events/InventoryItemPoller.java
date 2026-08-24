@@ -14,7 +14,6 @@ import com.soul.soa_additions.quest.task.HarvestLevelTask;
 import com.soul.soa_additions.quest.task.ItemTask;
 import com.soul.soa_additions.quest.team.QuestTeam;
 import com.soul.soa_additions.quest.team.TeamData;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -23,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * Absolute-value poller for the inventory-derived task types — {@link ItemTask} (non-consume
@@ -71,7 +71,7 @@ public final class InventoryItemPoller {
             if (stack.isEmpty()) continue;
             stacks.add(stack);
             if (wantItems) {
-                ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+                ResourceLocation id = ForgeRegistries.ITEMS.getKey(stack.getItem());
                 owned.put(id, owned.getOrDefault(id, 0) + stack.getCount());
             }
             if (wantLevels) probes.add(HarvestLevelTask.Probe.of(stack));

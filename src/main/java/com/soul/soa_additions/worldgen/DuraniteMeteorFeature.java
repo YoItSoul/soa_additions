@@ -2,7 +2,6 @@ package com.soul.soa_additions.worldgen;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;

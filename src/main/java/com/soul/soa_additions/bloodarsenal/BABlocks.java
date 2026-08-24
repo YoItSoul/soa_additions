@@ -1,6 +1,5 @@
 package com.soul.soa_additions.bloodarsenal;
 
-import com.soul.soa_additions.SoaAdditions;
 import com.soul.soa_additions.bloodarsenal.block.*;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;

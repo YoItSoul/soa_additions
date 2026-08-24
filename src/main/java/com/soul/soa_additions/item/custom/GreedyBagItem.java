@@ -85,9 +85,19 @@ public class GreedyBagItem extends Item implements ICurio {
                 continue; // still locked
             }
 
-            if (player.getInventory().add(stored)) {
+            // Inventory#add is not all-or-nothing: it moves what it can and still returns
+            // false, so trusting the boolean alone left the full entry in the bag after a
+            // partial insert — every click handed out free copies of the remainder.
+            int had = stored.getCount();
+            player.getInventory().add(stored);
+            if (stored.isEmpty()) {
                 toRemove.add(i);
             } else {
+                if (stored.getCount() != had) {
+                    CompoundTag shrunk = new CompoundTag();
+                    stored.save(shrunk);
+                    list.set(i, shrunk);
+                }
                 break; // inventory full
             }
         }

@@ -1,6 +1,5 @@
 package com.soul.soa_additions.bloodarsenal.recipe;
 
-import com.soul.soa_additions.SoaAdditions;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.eventbus.api.IEventBus;

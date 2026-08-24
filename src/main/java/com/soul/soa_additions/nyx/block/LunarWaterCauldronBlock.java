@@ -1,6 +1,5 @@
 package com.soul.soa_additions.nyx.block;
 
-import com.soul.soa_additions.nyx.NyxBlocks;
 import com.soul.soa_additions.nyx.NyxItems;
 import com.soul.soa_additions.nyx.item.LunarWaterBottleItem;
 import net.minecraft.core.BlockPos;

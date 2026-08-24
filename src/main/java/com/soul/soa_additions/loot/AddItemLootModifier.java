@@ -3,7 +3,6 @@ package com.soul.soa_additions.loot;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -14,6 +13,7 @@ import net.minecraftforge.common.loot.LootModifier;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * Global loot modifier that injects weighted item entries into a matching
@@ -75,8 +75,8 @@ public class AddItemLootModifier extends LootModifier {
     public record Entry(Item item, int weight, int minCount, int maxCount) {
         public static final Codec<Entry> CODEC = RecordCodecBuilder.create(inst -> inst.group(
                 ResourceLocation.CODEC.fieldOf("item").xmap(
-                        rl -> BuiltInRegistries.ITEM.get(rl),
-                        item -> BuiltInRegistries.ITEM.getKey(item)
+                        rl -> ForgeRegistries.ITEMS.getValue(rl),
+                        item -> ForgeRegistries.ITEMS.getKey(item)
                 ).forGetter(Entry::item),
                 Codec.INT.optionalFieldOf("weight", 1).forGetter(Entry::weight),
                 Codec.INT.optionalFieldOf("min", 1).forGetter(Entry::minCount),

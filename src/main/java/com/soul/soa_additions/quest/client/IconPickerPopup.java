@@ -3,7 +3,6 @@ package com.soul.soa_additions.quest.client;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -15,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * Searchable item picker. Shows a grid of every registered item; the search
@@ -67,8 +67,8 @@ public final class IconPickerPopup {
     private static List<Entry> loadAll() {
         if (CACHED_ALL != null) return CACHED_ALL;
         List<Entry> out = new ArrayList<>();
-        for (Item item : BuiltInRegistries.ITEM) {
-            ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
+        for (Item item : ForgeRegistries.ITEMS) {
+            ResourceLocation id = ForgeRegistries.ITEMS.getKey(item);
             if (id == null) continue;
             ItemStack stack = new ItemStack(item);
             String name;

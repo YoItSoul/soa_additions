@@ -42,7 +42,23 @@ public class NyxWorldData extends SavedData {
     public final List<LunarEvent> lunarEvents = new ArrayList<>();
     public final Set<BlockPos> cachedMeteorPositions = new HashSet<>();
     public final Map<ChunkPos, int[]> playersPresentTicks = new HashMap<>();
-    public final Set<BlockPos> meteorLandingSites = new HashSet<>();
+    /**
+     * Impact sites the Meteor Finder points at. Insertion-ordered and capped: every rock an
+     * impact places used to be added and only a rock a player personally mined was ever removed,
+     * so a long-lived world carried tens of thousands of positions through every save.
+     */
+    public final Set<BlockPos> meteorLandingSites = new java.util.LinkedHashSet<>();
+    private static final int MAX_LANDING_SITES = 512;
+
+    /** Records an impact site, evicting the oldest once the cap is reached. */
+    public void addLandingSite(BlockPos pos) {
+        if (!meteorLandingSites.add(pos.immutable())) return;
+        java.util.Iterator<BlockPos> it = meteorLandingSites.iterator();
+        while (meteorLandingSites.size() > MAX_LANDING_SITES && it.hasNext()) {
+            it.next();
+            it.remove();
+        }
+    }
     public final Set<String> visitedDimensions = new HashSet<>();
     public LunarEvent currentEvent;
     public LunarEvent forcedEvent;
@@ -188,7 +204,7 @@ public class NyxWorldData extends SavedData {
         data.wasDaytime = tag.getBoolean("was_daytime");
         for (LunarEvent e : data.lunarEvents) e.deserialize(tag.getCompound(e.name));
         for (Tag t : tag.getList("meteor_landings", Tag.TAG_LONG)) {
-            data.meteorLandingSites.add(BlockPos.of(((LongTag) t).getAsLong()));
+            data.addLandingSite(BlockPos.of(((LongTag) t).getAsLong()));
         }
         for (Tag t : tag.getList("cached_meteors", Tag.TAG_LONG)) {
             data.cachedMeteorPositions.add(BlockPos.of(((LongTag) t).getAsLong()));

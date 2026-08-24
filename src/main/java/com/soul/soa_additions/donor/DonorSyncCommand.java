@@ -49,6 +49,10 @@ public final class DonorSyncCommand {
     private static final Logger LOG = LoggerFactory.getLogger("soa_additions/donor-sync");
     private static final String API_URL = "https://telemetry.soulsofavarice.com/api/supporters";
     private static final Gson GSON = new Gson();
+    /** One client for the life of the JVM; each build spins up its own selector thread pool. */
+    private static final HttpClient HTTP = HttpClient.newBuilder()
+            .connectTimeout(Duration.ofSeconds(10))
+            .build();
 
     private DonorSyncCommand() {}
 
@@ -73,15 +77,12 @@ public final class DonorSyncCommand {
 
         Thread thread = new Thread(() -> {
             try {
-                HttpClient client = HttpClient.newBuilder()
-                        .connectTimeout(Duration.ofSeconds(10))
-                        .build();
                 HttpRequest request = HttpRequest.newBuilder()
                         .uri(URI.create(API_URL))
                         .timeout(Duration.ofSeconds(15))
                         .GET()
                         .build();
-                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                HttpResponse<String> response = HTTP.send(request, HttpResponse.BodyHandlers.ofString());
 
                 if (response.statusCode() != 200) {
                     server.execute(() -> source.sendFailure(
@@ -163,12 +164,15 @@ public final class DonorSyncCommand {
                         DonorRegistry.add(new DonorData(uuid, displayName, tier, donated, message));
                         added++;
                     } else {
-                        // Upgrade tier if higher, update name
-                        boolean changed = false;
+                        // Upgrade tier if higher, update name, and backfill a missing message
                         DonorData.Tier bestTier = tier.ordinal() > existing.tier().ordinal() ? tier : existing.tier();
                         String bestName = displayName;
                         String bestMsg = existing.message().isEmpty() ? message : existing.message();
-                        if (bestTier != existing.tier() || !bestName.equals(existing.name())) {
+                        // The message was computed but only written when the tier or name also
+                        // changed, so a supporter who added a note after the fact never got one.
+                        if (bestTier != existing.tier()
+                                || !bestName.equals(existing.name())
+                                || !bestMsg.equals(existing.message())) {
                             DonorRegistry.add(new DonorData(uuid, bestName, bestTier, existing.donatedAt(), bestMsg));
                             updated++;
                         }

@@ -26,9 +26,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Set;
 import java.util.UUID;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * Applies gameplay difficulty effects per pack mode, matching GreedyCraft's
@@ -64,13 +64,14 @@ public final class PackModeEffects {
     private static volatile boolean cachedIsExpert = false;
 
     /**
-     * Per-player previous-tick exhaustion level. Stored as a flat array indexed
-     * by a small player slot to avoid HashMap overhead. Falls back gracefully
-     * if more players connect than the array size (just skips scaling that tick).
+     * Per-player previous-tick exhaustion level, keyed by UUID.
+     *
+     * <p>This was a 128-slot array indexed by {@code entityId & 127}. Two online players whose
+     * entity ids differ by a multiple of 128 shared a slot with no identity check, so each read
+     * the other's exhaustion: one had drain silently cancelled, the other was never scaled at
+     * all. Touched only from the server thread (player tick, logout, cache refresh).</p>
      */
-    private static final float[] prevExhaustion = new float[128];
-    /** Parallel flag — true once we've stored a valid prev value for this slot. */
-    private static final boolean[] prevValid = new boolean[128];
+    private static final java.util.Map<java.util.UUID, Float> prevExhaustion = new java.util.HashMap<>();
 
     private PackModeEffects() {}
 
@@ -101,9 +102,9 @@ public final class PackModeEffects {
         cachedBossHpMultiplier = cachedIsExpert
                 ? ModConfigs.EXPERT_BOSS_HEALTH_MULTIPLIER.get() - 1.0
                 : 0.0;
-        // Invalidate all prev-exhaustion slots so the first tick after a
+        // Invalidate the prev-exhaustion baselines so the first tick after a
         // mode change doesn't produce a bogus delta.
-        java.util.Arrays.fill(prevValid, false);
+        prevExhaustion.clear();
     }
 
     // ------------------------------------------------------------------ //
@@ -185,7 +186,7 @@ public final class PackModeEffects {
 
     private static boolean isBoss(LivingEntity entity) {
         EntityType<?> type = entity.getType();
-        ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(type);
+        ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(type);
         if (EXPERT_HP_BLACKLIST.contains(id)) return false;
 
         if (entity instanceof WitherBoss || entity instanceof EnderDragon) return true;
@@ -221,28 +222,31 @@ public final class PackModeEffects {
         if (event.phase != TickEvent.Phase.END) return;
         if (!(event.player instanceof ServerPlayer player)) return;
 
-        int slot = player.getId() & 127; // cheap modulo for array index
+        java.util.UUID id = player.getUUID();
         FoodData food = player.getFoodData();
         float current = food.getExhaustionLevel();
 
-        if (!prevValid[slot]) {
-            prevExhaustion[slot] = current;
-            prevValid[slot] = true;
+        Float previous = prevExhaustion.get(id);
+        if (previous == null) {
+            prevExhaustion.put(id, current);
             return;
         }
 
-        float prev = prevExhaustion[slot];
-        float delta = current - prev;
-
+        float delta = current - previous;
         if (delta <= 0) {
-            prevExhaustion[slot] = current;
+            prevExhaustion.put(id, current);
             return;
         }
 
-        float scaled = (float) (delta / mult);
-        float adjusted = prev + scaled;
+        float adjusted = previous + (float) (delta / mult);
         food.setExhaustion(adjusted);
-        prevExhaustion[slot] = adjusted;
+        prevExhaustion.put(id, adjusted);
+    }
+
+    /** Drop the baseline with the player, so the map cannot grow across a long uptime. */
+    @SubscribeEvent
+    public static void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
+        prevExhaustion.remove(event.getEntity().getUUID());
     }
 
     // ------------------------------------------------------------------ //

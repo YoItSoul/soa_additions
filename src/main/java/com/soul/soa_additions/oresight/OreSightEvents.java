@@ -66,11 +66,27 @@ public final class OreSightEvents {
 
     @SubscribeEvent
     public static void onPlayerClone(PlayerEvent.Clone event) {
-        if (!event.isWasDeath()) return;
-        OreSightTracker old = event.getOriginal().getCapability(OreSightTracker.CAP).orElse(null);
-        OreSightTracker fresh = event.getEntity().getCapability(OreSightTracker.CAP).orElse(null);
-        if (old != null && fresh != null) {
-            fresh.deserializeNBT(old.serializeNBT());
+        // Both kinds of clone: the End-return path fires this with wasDeath == false, and skipping
+        // it threw away the rest of an ore-sight potion while the client kept drawing its
+        // wireframes with no server state behind them.
+        Player original = event.getOriginal();
+        original.reviveCaps();
+        try {
+            OreSightTracker old = original.getCapability(OreSightTracker.CAP).orElse(null);
+            OreSightTracker fresh = event.getEntity().getCapability(OreSightTracker.CAP).orElse(null);
+            if (old != null && fresh != null) {
+                fresh.deserializeNBT(old.serializeNBT());
+            }
+        } finally {
+            original.invalidateCaps();
+        }
+    }
+
+    /** Fires for a death respawn and for the End return alike — the moment the new player can be sent to. */
+    @SubscribeEvent
+    public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
+        if (event.getEntity() instanceof ServerPlayer sp) {
+            sync(sp);
         }
     }
 

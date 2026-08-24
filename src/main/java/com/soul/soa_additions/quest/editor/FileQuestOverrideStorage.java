@@ -6,7 +6,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.soul.soa_additions.SoaAdditions;
 import com.soul.soa_additions.quest.QuestSource;
 import com.soul.soa_additions.quest.model.Chapter;
 import com.soul.soa_additions.quest.model.Quest;

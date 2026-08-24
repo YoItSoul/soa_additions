@@ -435,15 +435,9 @@ public final class SoaSmitheryMelting {
         recipe("taiga:tiberium_crystal",        "soa_additions:tiberium", INGOT_MB);
 
         // TAIGA storage blocks (1296mb, matching original forge:storage_blocks melts)
-        String[] taigaStorage = {
-                "abyssum", "adamant", "astrium", "aurorium", "dilithium", "duranite",
-                "dyonite", "eezo", "fractum", "ignitz", "imperomite", "iox", "jauxum",
-                "karmesine", "lumix", "nihilite", "niob", "nucleum", "osram", "ovium",
-                "palladium", "prometheum", "proxii", "seismum", "solarium", "terrax",
-                "tiberium", "triberium", "tritonite", "valyrium", "vibranium", "violium",
-                "yrdeen"
-        };
-        for (String mat : taigaStorage) {
+        // One roster, owned by the package that registers the blocks: a private copy here
+        // silently skipped melting for anything added there.
+        for (String mat : com.soul.soa_additions.taiga.TaigaBlocks.STORAGE_MATERIALS) {
             recipe("taiga:" + mat + "_block", "soa_additions:" + mat, BLOCK_MB);
         }
         // World moon rocks + cobbles (cobble at ingot value, hulls at block value)

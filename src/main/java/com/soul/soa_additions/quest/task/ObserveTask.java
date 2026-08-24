@@ -3,8 +3,8 @@ package com.soul.soa_additions.quest.task;
 import com.google.gson.JsonObject;
 import com.soul.soa_additions.SoaAdditions;
 import com.soul.soa_additions.quest.model.QuestTask;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * Look at a block or entity. Auto-detects which registry the {@code id}
@@ -26,8 +26,8 @@ public record ObserveTask(ResourceLocation id, int count, double reach) implemen
     @Override public ResourceLocation type() { return TYPE; }
     @Override public int target() { return count; }
 
-    public boolean isBlock() { return BuiltInRegistries.BLOCK.containsKey(id); }
-    public boolean isEntity() { return !isBlock() && BuiltInRegistries.ENTITY_TYPE.containsKey(id); }
+    public boolean isBlock() { return ForgeRegistries.BLOCKS.containsKey(id); }
+    public boolean isEntity() { return !isBlock() && ForgeRegistries.ENTITY_TYPES.containsKey(id); }
 
     @Override public String describe() {
         String pretty = isBlock() ? TaskNames.block(id.toString()) : TaskNames.entity(id.toString());

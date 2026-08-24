@@ -10,8 +10,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -45,22 +44,16 @@ final class JfrTrigger {
         rec.start();
         LOGGER.warn("JFR recording started ({}s) → {}", seconds, out.getFileName());
 
-        // Auto-close after duration so we don't leak the Recording handle.
-        ScheduledExecutorService closer = Executors.newSingleThreadScheduledExecutor(r -> {
-            Thread t = new Thread(r, "SOA-JfrCloser");
-            t.setDaemon(true);
-            return t;
-        });
-        closer.schedule(() -> {
+        // Auto-close after duration so we don't leak the Recording handle. A delayed executor
+        // borrows the common pool for the one task; a dedicated scheduler outlived its single use.
+        CompletableFuture.delayedExecutor(seconds + 2L, TimeUnit.SECONDS).execute(() -> {
             try {
                 if (rec.getState() == RecordingState.RUNNING) rec.stop();
                 rec.close();
                 LOGGER.info("JFR recording finished → {}", out.getFileName());
             } catch (Throwable t) {
                 LOGGER.warn("JFR close failed", t);
-            } finally {
-                closer.shutdown();
             }
-        }, seconds + 2, TimeUnit.SECONDS);
+        });
     }
 }

@@ -1,6 +1,5 @@
 package com.soul.soa_additions.bloodarsenal.block;
 
-import com.soul.soa_additions.bloodarsenal.BABlockEntities;
 import com.soul.soa_additions.bloodarsenal.tile.StasisPlateBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Containers;
@@ -36,6 +35,8 @@ public class StasisPlateBlock extends BaseEntityBlock {
     }
 
     @Override
+    // Deprecated only to steer callers to the BlockState overload; overriding it is the intended use.
+    @SuppressWarnings("deprecation")
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
         return SHAPE;
     }
@@ -52,6 +53,7 @@ public class StasisPlateBlock extends BaseEntityBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public InteractionResult use(BlockState state, Level level, BlockPos pos,
                                  Player player, InteractionHand hand, BlockHitResult hit) {
         if (level.isClientSide()) return InteractionResult.SUCCESS;
@@ -80,6 +82,7 @@ public class StasisPlateBlock extends BaseEntityBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean moved) {
         if (!state.is(newState.getBlock())) {
             BlockEntity be = level.getBlockEntity(pos);

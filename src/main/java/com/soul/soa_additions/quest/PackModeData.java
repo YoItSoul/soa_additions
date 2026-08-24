@@ -168,10 +168,10 @@ public final class PackModeData extends SavedData {
             }
             return;
         }
-        PackMode target = PackMode.fromString(cfg);
-        // fromString returns ADVENTURE for invalid input — only enforce if the
-        // config string actually matches a valid mode name.
-        if (!target.name().equalsIgnoreCase(cfg.trim())) return;
+        // parseStrict answers null for invalid input — only enforce if the config string
+        // actually names a mode, rather than silently enforcing ADVENTURE on a typo.
+        PackMode target = PackMode.parseStrict(cfg);
+        if (target == null) return;
 
         if (serverEnforced && this.mode == target) return; // already correct
 

@@ -1,10 +1,10 @@
 package com.soul.soa_additions.quest.task;
 
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.entity.EntityType;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * Small helpers that turn raw registry ids like {@code minecraft:stone_pickaxe}
@@ -17,7 +17,7 @@ public final class TaskNames {
 
     public static String item(String id) {
         try {
-            Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(id));
+            Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(id));
             if (item != null) {
                 String s = item.getDescription().getString();
                 if (!s.isEmpty()) return s;
@@ -28,7 +28,7 @@ public final class TaskNames {
 
     public static String block(String id) {
         try {
-            Block block = BuiltInRegistries.BLOCK.get(new ResourceLocation(id));
+            Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(id));
             if (block != null) {
                 String s = block.getName().getString();
                 if (!s.isEmpty()) return s;
@@ -39,7 +39,7 @@ public final class TaskNames {
 
     public static String entity(String id) {
         try {
-            EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.get(new ResourceLocation(id));
+            EntityType<?> type = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(id));
             if (type != null) {
                 String s = type.getDescription().getString();
                 if (!s.isEmpty()) return s;

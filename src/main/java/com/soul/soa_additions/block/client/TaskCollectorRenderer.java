@@ -107,12 +107,17 @@ public class TaskCollectorRenderer implements BlockEntityRenderer<TaskCollectorB
 
         drawCentered(font, pose, buffers, trim(font, title, w - 4), w / 2, y, TITLE);
         y += 11;
+        // The face is only px/scale units tall and the progress bar claims the bottom of it, so a
+        // 1x1 screen has room for far fewer than three lines. Overflow used to render in mid-air
+        // below the block and across the bar; now it is simply dropped.
+        float textBottom = (hasTask ? px - 30f - 12f : px) / scale;
         if (body != null) {
             for (String line : wrap(font, body, (int) w - 4, 3)) {
+                if (y + 9 > textBottom) break;
                 drawCentered(font, pose, buffers, line, w / 2, y, BODY);
                 y += 9;
             }
-        } else {
+        } else if (y + 9 <= textBottom) {
             drawCentered(font, pose, buffers, "sneak-click to select a task", w / 2, y, DIM);
             y += 9;
         }

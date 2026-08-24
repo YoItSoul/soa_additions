@@ -6,7 +6,6 @@ import com.soul.soa_additions.network.ClientModReportPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.GameType;
 import net.minecraftforge.event.CommandEvent;
@@ -169,7 +168,7 @@ public final class AntiCheatHandler {
         if (accepted) return;
 
         String name = player.getGameProfile().getName();
-        if (isSingleplayerOwner(player)) {
+        if (CheatEnforcement.isSingleplayerOwner(player)) {
             LOGGER.info("[soa anticheat] {} declined the scan in their own singleplayer world.", name);
             return;
         }
@@ -180,13 +179,6 @@ public final class AntiCheatHandler {
         }
         LOGGER.warn("[soa anticheat] {} declined the scan and this server requires it — disconnecting.", name);
         player.connection.disconnect(scanRequiredReason());
-    }
-
-    /** True for the host of a singleplayer world; LAN guests are on someone else's world. */
-    private static boolean isSingleplayerOwner(ServerPlayer player) {
-        MinecraftServer server = player.getServer();
-        return server != null && !server.isDedicatedServer()
-                && server.isSingleplayerOwner(player.getGameProfile());
     }
 
     /** Deliberately worded as a requirement, not an accusation — declining is not cheating. */

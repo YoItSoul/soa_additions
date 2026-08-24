@@ -4,7 +4,6 @@ import com.soul.smithery.item.tool.SmitheryToolData;
 import com.soul.smithery.item.tool.ToolComposition;
 import com.soul.smithery.item.tool.ToolCompositions;
 import com.soul.smithery.api.modifier.ModifierEffect;
-import com.soul.soa_additions.SoaAdditions;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
@@ -13,7 +12,6 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,13 +36,28 @@ import java.util.UUID;
  * migration path, and the crash window is a few seconds wide. If that trade stops being acceptable,
  * the fix is to write the stash into the player's persistent NBT
  * ({@code player.getPersistentData().get(Player.PERSISTED_NBT_TAG)}), which survives death by design.</p>
+ *
+ * <p>Registered to the Forge event bus by {@link SmitheryIntegration#init} when Smithery is
+ * present. NOT annotated with {@code @Mod.EventBusSubscriber}: the handler bodies dereference
+ * {@code com.soul.smithery} types, and Forge's scanner would subscribe them unconditionally — the
+ * first block break without Smithery installed would then be a NoClassDefFoundError inside a
+ * listener that nothing catches.</p>
  */
-@Mod.EventBusSubscriber(modid = SoaAdditions.MODID)
 public final class SoulboundEvents {
 
     private SoulboundEvents() {}
 
     private static final Map<UUID, List<ItemStack>> STASH = new HashMap<>();
+
+    /**
+     * The stash belongs to one server run. Static state outlives the integrated server, so
+     * quitting to the title screen after dying and loading another world used to hand the first
+     * world's gear to the same UUID on respawn.
+     */
+    @SubscribeEvent
+    public static void onServerStopped(net.minecraftforge.event.server.ServerStoppedEvent event) {
+        STASH.clear();
+    }
 
     /**
      * Pulls soulbound gear out of the inventory before vanilla can drop it.

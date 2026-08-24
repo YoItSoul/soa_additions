@@ -1,6 +1,6 @@
 {
-  "name": "item.soa_additions.nyx_guide",
-  "landing_text": "item.soa_additions.nyx_guide.landing",
+  "name": "item.nyx.nyx_guide",
+  "landing_text": "item.nyx.nyx_guide.landing",
   "book_texture": "patchouli:textures/gui/book_blue.png",
   "model": "patchouli:book_blue",
   "creative_tab": "soa_additions:soa_additions_tab",

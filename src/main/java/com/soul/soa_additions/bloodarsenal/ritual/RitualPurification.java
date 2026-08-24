@@ -1,6 +1,7 @@
 package com.soul.soa_additions.bloodarsenal.ritual;
 
 import com.soul.soa_additions.bloodarsenal.BAConfig;
+import com.soul.soa_additions.bloodarsenal.BAFluids;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
@@ -8,6 +9,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import wayoftime.bloodmagic.common.fluid.BloodMagicFluids;
 import wayoftime.bloodmagic.ritual.*;
 
 import java.util.function.Consumer;
@@ -61,9 +63,13 @@ public class RitualPurification extends Ritual {
                 FluidStack drained = inputHandler.drain(INPUT_AMOUNT, IFluidHandler.FluidAction.SIMULATE);
                 if (drained.isEmpty() || drained.getAmount() < INPUT_AMOUNT) return;
 
-                // Fill OUTPUT_AMOUNT mB to output (using the same fluid type for now)
-                FluidStack toFill = drained.copy();
-                toFill.setAmount(OUTPUT_AMOUNT);
+                // The ritual refines life essence. It used to fill back a copy of whatever it
+                // drained, so any fluid in the input tank — lava included — was destroyed at 10:1
+                // while paying LP, and refined essence was never produced at all.
+                if (!isLifeEssence(drained)) return;
+
+                FluidStack toFill = new FluidStack(
+                        BAFluids.REFINED_LIFE_ESSENCE_SOURCE.get(), OUTPUT_AMOUNT);
 
                 int filled = outputHandler.fill(toFill, IFluidHandler.FluidAction.SIMULATE);
                 if (filled >= OUTPUT_AMOUNT) {
@@ -72,6 +78,13 @@ public class RitualPurification extends Ritual {
                 }
             });
         });
+    }
+
+    /** Blood Magic's life essence, source or flowing — never our own refined output. */
+    private static boolean isLifeEssence(FluidStack stack) {
+        var fluid = stack.getFluid();
+        return fluid == BloodMagicFluids.LIFE_ESSENCE_FLUID.get()
+                || fluid == BloodMagicFluids.LIFE_ESSENCE_FLUID_FLOWING.get();
     }
 
     @Override

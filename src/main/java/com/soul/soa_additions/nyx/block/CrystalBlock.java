@@ -1,7 +1,6 @@
 package com.soul.soa_additions.nyx.block;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -32,6 +31,8 @@ public class CrystalBlock extends BaseEntityBlock {
     public CrystalBlock(Properties props) { super(props); }
 
     @Override
+    // Deprecated only to steer callers to the BlockState overload; overriding it is the intended use.
+    @SuppressWarnings("deprecation")
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
         return SHAPE;
     }
@@ -40,6 +41,7 @@ public class CrystalBlock extends BaseEntityBlock {
     @Override public boolean isRandomlyTicking(BlockState state) { return true; }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
         BlockEntity be = level.getBlockEntity(pos);
         if (!(be instanceof CrystalBlockEntity tile)) return;
@@ -56,11 +58,16 @@ public class CrystalBlock extends BaseEntityBlock {
         for (BlockPos off : candidates) {
             if (tile.durability <= 0) break;
             BlockState before = level.getBlockState(off);
-            if (before.getBlock() instanceof BonemealableBlock bm) {
+            if (before.getBlock() instanceof BonemealableBlock) {
+                // performBonemeal writes the world, so the state has to be re-read every pass:
+                // feeding the stale one back in made the crop recompute the same target age and
+                // advance a single step for all five iterations.
                 for (int i = 0; i < 5; i++) {
-                    if (bm.isValidBonemealTarget(level, off, before, false)
-                            && bm.isBonemealSuccess(level, rand, off, before)) {
-                        bm.performBonemeal(level, rand, off, before);
+                    BlockState cur = level.getBlockState(off);
+                    if (!(cur.getBlock() instanceof BonemealableBlock bm)) break;
+                    if (!bm.isValidBonemealTarget(level, off, cur, false)) break;
+                    if (bm.isBonemealSuccess(level, rand, off, cur)) {
+                        bm.performBonemeal(level, rand, off, cur);
                     }
                 }
             }

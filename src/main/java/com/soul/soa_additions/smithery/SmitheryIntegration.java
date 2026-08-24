@@ -3,7 +3,6 @@ package com.soul.soa_additions.smithery;
 import com.soul.smithery.api.SmitheryAPI;
 import com.soul.smithery.api.cast.CastBlocks;
 import com.soul.smithery.api.cast.CastResults;
-import com.soul.smithery.api.cast.CastTemplates;
 import com.soul.smithery.api.material.Material;
 import com.soul.smithery.api.part.PartType;
 import com.soul.smithery.registry.SmitheryBlocks;
@@ -82,6 +81,13 @@ public final class SmitheryIntegration {
     public static void init(IEventBus modEventBus) {
         modEventBus.addListener((net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent e) ->
                 e.enqueueWork(SmitheryIntegration::registerPolishingKitSources));
+
+        // Forge-bus handlers for traits implemented outside Smithery's own modifier hooks.
+        // Registered here rather than through @Mod.EventBusSubscriber so they exist only when
+        // Smithery does — their bodies dereference com.soul.smithery types.
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.register(SmitheryTraitEvents.class);
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.register(SoulboundEvents.class);
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.register(ToolLevelingEvents.class);
         SoaSmitheryModifiers.register();
         SoaSmitheryMaterials.register();
         // Storage ingots and blocks for our materials that no mod in the pack supplies an item for.
@@ -327,17 +333,9 @@ public final class SmitheryIntegration {
 
         // TAIGA — every material castable back to ingot/nugget (melting was one-way;
         // original TC 1.12 had ingot+nugget casts for all TAIGA fluids).
-        String[] taigaMats = {
-                "abyssum", "adamant", "astrium", "aurorium", "basalt",
-                "dilithium", "duranite", "dyonite", "eezo", "fractum",
-                "ignitz", "imperomite", "iox", "jauxum", "karmesine",
-                "lumix", "meteorite", "nihilite", "niob", "nucleum",
-                "obsidiorite", "osram", "ovium", "palladium", "prometheum",
-                "proxii", "seismum", "solarium", "terrax", "tiberium",
-                "triberium", "tritonite", "valyrium", "vibranium", "violium",
-                "yrdeen"
-        };
-        for (String mat : taigaMats) {
+        // One roster, owned by the package that registers the items: a private copy here
+        // silently skipped casting for anything added there.
+        for (String mat : com.soul.soa_additions.taiga.TaigaItems.MATERIALS) {
             castIngot(mat, "taiga", mat + "_ingot", mat + "_nugget");
         }
         // uru ingot lives in soa_additions:, its new nugget in taiga: (split namespaces)

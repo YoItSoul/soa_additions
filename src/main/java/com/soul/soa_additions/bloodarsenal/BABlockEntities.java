@@ -1,6 +1,5 @@
 package com.soul.soa_additions.bloodarsenal;
 
-import com.soul.soa_additions.SoaAdditions;
 import com.soul.soa_additions.bloodarsenal.tile.AltareBlockEntity;
 import com.soul.soa_additions.bloodarsenal.tile.BloodCapacitorBlockEntity;
 import com.soul.soa_additions.bloodarsenal.tile.StasisPlateBlockEntity;

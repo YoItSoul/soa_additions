@@ -21,7 +21,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -105,7 +104,7 @@ public class FallingMeteorEntity extends FallingStarEntity {
                                     rockState = NyxBlocks.METEOR_ROCK.get().defaultBlockState();
                                 }
                                 level().setBlockAndUpdate(affected, rockState);
-                                data.meteorLandingSites.add(affected);
+                                data.addLandingSite(affected);
                             }
                         }
                     }
@@ -193,10 +192,20 @@ public class FallingMeteorEntity extends FallingStarEntity {
         return any;
     }
 
+    /**
+     * Spawns above the terrain at {@code pos}. The heightmap lookup here can block on a chunk
+     * that has not finished generating, so tick paths should resolve the height themselves and
+     * call {@link #spawnAt} instead; this entry point is for commands and other user-driven code.
+     */
     public static FallingMeteorEntity spawn(ServerLevel level, BlockPos pos) {
-        pos = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, pos)
-                .above(Mth.nextInt(level.random, 64, 96));
+        return spawnAt(level, level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, pos)
+                .above(Mth.nextInt(level.random, 64, 96)));
+    }
+
+    /** Spawns at an already-resolved position — no chunk or heightmap access of its own. */
+    public static FallingMeteorEntity spawnAt(ServerLevel level, BlockPos pos) {
         FallingMeteorEntity m = com.soul.soa_additions.nyx.NyxEntities.FALLING_METEOR.get().create(level);
+        if (m == null) return null;
         m.moveTo(pos.getX(), pos.getY(), pos.getZ(), 0, 0);
         level.addFreshEntity(m);
         return m;

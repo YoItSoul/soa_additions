@@ -173,7 +173,7 @@ public final class JerIntegration {
         DistributionBase dist = new DistributionSquare(veinCount, veinSize, minY, maxY);
 
         @SuppressWarnings("unchecked")
-        ResourceKey<Biome>[] keys = new ResourceKey[biomeIds.length];
+        ResourceKey<Biome>[] keys = (ResourceKey<Biome>[]) new ResourceKey<?>[biomeIds.length];
         for (int i = 0; i < biomeIds.length; i++) {
             keys[i] = ResourceKey.create(net.minecraft.core.registries.Registries.BIOME,
                     new ResourceLocation(biomeIds[i]));

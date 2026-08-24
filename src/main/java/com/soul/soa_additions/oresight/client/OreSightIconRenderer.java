@@ -90,7 +90,7 @@ public final class OreSightIconRenderer implements IClientMobEffectExtensions {
         if (source.isEmpty()) return null;
         if (source.size() == 1) return source.get(0);
         long t = Minecraft.getInstance().level == null ? 0 : Minecraft.getInstance().level.getGameTime();
-        int idx = (int) Math.floorMod(t / CYCLE_TICKS, source.size());
+        int idx = Math.floorMod(t / CYCLE_TICKS, source.size());
         return source.get(idx);
     }
 }

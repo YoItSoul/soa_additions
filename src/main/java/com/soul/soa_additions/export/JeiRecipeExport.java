@@ -19,7 +19,6 @@ import mezz.jei.api.runtime.IIngredientManager;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
@@ -32,11 +31,11 @@ import net.minecraftforge.fml.loading.FMLPaths;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * {@code /soa export jei} — writes {@code soa_exports/jei_recipes.json},
@@ -212,7 +211,7 @@ public final class JeiRecipeExport {
             V value = ing.getIngredient();
             if (value instanceof ItemStack stack) {
                 if (stack.isEmpty()) return null;
-                j.addProperty("item", BuiltInRegistries.ITEM.getKey(stack.getItem()).toString());
+                j.addProperty("item", ForgeRegistries.ITEMS.getKey(stack.getItem()).toString());
                 j.addProperty("count", stack.getCount());
                 if (stack.hasTag()) j.addProperty("nbt", String.valueOf(stack.getTag()));
                 return j;

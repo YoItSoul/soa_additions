@@ -15,7 +15,6 @@ import net.minecraft.advancements.DisplayInfo;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.Holder;
-import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -58,7 +57,6 @@ import net.minecraft.world.item.TridentItem;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.common.TierSortingRegistry;
 import net.minecraftforge.common.ToolActions;
@@ -82,6 +80,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
 
 /**
  * {@code /soa export <target>} — dumps registry contents to JSON files under
@@ -168,19 +168,19 @@ public final class RegistryExportCommand {
             if (all || "dimensions".equalsIgnoreCase(target))
                 totals.put("dimensions", write(outDir.resolve("dimensions.json"), dumpDimensions(server)));
             if (all || "effects".equalsIgnoreCase(target))
-                totals.put("effects", write(outDir.resolve("mob_effects.json"), dumpIds(BuiltInRegistries.MOB_EFFECT)));
+                totals.put("effects", write(outDir.resolve("mob_effects.json"), dumpIds(ForgeRegistries.MOB_EFFECTS)));
             if (all || "enchantments".equalsIgnoreCase(target))
-                totals.put("enchantments", write(outDir.resolve("enchantments.json"), dumpIds(BuiltInRegistries.ENCHANTMENT)));
+                totals.put("enchantments", write(outDir.resolve("enchantments.json"), dumpIds(ForgeRegistries.ENCHANTMENTS)));
             if (all || "fluids".equalsIgnoreCase(target))
-                totals.put("fluids", write(outDir.resolve("fluids.json"), dumpIds(BuiltInRegistries.FLUID)));
+                totals.put("fluids", write(outDir.resolve("fluids.json"), dumpIds(ForgeRegistries.FLUIDS)));
             if (all || "sounds".equalsIgnoreCase(target))
-                totals.put("sounds", write(outDir.resolve("sounds.json"), dumpIds(BuiltInRegistries.SOUND_EVENT)));
+                totals.put("sounds", write(outDir.resolve("sounds.json"), dumpIds(ForgeRegistries.SOUND_EVENTS)));
             if (all || "particles".equalsIgnoreCase(target))
-                totals.put("particles", write(outDir.resolve("particles.json"), dumpIds(BuiltInRegistries.PARTICLE_TYPE)));
+                totals.put("particles", write(outDir.resolve("particles.json"), dumpIds(ForgeRegistries.PARTICLE_TYPES)));
             if (all || "block_entities".equalsIgnoreCase(target))
-                totals.put("block_entities", write(outDir.resolve("block_entities.json"), dumpIds(BuiltInRegistries.BLOCK_ENTITY_TYPE)));
+                totals.put("block_entities", write(outDir.resolve("block_entities.json"), dumpIds(ForgeRegistries.BLOCK_ENTITY_TYPES)));
             if (all || "villager_professions".equalsIgnoreCase(target))
-                totals.put("villager_professions", write(outDir.resolve("villager_professions.json"), dumpIds(BuiltInRegistries.VILLAGER_PROFESSION)));
+                totals.put("villager_professions", write(outDir.resolve("villager_professions.json"), dumpIds(ForgeRegistries.VILLAGER_PROFESSIONS)));
             if (all || "tags".equalsIgnoreCase(target))
                 totals.put("tags", write(outDir.resolve("tags.json"), dumpAllTags(server)));
             if (all || "smithery_materials".equalsIgnoreCase(target))
@@ -238,24 +238,28 @@ public final class RegistryExportCommand {
     private static JsonArray dumpItems() {
         JsonArray arr = new JsonArray();
         List<Item> items = new ArrayList<>();
-        BuiltInRegistries.ITEM.forEach(items::add);
-        items.sort(Comparator.comparing(i -> BuiltInRegistries.ITEM.getKey(i).toString()));
+        ForgeRegistries.ITEMS.forEach(items::add);
+        items.sort(Comparator.comparing(i -> ForgeRegistries.ITEMS.getKey(i).toString()));
         for (Item item : items) {
-            ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
+            ResourceLocation id = ForgeRegistries.ITEMS.getKey(item);
             ItemStack stack = item.getDefaultInstance();
             JsonObject o = new JsonObject();
             o.addProperty("id", id.toString());
             o.addProperty("mod", id.getNamespace());
             o.addProperty("class", item.getClass().getName());
             safe(() -> o.addProperty("name", stack.getHoverName().getString()));
-            safe(() -> o.addProperty("max_stack", item.getMaxStackSize()));
-            safe(() -> o.addProperty("max_damage", item.getMaxDamage()));
+            safe(() -> o.addProperty("max_stack", stack.getMaxStackSize()));
+            safe(() -> o.addProperty("max_damage", stack.getMaxDamage()));
             safe(() -> o.addProperty("rarity", stack.getRarity().name()));
             safe(() -> o.addProperty("is_edible", item.isEdible()));
             safe(() -> o.addProperty("can_be_depleted", item.canBeDepleted()));
             safe(() -> o.addProperty("fire_resistant", item.isFireResistant()));
             if (item.isEdible()) {
-                FoodProperties fp = item.getFoodProperties();
+                // The stack-aware overload is the non-deprecated one, but it takes an entity and a
+                // mod override is free to dereference it. dumpItems has no per-item catch, so an
+                // NPE here would truncate items.json and everything after it.
+                FoodProperties fp = null;
+                try { fp = stack.getFoodProperties(null); } catch (Throwable ignored) {}
                 if (fp != null) {
                     JsonObject food = new JsonObject();
                     food.addProperty("nutrition", fp.getNutrition());
@@ -271,13 +275,18 @@ public final class RegistryExportCommand {
         return arr;
     }
 
+    // The Forge-sensitive forms of these getters all want a BlockGetter and a BlockPos (and an
+    // Explosion, for blast resistance) — a world this command deliberately does not have, because
+    // it dumps static registry data. Passing EmptyBlockGetter/BlockPos.ZERO/null to satisfy the
+    // signature would invite an NPE from any third-party block that actually reads them.
+    @SuppressWarnings("deprecation")
     private static JsonArray dumpBlocks() {
         JsonArray arr = new JsonArray();
         List<Block> blocks = new ArrayList<>();
-        BuiltInRegistries.BLOCK.forEach(blocks::add);
-        blocks.sort(Comparator.comparing(b -> BuiltInRegistries.BLOCK.getKey(b).toString()));
+        ForgeRegistries.BLOCKS.forEach(blocks::add);
+        blocks.sort(Comparator.comparing(b -> ForgeRegistries.BLOCKS.getKey(b).toString()));
         for (Block block : blocks) {
-            ResourceLocation id = BuiltInRegistries.BLOCK.getKey(block);
+            ResourceLocation id = ForgeRegistries.BLOCKS.getKey(block);
             BlockState state = block.defaultBlockState();
             JsonObject o = new JsonObject();
             o.addProperty("id", id.toString());
@@ -299,10 +308,10 @@ public final class RegistryExportCommand {
     private static JsonArray dumpEntities() {
         JsonArray arr = new JsonArray();
         List<EntityType<?>> types = new ArrayList<>();
-        BuiltInRegistries.ENTITY_TYPE.forEach(types::add);
-        types.sort(Comparator.comparing(t -> BuiltInRegistries.ENTITY_TYPE.getKey(t).toString()));
+        ForgeRegistries.ENTITY_TYPES.forEach(types::add);
+        types.sort(Comparator.comparing(t -> ForgeRegistries.ENTITY_TYPES.getKey(t).toString()));
         for (EntityType<?> et : types) {
-            ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(et);
+            ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(et);
             JsonObject o = new JsonObject();
             o.addProperty("id", id.toString());
             o.addProperty("mod", id.getNamespace());
@@ -339,11 +348,11 @@ public final class RegistryExportCommand {
                 new ResourceLocation("forge", "bosses"));
 
         List<EntityType<?>> types = new ArrayList<>();
-        BuiltInRegistries.ENTITY_TYPE.forEach(types::add);
-        types.sort(Comparator.comparing(t -> BuiltInRegistries.ENTITY_TYPE.getKey(t).toString()));
+        ForgeRegistries.ENTITY_TYPES.forEach(types::add);
+        types.sort(Comparator.comparing(t -> ForgeRegistries.ENTITY_TYPES.getKey(t).toString()));
 
         for (EntityType<?> et : types) {
-            ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(et);
+            ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(et);
 
             boolean tagged = isTagged(et, bossTag);
             boolean reflective = hasBossEventField(et.getBaseClass());
@@ -394,15 +403,15 @@ public final class RegistryExportCommand {
         if (supplier == null) return null;
         JsonObject stats = new JsonObject();
         List<Attribute> attrs = new ArrayList<>();
-        BuiltInRegistries.ATTRIBUTE.forEach(attrs::add);
+        ForgeRegistries.ATTRIBUTES.forEach(attrs::add);
         attrs.sort(Comparator.comparing(a -> {
-            ResourceLocation k = BuiltInRegistries.ATTRIBUTE.getKey(a);
+            ResourceLocation k = ForgeRegistries.ATTRIBUTES.getKey(a);
             return k == null ? "" : k.toString();
         }));
         for (Attribute attr : attrs) {
             try {
                 if (!supplier.hasAttribute(attr)) continue;
-                ResourceLocation aId = BuiltInRegistries.ATTRIBUTE.getKey(attr);
+                ResourceLocation aId = ForgeRegistries.ATTRIBUTES.getKey(attr);
                 if (aId == null) continue;
                 stats.addProperty(aId.toString(), supplier.getBaseValue(attr));
             } catch (Throwable ignored) {}
@@ -411,9 +420,7 @@ public final class RegistryExportCommand {
     }
 
     private static boolean isTagged(EntityType<?> et, TagKey<EntityType<?>> tag) {
-        Optional<Holder.Reference<EntityType<?>>> holder =
-                BuiltInRegistries.ENTITY_TYPE.getResourceKey(et)
-                        .flatMap(BuiltInRegistries.ENTITY_TYPE::getHolder);
+        Optional<Holder<EntityType<?>>> holder = ForgeRegistries.ENTITY_TYPES.getHolder(et);
         return holder.map(h -> h.is(tag)).orElse(false);
     }
 
@@ -511,9 +518,9 @@ public final class RegistryExportCommand {
         return arr;
     }
 
-    private static <T> JsonArray dumpIds(Registry<T> reg) {
+    private static <T> JsonArray dumpIds(IForgeRegistry<T> reg) {
         JsonArray arr = new JsonArray();
-        List<ResourceLocation> ids = new ArrayList<>(reg.keySet());
+        List<ResourceLocation> ids = new ArrayList<>(reg.getKeys());
         ids.sort(Comparator.comparing(ResourceLocation::toString));
         for (ResourceLocation rl : ids) {
             JsonObject o = new JsonObject();
@@ -524,6 +531,10 @@ public final class RegistryExportCommand {
         return arr;
     }
 
+    // BuiltInRegistries, not ForgeRegistries: four of the registries below (banner_pattern,
+    // cat_variant, instrument, game_event) have no ForgeRegistries field at all, and dumpTagsFrom
+    // needs Registry#getTagNames/#getTag — IForgeRegistry only offers a @Nullable ITagManager.
+    @SuppressWarnings("deprecation")
     private static JsonArray dumpAllTags(MinecraftServer server) {
         JsonArray arr = new JsonArray();
         // Built-in registries
@@ -580,14 +591,16 @@ public final class RegistryExportCommand {
      *   3. Attribute modifiers on the default stack — anything granting
      *      attack damage in the main hand or armor/toughness in an armor slot.
      */
+    // getLevel: the export records the numeric ladder rank, which is what the pack's docs show.
+    @SuppressWarnings("deprecation")
     private static JsonArray dumpEquipment() {
         JsonArray arr = new JsonArray();
         List<Item> items = new ArrayList<>();
-        BuiltInRegistries.ITEM.forEach(items::add);
-        items.sort(Comparator.comparing(i -> BuiltInRegistries.ITEM.getKey(i).toString()));
+        ForgeRegistries.ITEMS.forEach(items::add);
+        items.sort(Comparator.comparing(i -> ForgeRegistries.ITEMS.getKey(i).toString()));
         for (Item item : items) {
             try {
-                ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
+                ResourceLocation id = ForgeRegistries.ITEMS.getKey(item);
                 ItemStack stack = item.getDefaultInstance();
 
                 Map<EquipmentSlot, Multimap<Attribute, AttributeModifier>> mods = new EnumMap<>(EquipmentSlot.class);
@@ -608,8 +621,8 @@ public final class RegistryExportCommand {
                 o.addProperty("category", cat[0]);
                 o.addProperty("type", cat[1]);
                 safe(() -> o.addProperty("name", stack.getHoverName().getString()));
-                safe(() -> o.addProperty("max_damage", item.getMaxDamage()));
-                safe(() -> o.addProperty("enchantability", item.getEnchantmentValue()));
+                safe(() -> o.addProperty("max_damage", stack.getMaxDamage()));
+                safe(() -> o.addProperty("enchantability", stack.getEnchantmentValue()));
                 safe(() -> o.addProperty("rarity", stack.getRarity().name()));
                 safe(() -> o.addProperty("fire_resistant", item.isFireResistant()));
 
@@ -639,7 +652,7 @@ public final class RegistryExportCommand {
                     safe(() -> {
                         JsonArray repair = new JsonArray();
                         for (ItemStack rs : tier.getRepairIngredient().getItems())
-                            repair.add(BuiltInRegistries.ITEM.getKey(rs.getItem()).toString());
+                            repair.add(ForgeRegistries.ITEMS.getKey(rs.getItem()).toString());
                         if (repair.size() > 0) t.add("repair_items", repair);
                     });
                     o.add("tier", t);
@@ -663,11 +676,11 @@ public final class RegistryExportCommand {
                         if (m == null) continue;
                         List<Attribute> attrs = new ArrayList<>(m.keySet());
                         attrs.sort(Comparator.comparing(a2 -> {
-                            ResourceLocation k = BuiltInRegistries.ATTRIBUTE.getKey(a2);
+                            ResourceLocation k = ForgeRegistries.ATTRIBUTES.getKey(a2);
                             return k == null ? "" : k.toString();
                         }));
                         for (Attribute attr : attrs) {
-                            ResourceLocation aId = BuiltInRegistries.ATTRIBUTE.getKey(attr);
+                            ResourceLocation aId = ForgeRegistries.ATTRIBUTES.getKey(attr);
                             for (AttributeModifier mod : m.get(attr)) {
                                 JsonObject mo = new JsonObject();
                                 mo.addProperty("slot", slot.getName());
@@ -751,11 +764,11 @@ public final class RegistryExportCommand {
                 "opus", "thesaurus", "atlas"};
         JsonArray arr = new JsonArray();
         List<Item> items = new ArrayList<>();
-        BuiltInRegistries.ITEM.forEach(items::add);
-        items.sort(Comparator.comparing(i -> BuiltInRegistries.ITEM.getKey(i).toString()));
+        ForgeRegistries.ITEMS.forEach(items::add);
+        items.sort(Comparator.comparing(i -> ForgeRegistries.ITEMS.getKey(i).toString()));
         for (Item item : items) {
             try {
-                ResourceLocation id = BuiltInRegistries.ITEM.getKey(item);
+                ResourceLocation id = ForgeRegistries.ITEMS.getKey(item);
                 ItemStack stack = item.getDefaultInstance();
                 String path = id.getPath();
                 String name = "";
@@ -783,7 +796,7 @@ public final class RegistryExportCommand {
                 o.addProperty("class", item.getClass().getName());
                 safe(() -> o.addProperty("name", stack.getHoverName().getString()));
                 safe(() -> o.addProperty("rarity", stack.getRarity().name()));
-                safe(() -> o.addProperty("max_stack", item.getMaxStackSize()));
+                safe(() -> o.addProperty("max_stack", stack.getMaxStackSize()));
                 JsonArray viaArr = new JsonArray();
                 via.forEach(viaArr::add);
                 o.add("matched_via", viaArr);
@@ -825,11 +838,11 @@ public final class RegistryExportCommand {
             o.addProperty("id", id.toString());
             o.addProperty("mod", id.getNamespace());
             safe(() -> {
-                ResourceLocation t = BuiltInRegistries.RECIPE_TYPE.getKey(recipe.getType());
+                ResourceLocation t = ForgeRegistries.RECIPE_TYPES.getKey(recipe.getType());
                 if (t != null) o.addProperty("type", t.toString());
             });
             safe(() -> {
-                ResourceLocation s = BuiltInRegistries.RECIPE_SERIALIZER.getKey(recipe.getSerializer());
+                ResourceLocation s = ForgeRegistries.RECIPE_SERIALIZERS.getKey(recipe.getSerializer());
                 if (s != null) o.addProperty("serializer", s.toString());
             });
             safe(() -> o.addProperty("class", recipe.getClass().getName()));
@@ -1117,7 +1130,7 @@ public final class RegistryExportCommand {
                     safe(() -> {
                         ItemStack out = br.getOutput();
                         if (out != null && !out.isEmpty())
-                            o.addProperty("output", BuiltInRegistries.ITEM.getKey(out.getItem()).toString());
+                            o.addProperty("output", ForgeRegistries.ITEMS.getKey(out.getItem()).toString());
                     });
                 } else {
                     // e.g. VanillaBrewingRecipe — its data is the mix lists above.
@@ -1147,7 +1160,7 @@ public final class RegistryExportCommand {
                     o.addProperty("frame", d.getFrame().getName());
                     o.addProperty("hidden", d.isHidden());
                     safe(() -> o.addProperty("icon",
-                            BuiltInRegistries.ITEM.getKey(d.getIcon().getItem()).toString()));
+                            ForgeRegistries.ITEMS.getKey(d.getIcon().getItem()).toString()));
                 }
             });
             safe(() -> {
@@ -1180,7 +1193,7 @@ public final class RegistryExportCommand {
                         JsonObject s = new JsonObject();
                         s.addProperty("category", cat.getName());
                         safe(() -> s.addProperty("entity",
-                                BuiltInRegistries.ENTITY_TYPE.getKey(sd.type).toString()));
+                                ForgeRegistries.ENTITY_TYPES.getKey(sd.type).toString()));
                         safe(() -> s.addProperty("weight", sd.getWeight().asInt()));
                         s.addProperty("min_count", sd.minCount);
                         s.addProperty("max_count", sd.maxCount);
@@ -1206,9 +1219,9 @@ public final class RegistryExportCommand {
 
         safe(() -> net.minecraft.world.entity.npc.VillagerTrades.TRADES.entrySet().stream()
                 .sorted(Comparator.comparing(e -> String.valueOf(
-                        BuiltInRegistries.VILLAGER_PROFESSION.getKey(e.getKey()))))
+                        ForgeRegistries.VILLAGER_PROFESSIONS.getKey(e.getKey()))))
                 .forEach(entry -> {
-                    ResourceLocation prof = BuiltInRegistries.VILLAGER_PROFESSION.getKey(entry.getKey());
+                    ResourceLocation prof = ForgeRegistries.VILLAGER_PROFESSIONS.getKey(entry.getKey());
                     entry.getValue().forEach((level, listings) ->
                             addTradeRows(arr, prof == null ? "?" : prof.toString(), level, listings, rng));
                 }));
@@ -1248,7 +1261,7 @@ public final class RegistryExportCommand {
 
     private static JsonObject stackJson(ItemStack stack) {
         JsonObject o = new JsonObject();
-        o.addProperty("item", BuiltInRegistries.ITEM.getKey(stack.getItem()).toString());
+        o.addProperty("item", ForgeRegistries.ITEMS.getKey(stack.getItem()).toString());
         o.addProperty("count", stack.getCount());
         return o;
     }

@@ -2,7 +2,6 @@ package com.soul.soa_additions.smithery;
 
 import com.soul.smithery.api.SmitheryAPI;
 import com.soul.smithery.api.modifier.Modifier;
-import com.soul.smithery.api.modifier.ModifierEffect;
 import com.soul.smithery.item.tool.SmitheryArmorItem;
 import com.soul.smithery.item.tool.SmitheryToolData;
 import net.minecraft.resources.ResourceLocation;
@@ -635,7 +634,7 @@ public final class SoaSmitheryModifiers {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
                     float chance = effect.paramFloat("chance", 0.25f);
                     if (target.level().getRandom().nextFloat() < chance) {
-                        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.POISON,
+                        target.addEffect(new MobEffectInstance(MobEffects.POISON,
                                 effect.paramInt("duration_ticks", 100), effect.paramInt("amplifier", 0)));
                     }
                 })
@@ -668,7 +667,7 @@ public final class SoaSmitheryModifiers {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
                     float chance = effect.paramFloat("chance", 0.25f);
                     if (target.level().getRandom().nextFloat() < chance) {
-                        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.WITHER,
+                        target.addEffect(new MobEffectInstance(MobEffects.WITHER,
                                 effect.paramInt("duration_ticks", 100), effect.paramInt("amplifier", 0)));
                     }
                 })
@@ -950,7 +949,7 @@ public final class SoaSmitheryModifiers {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
                     float chance = effect.paramFloat("chance", 0.25f);
                     if (target.level().getRandom().nextFloat() < chance) {
-                        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.WEAKNESS,
+                        target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS,
                                 effect.paramInt("duration_ticks", 100), effect.paramInt("amplifier", 0)));
                     }
                 })
@@ -1212,7 +1211,7 @@ public final class SoaSmitheryModifiers {
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
-                        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 1));
+                        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 1));
                 })
                 .build());
 
@@ -1273,7 +1272,7 @@ public final class SoaSmitheryModifiers {
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
-                        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.WITHER, 60, 0));
+                        target.addEffect(new MobEffectInstance(MobEffects.WITHER, 60, 0));
                 })
                 .build());
 
@@ -1519,7 +1518,7 @@ public final class SoaSmitheryModifiers {
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
-                        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 80, 0));
+                        target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 80, 0));
                 })
                 .build());
 
@@ -1631,8 +1630,8 @@ public final class SoaSmitheryModifiers {
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
-                        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.WITHER, 100, 1));
-                        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0));
+                        target.addEffect(new MobEffectInstance(MobEffects.WITHER, 100, 1));
+                        target.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0));
                 })
                 .build());
 
@@ -1700,8 +1699,8 @@ public final class SoaSmitheryModifiers {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
                     int roll = target.level().getRandom().nextInt(3);
                     if (roll == 0) target.setSecondsOnFire(3);
-                    else if (roll == 1) ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 1));
-                    else ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.POISON, 60, 0));
+                    else if (roll == 1) target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 1));
+                    else target.addEffect(new MobEffectInstance(MobEffects.POISON, 60, 0));
                 })
                 .build());
 
@@ -1811,7 +1810,7 @@ public final class SoaSmitheryModifiers {
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onBlockDrops((effect, ctx) -> {
                     if (ctx.level().getRandom().nextFloat() >= 0.05f) return;
-                    var ambrosium = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(
+                    var ambrosium = net.minecraftforge.registries.ForgeRegistries.ITEMS.getValue(
                             net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("aether", "ambrosium_shard"));
                     if (ambrosium == null || ambrosium == net.minecraft.world.item.Items.AIR) return;
                     var stack = new net.minecraft.world.item.ItemStack(ambrosium);
@@ -2061,7 +2060,7 @@ public final class SoaSmitheryModifiers {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
                     float chance = effect.paramFloat("chance", 0.25f);
                     if (target.level().getRandom().nextFloat() < chance) {
-                        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,
+                        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,
                                 effect.paramInt("duration_ticks", 100), effect.paramInt("amplifier", 0)));
                     }
                 })
@@ -2212,7 +2211,7 @@ public final class SoaSmitheryModifiers {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
                     float chance = effect.paramFloat("chance", 0.25f);
                     if (target.level().getRandom().nextFloat() < chance) {
-                        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,
+                        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,
                                 effect.paramInt("duration_ticks", 100), effect.paramInt("amplifier", 0)));
                     }
                 })
@@ -2301,7 +2300,7 @@ public final class SoaSmitheryModifiers {
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
-                        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.GLOWING, 200, 0));
+                        target.addEffect(new MobEffectInstance(MobEffects.GLOWING, 200, 0));
                 })
                 .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
@@ -2357,7 +2356,7 @@ public final class SoaSmitheryModifiers {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
                     float chance = effect.paramFloat("chance", 0.25f);
                     if (target.level().getRandom().nextFloat() < chance) {
-                        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.WITHER,
+                        target.addEffect(new MobEffectInstance(MobEffects.WITHER,
                                 effect.paramInt("duration_ticks", 100), effect.paramInt("amplifier", 0)));
                     }
                 })
@@ -2576,7 +2575,7 @@ public final class SoaSmitheryModifiers {
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
-                        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.GLOWING, 200, 0));
+                        target.addEffect(new MobEffectInstance(MobEffects.GLOWING, 200, 0));
                 })
                 .build());
 
@@ -3004,7 +3003,7 @@ public final class SoaSmitheryModifiers {
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
-                        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.CONFUSION, 100, 0));
+                        target.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 100, 0));
                 })
                 .build());
 
@@ -3666,7 +3665,7 @@ public final class SoaSmitheryModifiers {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
                     float chance = effect.paramFloat("chance", 0.25f);
                     if (target.level().getRandom().nextFloat() < chance) {
-                        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.POISON,
+                        target.addEffect(new MobEffectInstance(MobEffects.POISON,
                                 effect.paramInt("duration_ticks", 100), effect.paramInt("amplifier", 0)));
                     }
                 })
@@ -4135,7 +4134,7 @@ public final class SoaSmitheryModifiers {
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
-                        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.WITHER, 60, 0));
+                        target.addEffect(new MobEffectInstance(MobEffects.WITHER, 60, 0));
                 })
                 .build());
 
@@ -4177,8 +4176,8 @@ public final class SoaSmitheryModifiers {
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
-                        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 0));
-                        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 40, 0));
+                        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 0));
+                        target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 40, 0));
                 })
                 .build());
 
@@ -4196,7 +4195,7 @@ public final class SoaSmitheryModifiers {
                 .category(Modifier.ModifierCategory.ACTIVE)
                 .onAttackEntity((effect, ctx) -> {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
-                        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.LEVITATION, 40, 0));
+                        target.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 40, 0));
                 })
                 .appliesTo(Modifier.AppliesTo.TOOLS)
                 .build());
@@ -4226,7 +4225,7 @@ public final class SoaSmitheryModifiers {
                 .onBlockDrops((effect, ctx) -> {
                     if (ctx.drops().isEmpty()) return;
                     boolean isAether = ctx.drops().stream().anyMatch(ie -> {
-                        var id = net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(ie.getItem().getItem());
+                        var id = net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(ie.getItem().getItem());
                         return id != null && "aether".equals(id.getNamespace());
                     });
                     if (!isAether) return;
@@ -5395,7 +5394,7 @@ public final class SoaSmitheryModifiers {
                     int cap = effect.paramInt("max_amp_per_level", 2) * level;
                     MobEffectInstance existing = target.getEffect(MobEffects.WITHER);
                     int nextAmp = existing != null ? Math.min(existing.getAmplifier() + 1, cap) : 0;
-                    ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.WITHER, 80, nextAmp));
+                    target.addEffect(new MobEffectInstance(MobEffects.WITHER, 80, nextAmp));
                 })
                 .build());
 
@@ -5802,7 +5801,7 @@ public final class SoaSmitheryModifiers {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
                     float chance = effect.paramFloat("chance", 0.25f);
                     if (target.level().getRandom().nextFloat() < chance) {
-                        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.WEAKNESS,
+                        target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS,
                                 effect.paramInt("duration_ticks", 100), effect.paramInt("amplifier", 0)));
                     }
                 })
@@ -5842,7 +5841,7 @@ public final class SoaSmitheryModifiers {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
                     float chance = effect.paramFloat("chance", 0.25f);
                     if (target.level().getRandom().nextFloat() < chance) {
-                        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.WITHER,
+                        target.addEffect(new MobEffectInstance(MobEffects.WITHER,
                                 effect.paramInt("duration_ticks", 100), effect.paramInt("amplifier", 0)));
                     }
                 })
@@ -5950,7 +5949,7 @@ public final class SoaSmitheryModifiers {
                     if (ctx.damageDealt() <= 0.0f || target.level().isClientSide || !target.isAlive()) return;
                     int level = effect.paramInt("level", 1);
                     int duration = effect.paramInt("duration_per_level_ticks", 100) * level;
-                    ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.GLOWING, duration, 0));
+                    target.addEffect(new MobEffectInstance(MobEffects.GLOWING, duration, 0));
                 })
                 .build());
 
@@ -6015,7 +6014,7 @@ public final class SoaSmitheryModifiers {
                     int level = effect.paramInt("level", 1);
                     // 1.12: 100-tick Mortal Wounds (75% heal suppression), not Wither
                     int duration = effect.paramInt("duration_per_level_ticks", 100) * level;
-                    ((LivingEntity) target).addEffect(new MobEffectInstance(
+                    target.addEffect(new MobEffectInstance(
                             com.soul.soa_additions.potion.TconEvoEffects.MORTAL_WOUNDS.get(), duration, 0));
                 })
                 .build());
@@ -6385,7 +6384,7 @@ public final class SoaSmitheryModifiers {
                     // so this fires unconditionally (or gate on cooldown externally)
                     int level = effect.paramInt("level", 1);
                     int duration = 20 + 10 * level;
-                    ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, duration, 4));
+                    target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, duration, 4));
                     target.level().playSound(null, target.getX(), target.getY(), target.getZ(),
                             net.minecraft.sounds.SoundEvents.ANVIL_LAND, net.minecraft.sounds.SoundSource.PLAYERS, 1.0f, 1.0f);
                 })
@@ -6423,7 +6422,7 @@ public final class SoaSmitheryModifiers {
                     if (ctx.damageDealt() <= 0.0f || target.level().isClientSide || !target.isAlive()) return;
                     int level = effect.paramInt("level", 1);
                     int duration = effect.paramInt("duration_per_level_ticks", 60) * level;
-                    ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.WEAKNESS, duration, 0));
+                    target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, duration, 0));
                 })
                 .build());
 
@@ -6454,7 +6453,7 @@ public final class SoaSmitheryModifiers {
                     if (level.isClientSide || !(level instanceof net.minecraft.server.level.ServerLevel server)) return;
                     // Original fires when pre-hit HP was at/near max (first-strike lightning)
                     // or when damage >= maxHealth (one-shot). Faithful translation:
-                    if (((LivingEntity) target).getHealth() + ctx.damageDealt() + 1.0E-4f < ((LivingEntity) target).getMaxHealth()) return;
+                    if (target.getHealth() + ctx.damageDealt() + 1.0E-4f < target.getMaxHealth()) return;
                     net.minecraft.world.entity.LightningBolt bolt = net.minecraft.world.entity.EntityType.LIGHTNING_BOLT.create(server);
                     if (bolt != null) {
                         bolt.moveTo(target.getX(), target.getY(), target.getZ());
@@ -6740,7 +6739,7 @@ public final class SoaSmitheryModifiers {
                     if (!(ctx.target() instanceof LivingEntity target)) return;
                     float chance = effect.paramFloat("chance", 0.25f);
                     if (target.level().getRandom().nextFloat() < chance) {
-                        ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,
+                        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,
                                 effect.paramInt("duration_ticks", 100), effect.paramInt("amplifier", 0)));
                     }
                 })

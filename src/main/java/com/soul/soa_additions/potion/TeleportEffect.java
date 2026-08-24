@@ -14,6 +14,9 @@ public final class TeleportEffect extends MobEffect {
     public boolean isDurationEffectTick(int duration, int amplifier) { return duration % 100 == 0; }
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
+        // Effect ticks run on both sides; the client would roll its own destination and snap the
+        // player somewhere the server never chose. Every other tick effect here guards the same way.
+        if (entity.level().isClientSide) return;
         if (entity.getRandom().nextFloat() >= 0.5F) return;
         double radius = 8.0 + amplifier * 4.0;
         for (int tries = 0; tries < 16; tries++) {

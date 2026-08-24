@@ -34,6 +34,10 @@ import net.minecraftforge.fml.ModList;
  * tier is one of ours, {@link #describe} appends its material name — matching the
  * "Level - Original Name - Altered Name" triple in the pack's Harvest Levels guide entry.</p>
  */
+// Tier#getLevel is Forge-deprecated in favour of TierSortingRegistry, which orders tiers but
+// never numbers them. This whole class is GreedyCraft's numeric ladder — names, numerals, colours,
+// level 127 — so the int is the point, not an implementation detail to migrate off.
+@SuppressWarnings("deprecation")
 public final class MiningLevels {
 
     /**

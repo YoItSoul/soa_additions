@@ -5,7 +5,6 @@ import com.soul.smithery.item.tool.SmitheryToolData;
 import com.soul.smithery.item.tool.SmitheryToolItem;
 import com.soul.smithery.item.tool.ToolComposition;
 import com.soul.smithery.item.tool.ToolCompositions;
-import com.soul.soa_additions.SoaAdditions;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -15,7 +14,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +27,13 @@ import java.util.Map;
  * hidden {@code well_used} effect whose {@code bonus_slots} param natively grants
  * bonus modifier slots (one net slot per level — the +1 offsets the effect itself
  * occupying a modifier entry).</p>
+ *
+ * <p>Registered to the Forge event bus by {@link SmitheryIntegration#init} when Smithery is
+ * present. NOT annotated with {@code @Mod.EventBusSubscriber}: the handler bodies dereference
+ * {@code com.soul.smithery} types, and Forge's scanner would subscribe them unconditionally — the
+ * first block break without Smithery installed would then be a NoClassDefFoundError inside a
+ * listener that nothing catches.</p>
  */
-@Mod.EventBusSubscriber(modid = SoaAdditions.MODID)
 public final class ToolLevelingEvents {
 
     private static final String XP_TAG = "SoaToolXp";

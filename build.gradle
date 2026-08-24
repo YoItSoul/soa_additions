@@ -312,7 +312,7 @@ tasks.named('jar', Jar).configure {
                 'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
                 // Mixins target only OTHER MODS' (deobf) classes, so no refmap
                 // or MixinGradle is needed — the manifest entry alone loads it.
-                'MixinConfigs'            : 'soa_additions.mixins.json'
+                'MixinConfigs'            : 'soa_additions.mixins.json,soa_additions.critical.mixins.json'
         ])
     }
     finalizedBy 'reobfJar'
@@ -334,18 +334,27 @@ publishing {
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 
-    // Silence javac's [removal] category. Every hit is a Forge forward-compat
-    // hint for 1.21, not something that actually disappears on 1.20.1:
+    // Everything on, minus two categories that carry no signal here.
+    //
+    // [removal]: every hit is a Forge forward-compat hint for 1.21, not something that
+    // actually disappears on 1.20.1 —
     //
     //   new ResourceLocation(..)   -> ResourceLocation.fromNamespaceAndPath/parse
     //   ModLoadingContext.get()    -> "use the context from your mod constructor"
     //
-    // Neither replacement is usable here. The ResourceLocation statics were
-    // only added in Forge 47.4, and we ship forge_version_range=[47,) — calling
-    // them would hand anyone on 47.0-47.3 a NoSuchMethodError on nearly every
-    // registry lookup. ModLoadingContext.registerConfig is likewise reachable
-    // only through the deprecated get() on this Forge line.
+    // We DO call fromNamespaceAndPath, at 66 sites, which is why forge_version_range is
+    // pinned to the 47.4 line — see the note in gradle.properties. The suppression is still
+    // needed either way: ~168 `new ResourceLocation(..)` calls remain, and
+    // ModLoadingContext.registerConfig is reachable only through the deprecated get() here.
     //
-    // Revisit if the pack ever pins Forge >= 47.4 or moves to 1.21.
-    options.compilerArgs << '-Xlint:-removal'
+    // [this-escape]: a Java 21 lint every hit of which is a superclass-constructor artifact of
+    // Minecraft's own shapes — Entity's constructor calls overridable methods, Block's calls
+    // createBlockStateDefinition. Closing them would mean making the classes final, which
+    // FallingStarEntity cannot be.
+    //
+    // [deprecation] is deliberately NOT excluded: the tree is at zero, every remaining case
+    // carries a @SuppressWarnings with the reason next to it, and a new one should be visible.
+    //
+    // Revisit on 1.21.
+    options.compilerArgs << '-Xlint:all,-removal,-this-escape'
 }

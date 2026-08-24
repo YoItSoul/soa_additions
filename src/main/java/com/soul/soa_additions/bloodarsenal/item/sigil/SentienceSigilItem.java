@@ -13,7 +13,6 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import wayoftime.bloodmagic.common.item.sigil.ItemSigilBase;
-import wayoftime.bloodmagic.core.data.SoulNetwork;
 import wayoftime.bloodmagic.core.data.SoulTicket;
 import wayoftime.bloodmagic.util.helper.NetworkHelper;
 
@@ -80,6 +79,8 @@ public class SentienceSigilItem extends ItemSigilBase {
         return oldStack.getItem() != newStack.getItem();
     }
 
+    // getLevel: the GC cost formula scales on the raw harvest level.
+    @SuppressWarnings("deprecation")
     private void syphonCosts(ItemStack stack, Level level, Player player, ItemStack summonedTool) {
         float cost = 500;
 

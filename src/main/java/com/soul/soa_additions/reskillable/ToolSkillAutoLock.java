@@ -7,7 +7,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -193,6 +192,8 @@ public final class ToolSkillAutoLock {
         return reqs != null && reqs.length > 0;
     }
 
+    // getLevel: classifyToolTier takes an int; TierSortingRegistry offers ordering, not a number.
+    @SuppressWarnings("deprecation")
     private static Requirement classifyUncached(ItemStack stack) {
         Item item = stack.getItem();
 

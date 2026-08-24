@@ -85,16 +85,15 @@ public final class FrameMeasurement {
     /**
      * Frame durations in milliseconds, sorted, or null if unavailable.
      *
-     * <p>Reflective because {@code FrameTimer} is an internal detail rather than API, and a
-     * missing lagometer is not worth failing graphics advice over — the caller degrades to
-     * unmeasured.</p>
+     * <p>Called directly rather than reflectively: the workspace is Mojang-mapped but the shipped
+     * jar runs against SRG, where {@code getFrameTimer} and {@code getLog} do not exist by those
+     * names. Every reflective lookup threw in production, so the advice this feeds was silently
+     * dead outside the dev environment. A compiled call site is remapped for us.</p>
      */
     private static double[] frameTimesMs(Minecraft mc) {
         try {
-            Object timer = mc.getClass().getMethod("getFrameTimer").invoke(mc);
-            if (timer == null) return null;
-            Object logObj = timer.getClass().getMethod("getLog").invoke(timer);
-            if (!(logObj instanceof long[] log) || log.length == 0) return null;
+            long[] log = mc.getFrameTimer().getLog();
+            if (log.length == 0) return null;
 
             double[] out = new double[log.length];
             int n = 0;

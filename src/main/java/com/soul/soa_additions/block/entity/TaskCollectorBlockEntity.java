@@ -1,6 +1,5 @@
 package com.soul.soa_additions.block.entity;
 
-import com.soul.soa_additions.block.TaskCollectorBlock;
 import com.soul.soa_additions.quest.progress.CollectorService;
 import com.soul.soa_additions.quest.task.EnergyTask;
 import com.soul.soa_additions.quest.task.ManaTask;

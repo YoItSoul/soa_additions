@@ -102,8 +102,8 @@ public final class PackModeBridge {
             // 3. Dedicated server override.
             String cfg = com.soul.soa_additions.config.ModConfigs.SERVER_PACKMODE.get();
             if (cfg != null && !cfg.isBlank()) {
-                PackMode target = PackMode.fromString(cfg);
-                if (target.name().equalsIgnoreCase(cfg.trim())) return target.lower();
+                PackMode target = PackMode.parseStrict(cfg);
+                if (target != null) return target.lower();
             }
 
             // 4. Whatever the last run resolved.
@@ -123,9 +123,18 @@ public final class PackModeBridge {
      * the mode is chosen or changes, so the mirror never lags by more than one
      * datapack reload.
      */
+    /** Last value actually written, so an unchanged mode costs nothing. */
+    private static volatile String lastRemembered;
+
     public static void remember(String mode) {
+        if (mode == null) return;
+        // PackModeData.get() calls this on every access, and that runs on the player tick path
+        // whenever an is_packmode task is loaded — one synchronous write per player per second,
+        // all of them rewriting the same string.
+        if (mode.equals(lastRemembered)) return;
         try {
             Files.writeString(mirrorPath(), mode);
+            lastRemembered = mode;
         } catch (IOException ignored) {
             // a stale mirror only costs us one reload; never fail the caller
         }

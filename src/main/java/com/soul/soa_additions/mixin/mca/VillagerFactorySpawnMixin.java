@@ -52,6 +52,8 @@ public abstract class VillagerFactorySpawnMixin {
                             + "Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/Mob;"
                             + "Lnet/minecraft/world/entity/MobSpawnType;)V"),
             require = 1, remap = false)
+    // Forge wants ForgeEventFactory.onFinalizeSpawn here, but routing through it would fire MobSpawnEvent.FinalizeSpawn where the original does not, letting other mods veto these spawns.
+    @SuppressWarnings("deprecation")
     private void soa$spawnWithoutBlocking(Level level, Mob mob, MobSpawnType reason) {
         if (McaSpawnGuard.spawnWithoutBlocking(level, mob, reason)) {
             return;

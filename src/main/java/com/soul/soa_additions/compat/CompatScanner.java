@@ -1,12 +1,10 @@
 package com.soul.soa_additions.compat;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.soul.soa_additions.SoaAdditions;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -28,7 +26,6 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +33,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Stream;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
 
 /**
  * Read-only modpack compatibility scanner. After server start it scans every mod jar for:
@@ -234,17 +233,17 @@ public final class CompatScanner {
 
     private static Map<ResourceLocation, List<String>> scanRegistryCollisions() {
         Map<ResourceLocation, List<String>> all = new TreeMap<>(Comparator.comparing(ResourceLocation::toString));
-        scanRegistry(BuiltInRegistries.ITEM, "Item", all);
-        scanRegistry(BuiltInRegistries.BLOCK, "Block", all);
-        scanRegistry(BuiltInRegistries.ENTITY_TYPE, "EntityType", all);
-        scanRegistry(BuiltInRegistries.BLOCK_ENTITY_TYPE, "BlockEntity", all);
-        scanRegistry(BuiltInRegistries.MOB_EFFECT, "MobEffect", all);
-        scanRegistry(BuiltInRegistries.SOUND_EVENT, "Sound", all);
+        scanRegistry(ForgeRegistries.ITEMS, "Item", all);
+        scanRegistry(ForgeRegistries.BLOCKS, "Block", all);
+        scanRegistry(ForgeRegistries.ENTITY_TYPES, "EntityType", all);
+        scanRegistry(ForgeRegistries.BLOCK_ENTITY_TYPES, "BlockEntity", all);
+        scanRegistry(ForgeRegistries.MOB_EFFECTS, "MobEffect", all);
+        scanRegistry(ForgeRegistries.SOUND_EVENTS, "Sound", all);
         // Most registries auto-dedupe, so collisions show up as a `<modid>:<id>` already taken.
         // We instead look for *suspicious namespace overlaps* — multiple mods declaring items
         // under the same unexpected namespace (e.g. two mods both registering into "minecraft").
         Map<String, List<String>> nsToMods = new HashMap<>();
-        for (var key : BuiltInRegistries.ITEM.keySet()) {
+        for (var key : ForgeRegistries.ITEMS.getKeys()) {
             String ns = key.getNamespace();
             if (ns.equals("minecraft")) continue;
             // Map ns → known mod ids that *could* own it
@@ -254,14 +253,14 @@ public final class CompatScanner {
         return all;
     }
 
-    private static <T> void scanRegistry(Registry<T> registry, String label,
+    private static <T> void scanRegistry(IForgeRegistry<T> registry, String label,
                                          Map<ResourceLocation, List<String>> out) {
         // Vanilla registries deduplicate at registration, so a "real" collision can't appear
         // here at runtime — but we surface IDs registered into namespaces that *aren't* a
         // loaded mod id, which means the owning mod was either renamed or replaced mid-pack.
         Set<String> knownMods = new java.util.HashSet<>();
         for (IModInfo m : ModList.get().getMods()) knownMods.add(m.getModId());
-        for (ResourceLocation id : registry.keySet()) {
+        for (ResourceLocation id : registry.getKeys()) {
             String ns = id.getNamespace();
             if (ns.equals("minecraft") || ns.equals("forge")) continue;
             if (!knownMods.contains(ns)) {

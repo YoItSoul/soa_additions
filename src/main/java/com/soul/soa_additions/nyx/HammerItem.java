@@ -75,6 +75,10 @@ public class HammerItem extends PickaxeItem {
     @Override
     public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, Player player) {
         Level level = player.level();
+        // Forge calls this on both sides. Breaking blocks and spending durability against the
+        // client's copy of the world made neighbours vanish before the server agreed, and the
+        // tool's damage bar drop by eight per swing.
+        if (level.isClientSide) return false;
         HitResult hit = player.pick(5.0D, 0.0f, false);
         if (!(hit instanceof BlockHitResult bhr)) return false;
         Direction face = bhr.getDirection();

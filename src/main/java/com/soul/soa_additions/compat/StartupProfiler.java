@@ -12,7 +12,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -40,7 +39,8 @@ public final class StartupProfiler {
     private static long stageConstructMs;
     private static long stageCommonSetupMs;
     private static Thread samplerThread;
-    private static final Map<String, long[]> SAMPLE_COUNTS = new HashMap<>(); // modid → {samples}
+    // modid → {samples}. Written by the sampler daemon, read by the loading thread.
+    private static final Map<String, long[]> SAMPLE_COUNTS = new java.util.concurrent.ConcurrentHashMap<>();
 
     private StartupProfiler() {}
 
@@ -110,7 +110,16 @@ public final class StartupProfiler {
 
     private static void stopSampler() {
         if (!RUNNING.compareAndSet(true, false)) return;
-        if (samplerThread != null) samplerThread.interrupt();
+        if (samplerThread == null) return;
+        // interrupt() only breaks the sleep; a pass already inside sampleAllThreads keeps writing
+        // the map the report is about to walk, so wait for it to finish.
+        samplerThread.interrupt();
+        try {
+            samplerThread.join(500L);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        samplerThread = null;
     }
 
     private static final String SELF_PACKAGE = "com.soul.soa_additions";

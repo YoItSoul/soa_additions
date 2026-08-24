@@ -172,6 +172,11 @@ public final class TeamData extends SavedData implements TeamManager {
         st.members.remove(player.getUUID());
         if (st.members.isEmpty()) {
             teams.remove(teamId);
+            // The bucket is unreachable once the team is gone, but it was still being written
+            // into soa_quest_progress.dat on every save. Its contents live on in the leaver's
+            // solo bucket, copied just above.
+            pdata.dropTeam(teamId);
+            pdata.touch();
         } else if (st.ownerUuid.equals(player.getUUID())) {
             st.ownerUuid = st.members.get(0); // transfer to next-joined
         }
@@ -184,7 +189,16 @@ public final class TeamData extends SavedData implements TeamManager {
         StoredTeam st = teams.remove(teamId);
         if (st == null) return;
         for (UUID m : st.members) playerToTeam.remove(m);
+        dropProgress(teamId);
         setDirty();
+    }
+
+    /** Drops the team's shared progress bucket, which nothing can reach once the team is gone. */
+    private void dropProgress(UUID teamId) {
+        if (server == null) return;
+        QuestProgressData pdata = QuestProgressData.get(server);
+        pdata.dropTeam(teamId);
+        pdata.touch();
     }
 
     @Override
@@ -233,12 +247,19 @@ public final class TeamData extends SavedData implements TeamManager {
 
     public static TeamData get(MinecraftServer server) {
         ServerLevel overworld = server.overworld();
-        return overworld.getDataStorage().computeIfAbsent(
+        TeamData data = overworld.getDataStorage().computeIfAbsent(
                 TeamData::load,
                 TeamData::new,
                 DATA_NAME
         );
+        // disband() comes through the TeamManager interface with no server argument, and it has
+        // progress to drop; every route to this data passes through here first.
+        data.server = server;
+        return data;
     }
+
+    /** The server this data was last resolved for. See {@link #get(MinecraftServer)}. */
+    private MinecraftServer server;
 
     // ---------- internal storage shape ----------
 

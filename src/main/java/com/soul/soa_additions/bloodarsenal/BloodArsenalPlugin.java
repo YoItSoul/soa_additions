@@ -79,6 +79,12 @@ public final class BloodArsenalPlugin {
         // Forge (game) event bus listeners for runtime behaviour
         MinecraftForge.EVENT_BUS.register(com.soul.soa_additions.bloodarsenal.event.BAEventHandler.class);
 
+        // Curios soft-dep: the baubles are plain Items, and their curio capability is
+        // attached from a class that never loads unless Curios is present.
+        if (net.minecraftforge.fml.ModList.get().isLoaded("curios")) {
+            com.soul.soa_additions.bloodarsenal.curios.BABaubleCurios.init();
+        }
+
         // Imperfect rituals activate on BM's blank Ritual Stone (BM 1.20 has
         // no dedicated imperfect stone block — see ImperfectRitualStoneHandler).
         MinecraftForge.EVENT_BUS.register(com.soul.soa_additions.bloodarsenal.ritual.ImperfectRitualStoneHandler.class);

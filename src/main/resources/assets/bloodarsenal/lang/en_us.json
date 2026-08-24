@@ -83,6 +83,8 @@
   "tooltip.bloodarsenal.glass_sacrificial_dagger.desc": "A dagger made of glass shards. Cuts deeper than steel.",
   "tooltip.bloodarsenal.glass_dagger_of_sacrifice.desc": "A sacrificial dagger of glass. Mobs slain near an altar yield their life force.",
   "chat.bloodarsenal.crit": "Critical Hit!",
+  "chat.bloodarsenal.set_level": "Lightning Level: %s",
+  "chat.bloodarsenal.too_weak": "Your Soul Network is too weak to do that!",
   "bloodarsenal.subtitle.crit": "Critical hit!",
   "effect.bloodarsenal.bleeding": "Bleeding"
 }

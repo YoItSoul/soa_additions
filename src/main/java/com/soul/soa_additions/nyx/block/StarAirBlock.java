@@ -1,7 +1,6 @@
 package com.soul.soa_additions.nyx.block;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AirBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -13,6 +12,8 @@ public class StarAirBlock extends AirBlock {
     public StarAirBlock(Properties props) { super(props); }
 
     @Override
+    // Deprecated only to steer callers to the BlockState overload; overriding it is the intended use.
+    @SuppressWarnings("deprecation")
     public boolean isPathfindable(BlockState state, net.minecraft.world.level.BlockGetter world,
                                   BlockPos pos, PathComputationType type) {
         return true;

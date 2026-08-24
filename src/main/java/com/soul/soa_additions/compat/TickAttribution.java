@@ -36,7 +36,8 @@ public final class TickAttribution {
     private static final DateTimeFormatter FILE_TS = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
     private static final long SAMPLE_INTERVAL_MS = 100L;
 
-    private static final Map<String, AtomicLong> COUNTS = new HashMap<>();
+    /** Written by the sampler daemon, read by the server thread when the report is written. */
+    private static final Map<String, AtomicLong> COUNTS = new java.util.concurrent.ConcurrentHashMap<>();
     private static final AtomicLong totalSamples = new AtomicLong();
     private static final AtomicLong attributedSamples = new AtomicLong();
 
@@ -69,6 +70,13 @@ public final class TickAttribution {
     public static void onServerStopping(ServerStoppingEvent event) {
         if (executor != null) {
             executor.shutdownNow();
+            try {
+                // A sample already in flight would otherwise still be writing COUNTS while the
+                // report iterates it.
+                executor.awaitTermination(500L, TimeUnit.MILLISECONDS);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
             executor = null;
         }
         try {

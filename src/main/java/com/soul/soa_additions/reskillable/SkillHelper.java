@@ -1,7 +1,6 @@
 package com.soul.soa_additions.reskillable;
 
 import net.bandit.reskillable.common.capabilities.SkillCapability;
-import net.bandit.reskillable.common.capabilities.SkillModel;
 import net.bandit.reskillable.common.commands.skills.Skill;
 import net.minecraft.world.entity.player.Player;
 

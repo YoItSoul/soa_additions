@@ -87,8 +87,7 @@ public final class QuestLifecycleHandler {
                 org.slf4j.LoggerFactory.getLogger("soa_additions/packmode")
                         .info("Pack mode set via console prompt: {}", chosen.lower());
             } else {
-                PackMode parsed = PackMode.fromString(cfg);
-                if (!parsed.name().equalsIgnoreCase(cfg.trim())) {
+                if (PackMode.parseStrict(cfg) == null) {
                     // Invalid value — prompt instead of crashing.
                     org.slf4j.LoggerFactory.getLogger("soa_additions/packmode")
                             .warn("Invalid serverPackMode '{}' in config, prompting for correction", cfg);

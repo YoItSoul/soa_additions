@@ -26,12 +26,32 @@ public record ClientModReportPacket(List<String> mods, List<String> resourcePack
         buf.writeCollection(findings, FriendlyByteBuf::writeUtf);
     }
 
+    /** A client with thousands of mods is already unusual; nothing legitimate approaches this. */
+    private static final int MAX_ENTRIES = 4096;
+    private static final int MAX_ENTRY_LENGTH = 512;
+
     public static ClientModReportPacket decode(FriendlyByteBuf buf) {
-        return new ClientModReportPacket(
-                buf.readList(FriendlyByteBuf::readUtf),
-                buf.readList(FriendlyByteBuf::readUtf),
-                buf.readList(FriendlyByteBuf::readUtf)
-        );
+        return new ClientModReportPacket(readBounded(buf), readBounded(buf), readBounded(buf));
+    }
+
+    /**
+     * Reads a length-prefixed string list without trusting the length.
+     *
+     * <p>{@code readList} hands the declared count straight to {@code newArrayListWithCapacity},
+     * so a five-byte VarInt from a modified client asked the netty decode thread for an 8GB array
+     * before a single element was read. This is a serverbound packet: the count is attacker
+     * input, and the 32767-byte payload cap does not constrain it.</p>
+     */
+    private static List<String> readBounded(FriendlyByteBuf buf) {
+        int declared = buf.readVarInt();
+        if (declared < 0 || declared > MAX_ENTRIES) {
+            throw new IllegalArgumentException("Mod report list too long: " + declared);
+        }
+        List<String> out = new java.util.ArrayList<>(declared);
+        for (int i = 0; i < declared; i++) {
+            out.add(buf.readUtf(MAX_ENTRY_LENGTH));
+        }
+        return out;
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctxSupplier) {

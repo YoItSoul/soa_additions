@@ -88,21 +88,23 @@ public final class JvmStatsSampler {
     private static final Map<String, long[]> LAST_GC = new HashMap<>();
     private static long lastSampleNanos;
     private static long lastHeapUsed;
-    private static long cumulativeCollectedBytes;
+    private static volatile long cumulativeCollectedBytes;
     private static boolean jfrAlreadyTriggered;
     private static long lastDiskRead = -1;
     private static long lastDiskWrite = -1;
 
-    // Aggregates for the shutdown summary.
-    private static long sampleCount;
-    private static long peakHeapUsed;
-    private static long peakHeapCommitted;
-    private static long totalGcCount;
-    private static long totalGcMillis;
-    private static long longestGcMillis;
-    private static double tpsSum;
-    private static int tpsCount;
-    private static double peakProcessCpu;
+    // Aggregates for the shutdown summary. Written by the sampler thread, read by whichever
+    // thread asks for the report, with nothing between them — volatile is what makes the read see
+    // the writes at all.
+    private static volatile long sampleCount;
+    private static volatile long peakHeapUsed;
+    private static volatile long peakHeapCommitted;
+    private static volatile long totalGcCount;
+    private static volatile long totalGcMillis;
+    private static volatile long longestGcMillis;
+    private static volatile double tpsSum;
+    private static volatile int tpsCount;
+    private static volatile double peakProcessCpu;
 
     private JvmStatsSampler() {}
 

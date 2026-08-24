@@ -1,6 +1,5 @@
 package com.soul.soa_additions.quest.item;
 
-import com.soul.soa_additions.SoaAdditions;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;

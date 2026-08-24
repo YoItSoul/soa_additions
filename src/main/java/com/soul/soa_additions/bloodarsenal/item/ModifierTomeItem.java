@@ -2,11 +2,8 @@ package com.soul.soa_additions.bloodarsenal.item;
 
 import com.soul.soa_additions.bloodarsenal.modifier.Modifier;
 import com.soul.soa_additions.bloodarsenal.modifier.ModifierHelper;
-import com.soul.soa_additions.bloodarsenal.modifier.ModifierRegistry;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;

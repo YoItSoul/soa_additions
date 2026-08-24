@@ -3,7 +3,6 @@ package com.soul.soa_additions.combat;
 import com.mojang.logging.LogUtils;
 import com.soul.soa_additions.SoaAdditions;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
@@ -23,6 +22,7 @@ import org.slf4j.Logger;
 
 import java.lang.reflect.Method;
 import java.util.Set;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * Port of GreedyCraft's {@code events/onEntityLivingHurt.zs}.
@@ -196,7 +196,7 @@ public final class DamageScalingHandler {
     }
 
     private static String typeId(Entity entity) {
-        ResourceLocation key = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
+        ResourceLocation key = ForgeRegistries.ENTITY_TYPES.getKey(entity.getType());
         return key != null ? key.toString() : "";
     }
 

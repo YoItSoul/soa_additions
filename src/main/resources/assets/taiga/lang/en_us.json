@@ -161,5 +161,7 @@
   "block.taiga.meteorite_cobble": "Meteorite Cobble Block",
   "block.taiga.obsidiorite_cobble": "Obsidiorite Cobble Block",
   "item.taiga.uru_dust": "Uru Dust",
-  "item.taiga.uru_nugget": "Uru Nugget"
+  "item.taiga.uru_nugget": "Uru Nugget",
+  "item.taiga.taiga_guide": "TAIGA Field Guide",
+  "item.taiga.taiga_guide.landing": "The TAIGA material pack \u2014 36 materials, their ores, fluids, and the traits they carry."
 }

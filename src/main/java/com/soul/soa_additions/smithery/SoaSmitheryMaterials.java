@@ -3,6 +3,7 @@ package com.soul.soa_additions.smithery;
 import com.soul.smithery.api.SmitheryAPI;
 import com.soul.smithery.api.material.MaterialStats;
 import com.soul.smithery.api.modifier.ModifierEffect;
+import com.soul.smithery.api.part.PartEligibility;
 import com.soul.smithery.content.SmitheryPartTypes;
 import com.soul.smithery.content.SmitheryToolTypes;
 import com.soul.smithery.api.tool.ToolType;
@@ -331,6 +332,27 @@ public final class SoaSmitheryMaterials {
         registerSoaMetals();
         registerAlloyFluids();
         retuneBuiltinMaterials();
+        restrictMagicMaterials();
+    }
+
+    /**
+     * Keeps Tinkers' Evolution's magic materials magic-only, as they were in GreedyCraft.
+     *
+     * <p>These seven carried nothing but {@code MagicMaterialStats} in 1.12 — durability,
+     * potency, range and a harvest level, readable only by the Sceptre's magic part. There was
+     * no head or handle stat, so no amount of wanting could turn Mana Diamond into a sword.
+     * Smithery has no magic stat type; the numbers live on the ordinary fields instead
+     * (potency as attack damage, since the Sceptre read it as {@code asHead(0, 1)}, and range
+     * through the bow stats, as {@code asBow(0)} did), which without a restriction would make
+     * every one of them a perfectly good blade material several tiers above where they sit.</p>
+     */
+    private static void restrictMagicMaterials() {
+        final ResourceLocation arcaneFocus = SmitheryPartTypes.ARCANE_FOCUS.id();
+        for (ResourceLocation material : new ResourceLocation[]{
+                DRAGONSTONE, ENDER_CRYSTAL, MANA_DIAMOND, MANA_PEARL,
+                PULSATING_CRYSTAL, VIBRANT_CRYSTAL, WEATHER_CRYSTAL}) {
+            PartEligibility.restrictMaterialTo(material, arcaneFocus);
+        }
     }
 
     /**
@@ -2844,10 +2866,10 @@ public final class SoaSmitheryMaterials {
 
         DRAGONSTONE = id("dragonstone");
         SmitheryAPI.registerMaterial(DRAGONSTONE, MaterialStats.builder()
-                        .harvestLevel(0)
+                        .harvestLevel(4)
                         .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
+                        .attackDamage(8.0f)
+                        .durabilityPerIngot(1400)
                         .meltingTemp(0.0f)
                         .partColor(0xFFE771B9)
                         .binderMultiplier(1.0f)
@@ -2855,6 +2877,7 @@ public final class SoaSmitheryMaterials {
                         SmitheryPartTypes.ARCANE_FOCUS)
                 .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED),
                         SmitheryPartTypes.ARCANE_FOCUS)
+                .bow(1.0f, 1.0f, 0.0f)
                 .build());
 
         DREAMWOOD = id("dreamwood");
@@ -3135,10 +3158,10 @@ public final class SoaSmitheryMaterials {
 
         MANA_DIAMOND = id("mana_diamond");
         SmitheryAPI.registerMaterial(MANA_DIAMOND, MaterialStats.builder()
-                        .harvestLevel(0)
+                        .harvestLevel(3)
                         .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
+                        .attackDamage(6.0f)
+                        .durabilityPerIngot(900)
                         .meltingTemp(0.0f)
                         .partColor(0xFF00869B)
                         .binderMultiplier(1.0f)
@@ -3146,20 +3169,22 @@ public final class SoaSmitheryMaterials {
                         SmitheryPartTypes.ARCANE_FOCUS)
                 .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED),
                         SmitheryPartTypes.ARCANE_FOCUS)
+                .bow(1.0f, 1.25f, 0.0f)
                 .build());
 
         MANA_PEARL = id("mana_pearl");
         SmitheryAPI.registerMaterial(MANA_PEARL, MaterialStats.builder()
-                        .harvestLevel(0)
+                        .harvestLevel(3)
                         .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
+                        .attackDamage(7.0f)
+                        .durabilityPerIngot(900)
                         .meltingTemp(0.0f)
                         .partColor(0xFF00E4E5)
                         .binderMultiplier(1.0f)
                 .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.ENDSPEED), SmitheryPartTypes.ARCANE_FOCUS)
                 .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_MANA_INFUSED),
                         SmitheryPartTypes.ARCANE_FOCUS)
+                .bow(1.0f, 0.9f, 0.0f)
                 .build());
 
         MANA_STRING = id("mana_string");
@@ -3430,15 +3455,16 @@ public final class SoaSmitheryMaterials {
 
         WEATHER_CRYSTAL = id("weather_crystal");
         SmitheryAPI.registerMaterial(WEATHER_CRYSTAL, MaterialStats.builder()
-                        .harvestLevel(0)
+                        .harvestLevel(4)
                         .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
+                        .attackDamage(8.5f)
+                        .durabilityPerIngot(1420)
                         .meltingTemp(0.0f)
                         .partColor(0xFFC9A8D3)
                         .binderMultiplier(1.0f)
                 .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_THUNDERGOD_WRATH),
                         SmitheryPartTypes.ARCANE_FOCUS)
+                .bow(1.0f, 1.3f, 0.0f)
                 .build());
 
     }
@@ -5212,14 +5238,15 @@ public final class SoaSmitheryMaterials {
 
         ENDER_CRYSTAL = id("ender_crystal");
         SmitheryAPI.registerMaterial(ENDER_CRYSTAL, MaterialStats.builder()
-                        .harvestLevel(0)
+                        .harvestLevel(3)
                         .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
+                        .attackDamage(8.0f)
+                        .durabilityPerIngot(890)
                         .meltingTemp(0.0f)
                         .partColor(0xFFBFE6D4)
                         .binderMultiplier(1.0f)
                 .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.ENDSPEED), SmitheryPartTypes.ARCANE_FOCUS)
+                .bow(1.0f, 1.0f, 0.0f)
                 .build());
 
         ENERGETIC_ALLOY = id("energetic_alloy");
@@ -5242,14 +5269,15 @@ public final class SoaSmitheryMaterials {
 
         PULSATING_CRYSTAL = id("pulsating_crystal");
         SmitheryAPI.registerMaterial(PULSATING_CRYSTAL, MaterialStats.builder()
-                        .harvestLevel(0)
+                        .harvestLevel(3)
                         .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
+                        .attackDamage(7.0f)
+                        .durabilityPerIngot(840)
                         .meltingTemp(0.0f)
                         .partColor(0xFFA1FEFB)
                         .binderMultiplier(1.0f)
                 .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.ENDERFERENCE), SmitheryPartTypes.ARCANE_FOCUS)
+                .bow(1.0f, 1.1f, 0.0f)
                 .build());
 
         PULSATING_IRON = id("pulsating_iron");
@@ -5343,15 +5371,16 @@ public final class SoaSmitheryMaterials {
 
         VIBRANT_CRYSTAL = id("vibrant_crystal");
         SmitheryAPI.registerMaterial(VIBRANT_CRYSTAL, MaterialStats.builder()
-                        .harvestLevel(0)
+                        .harvestLevel(3)
                         .miningSpeed(0.0f)
-                        .attackDamage(0.0f)
-                        .durabilityPerIngot(0)
+                        .attackDamage(8.0f)
+                        .durabilityPerIngot(1140)
                         .meltingTemp(0.0f)
                         .partColor(0xFFB2FF9D)
                         .binderMultiplier(1.0f)
                 .addPartModifier(ModifierEffect.of(SoaSmitheryModifiers.TCONEVO_CHAIN_LIGHTNING),
                         SmitheryPartTypes.ARCANE_FOCUS)
+                .bow(1.0f, 1.15f, 0.0f)
                 .build());
 
     }

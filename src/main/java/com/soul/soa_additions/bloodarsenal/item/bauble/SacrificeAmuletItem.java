@@ -1,13 +1,9 @@
 package com.soul.soa_additions.bloodarsenal.item.bauble;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
@@ -15,8 +11,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.type.capability.ICurio;
 import wayoftime.bloodmagic.altar.IBloodAltar;
 
 import javax.annotation.Nullable;
@@ -29,23 +23,13 @@ import java.util.List;
  *
  * The LP accumulation logic is in BAEventHandler (LivingHurtEvent).
  */
-public class SacrificeAmuletItem extends Item implements ICurio {
+public class SacrificeAmuletItem extends Item {
 
     private static final String TAG_LP = "stored_lp";
     private static final int MAX_LP = 10000;
 
     public SacrificeAmuletItem() {
         super(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
-    }
-
-    @Override
-    public net.minecraft.world.item.ItemStack getStack() {
-        return ItemStack.EMPTY;
-    }
-
-    @Override
-    public boolean canEquipFromUse(SlotContext ctx) {
-        return true;
     }
 
     // ── LP storage ──────────────────────────────────────────────────────

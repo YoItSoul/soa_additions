@@ -4,13 +4,13 @@ import com.google.gson.JsonObject;
 import com.soul.soa_additions.SoaAdditions;
 import com.soul.soa_additions.quest.model.QuestReward;
 import com.soul.soa_additions.quest.model.RewardScope;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.TagParser;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * Hand the player {@code count} of an item, with optional NBT.
@@ -52,7 +52,7 @@ public record ItemReward(ResourceLocation item, int count, CompoundTag nbt, Rewa
      * Returns an empty stack for an unknown item id.
      */
     public ItemStack toStack() {
-        Item it = BuiltInRegistries.ITEM.get(item);
+        Item it = ForgeRegistries.ITEMS.getValue(item);
         if (it == null || it == net.minecraft.world.item.Items.AIR) return ItemStack.EMPTY;
         ItemStack stack = new ItemStack(it, count);
         if (nbt != null) stack.setTag(nbt.copy());

@@ -38,7 +38,7 @@ public record CraftTask(ResourceLocation item, ResourceLocation tag, CompoundTag
         if (tag != null) {
             if (!stack.is(TagKey.create(Registries.ITEM, tag))) return false;
         } else {
-            if (!net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem()).equals(item)) return false;
+            if (!net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(stack.getItem()).equals(item)) return false;
         }
         if (nbt != null) {
             CompoundTag actual = stack.getTag();

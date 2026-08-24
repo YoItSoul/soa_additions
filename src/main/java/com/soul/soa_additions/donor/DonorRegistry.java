@@ -137,7 +137,7 @@ public final class DonorRegistry {
         }
     }
 
-    private static void save() {
+    private static synchronized void save() {
         if (savePath == null) return;
         try {
             JsonArray arr = new JsonArray();

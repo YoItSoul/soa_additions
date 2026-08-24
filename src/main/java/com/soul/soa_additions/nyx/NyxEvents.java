@@ -14,7 +14,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
@@ -24,7 +23,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -38,15 +36,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CauldronBlock;
 import net.minecraft.world.level.block.EnchantmentTableBlock;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.TickEvent;
@@ -84,6 +79,10 @@ public final class NyxEvents {
     // ---------- World tick: drives lunar events + falling stars + meteors ----------
 
     @SubscribeEvent
+    // hasChunkAt is deprecated without a named replacement. Level#isLoaded is NOT equivalent —
+    // it short-circuits on isOutsideBuildHeight, and these positions are deliberately placed high
+    // above the terrain, so tall ground would silently turn a spawn into a skip.
+    @SuppressWarnings("deprecation")
     public static void onWorldTick(TickEvent.LevelTickEvent event) {
         if (event.phase != TickEvent.Phase.START) return;
         if (event.level.isClientSide) return;
@@ -133,13 +132,23 @@ public final class NyxEvents {
                 chance /= Math.pow(2.0, (double) ticks[0] / (double) disallowTime);
             }
             if (chance > 0.0 && sl.random.nextFloat() <= chance) {
-                if (!sl.hasChunkAt(spawnPos)) {
+                // hasChunkAt() routes through getChunk(FULL, false), which still parks the
+                // server thread on a chunk that exists but has not reached FULL — the exact
+                // stall documented in onChunkLoad below, just on the tick path instead.
+                // getChunkNow never blocks: a miss simply defers to the chunk-load handler.
+                var chunk = sl.getChunkSource().getChunkNow(spawnPos.getX() >> 4, spawnPos.getZ() >> 4);
+                if (chunk == null) {
                     // Chunk not loaded — defer; wardedness will be re-checked
                     // at materialization time in onChunkLoad below.
                     data.cachedMeteorPositions.add(spawnPos);
                     data.setDirty();
                 } else {
-                    FallingMeteorEntity.spawn(sl, spawnPos);
+                    // Height comes from the chunk we are already holding, so spawn() never
+                    // reaches getHeightmapPos() and its blocking getChunk(FULL, true).
+                    int height = chunk.getHeight(Heightmap.Types.MOTION_BLOCKING,
+                            spawnPos.getX() & 15, spawnPos.getZ() & 15);
+                    FallingMeteorEntity.spawnAt(sl, new BlockPos(spawnPos.getX(),
+                            height + Mth.nextInt(sl.random, 64, 96), spawnPos.getZ()));
                 }
             }
         }
@@ -148,6 +157,10 @@ public final class NyxEvents {
     // ---------- Chunk load: spawn cached-meteor entities ----------
 
     @SubscribeEvent
+    // hasChunkAt is deprecated without a named replacement. Level#isLoaded is NOT equivalent —
+    // it short-circuits on isOutsideBuildHeight, and these positions are deliberately placed high
+    // above the terrain, so tall ground would silently turn a spawn into a skip.
+    @SuppressWarnings("deprecation")
     public static void onChunkLoad(ChunkEvent.Load event) {
         if (!(event.getLevel() instanceof ServerLevel sl)) return;
         NyxWorldData data = NyxWorldData.get(sl);
@@ -307,7 +320,7 @@ public final class NyxEvents {
         Player attacker = event.getAttackingPlayer();
         if (attacker == null) return;
         ItemStack held = attacker.getMainHandItem();
-        int lvl = EnchantmentHelper.getItemEnchantmentLevel(NyxEnchantments.LUNAR_EDGE.get(), held);
+        int lvl = held.getEnchantmentLevel(NyxEnchantments.LUNAR_EDGE.get());
         if (lvl <= 0) return;
         float xp = event.getDroppedExperience();
         float mult = 2.0f * ((float) lvl / (float) NyxEnchantments.LUNAR_EDGE.get().getMaxLevel());
@@ -394,6 +407,8 @@ public final class NyxEvents {
     // Spawn work is queued to the server thread — FinalizeSpawn can fire on
     // worker threads (see onSpecialSpawn threading note).
 
+    // Forge wants ForgeEventFactory.onFinalizeSpawn here, but routing through it would fire MobSpawnEvent.FinalizeSpawn where the original does not, letting other mods veto these spawns.
+    @SuppressWarnings("deprecation")
     private static void tryFullMoonDuplication(ServerLevel sl, LivingEntity entity,
                                                net.minecraft.util.RandomSource rng) {
         if (entity.getPersistentData().getBoolean("nyx:full_moon_spawn")) return;
@@ -443,6 +458,8 @@ public final class NyxEvents {
     // nyx:blood_moon_spawn so the dawn-vanish in onLivingTick reclaims them.
 
     @SubscribeEvent
+    // Forge wants ForgeEventFactory.onFinalizeSpawn here, but routing through it would fire MobSpawnEvent.FinalizeSpawn where the original does not, letting other mods veto these spawns.
+    @SuppressWarnings("deprecation")
     public static void onBloodMoonSpawnTick(net.minecraftforge.event.TickEvent.LevelTickEvent event) {
         if (event.phase != net.minecraftforge.event.TickEvent.Phase.END) return;
         if (!(event.level instanceof ServerLevel sl)) return;

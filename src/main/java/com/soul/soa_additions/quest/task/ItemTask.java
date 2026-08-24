@@ -56,7 +56,7 @@ public record ItemTask(ResourceLocation item, ResourceLocation tag, CompoundTag 
             TagKey<Item> key = TAG_KEYS.computeIfAbsent(tag, t -> TagKey.create(Registries.ITEM, t));
             if (!stack.is(key)) return false;
         } else {
-            if (!net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem()).equals(item)) return false;
+            if (!net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(stack.getItem()).equals(item)) return false;
         }
         if (nbt != null) {
             CompoundTag actual = stack.getTag();

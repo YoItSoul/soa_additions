@@ -2,8 +2,8 @@ package com.soul.soa_additions.potion;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
@@ -13,6 +13,18 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
  * effect (avoids fighting vanilla's brewing recipe registration).
  */
 public final class HealthBoostEffect extends MobEffect {
+
+    /**
+     * Vanilla Health Boost clamps current health when the bonus goes away; without it the entity
+     * keeps the extra points until the next setHealth silently trims them, and the HUD overdraws
+     * hearts past the end of the row in the meantime.
+     */
+    @Override
+    public void removeAttributeModifiers(LivingEntity entity, AttributeMap attributes, int amplifier) {
+        super.removeAttributeModifiers(entity, attributes, amplifier);
+        if (entity.getHealth() > entity.getMaxHealth()) entity.setHealth(entity.getMaxHealth());
+    }
+
     public HealthBoostEffect() {
         super(MobEffectCategory.BENEFICIAL, 0xF87D23);
         // UUID prefix 50AADD01 = "SOAADD01" leetspeak (all hex). Stable across

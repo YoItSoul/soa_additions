@@ -132,7 +132,8 @@ public final class CheatEnforcement {
                 && PackModeData.get(server).mode() == PackMode.CASUAL;
     }
 
-    private static boolean isSingleplayerOwner(ServerPlayer player) {
+    /** True for the host of a singleplayer world; LAN guests are on someone else's world. */
+    static boolean isSingleplayerOwner(ServerPlayer player) {
         MinecraftServer server = player.getServer();
         return server != null && !server.isDedicatedServer()
                 && server.isSingleplayerOwner(player.getGameProfile());

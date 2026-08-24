@@ -59,7 +59,11 @@ public final class BAEventHandler {
     // ── Self-Sacrifice Amulet — store LP from damage taken ──────────────
 
     @SubscribeEvent
-    public static void onLivingAttack(LivingAttackEvent event) {
+    public static void onSelfSacrificeHurt(LivingHurtEvent event) {
+        // LivingAttackEvent fires on both sides and before mitigation: walking into a cactus
+        // credited LP on the client's copy of the amulet, and damage that was later cancelled
+        // (i-frames, a shield, a lower-priority cancel) paid out anyway.
+        if (event.getEntity().level().isClientSide()) return;
         if (event.getEntity() instanceof Player player) {
             // Self-Sacrifice Amulet: convert incoming damage to LP
             ItemStack amulet = BACuriosHelper.findEquipped(player, BAItems.SELF_SACRIFICE_AMULET.get());
@@ -188,11 +192,11 @@ public final class BAEventHandler {
     private static java.util.List<ItemStack> findAllPendants(Player player) {
         java.util.List<ItemStack> pendants = new java.util.ArrayList<>();
         // Check curios and inventory for all pendant tiers
-        for (var pendantReg : new net.minecraftforge.registries.RegistryObject[]{
+        for (var pendantReg : java.util.List.of(
                 BAItems.SOUL_PENDANT_PETTY, BAItems.SOUL_PENDANT_LESSER,
                 BAItems.SOUL_PENDANT_COMMON, BAItems.SOUL_PENDANT_GREATER,
-                BAItems.SOUL_PENDANT_GRAND}) {
-            ItemStack found = BACuriosHelper.findEquipped(player, (net.minecraft.world.item.Item) pendantReg.get());
+                BAItems.SOUL_PENDANT_GRAND)) {
+            ItemStack found = BACuriosHelper.findEquipped(player, pendantReg.get());
             if (!found.isEmpty()) {
                 pendants.add(found);
             }

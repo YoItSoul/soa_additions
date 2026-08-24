@@ -2,9 +2,8 @@ package com.soul.soa_additions.potion;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeMap;
 
 /**
  * Magic Shield — applies a stacking Absorption sub-effect every second.
@@ -21,5 +20,16 @@ public final class MagicShieldEffect extends MobEffect {
         if (entity.getAbsorptionAmount() < cap) {
             entity.setAbsorptionAmount(Math.min(cap, entity.getAbsorptionAmount() + 1.0F));
         }
+    }
+
+    /**
+     * Absorption is raw persisted state that nothing else decays, so the grant has to be paid
+     * back when the effect ends — vanilla's AbsorptionMobEffect pairs them for the same reason.
+     * Without this the hearts survived expiry, relogs and world reloads: free armour forever.
+     */
+    @Override
+    public void removeAttributeModifiers(LivingEntity entity, AttributeMap attributes, int amplifier) {
+        super.removeAttributeModifiers(entity, attributes, amplifier);
+        entity.setAbsorptionAmount(Math.max(0.0F, entity.getAbsorptionAmount() - 4.0F * (amplifier + 1)));
     }
 }

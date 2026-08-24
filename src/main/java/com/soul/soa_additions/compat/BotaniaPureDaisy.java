@@ -1,7 +1,6 @@
 package com.soul.soa_additions.compat;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Blocks;
@@ -9,6 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import vazkii.botania.api.recipe.PureDaisyRecipe;
 
 import java.util.List;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * Applies Botania's Pure Daisy transmutations in bulk — the guts of
@@ -36,7 +36,7 @@ public final class BotaniaPureDaisy {
      */
     @SuppressWarnings("unchecked")
     public static int convertAround(ServerLevel level, BlockPos centre, int radius) {
-        RecipeType<?> rawType = BuiltInRegistries.RECIPE_TYPE.get(PureDaisyRecipe.TYPE_ID);
+        RecipeType<?> rawType = ForgeRegistries.RECIPE_TYPES.getValue(PureDaisyRecipe.TYPE_ID);
         if (rawType == null) return 0;
         List<PureDaisyRecipe> recipes =
                 level.getRecipeManager().getAllRecipesFor((RecipeType<PureDaisyRecipe>) rawType);

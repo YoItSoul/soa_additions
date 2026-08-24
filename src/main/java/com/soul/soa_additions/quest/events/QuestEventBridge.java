@@ -11,7 +11,6 @@ import com.soul.soa_additions.quest.task.KillTask;
 import com.soul.soa_additions.quest.task.MineTask;
 import com.soul.soa_additions.quest.task.PlaceTask;
 import com.soul.soa_additions.quest.task.TameTask;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,6 +23,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * Maps Forge events to {@link ProgressService} calls, one event type per task
@@ -45,7 +45,7 @@ public final class QuestEventBridge {
         if (!(event.getSource().getEntity() instanceof ServerPlayer player)) return;
         if (!com.soul.soa_additions.quest.QuestRegistry.hasTasksOfType(KillTask.TYPE)) return;
         LivingEntity victim = event.getEntity();
-        ResourceLocation entityId = BuiltInRegistries.ENTITY_TYPE.getKey(victim.getType());
+        ResourceLocation entityId = ForgeRegistries.ENTITY_TYPES.getKey(victim.getType());
 
         ProgressService.apply(player, 1, KillTask.TYPE, task -> {
             KillTask kt = (KillTask) task;
@@ -79,7 +79,7 @@ public final class QuestEventBridge {
     public static void onBlockPlace(BlockEvent.EntityPlaceEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
         if (!com.soul.soa_additions.quest.QuestRegistry.hasTasksOfType(PlaceTask.TYPE)) return;
-        ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(event.getPlacedBlock().getBlock());
+        ResourceLocation blockId = ForgeRegistries.BLOCKS.getKey(event.getPlacedBlock().getBlock());
 
         ProgressService.apply(player, 1, PlaceTask.TYPE, task -> {
             PlaceTask pt = (PlaceTask) task;
@@ -91,7 +91,7 @@ public final class QuestEventBridge {
     public static void onTame(net.minecraftforge.event.entity.living.AnimalTameEvent event) {
         if (!(event.getTamer() instanceof ServerPlayer player)) return;
         if (!com.soul.soa_additions.quest.QuestRegistry.hasTasksOfType(TameTask.TYPE)) return;
-        ResourceLocation entityId = BuiltInRegistries.ENTITY_TYPE.getKey(event.getAnimal().getType());
+        ResourceLocation entityId = ForgeRegistries.ENTITY_TYPES.getKey(event.getAnimal().getType());
 
         ProgressService.apply(player, 1, TameTask.TYPE, task -> {
             TameTask tt = (TameTask) task;
@@ -107,7 +107,7 @@ public final class QuestEventBridge {
         // null for some mods, but parentA is always set when the vanilla
         // breeding flow fires this event.
         if (event.getParentA() == null) return;
-        ResourceLocation entityId = BuiltInRegistries.ENTITY_TYPE.getKey(event.getParentA().getType());
+        ResourceLocation entityId = ForgeRegistries.ENTITY_TYPES.getKey(event.getParentA().getType());
 
         ProgressService.apply(player, 1, BreedTask.TYPE, task -> {
             BreedTask bt = (BreedTask) task;
@@ -121,7 +121,7 @@ public final class QuestEventBridge {
         if (event.isCanceled()) return;
         if (!com.soul.soa_additions.quest.QuestRegistry.hasTasksOfType(MineTask.TYPE)) return;
         BlockState state = event.getState();
-        ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(state.getBlock());
+        ResourceLocation blockId = ForgeRegistries.BLOCKS.getKey(state.getBlock());
 
         ProgressService.apply(player, 1, MineTask.TYPE, task -> {
             MineTask mt = (MineTask) task;

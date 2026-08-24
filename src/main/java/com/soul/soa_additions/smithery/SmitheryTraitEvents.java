@@ -4,7 +4,6 @@ import com.soul.smithery.item.tool.SmitheryToolData;
 import com.soul.smithery.item.tool.SmitheryToolItem;
 import com.soul.smithery.item.tool.ToolComposition;
 import com.soul.smithery.item.tool.ToolStats;
-import com.soul.soa_additions.SoaAdditions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -26,7 +25,6 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
@@ -39,8 +37,13 @@ import java.util.List;
  * break and transforms the block into a random other natural block. Ported from
  * {@code com.sosnitzka.taiga.traits.TraitMutate} (1.12): same 13-block pool, same
  * odds, break cancelled so nothing drops.</p>
+ *
+ * <p>Registered to the Forge event bus by {@link SmitheryIntegration#init} when Smithery is
+ * present. NOT annotated with {@code @Mod.EventBusSubscriber}: the handler bodies dereference
+ * {@code com.soul.smithery} types, and Forge's scanner would subscribe them unconditionally — the
+ * first block break without Smithery installed would then be a NoClassDefFoundError inside a
+ * listener that nothing catches.</p>
  */
-@Mod.EventBusSubscriber(modid = SoaAdditions.MODID)
 public final class SmitheryTraitEvents {
 
     private SmitheryTraitEvents() {}

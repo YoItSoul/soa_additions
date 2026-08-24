@@ -15,7 +15,6 @@ import com.soul.soa_additions.quest.progress.QuestStatus;
 import com.soul.soa_additions.quest.task.CheckmarkTask;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -30,11 +29,13 @@ import net.minecraft.client.resources.model.BakedModel;
 import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.model.data.ModelData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * Minimum-viable quest book. Deliberately unstyled — this is bones and
@@ -649,7 +650,7 @@ public final class QuestBookScreen extends Screen {
         // Compute the drop-target index when a drag is active so we can paint
         // the insert line at the right gap.
         if (chapterDragActive && chapterDragIndex >= 0) {
-            int hoverIdx = chapterIndexAt((int) mouseY);
+            int hoverIdx = chapterIndexAt(mouseY);
             if (hoverIdx < 0) hoverIdx = chapters.size();
             chapterDragInsertIndex = hoverIdx;
         }
@@ -1226,19 +1227,19 @@ public final class QuestBookScreen extends Screen {
      * (tag-only filters, or blocks with no item form). */
     private static ItemStack resolveLinkStack(com.soul.soa_additions.quest.model.QuestTask task) {
         if (task instanceof com.soul.soa_additions.quest.task.ItemTask it && it.item() != null) {
-            ItemStack stack = new ItemStack(BuiltInRegistries.ITEM.get(it.item()));
+            ItemStack stack = new ItemStack(ForgeRegistries.ITEMS.getValue(it.item()));
             if (stack.isEmpty()) return null;
             if (it.nbt() != null) stack.setTag(it.nbt().copy());
             return stack;
         }
         if (task instanceof com.soul.soa_additions.quest.task.CraftTask ct && ct.item() != null) {
-            ItemStack stack = new ItemStack(BuiltInRegistries.ITEM.get(ct.item()));
+            ItemStack stack = new ItemStack(ForgeRegistries.ITEMS.getValue(ct.item()));
             if (stack.isEmpty()) return null;
             if (ct.nbt() != null) stack.setTag(ct.nbt().copy());
             return stack;
         }
         if (task instanceof com.soul.soa_additions.quest.task.PlaceTask pt) {
-            ItemStack stack = new ItemStack(BuiltInRegistries.BLOCK.get(pt.block()));
+            ItemStack stack = new ItemStack(ForgeRegistries.BLOCKS.getValue(pt.block()));
             return stack.isEmpty() ? null : stack;
         }
         // A harvest-level task has no single item — anything at or above the level satisfies it.
@@ -1360,7 +1361,7 @@ public final class QuestBookScreen extends Screen {
     private static final SilhouetteTex SILHOUETTE_TEX_MISS = new SilhouetteTex(null, null);
 
     private static boolean[][] getSilhouetteMask(ItemStack stack) {
-        ResourceLocation key = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        ResourceLocation key = ForgeRegistries.ITEMS.getKey(stack.getItem());
         boolean[][] cached = SILHOUETTE_CACHE.get(key);
         if (cached != null) return cached == SILHOUETTE_MISS ? null : cached;
         boolean[][] mask = buildMask(stack);
@@ -1369,7 +1370,7 @@ public final class QuestBookScreen extends Screen {
     }
 
     private static SilhouetteTex getSilhouetteTex(ItemStack stack) {
-        ResourceLocation key = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        ResourceLocation key = ForgeRegistries.ITEMS.getKey(stack.getItem());
         SilhouetteTex cached = SILHOUETTE_TEX.get(key);
         if (cached != null) return cached == SILHOUETTE_TEX_MISS ? null : cached;
         boolean[][] mask = getSilhouetteMask(stack);
@@ -1445,7 +1446,7 @@ public final class QuestBookScreen extends Screen {
         try {
             Minecraft mc = Minecraft.getInstance();
             BakedModel model = mc.getItemRenderer().getModel(stack, null, null, 0);
-            TextureAtlasSprite sprite = model.getParticleIcon();
+            TextureAtlasSprite sprite = model.getParticleIcon(ModelData.EMPTY);
             if (sprite == null) return null;
 
             int sw = sprite.contents().width();
@@ -1504,7 +1505,7 @@ public final class QuestBookScreen extends Screen {
                 itemId = id.substring(0, braceIdx);
                 snbt = id.substring(braceIdx);
             }
-            Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(itemId));
+            Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemId));
             if (item == Items.AIR) {
                 stack = new ItemStack(Items.PAPER);
             } else {
