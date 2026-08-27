@@ -20,15 +20,32 @@ import java.util.function.Supplier;
  */
 public record ClientModReportPacket(List<String> mods, List<String> resourcePacks, List<String> findings) {
 
-    public void encode(FriendlyByteBuf buf) {
-        buf.writeCollection(mods, FriendlyByteBuf::writeUtf);
-        buf.writeCollection(resourcePacks, FriendlyByteBuf::writeUtf);
-        buf.writeCollection(findings, FriendlyByteBuf::writeUtf);
-    }
-
     /** A client with thousands of mods is already unusual; nothing legitimate approaches this. */
     private static final int MAX_ENTRIES = 4096;
     private static final int MAX_ENTRY_LENGTH = 512;
+
+    public void encode(FriendlyByteBuf buf) {
+        writeBounded(buf, mods);
+        writeBounded(buf, resourcePacks);
+        writeBounded(buf, findings);
+    }
+
+    /**
+     * Writes under the same bounds {@link #readBounded} enforces. Encode and decode share one
+     * contract or the packet becomes a disconnect: mod entries carry mods.toml descriptions, which
+     * routinely run past 512 characters, and an unclamped write of one of those met the read cap as
+     * a DecoderException that kicked every consenting player on login. Truncation costs only the
+     * tail of a description; the keyword scan still sees the id and name.
+     */
+    private static void writeBounded(FriendlyByteBuf buf, List<String> entries) {
+        int count = Math.min(entries.size(), MAX_ENTRIES);
+        buf.writeVarInt(count);
+        for (int i = 0; i < count; i++) {
+            String entry = entries.get(i);
+            if (entry.length() > MAX_ENTRY_LENGTH) entry = entry.substring(0, MAX_ENTRY_LENGTH);
+            buf.writeUtf(entry, MAX_ENTRY_LENGTH);
+        }
+    }
 
     public static ClientModReportPacket decode(FriendlyByteBuf buf) {
         return new ClientModReportPacket(readBounded(buf), readBounded(buf), readBounded(buf));

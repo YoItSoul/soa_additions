@@ -29,8 +29,14 @@ public record CheatDetectedPacket(Mode mode, String category, String detail) {
 
     public static void encode(CheatDetectedPacket msg, FriendlyByteBuf buf) {
         buf.writeEnum(msg.mode);
-        buf.writeUtf(msg.category, 64);
-        buf.writeUtf(msg.detail, 512);
+        buf.writeUtf(clamp(msg.category, 64), 64);
+        buf.writeUtf(clamp(msg.detail, 512), 512);
+    }
+
+    /** Scanner evidence strings have no length contract, and writeUtf past the cap throws — the
+     *  detection must reach the player even with its tail cut off. */
+    private static String clamp(String s, int max) {
+        return s.length() > max ? s.substring(0, max) : s;
     }
 
     public static CheatDetectedPacket decode(FriendlyByteBuf buf) {
